@@ -73,13 +73,28 @@
   }
 
   .testimonial .testimonial-quotes {
-    @apply min-w-80 min-h-44 -bottom-10 -right-2.5 z-5
+    @apply w-98 min-h-44 py-6 px-8 flex flex-col justify-between -bottom-10 -right-2.5 z-5 bg-white
+  }
+
+  .testimonial .testimonial-quotes blockquote {
+    @apply text-lg/tighter font-semibold text-gray-400
+  }
+
+  .testimonial .testimonial-quotes .testimonial-author {
+    @apply flex justify-between
+  }
+
+  .testimonial .testimonial-quotes .testimonial-author a {
+    @apply text-blue-500 text-lg font-semibold 
   }
 
   .testimonial-media img {
     @apply object-cover w-full h-full
   }
 
-  
+  .testimonial .testimonial-overlay {
+    @apply top-0 left-0 w-full h-full 
+  }
+
   /* .testimonial */
 }

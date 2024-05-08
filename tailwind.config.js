@@ -36,6 +36,11 @@ module.exports = {
       inset: {
         '15': '3.75rem',
       },
+      lineHeight: {
+        'tighter': '1.35',
+        // 'extra-loose': '2.5',
+        // '12': '3rem',
+      },
       margin: {
         '7.5': '1.875rem',
         '14.5': '3.125rem',
