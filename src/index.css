@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+@layer base {
+  
+  :root {
+    /* --font-family-sans: ""; */
+    /* --color-light-pink: "rgb(255, 236, 219)"; */
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .container {
+    max-width: 1380px;
+  }
+
+}
+
+
+
+@layer components {
+
+  header {
+    @apply h-24 bg-white
+  }
+
+  header .cta-menu {
+    @apply inline-flex
+  }
+
+  .nav-links {
+    @apply inline-flex
+  }
+
+  .menu-item p {
+    @apply relative text-2xl font-medium text-slate-800/50
+  }
+
+  .menu-item p::after {
+    @apply content-[''] bg-dropdown-icon h-4 w-6 ml-1 absolute top-2 text-slate-800/50
+  }  
+
+  header .cta-menu a {
+    @apply text-blue-600 text-xl font-bold capitalize
+  }
+
+  header .cta-menu a:last-child {
+    @apply text-white bg-blue-600 px-8 py-4 rounded-xl
+  }
+
+  .home-section-one--left {
+    @apply mt-7.5 ml-7.5 
+  }
+
+  .home-section-one--left .testimonial {
+    @apply relative 
+  }
+
+  .testimonial .testimonial-backdrop {
+    @apply w-98 h-128 bg-pink-600/25 -top-15 -left-20 
+  }
+
+  .testimonial .testimonial-video-ctrl {
+    @apply w-11 h-11 absolute top-5 right-24 z-3
+  }
+
+  .testimonial .testimonial-video-ctrl svg {
+    @apply w-10 h-10 cursor-pointer
+  }
+
+  .testimonial .testimonial-quotes {
+    @apply min-w-80 min-h-44 -bottom-10 -right-2.5 z-5
+  }
+
+  .testimonial-media img {
+    @apply object-cover w-full h-full
+  }
+
+  
+  /* .testimonial */
+}
