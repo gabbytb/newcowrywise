@@ -1,54 +1,102 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { customersQuotes, customersThumbnails } from "../constants";
+import { TestimonialQuotes, TestimonialThumbnails } from "../components";
 import { VideoIcon } from "../assets/icons";
 import { wura } from "../assets/images";
 
 
 
 
+
+
 const HomeSectionOne = () => {
+
+    /********************************************************/
+    /******************** demacation ************************/
+    /********************************************************/
+    const [customersQuo, setCustomQuo] = useState(customersQuotes);
+    // console.log("Showing Customers Quotes: ", customersQuo);   
+
+    const [customersThumb, setCustomersThumb] = useState(customersThumbnails);
+    // console.log("Showing Customers Thumbnails: ", customersThumb);   
+
+    const [activeImage, setActiveImage] = useState(wura);
+    // console.log("Active Thumbnail: ", activeImage);   
+
+
+    function handleActiveQuote() {
+        for (var i = 0; i < customersThumb.length; i++) {
+            if (activeImage === customersThumb[i].imgURI) {           
+                // console.clear();
+                console.log("Active Customer Quote: ", customersThumb[i]);
+                var isHidden = document.querySelector('.testimonial-quotes');          
+
+                isHidden = customersQuo[i];
+                console.log("Is Hidden is Present: ", isHidden);
+                return isHidden;
+
+            }            
+        }
+    }
+    handleActiveQuote();
+
+
     return (
-        <section className="absolute top-0 py-14.5 px-0">
-            <div className="container">
-                <div className="flex justify-between py-20 px-0 space-x-12">
+        <section className="home-section-one">
+            <div className="h-container-1 max-container">
+                <div className="flex justify-between py-20 px-0">
 
 
-                    <div className="relative home-section-one--left">
-                        <div className="customers-testimonials">
-
-                            <div className="testimonial w-125">
+                    <div className="relative home-section-one--left min-h-126">
+                        <div className="customers-testimonials h-full">
+                            <div className="w-127 h-full testimonial">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
-                                <div className="absolute testimonial-quotes">
-                                    <blockquote>I've become more conscious of how I spend my money and also about investing. Now, I feel comfortable spending knowing my Cowrywise account is there.</blockquote>
-                                    <div className="mt-6 testimonial-author">
-                                        <span>Wuraola F</span>
-                                        <Link to="https://cowrywise.com/@wuwu" target="_blank">@wuwu</Link>
-                                    </div>
-                                </div>
+                                {
+                                    customersQuotes.map((item) => {
+                                        return (
+                                            <TestimonialQuotes key={item.textAuthor} {...item} />
+                                        );
+                                    })
+                                }
                                 <div className="bg-white aboslute testimonial-overlay"></div>
-                                <div className="relative overflow-hidden h-126 w-124 testimonial-media">
-                                    <img className="" src={wura} alt="customer" />
+                                <div className="absolute top-0 h-full w-124 testimonial-media">
+                                    <img src={activeImage} alt="customer" />
                                 </div>
                             </div>
-
-
                         </div>
-                        <ul>
-
+                        <ul className="flex absolute -bottom-100 testimonials-thumbnail">
+                            {
+                                customersThumbnails.map((item) => {
+                                    return (
+                                        <li key={item.label} className="w-16 h-20 my-5 mr-8 cursor-pointer relative">
+                                            <TestimonialThumbnails
+                                                exactItem={item}
+                                                activeImage={activeImage}
+                                                changeActiveImage={(item) => setActiveImage(item)}
+                                            />
+                                        </li>
+                                    );
+                                })
+                            }
                         </ul>
                     </div>
 
                     
-                    <div className="home-section-one--right">
-
+                    <div className="home-section-one--right pt-20">
+                        <h1>Put your <br />money to work</h1>
+                        <h6>Invest wisely. Grow wealth.</h6>
+                        <form className="flex max-w-80">
+                            <input className="flex-1 min-w-63 border mr-4 px-5 text-2xl rounded-lg" type="email" required name="email" placeholder="Your email..." />
+                            <button className="capitalize bg-blue-600 min-h-16 px-8 text-2xl text-white font-bold rounded-lg" type="submit">start investing</button>
+                        </form>
                     </div>
-
 
 
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default HomeSectionOne
+export default HomeSectionOne;
