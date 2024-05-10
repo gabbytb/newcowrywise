@@ -23,6 +23,9 @@
     max-width: 1380px;
   }
 
+  sub, sup {
+    line-height: 0;
+  }
 }
 
 
@@ -219,7 +222,8 @@
 
   /* Section Three */
   .home-section-three {
-    @apply pt-14.5 bg-return-invested bg-no-repeat h-screen 
+    @apply pt-14.5 bg-return-invested bg-no-repeat bg-left 
+    /* h-screen */
   }
 
   .h-container-3 {
@@ -227,7 +231,7 @@
   }
 
   .home-section-three h2 {
-    @apply text-6xl font-bold text-center
+    @apply text-7xl -tracking-tightened text-dark-blue font-bold text-center mt-20 mb-10
   }
 
   .roi-wrap {
@@ -235,7 +239,7 @@
   }
 
   .roi-wrap h6 {
-    @apply mt-16.5 mb-5.5 text-xl font-normal text-light-gray
+    @apply mt-16.5 mb-7 text-4xl font-normal text-light-gray
   }
 
   .roi-input {
@@ -243,10 +247,10 @@
   }
 
   .roi-input sup {
-    @apply text-dark-blue font-bold
+    @apply text-4xl/least text-dark-blue font-normal w-6 mr-14.5
   }
-
+  
   .roi-input input[type="tel"] {
-    @apply text-9xl font-normal w-full bg-white text-dark-blue
+    @apply text-12xl font-semibold -tracking-tightener bg-white text-dark-blue w-121 
   }
 }

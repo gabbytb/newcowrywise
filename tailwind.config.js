@@ -6,6 +6,26 @@ module.exports = {
     "./src/**/*.{html,js,jsx}",
   ],
   theme: {
+    fontSize: {
+      'xs': '.75rem',     // Extra Small
+      'sm': '.875rem',    // Small
+      'base': '1rem',     // Base
+      'lg': '1.125rem',   // Large
+      'xl': '1.25rem',    // Extra Large
+      '2xl': '1.5rem',    // 2 Extra Large
+      '3xl': '1.875rem',  // 3 Extra Large
+      '4xl': '2.25rem',   // 4 Extra Large
+      '5xl': '3rem',      // 5 Extra Large
+      '6xl': '4rem',      // 6 Extra Large
+      '7xl': '5rem',      // 7 Extra Large
+      '8xl': '6rem',
+      '9xl': '7rem',
+      '12xl': '7.5rem',
+    },
+    letterSpacing: {
+      tightened: '0.04em',
+      tightener: '0.045rem',
+    },
     extend: {
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
@@ -32,6 +52,7 @@ module.exports = {
       height: {
         '50': '3.125rem',
         '98': '25rem',
+        '121': '30.875rem',
         '123': '34rem',
         '124': '47rem',
         '125': '40rem',
@@ -58,6 +79,7 @@ module.exports = {
       lineHeight: {
         'to-tight': '1.1',
         'tighter': '1.35',
+        'least': '0',
         // 'extra-loose': '2.5',
         // '12': '3rem',
       },
@@ -68,6 +90,7 @@ module.exports = {
         '14.5': '3.125rem',
         '15.5': '3.35rem',
         '16.5': '5.71rem',
+        '29': '5px',
       },
       maxWidth: {
         '80': '80%',
@@ -90,6 +113,7 @@ module.exports = {
         '78': '20.75rem',
         '50': '3.125rem',
         '98': '25rem',
+        '121': '30.875rem',
         '122': '33rem',
         '123': '34rem',
         '123.5': '44rem',
