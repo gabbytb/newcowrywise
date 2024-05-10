@@ -243,14 +243,14 @@
   }
 
   .roi-input {
-    @apply w-122 text-center flex flex-row items-center space-x-1
+    @apply max-w-3xl text-center flex flex-row items-center space-x-1
   }
 
   .roi-input sup {
-    @apply text-4xl/least text-dark-blue font-normal w-6 mr-14.5
+    @apply text-4xl/least text-dark-blue font-normal w-6 mr-29
   }
   
   .roi-input input[type="tel"] {
-    @apply text-12xl font-semibold -tracking-tightener bg-white text-dark-blue w-121 
+    @apply text-12xl font-semibold -tracking-tightener bg-white text-dark-blue w-121
   }
 }

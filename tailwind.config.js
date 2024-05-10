@@ -20,7 +20,7 @@ module.exports = {
       '7xl': '5rem',      // 7 Extra Large
       '8xl': '6rem',
       '9xl': '7rem',
-      '12xl': '7.5rem',
+      '12xl': '120px',
     },
     letterSpacing: {
       tightened: '0.04em',
@@ -113,7 +113,7 @@ module.exports = {
         '78': '20.75rem',
         '50': '3.125rem',
         '98': '25rem',
-        '121': '30.875rem',
+        '121': '45rem',
         '122': '33rem',
         '123': '34rem',
         '123.5': '44rem',
