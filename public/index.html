@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="scrollbar">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1 maximum-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -25,8 +25,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   </head>
-  <body>
+  <body onLoad="loadFunction()" onscroll="myFunction()">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -39,5 +40,27 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      async function loadFunction() {
+        var foundFirstAnim = document.getElementById("sectionOneAnim");
+        foundFirstAnim.classList.add('animate_first_img');
+        foundFirstAnim.classList.remove('opacity-0');
+      }
+
+
+      function myFunction() {
+        var foundScrollbar = document.getElementById('scrollbar');
+        var foundHeader = document.getElementById('header');
+        var scroll = window.scrollY;
+
+        if (scroll > 5) {
+          foundHeader.classList.add('sticky-header');
+          foundScrollbar.classList.add('no-scrollbar');
+        } else {
+          foundHeader.classList.remove('sticky-header');
+          foundScrollbar.classList.remove('no-scrollbar');
+        }
+      };  
+      </script>
   </body>
 </html>

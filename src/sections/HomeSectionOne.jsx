@@ -60,7 +60,7 @@ const HomeSectionOne = () => {
                                     })
                                 }
                                 <div className="bg-white aboslute testimonial-overlay"></div>
-                                <div className="absolute top-0 h-full w-124 testimonial-media">
+                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-full w-124 opacity-0 testimonial-media">
                                     <img src={activeImage} alt="customer" />
                                 </div>
                             </div>

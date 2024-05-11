@@ -6,17 +6,60 @@
 
 
 @layer base {
-  
-  :root {
-    --color-dark-blue: rgb(8 37 82);
-    --color-light-gray: rgb(108 130 163);
-    font-size: 11px;
-    line-height: 1.5;
+  @font-face {
+    font-family: "CW BR Firma";
+    src: url("/src/assets/fonts/br-firma/BRFirmaCW-Light.woff2") format("woff2");
+    font-weight: 200;
+    font-display: fallback;
+    font-style: normal
   }
 
-  a,h1,h2,h3,h4,h5,h6,li,p,span {
-      /* text-rendering: geometricPrecision; */
-      color: var(--color-dark-blue);
+  @font-face {
+      font-family: "CW BR Firma";
+      src: url("/src/assets/fonts/br-firma/BRFirmaCW-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-display: fallback;
+      font-style: normal
+  }
+
+  @font-face {
+      font-family: "CW BR Firma";
+      src: url("/src/assets/fonts/br-firma/BRFirmaCW-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-display: fallback;
+      font-style: normal
+  }
+
+  @font-face {
+      font-family: "CW BR Firma";
+      src: url("/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.woff2") format("woff2");
+      font-weight: 600;
+      font-display: fallback;
+      font-style: normal
+  }
+
+  @font-face {
+      font-family: "CW BR Firma";
+      src: url("/src/assets/fonts/br-firma/BRFirmaCW-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-display: fallback;
+      font-style: normal
+  }
+
+
+  :root {
+    --color-dark-blue: rgb(8 37 82);
+    --color-light-gray: rgb(108 130 163);  
+    --color-sky-blue: rgb(230, 250, 255);  
+    font-family: "CW BR Firma";
+    font-size: 10px;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+  }
+
+  h1,h2,h3,h4,h5,h6,li,p,a,span {
+    color: var(--color-dark-blue);
   }
 
   .max-container {
@@ -26,19 +69,30 @@
   sub, sup {
     line-height: 0;
   }
+
 }
-
-
 
 
 @layer components {
 
-  .is-active {
-    @apply flex
+  header {
+    @apply h-28 bg-white
   }
 
-  header {
-    @apply h-24 bg-white
+  .sticky-header {
+    @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm
+  }
+
+  .no-scrollbar {    
+    @apply overflow-x-hidden overflow-y-scroll
+  }
+
+  .slide-in-anim {
+    @apply animate-slideIn opacity-100
+  }
+
+  .animate_first_img {
+    @apply animate-slideUp opacity-100 
   }
 
   header .cta-menu {
@@ -75,7 +129,7 @@
   }
 
   .h-container-1 {
-    @apply h-full w-full px-7 my-0 mx-auto 
+    @apply h-840 w-full px-7 my-0 mx-auto 
   }
 
   .home-section-one--left {
@@ -83,7 +137,7 @@
   }
 
   .home-section-one--left .testimonial {
-    @apply relative top-0
+    @apply relative top-0 left-0
   }
 
   .testimonial .testimonial-backdrop {
@@ -119,7 +173,7 @@
   }
 
   .testimonial-media img {
-    @apply object-cover h-full w-full
+    @apply object-cover w-full h-full absolute top-0
   }
 
   .testimonial .testimonial-overlay {
@@ -140,6 +194,8 @@
   
 
 
+
+
   /* Section Two */
   .home-section-two {
     @apply pt-24 pb-0 px-0 w-full
@@ -150,11 +206,11 @@
   }
 
   .home-section-two--left {
-    @apply flex w-126.5
+    @apply flex w-127.7
   }
   
   .home-section-two--left h2 {
-    @apply text-8xl font-bold leading-to-tight
+    @apply text-8xl font-bold leading-to-tight -ml-0.5
   }
 
   .home-section-two--left h2 span {
@@ -222,7 +278,7 @@
 
   /* Section Three */
   .home-section-three {
-    @apply pt-14.5 bg-return-invested bg-no-repeat bg-left 
+    @apply pt-14.5 bg-return-invested bg-no-repeat bg-top-left 
     /* h-screen */
   }
 
@@ -243,14 +299,26 @@
   }
 
   .roi-input {
-    @apply max-w-3xl text-center flex flex-row items-center space-x-1
+    @apply text-center flex flex-row items-center space-x-1
   }
 
   .roi-input sup {
-    @apply text-4xl/least text-dark-blue font-normal w-6 mr-29
+    @apply text-[3em]/least text-dark-blue font-normal w-8 mr-29 
   }
   
   .roi-input input[type="tel"] {
-    @apply text-12xl font-semibold -tracking-tightener bg-white text-dark-blue w-121
+    @apply text-12xl font-normal font-firma tracking-tightener bg-white text-dark-blue w-121 text-right py-4
+  }
+
+  .roi-dropdown-wrap {
+    @apply flex justify-between w-96
+  }
+
+  .roi-dropdown-wrap .wrap-selection {
+    @apply flex items-center space-x-2
+  }
+
+  .roi-dropdown-wrap .roi--select-input {
+    @apply appearance-none text-3xl text-blue-600 font-normal
   }
 }

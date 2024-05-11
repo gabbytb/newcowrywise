@@ -6,6 +6,12 @@ module.exports = {
     "./src/**/*.{html,js,jsx}",
   ],
   theme: {
+    backgroundPosition: {
+      'top-left': '0, 0',
+    },
+    fontFamily: {
+      firma: ["CW BR Firma"],
+    },
     fontSize: {
       'xs': '.75rem',     // Extra Small
       'sm': '.875rem',    // Small
@@ -20,13 +26,20 @@ module.exports = {
       '7xl': '5rem',      // 7 Extra Large
       '8xl': '6rem',
       '9xl': '7rem',
+      '10xl': '1.45rem',
       '12xl': '120px',
+    
     },
     letterSpacing: {
       tightened: '0.04em',
-      tightener: '0.045rem',
+      tightener: '0.045em',
     },
     extend: {
+      animation: {
+        slideDown: 'slideDown .42s cubic-bezier(.165,.84,.44,1)',
+        slideIn: 'slideIn .42s cubic-bezier(.165,.84,.44,1)',
+        slideUp: 'all 1s ease',
+      },
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
         'return-invested': "url('/src/assets/images/return-pattern.svg')",
@@ -34,20 +47,7 @@ module.exports = {
       colors: {
         'dark-blue': 'var(--color-dark-blue)',
         'light-gray': 'var(--color-light-gray)',
-      },
-      fontFamily: {
-        firma: [          
-          '"CW BR Firma"',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"Segoe UI"',
-          'Roboto',
-          'Oxygen-Sans',
-          'Ubuntu',
-          'Cantarell',
-          '"Helvetica Neue"',
-          'sans-serif',
-        ]
+        'sky-blue': 'var(--color-sky-blue)',
       },
       height: {
         '50': '3.125rem',
@@ -61,6 +61,7 @@ module.exports = {
         '127': '48.7rem',
         '128': '58rem',
         '780': '780px',
+        '840': '840px',
         '850': '850px'
       },
       inset: {
@@ -75,6 +76,24 @@ module.exports = {
         '56/2': '56%',
 
         '100': '100px',
+      },
+      keyframes: {
+        slideDown: {
+          '0%': { 
+            transform: 'translate3d(0, -80px, 0)',
+          },
+          to: { 
+            transform: 'translateZ(0)',
+          },
+        },
+        slideIn: {
+          '0%, 50%': { 
+            // transform: 'translate3d(-1000px, 0, 0)',
+          },
+          '100%': { 
+            transform: 'translateX(0)',
+          },
+        },
       },
       lineHeight: {
         'to-tight': '1.1',
@@ -113,6 +132,7 @@ module.exports = {
         '78': '20.75rem',
         '50': '3.125rem',
         '98': '25rem',
+        '120': '43rem',
         '121': '45rem',
         '122': '33rem',
         '123': '34rem',
@@ -123,6 +143,7 @@ module.exports = {
         '126.5': '46.5rem',
         '127': '48.7rem',
         '127.5': '48.75rem',
+        '127.7': '50rem',
         '128': '58rem',
         '630': '630px',
         '720': '720px'

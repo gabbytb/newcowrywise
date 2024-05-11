@@ -22,16 +22,16 @@ const HomeSectionThree = () => {
                                 <select className="roi--select-input">
                                     <option value="onetime">Onetime</option>
                                     <option value="weekly">Weekly</option>
-                                    <option selected="selected" value="monthly">Onetime</option>
+                                    <option select='true' value="monthly">Monthly</option>
                                 </select>
                                 <div className="roi--select-arrow">
                                     <ArrowDown />
                                 </div>
                             </div>
-                            <div className="wrap-selection">
+                            <div className="wrap-selection">    
                                 <select className="roi--select-input">
                                     <option value="12">Last year</option>
-                                    <option selected="selected" value="36">3 years ago</option>
+                                    <option select='true' value="36">3 years ago</option>
                                     <option value="60">5 years ago</option>
                                 </select>
                                 <div className="roi--select-arrow">

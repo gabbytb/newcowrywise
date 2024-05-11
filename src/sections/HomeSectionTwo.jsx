@@ -1,17 +1,31 @@
 import { ButtonLinkComponent, GraphComponent } from "../components"
 
 
+
+
+
 const HomeSectionTwo = () => {
 
+
+  async function mouseEnter() {
+    var foundSectionTwoAnim = document.getElementById('sectionTwoAnim');
+    var scroll = window.scrollY;
+    if (scroll > 5) {
+      foundSectionTwoAnim.classList.add('slide-in-anim');
+      foundSectionTwoAnim.classList.remove('opacity-0');
+    }
+  }
+  
+
   return (
-    <section className="home-section-two">
+    <section className="home-section-two" onMouseEnter={mouseEnter}>
         <div className="h-container-2 max-container">
             <div className="flex justify-between">
 
 
                 {/* Left Side */}
-                <div className="home-section-two--left">
-                  <div className="flex flex-col pt-5 space-y-12 flex-wrap">
+                <div id="sectionTwoAnim" className="home-section-two--left opacity-0">
+                  <div className="flex flex-col pt-5 space-y-12">
                       <h2>
                         Get a <span>little</span>&nbsp;richer each day
                       </h2>
