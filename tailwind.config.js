@@ -28,17 +28,18 @@ module.exports = {
       '9xl': '7rem',
       '10xl': '1.45rem',
       '12xl': '120px',
-    
+      '13xl': '3.125rem',  
     },
     letterSpacing: {
+      tighten: '0.25rem',
       tightened: '0.04em',
       tightener: '0.045em',
     },
     extend: {
       animation: {
+        fade: 'fade 40s linear infinite',
         slideDown: 'slideDown .42s cubic-bezier(.165,.84,.44,1)',
         slideIn: 'slideIn .42s cubic-bezier(.165,.84,.44,1)',
-        slideUp: 'all 1s ease',
       },
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
@@ -51,6 +52,7 @@ module.exports = {
       },
       height: {
         '50': '3.125rem',
+        '94': '20rem',
         '98': '25rem',
         '121': '30.875rem',
         '123': '34rem',
@@ -75,9 +77,18 @@ module.exports = {
         '32/2': '32%',
         '56/2': '56%',
 
+        '60': "60px",           // UseCase: section-four
         '100': '100px',
       },
       keyframes: {
+        fade:  {
+          '0%': { 
+            transform: 'translateZ(0)' 
+          },
+          '100%': { 
+            transform: 'translate3d(-100%, 0, 0)' 
+          },
+        },
         slideDown: {
           '0%': { 
             transform: 'translate3d(0, -80px, 0)',
@@ -87,10 +98,10 @@ module.exports = {
           },
         },
         slideIn: {
-          '0%, 50%': { 
-            // transform: 'translate3d(-1000px, 0, 0)',
+          '0%': { 
+            transform: 'translate3d(-1000px, 0, 0)',
           },
-          '100%': { 
+          to: { 
             transform: 'translateX(0)',
           },
         },
@@ -112,6 +123,7 @@ module.exports = {
         '29': '5px',
       },
       maxWidth: {
+        '99': '30rem',
         '80': '80%',
       },
       minHeight: {
@@ -146,7 +158,9 @@ module.exports = {
         '127.7': '50rem',
         '128': '58rem',
         '630': '630px',
-        '720': '720px'
+        '720': '720px',
+        '22/12': '120%',
+
       },
       zIndex: {
         '3': '3',

@@ -62,7 +62,7 @@
     color: var(--color-dark-blue);
   }
 
-  .max-container {
+  .container {
     max-width: 1380px;
   }
 
@@ -91,9 +91,9 @@
     @apply animate-slideIn opacity-100
   }
 
-  .animate_first_img {
+  /* .animate_first_img {
     @apply animate-slideUp opacity-100 
-  }
+  } */
 
   header .cta-menu {
     @apply inline-flex
@@ -321,4 +321,32 @@
   .roi-dropdown-wrap .roi--select-input {
     @apply appearance-none text-3xl text-blue-600 font-normal
   }
+
+
+
+
+
+      /* Section four */
+    .home-section-four .slider-wrapper {
+        @apply mt-10 mb-0 mx-0 w-screen h-98 overflow-hidden relative
+    }
+    .h-container-4 {
+      @apply h-full w-full mx-auto my-0 px-0
+    }
+    .home-section-four .slider-wrapper .slides-wrap {
+        @apply w-22/12 flex absolute animate-fade      
+    }
+    .home-section-four .slider-wrapper .slides {
+        @apply inline-flex shrink-0
+    }
+    .home-section-four .slider-wrapper .slides .slider-item {
+        @apply flex justify-center items-center mr-8 p-8 h-94 border border-blue-400 relative text-center w-127.7 max-w-99 min-h-80 rounded-3xl
+    }
+    .home-section-four .slider-wrapper .slides .slider-item h4 {
+        @apply font-semibold font-firma w-full relative text-left text-13xl
+    }
+    .home-section-four .slider-wrapper .slides .slider-item h4::before {
+        @apply content-["“"] absolute -top-60 left-0 font-normal text-blue-500
+    }
+    /* Section four */
 }

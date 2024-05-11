@@ -1,4 +1,4 @@
-import { HomeSectionOne, HomeSectionTwo, HomeSectionThree, } from "../sections";
+import { HomeSectionOne, HomeSectionTwo, HomeSectionThree, HomeSectionFour, } from "../sections";
 
 
 
@@ -9,6 +9,7 @@ const HomeBody = () => {
             <HomeSectionOne />
             <HomeSectionTwo />
             <HomeSectionThree />
+            <HomeSectionFour />
         </main>
     );
 };

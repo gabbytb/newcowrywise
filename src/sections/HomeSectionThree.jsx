@@ -6,7 +6,7 @@ import { ArrowDown } from "../components";
 const HomeSectionThree = () => {
     return (
         <section className="home-section-three">
-            <div className="h-container-3 max-container">
+            <div className="h-container-3 container">
 
 
                 <div className="content">

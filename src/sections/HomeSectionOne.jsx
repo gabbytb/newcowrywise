@@ -43,7 +43,7 @@ const HomeSectionOne = () => {
 
     return (
         <section className="home-section-one">
-            <div className="h-container-1 max-container">
+            <div className="h-container-1 container">
                 <div className="flex justify-between py-20 px-0">
 
 

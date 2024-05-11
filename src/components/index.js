@@ -6,6 +6,8 @@ import ButtonComponent from "./ButtonComponent";
 import ButtonLinkComponent from "./ButtonLinkComponent";
 import GraphComponent from "./GraphComponent";
 import ArrowDown from "./ArrowDown";
+import SliderCards from "./SliderCards";
+
 
 
 
@@ -18,5 +20,6 @@ export {
     ButtonLinkComponent,
     GraphComponent,
     ArrowDown,
+    SliderCards,
     
 }

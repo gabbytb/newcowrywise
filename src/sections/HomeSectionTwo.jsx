@@ -19,7 +19,7 @@ const HomeSectionTwo = () => {
 
   return (
     <section className="home-section-two" onMouseEnter={mouseEnter}>
-        <div className="h-container-2 max-container">
+        <div className="h-container-2 container">
             <div className="flex justify-between">
 
 
