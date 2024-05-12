@@ -14,31 +14,31 @@ const HomeSectionOne = () => {
     /********************************************************/
     /******************** demacation ************************/
     /********************************************************/
-    const [customersQuo, setCustomQuo] = useState(customersQuotes);
-    // console.log("Showing Customers Quotes: ", customersQuo);   
+    // const [customersQuo, setCustomQuo] = useState(customersQuotes);
+    // // console.log("Showing Customers Quotes: ", customersQuo);   
 
-    const [customersThumb, setCustomersThumb] = useState(customersThumbnails);
-    // console.log("Showing Customers Thumbnails: ", customersThumb);   
+    // const [customersThumb, setCustomersThumb] = useState(customersThumbnails);
+    // // console.log("Showing Customers Thumbnails: ", customersThumb);   
 
     const [activeImage, setActiveImage] = useState(wura);
     // console.log("Active Thumbnail: ", activeImage);   
 
 
-    function handleActiveQuote() {
-        for (var i = 0; i < customersThumb.length; i++) {
-            if (activeImage === customersThumb[i].imgURI) {           
-                // console.clear();
-                console.log("Active Customer Quote: ", customersThumb[i]);
-                var isHidden = document.querySelector('.testimonial-quotes');          
+    // function handleActiveQuote() {
+    //     for (var i = 0; i < customersThumb.length; i++) {
+    //         if (activeImage === customersThumb[i].imgURI) {           
+    //             // console.clear();
+    //             console.log("Active Customer Quote: ", customersThumb[i]);
+    //             var isHidden = document.querySelector('.testimonial-quotes');          
 
-                isHidden = customersQuo[i];
-                console.log("Is Hidden is Present: ", isHidden);
-                return isHidden;
+    //             isHidden = customersQuo[i];
+    //             console.log("Is Hidden is Present: ", isHidden);
+    //             return isHidden;
 
-            }            
-        }
-    }
-    handleActiveQuote();
+    //         }            
+    //     }
+    // }
+    // handleActiveQuote();
 
 
     return (
