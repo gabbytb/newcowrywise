@@ -326,7 +326,7 @@
 
 
 
-      /* Section four */
+    /* Section four */
     .home-section-four .slider-wrapper {
         @apply mt-10 mb-0 mx-0 w-screen h-98 overflow-hidden relative
     }

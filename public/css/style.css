@@ -1250,7 +1250,8 @@ header .cta-menu a:last-child {
   display: flex;
   height: 20rem;
   min-height: 20rem;
-  width: 30rem;
+  width: 50rem;
+  max-width: 30rem;
   align-items: center;
   justify-content: center;
   border-radius: 1.5rem;
@@ -1266,6 +1267,7 @@ header .cta-menu a:last-child {
   width: 100%;
   text-align: left;
   font-family: CW BR Firma;
+  font-size: 3.125rem;
   font-weight: 600;
 }
 
@@ -1330,6 +1332,10 @@ header .cta-menu a:last-child {
   margin-bottom: 1.25rem;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .mr-20 {
   margin-right: 5rem;
 }
@@ -1348,6 +1354,10 @@ header .cta-menu a:last-child {
 
 .mt-1\.5 {
   margin-top: 0.375rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
 }
 
 .mt-6 {
@@ -1392,6 +1402,10 @@ header .cta-menu a:last-child {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-5\/12 {
+  width: 41.666667%;
 }
 
 .w-full {
@@ -1486,6 +1500,14 @@ header .cta-menu a:last-child {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-2\.5 {
+  padding: 0.625rem;
+}
+
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -1523,16 +1545,17 @@ header .cta-menu a:last-child {
   text-align: center;
 }
 
-.font-firma {
-  font-family: CW BR Firma;
-}
-
 .text-10xl {
   font-size: 1.45rem;
 }
 
 .text-2xl {
   font-size: 1.5rem;
+}
+
+.text-8xl\/tighter {
+  font-size: 6rem;
+  line-height: 1.35;
 }
 
 .text-xl {
@@ -1553,6 +1576,10 @@ header .cta-menu a:last-child {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.-tracking-tighten {
+  letter-spacing: -0.25rem;
 }
 
 .text-sky-950\/100 {
