@@ -677,7 +677,7 @@ header {
 
 @keyframes slideDown {
   0% {
-    transform: translate3d(0, -80px, 0);
+    transform: translate3d(0, -100%, 0);
   }
 
   to {
@@ -686,7 +686,7 @@ header {
 }
 
 .sticky-header {
-  animation: slideDown .42s cubic-bezier(.165,.84,.44,1);
+  animation: slideDown .42s;
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -699,7 +699,7 @@ header {
 
 @keyframes slideIn {
   0% {
-    transform: translate3d(-1000px, 0, 0);
+    transform: translate3d(-100%, 0, 0);
   }
 
   to {
@@ -708,7 +708,7 @@ header {
 }
 
 .slide-in-anim {
-  animation: slideIn .42s cubic-bezier(.165,.84,.44,1);
+  animation: slideIn .42s;
   opacity: 1;
 }
 

@@ -11,7 +11,7 @@ const Nav = () => {
                 Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
             </Link>
             <header id="header" className="default-header">
-                <div className="max-container px-7 h-full w-full my-0 mx-auto">
+                <div className="container">
                     <div className="flex items-center h-full px-0">                
                         <Link className="mt-1.5 mr-20 brand">
                             <BrandLogo />
