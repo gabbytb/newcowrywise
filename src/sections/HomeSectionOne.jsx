@@ -26,15 +26,34 @@ const HomeSectionOne = () => {
     }, []);
 
 
+    async function showTestimonial() {
+        var cusTestimonial = document.getElementById('customerTestimonial');               
+        cusTestimonial.classList.remove('opacity-0');        
+        cusTestimonial.classList.remove('hidden');     
+
+        cusTestimonial.classList.add('testimonial--active');
+        console.log('Found Testimonial: ', cusTestimonial);
+    }
+
+    useEffect(() => {
+        showTestimonial();
+    }, []);
+
+
     return (
         <section className="home-section-one">
             <div className="h-container-1 container">
+<<<<<<< HEAD
                 <div className="flex justify-between py-32 px-0">
 
+=======
+                <div className="h-section-1-wrap">
+>>>>>>> 21a1eae6909ee66c989b024956287499d9003051
 
+                   
                     <div className="relative home-section-one--left min-h-126">
                         <div className="customers-testimonials h-full">
-                            <div className="w-127 h-full testimonial">
+                            <div id="customerTestimonial" className="w-127 h-full testimonial opacity-0 hidden">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {
