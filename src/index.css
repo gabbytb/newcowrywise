@@ -73,10 +73,15 @@
 }
 
 
+
 @layer components {
 
   header {
     @apply h-28 bg-white
+  }
+
+  .default-header .container {
+    @apply px-7 h-full w-full my-0 mx-auto
   }
 
   .sticky-header {
@@ -86,14 +91,6 @@
   .no-scrollbar {    
     @apply overflow-x-hidden overflow-y-scroll
   }
-
-  .slide-in-anim {
-    @apply animate-slideIn opacity-100
-  }
-
-  /* .animate_first_img {
-    @apply animate-slideUp opacity-100 
-  } */
 
   header .cta-menu {
     @apply inline-flex
@@ -209,6 +206,9 @@
     @apply flex w-127.7
   }
   
+  .slide-in-anim {
+    @apply animate-clipPathAnimation opacity-100
+  }
   .home-section-two--left h2 {
     @apply text-8xl font-bold leading-to-tight -ml-0.5
   }
@@ -333,8 +333,11 @@
     .h-container-4 {
       @apply h-full w-full mx-auto my-0 px-0
     }
+    .load-slides {
+      @apply animate-fade
+    }
     .home-section-four .slider-wrapper .slides-wrap {
-        @apply w-22/12 flex absolute animate-fade      
+        @apply w-22/12 flex absolute     
     }
     .home-section-four .slider-wrapper .slides {
         @apply inline-flex shrink-0
@@ -348,5 +351,6 @@
     .home-section-four .slider-wrapper .slides .slider-item h4::before {
         @apply content-["“"] absolute -top-60 left-0 font-normal text-blue-500
     }
+       
     /* Section four */
 }

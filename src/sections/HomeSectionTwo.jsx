@@ -7,18 +7,15 @@ import { ButtonLinkComponent, GraphComponent } from "../components"
 const HomeSectionTwo = () => {
 
 
-  async function mouseEnter() {
+  async function mouseEvent() {
     var foundSectionTwoAnim = document.getElementById('sectionTwoAnim');
-    var scroll = window.scrollY;
-    if (scroll > 5) {
-      foundSectionTwoAnim.classList.add('slide-in-anim');
-      foundSectionTwoAnim.classList.remove('opacity-0');
-    }
+    foundSectionTwoAnim.classList.add('slide-in-anim');
+    foundSectionTwoAnim.classList.remove('opacity-0');
   }
   
 
   return (
-    <section className="home-section-two" onMouseEnter={mouseEnter}>
+    <section className="home-section-two" onMouseEnter={mouseEvent}>
         <div className="h-container-2 container">
             <div className="flex justify-between">
 
@@ -40,7 +37,7 @@ const HomeSectionTwo = () => {
 
                 {/* Right Side */}
                 <div className="home-section-two--right">
-                    <div id="graph-anim-wrap">
+                    <div>
                       <GraphComponent />
                     </div>
 

@@ -2,7 +2,7 @@
 
 module.exports = {
   content: [
-    "./public/index.html",
+    "./public/*.html",
     "./src/**/*.{html,js,jsx}",
   ],
   theme: {
@@ -36,10 +36,10 @@ module.exports = {
       tightener: '0.045em',
     },
     extend: {
-      animation: {
-        fade: 'fade 40s linear infinite',
-        slideDown: 'slideDown .42s cubic-bezier(.165,.84,.44,1)',
-        slideIn: 'slideIn .42s cubic-bezier(.165,.84,.44,1)',
+      animation: {    
+        fade: 'fade 40s linear infinite',    
+        clipPathAnimation: 'clipPathAnimation 2.5s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER ANIMATION **/
       },
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
@@ -91,20 +91,23 @@ module.exports = {
         },
         slideDown: {
           '0%': { 
-            transform: 'translate3d(0, -80px, 0)',
+            transform: 'translate3d(0, -100%, 0)',
           },
           to: { 
             transform: 'translateZ(0)',
           },
         },
-        slideIn: {
-          '0%': { 
-            transform: 'translate3d(-1000px, 0, 0)',
+        clipPathAnimation: { 
+          '0%': {
+            clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+          },       
+          '50%': {
+            clipPath: 'polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%)',
           },
-          to: { 
-            transform: 'translateX(0)',
+          '100%': {
+            clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
           },
-        },
+        },  
       },
       lineHeight: {
         'to-tight': '1.1',

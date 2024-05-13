@@ -5,12 +5,8 @@ const GraphComponent = (props) => {
             viewBox="0 0 1270 1360"
             width={1270}
             height={1360}
-            preserveAspectRatio="xMidYMid meet"
-            style={{
-            width: "100%",
-            height: "100%",
-            transform: "translate3d(0px, 0px, 0px)",
-            }}
+            preserveAspectRatio="xMidYMid meet"          
+            className="w-full h-full animate-clipPathAnimation"
             {...props}
         >
             <defs>
@@ -21,11 +17,7 @@ const GraphComponent = (props) => {
             <g clipPath="url(#__lottie_element_2)">
             <g
                 transform="matrix(1.2899999618530273,0,0,1,1.9583740234375,1128.6500244140625)"
-                opacity={1}
-                style={{
-                display: "block",
-                }}
-            >
+                opacity={1}>
                 <g
                 opacity={1}
                 transform="matrix(1,0,0,1,199.46499633789062,115.19400024414062)"

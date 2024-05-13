@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SliderCards } from "../components";
 import { sliderItems } from "../constants";
 
@@ -6,6 +7,17 @@ import { sliderItems } from "../constants";
 
 const HomeSectionFour = () => {
   
+
+    async function myFunction() {
+        let docLoader = document.getElementById('sectionFourSlidesAnim');
+        docLoader.classList.add('load-slides');
+    }
+
+    useEffect(() => {
+        myFunction();
+    }, []);
+
+    
     return (
         <section className="home-section-four">
             <div className="h-container-4 container">
@@ -18,7 +30,7 @@ const HomeSectionFour = () => {
 
 
             <div className="slider-wrapper">
-                <div className="slides-wrap">
+                <div id="sectionFourSlidesAnim" className="slides-wrap">
                     <div className="slides">
                         {
                             sliderItems.map((item) => {
