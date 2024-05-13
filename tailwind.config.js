@@ -2,7 +2,7 @@
 
 module.exports = {
   content: [
-    "./public/*.html",
+    "./public/index.html",
     "./src/**/*.{html,js,jsx}",
   ],
   theme: {
@@ -38,7 +38,6 @@ module.exports = {
       tightener: '0.045em',
     },
     extend: {
-<<<<<<< HEAD
       animation: {   
         easeIn: 'easeIn 4s ease',   /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 1 ANIMATION */
@@ -46,12 +45,6 @@ module.exports = {
         slideUp: 'slideUp 2.5s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideUpSpan: 'slideUp 0.6s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
-=======
-      animation: {    
-        fade: 'fade 40s linear infinite',    
-        clipPathAnimation: 'clipPathAnimation 2.5s linear',     /** SECTION 2 GRAPH ANIMATION */
-        slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER ANIMATION **/
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
       },
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
@@ -95,7 +88,6 @@ module.exports = {
         '100': '100px',
       },
       keyframes: {
-<<<<<<< HEAD
         easeIn: {
           from: {
             opacity: 0,
@@ -104,8 +96,6 @@ module.exports = {
             opacity: 1,
           }
         },
-=======
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
         fade:  {
           '0%': { 
             transform: 'translateZ(0)' 
@@ -114,7 +104,6 @@ module.exports = {
             transform: 'translate3d(-100%, 0, 0)' 
           },
         },
-<<<<<<< HEAD
         slideRight: {
           '0%': { 
             transform: 'translate3d(-100%, 0%, 0)',
@@ -123,8 +112,6 @@ module.exports = {
             transform: 'translateZ(0)',
           },
         },
-=======
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
         slideDown: {
           '0%': { 
             transform: 'translate3d(0, -100%, 0)',

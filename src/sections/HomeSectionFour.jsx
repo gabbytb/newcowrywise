@@ -7,17 +7,15 @@ import { sliderItems } from "../constants";
 
 const HomeSectionFour = () => {
   
-
-    async function myFunction() {
-        let docLoader = document.getElementById('sectionFourSlidesAnim');
-        docLoader.classList.add('load-slides');
+    function autoScroll() {
+        document.getElementById('autoScroll').classList.add('s-4-anim');
     }
 
     useEffect(() => {
-        myFunction();
+        autoScroll();
     }, []);
+        
 
-    
     return (
         <section className="home-section-four">
             <div className="h-container-4 container">
@@ -30,7 +28,7 @@ const HomeSectionFour = () => {
 
 
             <div className="slider-wrapper">
-                <div id="sectionFourSlidesAnim" className="slides-wrap">
+                <div id="autoScroll" className="slides-wrap">
                     <div className="slides">
                         {
                             sliderItems.map((item) => {

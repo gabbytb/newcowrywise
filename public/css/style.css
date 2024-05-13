@@ -676,7 +676,6 @@ header {
   margin-right: auto;
   height: 100%;
   width: 100%;
-<<<<<<< HEAD
   max-width: 100%;
   padding-left: 2.25rem;
   padding-right: 2.25rem;
@@ -684,12 +683,6 @@ header {
 
 /* Animations CSS */
 
-=======
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
-}
-
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
 .sticky-header {
   position: fixed;
   top: 0px;
@@ -719,7 +712,6 @@ header {
   overflow-y: scroll;
 }
 
-<<<<<<< HEAD
 @keyframes easeIn {
   from {
     opacity: 0;
@@ -789,8 +781,6 @@ header {
 
 /* Animations CSS */
 
-=======
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
 header .cta-menu {
   display: inline-flex;
 }
@@ -860,15 +850,6 @@ header .cta-menu a:last-child {
   padding-right: 1.75rem;
 }
 
-.h-section-1-wrap {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 .home-section-one--left {
   margin-top: 3rem;
   margin-left: 3rem;
@@ -878,20 +859,6 @@ header .cta-menu a:last-child {
   position: relative;
   top: 0px;
   left: 0px;
-}
-
-.testimonial--active {
-  opacity: 1;
-  transition-duration: 1000ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
-.home-section-one .h-section-1-wrap .home-section-one--left .customers-testimonials .testimonial {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
 }
 
 .testimonial .testimonial-backdrop {
@@ -1026,28 +993,6 @@ header .cta-menu a:last-child {
 .home-section-two--left {
   display: flex;
   width: 50rem;
-}
-
-@keyframes clipPathAnimation {
-  0% {
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-  }
-
-  50% {
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
-  }
-
-  100% {
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-  }
-}
-
-.slide-in-anim {
-  animation: clipPathAnimation 2.5s linear;
-  opacity: 1;
 }
 
 .home-section-two--left h2 {
@@ -1341,23 +1286,6 @@ header .cta-menu a:last-child {
   padding-right: 0px;
 }
 
-<<<<<<< HEAD
-=======
-@keyframes fade {
-  0% {
-    transform: translateZ(0);
-  }
-
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.load-slides {
-  animation: fade 40s linear infinite;
-}
-
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
 .home-section-four .slider-wrapper .slides-wrap {
   position: absolute;
   display: flex;
@@ -1487,10 +1415,6 @@ header .cta-menu a:last-child {
   display: flex;
 }
 
-.hidden {
-  display: none;
-}
-
 .h-14 {
   height: 3.5rem;
 }
@@ -1551,11 +1475,7 @@ header .cta-menu a:last-child {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-<<<<<<< HEAD
 @keyframes slideUp {
-=======
-@keyframes clipPathAnimation {
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
   0% {
     -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
             clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
@@ -1572,13 +1492,8 @@ header .cta-menu a:last-child {
   }
 }
 
-<<<<<<< HEAD
 .animate-slideUp {
   animation: slideUp 2.5s linear;
-=======
-.animate-clipPathAnimation {
-  animation: clipPathAnimation 2.5s linear;
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
 }
 
 .cursor-pointer {
@@ -1672,14 +1587,11 @@ header .cta-menu a:last-child {
   padding-right: 2rem;
 }
 
-<<<<<<< HEAD
 .py-32 {
   padding-top: 8rem;
   padding-bottom: 8rem;
 }
 
-=======
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
 .pt-20 {
   padding-top: 5rem;
 }
