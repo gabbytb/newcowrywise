@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ButtonLinkComponent, GraphComponent } from "../components"
 
 
@@ -7,24 +8,27 @@ import { ButtonLinkComponent, GraphComponent } from "../components"
 const HomeSectionTwo = () => {
 
 
-  async function mouseEvent() {
-    var foundSectionTwoAnim = document.getElementById('sectionTwoAnim');
-    foundSectionTwoAnim.classList.add('slide-in-anim');
-    foundSectionTwoAnim.classList.remove('opacity-0');
-  }
-  
+  useEffect(() => {
+    function myFunction() {
+        document.getElementById("sectionTwoAnim").classList.add('s-2-anim');
+        document.getElementById("sectionTwoAnime").classList.add('s-2-2-anim');
+    }
+
+    myFunction();        
+  }, []);
+
 
   return (
-    <section className="home-section-two" onMouseEnter={mouseEvent}>
+    <section className="home-section-two">
         <div className="h-container-2 container">
             <div className="flex justify-between">
 
 
                 {/* Left Side */}
-                <div id="sectionTwoAnim" className="home-section-two--left opacity-0">
+                <div id="sectionTwoAnim" className="home-section-two--left">
                   <div className="flex flex-col pt-5 space-y-12">
                       <h2>
-                        Get a <span>little</span>&nbsp;richer each day
+                        Get a <span id="sectionTwoAnime">little</span>&nbsp;richer each day
                       </h2>
                       <h5>One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />

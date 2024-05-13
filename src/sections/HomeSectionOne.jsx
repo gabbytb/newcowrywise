@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { customersQuotes, customersThumbnails } from "../constants";
 import { TestimonialQuotes, TestimonialThumbnails } from "../components";
 import { VideoIcon } from "../assets/icons";
@@ -11,40 +11,25 @@ import { wura } from "../assets/images";
 
 const HomeSectionOne = () => {
 
-    /********************************************************/
-    /******************** demacation ************************/
-    /********************************************************/
-    // const [customersQuo, setCustomQuo] = useState(customersQuotes);
-    // // console.log("Showing Customers Quotes: ", customersQuo);   
 
-    // const [customersThumb, setCustomersThumb] = useState(customersThumbnails);
-    // // console.log("Showing Customers Thumbnails: ", customersThumb);   
 
     const [activeImage, setActiveImage] = useState(wura);
-    // console.log("Active Thumbnail: ", activeImage);   
+    console.log("Active Thumbnail: ", activeImage);   
 
 
-    // function handleActiveQuote() {
-    //     for (var i = 0; i < customersThumb.length; i++) {
-    //         if (activeImage === customersThumb[i].imgURI) {           
-    //             // console.clear();
-    //             console.log("Active Customer Quote: ", customersThumb[i]);
-    //             var isHidden = document.querySelector('.testimonial-quotes');          
 
-    //             isHidden = customersQuo[i];
-    //             console.log("Is Hidden is Present: ", isHidden);
-    //             return isHidden;
-
-    //         }            
-    //     }
-    // }
-    // handleActiveQuote();
+    useEffect(() => {
+        function myFunction() {
+            document.getElementById("sectionOneAnim").classList.add('s-1-anim');
+        }
+        myFunction();        
+    }, []);
 
 
     return (
         <section className="home-section-one">
             <div className="h-container-1 container">
-                <div className="flex justify-between py-20 px-0">
+                <div className="flex justify-between py-32 px-0">
 
 
                     <div className="relative home-section-one--left min-h-126">
@@ -60,8 +45,8 @@ const HomeSectionOne = () => {
                                     })
                                 }
                                 <div className="bg-white aboslute testimonial-overlay"></div>
-                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-full w-124 opacity-0 testimonial-media">
-                                    <img src={activeImage} alt="customer" />
+                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-full w-124 testimonial-media">
+                                    <img src={activeImage} alt="customer"/>
                                 </div>
                             </div>
                         </div>

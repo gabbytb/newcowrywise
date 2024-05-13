@@ -7,7 +7,7 @@ import { BrandLogo } from "../assets/images";
 const Nav = () => {
     return (
         <>
-            <Link className="bg-sky-blue h-14 text-10xl text-center font-normal flex justify-center items-center" to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" target="_blank">
+            <Link className="bg-sky-blue h-14 text-10xl text-center text-light-gray font-medium flex justify-center items-center" to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" target="_blank">
                 Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
             </Link>
             <header id="header" className="default-header">

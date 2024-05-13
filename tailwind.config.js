@@ -26,19 +26,25 @@ module.exports = {
       '7xl': '5rem',      // 7 Extra Large
       '8xl': '6rem',
       '9xl': '7rem',
-      '10xl': '1.45rem',
+      '10xl': '1.3rem',
       '12xl': '120px',
       '13xl': '3.125rem',  
+      '14xl': '1.6rem',
     },
     letterSpacing: {
+      tightest: '3px',
       tighten: '0.25rem',
       tightened: '0.04em',
       tightener: '0.045em',
     },
     extend: {
-      animation: {        
-        clipPathAnimation: 'clipPathAnimation 2.5s linear',     /** FOR SECTION 2 GRAPH ANIMATION */
-        slideDown: 'slideDown .42s ease-in-out',      /** FOR STICKY HEADER **/
+      animation: {   
+        easeIn: 'easeIn 4s ease',   /** SECTION 1 ANIMATION */
+        slideRight: 'slideRight 0.5s ease',   /** SECTION 1 ANIMATION */
+        fade: 'fade 40s linear infinite',   /** SECTION 4 SLIDER ANIMATION */  
+        slideUp: 'slideUp 2.5s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideUpSpan: 'slideUp 0.6s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
       },
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
@@ -48,6 +54,7 @@ module.exports = {
         'dark-blue': 'var(--color-dark-blue)',
         'light-gray': 'var(--color-light-gray)',
         'sky-blue': 'var(--color-sky-blue)',
+        'light-gray': 'var(--color-gray-opacity)',
       },
       height: {
         '50': '3.125rem',
@@ -76,18 +83,35 @@ module.exports = {
         '32/2': '32%',
         '56/2': '56%',
 
-        '60': "60px",           // UseCase: section-four
+        '60': "60px",           // UseCase: section-1, 4,
+        '80': '80px',           // UseCase: section-1
         '100': '100px',
       },
       keyframes: {
-        // fade:  {
-        //   '0%': { 
-        //     transform: 'translateZ(0)' 
-        //   },
-        //   '100%': { 
-        //     transform: 'translate3d(-100%, 0, 0)' 
-        //   },
-        // },
+        easeIn: {
+          from: {
+            opacity: 0,
+          },
+          to: {
+            opacity: 1,
+          }
+        },
+        fade:  {
+          '0%': { 
+            transform: 'translateZ(0)' 
+          },
+          '100%': { 
+            transform: 'translate3d(-100%, 0, 0)' 
+          },
+        },
+        slideRight: {
+          '0%': { 
+            transform: 'translate3d(-100%, 0%, 0)',
+          },
+          to: { 
+            transform: 'translateZ(0)',
+          },
+        },
         slideDown: {
           '0%': { 
             transform: 'translate3d(0, -100%, 0)',
@@ -96,7 +120,7 @@ module.exports = {
             transform: 'translateZ(0)',
           },
         },
-        clipPathAnimation: { 
+        slideUp: { 
           '0%': {
             clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
           },       
@@ -145,6 +169,7 @@ module.exports = {
       width: {
         '78': '20.75rem',
         '50': '3.125rem',
+        '69': '9.625rem',
         '98': '25rem',
         '120': '43rem',
         '121': '45rem',

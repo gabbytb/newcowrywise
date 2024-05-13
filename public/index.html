@@ -27,7 +27,7 @@
     <title>React App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   </head>
-  <body onLoad="loadFunction()" onscroll="myFunction()">
+  <body onscroll="myFunction()">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -41,13 +41,6 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      async function loadFunction() {
-        var foundFirstAnim = document.getElementById("sectionOneAnim");
-        foundFirstAnim.classList.add('animate_first_img');
-        foundFirstAnim.classList.remove('opacity-0');
-      }
-
-
       function myFunction() {
         var foundScrollbar = document.getElementById('scrollbar');
         var foundHeader = document.getElementById('header');
@@ -61,6 +54,29 @@
           foundScrollbar.classList.remove('no-scrollbar');
         }
       };  
-      </script>
+
+
+      // //Check if the document is loaded (so that this script can be placed in the <head>)
+      // document.addEventListener("DOMContentLoaded", () => {
+
+      // // Use Intersection Observer to determine if objects are within the viewport
+      // const observer = new IntersectionObserver(entries => {
+      //   entries.forEach(entry => {
+      //   if (entry.isIntersecting) {
+      //     entry.target.classList.add('in-view');
+      //     return;
+      //   }
+      //   entry.target.classList.remove('in-view');
+      //   });
+      // });
+
+      // // Get all the elements with the .animate class applied
+      // const allAnimatedElements = document.querySelectorAll('.animate');
+
+      // // Add the observer to each of those elements
+      // allAnimatedElements.forEach((element) => observer.observe(element));
+
+      // }); 
+    </script>
   </body>
 </html>

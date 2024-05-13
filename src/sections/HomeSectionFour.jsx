@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SliderCards } from "../components";
 import { sliderItems } from "../constants";
 
@@ -6,6 +7,15 @@ import { sliderItems } from "../constants";
 
 const HomeSectionFour = () => {
   
+    function autoScroll() {
+        document.getElementById('autoScroll').classList.add('s-4-anim');
+    }
+
+    useEffect(() => {
+        autoScroll();
+    }, []);
+        
+
     return (
         <section className="home-section-four">
             <div className="h-container-4 container">
@@ -18,7 +28,7 @@ const HomeSectionFour = () => {
 
 
             <div className="slider-wrapper">
-                <div className="slides-wrap">
+                <div id="autoScroll" className="slides-wrap">
                     <div className="slides">
                         {
                             sliderItems.map((item) => {
