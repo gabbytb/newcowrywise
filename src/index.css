@@ -129,12 +129,24 @@
     @apply h-840 w-full px-7 my-0 mx-auto 
   }
 
+  .h-section-1-wrap {
+    @apply flex justify-between py-20 px-0
+  }
+
   .home-section-one--left {
     @apply mt-12 ml-12 
   }
 
   .home-section-one--left .testimonial {
     @apply relative top-0 left-0
+  }
+
+  .testimonial--active {    
+    @apply opacity-100 ease-in duration-1000
+  }
+
+  .home-section-one .h-section-1-wrap .home-section-one--left .customers-testimonials .testimonial {
+    @apply absolute top-0 left-0 h-full w-full
   }
 
   .testimonial .testimonial-backdrop {

@@ -776,6 +776,15 @@ header .cta-menu a:last-child {
   padding-right: 1.75rem;
 }
 
+.h-section-1-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .home-section-one--left {
   margin-top: 3rem;
   margin-left: 3rem;
@@ -785,6 +794,20 @@ header .cta-menu a:last-child {
   position: relative;
   top: 0px;
   left: 0px;
+}
+
+.testimonial--active {
+  opacity: 1;
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.home-section-one .h-section-1-wrap .home-section-one--left .customers-testimonials .testimonial {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
 }
 
 .testimonial .testimonial-backdrop {
@@ -1376,6 +1399,10 @@ header .cta-menu a:last-child {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .h-14 {
   height: 3.5rem;
 }
@@ -1546,11 +1573,6 @@ header .cta-menu a:last-child {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
-}
-
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
 }
 
 .pt-20 {

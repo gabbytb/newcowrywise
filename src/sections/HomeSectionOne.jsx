@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { customersQuotes, customersThumbnails } from "../constants";
 import { TestimonialQuotes, TestimonialThumbnails } from "../components";
 import { VideoIcon } from "../assets/icons";
@@ -41,15 +41,29 @@ const HomeSectionOne = () => {
     // handleActiveQuote();
 
 
+    async function showTestimonial() {
+        var cusTestimonial = document.getElementById('customerTestimonial');               
+        cusTestimonial.classList.remove('opacity-0');        
+        cusTestimonial.classList.remove('hidden');     
+
+        cusTestimonial.classList.add('testimonial--active');
+        console.log('Found Testimonial: ', cusTestimonial);
+    }
+
+    useEffect(() => {
+        showTestimonial();
+    }, []);
+
+
     return (
         <section className="home-section-one">
             <div className="h-container-1 container">
-                <div className="flex justify-between py-20 px-0">
+                <div className="h-section-1-wrap">
 
-
+                   
                     <div className="relative home-section-one--left min-h-126">
                         <div className="customers-testimonials h-full">
-                            <div className="w-127 h-full testimonial">
+                            <div id="customerTestimonial" className="w-127 h-full testimonial opacity-0 hidden">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {
