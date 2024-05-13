@@ -668,6 +668,17 @@ header {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.default-header .container {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 100%;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
 .sticky-header {
   position: fixed;
   top: 0px;
@@ -686,7 +697,7 @@ header {
 }
 
 .sticky-header {
-  animation: slideDown .42s;
+  animation: slideDown .42s ease-in-out;
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -696,25 +707,6 @@ header {
   overflow-x: hidden;
   overflow-y: scroll;
 }
-
-@keyframes slideIn {
-  0% {
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-.slide-in-anim {
-  animation: slideIn .42s;
-  opacity: 1;
-}
-
-/* .animate_first_img {
-    @apply animate-slideUp opacity-100 
-  } */
 
 header .cta-menu {
   display: inline-flex;
@@ -926,6 +918,28 @@ header .cta-menu a:last-child {
 .home-section-two--left {
   display: flex;
   width: 50rem;
+}
+
+@keyframes clipPathAnimation {
+  0% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+  }
+
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+}
+
+.slide-in-anim {
+  animation: clipPathAnimation 2.5s linear;
+  opacity: 1;
 }
 
 .home-section-two--left h2 {
@@ -1225,20 +1239,6 @@ header .cta-menu a:last-child {
   width: 120%;
 }
 
-@keyframes fade {
-  0% {
-    transform: translateZ(0);
-  }
-
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.home-section-four .slider-wrapper .slides-wrap {
-  animation: fade 40s linear infinite;
-}
-
 .home-section-four .slider-wrapper .slides {
   display: inline-flex;
   flex-shrink: 0;
@@ -1310,16 +1310,6 @@ header .cta-menu a:last-child {
 
 .top-0 {
   top: 0px;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.my-0 {
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 
 .my-4 {
@@ -1432,6 +1422,27 @@ header .cta-menu a:last-child {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@keyframes clipPathAnimation {
+  0% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+  }
+
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+}
+
+.animate-clipPathAnimation {
+  animation: clipPathAnimation 2.5s linear;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -1516,11 +1527,6 @@ header .cta-menu a:last-child {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-}
-
-.px-7 {
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
 }
 
 .px-8 {
