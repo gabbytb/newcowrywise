@@ -7,17 +7,6 @@ import { sliderItems } from "../constants";
 
 const HomeSectionFour = () => {
   
-<<<<<<< HEAD
-    function autoScroll() {
-        document.getElementById('autoScroll').classList.add('s-4-anim');
-    }
-
-    useEffect(() => {
-        autoScroll();
-    }, []);
-        
-
-=======
 
     async function myFunction() {
         let docLoader = document.getElementById('sectionFourSlidesAnim');
@@ -29,7 +18,6 @@ const HomeSectionFour = () => {
     }, []);
 
     
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
     return (
         <section className="home-section-four">
             <div className="h-container-4 container">
@@ -42,11 +30,7 @@ const HomeSectionFour = () => {
 
 
             <div className="slider-wrapper">
-<<<<<<< HEAD
-                <div id="autoScroll" className="slides-wrap">
-=======
                 <div id="sectionFourSlidesAnim" className="slides-wrap">
->>>>>>> 21a1eae6909ee66c989b024956287499d9003051
                     <div className="slides">
                         {
                             sliderItems.map((item) => {
