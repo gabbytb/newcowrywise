@@ -87,6 +87,8 @@
 
 
 
+
+
   /* Animations CSS */
   .sticky-header {
     @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm
