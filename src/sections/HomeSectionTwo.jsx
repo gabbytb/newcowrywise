@@ -12,6 +12,7 @@ const HomeSectionTwo = () => {
     function myFunction() {
         document.getElementById("sectionTwoAnim").classList.add('s-2-anim');
         document.getElementById("sectionTwoAnime").classList.add('s-2-2-anim');
+        document.getElementById("sectionTwoAnimReverse").classList.add('s-2-2-animreverse');
     }
 
     myFunction();        
@@ -21,16 +22,16 @@ const HomeSectionTwo = () => {
   return (
     <section className="home-section-two">
         <div className="h-container-2 container">
-            <div className="flex justify-between">
+            <div className="grid grid-cols-16 gap-44">
 
 
                 {/* Left Side */}
-                <div id="sectionTwoAnim" className="home-section-two--left">
+                <div className="home-section-two--left">
                   <div className="flex flex-col pt-5 space-y-12">
-                      <h2>
+                      <h2 id="sectionTwoAnim">
                         Get a <span id="sectionTwoAnime">little</span>&nbsp;richer each day
                       </h2>
-                      <h5>One small step today, a giant leap for tomorrow.</h5>
+                      <h5 id="sectionTwoAnimReverse">One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />
                   </div>
                 </div>

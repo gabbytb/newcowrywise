@@ -40,6 +40,7 @@ module.exports = {
     },
     extend: {
       animation: {   
+        dropdown: 'showDropdown 0.5s ease',
         easeIn: 'easeIn 4s ease',   /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 1 ANIMATION */
         fade: 'fade 40s linear infinite',   /** SECTION 4 SLIDER ANIMATION */  
@@ -56,6 +57,9 @@ module.exports = {
         'light-gray': 'var(--color-light-gray)',
         'sky-blue': 'var(--color-sky-blue)',
         'light-gray': 'var(--color-gray-opacity)',
+      },
+      gridTemplateColumns: {
+        '16': '1fr 1fr',
       },
       height: {
         '50': '3.125rem',
@@ -77,6 +81,8 @@ module.exports = {
         '13.5': '4.25rem',
         '15': '3.75rem',
         '18': '4.5rem',  
+        '19': '6.8rem',
+        '21': '2.75rem',
 
         '1/2': '1%', 
         '8/2': '8%',
@@ -131,7 +137,16 @@ module.exports = {
           '100%': {
             clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
           },
-        },  
+        }, 
+        showDropdown: {
+          '0%': { 
+            transform: 'translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078)',
+          },
+          to: { 
+            transform: 'translate(0px, 0px)',
+          },
+          
+        } 
       },
       lineHeight: {
         'to-tight': '1.1',

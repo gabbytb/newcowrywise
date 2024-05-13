@@ -82,7 +82,7 @@
   }
 
   .default-header .container {
-    @apply px-9 h-full w-full max-w-full my-0 mx-auto
+    @apply h-full w-full my-0 mx-auto
   }
 
 
@@ -103,6 +103,9 @@
   .s-2-2-anim {
     @apply animate-slideUpSpan 
   }
+  .s-2-2-animreverse {
+    @apply animate-slideUpSpan
+  }
   .s-4-anim {
     @apply animate-fade
   }
@@ -119,13 +122,25 @@
   .nav-links {
      @apply inline-flex justify-start space-x-16 cursor-pointer z-10
   }
+  
+  .has-dropdown {
+    @apply py-10  
+  }
 
+  .menu-item .nav-dropdown {
+    @apply hidden
+  }
+
+  .menu-item:hover .nav-dropdown {
+    @apply flex animate-dropdown
+  }
+  
   .menu-item p {
     @apply relative text-14xl font-semibold text-slate-800/50
   }
 
   .menu-item p::after {
-    @apply content-[''] bg-dropdown-icon h-6 w-6 ml-1 absolute top-2 text-slate-800/50
+    @apply content-[''] bg-dropdown-icon h-6 w-6 ml-1 absolute top-21 text-slate-800/50
   }  
 
   .nav-dropdown-item svg {
@@ -246,23 +261,23 @@
   }
 
   .h-container-2 {
-    @apply h-full w-full px-7 my-0 mx-auto 
+    @apply h-full w-full px-0 my-0 mx-auto 
   }
 
   .home-section-two--left {
-    @apply flex w-127.7
+    @apply flex w-128
   }
   
   .home-section-two--left h2 {
-    @apply text-8xl font-bold leading-to-tight -ml-0.5
+    @apply text-9xl font-bold leading-to-tight -ml-0.5
   }
 
   .home-section-two--left h2 span {
-    @apply text-8xl font-normal italic
+    @apply text-9xl font-normal italic
   }
 
   .home-section-two--left h5 {
-    @apply text-4xl font-semibold
+    @apply text-5xl font-medium
   }
 
   .home-section-two--left a {

@@ -676,9 +676,6 @@ header {
   margin-right: auto;
   height: 100%;
   width: 100%;
-  max-width: 100%;
-  padding-left: 2.25rem;
-  padding-right: 2.25rem;
 }
 
 /* Animations CSS */
@@ -765,6 +762,27 @@ header {
   animation: slideUp 0.6s linear;
 }
 
+@keyframes slideUp {
+  0% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+  }
+
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+}
+
+.s-2-2-animreverse {
+  animation: slideUp 0.6s linear;
+}
+
 @keyframes fade {
   0% {
     transform: translateZ(0);
@@ -798,6 +816,33 @@ header .cta-menu {
   margin-left: calc(4rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.has-dropdown {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.menu-item .nav-dropdown {
+  display: none;
+}
+
+.menu-item:hover .nav-dropdown {
+  display: flex;
+}
+
+@keyframes showDropdown {
+  0% {
+    transform: translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078);
+  }
+
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+
+.menu-item:hover .nav-dropdown {
+  animation: showDropdown 0.5s ease;
+}
+
 .menu-item p {
   position: relative;
   font-size: 1.6rem;
@@ -807,7 +852,7 @@ header .cta-menu {
 
 .menu-item p::after {
   position: absolute;
-  top: 0.5rem;
+  top: 2.75rem;
   margin-left: 0.25rem;
   height: 1.5rem;
   width: 1.5rem;
@@ -1033,31 +1078,31 @@ header .cta-menu a:last-child {
   margin-right: auto;
   height: 100%;
   width: 100%;
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .home-section-two--left {
   display: flex;
-  width: 50rem;
+  width: 58rem;
 }
 
 .home-section-two--left h2 {
   margin-left: -0.125rem;
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .home-section-two--left h2 span {
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 400;
   font-style: italic;
 }
 
 .home-section-two--left h5 {
-  font-size: 2.25rem;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: 500;
 }
 
 .home-section-two--left a {
@@ -1412,12 +1457,8 @@ header .cta-menu a:last-child {
   top: 0px;
 }
 
-.top-18 {
-  top: 4.5rem;
-}
-
-.z-50 {
-  z-index: 50;
+.top-19 {
+  top: 6.8rem;
 }
 
 .my-4 {
@@ -1480,6 +1521,10 @@ header .cta-menu a:last-child {
 
 .flex {
   display: flex;
+}
+
+.grid {
+  display: grid;
 }
 
 .h-14 {
@@ -1572,6 +1617,10 @@ header .cta-menu a:last-child {
   cursor: pointer;
 }
 
+.grid-cols-16 {
+  grid-template-columns: 1fr 1fr;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1590,6 +1639,18 @@ header .cta-menu a:last-child {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-44 {
+  gap: 11rem;
+}
+
+.gap-40 {
+  gap: 10rem;
+}
+
+.gap-48 {
+  gap: 12rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]) {
