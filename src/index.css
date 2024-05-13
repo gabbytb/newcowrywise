@@ -109,6 +109,7 @@
   /* Animations CSS */
   
 
+  
 
 
   header .cta-menu {
@@ -116,7 +117,7 @@
   }
 
   .nav-links {
-    @apply inline-flex
+     @apply inline-flex justify-start space-x-16 cursor-pointer z-10
   }
 
   .menu-item p {
@@ -126,6 +127,34 @@
   .menu-item p::after {
     @apply content-[''] bg-dropdown-icon h-6 w-6 ml-1 absolute top-2 text-slate-800/50
   }  
+
+  .nav-dropdown-item svg {
+    @apply w-20 h-20
+  }
+
+  .nav-dropdown-item div span {
+    @apply text-start text-3xl/more-loose font-semibold
+  }
+
+  .nav-dropdown-item p {
+    @apply text-15xl font-normal
+  }
+
+  .nav-dropdown-item p::after {
+    @apply bg-none
+  }
+
+  .nav-dropdown-item a {
+    @apply text-15xl text-light-gray
+  }
+
+  .nav-dropdown-item li {
+    @apply leading-extra-loose
+  }
+
+  .nav-dropdown--right h6 {
+    @apply text-14xl/more-loose font-semibold mb-6 text-start
+  }
 
   header .cta-menu a {
     @apply text-blue-600 text-2xl font-bold capitalize

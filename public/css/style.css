@@ -786,7 +786,16 @@ header .cta-menu {
 }
 
 .nav-links {
+  z-index: 10;
   display: inline-flex;
+  cursor: pointer;
+  justify-content: flex-start;
+}
+
+.nav-links > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(4rem * var(--tw-space-x-reverse));
+  margin-left: calc(4rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .menu-item p {
@@ -806,6 +815,44 @@ header .cta-menu {
   color: rgb(30 41 59 / 0.5);
   --tw-content: '';
   content: var(--tw-content);
+}
+
+.nav-dropdown-item svg {
+  height: 5rem;
+  width: 5rem;
+}
+
+.nav-dropdown-item div span {
+  text-align: start;
+  font-size: 1.875rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.nav-dropdown-item p {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.nav-dropdown-item p::after {
+  background-image: none;
+}
+
+.nav-dropdown-item a {
+  font-size: 1.4rem;
+  color: var(--color-gray-opacity);
+}
+
+.nav-dropdown-item li {
+  line-height: 2;
+}
+
+.nav-dropdown--right h6 {
+  margin-bottom: 1.5rem;
+  text-align: start;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-weight: 600;
 }
 
 header .cta-menu a {
@@ -1365,6 +1412,14 @@ header .cta-menu a:last-child {
   top: 0px;
 }
 
+.top-18 {
+  top: 4.5rem;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -1377,6 +1432,18 @@ header .cta-menu a:last-child {
 
 .mb-10 {
   margin-bottom: 2.5rem;
+}
+
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.mr-14 {
+  margin-right: 3.5rem;
 }
 
 .mr-20 {
@@ -1455,6 +1522,11 @@ header .cta-menu a:last-child {
   width: 100%;
 }
 
+.w-max {
+  width: -webkit-max-content;
+  width: max-content;
+}
+
 .min-w-63 {
   min-width: 61%;
 }
@@ -1508,10 +1580,6 @@ header .cta-menu a:last-child {
   align-items: center;
 }
 
-.justify-start {
-  justify-content: flex-start;
-}
-
 .justify-end {
   justify-content: flex-end;
 }
@@ -1530,12 +1598,6 @@ header .cta-menu a:last-child {
   margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-16 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(4rem * var(--tw-space-x-reverse));
-  margin-left: calc(4rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-y-12 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1546,8 +1608,21 @@ header .cta-menu a:last-child {
   border-radius: 0.5rem;
 }
 
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
 .border {
   border-width: 1px;
+}
+
+.border-e-2 {
+  border-inline-end-width: 2px;
+}
+
+.border-slate-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-border-opacity));
 }
 
 .bg-blue-600 {
@@ -1577,6 +1652,11 @@ header .cta-menu a:last-child {
   padding-right: 0px;
 }
 
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -1590,6 +1670,22 @@ header .cta-menu a:last-child {
 .py-32 {
   padding-top: 8rem;
   padding-bottom: 8rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.pr-20 {
+  padding-right: 5rem;
+}
+
+.pr-8 {
+  padding-right: 2rem;
+}
+
+.pt-12 {
+  padding-top: 3rem;
 }
 
 .pt-20 {
@@ -1652,4 +1748,10 @@ header .cta-menu a:last-child {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }

@@ -30,6 +30,7 @@ module.exports = {
       '12xl': '120px',
       '13xl': '3.125rem',  
       '14xl': '1.6rem',
+      '15xl': '1.4rem'
     },
     letterSpacing: {
       tightest: '3px',
@@ -136,7 +137,8 @@ module.exports = {
         'to-tight': '1.1',
         'tighter': '1.35',
         'least': '0',
-        // 'extra-loose': '2.5',
+        'more-loose': '1.5',
+        'extra-loose': '2',
         // '12': '3rem',
       },
       margin: {
