@@ -29,7 +29,7 @@ const HomeSectionTwo = () => {
                 <div className="home-section-two--left">
                   <div className="flex flex-col pt-5 space-y-16 w-136">
                       <h2 id="sectionTwoAnim">
-                        Get a <span id="sectionTwoAnime">little</span>&nbsp;richer each day
+                        Get a <span id="sectionTwoAnime">little </span>&nbsp;richer each day
                       </h2>
                       <h5 id="sectionTwoAnimReverse" className="sm:pr-20 sm:my-14.4">One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />
