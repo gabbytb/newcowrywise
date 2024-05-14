@@ -514,7 +514,7 @@ h1,h2,h3,h4,h5,h6,li,p,a,span {
 }
 
 .container {
-  max-width: 1380px;
+  max-width: 1380px !important;
 }
 
 sub, sup {
@@ -676,6 +676,8 @@ header {
   margin-right: auto;
   height: 100%;
   width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 /* Animations CSS */
@@ -846,7 +848,7 @@ header .cta-menu {
 .menu-item p {
   position: relative;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 400;
   color: rgb(30 41 59 / 0.5);
 }
 
@@ -925,8 +927,8 @@ header .cta-menu a:last-child {
 
 .home-section-one {
   width: 100%;
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -934,12 +936,12 @@ header .cta-menu a:last-child {
 .h-container-1 {
   margin-top: 0px;
   margin-bottom: 0px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0px;
+  margin-right: 0px;
   height: 840px;
   width: 100%;
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .home-section-one--left {
@@ -954,10 +956,10 @@ header .cta-menu a:last-child {
 }
 
 .testimonial .testimonial-backdrop {
-  top: -60px;
-  left: -80px;
+  top: -6rem;
+  left: -8rem;
   height: 850px;
-  width: 34rem;
+  width: 40rem;
   background-color: rgb(219 39 119 / 0.25);
 }
 
@@ -1071,20 +1073,8 @@ header .cta-menu a:last-child {
   padding-bottom: 0px;
 }
 
-.h-container-2 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100%;
-  width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 .home-section-two--left {
   display: flex;
-  width: 58rem;
 }
 
 .home-section-two--left h2 {
@@ -1123,13 +1113,11 @@ header .cta-menu a:last-child {
 
 .home-section-two--right {
   position: relative;
-  width: 630px;
+  width: 72rem;
 }
 
 .home-section-two--right #graph-anim-wrap {
   position: relative;
-  height: 780px;
-  width: 720px;
 }
 
 .home-section-two--right .card-wrap {
@@ -1254,17 +1242,6 @@ header .cta-menu a:last-child {
   padding-top: 3.125rem;
 }
 
-.h-container-3 {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  height: 100%;
-  width: 100%;
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
-}
-
 .home-section-three h2 {
   margin-top: 5rem;
   margin-bottom: 2.5rem;
@@ -1367,17 +1344,6 @@ header .cta-menu a:last-child {
   overflow: hidden;
 }
 
-.h-container-4 {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  height: 100%;
-  width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 .home-section-four .slider-wrapper .slides-wrap {
   position: absolute;
   display: flex;
@@ -1418,7 +1384,7 @@ header .cta-menu a:last-child {
 
 .home-section-four .slider-wrapper .slides .slider-item h4::before {
   position: absolute;
-  top: -60px;
+  top: -6rem;
   left: 0px;
   font-weight: 400;
   --tw-text-opacity: 1;
@@ -1540,19 +1506,15 @@ header .cta-menu a:last-child {
 }
 
 .min-h-126 {
-  min-height: 650px;
+  min-height: 65rem;
 }
 
 .min-h-16 {
   min-height: 4rem;
 }
 
-.w-124 {
-  width: 47rem;
-}
-
-.w-127 {
-  width: 48.7rem;
+.w-135 {
+  width: 52rem;
 }
 
 .w-16 {
@@ -1621,6 +1583,10 @@ header .cta-menu a:last-child {
   grid-template-columns: 1fr 1fr;
 }
 
+.grid-cols-18 {
+  grid-template-columns: 54% 1fr;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1641,8 +1607,12 @@ header .cta-menu a:last-child {
   justify-content: space-between;
 }
 
-.gap-44 {
-  gap: 11rem;
+.gap-16 {
+  gap: 4rem;
+}
+
+.gap-40 {
+  gap: 10rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]) {
@@ -1713,6 +1683,11 @@ header .cta-menu a:last-child {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .px-8 {

@@ -21,8 +21,8 @@ const HomeSectionTwo = () => {
 
   return (
     <section className="home-section-two">
-        <div className="h-container-2 container">
-            <div className="grid grid-cols-16 gap-44">
+        <div className="container">
+            <div className="grid grid-cols-18 gap-16 px-8">
 
 
                 {/* Left Side */}

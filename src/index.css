@@ -64,7 +64,7 @@
   }
 
   .container {
-    max-width: 1380px;
+    max-width: 1380px !important;
   }
 
   sub, sup {
@@ -82,7 +82,7 @@
   }
 
   .default-header .container {
-    @apply h-full w-full my-0 mx-auto
+    @apply h-full w-full my-0 mx-auto px-8
   }
 
 
@@ -138,7 +138,7 @@
   }
   
   .menu-item p {
-    @apply relative text-14xl font-semibold text-slate-800/50
+    @apply relative text-14xl font-normal  text-slate-800/50
   }
 
   .menu-item p::after {
@@ -186,11 +186,11 @@
 
   /* Section One */
   .home-section-one {
-    @apply py-24 px-0 w-full
+    @apply py-20 px-0 w-full
   }
 
   .h-container-1 {
-    @apply h-840 w-full px-7 my-0 mx-auto 
+    @apply h-840 w-full px-8 my-0 mx-0
   }
 
   .home-section-one--left {
@@ -202,7 +202,7 @@
   }
 
   .testimonial .testimonial-backdrop {
-    @apply w-123 h-850 bg-pink-600/25 -top-60 -left-80 
+    @apply w-125 h-850 bg-pink-600/25 -top-60 -left-80 
   }
 
   .testimonial .testimonial-video-ctrl {
@@ -267,7 +267,7 @@
   }
 
   .home-section-two--left {
-    @apply flex w-128
+    @apply flex
   }
   
   .home-section-two--left h2 {
@@ -287,11 +287,11 @@
   }
 
   .home-section-two--right {
-    @apply relative w-630
+    @apply relative w-720
   }
 
   .home-section-two--right #graph-anim-wrap {
-    @apply relative h-780 w-720
+    @apply relative 
   }
 
   .home-section-two--right .card-wrap {

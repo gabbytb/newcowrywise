@@ -11,11 +11,8 @@ import { wura } from "../assets/images";
 
 const HomeSectionOne = () => {
 
-
-
     const [activeImage, setActiveImage] = useState(wura);
     console.log("Active Thumbnail: ", activeImage);   
-
 
 
     useEffect(() => {
@@ -29,12 +26,12 @@ const HomeSectionOne = () => {
     return (
         <section className="home-section-one">
             <div className="h-container-1 container">
-                <div className="flex justify-between py-32 px-0">
+                <div className="grid grid-cols-16 gap-40 py-32 px-0">
 
 
                     <div className="relative home-section-one--left min-h-126">
                         <div className="customers-testimonials h-full">
-                            <div className="w-127 h-full testimonial">
+                            <div className="h-full testimonial">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {
@@ -45,7 +42,7 @@ const HomeSectionOne = () => {
                                     })
                                 }
                                 <div className="bg-white aboslute testimonial-overlay"></div>
-                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-full w-124 testimonial-media">
+                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-full w-135 testimonial-media">
                                     <img src={activeImage} alt="customer"/>
                                 </div>
                             </div>
