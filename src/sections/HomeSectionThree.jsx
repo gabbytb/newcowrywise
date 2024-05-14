@@ -6,7 +6,7 @@ import { ArrowDown } from "../components";
 const HomeSectionThree = () => {
     return (
         <section className="home-section-three">
-            <div className="container">
+            <div className="h-container-3 container">
 
 
                 <div className="content">
@@ -37,6 +37,12 @@ const HomeSectionThree = () => {
                                 <div className="roi--select-arrow">
                                     <ArrowDown />
                                 </div>
+                            </div>
+                        </div>
+                        <div class="slider-wrap">
+                            <div class="slider">
+                                <div class="line"></div> 
+                                <input type="range" min="5000" max="10000000" step="1000" value="100000" data-v-f5a75a14="" />
                             </div>
                         </div>
                     </div>

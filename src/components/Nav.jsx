@@ -15,7 +15,7 @@ const Nav = () => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex items-center h-full px-0">                
-                        <Link className="mt-1.5 mr-20 brand">
+                        <Link className="mt-1.5 ml-2 mr-24 brand">
                             <BrandLogo />
                         </Link>
 

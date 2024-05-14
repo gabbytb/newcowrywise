@@ -27,24 +27,34 @@ module.exports = {
       '8xl': '6rem',
       '9xl': '7rem',
       '10xl': '1.3rem',
-      '12xl': '120px',
+      '12xl': '12rem',
       '13xl': '3.125rem',  
       '14xl': '1.6rem',
-      '15xl': '1.4rem'
+      '15xl': '1.4rem',
+      '16xl': '8rem',
+      '17xl': '1.9rem',
     },
     letterSpacing: {
-      tightest: '3px',
+      verytight: '0.1rem',
+      tightest: '0.3rem',
       tighten: '0.25rem',
       tightened: '0.04em',
       tightener: '0.045em',
+      extratight: '0.06em',
+      moretight: '0.065em',
+    },
+    screens: {          
+      'sm': '601px',    
+      'lg': '981px',
     },
     extend: {
       animation: {   
         dropdown: 'showDropdown 0.5s ease',
         easeIn: 'easeIn 4s ease',   /** SECTION 1 ANIMATION */
-        slideRight: 'slideRight 0.5s ease',   /** SECTION 1 ANIMATION */
+        slideRight: 'slideRight 0.5s ease',   /** SECTION 2 ANIMATION */
+        slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 ANIMATION */
         fade: 'fade 40s linear infinite',   /** SECTION 4 SLIDER ANIMATION */  
-        slideUp: 'slideUp 2.5s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideUp: 'slideUp 0.8s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideUpSpan: 'slideUp 0.6s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
       },
@@ -61,8 +71,10 @@ module.exports = {
       gridTemplateColumns: {
         '16': '1fr 1fr',
         '18': '54% 1fr',
+        '20': '1fr',
       },
       height: {
+        '13': '3.2rem',
         '50': '3.125rem',
         '94': '20rem',
         '98': '25rem',
@@ -74,6 +86,8 @@ module.exports = {
         '126.5': '46.5rem',
         '127': '48.7rem',
         '128': '58rem',
+        '130': '65rem',
+        '760': '126rem',
         '780': '780px',
         '840': '840px',
         '850': '850px'
@@ -93,6 +107,7 @@ module.exports = {
         '32/2': '32%',
         '56/2': '56%',
 
+        '58': '4rem',
         '60': '6rem',           // UseCase: section-1, 4,
         '80': '8rem',           // UseCase: section-1
         '100': '100px',
@@ -116,7 +131,15 @@ module.exports = {
         },
         slideRight: {
           '0%': { 
-            transform: 'translate3d(-100%, 0%, 0)',
+            transform: 'translate3d(-5%, 0, 0)',
+          },
+          to: { 
+            transform: 'translateZ(0)',
+          },
+        },
+        slideLeft: {
+          '0%': { 
+            transform: 'translate3d(5%, 0, 0)',
           },
           to: { 
             transform: 'translateZ(0)',
@@ -155,17 +178,20 @@ module.exports = {
         'to-tight': '1.1',
         'tighter': '1.35',
         'least': '0',
+        'very-loose': '1.4',
         'more-loose': '1.5',
         'extra-loose': '2',
-        // '12': '3rem',
       },
       margin: {
+        '3.1': '0.6rem',
+        '3.2': '0.8rem',
         '5.5': '1.125rem',
         '6.5': '1.85rem',
         '13.5': '2.1rem',
         '14.5': '3.125rem',
         '15.5': '3.35rem',
         '16.5': '5.71rem',
+        '17.5': '5.3rem',
         '29': '5px',
       },
       maxWidth: {
@@ -173,45 +199,48 @@ module.exports = {
         '80': '80%',
       },
       minHeight: {
+        '98': '32rem',
         '126': '65rem',
       },
       minWidth: {
         '50': '3.125rem',
+        '80': '17.8rem',
         '63': '61%',
-        // '130': '40rem',
       },
       padding: {
+        '6.4': '1.6rem',
         '6.5': '1.85rem',
         '13.5': '2.1rem',
+        '14.4': '2.4rem',
         '14.5': '3.125rem',
+        '14.7': '3.2rem',
         '15.5': '3.35rem',
         '18.5': '4.86rem',
       },
       width: {
-        '78': '20.75rem',
+        '13': '3.2rem',
         '50': '3.125rem',
+        '52.5': '14.5rem',
         '69': '9.625rem',
         '98': '25rem',
+        '100': '30rem',
         '120': '43rem',
         '121': '45rem',
         '122': '33rem',
         '123': '34rem',
         '123.5': '44rem',
-        // '124': '47rem',
         '125': '40rem',
         '126': '40.625rem',
         '126.5': '46.5rem',       
         '127': '48.7rem',
         '127.5': '48.75rem',
-        '127.7': '50rem',
-        // '128': '58rem',
-        // '130': '58.3rem',
         '135': '52rem',
+        '136': '56rem',
         '140': '61.3rem',
+        '183': '87.3rem',
         '630': '630px',
         '720': '72rem',
         '22/12': '120%',
-
       },
       zIndex: {
         '3': '3',

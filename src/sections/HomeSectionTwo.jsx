@@ -21,17 +21,17 @@ const HomeSectionTwo = () => {
 
   return (
     <section className="home-section-two">
-        <div className="container">
-            <div className="grid grid-cols-18 gap-16 px-8">
+        <div className="h-container-2 container">
+            <div className="grid grid-cols-18 gap-16 px-10">
 
 
                 {/* Left Side */}
                 <div className="home-section-two--left">
-                  <div className="flex flex-col pt-5 space-y-12">
+                  <div className="flex flex-col pt-5 space-y-16 w-136">
                       <h2 id="sectionTwoAnim">
                         Get a <span id="sectionTwoAnime">little</span>&nbsp;richer each day
                       </h2>
-                      <h5 id="sectionTwoAnimReverse">One small step today, a giant leap for tomorrow.</h5>
+                      <h5 id="sectionTwoAnimReverse" className="sm:pr-20 sm:my-14.4">One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />
                   </div>
                 </div>

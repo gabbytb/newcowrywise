@@ -58,7 +58,7 @@
     scroll-behavior: smooth;
   }
 
-  h1,h2,h3,h4,h5,h6,li,p,a,span {
+  h1,h2,h3,h4,h5,h6,li,p,a,span,blockquote {
     color: var(--color-dark-blue);
     font-family: "CW BR Firma";
   }
@@ -100,13 +100,13 @@
     @apply animate-easeIn
   }
   .s-2-anim {
-    @apply animate-slideRight -ml-2
+    @apply animate-slideRight
   }
   .s-2-2-anim {
     @apply animate-slideUpSpan 
   }
   .s-2-2-animreverse {
-    @apply animate-slideUpSpan
+    @apply animate-slideLeft
   }
   .s-4-anim {
     @apply animate-fade
@@ -122,7 +122,7 @@
   }
 
   .nav-links {
-     @apply inline-flex justify-start space-x-16 cursor-pointer z-10
+     @apply inline-flex justify-start space-x-20 cursor-pointer z-10
   }
   
   .has-dropdown {
@@ -138,7 +138,7 @@
   }
   
   .menu-item p {
-    @apply relative text-14xl font-normal  text-slate-800/50
+    @apply relative text-2xl font-normal text-slate-500
   }
 
   .menu-item p::after {
@@ -181,32 +181,36 @@
     @apply text-2xl text-white bg-blue-600 px-9 py-5 rounded-xl
   }
 
+  .brand svg {
+    @apply w-52.5
+  }
 
 
 
   /* Section One */
   .home-section-one {
-    @apply py-20 px-0 w-full
+    @apply py-20 px-0 w-full sm:h-760 lg:h-full
   }
 
   .h-container-1 {
-    @apply h-840 w-full px-8 my-0 mx-0
+    @apply w-full px-8 my-0 mx-auto
+    /* h-840 */
   }
 
   .home-section-one--left {
-    @apply mt-12 ml-12 
+    @apply mt-12 ml-12 sm:mt-0 sm:ml-0 lg:mt-12 lg:ml-12 
   }
 
   .home-section-one--left .testimonial {
-    @apply relative top-0 left-0
+    @apply relative top-0 left-0 sm:h-130
   }
 
   .testimonial .testimonial-backdrop {
-    @apply w-125 h-850 bg-pink-600/25 -top-60 -left-80 
+    @apply w-125 h-850 bg-pink-600/25 -top-60 -left-80 sm:-top-212 sm:-left-58 lg:-top-60 lg:-left-80
   }
 
   .testimonial .testimonial-video-ctrl {
-    @apply w-11 h-11 absolute top-12 right-16 z-3
+    @apply w-11 h-11 absolute top-8 right-214 z-3
   }
 
   .testimonial .testimonial-video-ctrl svg {
@@ -214,39 +218,35 @@
   }
 
   .testimonial .testimonial-quotes {
-    @apply w-98 min-h-44 py-6 px-8 flex-col justify-between -bottom-10 -right-2.5 z-5 bg-white
+    @apply z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between -bottom-10 -right-2.5 bg-white sm:left-0 sm:right-0 lg:-bottom-10 lg:-right-2.5 lg:left-auto
   }
 
   .testimonial .testimonial-quotes blockquote {
-    @apply text-lg/tighter font-semibold text-gray-400
+    @apply text-15xl/tighter font-medium text-gray-400
   }
 
   .testimonial .testimonial-quotes .testimonial-author {
-    @apply flex justify-between
-  }
-
-  .testimonial .testimonial-quotes .testimonial-author a {
-    @apply text-blue-500 text-lg font-semibold 
+    @apply flex justify-between 
   }
 
   .testimonial .testimonial-quotes .testimonial-author span {
-    @apply text-lg font-semibold text-gray-500
+    @apply text-15xl font-medium text-gray-500
+  }
+
+  .testimonial .testimonial-quotes .testimonial-author a {
+    @apply text-blue-500 text-15xl font-semibold 
   }
 
   .testimonial-media img {
     @apply object-cover w-full h-full absolute top-0
   }
 
-  .testimonial .testimonial-overlay {
-    @apply top-0 left-0 w-full h-full 
-  }
-
   .testimonials-thumbnail img {
-    @apply h-full w-full object-cover absolute top-3 left-0
+    @apply h-full w-full object-cover absolute top-3 left-0 lg:top-3 lg:left-0 
   }
 
   .home-section-one--right h1 {
-    @apply text-8xl font-bold mt-15.5 mb-9 leading-to-tight text-dark-blue
+    @apply text-8xl font-semibold mt-15.5 mb-9 leading-to-tight text-dark-blue sm:mt-15.5 sm:text-7xl lg:text-16xl lg:font-semibold lg:-tracking-moretight lg:mt-17.5
   }
 
   .home-section-one--right h6 {
@@ -271,11 +271,11 @@
   }
   
   .home-section-two--left h2 {
-    @apply text-9xl font-bold leading-to-tight -ml-0.5
+    @apply text-9xl/none font-bold leading-to-tight -tracking-moretight -ml-3.1 sm:text-7xl lg:text-16xl/none
   }
 
   .home-section-two--left h2 span {
-    @apply text-9xl font-normal italic
+    @apply text-9xl font-normal italic sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
   }
 
   .home-section-two--left h5 {
@@ -295,11 +295,11 @@
   }
 
   .home-section-two--right .card-wrap {
-    @apply absolute 
+    @apply absolute w-100 min-h-44
   }
 
   .home-section-two--right .card-wrap .card-item {
-    @apply bg-white w-78 py-4 pb-6 px-6 rounded-lg border border-slate-200 shadow-md
+    @apply bg-white w-full h-full pt-6.4 pb-14.4 px-14.4 rounded-lg border border-slate-200 shadow-md flex flex-col
   }
 
   .home-section-two .card-item-one {
@@ -315,11 +315,11 @@
   }
 
   .card-item h6 {
-    @apply text-2xl font-bold
+    @apply text-17xl font-semibold -tracking-verytight
   }
 
   .card-item p {
-    @apply text-lg font-normal mt-2
+    @apply text-15xl/very-loose font-normal mt-3.2 text-slate-500
   }
 
   .home-section-two .card-item-one .card-item::after {
@@ -368,7 +368,7 @@
   }
   
   .roi-input input[type="tel"] {
-    @apply text-12xl font-normal font-firma tracking-tightener bg-white text-dark-blue w-121 text-right py-4
+    @apply text-12xl font-normal font-firma tracking-tightener bg-white text-dark-blue w-135 text-right py-4
   }
 
   .roi-dropdown-wrap {
@@ -383,7 +383,21 @@
     @apply appearance-none text-3xl text-blue-600 font-normal
   }
 
+  .slider-wrap {
+    @apply w-183 
+  }
 
+  .slider-wrap .slider {
+    @apply relative
+  }
+
+  .slider .line {
+    @apply absolute left-0 bottom-1 w-full 
+  }
+
+  .slider-wrap .slider input[type="range"] {
+    @apply w-full
+  }
 
 
 
@@ -392,7 +406,7 @@
         @apply mt-10 mb-0 mx-0 w-screen h-98 overflow-hidden relative
     }
     .h-container-4 {
-      @apply h-full w-full mx-auto my-0 px-0
+      @apply h-full w-full px-7 mx-auto my-0
     }
     .home-section-four .slider-wrapper .slides-wrap {
         @apply w-22/12 flex absolute     
@@ -401,13 +415,13 @@
         @apply inline-flex shrink-0
     }
     .home-section-four .slider-wrapper .slides .slider-item {
-        @apply flex justify-center items-center mr-8 p-8 h-94 border border-blue-400 relative text-center w-127.7 max-w-99 min-h-80 rounded-3xl
+        @apply flex justify-center items-center mr-8 p-16 h-94 border border-blue-400 relative text-center max-w-3xl min-h-98 rounded-3xl
     }
     .home-section-four .slider-wrapper .slides .slider-item h4 {
-        @apply font-semibold font-firma w-full relative text-left text-13xl
+        @apply font-semibold font-firma w-full relative text-left text-7xl/to-tight -tracking-extratight text-blue-600
     }
     .home-section-four .slider-wrapper .slides .slider-item h4::before {
-        @apply content-["“"] absolute -top-60 left-0 font-normal text-blue-500
+        @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
     }
     /* Section four */
 }
