@@ -1323,15 +1323,16 @@ header .cta-menu a:last-child {
 .home-section-two .card-item-one .card-item::after {
   position: absolute;
   top: 0px;
-  right: -4.25rem;
+  right: -5.2rem;
   display: flex;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 4rem;
+  width: 4rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-dark-blue);
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -1344,15 +1345,16 @@ header .cta-menu a:last-child {
 .home-section-two .card-item-two .card-item::after {
   position: absolute;
   top: 0px;
-  right: -4.25rem;
+  right: -5.2rem;
   display: flex;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 4rem;
+  width: 4rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-dark-blue);
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -1365,15 +1367,16 @@ header .cta-menu a:last-child {
 .home-section-two .card-item-three .card-item::after {
   position: absolute;
   top: 0px;
-  right: -4.25rem;
+  right: -5.2rem;
   display: flex;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 4rem;
+  width: 4rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-dark-blue);
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -1454,8 +1457,6 @@ header .cta-menu a:last-child {
 
 .roi-input input[type="tel"] {
   width: 52rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: right;
@@ -1504,16 +1505,39 @@ header .cta-menu a:last-child {
   margin-bottom: 4rem;
 }
 
-.slider .line {
-  position: absolute;
-  left: 0px;
-  bottom: 0.25rem;
-  width: 100%;
-}
+/* .slider .line {
+    @apply absolute left-0 bottom-1 w-full 
+  } */
 
 .slider-wrap .slider input[type="range"] {
   height: 0.1rem;
   width: 100%;
+}
+
+.roi-investment p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roi-investment p sup {
+  margin-right: 5px;
+  width: 2rem;
+  font-size: 3em;
+  line-height: 0;
+  font-weight: 400;
+  color: var(--color-dark-blue);
+}
+
+.roi-investment p span {
+  width: 52rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: right;
+  font-size: 12rem;
+  font-weight: 300;
+  letter-spacing: 0.045em;
+  color: var(--color-gray-opacity);
 }
 
 /* Section four */

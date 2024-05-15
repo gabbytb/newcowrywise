@@ -6,9 +6,9 @@ module.exports = {
     "./src/**/*.{html,js,jsx}",
   ],
   theme: {
-    backgroundPosition: {
-      'top-left': '0, 0',
-    },
+    // backgroundPosition: {
+    //   'top-left': '0, 0',
+    // },
     fontFamily: {
       firma: ["CW BR Firma"],
     },
@@ -33,6 +33,7 @@ module.exports = {
       '15xl': '1.4rem',
       '16xl': '8rem',
       '17xl': '1.9rem',
+      '18xl': '3.9rem',
     },
     letterSpacing: {
       verytight: '0.1rem',
@@ -67,6 +68,7 @@ module.exports = {
         'light-gray': 'var(--color-light-gray)',
         'sky-blue': 'var(--color-sky-blue)',
         'light-gray': 'var(--color-gray-opacity)',
+        'trans-opaque': 'var(--background-color-opacity)'
       },
       gridTemplateColumns: {
         '16': '1fr 1fr',
@@ -96,11 +98,11 @@ module.exports = {
       inset: {
         '212': '2rem',
         '214': '9.5rem',
-        '13.5': '4.25rem',
         '15': '3.75rem',
         '18': '4.5rem',  
         '19': '6.8rem',
         '21': '2.75rem',
+        '23': '5.2rem',     /** Section 2: card-item::after */
 
         '1/2': '1%', 
         '8/2': '8%',
@@ -182,6 +184,7 @@ module.exports = {
         'very-loose': '1.4',
         'more-loose': '1.5',
         'extra-loose': '2',
+        'extra-loosened': '4.4rem',
       },
       margin: {
         '3.1': '0.6rem',
@@ -189,9 +192,11 @@ module.exports = {
         '5.5': '1.125rem',
         '6.5': '1.85rem',
         '13.5': '2.1rem',
+        '13.7': '2.7rem',
         '14.4': '4rem',
         '14.5': '3.125rem',
         '15.5': '3.35rem',
+        '15.7': '3.9rem',
         '16.5': '5.71rem',
         '17.5': '5.3rem',
         '29': '5px',

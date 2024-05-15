@@ -1,6 +1,6 @@
-const ButtonComponent = ({ btnType, label }) => {
+const ButtonComponent = ({ btnType, btnProps, label }) => {
   return (
-    <button type={btnType}>
+    <button type={btnType} className={`${btnProps}`}>
         {label}
     </button>
   );

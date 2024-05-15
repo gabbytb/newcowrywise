@@ -52,6 +52,7 @@
     --color-light-gray: rgb(108 130 163);  
     --color-sky-blue: rgb(230, 250, 255);  
     --color-gray-opacity: rgba(100, 116, 139, 1);
+    --background-color-opacity: hsla(0,0%,100%,.7);
     font-size: 10px;
     font-family: sans-serif;
     line-height: 1.15;
@@ -332,15 +333,15 @@
   }
 
   .home-section-two .card-item-one .card-item::after {
-    @apply content-['1'] absolute top-0 -right-13.5 rounded-full text-dark-blue font-bold bg-white shadow-md w-14 h-14 flex justify-center items-center
+    @apply content-['1'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
   
   .home-section-two .card-item-two .card-item::after {
-    @apply content-['2'] absolute top-0 -right-13.5 rounded-full text-dark-blue font-bold bg-white shadow-md w-14 h-14 flex justify-center items-center
+    @apply content-['2'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
 
   .home-section-two .card-item-three .card-item::after {
-    @apply content-['3'] absolute top-0 -right-13.5 rounded-full text-dark-blue font-bold bg-white shadow-md w-14 h-14 flex justify-center items-center
+    @apply content-['3'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
 
 
@@ -348,8 +349,8 @@
 
   /* Section Three */
   .home-section-three {
-    @apply pt-14.5 bg-return-invested bg-no-repeat bg-top-left 
-    /* h-screen */
+    @apply pt-14.5 bg-return-invested bg-no-repeat
+    /* bg-top-left h-screen */
   }
 
   .h-container-3 {
@@ -377,7 +378,7 @@
   }
   
   .roi-input input[type="tel"] {
-    @apply text-12xl font-normal font-firma tracking-tightener bg-white text-dark-blue w-135 text-right py-4
+    @apply text-12xl font-normal tracking-tightener font-firma text-dark-blue w-135 text-right py-4
   }
 
   .roi-dropdown-wrap {
@@ -392,45 +393,76 @@
     @apply appearance-none text-3xl text-blue-600 font-normal
   }
 
-  .roi-wrap .slider-wrap {
+  /* .roi-wrap .slider-wrap {
     @apply w-183 mx-auto
-  }
+  } */
 
   .slider-wrap .slider {
-    @apply relative my-16
+    @apply relative w-183 mx-auto my-16
   }
 
-  .slider .line {
+  /* .slider .line {
     @apply absolute left-0 bottom-1 w-full 
-  }
+  } */
 
   .slider-wrap .slider input[type="range"] {
     @apply w-full h-99.5
   }
 
+  .roi-investment p {
+    @apply flex justify-center items-center
+  }
+   
+  .roi-investment p sup {
+    @apply text-[3em]/least text-dark-blue font-normal w-8 mr-29 
+  }
+  
+  .roi-investment p span {
+    @apply text-12xl font-light tracking-tightener text-light-gray w-135 text-right py-4
+  }
+
+  .roi-investment-returns div {
+    @apply text-2xl font-medium bg-sky-200 text-blue-600 w-123 mt-10 mx-auto py-3 px-4 rounded-md
+  }
+
+  .roi-investment-returns p {
+    @apply text-2xl font-medium text-light-gray my-8
+  }
+
+  .roi-investment-returns span {
+    @apply text-black
+  }
+
+  .roi-investments-overlay h3 {
+    @apply text-18xl font-semibold text-light-gray -tracking-tightened text-gray-700 mt-15.7 mb-13.7 
+  }
 
 
-      /* Section four */
-    .home-section-four .slider-wrapper {
-        @apply mt-10 mb-0 mx-0 w-screen h-98 overflow-hidden relative
-    }
-    .h-container-4 {
-      @apply h-full w-full px-7 mx-auto my-0
-    }
-    .home-section-four .slider-wrapper .slides-wrap {
-        @apply w-22/12 flex absolute     
-    }
-    .home-section-four .slider-wrapper .slides {
-        @apply inline-flex shrink-0
-    }
-    .home-section-four .slider-wrapper .slides .slider-item {
-        @apply flex justify-center items-center mr-8 p-16 h-94 border border-blue-400 relative text-center max-w-3xl min-h-98 rounded-3xl
-    }
-    .home-section-four .slider-wrapper .slides .slider-item h4 {
-        @apply font-semibold font-firma w-full relative text-left text-7xl/to-tight -tracking-extratight text-blue-600
-    }
-    .home-section-four .slider-wrapper .slides .slider-item h4::before {
-        @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
-    }
-    /* Section four */
+
+
+
+
+  /* Section four */
+  .home-section-four .slider-wrapper {
+      @apply mt-10 mb-0 mx-0 w-screen h-98 overflow-hidden relative
+  }
+  .h-container-4 {
+    @apply h-full w-full px-7 mx-auto my-0
+  }
+  .home-section-four .slider-wrapper .slides-wrap {
+      @apply w-22/12 flex absolute     
+  }
+  .home-section-four .slider-wrapper .slides {
+      @apply inline-flex shrink-0
+  }
+  .home-section-four .slider-wrapper .slides .slider-item {
+      @apply flex justify-center items-center mr-8 p-16 h-94 border border-blue-400 relative text-center max-w-3xl min-h-98 rounded-3xl
+  }
+  .home-section-four .slider-wrapper .slides .slider-item h4 {
+      @apply font-semibold font-firma w-full relative text-left text-7xl/to-tight -tracking-extratight text-blue-600
+  }
+  .home-section-four .slider-wrapper .slides .slider-item h4::before {
+      @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
+  }
+  /* Section four */
 }
