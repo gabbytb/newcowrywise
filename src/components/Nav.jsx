@@ -9,12 +9,12 @@ const Nav = () => {
     
     return (
         <>
-            <Link className="bg-sky-blue h-14 text-10xl text-center text-light-gray font-medium flex justify-center items-center cursor-pointer" to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" target="_blank">
+            <Link className="bg-sky-blue h-15 text-10xl text-center text-light-gray font-medium flex justify-center items-center cursor-pointer" to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" target="_blank">
                 Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
             </Link>
             <header id="header" className="default-header">
                 <div className="container">
-                    <div className="flex items-center h-full px-0">                
+                    <div className="flex items-center h-full px-0 relative ">                
                         <Link className="mt-1.5 ml-2 mr-24 brand">
                             <BrandLogo />
                         </Link>

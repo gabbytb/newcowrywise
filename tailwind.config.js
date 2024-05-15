@@ -6,9 +6,9 @@ module.exports = {
     "./src/**/*.{html,js,jsx}",
   ],
   theme: {
-    // backgroundPosition: {
-    //   'top-left': '0, 0',
-    // },
+    backgroundPosition: {
+      'top-left': '0, 0',
+    },
     fontFamily: {
       firma: ["CW BR Firma"],
     },
@@ -77,6 +77,7 @@ module.exports = {
       },
       height: {
         '13': '3.2rem',
+        '15': '3.6rem',
         '50': '3.125rem',
         '94': '20rem',
         '98': '25rem',
@@ -96,24 +97,25 @@ module.exports = {
         '99.5': '0.1rem',
       },
       inset: {
+        '106': '0.6rem',
         '212': '2rem',
+        '213': '2.2rem',
         '214': '9.5rem',
         '15': '3.75rem',
         '18': '4.5rem',  
         '19': '6.8rem',
         '21': '2.75rem',
-        '23': '5.2rem',     /** Section 2: card-item::after */
+        '23': '5.2rem',         /** Section 2: card-item::after */
 
-        '1/2': '1%', 
-        '8/2': '8%',
-        '28/2': '28%',
-        '32/2': '32%',
-        '56/2': '56%',
+        '1/2': '1%',            /** UseCase: Section Two Cards Positioning */
+        '8/2': '8%',            /** UseCase: Section Two Cards Positioning */
+        '28/2': '28%',          /** UseCase: Section Two Cards Positioning */
+        '32/2': '32%',          /** UseCase: Section Two Cards Positioning */
+        '56/2': '56%',          /** UseCase: Section Two Cards Positioning */
 
-        '58': '4rem',
-        '60': '6rem',           // UseCase: section-1, 4,
-        '80': '8rem',           // UseCase: section-1
-        '100': '100px',
+        '58': '4rem',           /** UseCase: section-1 testimonial backdrop */
+        '60': '6rem',           /** UseCase: section-1 testimonial backdrop, 4 */
+        '80': '8rem',           /** UseCase: section-1 testimonial backdrop  */
       },
       keyframes: {
         easeIn: {
@@ -203,6 +205,7 @@ module.exports = {
       },
       maxWidth: {
         '99': '30rem',
+        '58/12': '58%',
         '80': '80%',
       },
       minHeight: {
@@ -242,6 +245,7 @@ module.exports = {
         '126.5': '46.5rem',       
         '127': '48.7rem',
         '127.5': '48.75rem',
+        '128.5': '49.4rem',
         '135': '52rem',
         '136': '56rem',
         '140': '61.3rem',

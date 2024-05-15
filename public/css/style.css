@@ -502,6 +502,7 @@ video {
   --color-light-gray: rgb(108 130 163);
   --color-sky-blue: rgb(230, 250, 255);
   --color-gray-opacity: rgba(100, 116, 139, 1);
+  --background-color-opacity: hsla(0,0%,100%,.7);
   font-size: 10px;
   font-family: sans-serif;
   line-height: 1.15;
@@ -660,6 +661,14 @@ header {
   width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.content p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 58%;
+  text-align: center;
+  font-size: 1.25rem;
 }
 
 /* Animations CSS */
@@ -868,7 +877,7 @@ header .cta-menu {
 
 .menu-item p::after {
   position: absolute;
-  top: 2.75rem;
+  top: 2.2rem;
   margin-left: 0.25rem;
   height: 1.5rem;
   width: 1.5rem;
@@ -1161,8 +1170,6 @@ header .cta-menu a:last-child {
 
 .home-section-two {
   width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
   padding-top: 6rem;
   padding-bottom: 0px;
 }
@@ -1390,9 +1397,9 @@ header .cta-menu a:last-child {
 
 .home-section-three {
   background-image: url('/src/assets/images/return-pattern.svg');
-  background-position: 0, 0;
   background-repeat: no-repeat;
   padding-top: 3.125rem;
+  padding-bottom: 5rem;
 }
 
 .h-container-3 {
@@ -1456,14 +1463,13 @@ header .cta-menu a:last-child {
 }
 
 .roi-input input[type="tel"] {
-  width: 52rem;
+  width: 49.4rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: right;
   font-family: CW BR Firma;
   font-size: 12rem;
   font-weight: 400;
-  letter-spacing: 0.045em;
   color: var(--color-dark-blue);
 }
 
@@ -1488,26 +1494,21 @@ header .cta-menu a:last-child {
   -webkit-appearance: none;
           appearance: none;
   font-size: 1.875rem;
-  font-weight: 400;
+  font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
-}
-
-.roi-wrap .slider-wrap {
-  margin-left: auto;
-  margin-right: auto;
-  width: 87.3rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .slider-wrap .slider {
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 4rem;
   margin-bottom: 4rem;
+  width: 87.3rem;
 }
-
-/* .slider .line {
-    @apply absolute left-0 bottom-1 w-full 
-  } */
 
 .slider-wrap .slider input[type="range"] {
   height: 0.1rem;
@@ -1540,7 +1541,54 @@ header .cta-menu a:last-child {
   color: var(--color-gray-opacity);
 }
 
+.roi-investment-returns div {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+  width: 34rem;
+  border-radius: 0.375rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(186 230 253 / var(--tw-bg-opacity));
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.roi-investment-returns p {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-gray-opacity);
+}
+
+.roi-investment-returns span {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.roi-investments-overlay h3 {
+  margin-top: 3.9rem;
+  margin-bottom: 2.7rem;
+  font-size: 3.9rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--color-gray-opacity);
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 /* Section four */
+
+.home-section-four {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
 
 .home-section-four .slider-wrapper {
   position: relative;
@@ -1627,10 +1675,6 @@ header .cta-menu a:last-child {
   position: relative;
 }
 
-.-bottom-100 {
-  bottom: -100px;
-}
-
 .bottom-0 {
   bottom: 0px;
 }
@@ -1709,6 +1753,10 @@ header .cta-menu a:last-child {
   margin-top: 3.5rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -1725,8 +1773,8 @@ header .cta-menu a:last-child {
   display: grid;
 }
 
-.h-14 {
-  height: 3.5rem;
+.h-15 {
+  height: 3.6rem;
 }
 
 .h-20 {
@@ -1897,6 +1945,14 @@ header .cta-menu a:last-child {
   background-color: var(--color-sky-blue);
 }
 
+.bg-trans-opaque {
+  background-color: var(--background-color-opacity);
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1940,6 +1996,11 @@ header .cta-menu a:last-child {
   padding-bottom: 8rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .pb-10 {
   padding-bottom: 2.5rem;
 }
@@ -1968,8 +2029,17 @@ header .cta-menu a:last-child {
   text-align: center;
 }
 
+.font-firma {
+  font-family: CW BR Firma;
+}
+
 .text-10xl {
   font-size: 1.3rem;
+}
+
+.text-14xl\/extra-loosened {
+  font-size: 1.6rem;
+  line-height: 4.4rem;
 }
 
 .text-2xl {
@@ -2005,6 +2075,11 @@ header .cta-menu a:last-child {
   letter-spacing: -0.25rem;
 }
 
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
 .text-light-gray {
   color: var(--color-gray-opacity);
 }
@@ -2018,10 +2093,22 @@ header .cta-menu a:last-child {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 @media (min-width: 601px) {
