@@ -5,15 +5,32 @@ import { ButtonLinkComponent, GraphComponent } from "../components"
 
 
 
+
 const HomeSectionTwo = () => {
 
 
   useEffect(() => {
     function myFunction() {
-        document.getElementById("sectionTwoAnim").classList.add('s-2-anim');
-        document.getElementById("sectionTwoAnime").classList.add('s-2-2-anim');
-        document.getElementById("sectionTwoAnimReverse").classList.add('s-2-2-animreverse');
-    }
+        document.querySelector('.home-section-two--left h2').classList.add('s-2-l2-anim');
+        document.querySelector('.home-section-two--left h2 span').classList.add('s-2-ls-anim');
+        document.querySelector('.home-section-two--left h5').classList.add('s-2-l5-animreverse');
+
+        
+        document.querySelector('.home-section-two--right svg').classList.add('animate-slideUp');
+        
+
+        setTimeout(() => {
+          document.querySelector('.card-item-one').classList.add('s-2-rc-1');
+        }, 0);
+        
+        setTimeout(() => {
+          document.querySelector('.card-item-two').classList.add('s-2-rc-2');
+        }, 180);
+        
+        setTimeout(() => {
+          document.querySelector('.card-item-three').classList.add('s-2-rc-3');
+        }, 220);
+    };
 
     myFunction();        
   }, []);
@@ -22,16 +39,14 @@ const HomeSectionTwo = () => {
   return (
     <section className="home-section-two">
         <div className="h-container-2 container">
-            <div className="grid grid-cols-18 gap-16 px-10">
+            <div className="grid grid-cols-18 gap-16 px-10 min-h-138">
 
 
                 {/* Left Side */}
                 <div className="home-section-two--left">
                   <div className="flex flex-col pt-5 space-y-16 w-136">
-                      <h2 id="sectionTwoAnim">
-                        Get a <span id="sectionTwoAnime">little </span>&nbsp;richer each day
-                      </h2>
-                      <h5 id="sectionTwoAnimReverse" className="sm:pr-20 sm:my-14.4">One small step today, a giant leap for tomorrow.</h5>
+                      <h2>Get a <span>little</span>&nbsp; richer each day</h2>
+                      <h5>One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />
                   </div>
                 </div>

@@ -49,13 +49,13 @@ module.exports = {
     },
     extend: {
       animation: {   
-        dropdown: 'showDropdown 0.5s ease',
+        dropdown: 'showDropdown 0.5s ease',     /** NAV MENU */
         easeIn: 'easeIn 4s ease',   /** SECTION 1 ANIMATION */
-        slideRight: 'slideRight 0.5s ease',   /** SECTION 2 ANIMATION */
-        slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 ANIMATION */
-        fade: 'fade 40s linear infinite',   /** SECTION 4 SLIDER ANIMATION */  
-        slideUp: 'slideUp 0.8s linear',     /** SECTION 2 GRAPH ANIMATION */
-        slideUpSpan: 'slideUp 0.6s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
+        slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
+        fade: 'fade 40s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
+        slideUp: 'slideUp 1.7s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
       },
       backgroundImage: {
@@ -90,7 +90,8 @@ module.exports = {
         '760': '126rem',
         '780': '780px',
         '840': '840px',
-        '850': '850px'
+        '850': '850px',
+        '99.5': '0.1rem',
       },
       inset: {
         '212': '2rem',
@@ -188,6 +189,7 @@ module.exports = {
         '5.5': '1.125rem',
         '6.5': '1.85rem',
         '13.5': '2.1rem',
+        '14.4': '4rem',
         '14.5': '3.125rem',
         '15.5': '3.35rem',
         '16.5': '5.71rem',
@@ -201,6 +203,7 @@ module.exports = {
       minHeight: {
         '98': '32rem',
         '126': '65rem',
+        '138': '78rem',
       },
       minWidth: {
         '50': '3.125rem',

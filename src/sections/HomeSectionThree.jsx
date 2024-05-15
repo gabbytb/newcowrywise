@@ -45,6 +45,12 @@ const HomeSectionThree = () => {
                                 <input type="range" min="5000" max="10000000" step="1000" value="100000" data-v-f5a75a14="" />
                             </div>
                         </div>
+                        <div className="relative">
+                            <div class="roi-investment">
+                                <h6>Today, you’d have</h6>
+                                <p><sup>₦</sup><span>221,713</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

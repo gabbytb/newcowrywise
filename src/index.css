@@ -99,14 +99,23 @@
   .s-1-anim {
     @apply animate-easeIn
   }
-  .s-2-anim {
+  .s-2-l2-anim {
     @apply animate-slideRight
   }
-  .s-2-2-anim {
+  .s-2-ls-anim {
     @apply animate-slideUpSpan 
   }
-  .s-2-2-animreverse {
+  .s-2-l5-animreverse {
     @apply animate-slideLeft
+  }
+  .s-2-rc-1 {
+    @apply animate-slideDown 
+  }
+  .s-2-rc-2 {
+    @apply animate-slideDown 
+  }
+  .s-2-rc-3 {
+    @apply animate-slideDown 
   }
   .s-4-anim {
     @apply animate-fade
@@ -279,7 +288,7 @@
   }
 
   .home-section-two--left h5 {
-    @apply text-5xl font-medium
+    @apply text-5xl font-medium sm:pr-20 sm:my-14.4
   }
 
   .home-section-two--left a {
@@ -383,12 +392,12 @@
     @apply appearance-none text-3xl text-blue-600 font-normal
   }
 
-  .slider-wrap {
-    @apply w-183 
+  .roi-wrap .slider-wrap {
+    @apply w-183 mx-auto
   }
 
   .slider-wrap .slider {
-    @apply relative
+    @apply relative my-16
   }
 
   .slider .line {
@@ -396,7 +405,7 @@
   }
 
   .slider-wrap .slider input[type="range"] {
-    @apply w-full
+    @apply w-full h-99.5
   }
 
 

@@ -6,7 +6,7 @@ const GraphComponent = (props) => {
             width={1270}
             height={1360}
             preserveAspectRatio="xMidYMid meet"          
-            className="w-full h-full animate-slideUp"
+            className="w-full h-full"
             {...props}
         >
             <defs>

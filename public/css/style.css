@@ -717,7 +717,7 @@ header {
   }
 }
 
-.s-2-anim {
+.s-2-l2-anim {
   animation: slideRight 0.5s ease;
 }
 
@@ -738,8 +738,8 @@ header {
   }
 }
 
-.s-2-2-anim {
-  animation: slideUp 0.6s linear;
+.s-2-ls-anim {
+  animation: slideUp 0.7s linear;
 }
 
 @keyframes slideLeft {
@@ -752,8 +752,50 @@ header {
   }
 }
 
-.s-2-2-animreverse {
+.s-2-l5-animreverse {
   animation: slideLeft 0.5s ease;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    transform: translateZ(0);
+  }
+}
+
+.s-2-rc-1 {
+  animation: slideDown .42s ease-in-out;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    transform: translateZ(0);
+  }
+}
+
+.s-2-rc-2 {
+  animation: slideDown .42s ease-in-out;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    transform: translateZ(0);
+  }
+}
+
+.s-2-rc-3 {
+  animation: slideDown .42s ease-in-out;
 }
 
 @keyframes fade {
@@ -1186,6 +1228,14 @@ header .cta-menu a:last-child {
   font-weight: 500;
 }
 
+@media (min-width: 601px) {
+  .home-section-two--left h5 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding-right: 5rem;
+  }
+}
+
 .home-section-two--left a {
   display: flex;
   height: 4rem;
@@ -1442,12 +1492,16 @@ header .cta-menu a:last-child {
   color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
-.slider-wrap {
+.roi-wrap .slider-wrap {
+  margin-left: auto;
+  margin-right: auto;
   width: 87.3rem;
 }
 
 .slider-wrap .slider {
   position: relative;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 .slider .line {
@@ -1458,6 +1512,7 @@ header .cta-menu a:last-child {
 }
 
 .slider-wrap .slider input[type="range"] {
+  height: 0.1rem;
   width: 100%;
 }
 
@@ -1662,6 +1717,10 @@ header .cta-menu a:last-child {
   min-height: 65rem;
 }
 
+.min-h-138 {
+  min-height: 78rem;
+}
+
 .min-h-20 {
   min-height: 5rem;
 }
@@ -1689,10 +1748,6 @@ header .cta-menu a:last-child {
 .w-max {
   width: -webkit-max-content;
   width: max-content;
-}
-
-.min-w-63 {
-  min-width: 61%;
 }
 
 .min-w-80 {
@@ -1733,7 +1788,7 @@ header .cta-menu a:last-child {
 }
 
 .animate-slideUp {
-  animation: slideUp 0.8s linear;
+  animation: slideUp 1.7s linear;
 }
 
 .cursor-pointer {
@@ -1951,11 +2006,6 @@ header .cta-menu a:last-child {
     margin-bottom: 3rem;
   }
 
-  .sm\:my-14 {
-    margin-top: 3.5rem;
-    margin-bottom: 3.5rem;
-  }
-
   .sm\:flex {
     display: flex;
   }
@@ -1971,10 +2021,6 @@ header .cta-menu a:last-child {
   .sm\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-
-  .sm\:pr-20 {
-    padding-right: 5rem;
   }
 
   .sm\:pt-0 {
