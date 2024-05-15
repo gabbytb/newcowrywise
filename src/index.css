@@ -93,9 +93,28 @@
 
 
 
+
+  /** Mobile Nav Config */
+  .mobile-nav {
+    @apply block sm:flex lg:hidden
+  }
+
+  .mobile-nav .hamburger {
+    @apply w-10
+  }
+
+  .mobile-nav .hamburger span::before {
+    @apply content-[''] bg-black w-10 h-101.5 absolute top-21.5
+  }
+
+  .mobile-nav .hamburger span::after {
+    @apply content-[''] bg-black w-10 h-101.5 absolute top-16.5
+  }
+  
+
   /* Animations CSS */
   .sticky-header {
-    @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm
+    @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm bg-blue-600 sm:bg-white lg:bg-white
   }
   .no-scrollbar {    
     @apply overflow-x-hidden overflow-y-scroll
@@ -127,15 +146,17 @@
   /* Animations CSS */
   
 
+
+
   
 
 
   header .cta-menu {
-    @apply inline-flex
+    @apply hidden sm:hidden lg:inline-flex lg:justify-end lg:items-center lg:space-x-10 
   }
 
   .nav-links {
-     @apply inline-flex justify-start space-x-20 cursor-pointer z-10
+     @apply hidden sm:hidden lg:inline-flex lg:justify-start lg:space-x-20 lg:cursor-pointer lg:z-10 lg:items-center
   }
   
   .has-dropdown {
@@ -155,7 +176,7 @@
   }
 
   .menu-item p::after {
-    @apply content-[''] bg-dropdown-icon h-6 w-6 ml-1 absolute top-213 text-slate-800/50
+    @apply content-[''] bg-dropdown-icon h-6 w-6 ml-1 absolute top-21 text-slate-800/50
   }  
 
   .nav-dropdown-item svg {
@@ -198,9 +219,19 @@
     @apply w-52.5
   }
 
+  .social-icons {
+    @apply flex space-x-5
+  }
+
+  .social-icons svg {
+    @apply w-56 h-20
+  }
 
 
-  
+
+
+
+ 
 
   /* Section One */
   .home-section-one {
@@ -212,16 +243,29 @@
     /* h-840 */
   }
 
+  .s1-grids-wrap {
+    @apply flex flex-col-reverse
+    sm:flex sm:flex-col-reverse sm:gap-y-12 sm:py-16 
+    lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
+  }
+
+  .home-section-one--right {
+    @apply pt-12 sm:pt-0 lg:pt-24 
+  }
+
   .home-section-one--left {
-    @apply mt-12 ml-12 sm:mt-0 sm:ml-0 lg:mt-12 lg:ml-12 
+    @apply mt-12 ml-12 relative sm:mt-0 sm:ml-0 lg:mt-12 lg:ml-12 lg:min-h-125
   }
 
   .home-section-one--left .testimonial {
-    @apply relative top-0 left-0 sm:h-130
+    @apply relative top-0 left-0 h-122 sm:h-130 
   }
 
   .testimonial .testimonial-backdrop {
-    @apply w-125 h-850 bg-pink-600/25 -top-60 -left-80 sm:-top-212 sm:-left-58 lg:-top-60 lg:-left-80
+    @apply bg-pink-600/25 
+    h-850 w-125 -top-60 -left-80 
+    sm:h-850  sm:w-125 sm:-top-212 sm:-left-58 
+    lg:h-850 lg:w-125 lg:-top-60 lg:-left-80
   }
 
   .testimonial .testimonial-video-ctrl {
@@ -256,18 +300,25 @@
     @apply object-cover w-full h-full absolute top-0
   }
 
+  .testimonials-thumbnail { 
+    @apply flex absolute gap-6 sm:-bottom-48 lg:-bottom-40
+  }
+
   .testimonials-thumbnail img {
     @apply h-full w-full object-cover absolute top-3 left-0 lg:top-3 lg:left-0 
   }
 
   .home-section-one--right h1 {
-    @apply text-8xl font-semibold mt-15.5 mb-9 leading-to-tight text-dark-blue sm:mt-15.5 sm:text-7xl lg:text-16xl lg:font-semibold lg:-tracking-moretight lg:mt-17.5
+    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-dark-blue sm:mt-15.5 sm:text-7xl lg:text-16xl lg:font-semibold lg:mt-17.5
   }
 
   .home-section-one--right h6 {
-    @apply text-7xl font-normal mt-4 mb-13.5 text-dark-blue -tracking-tightest
+    @apply font-normal mt-4 mb-13.5 text-dark-blue -tracking-moretighter text-5xl lg:-tracking-tightest lg:text-7xl/to-tight 
   }
   
+  .home-section-one--right .social-icons {
+    @apply flex sm:hidden
+  }
 
 
 
@@ -286,7 +337,7 @@
   }
   
   .home-section-two--left h2 {
-    @apply text-9xl/none font-bold leading-to-tight -tracking-moretight -ml-3.1 sm:text-7xl lg:text-16xl/none
+    @apply text-9xl/none font-bold leading-to-tight -tracking-moretight mt-15.8 mb-4 -ml-3.1 sm:text-7xl lg:text-16xl/none
   }
 
   .home-section-two--left h2 span {
@@ -349,6 +400,10 @@
     @apply content-['3'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
 
+  .home-section-two--right #bar-anima--wrap {
+    @apply h-780 w-720
+  }
+
 
 
 
@@ -397,7 +452,7 @@
   }
 
   .roi-dropdown-wrap .roi--select-input {
-    @apply text-3xl text-blue-600 font-medium appearance-none outline-none
+    @apply text-3xl text-blue-600 font-firma font-medium appearance-none outline-none
   }
 
   .slider-wrap .slider {
@@ -421,7 +476,7 @@
   }
 
   .roi-investment-returns div {
-    @apply text-2xl font-medium bg-sky-200 text-blue-600 w-123 mt-10 mx-auto py-3 px-4 rounded-md
+    @apply text-2xl font-medium bg-sky-200 text-blue-600 w-123 mx-auto py-3 px-4 rounded-md lg:-mt-12
   }
 
   .roi-investment-returns p {
@@ -448,7 +503,7 @@
     @apply py-20 
   }
   .home-section-four .slider-wrapper {
-      @apply mt-10 mb-0 mx-0 w-screen h-98 overflow-hidden relative
+      @apply mt-16 mb-0 mx-0 w-screen h-125 overflow-hidden relative
   }
   .h-container-4 {
     @apply h-full w-full px-7 mx-auto my-0
@@ -469,4 +524,58 @@
       @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
   }
   /* Section four */
+
+
+
+
+
+
+  
+  .home-section-five {
+    @apply bg-device-section bg-x-axis bg-77% bg-no-repeat pt-20 pb-48 
+  }
+
+  .h-container-5 {
+    @apply h-full w-full px-7 mx-auto my-0
+  }
+
+  .h-investment-wrap {
+    @apply flex lg:h-770
+  }
+
+  .home-section-five--left {
+    @apply flex-col w-2/4 ml-95.5 
+  }
+
+  .h-investment-wrap img {
+    @apply relative top-23
+  }
+
+  .home-section-five--right {
+    @apply lg:w-5/12 lg:p-4
+  }
+
+  .home-section-five--right h2 {
+    @apply text-7xl font-bold mt-16 mb-14
+  }
+
+  .registration-steps-wrap {
+    @apply mt-24 
+  }
+
+  .registration-steps-wrap .step-item {
+    @apply relative lg:flex lg:justify-start lg:mb-20
+  }
+
+  .registration-steps-wrap .step-item::before {
+    @apply content-[''] w-4 h-4/5 opacity-100
+  }
+
+  .step-item-info span {
+    @apply text-4xl font-semibold
+  }
+
+  .step-item-info p {
+    @apply text-3xl/normal text-light-gray my-6
+  }
 }

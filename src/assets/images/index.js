@@ -2,7 +2,7 @@ import BrandLogo from "./BrandLogo";
 import wura from "./wura.jpg";
 import mayokun from "./mayokun.jpg";
 import wande from "./wande.jpg";
-
+import investmentPlatform from "./investment-platform.png";
 
 
 export {
@@ -10,4 +10,5 @@ export {
     wura,
     mayokun,
     wande,
+    investmentPlatform,
 }

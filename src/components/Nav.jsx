@@ -19,8 +19,8 @@ const Nav = () => {
                             <BrandLogo />
                         </Link>
 
-                        <div className="flex justify-between w-full h-full">
-                            <ul className="nav-links items-center">
+                        <div className="flex justify-end w-full h-full sm:justify-end lg:justify-between">
+                            <ul className="nav-links">
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Personal</p>
                                     <div className="nav-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl">
@@ -141,10 +141,17 @@ const Nav = () => {
                                 </li>
                             </ul>
 
-                            <div className="items-center justify-end space-x-10 cta-menu">
+                            <div className="cta-menu">
                                 <Link to="#">log in</Link>
                                 <Link to="#">sign up for free</Link>
                             </div>
+                            
+                            <div className="mobile-nav">
+                                <div className="hamburger">
+                                    <span></span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

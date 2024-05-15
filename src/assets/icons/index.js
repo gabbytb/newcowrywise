@@ -12,12 +12,15 @@ import LearnSecondIcon from "./LearnSecondIcon";
 import LearnThirdIcon from "./LearnThirdIcon";
 
 import VideoIcon from "./VideoIcon";
-
+import PlayStoreIcon from "./PlayStore";
+import AppStoreIcon from "./AppStoreIcon";
 
 
 
 export {
     VideoIcon,
+    PlayStoreIcon,
+    AppStoreIcon,
 
     PersonalFirstIcon,
     PersonalSecondIcon,

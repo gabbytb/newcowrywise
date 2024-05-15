@@ -671,6 +671,50 @@ header {
   font-size: 1.25rem;
 }
 
+/** Mobile Nav Config */
+
+.mobile-nav {
+  display: block;
+}
+
+@media (min-width: 601px) {
+  .mobile-nav {
+    display: flex;
+  }
+}
+
+@media (min-width: 981px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.mobile-nav .hamburger {
+  width: 2.5rem;
+}
+
+.mobile-nav .hamburger span::before {
+  position: absolute;
+  top: 2.85rem;
+  height: 0.3rem;
+  width: 2.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
+.mobile-nav .hamburger span::after {
+  position: absolute;
+  top: 3.85rem;
+  height: 0.3rem;
+  width: 2.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
 /* Animations CSS */
 
 .sticky-header {
@@ -692,9 +736,25 @@ header {
 
 .sticky-header {
   animation: slideDown .42s ease-in-out;
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 601px) {
+  .sticky-header {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+}
+
+@media (min-width: 981px) {
+  .sticky-header {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
 }
 
 .no-scrollbar {
@@ -824,20 +884,53 @@ header {
 /* Animations CSS */
 
 header .cta-menu {
-  display: inline-flex;
+  display: none;
+}
+
+@media (min-width: 601px) {
+  header .cta-menu {
+    display: none;
+  }
+}
+
+@media (min-width: 981px) {
+  header .cta-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  header .cta-menu > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
 }
 
 .nav-links {
-  z-index: 10;
-  display: inline-flex;
-  cursor: pointer;
-  justify-content: flex-start;
+  display: none;
 }
 
-.nav-links > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(5rem * var(--tw-space-x-reverse));
-  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
+@media (min-width: 601px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (min-width: 981px) {
+  .nav-links {
+    z-index: 10;
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .nav-links > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(5rem * var(--tw-space-x-reverse));
+    margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
 }
 
 .has-dropdown {
@@ -877,7 +970,7 @@ header .cta-menu {
 
 .menu-item p::after {
   position: absolute;
-  top: 2.2rem;
+  top: 2.75rem;
   margin-left: 0.25rem;
   height: 1.5rem;
   width: 1.5rem;
@@ -1016,7 +1109,7 @@ header .cta-menu a:last-child {
 .testimonial .testimonial-backdrop {
   top: -6rem;
   left: -8rem;
-  height: 850px;
+  height: 85rem;
   width: 40rem;
   background-color: rgb(219 39 119 / 0.25);
 }
@@ -1190,6 +1283,8 @@ header .cta-menu a:last-child {
 }
 
 .home-section-two--left h2 {
+  margin-top: 4.3rem;
+  margin-bottom: 1rem;
   margin-left: -0.6rem;
   font-size: 7rem;
   font-weight: 700;
@@ -1393,6 +1488,11 @@ header .cta-menu a:last-child {
   content: var(--tw-content);
 }
 
+.home-section-two--right #bar-anima--wrap {
+  height: 78rem;
+  width: 72rem;
+}
+
 /* Section Three */
 
 .home-section-three {
@@ -1493,6 +1593,7 @@ header .cta-menu a:last-child {
 .roi-dropdown-wrap .roi--select-input {
   -webkit-appearance: none;
           appearance: none;
+  font-family: CW BR Firma;
   font-size: 1.875rem;
   font-weight: 500;
   --tw-text-opacity: 1;
@@ -1594,9 +1695,9 @@ header .cta-menu a:last-child {
   position: relative;
   margin-left: 0px;
   margin-right: 0px;
-  margin-top: 2.5rem;
+  margin-top: 4rem;
   margin-bottom: 0px;
-  height: 25rem;
+  height: 40rem;
   width: 100vw;
   overflow: hidden;
 }
@@ -1891,22 +1992,12 @@ header .cta-menu a:last-child {
   justify-content: center;
 }
 
-.justify-between {
-  justify-content: space-between;
-}
-
 .gap-16 {
   gap: 4rem;
 }
 
 .gap-x-32 {
   column-gap: 8rem;
-}
-
-.space-x-10 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-16 > :not([hidden]) ~ :not([hidden]) {
@@ -2121,8 +2212,16 @@ header .cta-menu a:last-child {
     display: flex;
   }
 
+  .sm\:w-full {
+    width: 100%;
+  }
+
   .sm\:flex-col-reverse {
     flex-direction: column-reverse;
+  }
+
+  .sm\:justify-end {
+    justify-content: flex-end;
   }
 
   .sm\:gap-y-12 {
@@ -2154,6 +2253,10 @@ header .cta-menu a:last-child {
 
   .lg\:grid-cols-16 {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
   }
 
   .lg\:gap-x-32 {

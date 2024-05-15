@@ -8,6 +8,15 @@ module.exports = {
   theme: {
     backgroundPosition: {
       'top-left': '0, 0',
+      'x-axis': '-120% -120px'
+    },
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      '50%': '50%',
+      '77%': '77%',
+      '16': '4rem',
     },
     fontFamily: {
       firma: ["CW BR Firma"],
@@ -34,6 +43,7 @@ module.exports = {
       '16xl': '8rem',
       '17xl': '1.9rem',
       '18xl': '3.9rem',
+      '30xl': '4.7rem',
     },
     letterSpacing: {
       verytight: '0.1rem',
@@ -43,6 +53,7 @@ module.exports = {
       tightener: '0.045em',
       extratight: '0.06em',
       moretight: '0.065em',
+      moretighter: '0.09rem',
     },
     screens: {          
       'sm': '601px',    
@@ -62,6 +73,7 @@ module.exports = {
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
         'return-invested': "url('/src/assets/images/return-pattern.svg')",
+        'device-section': "url('/src/assets/images/home-device-section.svg')",
       },
       colors: {
         'dark-blue': 'var(--color-dark-blue)',
@@ -82,6 +94,7 @@ module.exports = {
         '94': '20rem',
         '98': '25rem',
         '121': '30.875rem',
+        '122': '45rem',
         '123': '34rem',
         '124': '47rem',
         '125': '40rem',
@@ -89,22 +102,27 @@ module.exports = {
         '126.5': '46.5rem',
         '127': '48.7rem',
         '128': '58rem',
+        '129': '60rem',
         '130': '65rem',
         '760': '126rem',
-        '780': '780px',
-        '840': '840px',
-        '850': '850px',
+        '770': '76rem',
+        '780': '78rem',
+        '840': '84rem',
+        '850': '85rem',
         '99.5': '0.1rem',
+        '101.5': '0.3rem',
+        '114.5': '7.5rem',
       },
       inset: {
         '106': '0.6rem',
         '212': '2rem',
-        '213': '2.2rem',
         '214': '9.5rem',
         '15': '3.75rem',
+        '16.5': '3.85rem',
         '18': '4.5rem',  
         '19': '6.8rem',
         '21': '2.75rem',
+        '21.5': '2.85rem',
         '23': '5.2rem',         /** Section 2: card-item::after */
 
         '1/2': '1%',            /** UseCase: Section Two Cards Positioning */
@@ -199,18 +217,20 @@ module.exports = {
         '14.5': '3.125rem',
         '15.5': '3.35rem',
         '15.7': '3.9rem',
+        '15.8': '4.3rem',
         '16.5': '5.71rem',
         '17.5': '5.3rem',
         '29': '5px',
+        '95.5': '9.55em',     /** 8.33333% */
       },
       maxWidth: {
         '99': '30rem',
-        '58/12': '58%',
+        '58/12': '58%',   /** UseCase: Section-3 (last p-tag) */
         '80': '80%',
       },
       minHeight: {
         '98': '32rem',
-        '126': '65rem',
+        '125': '65rem',
         '138': '78rem',
       },
       minWidth: {
@@ -250,7 +270,7 @@ module.exports = {
         '136': '56rem',
         '140': '61.3rem',
         '183': '87.3rem',
-        '630': '630px',
+        '630': '63rem',
         '720': '72rem',
         '22/12': '120%',
       },

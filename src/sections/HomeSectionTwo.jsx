@@ -57,7 +57,7 @@ const HomeSectionTwo = () => {
 
                 {/* Right Side */}
                 <div className="home-section-two--right">
-                    <div>
+                    <div id="bar-anima--wrap">
                       <GraphComponent />
                     </div>
 
