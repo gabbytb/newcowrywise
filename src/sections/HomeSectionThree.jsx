@@ -1,4 +1,5 @@
-import { ArrowDown, ButtonComponent, ButtonLinkComponent } from "../components";
+import { ArrowDown } from "../assets/icons";
+import { ButtonComponent, ButtonLinkComponent } from "../components";
 
 
 

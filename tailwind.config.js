@@ -43,9 +43,12 @@ module.exports = {
       '16xl': '8rem',
       '17xl': '1.9rem',
       '18xl': '3.9rem',
+      '19xl': '2rem',
       '30xl': '4.7rem',
+      '32xl': '4.86rem',
     },
     letterSpacing: {
+      supertight: '.015em',
       verytight: '0.1rem',
       tightest: '0.3rem',
       tighten: '0.25rem',
@@ -115,6 +118,8 @@ module.exports = {
       },
       inset: {
         '106': '0.6rem',
+        '208': '1.7rem',
+        '210': '1.8rem',
         '212': '2rem',
         '214': '9.5rem',
         '15': '3.75rem',
@@ -202,7 +207,7 @@ module.exports = {
         'tighter': '1.35',
         'least': '0',
         'very-loose': '1.4',
-        'more-loose': '1.5',
+        'more-loose': '1.55',
         'extra-loose': '2',
         'extra-loosened': '4.4rem',
       },
@@ -225,6 +230,7 @@ module.exports = {
       },
       maxWidth: {
         '99': '30rem',
+        '2/4': '50%',
         '58/12': '58%',   /** UseCase: Section-3 (last p-tag) */
         '80': '80%',
       },

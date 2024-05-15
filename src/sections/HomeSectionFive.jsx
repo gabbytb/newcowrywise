@@ -1,5 +1,5 @@
 import { investmentPlatform } from "../assets/images";
-
+import { ButtonLinkComponent } from "../components";
 
 
 
@@ -51,6 +51,11 @@ const HomeSectionFive = () => {
 
 
                     </div>
+                    <ButtonLinkComponent 
+                        btnBg 
+                        btnProps="text-white text-14xl font-bold px-10 py-6 capitalize"
+                        linkURL="https://cowrywise.com/choose-account" 
+                        label="Sign up now" />
                 </div>
             </div>
         </div>

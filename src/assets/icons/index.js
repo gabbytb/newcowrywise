@@ -16,20 +16,34 @@ import PlayStoreIcon from "./PlayStore";
 import AppStoreIcon from "./AppStoreIcon";
 
 
+// Arrow Keys
+import ArrowDown from "./ArrowDown";
+import ArrowRight from "./ArrowRight";
+// Arrow Keys
+
+
 
 export {
+    ArrowDown,
+    ArrowRight,
+    
+
     VideoIcon,
     PlayStoreIcon,
     AppStoreIcon,
 
+    
     PersonalFirstIcon,
     PersonalSecondIcon,
     PersonalThirdIcon,
     
+
     BusinessFirstIcon,
+
 
     DeveloperFirstIcon,
     DeveloperSecondIcon,
+
 
     LearnFirstIcon,
     LearnSecondIcon,
