@@ -226,16 +226,16 @@
     @apply block 
   }
 
+  .brand-white {
+    @apply block sm:hidden
+  }
+  
   .sticky-header .brand {
     @apply hidden sm:block
   }
 
   .brand svg {
     @apply w-52.5
-  }
-
-  .brand-white {
-    @apply block sm:hidden
   }
 
   .home-section-one--right .social-icons {

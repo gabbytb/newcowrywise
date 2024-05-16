@@ -1126,6 +1126,16 @@ header .cta-menu a:last-child {
   display: block;
 }
 
+.brand-white {
+  display: block;
+}
+
+@media (min-width: 769px) {
+  .brand-white {
+    display: none;
+  }
+}
+
 .sticky-header .brand {
   display: none;
 }
@@ -1138,16 +1148,6 @@ header .cta-menu a:last-child {
 
 .brand svg {
   width: 14.5rem;
-}
-
-.brand-white {
-  display: block;
-}
-
-@media (min-width: 769px) {
-  .brand-white {
-    display: none;
-  }
 }
 
 .home-section-one--right .social-icons {
