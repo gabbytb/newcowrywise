@@ -89,7 +89,7 @@
   }
 
   .content p {
-    @apply text-center text-xl mx-auto max-w-58/12
+    @apply text-center text-15xl/more-loose text-light-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
   }
 
 
@@ -106,13 +106,16 @@
   }
 
   .mobile-nav .hamburger span::before {
-    @apply content-[''] bg-black w-10 h-101.5 absolute top-21.5
+    @apply content-[''] bg-white sm:bg-black w-10 h-101.5 absolute top-21.5
   }
 
   .mobile-nav .hamburger span::after {
-    @apply content-[''] bg-black w-10 h-101.5 absolute top-16.5
+    @apply content-[''] bg-white sm:bg-black w-10 h-101.5 absolute top-16.5
   }
   
+
+
+
 
   /* Animations CSS */
   .sticky-header {
@@ -143,7 +146,10 @@
     @apply animate-slideDown 
   }
   .s-4-anim {
-    @apply animate-fade
+    @apply animate-fadeOut
+  }
+  .ease-out-anim {
+    @apply animate-easeOut
   }
   /* Animations CSS */
   
@@ -217,7 +223,19 @@
     @apply text-2xl text-white bg-blue-600 px-9 py-5 rounded-xl
   }
 
+  .brand {
+    @apply hidden sm:block lg:block
+  }
+
   .brand svg {
+    @apply w-52.5
+  }
+
+  .brand-white {
+    @apply block sm:hidden lg:hidden
+  }
+
+  .brand-white svg {
     @apply w-52.5
   }
 
@@ -235,9 +253,10 @@
 
  
 
+
   /* Section One */
   .home-section-one {
-    @apply py-20 px-0 w-full sm:h-760 lg:h-full
+    @apply py-20 px-0 w-full lg:h-full
   }
 
   .h-container-1 {
@@ -247,7 +266,7 @@
 
   .s1-grids-wrap {
     @apply flex flex-col-reverse
-    sm:flex sm:flex-col-reverse sm:gap-y-12 sm:py-16 
+    sm:flex sm:flex-col-reverse sm:gap-y-12 sm:py-28
     lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
   }
 
@@ -260,13 +279,13 @@
   }
 
   .home-section-one--left .testimonial {
-    @apply relative top-0 left-0 h-122 sm:h-130 
+    @apply relative top-0 left-0 sm:h-122 lg:h-130 
   }
 
   .testimonial .testimonial-backdrop {
     @apply bg-pink-600/25 
     h-850 w-125 -top-60 -left-80 
-    sm:h-850  sm:w-125 sm:-top-212 sm:-left-58 
+    sm:h-129  sm:w-125 sm:-top-212 sm:-left-58 
     lg:h-850 lg:w-125 lg:-top-60 lg:-left-80
   }
 
@@ -299,7 +318,7 @@
   }
 
   .testimonial-media img {
-    @apply object-cover w-full h-full absolute top-0
+    @apply object-cover w-full h-full absolute top-0 
   }
 
   .testimonials-thumbnail { 
@@ -307,7 +326,7 @@
   }
 
   .testimonials-thumbnail img {
-    @apply h-full w-full object-cover absolute top-3 left-0 lg:top-3 lg:left-0 
+    @apply h-full w-full object-cover absolute top-3 left-0 sm:w-28 sm:h-28 lg:top-3 lg:left-0 
   }
 
   .home-section-one--right h1 {
@@ -411,87 +430,104 @@
 
   
 
-  /* Section Three */
-  .home-section-three {
-    @apply pt-14.5 pb-20 bg-return-invested bg-no-repeat
-    /* bg-top-left h-screen */
-  }
 
-  .h-container-3 {
-    @apply h-full w-full mx-auto my-0 px-7 
-  }
 
-  .home-section-three h2 {
-    @apply text-7xl -tracking-tightened text-dark-blue font-bold text-center mt-20 mb-10
-  }
+ /* Section Three */
+ .home-section-three {
+  @apply pt-14.5 pb-20 bg-return-invested bg-no-repeat
+  /* bg-top-left h-screen */
+}
 
-  .roi-wrap {
-    @apply flex flex-col items-center
-  }
+.h-container-3 {
+  @apply h-full w-full mx-auto my-0 px-7 
+}
 
-  .roi-wrap h6 {
-    @apply mt-16.5 mb-7 text-4xl font-normal text-light-gray
-  }
+.home-section-three h2 {
+  @apply text-7xl -tracking-tightened text-dark-blue font-bold text-center mt-20 mb-10
+}
 
-  .roi-input {
-    @apply text-center flex flex-row items-center space-x-1
-  }
+.roi-wrap {
+  @apply flex flex-col items-center
+}
 
-  .roi-input sup {
-    @apply text-[3em]/least text-dark-blue font-normal w-8 mr-29 
-  }
-  
-  .roi-input input[type="tel"] {
-    @apply text-12xl font-normal font-firma text-dark-blue w-128.5 text-right py-4
-  }
+.roi-wrap h6 {
+  @apply mt-16.5 mb-7 text-4xl font-normal text-light-gray
+}
 
-  .roi-dropdown-wrap {
-    @apply flex justify-between w-96
-  }
+.roi-input {
+  @apply text-center sm:w-123.3 lg:w-135.3 flex flex-row items-center space-x-1
+}
 
-  .roi-dropdown-wrap .wrap-selection {
-    @apply flex items-center space-x-2
-  }
+.roi-input sup {
+  @apply text-[3em]/least text-dark-blue font-normal w-8 mr-29 
+}
 
-  .roi-dropdown-wrap .roi--select-input {
-    @apply text-3xl text-blue-600 font-firma font-medium appearance-none outline-none
-  }
+.roi-input input[type="tel"] {
+  @apply w-full sm:text-16xl lg:text-12xl font-normal font-firma text-dark-blue text-right py-4
+}
 
-  .slider-wrap .slider {
-    @apply relative w-183 mx-auto my-16
-  }
+.roi-dropdown-wrap {
+  @apply flex gap-16
+}
 
-  .slider-wrap .slider input[type="range"] {
-    @apply w-full h-99.5
-  }
+.roi-dropdown-wrap .wrap-selection {
+  @apply flex items-center space-x-2
+}
 
-  .roi-investment p {
-    @apply flex justify-center items-center
-  }
-   
-  .roi-investment p sup {
-    @apply text-[3em]/least text-dark-blue font-normal w-8 mr-29 
-  }
-  
-  .roi-investment p span {
-    @apply text-12xl font-light tracking-tightener text-light-gray w-135 text-right py-4
-  }
+.roi-dropdown-wrap .roi--select-input {
+  @apply text-3xl text-blue-600 font-firma font-medium appearance-none outline-none py-4 px-5.4
+}
 
-  .roi-investment-returns div {
-    @apply text-2xl font-medium bg-sky-200 text-blue-600 w-123 mx-auto py-3 px-4 rounded-md lg:-mt-12
-  }
+.slider-wrap .slider {
+  @apply relative w-183 mx-auto my-16
+}
 
-  .roi-investment-returns p {
-    @apply text-2xl font-medium text-light-gray my-8
-  }
+.slider-wrap .slider input[type="range"] {
+  @apply w-full h-99.5
+}
 
-  .roi-investment-returns span {
-    @apply text-black
-  }
+.roi-investment h6 {
+  @apply text-24xl mt-20 mb-6 text-light-gray font-normal
+}
 
-  .roi-investments-overlay h3 {
-    @apply text-18xl font-semibold text-light-gray -tracking-tightened text-gray-700 mt-15.7 mb-13.7 
-  }
+.roi-investment p {
+  @apply flex justify-center items-center sm:w-182.3 sm:h-128.6
+}
+ 
+.roi-investment p sup {
+  @apply text-[3em]/least text-light-gray font-normal w-8 mr-29 
+}
+
+.roi-investment p span {
+  @apply sm:text-16xl lg:text-12xl font-light tracking-tightener text-light-gray text-right py-4
+}
+
+.roi-investment-returns {
+  @apply flex flex-col
+}
+
+.roi-investment-returns div {
+  @apply text-2xl font-medium bg-sky-200 text-blue-600 mt-10 w-123 mx-auto py-3 px-4 rounded-md 
+  /* lg:-mt-12 */
+}
+
+.roi-investment-returns p {
+  @apply text-2xl font-medium text-light-gray my-8
+}
+
+.roi-investment-returns span {
+  @apply text-black
+}
+
+.roi-investments-overlay {
+  @apply h-full absolute top-0 bottom-0 left-0 right-0 backdrop-blur-sm bg-trans-opaque
+}
+
+.roi-investments-overlay h3 {
+  @apply text-18xl font-semibold text-light-gray -tracking-tightened text-gray-700 mt-15.7 mb-13.7 
+}
+/* Section Three */
+
 
 
 
@@ -502,22 +538,22 @@
 
   /* Section four */
   .home-section-four {
-    @apply py-20 
+    @apply py-20 flex flex-col space-y-16
   }
   .home-section-four .slider-wrapper {
-      @apply mt-16 mb-0 mx-0 w-screen h-125 overflow-hidden relative
+      @apply mb-0 mx-0 w-screen min-h-104 relative bg-white z-20
   }
   .h-container-4 {
-    @apply h-full w-full px-7 mx-auto my-0
+    @apply h-full w-full px-10 mx-auto my-0
   }
   .home-section-four .slider-wrapper .slides-wrap {
-      @apply w-22/12 flex absolute     
+      @apply w-22/12 flex absolute hover:pause 
   }
   .home-section-four .slider-wrapper .slides {
       @apply inline-flex shrink-0
   }
   .home-section-four .slider-wrapper .slides .slider-item {
-      @apply flex justify-center items-center mr-8 p-16 h-94 border border-blue-400 relative text-center max-w-3xl min-h-98 rounded-3xl
+      @apply flex justify-center items-center mr-8 p-16 h-94 border-2 border-blue-400 relative text-center max-w-3xl min-h-98 rounded-3xl bg-white
   }
   .home-section-four .slider-wrapper .slides .slider-item h4 {
       @apply font-semibold font-firma w-full relative text-left text-7xl/to-tight -tracking-extratight text-blue-600
@@ -532,93 +568,93 @@
 
 
 
-  /* Section five */
-  .home-section-five {
-    @apply bg-device-section bg-x-axis bg-77% bg-no-repeat pt-20 pb-48 
-  }
+    /* Section five */
+    .home-section-five {
+      @apply bg-device-section bg-x-axis bg-77% bg-no-repeat pt-20 pb-48 
+    }
+  
+    .h-container-5 {
+      @apply h-full w-full px-10 mx-auto my-0
+    }
+  
+    .home-section-five .h-investment-wrap {
+      @apply flex relative h-770 w-full 
+    }
+  
+    .home-section-five--left {
+      @apply flex-col max-w-2/4 ml-95.5 basis-3/6
+    }
+  
+    .h-investment-wrap img {
+      @apply relative top-23
+    }
+  
+    .home-section-five--right {
+      @apply lg:w-5/12 lg:p-4 lg:flex lg:flex-col
+    }
+  
+    .home-section-five--right h2 {
+      @apply text-7xl font-bold mt-16 mb-14
+    }
+  
+    .registration-steps-wrap {
+      @apply mt-24 
+    }
+  
+    .registration-steps-wrap .step-item {
+      @apply relative sm:flex sm:justify-start sm:mb-20
+    }
+  
+    .registration-steps-wrap .step-item::before {
+      @apply content-[''] w-0.5 h-4/5 bg-blue-600 absolute left-5 top-20
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(3)::before {
+      @apply hidden
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(1) .step-item-count::before {
+      @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(2) .step-item-count::before {
+      @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(3) .step-item-count::before {
+      @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(1) .step-item-count::after {
+      @apply content-['01'] text-19xl font-semibold text-blue-600
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(2) .step-item-count::after {
+      @apply content-['02'] text-19xl font-semibold text-blue-600
+    }
+  
+    .registration-steps-wrap .step-item:nth-of-type(3) .step-item-count::after {
+      @apply content-['03'] text-19xl font-semibold text-blue-600
+    }
+  
+    .step-item .step-item-info {
+      @apply ml-24
+    }
+  
+    .step-item-info span {
+      @apply text-4xl font-semibold
+    }
+  
+    .step-item-info p {
+      @apply text-3xl/normal text-light-gray my-6
+    }
+  
+    .home-section-five--right a {
+      @apply w-60
+    }
+    /* Section five */
 
-  .h-container-5 {
-    @apply h-full w-full px-7 mx-auto my-0
-  }
-
-  .home-section-five .h-investment-wrap {
-    @apply flex relative h-770 w-full 
-  }
-
-  .home-section-five--left {
-    @apply flex-col max-w-2/4 ml-95.5 basis-3/6
-  }
-
-  .h-investment-wrap img {
-    @apply relative top-23
-  }
-
-  .home-section-five--right {
-    @apply lg:w-5/12 lg:p-4 lg:flex lg:flex-col
-  }
-
-  .home-section-five--right h2 {
-    @apply text-7xl font-bold mt-16 mb-14
-  }
-
-  .registration-steps-wrap {
-    @apply mt-24 
-  }
-
-  .registration-steps-wrap .step-item {
-    @apply relative lg:flex lg:justify-start lg:mb-20
-  }
-
-  .registration-steps-wrap .step-item::before {
-    @apply content-[''] w-0.5 h-4/5 bg-blue-600 absolute left-5 top-20
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(3)::before {
-    @apply hidden
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(1) .step-item-count::before {
-    @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(2) .step-item-count::before {
-    @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(3) .step-item-count::before {
-    @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(1) .step-item-count::after {
-    @apply content-['01'] text-19xl font-semibold text-blue-600
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(2) .step-item-count::after {
-    @apply content-['02'] text-19xl font-semibold text-blue-600
-  }
-
-  .registration-steps-wrap .step-item:nth-of-type(3) .step-item-count::after {
-    @apply content-['03'] text-19xl font-semibold text-blue-600
-  }
-
-  .step-item .step-item-info {
-    @apply ml-24
-  }
-
-  .step-item-info span {
-    @apply text-4xl font-semibold
-  }
-
-  .step-item-info p {
-    @apply text-3xl/normal text-light-gray my-6
-  }
-
-  .home-section-five--right a {
-    @apply w-60
-  }
-  /* Section five */
-
-
+    
 
 
 
@@ -632,7 +668,10 @@
     @apply content-[''] bg-security-pattern bg-no-repeat bg-s-axis bg-110% h-790 w-780 absolute -right-15.9 top-40
   }
   .h-container-6 {
-    @apply h-full w-full px-7 mx-auto my-0
+    @apply h-full w-full px-10 mx-auto my-0
+  }
+  .home-section-five--left .h-investment-wrap {
+    @apply hidden sm:hidden lg:flex
   }
   .home-section-six--left h2 {
     @apply text-32xl text-white font-semibold mt-16 mb-15.5
@@ -647,10 +686,10 @@
     @apply fill-white 
   }
   .home-section-six--right .card-item {
-    @apply flex h-95.5
+    @apply flex h-95.5 basis-4/12 
   }
   .home-section-six--right .card-item .card-item--icon {
-    @apply relative
+    @apply relative mt-12 pl-16  
   }
   .home-section-six--right .card-item .card-item--icon::before { 
     @apply content-[''] bg-white shadow-hsla-opacity h-6 w-6 absolute left-0 top-2 rounded-md 
@@ -673,7 +712,25 @@
     @apply 
   } */
   .h-container-7 {
-    @apply h-full w-full px-7 mx-auto my-0
+    @apply h-full w-full px-10 mx-auto my-0
+  }
+  .h-section-7-wrap h6 {
+    @apply uppercase text-14xl text-black font-semibold
+  }
+  .step-item .step-item-info {
+    @apply  w-128.5
   }
   /** Section Seven **/
+}
+
+
+
+
+
+
+
+@layer utilities {
+  .pause {
+    animation-play-state: paused;
+  }
 }

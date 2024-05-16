@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BrandLogo } from "../assets/images";
+import { BrandLogo, BrandLogoWhite } from "../assets/images";
 import { PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, } from "../assets/icons";
 
 
@@ -17,6 +17,9 @@ const Nav = () => {
                     <div className="flex items-center h-full px-0 relative ">                
                         <Link className="mt-1.5 ml-2 mr-24 brand">
                             <BrandLogo />
+                        </Link>
+                        <Link className="mt-1.5 ml-2 mr-24 brand-white">
+                            <BrandLogoWhite />
                         </Link>
 
                         <div className="flex justify-end w-full h-full sm:justify-end lg:justify-between">

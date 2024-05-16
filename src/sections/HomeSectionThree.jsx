@@ -5,7 +5,8 @@ import { ButtonComponent, ButtonLinkComponent } from "../components";
 
 
 
-const HomeSectionThree = () => {
+const HomeSectionThree = () => { 
+
     return (
         <section className="home-section-three">
         <div className="h-container-3 container">
@@ -55,7 +56,7 @@ const HomeSectionThree = () => {
                         <div>₦834,260 earned in returns on Cowrywise</div>
                         <p>*In a bank, you’d earn <span>₦28,800</span></p>
                     </div>
-                    <div className="flex flex-col justify-center items-center absolute top-0 bottom-0 left-0 right-0 backdrop-blur-sm bg-trans-opaque roi-investments-overlay">
+                    <div id="investmentOverlay" className="flex flex-col justify-center items-center roi-investments-overlay">
                         <h3>Ready to start investing?</h3>
                         <ButtonLinkComponent 
                             btnBg 
@@ -65,7 +66,8 @@ const HomeSectionThree = () => {
                         />
                         <ButtonComponent 
                             btnProps="text-blue-500 text-14xl/extra-loosened font-bold font-firma mt-4"
-                            label="Not yet" />
+                            label="Not yet" 
+                        />
                     </div>
                 </div>
                 <p>Calculations are based on the average performance of conservative mutual funds on Cowrywise from 2019. Calculation excludes processing fees.</p>                    

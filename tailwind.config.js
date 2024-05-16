@@ -47,6 +47,7 @@ module.exports = {
       '18xl': '3.9rem',
       '19xl': '2rem',
       '21xl': '2.1rem',
+      '24xl': '2.4rem',
       '30xl': '4.7rem',
       '32xl': '4.86rem',
     },
@@ -68,10 +69,11 @@ module.exports = {
     extend: {
       animation: {   
         dropdown: 'showDropdown 0.5s ease',     /** NAV MENU */
-        easeIn: 'easeIn 4s ease',   /** SECTION 1 ANIMATION */
+        easeIn: 'easeIn 2.5s ease',               /** SECTION 1 ANIMATION */
+        easeOut: 'easeOut 1s ease-out',             /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
-        fade: 'fade 40s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
+        fadeOut: 'fadeOut 40s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
         slideUp: 'slideUp 1.7s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
@@ -104,9 +106,9 @@ module.exports = {
         '98': '25rem',
         '121': '30.875rem',
         '122': '45rem',
+        '122.5': '46rem',
         '123': '34rem',
-        '124': '47rem',
-        '125': '40rem',
+        // '124': '47rem',
         '126': '40.625rem',
         '126.5': '46.5rem',
         '127': '48.7rem',
@@ -122,6 +124,7 @@ module.exports = {
         '99.5': '0.1rem',
         '101.5': '0.3rem',
         '114.5': '7.5rem',
+        '128.6': '18.6rem',
       },
       inset: {
         '106': '0.6rem',
@@ -157,12 +160,21 @@ module.exports = {
             opacity: 1,
           }
         },
-        fade:  {
+        easeOut: {
+          '0%': {
+            opacity: 1,
+          },
+          to: {
+            opacity: 0,
+          }
+        },
+        fadeOut:  {
           '0%': { 
             transform: 'translateZ(0)' 
           },
           '100%': { 
-            transform: 'translate3d(-100%, 0, 0)' 
+            transform: 'translate3d(-100%, 0, 0)',
+            opacity: 1,
           },
         },
         slideRight: {
@@ -183,12 +195,14 @@ module.exports = {
         },
         slideDown: {
           '0%': { 
+            opacity: 0.5,
             transform: 'translate3d(0, -100%, 0)',
           },
           to: { 
+            opacity: 1,
             transform: 'translateZ(0)',
           },
-        },
+        },        /** Info Notes ontop Graph */
         slideUp: { 
           '0%': {
             clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
@@ -199,7 +213,7 @@ module.exports = {
           '100%': {
             clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
           },
-        }, 
+        },        /** Graph */
         showDropdown: {
           '0%': { 
             transform: 'translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078)',
@@ -238,21 +252,26 @@ module.exports = {
       },
       maxWidth: {
         '99': '30rem',
+        '126': '36.3rem',
         '2/4': '50%',
-        '58/12': '58%',   /** UseCase: Section-3 (last p-tag) */
+        '65/12': '65%',   /** UseCase: Section-3 (last p-tag) */
+        '70/12': '70%',
         '80': '80%',
       },
       minHeight: {
         '98': '32rem',
+        '104': '38rem',
         '125': '65rem',
         '138': '78rem',
       },
       minWidth: {
         '50': '3.125rem',
         '80': '17.8rem',
+        '134': '33.4rem',
         '63': '61%',
       },
       padding: {
+        '5.4': '0.4rem',
         '6.4': '1.6rem',
         '6.5': '1.85rem',
         '13.5': '2.1rem',
@@ -273,16 +292,19 @@ module.exports = {
         '121': '45rem',
         '122': '33rem',
         '123': '34rem',
+        '123.3': '36rem',
         '123.5': '44rem',
         '125': '40rem',
         '126': '40.625rem',
         '126.5': '46.5rem',       
         '127': '48.7rem',
         '127.5': '48.75rem',
-        '128.5': '49.4rem',
+        '128.5': '50.8rem',
         '135': '52rem',
+        '135.3': '52.3rem',
         '136': '56rem',
         '140': '61.3rem',
+        '182.3': '86.3rem',
         '183': '87.3rem',
         '630': '63rem',
         '720': '72rem',

@@ -6,15 +6,18 @@ import { sliderItems } from "../constants";
 
 
 const HomeSectionFour = () => {
-  
-    function autoScroll() {
-        document.getElementById('autoScroll').classList.add('s-4-anim');
-    }
-
-    useEffect(() => {
-        autoScroll();
-    }, []);
+    
         
+    function scrollFunction() {   
+        var scrollWheel = document.getElementById('autoScroll');
+        scrollWheel.classList.add('s-4-anim');
+    };
+    
+    
+    useEffect(() => {
+        scrollFunction();
+    }, []);
+
 
     return (
         <section className="home-section-four">
