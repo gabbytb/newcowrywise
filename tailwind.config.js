@@ -52,6 +52,9 @@ module.exports = {
       '31xl': '1.8rem',
       '32xl': '4.86rem',
       '34xl': '3.4rem',
+      '35xl': '6.4rem',
+      '36xl': '5.25rem',
+      '38xl': '4.8rem',
     },
     letterSpacing: {
       supertight: '.015em',
@@ -64,9 +67,11 @@ module.exports = {
       moretight: '0.065em',
       moretighter: '0.09rem',
     },
-    screens: {          
-      'sm': '601px',    
-      'lg': '981px',
+    screens: {   
+      'xs': '601px',       
+      'sm': '769px',    
+      'lg': '981px', 
+      'xl': '1040px'
     },
     extend: {
       animation: {   
@@ -95,7 +100,7 @@ module.exports = {
       textColor: {
         skin: {
           darkBlue: 'var(--color-dark-blue)',
-          lightGray: 'var(--color-light-gray)',
+          // lightGray: 'var(--color-light-gray)',
           gray: 'var(--color-lighter-gray)',
           opaque: 'var(--color-opacity)',
         }
@@ -117,6 +122,7 @@ module.exports = {
         '94': '20rem',
         '95.5': '22.5rem',
         '98': '25rem',
+        '26.3': '26.3rem',
         '121': '30.875rem',
         '122': '45rem',
         '122.5': '46rem',
@@ -127,7 +133,7 @@ module.exports = {
         '127': '48.7rem',
         '128': '58rem',
         '129': '60rem',
-        '130': '65rem',
+        '130': '65rem',       /** Section 1: Backdrop */
         '760': '126rem',
         '770': '76rem',
         '780': '78rem',
@@ -276,6 +282,7 @@ module.exports = {
         '97': '20rem',
         '98': '32rem',
         '104': '38rem',
+        '116': '46rem',
         '125': '65rem',
         '138': '78rem',
       },

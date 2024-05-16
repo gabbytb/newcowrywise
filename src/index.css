@@ -158,7 +158,6 @@
 
   
 
-
   header .cta-menu {
     @apply hidden sm:hidden lg:inline-flex lg:justify-end lg:items-center lg:space-x-10 
   }
@@ -224,7 +223,11 @@
   }
 
   .brand {
-    @apply hidden sm:block lg:block
+    @apply block 
+  }
+
+  .sticky-header .brand {
+    @apply hidden sm:block
   }
 
   .brand svg {
@@ -232,7 +235,11 @@
   }
 
   .brand-white {
-    @apply block sm:hidden lg:hidden
+    @apply block sm:hidden
+  }
+
+  .home-section-one--right .social-icons {
+    @apply block xs:hidden
   }
 
   .brand-white svg {
@@ -256,7 +263,7 @@
 
   /* Section One */
   .home-section-one {
-    @apply py-20 px-0 w-full lg:h-full
+    @apply py-20 px-0 w-full h-full
   }
 
   .h-container-1 {
@@ -265,8 +272,10 @@
   }
 
   .s1-grids-wrap {
-    @apply flex flex-col-reverse
-    sm:flex sm:flex-col-reverse sm:gap-y-12 sm:py-28
+    @apply 
+    flex flex-col-reverse
+    sm:flex sm:flex-col-reverse sm:gap-y-12 sm:py-12
+    /* sm:py-28 */
     lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
   }
 
@@ -275,11 +284,20 @@
   }
 
   .home-section-one--left {
-    @apply mt-12 ml-12 relative sm:mt-0 sm:ml-0 lg:mt-12 lg:ml-12 lg:min-h-125
+    @apply relative 
+    mt-12 ml-12 min-h-125 
+    sm:mt-0 sm:ml-0 sm:min-h-116
+    lg:mt-12 lg:ml-12 lg:min-h-125
   }
 
   .home-section-one--left .testimonial {
-    @apply relative top-0 left-0 sm:h-122 lg:h-130 
+    @apply relative top-0 left-0 
+    min-h-125 
+    sm:min-h-116
+    lg:min-h-125
+
+    /* lg:h-130 
+    sm:h-122  */
   }
 
   .testimonial .testimonial-backdrop {
@@ -326,20 +344,28 @@
   }
 
   .testimonials-thumbnail img {
-    @apply h-full w-full object-cover absolute top-3 left-0 sm:w-28 sm:h-28 lg:top-3 lg:left-0 
+    @apply h-full w-full object-cover absolute 
+    top-3 left-0 
+    sm:w-28 sm:h-28 
+    lg:top-3 lg:left-0 
   }
 
   .home-section-one--right h1 {
-    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-skin-darkBlue sm:mt-15.5 sm:text-7xl lg:text-16xl lg:font-semibold lg:mt-17.5
+    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-skin-darkBlue 
+    sm:mt-15.5 sm:text-36xl 
+    lg:text-16xl lg:font-semibold lg:mt-17.5
   }
 
   .home-section-one--right h6 {
-    @apply font-normal mt-4 mb-13.5 text-skin-darkBlue -tracking-moretighter text-5xl lg:-tracking-tightest lg:text-7xl/to-tight 
+    @apply font-normal mt-4 mb-13.5 text-skin-darkBlue 
+    -tracking-moretighter text-5xl 
+    sm:text-38xl sm:-tracking-tightest
+    lg:text-7xl/to-tight 
   }
   
-  .home-section-one--right .social-icons {
-    @apply flex sm:hidden
-  }
+  
+
+
 
 
 
@@ -590,6 +616,10 @@
       @apply flex-col max-w-2/4 ml-95.5 basis-3/6
     }
   
+    .home-section-five--left {
+      @apply hidden xl:block
+    }
+
     .h-investment-wrap img {
       @apply relative top-23
     }
@@ -670,16 +700,14 @@
     @apply relative pt-20 pb-60 bg-blue-600
   }
   .home-section-six::after {
-    @apply content-[''] bg-security-pattern bg-no-repeat bg-s-axis bg-110% h-790 w-780 absolute -right-15.9 top-40
+    @apply content-[''] h-790 w-780 absolute -right-15.9 top-40
+    lg:bg-security-pattern lg:bg-no-repeat lg:bg-s-axis lg:bg-110% lg:opacity-50
   }
   .h-container-6 {
     @apply h-full w-full px-10 mx-auto my-0
   }
-  .home-section-five--left .h-investment-wrap {
-    @apply hidden sm:hidden lg:flex
-  }
   .home-section-six--left h2 {
-    @apply text-32xl text-white font-semibold mt-16 mb-15.5
+    @apply text-32xl text-white font-semibold mt-16 mb-15.5 -tracking-tightened
   }
   .home-section-six--left p {
     @apply text-3xl/more-loose text-white font-light -tracking-supertight
@@ -691,10 +719,10 @@
     @apply fill-white 
   }
   .home-section-six--right .card-item {
-    @apply flex sm:h-full lg:h-95.5 basis-4/12 
+    @apply flex h-full sm:basis-full xl:basis-4/12 
   }
   .home-section-six--right .card-item .card-item--icon {
-    @apply relative mt-12 pl-16  
+    @apply relative mt-12 sm:mt-12 pl-16  
   }
   .home-section-six--right .card-item .card-item--icon::before { 
     @apply content-[''] bg-white shadow-skin-hsla h-6 w-6 absolute left-0 top-2 rounded-md 

@@ -13,7 +13,7 @@ const HomeSectionSix = () => {
 
             
             <div className="lg:flex lg:flex-row">
-              <div className="sm:w-full lg:w-5/12 home-section-six--left">
+              <div className="sm:w-full xl:w-5/12 home-section-six--left">
                 <h2>Keeping your money safe is our business.</h2>
                 <p>Trust is our currency. We are committed to the security of your money and the protection of your account.</p>
                 <Link to="https://cowrywise.com/security" target="_blank">
@@ -30,7 +30,7 @@ const HomeSectionSix = () => {
                   <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
                 </div>
               </div>
-              <div className="sm:ml-0 lg:ml-44 card-item">
+              <div className="sm:ml-0 xl:ml-44 card-item">
                 <div className="card-item--icon">
                   <h5>Assets Custody</h5>
                   <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
@@ -42,7 +42,7 @@ const HomeSectionSix = () => {
                   <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
                 </div>
               </div>
-              <div className="sm:ml-0 lg:ml-44 card-item">
+              <div className="sm:ml-0 xl:ml-44 card-item">
                 <div className="card-item--icon">
                   <h5>Best-In-Class Assets</h5>
                   <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
