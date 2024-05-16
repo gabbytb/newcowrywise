@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     backgroundPosition: {
       'top-left': '0, 0',
-      'x-axis': '-120% -120px'
+      'x-axis': '-120% -120px',
+      's-axis': '12.6rem',
     },
     backgroundSize: {
       'auto': 'auto',
@@ -17,6 +18,7 @@ module.exports = {
       '50%': '50%',
       '77%': '77%',
       '16': '4rem',
+      '110%': '110%',
     },
     fontFamily: {
       firma: ["CW BR Firma"],
@@ -44,6 +46,7 @@ module.exports = {
       '17xl': '1.9rem',
       '18xl': '3.9rem',
       '19xl': '2rem',
+      '21xl': '2.1rem',
       '30xl': '4.7rem',
       '32xl': '4.86rem',
     },
@@ -77,13 +80,15 @@ module.exports = {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
         'return-invested': "url('/src/assets/images/return-pattern.svg')",
         'device-section': "url('/src/assets/images/home-device-section.svg')",
+        'security-pattern': "url('/src/assets/images/security-section.svg')",
       },
       colors: {
         'dark-blue': 'var(--color-dark-blue)',
         'light-gray': 'var(--color-light-gray)',
         'sky-blue': 'var(--color-sky-blue)',
         'light-gray': 'var(--color-gray-opacity)',
-        'trans-opaque': 'var(--background-color-opacity)'
+        'trans-opaque': 'var(--background-color-opacity)',
+        'hsla-opacity': '3px 3px 0 0 var(--border-hsla-opacity)',
       },
       gridTemplateColumns: {
         '16': '1fr 1fr',
@@ -95,6 +100,7 @@ module.exports = {
         '15': '3.6rem',
         '50': '3.125rem',
         '94': '20rem',
+        '95.5': '22.5rem',
         '98': '25rem',
         '121': '30.875rem',
         '122': '45rem',
@@ -110,6 +116,7 @@ module.exports = {
         '760': '126rem',
         '770': '76rem',
         '780': '78rem',
+        '790': '79rem',
         '840': '84rem',
         '850': '85rem',
         '99.5': '0.1rem',
@@ -139,6 +146,7 @@ module.exports = {
         '58': '4rem',           /** UseCase: section-1 testimonial backdrop */
         '60': '6rem',           /** UseCase: section-1 testimonial backdrop, 4 */
         '80': '8rem',           /** UseCase: section-1 testimonial backdrop  */
+        '15.9': '15rem',
       },
       keyframes: {
         easeIn: {
@@ -225,8 +233,8 @@ module.exports = {
         '15.8': '4.3rem',
         '16.5': '5.71rem',
         '17.5': '5.3rem',
-        '29': '5px',
-        '95.5': '9.55em',     /** 8.33333% */
+        '29': '0.5em',
+        '95.5': '9.55em', 
       },
       maxWidth: {
         '99': '30rem',
@@ -278,6 +286,7 @@ module.exports = {
         '183': '87.3rem',
         '630': '63rem',
         '720': '72rem',
+        '780': '78rem',
         '22/12': '120%',
       },
       zIndex: {

@@ -53,6 +53,7 @@
     --color-sky-blue: rgb(230, 250, 255);  
     --color-gray-opacity: rgba(100, 116, 139, 1);
     --background-color-opacity: hsla(0,0%,100%,.7);
+    --border-border-hsla-opacity: hsla(0,0%,100%,.3);
     font-size: 10px;
     font-family: sans-serif;
     line-height: 1.15;
@@ -71,8 +72,9 @@
   sub, sup {
     line-height: 0;
   }
-
 }
+
+
 
 
 
@@ -624,7 +626,10 @@
 
   /* Section six */
   .home-section-six {
-    @apply pt-20 bg-blue-600
+    @apply relative pt-20 pb-60 bg-blue-600
+  }
+  .home-section-six::after {
+    @apply content-[''] bg-security-pattern bg-no-repeat bg-s-axis bg-110% h-790 w-780 absolute -right-15.9 top-40
   }
   .h-container-6 {
     @apply h-full w-full px-7 mx-auto my-0
@@ -641,6 +646,34 @@
   .home-section-six--left a svg {
     @apply fill-white 
   }
+  .home-section-six--right .card-item {
+    @apply flex h-95.5
+  }
+  .home-section-six--right .card-item .card-item--icon {
+    @apply relative
+  }
+  .home-section-six--right .card-item .card-item--icon::before { 
+    @apply content-[''] bg-white shadow-hsla-opacity h-6 w-6 absolute left-0 top-2 rounded-md 
+  }
+  .home-section-six--right .card-item h5 {
+    @apply text-21xl font-semibold text-white font-firma mb-6
+  }
+  .home-section-six--right .card-item p {
+    @apply text-white/75 text-3xl/more-loose
+  }
   /* Section six */
 
+
+
+
+
+
+  /** Section Seven **/
+  /* .home-section-seven {
+    @apply 
+  } */
+  .h-container-7 {
+    @apply h-full w-full px-7 mx-auto my-0
+  }
+  /** Section Seven **/
 }

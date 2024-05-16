@@ -23,8 +23,30 @@ const HomeSectionSix = () => {
             </div>
 
 
-            <div className="lg:flex lg-flex-row">
-              <div className="home-section-six--right">
+            <div className="lg:flex lg:flex-row lg:w-full lg:flex-wrap home-section-six--right">
+              <div className="basis-4/12 card-item">
+                <div className="mt-12 pl-16 card-item--icon">
+                  <h5>Top-Notch Security</h5>
+                  <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
+                </div>
+              </div>
+              <div className="basis-4/12 ml-44 card-item">
+                <div className="mt-12 pl-16 card-item--icon">
+                  <h5>Assets Custody</h5>
+                  <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
+                </div>
+              </div>
+              <div className="basis-4/12 card-item">
+                <div className="mt-12 pl-16 card-item--icon">
+                  <h5>Regulatory Compliance</h5>
+                  <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
+                </div>
+              </div>
+              <div className="basis-4/12 ml-44 card-item">
+                <div className="mt-12 pl-16 card-item--icon">
+                  <h5>Best-In-Class Assets</h5>
+                  <p>We use industry-standard encryption technology to protect user data. We also use two-factor authentication to verify all customer accounts, so you can be sure that your funds are safe and secure.</p>
+                </div>
               </div>
             </div>
           </div>
