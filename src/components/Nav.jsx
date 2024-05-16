@@ -5,13 +5,22 @@ import { PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, BusinessFirst
 
 
 
+
+
 const Nav = () => {
     
     return (
         <>
-            <Link className="bg-sky-blue h-15 text-10xl text-center text-light-gray font-medium flex justify-center items-center cursor-pointer" to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" target="_blank">
-                Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
+            {/* Top bar */}
+            <Link className="bg-skin-skyblue h-15 text-10xl text-center text-skin-gray font-medium flex justify-center items-center cursor-pointer" 
+                to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" 
+                target="_blank">Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
             </Link>
+            {/* Top bar */}
+
+
+
+            {/* Top Header  */}
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex items-center h-full px-0 relative ">                
@@ -22,11 +31,12 @@ const Nav = () => {
                             <BrandLogoWhite />
                         </Link>
 
+
                         <div className="flex justify-end w-full h-full sm:justify-end lg:justify-between">
                             <ul className="nav-links">
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Personal</p>
-                                    <div className="nav-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl">
+                                    <div className="nav-dropdown">
                                         <div className="nav-dropdown--left border-e-2 mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://cowrywise.com/plan" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -67,7 +77,7 @@ const Nav = () => {
                                 </li>
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Business</p>
-                                    <div className="nav-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl">
+                                    <div className="nav-dropdown">
                                         <div className="nav-dropdown--left mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://cowrywise.com/plan" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -83,7 +93,7 @@ const Nav = () => {
                                 </li>
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Developer</p>
-                                    <div className="nav-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl">
+                                    <div className="nav-dropdown">
                                         <div className="nav-dropdown--left border-e-2 mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://cowrywise.com/plan" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -114,7 +124,7 @@ const Nav = () => {
                                 </li>
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Learn</p>
-                                    <div className="nav-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl">
+                                    <div className="nav-dropdown">
                                         <div className="nav-dropdown--left mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://learn.cowrywise.com" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -154,11 +164,11 @@ const Nav = () => {
                                     <span></span>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </header>
+            {/* Top Header  */}
         </>
     );
 };

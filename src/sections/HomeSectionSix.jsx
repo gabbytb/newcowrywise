@@ -13,7 +13,7 @@ const HomeSectionSix = () => {
 
             
             <div className="lg:flex lg:flex-row">
-              <div className="w-5/12 home-section-six--left">
+              <div className="sm:w-full lg:w-5/12 home-section-six--left">
                 <h2>Keeping your money safe is our business.</h2>
                 <p>Trust is our currency. We are committed to the security of your money and the protection of your account.</p>
                 <Link to="https://cowrywise.com/security" target="_blank">

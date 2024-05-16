@@ -49,7 +49,9 @@ module.exports = {
       '21xl': '2.1rem',
       '24xl': '2.4rem',
       '30xl': '4.7rem',
+      '31xl': '1.8rem',
       '32xl': '4.86rem',
+      '34xl': '3.4rem',
     },
     letterSpacing: {
       supertight: '.015em',
@@ -84,13 +86,24 @@ module.exports = {
         'device-section': "url('/src/assets/images/home-device-section.svg')",
         'security-pattern': "url('/src/assets/images/security-section.svg')",
       },
-      colors: {
-        'dark-blue': 'var(--color-dark-blue)',
-        'light-gray': 'var(--color-light-gray)',
-        'sky-blue': 'var(--color-sky-blue)',
-        'light-gray': 'var(--color-gray-opacity)',
-        'trans-opaque': 'var(--background-color-opacity)',
-        'hsla-opacity': '3px 3px 0 0 var(--border-hsla-opacity)',
+      backgroundColor: {
+        skin: {
+          skyblue: 'var(--background-sky-blue)',
+          opaque: 'var(--color-opacity)',
+        }
+      },
+      textColor: {
+        skin: {
+          darkBlue: 'var(--color-dark-blue)',
+          lightGray: 'var(--color-light-gray)',
+          gray: 'var(--color-lighter-gray)',
+          opaque: 'var(--color-opacity)',
+        }
+      },
+      boxShadowColor: {
+        skin: {
+          hsla: 'var(--shadow-gray-opacity)',
+        }
       },
       gridTemplateColumns: {
         '16': '1fr 1fr',
@@ -252,6 +265,7 @@ module.exports = {
       },
       maxWidth: {
         '99': '30rem',
+        '100': '32rem',
         '126': '36.3rem',
         '2/4': '50%',
         '65/12': '65%',   /** UseCase: Section-3 (last p-tag) */
@@ -259,6 +273,7 @@ module.exports = {
         '80': '80%',
       },
       minHeight: {
+        '97': '20rem',
         '98': '32rem',
         '104': '38rem',
         '125': '65rem',
@@ -319,4 +334,5 @@ module.exports = {
   },
   plugins: [],
 }
+
 

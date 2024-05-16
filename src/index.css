@@ -49,11 +49,11 @@
 
   :root {
     --color-dark-blue: rgb(8 37 82);
-    --color-light-gray: rgb(108 130 163);  
-    --color-sky-blue: rgb(230, 250, 255);  
-    --color-gray-opacity: rgba(100, 116, 139, 1);
-    --background-color-opacity: hsla(0,0%,100%,.7);
-    --border-border-hsla-opacity: hsla(0,0%,100%,.3);
+    --color-light-gray: rgba(100, 116, 139, 1);
+    --color-lighter-gray: rgb(108 130 163);  
+    --shadow-gray-opacity: hsla(0,0%,100%,.3);
+    --color-opacity: hsla(0,0%,100%,.7);
+    --background-sky-blue: rgb(230, 250, 255);     /**   TopBar BackgroundColor   */
     font-size: 10px;
     font-family: sans-serif;
     line-height: 1.15;
@@ -89,7 +89,7 @@
   }
 
   .content p {
-    @apply text-center text-15xl/more-loose text-light-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
+    @apply text-center text-15xl/more-loose text-skin-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
   }
 
 
@@ -172,11 +172,11 @@
   }
 
   .menu-item .nav-dropdown {
-    @apply hidden
+    @apply hidden 
   }
 
   .menu-item:hover .nav-dropdown {
-    @apply flex animate-dropdown
+    @apply animate-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl
   }
   
   .menu-item p {
@@ -204,7 +204,7 @@
   }
 
   .nav-dropdown-item a {
-    @apply text-15xl text-light-gray
+    @apply text-15xl text-skin-gray
   }
 
   .nav-dropdown-item li {
@@ -330,11 +330,11 @@
   }
 
   .home-section-one--right h1 {
-    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-dark-blue sm:mt-15.5 sm:text-7xl lg:text-16xl lg:font-semibold lg:mt-17.5
+    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-skin-darkBlue sm:mt-15.5 sm:text-7xl lg:text-16xl lg:font-semibold lg:mt-17.5
   }
 
   .home-section-one--right h6 {
-    @apply font-normal mt-4 mb-13.5 text-dark-blue -tracking-moretighter text-5xl lg:-tracking-tightest lg:text-7xl/to-tight 
+    @apply font-normal mt-4 mb-13.5 text-skin-darkBlue -tracking-moretighter text-5xl lg:-tracking-tightest lg:text-7xl/to-tight 
   }
   
   .home-section-one--right .social-icons {
@@ -410,15 +410,15 @@
   }
 
   .home-section-two .card-item-one .card-item::after {
-    @apply content-['1'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
+    @apply content-['1'] absolute top-0 -right-23 rounded-full text-skin-darkBlue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
   
   .home-section-two .card-item-two .card-item::after {
-    @apply content-['2'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
+    @apply content-['2'] absolute top-0 -right-23 rounded-full text-skin-darkBlue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
 
   .home-section-two .card-item-three .card-item::after {
-    @apply content-['3'] absolute top-0 -right-23 rounded-full text-dark-blue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
+    @apply content-['3'] absolute top-0 -right-23 rounded-full text-skin-darkBlue text-2xl font-bold bg-white shadow-md w-16 h-16 flex justify-center items-center
   }
 
   .home-section-two--right #bar-anima--wrap {
@@ -443,7 +443,7 @@
 }
 
 .home-section-three h2 {
-  @apply text-7xl -tracking-tightened text-dark-blue font-bold text-center mt-20 mb-10
+  @apply text-7xl -tracking-tightened text-skin-darkBlue font-bold text-center mt-20 mb-10
 }
 
 .roi-wrap {
@@ -451,7 +451,7 @@
 }
 
 .roi-wrap h6 {
-  @apply mt-16.5 mb-7 text-4xl font-normal text-light-gray
+  @apply mt-16.5 mb-7 text-4xl font-normal text-skin-gray
 }
 
 .roi-input {
@@ -459,11 +459,11 @@
 }
 
 .roi-input sup {
-  @apply text-[3em]/least text-dark-blue font-normal w-8 mr-29 
+  @apply text-[3em]/least text-skin-darkBlue font-normal w-8 mr-29 
 }
 
 .roi-input input[type="tel"] {
-  @apply w-full sm:text-16xl lg:text-12xl font-normal font-firma text-dark-blue text-right py-4
+  @apply w-full sm:text-16xl lg:text-12xl font-normal font-firma text-skin-darkBlue text-right py-4
 }
 
 .roi-dropdown-wrap {
@@ -487,7 +487,7 @@
 }
 
 .roi-investment h6 {
-  @apply text-24xl mt-20 mb-6 text-light-gray font-normal
+  @apply text-24xl mt-20 mb-6 text-skin-gray font-normal
 }
 
 .roi-investment p {
@@ -495,11 +495,11 @@
 }
  
 .roi-investment p sup {
-  @apply text-[3em]/least text-light-gray font-normal w-8 mr-29 
+  @apply text-[3em]/least text-skin-gray font-normal w-8 mr-29 
 }
 
 .roi-investment p span {
-  @apply sm:text-16xl lg:text-12xl font-light tracking-tightener text-light-gray text-right py-4
+  @apply sm:text-16xl lg:text-12xl font-light tracking-tightener text-skin-gray text-right py-4
 }
 
 .roi-investment-returns {
@@ -512,7 +512,7 @@
 }
 
 .roi-investment-returns p {
-  @apply text-2xl font-medium text-light-gray my-8
+  @apply text-2xl font-medium text-skin-gray my-8
 }
 
 .roi-investment-returns span {
@@ -520,11 +520,11 @@
 }
 
 .roi-investments-overlay {
-  @apply h-full absolute top-0 bottom-0 left-0 right-0 backdrop-blur-sm bg-trans-opaque
+  @apply h-full absolute top-0 bottom-0 left-0 right-0 backdrop-blur-sm bg-skin-opaque
 }
 
 .roi-investments-overlay h3 {
-  @apply text-18xl font-semibold text-light-gray -tracking-tightened text-gray-700 mt-15.7 mb-13.7 
+  @apply text-18xl font-semibold text-skin-gray -tracking-tightened text-gray-700 mt-15.7 mb-13.7 
 }
 /* Section Three */
 
@@ -547,16 +547,21 @@
     @apply h-full w-full px-10 mx-auto my-0
   }
   .home-section-four .slider-wrapper .slides-wrap {
-      @apply w-22/12 flex absolute hover:pause 
+      @apply w-22/12 flex absolute hover:pause focus:pause
   }
   .home-section-four .slider-wrapper .slides {
       @apply inline-flex shrink-0
   }
   .home-section-four .slider-wrapper .slides .slider-item {
-      @apply flex justify-center items-center mr-8 p-16 h-94 border-2 border-blue-400 relative text-center max-w-3xl min-h-98 rounded-3xl bg-white
+      @apply flex justify-center mr-8 border-2 border-blue-400 relative text-center rounded-3xl bg-white
+      sm:max-w-100 sm:min-h-97 sm:p-14.7 sm:items-end
+      lg:max-w-3xl lg:min-h-98 lg:p-16 lg:items-center 
+      
   }
   .home-section-four .slider-wrapper .slides .slider-item h4 {
-      @apply font-semibold font-firma w-full relative text-left text-7xl/to-tight -tracking-extratight text-blue-600
+      @apply font-semibold font-firma w-full relative text-left 
+      sm:text-34xl/to-tight
+      lg:text-7xl/to-tight -tracking-extratight text-blue-600
   }
   .home-section-four .slider-wrapper .slides .slider-item h4::before {
       @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
@@ -646,7 +651,7 @@
     }
   
     .step-item-info p {
-      @apply text-3xl/normal text-light-gray my-6
+      @apply text-31xl/normal text-skin-gray my-6
     }
   
     .home-section-five--right a {
@@ -680,25 +685,25 @@
     @apply text-3xl/more-loose text-white font-light -tracking-supertight
   }
   .home-section-six--left a {
-    @apply text-xl/extra-loosened text-trans-opaque font-semibold uppercase tracking-moretight flex items-center
+    @apply text-xl/extra-loosened text-skin-opaque font-semibold uppercase tracking-moretight flex items-center
   }
   .home-section-six--left a svg {
     @apply fill-white 
   }
   .home-section-six--right .card-item {
-    @apply flex h-95.5 basis-4/12 
+    @apply flex sm:h-full lg:h-95.5 basis-4/12 
   }
   .home-section-six--right .card-item .card-item--icon {
     @apply relative mt-12 pl-16  
   }
   .home-section-six--right .card-item .card-item--icon::before { 
-    @apply content-[''] bg-white shadow-hsla-opacity h-6 w-6 absolute left-0 top-2 rounded-md 
+    @apply content-[''] bg-white shadow-skin-hsla h-6 w-6 absolute left-0 top-2 rounded-md 
   }
   .home-section-six--right .card-item h5 {
     @apply text-21xl font-semibold text-white font-firma mb-6
   }
   .home-section-six--right .card-item p {
-    @apply text-white/75 text-3xl/more-loose
+    @apply text-white/75 text-31xl/more-loose sm:mb-6
   }
   /* Section six */
 
