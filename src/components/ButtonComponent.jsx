@@ -1,15 +1,18 @@
 const ButtonComponent = ({ btnType, btnProps, label }) => {
 
+
   function clickFunction() {
     var invstmentOverlay = document.getElementById('investmentOverlay');
+    var investmentP = document.querySelector('.roi-investment p');
     invstmentOverlay.classList.add('ease-out-anim');
 
     if (!invstmentOverlay.classList.contains('ease-out-anim')) {
-      invstmentOverlay.classList.remove('ease-out-anim')
+      invstmentOverlay.classList.remove('ease-out-anim');
       return;
     }
   
     invstmentOverlay.style.opacity = '0';
+    investmentP.style.opacity = "1";
   };
 
 
@@ -19,4 +22,6 @@ const ButtonComponent = ({ btnType, btnProps, label }) => {
     </button>
   );
 };
+
+
 export default ButtonComponent;

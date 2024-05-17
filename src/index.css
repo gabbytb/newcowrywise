@@ -118,6 +118,8 @@
 
 
 
+
+
   /* Animations CSS */
   .sticky-header {
     @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm bg-blue-600 sm:bg-white lg:bg-white
@@ -392,11 +394,11 @@
   }
   
   .home-section-two--left h2 {
-    @apply text-9xl/none font-bold leading-to-tight -tracking-moretight mt-15.8 mb-4 -ml-3.1 sm:text-7xl lg:text-16xl/none
+    @apply font-bold -tracking-moretight mt-15.8 mb-4 -ml-3.1 xs:text-36xl sm:text-7xl lg:text-16xl/none xl:text-9xl/to-tight
   }
 
   .home-section-two--left h2 span {
-    @apply text-9xl font-normal italic sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
+    @apply text-9xl font-normal italic  xs:text-36xl sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
   }
 
   .home-section-two--left h5 {
@@ -489,7 +491,7 @@
 }
 
 .roi-input {
-  @apply text-center sm:w-123.3 lg:w-135.3 flex flex-row items-center space-x-1
+  @apply text-center xs:w-123.3 lg:w-135.3 flex flex-row items-center space-x-1
 }
 
 .roi-input sup {
@@ -497,7 +499,7 @@
 }
 
 .roi-input input[type="tel"] {
-  @apply w-full sm:text-16xl lg:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
+  @apply w-full xs:text-16xl lg:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
 }
 
 .roi-dropdown-wrap {
@@ -509,7 +511,7 @@
 }
 
 .roi-dropdown-wrap .roi--select-input {
-  @apply text-3xl text-blue-600 font-firma sm:font-light lg:font-medium appearance-none outline-none py-4 px-5.4
+  @apply text-3xl text-blue-600 font-firma xs:font-light lg:font-medium appearance-none outline-none py-4 px-5.4
 }
 
 .slider-wrap .slider {
@@ -525,7 +527,7 @@
 }
 
 .roi-investment p {
-  @apply flex justify-center items-center sm:w-182.3 sm:h-128.6
+  @apply flex justify-center items-center sm:w-182.3 sm:h-128.6 opacity-30
 }
  
 .roi-investment p sup {
@@ -533,7 +535,7 @@
 }
 
 .roi-investment p span {
-  @apply sm:text-16xl lg:text-12xl font-light tracking-tightener text-skin-gray text-right py-4
+  @apply xs:text-16xl lg:text-12xl font-light tracking-tightener text-skin-gray text-right py-4
 }
 
 .roi-investment-returns {
@@ -572,10 +574,10 @@
 
   /* Section four */
   .home-section-four {
-    @apply py-20 flex flex-col space-y-16
+    @apply sm:pt-20 sm:pb-0 lg:py-20 flex flex-col space-y-16
   }
   .home-section-four .slider-wrapper {
-      @apply mb-0 mx-0 w-screen min-h-104 relative bg-white z-20
+      @apply mb-0 mx-0 w-screen sm:min-h-106 lg:min-h-104 relative bg-white z-20
   }
   .h-container-4 {
     @apply h-full w-full px-10 mx-auto my-0
@@ -588,7 +590,7 @@
   }
   .home-section-four .slider-wrapper .slides .slider-item {
       @apply flex justify-center mr-8 border-2 border-blue-400 relative text-center rounded-3xl bg-white
-      sm:max-w-100 sm:min-h-97 sm:p-14.7 sm:items-end
+      xs:max-w-100 xs:min-h-97 xs:p-14.7 xs:items-end
       lg:max-w-3xl lg:min-h-98 lg:p-16 lg:items-center 
       
   }
