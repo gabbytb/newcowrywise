@@ -141,7 +141,7 @@ module.exports = {
         '840': '84rem',
         '850': '85rem',
         '99.5': '0.1rem',
-        '101.5': '0.3rem',
+        '100': '0.2rem',      /** Hamburger::after Height */
         '114.5': '7.5rem',
         '128.6': '18.6rem',
       },
@@ -156,7 +156,7 @@ module.exports = {
         '18': '4.5rem',  
         '19': '6.8rem',
         '21': '2.75rem',
-        '21.5': '2.85rem',
+        // '21.5': '2.85rem',
         '23': '5.2rem',         /** Section 2: card-item::after */
 
         '1/2': '1%',            /** UseCase: Section Two Cards Positioning */

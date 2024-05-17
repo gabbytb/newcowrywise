@@ -42,7 +42,7 @@ const HomeSectionOne = () => {
                                     })
                                 }
                                 <div className="bg-white aboslute top-0 left-0 w-full h-full testimonial-overlay"></div>
-                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-130 w-135 testimonial-media sm:h-122.5 sm:w-full lg:h-130 lg:w-135">
+                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-130 w-135 z-3 testimonial-media xs:h-122 sm:h-130 xs:w-full lg:w-135">
                                     <img src={activeImage} alt="customer"/>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@ const HomeSectionOne = () => {
                             {
                                 customersThumbnails.map((item) => {
                                     return (
-                                        <li key={item.label} className="cursor-pointer relative w-36 h-32 lg:w-16 lg:h-20 lg:my-5 lg:mr-8">
+                                        <li key={item.label} className="cursor-pointer relative w-16 h-16 lg:my-5 lg:mr-8">
                                             <TestimonialThumbnails
                                                 exactItem={item}
                                                 activeImage={activeImage}

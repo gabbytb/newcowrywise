@@ -106,11 +106,12 @@
   }
 
   .mobile-nav .hamburger span::before {
-    @apply content-[''] bg-white sm:bg-black w-10 h-101.5 absolute top-21.5
+    @apply content-[''] bg-white xs:bg-black w-10 h-1 absolute top-9
+    /* 21.5 */
   }
 
   .mobile-nav .hamburger span::after {
-    @apply content-[''] bg-white sm:bg-black w-10 h-101.5 absolute top-16.5
+    @apply content-[''] bg-white xs:bg-black w-10 h-100 absolute top-12
   }
   
 
@@ -274,7 +275,8 @@
   .s1-grids-wrap {
     @apply 
     flex flex-col-reverse
-    sm:flex sm:flex-col-reverse sm:gap-y-12 sm:py-12
+    xs:gap-y-12
+    sm:py-12
     /* sm:py-28 */
     lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
   }
@@ -286,14 +288,15 @@
   .home-section-one--left {
     @apply relative 
     mt-12 ml-12 min-h-125 
-    sm:mt-0 sm:ml-0 sm:min-h-116
+    xs:mt-0 xs:ml-0 xs:min-h-116
     lg:mt-12 lg:ml-12 lg:min-h-125
   }
 
   .home-section-one--left .testimonial {
     @apply relative top-0 left-0 
     min-h-125 
-    sm:min-h-116
+    /* xs:absolute */
+    xs:min-h-116
     lg:min-h-125
 
     /* lg:h-130 
@@ -302,9 +305,11 @@
 
   .testimonial .testimonial-backdrop {
     @apply bg-pink-600/25 
-    h-850 w-125 -top-60 -left-80 
-    sm:h-129  sm:w-125 sm:-top-212 sm:-left-58 
-    lg:h-850 lg:w-125 lg:-top-60 lg:-left-80
+    w-125 -top-60 -left-80 
+    xs:h-129
+    sm:h-850
+    xs:w-100 xs:-top-212
+    lg:w-125 lg:-top-60
   }
 
   .testimonial .testimonial-video-ctrl {
@@ -316,7 +321,10 @@
   }
 
   .testimonial .testimonial-quotes {
-    @apply z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between -bottom-10 -right-2.5 bg-white sm:left-0 sm:right-0 lg:-bottom-10 lg:-right-2.5 lg:left-auto
+    @apply bg-white z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between -bottom-10 
+    xs:left-0 xs:-bottom-0 
+    sm:left-0 sm:right-0 
+    lg:-bottom-10 lg:-right-2.5 lg:left-auto
   }
 
   .testimonial .testimonial-quotes blockquote {
@@ -340,26 +348,26 @@
   }
 
   .testimonials-thumbnail { 
-    @apply flex absolute gap-6 sm:-bottom-48 lg:-bottom-40
+    @apply flex absolute sm:-bottom-48 lg:-bottom-40
+    /* gap-6 */
   }
 
   .testimonials-thumbnail img {
     @apply h-full w-full object-cover absolute 
     top-3 left-0 
-    sm:w-28 sm:h-28 
-    lg:top-3 lg:left-0 
+    /* sm:w-28 sm:h-28  */
   }
 
   .home-section-one--right h1 {
     @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-skin-darkBlue 
-    sm:mt-15.5 sm:text-36xl 
+    xs:mt-15.5 xs:text-36xl 
     lg:text-16xl lg:font-semibold lg:mt-17.5
   }
 
   .home-section-one--right h6 {
     @apply font-normal mt-4 mb-13.5 text-skin-darkBlue 
     -tracking-moretighter text-5xl 
-    sm:text-38xl sm:-tracking-tightest
+    xs:text-38xl xs:-tracking-tightest
     lg:text-7xl/to-tight 
   }
   
@@ -372,7 +380,7 @@
 
   /* Section Two */
   .home-section-two {
-    @apply pt-24 pb-0 w-full
+    @apply pb-0 xs:pt-40 lg:pt-24 w-full
   }
 
   .h-container-2 {
@@ -489,7 +497,7 @@
 }
 
 .roi-input input[type="tel"] {
-  @apply w-full sm:text-16xl lg:text-12xl font-normal font-firma text-skin-darkBlue text-right py-4
+  @apply w-full sm:text-16xl lg:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
 }
 
 .roi-dropdown-wrap {
@@ -501,7 +509,7 @@
 }
 
 .roi-dropdown-wrap .roi--select-input {
-  @apply text-3xl text-blue-600 font-firma font-medium appearance-none outline-none py-4 px-5.4
+  @apply text-3xl text-blue-600 font-firma sm:font-light lg:font-medium appearance-none outline-none py-4 px-5.4
 }
 
 .slider-wrap .slider {
