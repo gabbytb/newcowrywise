@@ -23,7 +23,7 @@ const HomeSectionFour = () => {
         <section className="home-section-four">
             <div className="h-container-4 container">
                 <div className="flex">
-                    <div className="basis-5/12 text-8xl/tighter font-semibold -tracking-tighten p-2.5">
+                    <div className="xs:basis-full sm:basis-5/12 text-8xl/tighter font-semibold -tracking-tighten p-2.5">
                         <h2 className="mt-14 mb-10 text-sky-950/100 -tracking-moretight sm:text-35xl/tight lg:w-123.3 xl:w-full">You name it, we’ve figured it out.</h2>
                     </div>
                 </div>

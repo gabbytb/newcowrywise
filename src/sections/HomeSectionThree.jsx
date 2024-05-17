@@ -56,7 +56,7 @@ const HomeSectionThree = () => {
                         <div>₦834,260 earned in returns on Cowrywise</div>
                         <p>*In a bank, you’d earn <span>₦28,800</span></p>
                     </div>
-                    <div id="investmentOverlay" className="flex flex-col justify-center items-center z-50 roi-investments-overlay">
+                    <div id="investmentOverlay" className="flex flex-col justify-center items-center roi-investments-overlay">
                         <h3>Ready to start investing?</h3>
                         <ButtonLinkComponent 
                             btnBg 

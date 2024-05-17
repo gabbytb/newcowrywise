@@ -55,10 +55,13 @@ module.exports = {
       '35xl': '6.4rem',
       '36xl': '5.25rem',
       '38xl': '4.8rem',
+      '39xl': '2.7rem',
+      '40xl': '3.3rem',
     },
     letterSpacing: {
       supertight: '.015em',
       verytight: '0.1rem',
+      subtight: '0.18rem',
       tightest: '0.3rem',
       tighten: '0.25rem',
       tightened: '0.04em',
@@ -80,7 +83,7 @@ module.exports = {
         easeOut: 'easeOut 1s ease-out',             /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
-        fadeOut: 'fadeOut 40s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
+        fadeOut: 'fadeOut 21s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
         slideUp: 'slideUp 1.7s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
@@ -143,6 +146,7 @@ module.exports = {
         '99.5': '0.1rem',
         '100': '0.2rem',      /** Hamburger::after Height */
         '114.5': '7.5rem',
+        '126.4': '12.4rem',
         '128.6': '18.6rem',
       },
       inset: {
@@ -258,6 +262,7 @@ module.exports = {
         '5.5': '1.125rem',
         '6.5': '1.85rem',
         '13.5': '2.1rem',
+        '13.4': '2.4rem',
         '13.7': '2.7rem',
         '14.4': '4rem',
         '14.5': '3.125rem',

@@ -106,12 +106,12 @@
   }
 
   .mobile-nav .hamburger span::before {
-    @apply content-[''] bg-white xs:bg-black w-10 h-1 absolute top-9
+    @apply content-[''] bg-white sm:bg-black w-10 h-1 absolute top-9
     /* 21.5 */
   }
 
   .mobile-nav .hamburger span::after {
-    @apply content-[''] bg-white xs:bg-black w-10 h-100 absolute top-12
+    @apply content-[''] bg-white sm:bg-black w-10 h-100 absolute top-12
   }
   
 
@@ -351,13 +351,14 @@
 
   .testimonials-thumbnail { 
     @apply flex absolute sm:-bottom-48 lg:-bottom-40
-    /* gap-6 */
+    xs:gap-6
+    lg:gap-1
   }
 
   .testimonials-thumbnail img {
-    @apply h-full w-full object-cover absolute 
-    top-3 left-0 
-    /* sm:w-28 sm:h-28  */
+    @apply h-full w-full object-cover absolute
+    xs:top-12 left-0
+    lg:top-3
   }
 
   .home-section-one--right h1 {
@@ -402,7 +403,7 @@
   }
 
   .home-section-two--left h5 {
-    @apply text-5xl font-medium sm:pr-20 sm:my-14.4
+    @apply xs:text-39xl/tight xs:-tracking-subtight xs:my-13.4 sm:text-5xl font-medium sm:pr-20 sm:my-14.4
   }
 
   .home-section-two--left a {
@@ -479,7 +480,7 @@
 }
 
 .home-section-three h2 {
-  @apply text-7xl -tracking-tightened text-skin-darkBlue font-bold text-center mt-20 mb-10
+  @apply text-40xl sm:text-7xl -tracking-tightened text-skin-darkBlue font-bold text-center mt-20 mb-10
 }
 
 .roi-wrap {
@@ -491,7 +492,7 @@
 }
 
 .roi-input {
-  @apply text-center xs:w-123.3 lg:w-135.3 flex flex-row items-center space-x-1
+  @apply text-center w-123.3 xs:w-135.3 flex flex-row items-center space-x-1
 }
 
 .roi-input sup {
@@ -499,7 +500,10 @@
 }
 
 .roi-input input[type="tel"] {
-  @apply w-full xs:text-16xl lg:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
+  @apply 
+  w-full
+  xs:text-16xl xs:text-center
+  sm:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
 }
 
 .roi-dropdown-wrap {
@@ -527,7 +531,7 @@
 }
 
 .roi-investment p {
-  @apply flex justify-center items-center sm:w-182.3 sm:h-128.6 opacity-30
+  @apply flex justify-center items-center sm:w-182.3 sm:h-126.4 sm:my-6 lg:h-128.6 opacity-30
 }
  
 .roi-investment p sup {
@@ -539,7 +543,7 @@
 }
 
 .roi-investment-returns {
-  @apply flex flex-col
+  @apply flex flex-col sm:-mt-12
 }
 
 .roi-investment-returns div {
@@ -560,7 +564,9 @@
 }
 
 .roi-investments-overlay h3 {
-  @apply text-18xl font-semibold text-skin-gray -tracking-tightened text-gray-700 mt-15.7 mb-13.7 
+  @apply text-skin-darkBlue font-bold -tracking-tightened mt-15.7 mb-13.7
+  text-40xl 
+  lg:text-18xl 
 }
 /* Section Three */
 
@@ -577,7 +583,7 @@
     @apply sm:pt-20 sm:pb-0 lg:py-20 flex flex-col space-y-16
   }
   .home-section-four .slider-wrapper {
-      @apply mb-0 mx-0 w-screen sm:min-h-106 lg:min-h-104 relative bg-white z-20
+      @apply mb-0 mx-0 w-screen xs:min-h-106 lg:min-h-104 relative bg-white z-20
   }
   .h-container-4 {
     @apply h-full w-full px-10 mx-auto my-0
@@ -596,7 +602,7 @@
   }
   .home-section-four .slider-wrapper .slides .slider-item h4 {
       @apply font-semibold font-firma w-full relative text-left 
-      sm:text-34xl/to-tight
+      xs:text-34xl/to-tight
       lg:text-7xl/to-tight -tracking-extratight text-blue-600
   }
   .home-section-four .slider-wrapper .slides .slider-item h4::before {
@@ -639,7 +645,7 @@
     }
   
     .home-section-five--right h2 {
-      @apply text-7xl font-bold mt-16 mb-14
+      @apply text-40xl sm:text-7xl font-bold mt-16 mb-14
     }
   
     .registration-steps-wrap {
@@ -647,7 +653,7 @@
     }
   
     .registration-steps-wrap .step-item {
-      @apply relative sm:flex sm:justify-start sm:mb-20
+      @apply relative sm:flex sm:justify-start mb-20
     }
   
     .registration-steps-wrap .step-item::before {
