@@ -4,6 +4,10 @@ import { HomeSectionOne, HomeSectionTwo, HomeSectionThree, HomeSectionFour, Home
 
 
 const HomeBody = () => {
+
+
+
+
     return (
         <main className="absolute top-0 w-full">
             <HomeSectionOne />

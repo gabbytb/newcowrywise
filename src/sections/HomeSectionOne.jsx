@@ -9,7 +9,8 @@ import { wura } from "../assets/images";
 
 
 
-const HomeSectionOne = () => {
+
+const HomeSectionOne = () => { 
 
     const [activeImage, setActiveImage] = useState(wura);
     console.log("Active Thumbnail: ", activeImage);   
@@ -19,10 +20,11 @@ const HomeSectionOne = () => {
         function myFunction() {
             document.getElementById("sectionOneAnim").classList.add('s-1-anim');
         }
+
         myFunction();        
     }, []);
 
-
+        
     return (
         <section className="home-section-one">
             <div className="h-container-1 container">
