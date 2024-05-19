@@ -27,7 +27,7 @@ const Nav = () => {
                         <Link className="mt-1.5 ml-2 mr-24 brand">
                             <BrandLogo />
                         </Link>
-                        <Link className="mt-1.5 ml-2 mr-24 brand-white">
+                        <Link className="-mt-2 ml-2 mr-24 brand-white">
                             <BrandLogoWhite />
                         </Link>
 

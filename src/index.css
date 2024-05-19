@@ -106,14 +106,12 @@
   }
 
   .mobile-nav .hamburger span::before {
-    @apply content-[''] bg-white sm:bg-black w-10 h-1 absolute top-9
-    /* 21.5 */
+    @apply content-[''] bg-white sm:bg-black w-10 h-1 absolute top-11
   }
 
   .mobile-nav .hamburger span::after {
-    @apply content-[''] bg-white sm:bg-black w-10 h-100 absolute top-12
+    @apply content-[''] bg-white sm:bg-black w-10 h-100 absolute top-14
   }
-  
 
 
 
@@ -122,7 +120,7 @@
 
   /* Animations CSS */
   .sticky-header {
-    @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm bg-blue-600 sm:bg-white lg:bg-white
+    @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm bg-blue-600 sm:bg-white h-114.5
   }
   .no-scrollbar {    
     @apply overflow-x-hidden overflow-y-scroll
@@ -241,10 +239,6 @@
     @apply w-52.5
   }
 
-  .home-section-one--right .social-icons {
-    @apply block xs:hidden
-  }
-
   .brand-white svg {
     @apply w-52.5
   }
@@ -281,6 +275,10 @@
     @apply pt-12 sm:pt-0 lg:pt-24 
   }
 
+  .home-section-one--right .social-icons {
+    @apply flex space-x-3 xs:hidden
+  }
+
   .home-section-one--left {
     @apply relative mt-12 ml-12 min-h-125 xs:mt-0 xs:ml-0 xs:min-h-116 lg:mt-12 lg:ml-12 lg:min-h-125
   }
@@ -302,7 +300,7 @@
   }
 
   .testimonial .testimonial-quotes {
-    @apply bg-white z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between -bottom-10 xs:left-0 xs:-bottom-0 sm:left-0 sm:right-0 lg:-bottom-10 lg:-right-2.5 lg:left-auto
+    @apply bg-white z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between absolute -bottom-10 xs:left-0 xs:-bottom-0 sm:right-0 lg:-bottom-10 lg:-right-2.5 lg:left-auto
   }
 
   .testimonial .testimonial-quotes blockquote {
@@ -366,15 +364,16 @@
   }
   
   .home-section-two--left h2 {
-    @apply font-bold -tracking-moretight mt-15.8 mb-4 -ml-3.1 xs:text-36xl sm:text-7xl lg:text-16xl/none xl:text-9xl/to-tight
+    @apply font-bold -tracking-moretight mt-15.8 mb-4 -ml-3.1 xs:text-36xl sm:text-7xl lg:text-16xl/none
   }
 
   .home-section-two--left h2 span {
-    @apply text-9xl font-normal italic  xs:text-36xl sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
+    @apply text-9xl font-normal italic xs:text-36xl sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
   }
 
   .home-section-two--left h5 {
-    @apply xs:text-39xl/tight xs:-tracking-subtight xs:my-13.4 sm:text-5xl font-medium sm:pr-20 sm:my-14.4
+    @apply font-medium xs:text-39xl/tight xs:-tracking-subtight xs:my-13.4 sm:text-5xl sm:pr-20 sm:my-14.4
+    /* xl:mt-13.4 xl:mb-13.5 */
   }
 
   .home-section-two--left a {

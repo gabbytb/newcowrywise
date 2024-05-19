@@ -735,7 +735,7 @@ header {
 
 .mobile-nav .hamburger span::before {
   position: absolute;
-  top: 2.25rem;
+  top: 2.75rem;
   height: 0.25rem;
   width: 2.5rem;
   --tw-bg-opacity: 1;
@@ -753,7 +753,7 @@ header {
 
 .mobile-nav .hamburger span::after {
   position: absolute;
-  top: 3rem;
+  top: 3.5rem;
   height: 0.2rem;
   width: 2.5rem;
   --tw-bg-opacity: 1;
@@ -775,6 +775,7 @@ header {
   position: fixed;
   top: 0px;
   z-index: 50;
+  height: 7.5rem;
   width: 100%;
 }
 
@@ -800,13 +801,6 @@ header {
 }
 
 @media (min-width: 769px) {
-  .sticky-header {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  }
-}
-
-@media (min-width: 981px) {
   .sticky-header {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1594,13 +1588,6 @@ header .cta-menu a:last-child {
   .home-section-two--left h2 {
     font-size: 8rem;
     line-height: 1;
-  }
-}
-
-@media (min-width: 1040px) {
-  .home-section-two--left h2 {
-    font-size: 7rem;
-    line-height: 1.1;
   }
 }
 
@@ -2712,6 +2699,10 @@ header .cta-menu a:last-child {
   margin-top: 1.5rem;
 }
 
+.-mt-2 {
+  margin-top: -0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -3073,6 +3064,12 @@ header .cta-menu a:last-child {
 
   .lg\:justify-between {
     justify-content: space-between;
+  }
+
+  .lg\:space-y-12 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3rem * var(--tw-space-y-reverse));
   }
 }
 

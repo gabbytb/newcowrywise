@@ -25,7 +25,6 @@ export const customersQuotes = [
 ]
 
 
-
 export const customersThumbnails = [
     { 
         imgURI: wura,
@@ -40,7 +39,6 @@ export const customersThumbnails = [
         label: "customer 3", 
     }
 ]
-
 
 
 export const sliderItems = [

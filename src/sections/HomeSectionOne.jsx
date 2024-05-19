@@ -32,7 +32,7 @@ const HomeSectionOne = () => {
 
 
     useEffect(() => {
-        // Animate "Image" on Left OnLoad
+        // Animate "Image" on Left
         function myFunction() {
             document.getElementById("sectionOneAnim").classList.add('s-1-anim');
         }

@@ -25,7 +25,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Plan, Save and Invest Online | Get high returns | Cowrywise</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   </head>
   <body onscroll="myFunction()">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -45,6 +44,7 @@
         var foundScrollbar = document.getElementById('scrollbar');
         var foundHeader = document.getElementById('header');
         var scroll = window.scrollY;
+        console.log('Scroll: ', scroll);
 
         if (scroll > 5) {
           foundHeader.classList.add('sticky-header');
