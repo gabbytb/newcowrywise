@@ -1,13 +1,15 @@
-const TestimonialThumbnails = ({ exactItem, activeImage, changeActiveImage}) => {
+const TestimonialThumbnails = ({ itemRef, activeImage, changeActiveImage}) => {
 
     function handleActiveImage() {
-        if (activeImage !== exactItem.imgURI) {
-            changeActiveImage(exactItem.imgURI);
+        if (activeImage !== itemRef.imgURI) {
+            changeActiveImage(itemRef.imgURI);
         };
     };
 
+
     return (
-        <img className="img-click" src={exactItem.imgURI} alt={exactItem.label} onClick={handleActiveImage} />
+        <img className="img-click" src={itemRef.imgURI} alt={itemRef.label} onClick={handleActiveImage} />
     );
 };
+
 export default TestimonialThumbnails;

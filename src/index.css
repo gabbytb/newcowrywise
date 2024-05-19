@@ -81,7 +81,7 @@
 @layer components {
 
   header {
-    @apply h-28 bg-white
+    @apply sm:h-114.5 lg:h-28 bg-white
   }
 
   .default-header .container {
@@ -271,16 +271,10 @@
 
   .h-container-1 {
     @apply w-full px-8 my-0 mx-auto
-    /* h-840 */
   }
 
   .s1-grids-wrap {
-    @apply 
-    flex flex-col-reverse
-    xs:gap-y-12
-    sm:py-12
-    /* sm:py-28 */
-    lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
+    @apply flex flex-col-reverse xs:gap-y-12 sm:py-12 lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
   }
 
   .home-section-one--right {
@@ -288,30 +282,15 @@
   }
 
   .home-section-one--left {
-    @apply relative 
-    mt-12 ml-12 min-h-125 
-    xs:mt-0 xs:ml-0 xs:min-h-116
-    lg:mt-12 lg:ml-12 lg:min-h-125
+    @apply relative mt-12 ml-12 min-h-125 xs:mt-0 xs:ml-0 xs:min-h-116 lg:mt-12 lg:ml-12 lg:min-h-125
   }
 
   .home-section-one--left .testimonial {
-    @apply relative top-0 left-0 
-    min-h-125 
-    /* xs:absolute */
-    xs:min-h-116
-    lg:min-h-125
-
-    /* lg:h-130 
-    sm:h-122  */
+    @apply relative top-0 left-0 min-h-125 xs:min-h-116 lg:min-h-125
   }
 
   .testimonial .testimonial-backdrop {
-    @apply bg-pink-600/25 
-    w-125 -top-60 -left-80 
-    xs:h-129
-    sm:h-850
-    xs:w-100 xs:-top-212
-    lg:w-125 lg:-top-60
+    @apply bg-pink-600/25 w-125 -top-60 -left-80 xs:h-129 sm:h-850 xs:w-100 xs:-top-212 lg:w-125 lg:-top-60
   }
 
   .testimonial .testimonial-video-ctrl {
@@ -323,10 +302,7 @@
   }
 
   .testimonial .testimonial-quotes {
-    @apply bg-white z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between -bottom-10 
-    xs:left-0 xs:-bottom-0 
-    sm:left-0 sm:right-0 
-    lg:-bottom-10 lg:-right-2.5 lg:left-auto
+    @apply bg-white z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between -bottom-10 xs:left-0 xs:-bottom-0 sm:left-0 sm:right-0 lg:-bottom-10 lg:-right-2.5 lg:left-auto
   }
 
   .testimonial .testimonial-quotes blockquote {
@@ -345,33 +321,28 @@
     @apply text-blue-500 text-15xl font-semibold 
   }
 
+  .testimonial .testimonial-media {
+    @apply absolute top-0 left-0 bottom-0 right-0 h-130 w-135 z-3 xs:w-full xs:h-122 sm:h-130 lg:w-135 
+  } 
+  
   .testimonial-media img {
     @apply object-cover w-full h-full absolute top-0 
   }
 
   .testimonials-thumbnail { 
-    @apply flex absolute sm:-bottom-48 lg:-bottom-40
-    xs:gap-6
-    lg:gap-1
+    @apply flex absolute sm:-bottom-48 lg:-bottom-40 xs:gap-6 lg:gap-1
   }
 
   .testimonials-thumbnail img {
-    @apply h-full w-full object-cover absolute
-    xs:top-12 left-0
-    lg:top-3
+    @apply h-full w-full object-cover absolute xs:top-12 left-0 lg:top-3
   }
 
   .home-section-one--right h1 {
-    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-skin-darkBlue 
-    xs:mt-15.5 xs:text-36xl 
-    lg:text-16xl lg:font-semibold lg:mt-17.5
+    @apply text-30xl font-semibold -tracking-moretight mt-15.5 mb-9 leading-to-tight text-skin-darkBlue xs:mt-15.5 xs:text-36xl lg:text-16xl lg:font-semibold lg:mt-17.5
   }
 
   .home-section-one--right h6 {
-    @apply font-normal mt-4 mb-13.5 text-skin-darkBlue 
-    -tracking-moretighter text-5xl 
-    xs:text-38xl xs:-tracking-tightest
-    lg:text-7xl/to-tight 
+    @apply font-normal mt-4 mb-13.5 text-skin-darkBlue -tracking-moretighter text-5xl xs:text-38xl xs:-tracking-tightest lg:text-7xl/to-tight 
   }
   
   
@@ -472,7 +443,6 @@
  /* Section Three */
  .home-section-three {
   @apply pt-14.5 pb-20 bg-return-invested bg-no-repeat
-  /* bg-top-left h-screen */
 }
 
 .h-container-3 {
@@ -500,10 +470,7 @@
 }
 
 .roi-input input[type="tel"] {
-  @apply 
-  w-full
-  xs:text-16xl xs:text-center
-  sm:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
+  @apply w-full xs:text-16xl xs:text-center sm:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
 }
 
 .roi-dropdown-wrap {
@@ -548,7 +515,6 @@
 
 .roi-investment-returns div {
   @apply text-2xl font-medium bg-sky-200 text-blue-600 mt-10 w-123 mx-auto py-3 px-4 rounded-md 
-  /* lg:-mt-12 */
 }
 
 .roi-investment-returns p {
@@ -564,9 +530,7 @@
 }
 
 .roi-investments-overlay h3 {
-  @apply text-skin-darkBlue font-bold -tracking-tightened mt-15.7 mb-13.7
-  text-40xl 
-  lg:text-18xl 
+  @apply text-skin-darkBlue font-bold -tracking-tightened mt-15.7 mb-13.7 text-40xl lg:text-18xl 
 }
 /* Section Three */
 
@@ -595,15 +559,10 @@
       @apply inline-flex shrink-0
   }
   .home-section-four .slider-wrapper .slides .slider-item {
-      @apply flex justify-center mr-8 border-2 border-blue-400 relative text-center rounded-3xl bg-white
-      xs:max-w-100 xs:min-h-97 xs:p-14.7 xs:items-end
-      lg:max-w-3xl lg:min-h-98 lg:p-16 lg:items-center 
-      
+      @apply flex justify-center mr-8 border-2 border-blue-400 relative text-center rounded-3xl bg-white xs:max-w-100 xs:min-h-97 xs:p-14.7 xs:items-end lg:max-w-3xl lg:min-h-98 lg:p-16 lg:items-center 
   }
   .home-section-four .slider-wrapper .slides .slider-item h4 {
-      @apply font-semibold font-firma w-full relative text-left 
-      xs:text-34xl/to-tight
-      lg:text-7xl/to-tight -tracking-extratight text-blue-600
+      @apply font-semibold font-firma w-full relative text-left xs:text-34xl/to-tight lg:text-7xl/to-tight -tracking-extratight text-blue-600
   }
   .home-section-four .slider-wrapper .slides .slider-item h4::before {
       @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
@@ -720,13 +679,13 @@
     lg:bg-security-pattern lg:bg-no-repeat lg:bg-s-axis lg:bg-110% lg:opacity-50
   }
   .h-container-6 {
-    @apply h-full w-full px-10 mx-auto my-0
+    @apply h-full w-full sm:px-8 lg:px-10 mx-auto my-0
   }
   .home-section-six--left h2 {
     @apply text-32xl text-white font-semibold mt-16 mb-15.5 -tracking-tightened
   }
   .home-section-six--left p {
-    @apply text-3xl/more-loose text-white font-light -tracking-supertight
+    @apply text-white my-6 sm:text-31xl/more-loose sm:font-normal sm:-tracking-supertight lg:text-3xl/more-loose lg:font-light
   }
   .home-section-six--left a {
     @apply text-xl/extra-loosened text-skin-opaque font-semibold uppercase tracking-moretight flex items-center
@@ -767,7 +726,7 @@
     @apply uppercase text-14xl text-black font-semibold
   }
   .step-item .step-item-info {
-    @apply  w-128.5
+    @apply w-128.5
   }
   /** Section Seven **/
 }

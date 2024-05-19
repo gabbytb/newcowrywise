@@ -59,7 +59,7 @@ module.exports = {
       '40xl': '3.3rem',
     },
     letterSpacing: {
-      supertight: '.015em',
+      supertight: '0.015em',
       verytight: '0.1rem',
       subtight: '0.18rem',
       tightest: '0.3rem',

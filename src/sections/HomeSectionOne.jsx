@@ -16,15 +16,31 @@ const HomeSectionOne = () => {
     console.log("Active Thumbnail: ", activeImage);   
 
 
+    function changeActiveImage() {
+        if (activeImage !== activeImage.src) {
+            setTimeout(()=> {  
+                document.querySelector(".testimonial-media img").classList.add('s-1-anim');
+            }, 0);  
+
+            setTimeout(()=> {       
+                document.querySelector(".testimonial-media img").classList.remove('s-1-anim');
+            }, 400);       
+        };
+    };
+    changeActiveImage();
+
+
+
     useEffect(() => {
+        // Animate "Image" on Left OnLoad
         function myFunction() {
             document.getElementById("sectionOneAnim").classList.add('s-1-anim');
         }
-
-        myFunction();        
+        myFunction();
     }, []);
 
-        
+
+
     return (
         <section className="home-section-one">
             <div className="h-container-1 container">
@@ -36,16 +52,16 @@ const HomeSectionOne = () => {
                             <div className="testimonial">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
-                                {
-                                    customersQuotes.map((item) => {
-                                        return (
-                                            <TestimonialQuotes key={item.textAuthor} {...item} />
-                                        );
-                                    })
-                                }
+                                    {
+                                        customersQuotes.map((item) => {
+                                            return (
+                                                <TestimonialQuotes key={item.textAuthor} {...item} />
+                                            );
+                                        })
+                                    }
                                 <div className="bg-white aboslute top-0 left-0 w-full h-full testimonial-overlay"></div>
-                                <div id="sectionOneAnim" className="absolute top-0 left-0 bottom-0 right-0 h-130 w-135 z-3 testimonial-media xs:h-122 sm:h-130 xs:w-full lg:w-135">
-                                    <img src={activeImage} alt="customer"/>
+                                <div id="sectionOneAnim" className="testimonial-media">
+                                    <img src={activeImage} alt="customer" />
                                 </div>
                             </div>
                         </div>
@@ -55,7 +71,7 @@ const HomeSectionOne = () => {
                                     return (
                                         <li key={item.label} className="cursor-pointer relative w-16 h-16 lg:my-5 lg:mr-8">
                                             <TestimonialThumbnails
-                                                exactItem={item}
+                                                itemRef={item}
                                                 activeImage={activeImage}
                                                 changeActiveImage={(item) => setActiveImage(item)}
                                             />
