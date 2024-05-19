@@ -39,12 +39,12 @@ const HomeSectionTwo = () => {
   return (
     <section className="home-section-two">
         <div className="h-container-2 container">
-            <div className="grid grid-cols-18 gap-16 px-10 min-h-138">
+            <div className="flex flex-row sm:grid sm:grid-cols-18 gap-16 px-10 min-h-138">
 
 
                 {/* Left Side */}
                 <div className="home-section-two--left">
-                  <div className="flex flex-col pt-5 xs:space-y-12 sm:space-y-16 lg:space-y-12 w-136">
+                  <div className="flex flex-col pt-5 space-y-12 sm:space-y-16 lg:space-y-12 w-136">
                       <h2>Get a <span>little</span>&nbsp; richer each day</h2>
                       <h5>One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />

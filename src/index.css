@@ -360,19 +360,19 @@
   }
 
   .home-section-two--left {
-    @apply flex
+    @apply flex w-full
   }
   
   .home-section-two--left h2 {
-    @apply font-bold -tracking-moretight mt-15.8 mb-4 -ml-3.1 xs:text-36xl sm:text-7xl lg:text-16xl/none
+    @apply  -tracking-moretight mt-15.8 mb-4 -ml-3.1 font-semibold text-30xl/none xs:font-bold xs:text-36xl sm:text-7xl lg:text-16xl/none
   }
 
   .home-section-two--left h2 span {
-    @apply text-9xl font-normal italic xs:text-36xl sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
+    @apply font-extralight italic text-30xl xs:text-36xl sm:font-light sm:text-7xl sm:-tracking-extratight lg:text-16xl
   }
 
   .home-section-two--left h5 {
-    @apply font-medium xs:text-39xl/tight xs:-tracking-subtight xs:my-13.4 sm:text-5xl sm:pr-20 sm:my-14.4
+    @apply font-medium text-39xl -tracking-subtight xs:text-39xl/tight xs:-tracking-subtight xs:my-13.4 sm:text-5xl sm:pr-20 sm:my-14.4
     /* xl:mt-13.4 xl:mb-13.5 */
   }
 
@@ -599,7 +599,7 @@
     }
   
     .home-section-five--right {
-      @apply lg:w-5/12 lg:p-4 lg:flex lg:flex-col
+      @apply flex flex-col items-center xs:items-start lg:w-5/12 lg:p-4 
     }
   
     .home-section-five--right h2 {
@@ -607,7 +607,7 @@
     }
   
     .registration-steps-wrap {
-      @apply mt-24 
+      @apply mt-24 w-full
     }
   
     .registration-steps-wrap .step-item {
