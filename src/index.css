@@ -678,13 +678,13 @@
     lg:bg-security-pattern lg:bg-no-repeat lg:bg-s-axis lg:bg-110% lg:opacity-50
   }
   .h-container-6 {
-    @apply h-full w-full sm:px-8 lg:px-10 mx-auto my-0
+    @apply h-full w-full px-8 lg:px-10 mx-auto my-0
   }
   .home-section-six--left h2 {
-    @apply text-32xl text-white font-semibold mt-16 mb-15.5 -tracking-tightened
+    @apply text-40xl xs:text-32xl text-white font-semibold mt-16 mb-15.5 -tracking-tightened
   }
   .home-section-six--left p {
-    @apply text-white my-6 sm:text-31xl/more-loose sm:font-normal sm:-tracking-supertight lg:text-3xl/more-loose lg:font-light
+    @apply text-white my-6 text-41xl/more-loose sm:text-31xl/more-loose font-normal -tracking-supertight lg:text-3xl/more-loose lg:font-light
   }
   .home-section-six--left a {
     @apply text-xl/extra-loosened text-skin-opaque font-semibold uppercase tracking-moretight flex items-center
