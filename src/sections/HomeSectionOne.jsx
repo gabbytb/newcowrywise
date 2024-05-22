@@ -11,35 +11,83 @@ import { wura } from "../assets/images";
 
 
 const HomeSectionOne = () => { 
-
+    
     const [activeImage, setActiveImage] = useState(wura);
-    console.log("Active Thumbnail: ", activeImage);   
+    // console.log("Active Image: ", activeImage);   
 
 
-    function changeActiveImage() {
-        if (activeImage !== activeImage.src) {
-            setTimeout(()=> {  
-                document.querySelector(".testimonial-media img").classList.add('s-1-anim');
-            }, 0);  
+    
+    // 1st ANIMATE: Section 1 "Active Image" ease-in...
+    useEffect(() => {
+        function myFunc() {
+            document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
+        };
+        myFunc();
+    }, []);     //  empty Array, so that it runs once.       
+    
 
-            setTimeout(()=> {       
-                document.querySelector(".testimonial-media img").classList.remove('s-1-anim');
-            }, 400);       
+    
+    // 2nd ANIMATE: When Section 1 "Active Image" changes...
+    function onActiveImgChange() {
+        if (activeImage) {
+            setTimeout(() => {
+                document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
+            }, 0);
+
+            setTimeout(() => {
+                document.querySelector(".testimonial .testimonial-media").classList.remove('s-1-anim');
+            }, 300);
         };
     };
-    changeActiveImage();
+    onActiveImgChange();
 
 
 
-    useEffect(() => {
-        // Animate "Image" on Left
-        function myFunction() {
-            document.getElementById("sectionOneAnim").classList.add('s-1-anim');
-        }
-        myFunction();
-    }, []);
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+    // PRESENT STATE of Customers Thumbnails
+    /***********************************************************************************************************************/
+    const [customThumbnails, setCustomThumbnails] = useState(customersThumbnails);
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+    
 
 
+
+    useEffect(() => {        
+        function realFunc() {       
+            // Loop through each thumbnail
+            for (var n = 0; n < customThumbnails.length; n++) {
+
+                // HERE: Check if the activeImage matches any of the thumbnail imgURI
+                if (activeImage === customThumbnails[n]?.imgURI) {
+                    
+                    var findTestimonial = document.getElementById('customers-testimonial');
+                    // Get all elements inside testimonial, with the className 'testimonial-quotes'
+                    var testimonialQuotes = findTestimonial.getElementsByClassName('testimonial-quotes');
+                    
+                    // Loop through each testimonial quote
+                    for (var i = 0; i < testimonialQuotes.length; i++) {
+ 
+                        // HERE: If the current ACTIVE thumbnail index matches with the index of the testimonial quote, i.e n === i, Select Quote as ACTIVE, hide others!
+                        if (n !== i) {
+                            // Hide other testimonial quotes
+                            testimonialQuotes[i].classList.add('hidden');
+                            testimonialQuotes[i].classList.remove('is-active');
+                        } else {
+                            // Otherwise, show the testimonial quote as active
+                            testimonialQuotes[i].classList.remove('hidden');
+                            testimonialQuotes[i].classList.add('is-active');
+                        };
+                    };
+                };
+            };
+        };
+         // Call the function when the activeImage state changes
+        realFunc();
+    }, [activeImage, customThumbnails]);
+        
+    
 
     return (
         <section className="home-section-one">
@@ -49,18 +97,19 @@ const HomeSectionOne = () => {
 
                     <div className="home-section-one--left">
                         <div className="customers-testimonials">
-                            <div className="testimonial">
+                            <div id="customers-testimonial" className="testimonial">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
-                                    {
-                                        customersQuotes.map((item) => {
-                                            return (
-                                                <TestimonialQuotes key={item.textAuthor} {...item} />
-                                            );
-                                        })
-                                    }
+                                {
+                                    customersQuotes.map((item) => {
+                                        return (
+                                            <TestimonialQuotes key={item.textAuthor} {...item} />
+                                        );
+                                    })
+                                
+                                }
                                 <div className="bg-white aboslute top-0 left-0 w-full h-full testimonial-overlay"></div>
-                                <div id="sectionOneAnim" className="testimonial-media">
+                                <div className="testimonial-media">
                                     <img src={activeImage} alt="customer" />
                                 </div>
                             </div>
@@ -71,7 +120,7 @@ const HomeSectionOne = () => {
                                     return (
                                         <li key={item.label} className="cursor-pointer relative w-16 h-16 lg:my-5 lg:mr-8">
                                             <TestimonialThumbnails
-                                                itemRef={item}
+                                                exactItem={item}
                                                 activeImage={activeImage}
                                                 changeActiveImage={(item) => setActiveImage(item)}
                                             />

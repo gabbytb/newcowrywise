@@ -28,15 +28,15 @@ export const customersQuotes = [
 export const customersThumbnails = [
     { 
         imgURI: wura,
-        label: "customer 1",
+        label: "Wuraola F",
     },
     { 
         imgURI: mayokun, 
-        label: "customer 2", 
+        label: "Mayokun A", 
     },
     { 
         imgURI: wande, 
-        label: "customer 3", 
+        label: "Olaitan O", 
     }
 ]
 

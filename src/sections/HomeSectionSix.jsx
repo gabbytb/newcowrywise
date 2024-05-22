@@ -23,7 +23,7 @@ const HomeSectionSix = () => {
             </div>
 
 
-            <div className="lg:flex lg:flex-row lg:w-full lg:flex-wrap home-section-six--right">
+            <div className="flex flex-col lg:flex lg:flex-row lg:w-full lg:flex-wrap home-section-six--right">
               <div className="card-item">
                 <div className="card-item--icon">
                   <h5>Top-Notch Security</h5>

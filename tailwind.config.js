@@ -80,6 +80,7 @@ module.exports = {
     extend: {
       animation: {   
         dropdown: 'showDropdown 0.5s ease',     /** NAV MENU */
+        lineDropdown: 'lineDropdown 0.8s ease',
         easeIn: 'easeIn 2.5s ease',               /** SECTION 1 ANIMATION */
         easeOut: 'easeOut 1s ease-out',             /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
@@ -89,25 +90,17 @@ module.exports = {
         slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
       },
-      backgroundImage: {
-        'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
-        'return-invested': "url('/src/assets/images/return-pattern.svg')",
-        'device-section': "url('/src/assets/images/home-device-section.svg')",
-        'security-pattern': "url('/src/assets/images/security-section.svg')",
-      },
       backgroundColor: {
         skin: {
           skyblue: 'var(--background-sky-blue)',
           opaque: 'var(--color-opacity)',
         }
       },
-      textColor: {
-        skin: {
-          darkBlue: 'var(--color-dark-blue)',
-          // lightGray: 'var(--color-light-gray)',
-          gray: 'var(--color-lighter-gray)',
-          opaque: 'var(--color-opacity)',
-        }
+      backgroundImage: {
+        'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
+        'return-invested': "url('/src/assets/images/return-pattern.svg')",
+        'device-section': "url('/src/assets/images/home-device-section.svg')",
+        'security-pattern': "url('/src/assets/images/security-section.svg')",
       },
       boxShadowColor: {
         skin: {
@@ -131,7 +124,6 @@ module.exports = {
         '122': '45rem',
         '122.5': '46rem',
         '123': '34rem',
-        // '124': '47rem',
         '126': '40.625rem',
         '126.5': '46.5rem',
         '127': '48.7rem',
@@ -244,9 +236,18 @@ module.exports = {
           },
           to: { 
             transform: 'translate(0px, 0px)',
+          }, 
+        },
+        lineDropdown: {
+          '0%': { 
+            opacity: 0,
+            transform: 'translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078)',
           },
-          
-        } 
+          to: { 
+            opacity: 1,
+            transform: 'translate(0px, 0px)',
+          },
+        }         /** Section Five */
       },
       lineHeight: {
         'to-tight': '1.1',
@@ -297,7 +298,7 @@ module.exports = {
         '50': '3.125rem',
         '80': '17.8rem',
         '134': '33.4rem',
-        '63': '61%',
+        // '63': '61%',
       },
       padding: {
         '5.4': '0.4rem',
@@ -309,6 +310,14 @@ module.exports = {
         '14.7': '3.2rem',
         '15.5': '3.35rem',
         '18.5': '4.86rem',
+      },
+      textColor: {
+        skin: {
+          darkBlue: 'var(--color-dark-blue)',
+          // lightGray: 'var(--color-light-gray)',
+          gray: 'var(--color-lighter-gray)',
+          opaque: 'var(--color-opacity)',
+        }
       },
       width: {
         '13': '3.2rem',
@@ -338,7 +347,7 @@ module.exports = {
         '630': '63rem',
         '720': '72rem',
         '780': '78rem',
-        '22/12': '120%',
+        // '22/12': '120%',
       },
       zIndex: {
         '3': '3',

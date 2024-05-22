@@ -952,6 +952,22 @@ header {
   animation: easeOut 1s ease-out;
 }
 
+@keyframes lineDropdown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
+.active {
+  animation: lineDropdown 0.8s ease;
+}
+
 /* Animations CSS */
 
 header .cta-menu {
@@ -1155,16 +1171,6 @@ header .cta-menu a:last-child {
   width: 14.5rem;
 }
 
-.home-section-one--right .social-icons {
-  display: block;
-}
-
-@media (min-width: 601px) {
-  .home-section-one--right .social-icons {
-    display: none;
-  }
-}
-
 .brand-white svg {
   width: 14.5rem;
 }
@@ -1248,6 +1254,22 @@ header .cta-menu a:last-child {
 @media (min-width: 981px) {
   .home-section-one--right {
     padding-top: 6rem;
+  }
+}
+
+.home-section-one--right .social-icons {
+  display: flex;
+}
+
+.home-section-one--right .social-icons > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+@media (min-width: 601px) {
+  .home-section-one--right .social-icons {
+    display: none;
   }
 }
 
@@ -1336,7 +1358,8 @@ header .cta-menu a:last-child {
   cursor: pointer;
 }
 
-.testimonial .testimonial-quotes {
+.testimonial-quotes {
+  position: absolute;
   bottom: -2.5rem;
   z-index: 5;
   min-height: 11rem;
@@ -1352,21 +1375,20 @@ header .cta-menu a:last-child {
 }
 
 @media (min-width: 601px) {
-  .testimonial .testimonial-quotes {
+  .testimonial-quotes {
     left: 0px;
     bottom: -0px;
   }
 }
 
 @media (min-width: 769px) {
-  .testimonial .testimonial-quotes {
-    left: 0px;
+  .testimonial-quotes {
     right: 0px;
   }
 }
 
 @media (min-width: 981px) {
-  .testimonial .testimonial-quotes {
+  .testimonial-quotes {
     bottom: -2.5rem;
     right: -0.625rem;
     left: auto;
@@ -1377,11 +1399,11 @@ header .cta-menu a:last-child {
   font-size: 1.4rem;
   line-height: 1.35;
   font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: var(--color-lighter-gray);
 }
 
 .testimonial .testimonial-quotes .testimonial-author {
+  margin-top: 2.4rem;
   display: flex;
   justify-content: space-between;
 }
@@ -1389,13 +1411,12 @@ header .cta-menu a:last-child {
 .testimonial .testimonial-quotes .testimonial-author span {
   font-size: 1.4rem;
   font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
+  color: var(--color-dark-blue);
 }
 
 .testimonial .testimonial-quotes .testimonial-author a {
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
@@ -1562,19 +1583,23 @@ header .cta-menu a:last-child {
 
 .home-section-two--left {
   display: flex;
+  width: 100%;
 }
 
 .home-section-two--left h2 {
   margin-top: 4.3rem;
   margin-bottom: 1rem;
   margin-left: -0.6rem;
-  font-weight: 700;
+  font-size: 4.7rem;
+  line-height: 1;
+  font-weight: 600;
   letter-spacing: -0.065em;
 }
 
 @media (min-width: 601px) {
   .home-section-two--left h2 {
     font-size: 5.25rem;
+    font-weight: 700;
   }
 }
 
@@ -1592,8 +1617,8 @@ header .cta-menu a:last-child {
 }
 
 .home-section-two--left h2 span {
-  font-size: 7rem;
-  font-weight: 400;
+  font-size: 4.7rem;
+  font-weight: 200;
   font-style: italic;
 }
 
@@ -1618,7 +1643,9 @@ header .cta-menu a:last-child {
 }
 
 .home-section-two--left h5 {
+  font-size: 2.7rem;
   font-weight: 500;
+  letter-spacing: -0.18rem;
 }
 
 @media (min-width: 601px) {
@@ -2153,8 +2180,7 @@ header .cta-menu a:last-child {
 
 .home-section-four .slider-wrapper .slides-wrap {
   position: absolute;
-  display: flex;
-  width: 120%;
+  display: inline-flex;
 }
 
 .home-section-four .slider-wrapper .slides-wrap:hover {
@@ -2166,7 +2192,7 @@ header .cta-menu a:last-child {
 }
 
 .home-section-four .slider-wrapper .slides {
-  display: inline-flex;
+  display: flex;
   flex-shrink: 0;
 }
 
@@ -2289,11 +2315,15 @@ header .cta-menu a:last-child {
   top: 5.2rem;
 }
 
+.home-section-five--right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 @media (min-width: 981px) {
   .home-section-five--right {
-    display: flex;
     width: 41.666667%;
-    flex-direction: column;
     padding: 1rem;
   }
 }
@@ -2313,6 +2343,7 @@ header .cta-menu a:last-child {
 
 .registration-steps-wrap {
   margin-top: 6rem;
+  width: 100%;
 }
 
 .registration-steps-wrap .step-item {
@@ -2463,13 +2494,8 @@ header .cta-menu a:last-child {
   margin-bottom: 0px;
   height: 100%;
   width: 100%;
-}
-
-@media (min-width: 769px) {
-  .h-container-6 {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 @media (min-width: 981px) {
@@ -2482,16 +2508,26 @@ header .cta-menu a:last-child {
 .home-section-six--left h2 {
   margin-top: 4rem;
   margin-bottom: 3.35rem;
-  font-size: 4.86rem;
+  font-size: 3.3rem;
   font-weight: 600;
   letter-spacing: -0.04em;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media (min-width: 601px) {
+  .home-section-six--left h2 {
+    font-size: 4.86rem;
+  }
+}
+
 .home-section-six--left p {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1.54rem;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: -0.015em;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -2500,8 +2536,6 @@ header .cta-menu a:last-child {
   .home-section-six--left p {
     font-size: 1.8rem;
     line-height: 1.55;
-    font-weight: 400;
-    letter-spacing: -0.015em;
   }
 }
 
@@ -2582,9 +2616,15 @@ header .cta-menu a:last-child {
 }
 
 .home-section-six--right .card-item p {
-  font-size: 1.8rem;
-  line-height: 1.55;
+  font-size: 1.54rem;
   color: rgb(255 255 255 / 0.75);
+}
+
+@media (min-width: 601px) {
+  .home-section-six--right .card-item p {
+    font-size: 1.8rem;
+    line-height: 1.55;
+  }
 }
 
 @media (min-width: 769px) {
@@ -2647,6 +2687,10 @@ header .cta-menu a:last-child {
   margin-bottom: 1rem;
 }
 
+.-mt-2 {
+  margin-top: -0.5rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -2695,24 +2739,12 @@ header .cta-menu a:last-child {
   margin-top: 1rem;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
-.-mt-2 {
-  margin-top: -0.5rem;
-}
-
 .block {
   display: block;
 }
 
 .flex {
   display: flex;
-}
-
-.grid {
-  display: grid;
 }
 
 .hidden {
@@ -2792,8 +2824,8 @@ header .cta-menu a:last-child {
   cursor: pointer;
 }
 
-.grid-cols-18 {
-  grid-template-columns: 54% 1fr;
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -2814,6 +2846,12 @@ header .cta-menu a:last-child {
 
 .gap-16 {
   gap: 4rem;
+}
+
+.space-y-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
 }
 
 .rounded-lg {
@@ -2974,6 +3012,10 @@ header .cta-menu a:last-child {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
 @media (min-width: 601px) {
   .xs\:my-12 {
     margin-top: 3rem;
@@ -2991,17 +3033,15 @@ header .cta-menu a:last-child {
   .xs\:basis-full {
     flex-basis: 100%;
   }
-
-  .xs\:space-y-12 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(3rem * var(--tw-space-y-reverse));
-  }
 }
 
 @media (min-width: 769px) {
   .sm\:ml-0 {
     margin-left: 0px;
+  }
+
+  .sm\:grid {
+    display: grid;
   }
 
   .sm\:w-full {
@@ -3010,6 +3050,10 @@ header .cta-menu a:last-child {
 
   .sm\:basis-5\/12 {
     flex-basis: 41.666667%;
+  }
+
+  .sm\:grid-cols-18 {
+    grid-template-columns: 54% 1fr;
   }
 
   .sm\:justify-end {

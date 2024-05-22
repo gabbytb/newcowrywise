@@ -4,63 +4,65 @@ import { ButtonLinkComponent } from "../components";
 
 
 const HomeSectionFive = () => {
-  return (
-    <section className="home-section-five">
-        <div className="h-container-5 container">
-            <div className="lg:flex lg:flex-row">
-                <div className="home-section-five--left">
-                    <div className="h-investment-wrap">
-                        <img src={investmentPlatform} alt="save online Nigeria cowrywise" />
+
+    
+    return (
+        <section className="home-section-five">
+            <div className="h-container-5 container">
+                <div className="lg:flex lg:flex-row">
+                    <div className="home-section-five--left">
+                        <div className="h-investment-wrap">
+                            <img src={investmentPlatform} alt="save online Nigeria cowrywise" />
+                        </div>
                     </div>
-                </div>
-                <div className="home-section-five--right">
-                    <h2>It only takes 5 minutes</h2>
-                    <div className="registration-steps-wrap">
+                    <div className="home-section-five--right">
+                        <h2>It only takes 5 minutes</h2>
+                        <div className="registration-steps-wrap">
 
-                        {/* First Step */}
-                        <div className="step-item">
-                            <span className="step-item-count"></span>
-                            <div className="step-item-info">
-                                <span>Create an account</span>
-                                <p>Sign up for an account with your name, email and phone number.</p>
+                            {/* First Step */}
+                            <div className="step-item">
+                                <span className="step-item-count"></span>
+                                <div className="step-item-info">
+                                    <span>Create an account</span>
+                                    <p>Sign up for an account with your name, email and phone number.</p>
+                                </div>
                             </div>
-                        </div>
-                        {/* First Step */}
+                            {/* First Step */}
 
 
-                        {/* Second Step */}
-                        <div className="step-item">
-                            <span className="step-item-count"></span>
-                            <div className="step-item-info">
-                                <span>Add a payment method</span>
-                                <p>Using your debit card or a bank transfer, setup your first plan.</p>
+                            {/* Second Step */}
+                            <div className="step-item">
+                                <span className="step-item-count"></span>
+                                <div className="step-item-info">
+                                    <span>Add a payment method</span>
+                                    <p>Using your debit card or a bank transfer, setup your first plan.</p>
+                                </div>
                             </div>
-                        </div>
-                        {/* Second Step */}
+                            {/* Second Step */}
 
 
-                        {/* Third Step */}
-                        <div className="step-item">
-                            <span className="step-item-count"></span>
-                            <div className="step-item-info">
-                                <span>Watch your money grow</span>
-                                <p>Sit back, relax & let your money work for you all day, everyday.</p>
+                            {/* Third Step */}
+                            <div className="step-item">
+                                <span className="step-item-count"></span>
+                                <div className="step-item-info">
+                                    <span>Watch your money grow</span>
+                                    <p>Sit back, relax & let your money work for you all day, everyday.</p>
+                                </div>
                             </div>
+                            {/* Third Step */}
+
+
                         </div>
-                        {/* Third Step */}
-
-
+                        <ButtonLinkComponent 
+                            btnBg 
+                            btnProps="text-white text-14xl font-bold px-10 py-6 capitalize"
+                            linkURL="https://cowrywise.com/choose-account" 
+                            label="Sign up now" />
                     </div>
-                    <ButtonLinkComponent 
-                        btnBg 
-                        btnProps="text-white text-14xl font-bold px-10 py-6 capitalize"
-                        linkURL="https://cowrywise.com/choose-account" 
-                        label="Sign up now" />
                 </div>
             </div>
-        </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default HomeSectionFive;

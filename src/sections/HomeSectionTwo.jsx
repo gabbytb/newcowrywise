@@ -6,32 +6,34 @@ import { ButtonLinkComponent, GraphComponent } from "../components"
 
 
 
+
+
 const HomeSectionTwo = () => {
 
+  function myFunction() {
+    document.querySelector('.home-section-two--left h2').classList.add('s-2-l2-anim');
+    document.querySelector('.home-section-two--left h2 span').classList.add('s-2-ls-anim');
+    document.querySelector('.home-section-two--left h5').classList.add('s-2-l5-animreverse');
+    
+    
+    document.querySelector('.home-section-two--right svg').classList.add('animate-slideUp');
 
+
+    setTimeout(() => {
+      document.querySelector('.card-item-one').classList.add('s-2-rc-1');
+    }, 0);
+    
+    setTimeout(() => {
+      document.querySelector('.card-item-two').classList.add('s-2-rc-2');
+    }, 180);
+    
+    setTimeout(() => {
+      document.querySelector('.card-item-three').classList.add('s-2-rc-3');
+    }, 220);
+  };
+
+  
   useEffect(() => {
-    function myFunction() {
-        document.querySelector('.home-section-two--left h2').classList.add('s-2-l2-anim');
-        document.querySelector('.home-section-two--left h2 span').classList.add('s-2-ls-anim');
-        document.querySelector('.home-section-two--left h5').classList.add('s-2-l5-animreverse');
-
-        
-        document.querySelector('.home-section-two--right svg').classList.add('animate-slideUp');
-        
-
-        setTimeout(() => {
-          document.querySelector('.card-item-one').classList.add('s-2-rc-1');
-        }, 0);
-        
-        setTimeout(() => {
-          document.querySelector('.card-item-two').classList.add('s-2-rc-2');
-        }, 180);
-        
-        setTimeout(() => {
-          document.querySelector('.card-item-three').classList.add('s-2-rc-3');
-        }, 220);
-    };
-
     myFunction();        
   }, []);
 

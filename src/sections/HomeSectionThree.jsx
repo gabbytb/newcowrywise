@@ -18,7 +18,7 @@ const HomeSectionThree = () => {
                     <h6>If you invested</h6>
                     <div className="roi-input">
                         <sup>₦</sup>
-                        <input type="tel" value="100,000" />
+                        <input type="tel" defaultValue="100,000" />
                     </div>
                     <div className="roi-dropdown-wrap">
                         <div className="wrap-selection">
@@ -41,7 +41,7 @@ const HomeSectionThree = () => {
                 </div>
                 <div className="slider-wrap">
                     <div className="slider">
-                        <input type="range" min="5000" max="10000000" step="1000" value="100000" />
+                        <input type="range" min="5000" max="10000000" step="1000" defaultValue="100000" />
                     </div>
                 </div>
                 <div className="relative">

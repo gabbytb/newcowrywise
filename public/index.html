@@ -2,6 +2,7 @@
 <html lang="en" id="scrollbar">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="%PUBLIC_URL%/logo192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1 maximum-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -44,7 +45,7 @@
         var foundScrollbar = document.getElementById('scrollbar');
         var foundHeader = document.getElementById('header');
         var scroll = window.scrollY;
-        console.log('Scroll: ', scroll);
+        // console.log('Scroll: ', scroll);
 
         if (scroll > 5) {
           foundHeader.classList.add('sticky-header');
