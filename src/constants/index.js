@@ -49,3 +49,31 @@ export const sliderItems = [
     { linkURL: "https://cowrywise.com/choose-account", label: "Invest in mutual funds easily" },
     { linkURL: "https://cowrywise.com/choose-account", label: "Invest with very low fees" },
 ]
+
+
+export const flipItems = [
+    {
+        title: 'Licenced and regulated?',
+        subtitle: 'Yup!'
+    },
+    {
+        title: '99.99% service uptime?',
+        subtitle: 'Yup!'
+    },
+    {
+        title: 'Great interest rates?',
+        subtitle: 'Yup!'
+    },
+    {
+        title: 'Diversified investment portfolio?',
+        subtitle: 'Sure!'
+    },
+    {
+        title: 'Secured savings? ',
+        subtitle: 'Bet!'
+    },
+    {
+        title: 'Convinced?',
+        subtitle: 'Sign up now.'
+    },
+]

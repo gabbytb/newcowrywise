@@ -56,19 +56,18 @@ const HomeSectionOne = () => {
 
     useEffect(() => {        
         function realFunc() {       
-            // Loop through each thumbnail
+            // Loop through each thumbnail 
             for (var n = 0; n < customThumbnails.length; n++) {
 
-                // HERE: Check if the activeImage matches any of the thumbnail imgURI
+                // HERE: Check to find the one that matches the currently active image.
                 if (activeImage === customThumbnails[n]?.imgURI) {
                     
                     var findTestimonial = document.getElementById('customers-testimonial');
-                    // Get all elements inside testimonial, with the className 'testimonial-quotes'
-                    var testimonialQuotes = findTestimonial.getElementsByClassName('testimonial-quotes');
+                    var testimonialQuotes = findTestimonial.getElementsByClassName('testimonial-quotes');           // Get all elements inside testimonial, with the className 'testimonial-quotes'
                     
                     // Loop through each testimonial quote
                     for (var i = 0; i < testimonialQuotes.length; i++) {
- 
+                        
                         // HERE: If the current ACTIVE thumbnail index matches with the index of the testimonial quote, i.e n === i, Select Quote as ACTIVE, hide others!
                         if (n !== i) {
                             // Hide other testimonial quotes

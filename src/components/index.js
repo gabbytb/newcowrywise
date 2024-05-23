@@ -6,6 +6,7 @@ import ButtonComponent from "./ButtonComponent";
 import ButtonLinkComponent from "./ButtonLinkComponent";
 import GraphComponent from "./GraphComponent";
 import SliderCards from "./SliderCards";
+import Disqus from "./Disqus";
 
 
 
@@ -19,4 +20,5 @@ export {
     ButtonLinkComponent,
     GraphComponent,
     SliderCards,
+    Disqus,
 }
