@@ -65,7 +65,7 @@ const HomeSectionSeven = () => {
             };
 
             autoIncrement();
-        }, 2000);
+        }, 5000);
 
         return () => clearInterval(timer);
 
