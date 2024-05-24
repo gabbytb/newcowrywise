@@ -18,73 +18,32 @@ const HomeSectionSeven = () => {
     const [count, setCount] = useState(0);
     console.log('Count: ', count);
 
-    const [itemToFlip, setItemToFlip] = useState(flipItems);
+    const [itemsToFlip, setItemsToFlip] = useState(flipItems);
 
 
-
+    
 
     useEffect(() => {
-        setInterval(() => {
-            console.clear();
-
-            function autoIncrement() {  
-                for (var n = 0; n < itemToFlip.length; n++) {                                       
-                    if (n < itemToFlip.length) {
-                        var disqusWrapID = document.getElementById('disqusWrapId');
-                        var disqusObj = disqusWrapID.getElementsByClassName('disqus');
-                                              
-                        
-                        for (var i = 0; i < disqusObj.length; n++) {
-                            if ((count < n) && (count < disqusObj.length)) {
-                                setCount(count+1);
-                                
-
-                                if (n !== i) {
-                                    disqusObj[i]?.classList.add('is-active');
-                                    disqusObj[i]?.classList.remove('hidden');
-                                } else {
-                                    disqusObj[i]?.classList.remove('is-active');
-                                    disqusObj[i]?.classList.add('hidden');  
-                                };
-
-                            } else {
-                                setCount(0);
-                            };
-                        };
-                    };
+        // Define the function to be called
+        const myFunction = () => {
+            for (var n = 0; n < itemsToFlip.length; n++) {
+                if (count < n) {
+                    setCount(count + 1);
+                } else {
+                    setCount(0);
                 };
             };
 
-            autoIncrement();
-        }, 2000);
-    }, [count, itemToFlip]);
-
+            console.log('Function triggered!');
+        };
     
-
-   
- 
+        // Set up the interval
+        const intervalId = setInterval(myFunction, 2000); // 120000 milliseconds = 2 minutes
     
-
-        
-        // var disqusID = document.getElementById('disqosWrap');
-        // var disqusItem = disqusID.getElementsByClassName('disqus'); 
-        // for (var i = 0; i < disqusItem.length; i++) {
-        //     console.log('ALL Current Flip Items: ', disqusItem.length);
-        //     console.log('Current Flip Number: ', i);
-        //     console.log('Current Flip Item: ', disqusItem[i]);
-
-
-        //     var disqusID = document.getElementById('disqusId');
-        //     var disqusItem = disqusID.getElementsByClassName('disqus-q'); 
-
-
-
-        //     // if (itemToFlip[n]?.title === disqusItem[i]?.title) {
-        //     //     return console.log('True: ', true);
-        //     // } else {
-        //     //     return console.log('False: ', false);
-        //     // }
-        // }
+        // Clean up the interval on component unmount
+        return () => clearInterval(intervalId);
+      }, [count]); // Empty dependency array means this runs once on mount and cleans up on unmount
+    
 
 
     

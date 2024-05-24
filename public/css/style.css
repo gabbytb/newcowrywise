@@ -968,6 +968,10 @@ header {
   animation: lineDropdown 0.8s ease;
 }
 
+.is-active {
+  display: flex;
+}
+
 /* Animations CSS */
 
 header .cta-menu {
@@ -2637,9 +2641,10 @@ header .cta-menu a:last-child {
 
 /** Section Seven **/
 
-/* .home-section-seven {
-    @apply 
-  } */
+.home-section-seven {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
 
 .h-container-7 {
   margin-left: auto;
@@ -2652,16 +2657,42 @@ header .cta-menu a:last-child {
   padding-right: 2.5rem;
 }
 
+.h-section-7-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
 .h-section-7-wrap h6 {
+  margin-top: 3.7rem;
+  margin-bottom: 3rem;
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: var(--color-dark-blue);
 }
 
 .step-item .step-item-info {
   width: 50.8rem;
+}
+
+.disqus {
+  display: flex;
+  flex-direction: row;
+}
+
+.disqus .disqus-q {
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: -0.3rem;
+  color: var(--color-lighter-gray);
+}
+
+.disqus .disqus-a {
+  margin-left: 2.4rem;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: -0.3rem;
+  color: var(--color-dark-blue);
 }
 
 /** Section Seven **/
