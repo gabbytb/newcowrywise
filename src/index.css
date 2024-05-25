@@ -48,9 +48,10 @@
 
 
   :root {
-    --color-dark-blue: rgb(8 37 82);
-    --color-light-gray: rgba(100, 116, 139, 1);
-    --color-lighter-gray: rgb(108 130 163);  
+    --color-dark-blue: rgb(8, 37, 82);
+    --color-light-blue: rgb(0, 102, 245);
+    --color-lighter-gray: rgb(108, 130, 163);  
+    --color-lightest-gray: rgb(174, 185, 204);
     --shadow-gray-opacity: hsla(0,0%,100%,.3);
     --color-opacity: hsla(0,0%,100%,.7);
     --background-sky-blue: rgb(230, 250, 255);     /**   TopBar BackgroundColor   */
@@ -791,19 +792,40 @@
   @apply w-full px-8 py-0 my-0 mx-auto
 }
 .app-reviews {
-  @apply flex flex-row justify-between space-x-12
+  @apply grid grid-cols-22 gap-16
 }
 .app-review--card {
-  @apply w-full min-h-98 bg-white shadow-xl rounded-lg py-14.7 px-15.8 
+  @apply w-full min-h-98 bg-white border border-slate-200 shadow-lg rounded-3xl py-14.7 px-15.8 
 }
 .top-review--card {
-  @apply flex flex-col justify-between 
+  @apply flex flex-row justify-between mb-8
+}
+.top-review--card .r-star-rating svg {
+  @apply ml-8 h-20 w-50.4 
 }
 .top-review--card h3 {
-  @apply text-6xl font-semibold
+  @apply text-6xl font-semibold flex items-end
+}
+.top-review--card h3 sub {
+  @apply contents items-center h-full text-19xl text-skin-lightgray
 }
 .top-review--card a svg {
-  @apply w-5 h-2
+  @apply w-48 h-20
+}
+.bottom-review--card a {
+  @apply uppercase
+}
+.bottom-review--card h6 {
+  @apply text-21xl font-semibold mb-6 
+}
+.bottom-review--card p {
+  @apply text-10xl/more-loose my-6
+}
+.bottom-review--card a {
+  @apply mt-8 flex justify-start items-center text-xl font-semibold text-skin-lightblue min-h-20
+}
+.bottom-review--card a svg {
+  @apply ml-2.9 fill-blue-600 w-5 h-5
 }
 /**  Footer  **/
 

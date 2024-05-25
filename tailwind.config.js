@@ -113,6 +113,7 @@ module.exports = {
         '16': '1fr 1fr',
         '18': '54% 1fr',
         '20': '1fr',
+        '22': 'repeat(auto-fit,minmax(240px,1fr))',
       },
       height: {
         '13': '3.2rem',
@@ -261,6 +262,7 @@ module.exports = {
         'extra-loosened': '4.4rem',
       },
       margin: {
+        '2.9': '0.4rem',
         '3.1': '0.6rem',
         '3.2': '0.8rem',
         '5.5': '1.125rem',
@@ -318,14 +320,16 @@ module.exports = {
       textColor: {
         skin: {
           darkBlue: 'var(--color-dark-blue)',
-          // lightGray: 'var(--color-light-gray)',
+          lightblue: 'var(--color-light-blue)',
           gray: 'var(--color-lighter-gray)',
+          lightgray: 'var(--color-lightest-gray)',
           opaque: 'var(--color-opacity)',
         }
       },
       width: {
         '13': '3.2rem',
         '50': '3.125rem',
+        '50.4': '12.4rem',
         '52.5': '14.5rem',
         '69': '9.625rem',
         '98': '25rem',
@@ -351,7 +355,6 @@ module.exports = {
         '630': '63rem',
         '720': '72rem',
         '780': '78rem',
-        // '22/12': '120%',
       },
       zIndex: {
         '3': '3',
@@ -361,5 +364,4 @@ module.exports = {
   },
   plugins: [],
 }
-
 
