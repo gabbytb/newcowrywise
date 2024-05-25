@@ -24,19 +24,27 @@ const HomeSectionSeven = () => {
                 if (count <= n) {
                     setCount(count + 1);                   
                         
-                    var disqusObj = document.getElementsByClassName('disqus');            
+                    var disqusObj = document.getElementsByClassName('disqus');  
+    
                     for (var i = 0; i < disqusObj.length; i++) {               
                         if (count === i) { 
                             disqusObj[i].classList.remove('hidden');
-                            disqusObj[i].classList.add('activated');
+                            disqusObj[i].classList.add('activate-first');
+                                          
+                            
+                            var disqusA = document.querySelectorAll('.disqus-a');  
+                            for (var u = 0; u < disqusA.length; u++) {
+                                if (i === u) {
+                                    disqusA[u].classList.add('activate-second');
+                                }
+                            }
                         } else {
                             disqusObj[i].classList.add('hidden');
-                            disqusObj[i].classList.remove('activated');
-                        }
+                        };
                     };
                 } else {
                     setCount(0);
-                }
+                };
             };
         };
 

@@ -118,7 +118,10 @@
 
 
 
-  /* Animations CSS */
+  
+  /**************************************************************************/
+  /***************************** Animations CSS *****************************/
+  /**************************************************************************/
   .sticky-header {
     @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm bg-blue-600 sm:bg-white h-114.5
   }
@@ -152,18 +155,34 @@
   .ease-out-anim {
     @apply animate-easeOut
   }
-  .active {
+
+
+  /* .active {
     @apply animate-lineDropdown
-  }
+  } */
+
+
+  /***  Section  One  ***/
   .is-active {
     @apply flex
   }
-  .activated {
-    @apply animate-slideUpFast
-  }
-  /* Animations CSS */
+  /***  Section  One  ***/
+ 
 
+  /***  Section  Seven  ***/
+  .activate-first {
+    @apply animate-slideUpFirst
+  }
+  .activate-second {
+    @apply animate-slideUpSecond
+  }
+  /***  Section  Seven  ***/
+
+  /**************************************************************************/
+  /***************************** Animations CSS *****************************/
+  /**************************************************************************/
   
+
 
 
 
@@ -735,7 +754,7 @@
 
   /** Section Seven **/
   .home-section-seven {
-    @apply py-20
+    @apply py-20 mb-40
   }
   .h-container-7 {
     @apply h-full w-full px-10 mx-auto my-0
@@ -763,6 +782,12 @@
 
 
 
+
+
+
+.container-fc {
+  @apply w-full px-8 my-0 mx-auto
+}
 
 
 

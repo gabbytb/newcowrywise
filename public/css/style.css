@@ -989,8 +989,29 @@ header {
   }
 }
 
-.activated {
+.activate-first {
   animation: slideUp 0.5s linear;
+}
+
+@keyframes slideUp {
+  0% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+  }
+
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+}
+
+.activate-second {
+  animation: slideUp 1.2s linear;
 }
 
 /* Animations CSS */
