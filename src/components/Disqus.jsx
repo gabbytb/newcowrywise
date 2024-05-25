@@ -1,7 +1,7 @@
 const Disqus = ({ title, subtitle }) => {
 
   return (
-    <div id="disqusID" className="disqus">
+    <div className="disqus hidden">
         <span className="disqus-q">{title}</span>
         <span className="disqus-a">{subtitle}</span>
     </div>

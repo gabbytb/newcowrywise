@@ -87,6 +87,7 @@ module.exports = {
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
         fadeOut: 'fadeOut 21s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
         slideUp: 'slideUp 1.7s linear',     /** SECTION 2 GRAPH ANIMATION */
+        slideUpFast: 'slideUp 0.5s linear',     /** SECTION 7 DISCUSS ANIMATION */
         slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
         slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
       },

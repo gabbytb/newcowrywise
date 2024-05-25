@@ -158,8 +158,8 @@
   .is-active {
     @apply flex
   }
-  .disqus-c {
-    @apply text-7xl font-black ml-24
+  .activated {
+    @apply animate-slideUpFast
   }
   /* Animations CSS */
 
@@ -750,7 +750,7 @@
     @apply w-128.5
   }
   .disqus {
-    @apply flex flex-row
+    @apply flex flex-row absolute 
   }
   .disqus .disqus-q {
     @apply text-8xl font-normal -tracking-tightest text-skin-gray

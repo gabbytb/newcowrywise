@@ -972,6 +972,27 @@ header {
   display: flex;
 }
 
+@keyframes slideUp {
+  0% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+  }
+
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+}
+
+.activated {
+  animation: slideUp 0.5s linear;
+}
+
 /* Animations CSS */
 
 header .cta-menu {
@@ -2676,6 +2697,7 @@ header .cta-menu a:last-child {
 }
 
 .disqus {
+  position: absolute;
   display: flex;
   flex-direction: row;
 }

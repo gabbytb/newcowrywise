@@ -6,78 +6,48 @@ import { Disqus } from "../components";
 
 
 
+
 const HomeSectionSeven = () => {
     
     
-    // Managing the active state of The INDEXED Flip Items
     const [itemsToFlip, setItemsToFlip] = useState(flipItems);
-    // Managing the active state of The INDEXED Flip Items
 
-
-    // Value changes to represent the "Active Index" of The INDEXED Flip Items
+    
     const [count, setCount] = useState(0);
-    // Value changes to represent the "Active Index" of The INDEXED Flip Items
-
-
 
 
     
 
     useEffect(() => {
-        function myFunction() {
-            console.clear();
-
-            
+        function myFunction() {            
             for (var n = 0; n < itemsToFlip.length; n++) {    
-                if (count < n) {
-                    setCount(count + 1); 
-                    console.log('Count: ', count);
+                if (count <= n) {
+                    setCount(count + 1);                   
                         
-                    var disqusWrapID = document.getElementById('disqusWrapId');
-                    var disqusObj = disqusWrapID.getElementsByClassName('disqus');                                
-                    for (var i = 0; i < disqusObj.length; i++) {
-
-                        
-                        if (count === i) {           
-                                                        
-                            var titleFound = document.getElementsByClassName('disqus-q');
-                            for (var c = 0; c < titleFound.length; c++) {
-                                console.log('CURRENT ACTIVE VALUE: ', c);
-                                console.log('i: ', i);
-                                console.log('Flip Title: ', itemsToFlip[n]?.title);
-                                console.log('Matches Title: ', titleFound[c]?.innerHTML);
-                            }      
-                        }  
+                    var disqusObj = document.getElementsByClassName('disqus');            
+                    for (var i = 0; i < disqusObj.length; i++) {               
+                        if (count === i) { 
+                            disqusObj[i].classList.remove('hidden');
+                            disqusObj[i].classList.add('activated');
+                        } else {
+                            disqusObj[i].classList.add('hidden');
+                            disqusObj[i].classList.remove('activated');
+                        }
                     };
                 } else {
                     setCount(0);
-                };
+                }
             };
         };
 
-        // Set up the interval
-        const intervalId = setInterval(myFunction, 2000); // 120000 milliseconds = 2 minutes
+        // Setup interval
+        var intervalId = setInterval(myFunction, 2500);
     
-        // Clean up the interval on component unmount
+        // Clean up interval when component unmount
         return () => clearInterval(intervalId);
-    }, [count]); // Empty dependency array means this runs once on mount and cleans up on unmount
+    }, [count]); 
+    // NOTE: Empty dependency array means this runs once on mount and cleans up on unmount
     
-
-
-
-    // if (n !== i) {
-    //     disqusObj[i]?.classList.remove('hidden');
-    //     disqusObj[i]?.classList.add('is-active');
-        
-    //     console.log('CURRENT ACTIVE ITEM INDEX: ', disqusObj[i]);
-    // } else {
-    //     disqusObj[i]?.classList.add('hidden');
-    //     disqusObj[i]?.classList.remove('is-active');
-    // }
-            
-
-    
-
 
 
 
@@ -86,7 +56,7 @@ const HomeSectionSeven = () => {
             <div className="h-container-7 container">
                 <div className="h-section-7-wrap">
                     <h6>why cowrywise?</h6>
-                    <div id="disqusWrapId" className="relative">
+                    <div id="disqusWrapID" className="relative">
                         {
                             flipItems.map((item) => {
                                 return (
@@ -100,4 +70,6 @@ const HomeSectionSeven = () => {
         </section>
     );
 };
+
+
 export default HomeSectionSeven;
