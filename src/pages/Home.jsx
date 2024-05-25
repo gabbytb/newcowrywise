@@ -1,4 +1,5 @@
-import { Nav, HomeBody } from "../components";
+import { Nav, HomeBody, Footer } from "../components";
+
 
 
 
@@ -6,7 +7,10 @@ const Home = () => {
   return (
     <>
       <Nav />
-      <HomeBody />
+      <div className="absolute top-0 w-full">
+        <HomeBody />
+        <Footer />
+      </div>
     </>
   );
 };

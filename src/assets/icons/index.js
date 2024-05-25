@@ -22,6 +22,8 @@ import ArrowRight from "./ArrowRight";
 // Arrow Keys
 
 
+import StarRating from "./StarRating";
+
 
 
 
@@ -30,6 +32,7 @@ export {
     ArrowDown,
     ArrowRight,
     
+    StarRating,
 
     VideoIcon,
     PlayStoreIcon,

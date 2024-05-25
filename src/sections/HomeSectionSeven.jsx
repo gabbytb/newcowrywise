@@ -11,7 +11,7 @@ const HomeSectionSeven = () => {
     
     
     const [itemsToFlip, setItemsToFlip] = useState(flipItems);
-
+    console.log('ITEMS: ', itemsToFlip);
     
     const [count, setCount] = useState(0);
 
@@ -24,21 +24,20 @@ const HomeSectionSeven = () => {
                 if (count <= n) {
                     setCount(count + 1);                   
                         
-                    var disqusObj = document.getElementsByClassName('disqus');  
-    
-                    for (var i = 0; i < disqusObj.length; i++) {               
+                    var disqusObj = document.querySelectorAll('.disqus');  
+                    for (var i = 0; i < disqusObj.length; i++) {                                                              
                         if (count === i) { 
                             disqusObj[i].classList.remove('hidden');
                             disqusObj[i].classList.add('activate-first');
-                                          
-                            
+                                                                      
                             var disqusA = document.querySelectorAll('.disqus-a');  
                             for (var u = 0; u < disqusA.length; u++) {
                                 if (i === u) {
                                     disqusA[u].classList.add('activate-second');
-                                }
+                                };
                             }
                         } else {
+                            disqusObj[i].classList.remove('activate-first');
                             disqusObj[i].classList.add('hidden');
                         };
                     };

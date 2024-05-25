@@ -5,7 +5,7 @@ import { HomeSectionOne, HomeSectionTwo, HomeSectionThree, HomeSectionFour, Home
 const HomeBody = () => {
 
     return (
-        <main className="absolute top-0 w-full">
+        <main className="relative">
             <div>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie_svg.min.js"></script>
                 <HomeSectionOne />

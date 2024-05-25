@@ -785,9 +785,29 @@
 
 
 
+
+/**  Footer  **/
 .container-fc {
-  @apply w-full px-8 my-0 mx-auto
+  @apply w-full px-8 py-0 my-0 mx-auto
 }
+.app-reviews {
+  @apply flex flex-row justify-between space-x-12
+}
+.app-review--card {
+  @apply w-full min-h-98 bg-white shadow-xl rounded-lg py-14.7 px-15.8 
+}
+.top-review--card {
+  @apply flex flex-col justify-between 
+}
+.top-review--card h3 {
+  @apply text-6xl font-semibold
+}
+.top-review--card a svg {
+  @apply w-5 h-2
+}
+/**  Footer  **/
+
+
 
 
 
