@@ -95,6 +95,7 @@ const HomeSectionOne = () => {
 
 
                     <div className="home-section-one--left">
+
                         <div className="customers-testimonials">
                             <div id="customers-testimonial" className="testimonial">
                                 <div className="absolute testimonial-backdrop"></div>
@@ -113,6 +114,7 @@ const HomeSectionOne = () => {
                                 </div>
                             </div>
                         </div>
+                        
                         <ul className="testimonials-thumbnail">
                             {
                                 customersThumbnails.map((item) => {
@@ -128,13 +130,14 @@ const HomeSectionOne = () => {
                                 })
                             }
                         </ul>
+                        
                     </div>
 
                     
                     <div className="home-section-one--right">
                         <h1>Put your <br />money to work</h1>
                         <h6>Invest wisely. Grow wealth.</h6>
-                        <form className="hidden xs:my-12 xs:flex xs:max-w-80 ">
+                        <form className="hidden xs:my-12 xs:flex xs:max-w-80">
                             <input className="flex-1 min-w-80 border mr-4 px-5 text-2xl rounded-lg" type="email" required name="email" placeholder="Your email..." />
                             <button className="capitalize bg-blue-600 min-h-20 px-8 text-2xl text-white font-bold rounded-lg" type="submit">start investing</button>
                         </form>

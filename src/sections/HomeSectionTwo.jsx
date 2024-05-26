@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useRef, useEffect } from 'react';
+import { useInViewport } from 'react-in-viewport';
 import { ButtonLinkComponent, GraphComponent } from "../components"
 
 
@@ -10,36 +11,55 @@ import { ButtonLinkComponent, GraphComponent } from "../components"
 
 const HomeSectionTwo = () => {
 
-  function myFunction() {
-    document.querySelector('.home-section-two--left h2').classList.add('s-2-l2-anim');
-    document.querySelector('.home-section-two--left h2 span').classList.add('s-2-ls-anim');
-    document.querySelector('.home-section-two--left h5').classList.add('s-2-l5-animreverse');
-    
-    
-    document.querySelector('.home-section-two--right svg').classList.add('animate-slideUp');
+
+    const myRef = useRef();
+    const { inViewport } = useInViewport(
+        myRef, // options, config = { disconnectOnLeave: false }, props
+    );
+    console.log('In ViewPort: ', inViewport);
 
 
-    setTimeout(() => {
-      document.querySelector('.card-item-one').classList.add('s-2-rc-1');
-    }, 0);
-    
-    setTimeout(() => {
-      document.querySelector('.card-item-two').classList.add('s-2-rc-2');
-    }, 180);
-    
-    setTimeout(() => {
-      document.querySelector('.card-item-three').classList.add('s-2-rc-3');
-    }, 220);
-  };
+    useEffect(() => {
+        function myFunction() {  
+            if (inViewport) {            
+          
+            setTimeout(() => {
+              document.querySelector('.card-item-one').classList.add('s-2-rc-1');
+            }, 0);
+            
+            setTimeout(() => {
+              document.querySelector('.card-item-two').classList.add('s-2-rc-2');
+            }, 180);
+            
+            setTimeout(() => {
+              document.querySelector('.card-item-three').classList.add('s-2-rc-3');
+            }, 220);
 
-  
-  useEffect(() => {
-    myFunction();        
-  }, []);
+            setTimeout(() => {
+              document.querySelector('.home-section-two--left h2').classList.remove('opacity-0');
+              document.querySelector('.home-section-two--left h2').classList.add('s-2-l2-anim');
+
+              document.querySelector('.home-section-two--left h2 span').classList.remove('opacity-0');
+              document.querySelector('.home-section-two--left h2 span').classList.add('s-2-ls-anim');
+
+              document.querySelector('.home-section-two--left h5').classList.remove('opacity-0');
+              document.querySelector('.home-section-two--left h5').classList.add('s-2-l5-animreverse');  
+
+              document.querySelector('.home-section-two--left div a').classList.remove('opacity-0');
+              document.querySelector('.home-section-two--right svg').classList.remove('opacity-0');
+              document.querySelector('.home-section-two--right svg').classList.add('animate-slideUp');
+            }, 1000);
+          }
+      };
+
+      myFunction();        
+  }, [inViewport]);
+
 
 
   return (
-    <section className="home-section-two">
+    <section ref={myRef} className="home-section-two">
+      {/* {`Enter viewport: ${enterCount} times`} */}
         <div className="h-container-2 container">
             <div className="flex flex-row sm:grid sm:grid-cols-18 gap-16 px-10 min-h-138">
 
@@ -47,8 +67,8 @@ const HomeSectionTwo = () => {
                 {/* Left Side */}
                 <div className="home-section-two--left">
                   <div className="flex flex-col pt-5 space-y-12 sm:space-y-16 lg:space-y-12 w-136">
-                      <h2>Get a <span>little</span>&nbsp; richer each day</h2>
-                      <h5>One small step today, a giant leap for tomorrow.</h5>
+                      <h2 className="opacity-0">Get a <span className="opacity-0">little</span>&nbsp; richer each day</h2>
+                      <h5 className='opacity-0'>One small step today, a giant leap for tomorrow.</h5>
                       <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />
                   </div>
                 </div>
@@ -89,6 +109,7 @@ const HomeSectionTwo = () => {
 
             </div>
         </div>
+        {/* {`Leave viewport: ${leaveCount} times`} */}
     </section>
   );
 };

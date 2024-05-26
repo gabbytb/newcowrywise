@@ -201,17 +201,21 @@ module.exports = {
         },
         slideRight: {
           '0%': { 
+            opacity: 0,
             transform: 'translate3d(-5%, 0, 0)',
           },
           to: { 
+            opacity: 1,
             transform: 'translateZ(0)',
           },
         },
         slideLeft: {
           '0%': { 
+            opacity: 0,
             transform: 'translate3d(5%, 0, 0)',
           },
           to: { 
+            opacity: 1,
             transform: 'translateZ(0)',
           },
         },
@@ -246,7 +250,7 @@ module.exports = {
         },
         lineDropdown: {
           '0%': { 
-            opacity: 0,
+            opacity: 0.7,
             transform: 'translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078)',
           },
           to: { 
