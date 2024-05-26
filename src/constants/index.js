@@ -77,3 +77,133 @@ export const flipItems = [
         subtitle: 'Sign up now.'
     },
 ]
+
+
+export const footerCompany = [
+    {
+        linkURL: 'https://cowrywise.com/about',
+        label: 'about us'
+    },
+    {
+        linkURL: 'https://cowrywise.com/press',
+        label: 'press'
+    },
+    {
+        linkURL: 'https://cowrywise.com/careers',
+        label: 'careers'
+    },
+    {
+        linkURL: 'https://cowrywise.com/ambassadors',
+        label: 'ambassadors'
+    },
+    {
+        linkURL: 'https://cowrywise.com/complaints',
+        label: 'complaints management'
+    },
+    {
+        linkURL: 'https://cowrywise.com/privacy',
+        label: 'privacy'
+    },
+    {
+        linkURL: 'https://cowrywise.com/terms',
+        label: 'terms'
+    },
+]
+
+
+export const footerProduct = [
+    {
+        linkURL: 'https://cowrywise.com/save',
+        label: 'Saving Plans'
+    },
+    {
+        linkURL: 'https://cowrywise.com/invest',
+        label: 'Investment Plans'
+    },
+    {
+        linkURL: 'https://cowrywise.com/mutual-funds',
+        label: 'Mutual Funds'
+    },
+    {
+        linkURL: 'https://cowrywise.com/duo',
+        label: 'Duo'
+    },
+    {
+        linkURL: 'https://cowrywise.com/embed',
+        label: 'Embed API'
+    },
+    {
+        linkURL: 'https://cowrywise.com/sprout',
+        label: 'Sprout'
+    },
+    {
+        linkURL: 'https://cowrywise.com/circles/challenges',
+        label: 'Circles'
+    },
+    {
+        linkURL: 'https://cowrywise.com/halal',
+        label: 'Halal'
+    },
+    {
+        linkURL: 'https://coda.io/how-can-we-serve-you-better',
+        label: 'Got a Suggestion?'
+    },
+]
+
+
+export const footerResources = [
+    {
+        linkURL: 'https://cowrywise.com/testimonials',
+        label: 'Customer Stories'
+    },
+    {
+        linkURL: 'https://cowrywise.frontify.com',
+        label: 'Media'
+    },
+    {
+        linkURL: 'https://cowrywise.com/faqs',
+        label: 'FAQs'
+    },
+    {
+        linkURL: 'https://cowrywise.com/security',
+        label: 'Security'
+    },
+    {
+        linkURL: 'https://cowrywise.com/interest-tool',
+        label: 'Estimate your Interest'
+    },
+    {
+        linkURL: 'https://cowrywise.com/education-tool',
+        label: 'Plan Education'
+    },
+    {
+        linkURL: 'https://engineering.cowrywise.com',
+        label: 'Engineering'
+    },
+    {
+        linkURL: 'https://learn.cowrywise.com',
+        label: 'Glossary'
+    },
+    {
+        linkURL: 'https://cowrywise.com/blog',
+        label: 'Blog'
+    },
+    {
+        linkURL: 'help.cowrywise.com',
+        label: 'Help Center'
+    },
+]
+
+
+export const footerContact = [
+    {
+        linkURL: 'mailto:support@cowrywise.com',
+        label: 'support@cowrywise.com'
+    },
+    {
+        linkURL: 'https://wa.me/message/TCXFSJS3VKZPD1',
+        label: 'WhatsApp ↗'
+    },
+]
+
+

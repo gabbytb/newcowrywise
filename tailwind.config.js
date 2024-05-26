@@ -3,7 +3,7 @@
 module.exports = {
   content: [
     "./public/index.html",
-    "./src/**/*.{html,js,jsx}",
+    "./src/**/*.{html,js,jsx,ts,tsx}",
   ],
   theme: {
     backgroundPosition: {
@@ -58,6 +58,7 @@ module.exports = {
       '39xl': '2.7rem',
       '40xl': '3.3rem',
       '41xl': '1.54rem',
+      '42xl': '1.46rem',
     },
     letterSpacing: {
       supertight: '0.015em',
@@ -95,6 +96,7 @@ module.exports = {
       backgroundColor: {
         skin: {
           skyblue: 'var(--background-sky-blue)',
+          transparentblue: 'var(--background-transparent-blue)',
           opaque: 'var(--color-opacity)',
         }
       },
@@ -107,6 +109,7 @@ module.exports = {
       boxShadowColor: {
         skin: {
           hsla: 'var(--shadow-gray-opacity)',
+          transparentblue: 'var(--background-transparent-blue)',
         }
       },
       gridTemplateColumns: {
@@ -284,6 +287,7 @@ module.exports = {
       maxWidth: {
         '99': '30rem',
         '100': '32rem',
+        '101': '33rem',
         '126': '36.3rem',
         '2/4': '50%',
         '65/12': '65%',   /** UseCase: Section-3 (last p-tag) */

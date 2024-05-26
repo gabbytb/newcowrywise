@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { AppStoreIcon, ArrowRight, PlayStoreIcon, StarRating } from "../assets/icons";
+import { AppStoreIcon, ArrowRight, PlayStoreIcon, StarRating, } from "../assets/icons";
+import { footerCompany, footerProduct, footerResources, footerContact, } from "../constants";
+import { ButtonComponent, FooterCard, } from "./";
 
 
 
@@ -78,11 +80,85 @@ const Footer = () => {
 
             </div>
 
-            <div className="flex flex-row justify-center">
+            <div className="flex flex-row items-center justify-center rounded-3xl footer-email--wrap">
                 <div className="basis-5/12 p-4">
-                    <h3>Sign up for free.<br/>Start investing today.</h3>
+                    <h3 className="text-white font-semibold">Sign up for free.<br/>Start investing today.</h3>
                 </div>
-                <div></div>
+                <div className="basis-5/12 p-4">
+                    <form className="w-full" action="https://cowrywise.com/choose-account" method="GET">
+                        <div className="footer_email">
+                            <input className="text--white" type="email" name="email" required="required" placeholder="Your email..." />
+                            {/* <input type="hidden" name="utm_source" value="web">
+                            <input type="hidden" name="utm_medium" value="button">
+                            <input type="hidden" name="utm_campaign" value="web_signup"> */}
+                            <ButtonComponent 
+                                btnProps="text-black bg-white capitalize h-20 px-12 text-14xl font-semibold shrink-0 rounded-xl absolute top-106 right-106"
+                                btnType="submit" 
+                                label="Sign up for free" 
+                            />
+                        </div>
+                        {/* <button type="submit" className="">Sign up for free</button> */}
+                    </form>
+                </div>
+            </div>
+
+            <div className="flex flex-row footer-menu--wrap">
+                <div className="basis-1/4 p-4">
+                    <h4>company</h4>
+                    <ul>
+                        {
+                            footerCompany.map((item) => {
+                                return (
+                                    <li key={item.label}>
+                                        <FooterCard {...item} />
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
+                <div className="basis-1/4 p-4">
+                    <h4>product</h4>
+                    <ul>
+                        {
+                            footerProduct.map((item) => {
+                                return (
+                                    <li key={item.label}>
+                                        <FooterCard {...item} />
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
+                <div className="basis-1/4 p-4">
+                    <h4>resources</h4>
+                    <ul>
+                        {
+                            footerResources.map((item) => {
+                                return (
+                                    <li key={item.label}>
+                                        <FooterCard {...item} />
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
+                <div className="basis-1/4 p-4">
+                    <h4>contact</h4>
+                    <ul>
+                        {
+                            footerContact.map((item) => {
+                                return (
+                                    <li key={item.label}>
+                                        <FooterCard {...item} />
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
