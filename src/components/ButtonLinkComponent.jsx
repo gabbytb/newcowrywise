@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
 
-const ButtonLinkComponent = ({ linkURL, btnBg, btnProps, label }) => {
+const ButtonLinkComponent = ({ linkURL, btnProps, btnBg, label }) => {
   return (
-    <Link to={linkURL} className={`opacity-0 rounded-lg shadow-lg ${btnProps} ${btnBg ? 'bg-blue-600' : 'bg-red-500'}`}>{label}</Link>
+    <Link to={linkURL} className={`${btnProps} ${btnBg ? 'bg-blue-600' : 'bg-transparent'}`}>{label}</Link>
   );
 };
 

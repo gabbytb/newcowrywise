@@ -1,5 +1,5 @@
-import { Nav, HomeBody, Footer } from "../components";
-
+import { Nav, HomeBody, } from "../components";
+import { Footer } from "../sections";
 
 
 

@@ -1,3 +1,4 @@
+import { FacebookIcon, InstagramIcon, TelegramIcon, TwitterIcon, WhatsappIcon, YoutubeIcon } from "../assets/icons"
 import { mayokun, wande, wura } from "../assets/images"
 
 
@@ -207,3 +208,30 @@ export const footerContact = [
 ]
 
 
+export const footerLinks = [
+    {
+        // title: "@cowrywise",
+        linkURL: "https://twitter.com/cowrywise",
+        iconURI: <TwitterIcon />,
+    },
+    {
+        linkURL: "https://facebook.com/cowrywise",
+        iconURI: <FacebookIcon />,
+    },
+    {
+        linkURL: "https://wa.me/message/TCXFSJS3VKZPD1",
+        iconURI: <WhatsappIcon />,
+    },
+    {
+        linkURL: "https://t.me/cowrywise",
+        iconURI: <TelegramIcon />,
+    },
+    {
+        linkURL: "https://instagram.com/cowrywise",
+        iconURI: <InstagramIcon />,
+    },
+    {
+        linkURL: "https://www.youtube.com/channel/UCRApoo2RnIcX4ocFmKZwYSg",
+        iconURI: <YoutubeIcon />,
+    },
+]

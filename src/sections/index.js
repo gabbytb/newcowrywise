@@ -5,6 +5,7 @@ import HomeSectionFour from "./HomeSectionFour";
 import HomeSectionFive from "./HomeSectionFive";
 import HomeSectionSix from "./HomeSectionSix";
 import HomeSectionSeven from "./HomeSectionSeven";
+import Footer from "./Footer";
 
 
 
@@ -17,4 +18,5 @@ export {
     HomeSectionFive,
     HomeSectionSix,
     HomeSectionSeven,
-}
+    Footer,
+};

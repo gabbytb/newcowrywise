@@ -1,9 +1,49 @@
+import { useRef, useEffect } from "react";
+import { useInViewport } from "react-in-viewport";
 import { investmentPlatform } from "../assets/images";
 import { ButtonLinkComponent } from "../components";
 
 
 
+
 const HomeSectionFive = () => {
+
+
+    const myRef = useRef();
+    const { inViewport } = useInViewport(myRef);
+
+
+    useEffect(() => {
+        function myFunction() {
+            if (inViewport) {
+                setTimeout(() => {
+                    document.querySelector('.registration-steps-wrap .step-one').classList.remove('opacity-50');
+                    setTimeout(() => {
+                        document.querySelector('.registration-steps-wrap .step-one').classList.add('ease-in-anim');
+                    }, 300);
+                    document.querySelector('.registration-steps-wrap .step-one .step-item-count').classList.add('ease-in-anim');
+                }, 400);
+
+                setTimeout(() => {
+                    document.querySelector('.registration-steps-wrap .step-two').classList.remove('opacity-50');
+                    setTimeout(() => {
+                        document.querySelector('.registration-steps-wrap .step-two').classList.add('ease-in-anim');
+                    }, 700);
+                    document.querySelector('.registration-steps-wrap .step-two .step-item-count').classList.add('ease-in-anim');
+                }, 800);
+
+                setTimeout(() => {
+                    document.querySelector('.registration-steps-wrap .step-three').classList.remove('opacity-50');
+                    setTimeout(() => {
+                        document.querySelector('.registration-steps-wrap .step-three').classList.add('ease-in-anim');
+                    }, 1100);
+                    document.querySelector('.registration-steps-wrap .step-three .step-item-count').classList.add('ease-in-anim');
+                }, 1200);
+            };
+        };
+        myFunction();
+    }, [inViewport]);
+
 
     
     return (
@@ -20,8 +60,8 @@ const HomeSectionFive = () => {
                         <div className="registration-steps-wrap">
 
                             {/* First Step */}
-                            <div className="step-item">
-                                <span className="step-item-count"></span>
+                            <div className="step-item step-one opacity-50">
+                                <span className="h-full step-item-count"></span>
                                 <div className="step-item-info">
                                     <span>Create an account</span>
                                     <p>Sign up for an account with your name, email and phone number.</p>
@@ -31,19 +71,19 @@ const HomeSectionFive = () => {
 
 
                             {/* Second Step */}
-                            <div className="step-item">
-                                <span className="step-item-count"></span>
+                            <div className="step-item step-two opacity-50">
+                                <span className="h-full step-item-count"></span>
                                 <div className="step-item-info">
                                     <span>Add a payment method</span>
-                                    <p>Using your debit card or a bank transfer, setup your first plan.</p>
+                                    <p ref={myRef}>Using your debit card or a bank transfer, setup your first plan.</p>
                                 </div>
                             </div>
                             {/* Second Step */}
 
 
                             {/* Third Step */}
-                            <div className="step-item">
-                                <span className="step-item-count"></span>
+                            <div className="step-item step-three opacity-50">
+                                <span className="h-full step-item-count"></span>
                                 <div className="step-item-info">
                                     <span>Watch your money grow</span>
                                     <p>Sit back, relax & let your money work for you all day, everyday.</p>
@@ -57,7 +97,8 @@ const HomeSectionFive = () => {
                             btnBg 
                             btnProps="text-white text-14xl font-bold px-10 py-6 capitalize"
                             linkURL="https://cowrywise.com/choose-account" 
-                            label="Sign up now" />
+                            label="Sign up now" 
+                        />
                     </div>
                 </div>
             </div>

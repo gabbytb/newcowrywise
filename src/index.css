@@ -6,46 +6,72 @@
 
 
 @layer base {
+
   @font-face {
-    font-family: "CW BR Firma";
-    src: url("/src/assets/fonts/br-firma/BRFirmaCW-Light.woff2") format("woff2");
+    /* providing various font file formats to ensure cross-browser compatibility */
+    font-family: "firma";
+    src: url('/src/assets/fonts/br-firma/BRFirmaCW-Light.eot'); /* IE9 Compat Modes */
+    src: url('/src/assets/fonts/br-firma/BRFirmaCW-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Light.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Light.woff') format('woff'), /* Pretty Modern Browsers */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Light.svg#firma') format('svg'); /* Legacy iOS */
     font-weight: 200;
-    font-display: fallback;
-    font-style: normal
-  }
+    font-display: swap;
+    font-style: normal;
+  }   
 
   @font-face {
-      font-family: "CW BR Firma";
-      src: url("/src/assets/fonts/br-firma/BRFirmaCW-Regular.woff2") format("woff2");
+    font-family: "firma";
+    src: url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.eot'); /* IE9 Compat Modes */
+    src: url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.svg#firma') format('svg'); /* Legacy iOS */
       font-weight: 400;
-      font-display: fallback;
-      font-style: normal
+      font-display: swap;
+      font-style: normal;
   }
 
   @font-face {
-      font-family: "CW BR Firma";
-      src: url("/src/assets/fonts/br-firma/BRFirmaCW-Medium.woff2") format("woff2");
+      font-family: "firma";
+      src: url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.eot'); /* IE9 Compat Modes */
+      src: url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.woff') format('woff'), /* Pretty Modern Browsers */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.svg#firma') format('svg'); /* Legacy iOS */
       font-weight: 500;
-      font-display: fallback;
-      font-style: normal
+      font-display: swap;
+      font-style: normal;
   }
 
   @font-face {
-      font-family: "CW BR Firma";
-      src: url("/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.woff2") format("woff2");
+      font-family: "firma";
+      src: url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.eot'); /* IE9 Compat Modes */
+      src: url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.woff') format('woff'), /* Pretty Modern Browsers */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.svg#firma') format('svg'); /* Legacy iOS */
       font-weight: 600;
-      font-display: fallback;
-      font-style: normal
+      font-display: swap;
+      font-style: normal;
   }
 
   @font-face {
-      font-family: "CW BR Firma";
-      src: url("/src/assets/fonts/br-firma/BRFirmaCW-Bold.woff2") format("woff2");
+      font-family: "firma";
+      src: url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.eot'); /* IE9 Compat Modes */
+      src: url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.svg#firma') format('svg'); /* Legacy iOS */
       font-weight: 700;
-      font-display: fallback;
-      font-style: normal
+      font-display: swap;
+      font-style: normal;
   }
-
 
   :root {
     --color-dark-blue: rgb(8, 37, 82);
@@ -64,15 +90,15 @@
 
   h1,h2,h3,h4,h5,h6,li,p,a,span,blockquote {
     color: var(--color-dark-blue);
-    font-family: "CW BR Firma";
-  }
-
-  .container {
-    max-width: 1380px !important;
+    font-family: "firma";
   }
 
   sub, sup {
     line-height: 0;
+  }
+
+  .container {
+    max-width: 1380px !important;
   }
 
   .text--white {
@@ -99,6 +125,7 @@
   .content p {
     @apply text-center text-15xl/more-loose text-skin-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
   }
+
 
 
 
@@ -163,20 +190,16 @@
   .ease-out-anim {
     @apply animate-easeOut
   }
-
-
-  /* .active {
+  .ease-in-anim {
+    @apply animate-easeInComplete
+  }
+  .active {
     @apply animate-lineDropdown
-  } */
-
-
+  }
   /***  Section  One  ***/
   .is-active {
     @apply flex
   }
-  /***  Section  One  ***/
- 
-
   /***  Section  Seven  ***/
   .activate-first {
     @apply animate-slideUpFirst
@@ -184,8 +207,13 @@
   .activate-second {
     @apply animate-slideUpSecond
   }
-  /***  Section  Seven  ***/
-
+  /***  Section  One  ***/
+  .z-9 {
+    z-index: 9 !important;
+  }
+  .ideal {
+    color: var(--color-light-blue) !important;
+  }
   /**************************************************************************/
   /***************************** Animations CSS *****************************/
   /**************************************************************************/
@@ -411,11 +439,10 @@
 
   .home-section-two--left h5 {
     @apply font-medium text-39xl -tracking-subtight xs:text-39xl/tight xs:-tracking-subtight xs:my-13.4 sm:text-5xl sm:pr-20 sm:my-14.4
-    /* xl:mt-13.4 xl:mb-13.5 */
   }
 
   .home-section-two--left a {
-    @apply bg-blue-600 w-96 h-16 capitalize flex justify-center items-center text-white font-bold text-2xl rounded-lg
+    @apply w-96 h-16 text-white text-2xl font-bold capitalize flex justify-center items-center 
   }
 
   .home-section-two--right {
@@ -535,7 +562,7 @@
 }
 
 .roi-investment p {
-  @apply flex justify-center items-center sm:w-182.3 sm:h-126.4 sm:my-6 lg:h-128.6 opacity-30
+  @apply flex justify-center items-center opacity-100 sm:w-182.3 sm:h-126.4 sm:my-6 lg:h-128.6
 }
  
 .roi-investment p sup {
@@ -659,31 +686,25 @@
       @apply content-[''] w-0.5 h-4/5 bg-blue-600 absolute left-5 top-20
     }
   
-    .registration-steps-wrap .step-item:nth-of-type(3)::before {
+    .registration-steps-wrap .step-item.step-item.step-three::before {
       @apply hidden
     }
   
-    .registration-steps-wrap .step-item:nth-of-type(1) .step-item-count::before {
+    .registration-steps-wrap .step-item.step-one .step-item-count::before,   
+    .registration-steps-wrap .step-item.step-two .step-item-count::before, 
+    .registration-steps-wrap .step-item.step-three .step-item-count::before {
       @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
     }
   
-    .registration-steps-wrap .step-item:nth-of-type(2) .step-item-count::before {
-      @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
-    }
-  
-    .registration-steps-wrap .step-item:nth-of-type(3) .step-item-count::before {
-      @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
-    }
-  
-    .registration-steps-wrap .step-item:nth-of-type(1) .step-item-count::after {
+    .registration-steps-wrap .step-item.step-one .step-item-count::after {
       @apply content-['01'] text-19xl font-semibold text-blue-600
     }
   
-    .registration-steps-wrap .step-item:nth-of-type(2) .step-item-count::after {
+    .registration-steps-wrap .step-item.step-two .step-item-count::after {
       @apply content-['02'] text-19xl font-semibold text-blue-600
     }
   
-    .registration-steps-wrap .step-item:nth-of-type(3) .step-item-count::after {
+    .registration-steps-wrap .step-item.step-three .step-item-count::after {
       @apply content-['03'] text-19xl font-semibold text-blue-600
     }
   
@@ -774,7 +795,7 @@
     @apply uppercase text-14xl text-skin-darkBlue font-semibold mt-15.6 mb-12
   }
   .step-item .step-item-info {
-    @apply w-128.5
+    @apply w-full
   }
   .disqus {
     @apply flex flex-row absolute 
@@ -849,11 +870,32 @@
 .footer-menu--wrap h4 {
   @apply text-19xl font-semibold capitalize -tracking-tightened mt-13.7 mb-12
 }
+.footer-menu--wrap {
+  @apply mt-40 mb-16
+}
 .footer-menu--wrap a {
   @apply text-42xl
 }
 .footer-menu--wrap div:first-of-type a {
   @apply capitalize
+}
+.footer-menu--wrap ul li {
+  @apply text-31xl/more-loose mt-3.2 
+}
+.footer-menu--wrap ul li a {
+  @apply text-42xl font-medium text-slate-400
+}
+.footer-social--wrap ul li {
+  @apply flex space-x-6 h-full mt-8
+}
+.footer-social--wrap ul li a {
+  @apply flex w-6 h-6 fill-skin-gray
+}
+.footer-social--wrap ul li a svg {
+  @apply flex h-full fill-skin-gray
+}
+.footer-badge p {
+  @apply text-2xl my-6 font-firma font-medium text-slate-600
 }
 /**  Footer  **/
 

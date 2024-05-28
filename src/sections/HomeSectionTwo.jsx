@@ -16,7 +16,7 @@ const HomeSectionTwo = () => {
     const { inViewport } = useInViewport(
         myRef, // options, config = { disconnectOnLeave: false }, props
     );
-    console.log('In ViewPort: ', inViewport);
+    // console.log('In ViewPort: ', inViewport);
 
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const HomeSectionTwo = () => {
               document.querySelector('.home-section-two--left div a').classList.remove('opacity-0');
               document.querySelector('.home-section-two--right svg').classList.remove('opacity-0');
               document.querySelector('.home-section-two--right svg').classList.add('animate-slideUp');
-            }, 1000);
+            }, 1300);
           }
       };
 
@@ -58,7 +58,7 @@ const HomeSectionTwo = () => {
 
 
   return (
-    <section ref={myRef} className="home-section-two">
+    <section className="home-section-two">
       {/* {`Enter viewport: ${enterCount} times`} */}
         <div className="h-container-2 container">
             <div className="flex flex-row sm:grid sm:grid-cols-18 gap-16 px-10 min-h-138">
@@ -69,7 +69,12 @@ const HomeSectionTwo = () => {
                   <div className="flex flex-col pt-5 space-y-12 sm:space-y-16 lg:space-y-12 w-136">
                       <h2 className="opacity-0">Get a <span className="opacity-0">little</span>&nbsp; richer each day</h2>
                       <h5 className='opacity-0'>One small step today, a giant leap for tomorrow.</h5>
-                      <ButtonLinkComponent linkURL="https://cowrywise.com/choose-account" label="Start your financial journey" />
+                      <ButtonLinkComponent 
+                          linkURL="https://cowrywise.com/choose-account" 
+                          label="Start your financial journey"
+                          btnProps="rounded-lg shadow-lg opacity-0"
+                          btnBg
+                      />
                   </div>
                 </div>
                 {/* Left Side */}
@@ -79,11 +84,12 @@ const HomeSectionTwo = () => {
 
                 {/* Right Side */}
                 <div className="home-section-two--right">
-                    <div id="bar-anima--wrap">
+                    <div>
+                      {/* <div id="bar-anima--wrap"> */}
                       <GraphComponent />
                     </div>
 
-                    <div className="card-item-one card-wrap">
+                    <div ref={myRef} className="card-item-one card-wrap">
                       <div className="card-item">
                         <h6>Build your savings</h6>
                         <p>Consistently automate your savings while setting realistic goals.</p>

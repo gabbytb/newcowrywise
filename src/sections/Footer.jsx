@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppStoreIcon, ArrowRight, PlayStoreIcon, StarRating, } from "../assets/icons";
-import { footerCompany, footerProduct, footerResources, footerContact, } from "../constants";
-import { ButtonComponent, FooterCard, } from "./";
+import { footerCompany, footerProduct, footerResources, footerContact, footerLinks, } from "../constants";
+import { ButtonComponent, FooterCard, FooterSocialCard, } from "../components";
 
 
 
@@ -159,6 +159,32 @@ const Footer = () => {
                         }
                     </ul>
                 </div>
+            </div>
+
+            <hr/>
+            
+            <div className="flex footer-social--wrap">
+                <div className="basis-7/12 p-4 h-28">
+                    <ul>
+                        <li>
+                            {
+                                footerLinks.map((item) => {
+                                    return (
+                                        <FooterSocialCard key={item.linkURL} {...item} />
+                                    );
+                                })
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="flex justify-between footer-badge">
+                <div>
+                    <p>🇳🇬 &nbsp; 5C Reverend Ogunbiyi Street, Ikeja GRA, Lagos Nigeria.</p>
+                    <p>🇺🇸 &nbsp; 2261 Market Street #4817 San Francisco, CA 94114</p>
+                </div>
+                <div></div>
             </div>
         </div>
     </footer>

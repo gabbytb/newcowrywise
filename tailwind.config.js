@@ -21,7 +21,7 @@ module.exports = {
       '110%': '110%',
     },
     fontFamily: {
-      firma: ["CW BR Firma"],
+      firma: ["firma"],
     },
     fontSize: {
       'xs': '.75rem',     // Extra Small
@@ -81,9 +81,11 @@ module.exports = {
     extend: {
       animation: {   
         dropdown: 'showDropdown 0.5s ease',     /** NAV MENU */
-        lineDropdown: 'lineDropdown 0.8s ease',
-        easeIn: 'easeIn 2.5s ease',               /** SECTION 1 ANIMATION */
-        easeOut: 'easeOut 1s ease-out',             /** SECTION 1 ANIMATION */
+        lineDropdown: 'lineDropdown 0.5s linear',
+        easeIn: 'easeIn 0.5s ease-out',               /** SECTION 1 ANIMATION */
+        easeInComplete: '0.8s linear',
+        easeInFast: 'easeInFast 3s ease',             /** SECTION 3 ANIMATION */
+        easeOut: 'easeOut 1s linear',             /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
         fadeOut: 'fadeOut 21s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
@@ -91,7 +93,7 @@ module.exports = {
         slideUpFirst: 'slideUp 0.3s ease-in',     /** SECTION 7 DISCUSS ANIMATION */
         slideUpSecond: 'slideUp 0.6s ease-in',     /** SECTION 7 DISCUSS ANIMATION */
         slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
-        slideDown: 'slideDown .42s ease-in-out',      /** STICKY HEADER **/
+        slideDown: 'slideDown .6s ease-in-out',      /** STICKY HEADER **/
       },
       backgroundColor: {
         skin: {
@@ -111,6 +113,9 @@ module.exports = {
           hsla: 'var(--shadow-gray-opacity)',
           transparentblue: 'var(--background-transparent-blue)',
         }
+      },
+      colors: {
+        'skin-gray': 'var(--color-lighter-gray)',
       },
       gridTemplateColumns: {
         '16': '1fr 1fr',
@@ -174,11 +179,25 @@ module.exports = {
         '15.9': '15rem',
       },
       keyframes: {
-        easeIn: {
+        easeIn: {    
           from: {
-            opacity: 0,
+            transform: "translate3d(0px, 0.7294px, 0px) rotate(2deg) scale(1.0396, 1.03964)",
+            opacity: 0.8,
+            height: "95%",
           },
           to: {
+            transform: "translateX(0)",
+            opacity: 1,
+            height: "100%",
+          }
+        },
+        easeInFast: {    
+          from: {
+            transform: "translate3d(0px, 0.7294px, 0px) rotate(2deg) scale(1.0396, 1.03964)",
+            opacity: 0.8,
+          },
+          to: {
+            transform: "translateX(0)",
             opacity: 1,
           }
         },
@@ -353,9 +372,8 @@ module.exports = {
         '126.5': '46.5rem',       
         '127': '48.7rem',
         '127.5': '48.75rem',
-        '128.5': '50.8rem',
         '135': '52rem',
-        '135.3': '52.3rem',
+        '135.3': '52.3rem',   // investment input width
         '136': '56rem',
         '140': '61.3rem',
         '182.3': '86.3rem',

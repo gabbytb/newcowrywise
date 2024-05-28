@@ -25,6 +25,16 @@ import ArrowRight from "./ArrowRight";
 import StarRating from "./StarRating";
 
 
+// Footer Icons
+import TwitterIcon from "./TwitterIcon";
+import FacebookIcon from "./FacebookIcon";
+import WhatsappIcon from "./WhatsappIcon";
+import TelegramIcon from "./TelegramIcon";
+import InstagramIcon from "./InstagramIcon";
+import YoutubeIcon from "./YoutubeIcon";
+
+
+
 
 
 
@@ -55,4 +65,11 @@ export {
     LearnSecondIcon,
     LearnThirdIcon,
 
+
+    TwitterIcon,
+    FacebookIcon,
+    WhatsappIcon,
+    TelegramIcon,
+    InstagramIcon,
+    YoutubeIcon,
 }

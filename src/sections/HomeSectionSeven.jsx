@@ -24,16 +24,22 @@ const HomeSectionSeven = () => {
                     setCount(count + 1);                   
                         
                     var disqusObj = document.querySelectorAll('.disqus');  
-                    for (var i = 0; i < disqusObj.length; i++) {                                                              
+                    for (var i = 0; i < disqusObj.length; i++) {                                                            
                         if (count === i) { 
                             disqusObj[i].classList.remove('hidden');
                             disqusObj[i].classList.add('activate-first');
                                                                       
+                            
                             var disqusA = document.querySelectorAll('.disqus-a');  
                             for (var u = 0; u < disqusA.length; u++) {
                                 if (i === u) {
                                     disqusA[u].classList.add('activate-second');
-                                };
+
+                                    var lasIndex = disqusA.length - 1;
+                                    if (lasIndex === u) {
+                                        disqusA[u].classList.add('ideal');
+                                    }
+                                };                               
                             }
                         } else {
                             disqusObj[i].classList.remove('activate-first');

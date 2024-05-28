@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import {useRef, useEffect, useState } from "react";
+import { useInViewport } from "react-in-viewport";
 import { customersQuotes, customersThumbnails } from "../constants";
 import { TestimonialQuotes, TestimonialThumbnails } from "../components";
 import { AppStoreIcon, PlayStoreIcon, VideoIcon } from "../assets/icons";
@@ -10,36 +11,76 @@ import { wura } from "../assets/images";
 
 
 
+
 const HomeSectionOne = () => { 
     
-    const [activeImage, setActiveImage] = useState(wura);
-    // console.log("Active Image: ", activeImage);   
 
+
+    const myRef = useRef();
+    const {
+        inViewport,
+        // enterCount,
+        // leaveCount,
+      } = useInViewport(
+        myRef,
+        // options,
+        // config = { disconnectOnLeave: false },
+        // props
+    );
 
     
-    // 1st ANIMATE: Section 1 "Active Image" ease-in...
+
+
+    // Check when Component is in viewport
     useEffect(() => {
         function myFunc() {
-            document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
+            if (inViewport) {
+                var testimonialMedia = document.querySelector(".testimonial .testimonial-media");
+                testimonialMedia.classList.remove('hidden');
+                testimonialMedia.classList.add('s-1-anim');
+            };
+
+            document.querySelector(".testimonial .testimonial-video-ctrl").classList.add('z-9');
         };
-        myFunc();
-    }, []);     //  empty Array, so that it runs once.       
+
+        //  Not empty Array, so this should run multiple times as the dependency passed (i.e inViewport) would keep changing state everytime this section of my webpage is in view.
+        //  This is used to clear the setTimeout function after it has run once!
+        let timer = setTimeout(myFunc, 300);        
+        
+        //  Return a cleanup function to clear the timer
+        return () => {
+            clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes
+        };
+    }, [inViewport]);   // Pass inViewport as array dependency!     
     
 
+
+
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+    // PRESENT STATE of Active Image
+    /***********************************************************************************************************************/
+    const [activeImage, setActiveImage] = useState(wura);
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+
     
-    // 2nd ANIMATE: When Section 1 "Active Image" changes...
-    function onActiveImgChange() {
-        if (activeImage) {
-            setTimeout(() => {
+
+
+    // Run when activeImage state changes
+    useEffect(() => {
+        function onActiveImgChange() {
+            if (activeImage) {
                 document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
-            }, 0);
-
-            setTimeout(() => {
-                document.querySelector(".testimonial .testimonial-media").classList.remove('s-1-anim');
-            }, 300);
+                
+                setTimeout(() => {                   
+                    document.querySelector(".testimonial .testimonial-media").classList.remove('s-1-anim');       
+                }, 500);
+            };
         };
-    };
-    onActiveImgChange();
+        onActiveImgChange();
+    }, [activeImage]);  // Pass activeImage as array dependency!
+
 
 
 
@@ -52,14 +93,12 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     
 
-
-
     useEffect(() => {        
         function realFunc() {       
             // Loop through each thumbnail 
             for (var n = 0; n < customThumbnails.length; n++) {
 
-                // HERE: Check to find the one that matches the currently active image.
+                // HERE: Check to find the one that matches the Current activeImage.
                 if (activeImage === customThumbnails[n]?.imgURI) {
                     
                     var findTestimonial = document.getElementById('customers-testimonial');
@@ -89,7 +128,7 @@ const HomeSectionOne = () => {
     
 
     return (
-        <section className="home-section-one">
+        <section ref={myRef} className="home-section-one">
             <div className="h-container-1 container">
                 <div className="s1-grids-wrap">
 
@@ -109,7 +148,7 @@ const HomeSectionOne = () => {
                                 
                                 }
                                 <div className="bg-white aboslute top-0 left-0 w-full h-full testimonial-overlay"></div>
-                                <div className="testimonial-media">
+                                <div className="testimonial-media hidden">
                                     <img src={activeImage} alt="customer" />
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ const TestimonialThumbnails = ({ activeImage, exactItem, changeActiveImage}) => 
             changeActiveImage(exactItem.imgURI);
         };
     };
-
+    
 
     return (
         <img className="img-click" src={exactItem.imgURI} alt={exactItem.label} onClick={handleActiveImage} />
