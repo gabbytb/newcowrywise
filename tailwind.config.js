@@ -82,14 +82,14 @@ module.exports = {
       animation: {   
         dropdown: 'showDropdown 0.5s ease',     /** NAV MENU */
         lineDropdown: 'lineDropdown 0.5s linear',
-        easeIn: 'easeIn 0.25s ease-out',               /** SECTION 1 ANIMATION */
-        easeInn: 'easeInn 1s ease-in-out',             /** SECTION 2 ANIMATION */
+        easeIn: 'easeIn 0.25s ease-out',               /** WORKING: SECTION 1 ANIMATION */
+        easeInn: 'easeInn 1s ease-in-out',             /** WORKING: SECTION 2 ANIMATION */
         easeInComplete: '0.8s linear',
         easeInFast: 'easeInFast 3s ease-in',             /** SECTION 3 ANIMATION */
-        easeOut: 'easeOut 1s ease-in-out',             /** SECTION 1 ANIMATION */
+        easeOut: 'easeOut 1s ease-in-out',             /** WORKING: SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
-        fadeOut: 'fadeOut 21s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
+        fadeOut: 'fadeOut 21s linear infinite',   /** WORKING: SECTION 4 CARDS SLIDE ANIMATION */  
         slideUp: 'slideUp 1.7s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideUpFirst: 'slideUp 0.3s ease-in',     /** SECTION 7 DISCUSS ANIMATION */
         slideUpSecond: 'slideUp 0.6s ease-in',     /** SECTION 7 DISCUSS ANIMATION */
