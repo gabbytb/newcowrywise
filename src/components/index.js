@@ -1,7 +1,5 @@
 import Nav from "./Nav";
 import HomeBody from "./HomeBody";
-import FooterCard from "./FooterCard";
-import FooterSocialCard from "./FooterSocialCard";
 
 
 import TestimonialQuotes from "./TestimonialQuotes";
@@ -10,8 +8,11 @@ import ButtonComponent from "./ButtonComponent";
 import ButtonLinkComponent from "./ButtonLinkComponent";
 import GraphComponent from "./GraphComponent";
 import SliderCards from "./SliderCards";
-import Disqus from "./Disqus";
+import DisqusCard from "./DisqusCard";
 
+
+import FooterCard from "./FooterCard";
+import FooterSocialCard from "./FooterSocialCard";
 
 
 
@@ -19,13 +20,17 @@ import Disqus from "./Disqus";
 export {
     Nav,
     HomeBody,
+
+
     TestimonialQuotes,
     TestimonialThumbnails,
     ButtonComponent,
     ButtonLinkComponent,
     GraphComponent,
     SliderCards,
-    Disqus,
+    DisqusCard,
+
+
     FooterCard,
     FooterSocialCard,
 }

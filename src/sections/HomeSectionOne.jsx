@@ -35,23 +35,30 @@ const HomeSectionOne = () => {
     useEffect(() => {
         function myFunc() {
             if (inViewport) {
-                var testimonialMedia = document.querySelector(".testimonial .testimonial-media");
+                var testimonialMedia = document.querySelector(".testimonial .testimonial-media");             
                 testimonialMedia.classList.remove('hidden');
                 testimonialMedia.classList.add('s-1-anim');
+
+                if (testimonialMedia.classList.contains('s-1-anim')) {
+                    setTimeout(() => {
+                        testimonialMedia.classList.remove('s-1-anim');
+                    }, 400);
+                };
             };
 
             document.querySelector(".testimonial .testimonial-video-ctrl").classList.add('z-9');
         };
 
-        //  Not empty Array, so this should run multiple times as the dependency passed (i.e inViewport) would keep changing state everytime this section of my webpage is in view.
+        //  Not empty Array, so this should run multiple times as 
+        //  as "inViewport" would keep changing state everytime this section of my webpage is in view.
         //  This is used to clear the setTimeout function after it has run once!
-        let timer = setTimeout(myFunc, 300);        
+        var timer = setTimeout(myFunc, 400);
         
         //  Return a cleanup function to clear the timer
         return () => {
             clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes
         };
-    }, [inViewport]);   // Pass inViewport as array dependency!     
+    }, [!inViewport]);   // Pass inViewport as array dependency!     
     
 
 
@@ -72,10 +79,10 @@ const HomeSectionOne = () => {
         function onActiveImgChange() {
             if (activeImage) {
                 document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
-                
+
                 setTimeout(() => {                   
                     document.querySelector(".testimonial .testimonial-media").classList.remove('s-1-anim');       
-                }, 500);
+                }, 400);
             };
         };
         onActiveImgChange();

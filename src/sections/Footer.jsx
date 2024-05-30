@@ -18,7 +18,7 @@ const Footer = () => {
 
                     {/* top review card */}
                     <div className="top-review--card">
-                        <div className="flex justify-start items-center r-star-rating">
+                        <div className="r-star-rating">
                             <h3>4.5<sub>/5</sub></h3>
                             <StarRating />
                         </div>
@@ -53,7 +53,7 @@ const Footer = () => {
 
                     {/* top review card */}
                     <div className="top-review--card">
-                        <div className="flex justify-start items-center r-star-rating">
+                        <div className="r-star-rating">
                             <h3>4.4<sub>/5</sub></h3>
                             <StarRating />
                         </div>

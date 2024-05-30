@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 
 
-
-
-
 const TestimonialQuotes = ({ textQuote, textAuthor, linkURL, linkText }) => {
+
 
     return (
         <div className="testimonial-quotes">
@@ -16,5 +14,6 @@ const TestimonialQuotes = ({ textQuote, textAuthor, linkURL, linkText }) => {
         </div>
     );
 };
+
 
 export default TestimonialQuotes;

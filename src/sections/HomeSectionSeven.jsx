@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { flipItems } from "../constants";
-import { Disqus } from "../components";
+import { DisqusCard } from "../components";
 
 
 
@@ -37,7 +37,7 @@ const HomeSectionSeven = () => {
 
                                     var lasIndex = disqusA.length - 1;
                                     if (lasIndex === u) {
-                                        disqusA[u].classList.add('ideal');
+                                        disqusA[u].classList.add('text-skin-lightblue');
                                     }
                                 };                               
                             }
@@ -72,7 +72,7 @@ const HomeSectionSeven = () => {
                         {
                             flipItems.map((item) => {
                                 return (
-                                    <Disqus key={item.title} {...item} />
+                                    <DisqusCard key={item.title} {...item} />
                                 );
                             })
                         }

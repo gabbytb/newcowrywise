@@ -1,4 +1,6 @@
 const GraphComponent = (props) => {
+
+
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -129,4 +131,6 @@ const GraphComponent = (props) => {
         </svg>
     );
 };
+
+
 export default GraphComponent;;

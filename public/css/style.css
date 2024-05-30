@@ -829,7 +829,7 @@ header {
 
 /**************************************************************************/
 
-/***************************** Animations CSS *****************************/
+/************************* CUSTOM / Animations CSS ************************/
 
 /**************************************************************************/
 
@@ -876,9 +876,9 @@ header {
 
 @keyframes easeIn {
   from {
-    transform: translate3d(0px, 0.7294px, 0px) rotate(2deg) scale(1.0396, 1.03964);
+    transform: translate3d(0px, 100px, 0px) rotate(15deg) scale(1.0796, 1.07955);
     opacity: 0.8;
-    height: 95%;
+    height: 50%;
   }
 
   to {
@@ -889,8 +889,10 @@ header {
 }
 
 .s-1-anim {
-  animation: easeIn 0.5s ease-out;
+  animation: easeIn 0.25s ease-out;
 }
+
+/** Working for Section One Background Active Image */
 
 @keyframes slideRight {
   0% {
@@ -1000,7 +1002,6 @@ header {
 
   100% {
     transform: translate3d(-100%, 0, 0);
-    opacity: 1;
   }
 }
 
@@ -1008,8 +1009,12 @@ header {
   animation: fadeOut 21s linear infinite;
 }
 
+.ease-out-anim {
+  /** Working */
+}
+
 @keyframes easeOut {
-  0% {
+  from {
     opacity: 1;
   }
 
@@ -1019,7 +1024,8 @@ header {
 }
 
 .ease-out-anim {
-  animation: easeOut 1s linear;
+  animation: easeOut 1s ease-in-out;
+  opacity: 0;
 }
 
 .ease-in-anim {
@@ -1042,13 +1048,9 @@ header {
   animation: lineDropdown 0.5s linear;
 }
 
-/***  Section  One  ***/
-
 .is-active {
   display: flex;
 }
-
-/***  Section  Seven  ***/
 
 @keyframes slideUp {
   0% {
@@ -1092,54 +1094,26 @@ header {
   animation: slideUp 0.6s ease-in;
 }
 
-/***  Section  One  ***/
-
-.z-9 {
-  z-index: 9 !important;
-}
-
-.ideal {
-  color: var(--color-light-blue) !important;
-}
-
 /**************************************************************************/
 
 /***************************** Animations CSS *****************************/
 
 /**************************************************************************/
 
-header .cta-menu {
+.cta-menu a {
   display: none;
 }
 
-@media (min-width: 769px) {
-  header .cta-menu {
-    display: none;
-  }
-}
-
 @media (min-width: 981px) {
-  header .cta-menu {
+  .cta-menu a {
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
-  }
-
-  header .cta-menu > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 }
 
 .nav-links {
   display: none;
-}
-
-@media (min-width: 769px) {
-  .nav-links {
-    display: none;
-  }
 }
 
 @media (min-width: 981px) {
@@ -1164,13 +1138,8 @@ header .cta-menu {
 }
 
 .menu-item .nav-dropdown {
-  display: none;
-}
-
-.menu-item:hover .nav-dropdown {
   position: absolute;
   top: 6.8rem;
-  display: flex;
   width: -webkit-max-content;
   width: max-content;
 }
@@ -1185,7 +1154,7 @@ header .cta-menu {
   }
 }
 
-.menu-item:hover .nav-dropdown {
+.menu-item .nav-dropdown {
   animation: showDropdown 0.5s ease;
   border-radius: 0.75rem;
   border-width: 1px;
@@ -3032,10 +3001,6 @@ header .cta-menu a:last-child {
   align-items: center;
 }
 
-.justify-start {
-  justify-content: flex-start;
-}
-
 .justify-end {
   justify-content: flex-end;
 }
@@ -3050,6 +3015,12 @@ header .cta-menu a:last-child {
 
 .gap-16 {
   gap: 4rem;
+}
+
+.space-x-10 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-12 > :not([hidden]) ~ :not([hidden]) {
@@ -3222,6 +3193,10 @@ header .cta-menu a:last-child {
   color: var(--color-lighter-gray);
 }
 
+.text-skin-lightblue {
+  color: var(--color-light-blue);
+}
+
 .text-sky-950\/100 {
   color: rgb(8 47 73 / 1);
 }
@@ -3243,6 +3218,14 @@ header .cta-menu a:last-child {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.text-skin-lightblue {
+  color: var(--color-light-blue) !important;
+}
+
+.z-9 {
+  z-index: 9 !important;
 }
 
 /**  Footer  **/
@@ -3284,10 +3267,37 @@ header .cta-menu a:last-child {
 }
 
 .top-review--card {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 601px) {
+  .top-review--card {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.top-review--card .r-star-rating {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (min-width: 601px) {
+  .top-review--card .r-star-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.top-review--card a {
+  margin-top: 2rem;
 }
 
 .top-review--card .r-star-rating svg {

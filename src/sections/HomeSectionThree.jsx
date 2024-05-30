@@ -6,24 +6,28 @@ import { ButtonComponent, ButtonLinkComponent } from "../components";
 
 
 
-const HomeSectionThree = () => { 
 
 
+const HomeSectionThree = () => {
+
+    
     const [isVisible, setIsVisible] = useState(false);
-
         
+
     useEffect(() => {
         function myFunction() {
-            document.querySelector(".roi-investments-overlay").classList.add('hidden');    
             if (isVisible) {
                 setTimeout(() => {
                     document.querySelector(".roi-investments-overlay").classList.remove('hidden');
                     document.querySelector(".roi-investments-overlay").classList.add('ease-out-anime');
                 }, 500);
             };
+
+            document.querySelector(".roi-investments-overlay").classList.add('hidden'); 
         };
         myFunction();
     }, [isVisible]);
+
 
 
     return (
@@ -63,8 +67,8 @@ const HomeSectionThree = () => {
                             <input type="range" min="5000" max="10000000" step="1000" defaultValue="100000" />
                         </div>
                     </div>
-                    <div className="relative" onMouseOver={(e) => setIsVisible(true)}>
-                        <div className="text-center roi-investment">
+                    <div className="relative">
+                        <div className="text-center roi-investment" onMouseOver={(e) => setIsVisible(true)}>
                             <h6>Today, you’d have</h6>
                             <p>
                                 <sup>₦</sup>
@@ -91,6 +95,8 @@ const HomeSectionThree = () => {
                     </div>
                     <p>Calculations are based on the average performance of conservative mutual funds on Cowrywise from 2019. Calculation excludes processing fees.</p>                    
                 </div>
+
+
             </div>
         </section>
     );

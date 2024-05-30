@@ -1,26 +1,21 @@
-const ButtonComponent = ({ btnType, btnProps, label }) => {
+const ButtonComponent = ({ btnType, btnProps, btnBg, label }) => {
 
-  
-  function clickFunction() {
-      var invstmentOverlay = document.getElementById('investmentOverlay');
-      var investmentP = document.querySelector('.roi-investment p');
-      invstmentOverlay.classList.add('ease-out-anim');
+    
+    function clickFunction() {
+        var invstmentOverlay = document.getElementById('investmentOverlay');
+        if (invstmentOverlay.classList.contains('ease-out-anime') ) {
+            invstmentOverlay.classList.remove('ease-out-anime');
+        };
 
-      if (!invstmentOverlay.classList.contains('ease-out-anim')) {
-          invstmentOverlay.classList.remove('ease-out-anim');
-          return;
-      };
-  
-      invstmentOverlay.style.opacity = '0';
-      investmentP.style.opacity = "1";
-  };
-  
+        invstmentOverlay.classList.add('ease-out-anim');
+    };
 
-  return (
-      <button type={btnType} className={`${btnProps}`} onClick={clickFunction}>
-          {label}
-      </button>
-  );
+   
+    return (
+        <button type={btnType} className={`${btnProps} ${btnBg ? 'bg-blue-600' : 'bg-transparent'}`} onClick={clickFunction}>
+            {label}
+        </button>
+    );
 };
 
 

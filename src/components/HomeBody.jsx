@@ -1,13 +1,12 @@
 import { HomeSectionOne, HomeSectionTwo, HomeSectionThree, HomeSectionFour, HomeSectionFive, HomeSectionSix, HomeSectionSeven, } from "../sections";
 
 
-
 const HomeBody = () => {
 
     return (
         <main className="relative">
             <div>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie_svg.min.js"></script>
+                {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie_svg.min.js"></script> */}
                 <HomeSectionOne />
                 <HomeSectionTwo />
                 <HomeSectionThree />
@@ -19,4 +18,6 @@ const HomeBody = () => {
         </main>
     );
 };
+
+
 export default HomeBody;

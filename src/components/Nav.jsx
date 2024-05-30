@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { BrandLogo, BrandLogoWhite } from "../assets/images";
 import { PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, } from "../assets/icons";
+import { useEffect, useState } from "react";
+
 
 
 
@@ -9,10 +11,23 @@ import { PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, BusinessFirst
 
 const Nav = () => {
     
+
+    const [clicked, setClicked] = useState(false);
+    // const [exited, setExited] = useState(false);
+
+
+    useEffect(() => {       
+        function myFunction() {
+            // console.clear();
+        };
+        myFunction();
+    }, [clicked]);
+
+
     return (
         <>
             {/* Top bar */}
-            <Link className="bg-skin-skyblue h-15 text-10xl text-center text-skin-gray font-medium flex justify-center items-center cursor-pointer" 
+            <Link className="bg-skin-skyblue h-15 text-10xl text-skin-gray font-medium text-center flex justify-center items-center cursor-pointer" 
                 to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" 
                 target="_blank">Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
             </Link>
@@ -32,11 +47,11 @@ const Nav = () => {
                         </Link>
 
 
-                        <div className="flex justify-end w-full h-full sm:justify-end lg:justify-between">
-                            <ul className="nav-links">
-                                <li className="menu-item my-4 relative">
+                        <div className="flex justify-end items-center w-full h-full sm:justify-end lg:justify-between">
+                            <ul id="nav-menus-wrap" className="nav-links">
+                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
                                     <p className="has-dropdown">Personal</p>
-                                    <div className="nav-dropdown">
+                                    <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left border-e-2 mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://cowrywise.com/plan" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -75,9 +90,9 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative">
+                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
                                     <p className="has-dropdown">Business</p>
-                                    <div className="nav-dropdown">
+                                    <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://cowrywise.com/plan" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -91,9 +106,9 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative">
+                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
                                     <p className="has-dropdown">Developer</p>
-                                    <div className="nav-dropdown">
+                                    <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left border-e-2 mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://cowrywise.com/plan" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -122,9 +137,9 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative">
+                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
                                     <p className="has-dropdown">Learn</p>
-                                    <div className="nav-dropdown">
+                                    <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left mr-20 pr-20">
                                             <ul>
                                                 <Link to="https://learn.cowrywise.com" className="nav-dropdown-item flex items-center mb-12 pr-8">
@@ -154,7 +169,7 @@ const Nav = () => {
                                 </li>
                             </ul>
 
-                            <div className="cta-menu">
+                            <div className="space-x-10 cta-menu">
                                 <Link to="#">log in</Link>
                                 <Link to="#">sign up for free</Link>
                             </div>

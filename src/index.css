@@ -155,17 +155,32 @@
 
   
   /**************************************************************************/
-  /***************************** Animations CSS *****************************/
+  /************************* CUSTOM / Animations CSS ************************/
   /**************************************************************************/
   .sticky-header {
-    @apply fixed top-0 z-50 w-full animate-slideDown shadow-sm bg-blue-600 sm:bg-white h-114.5
+    @apply 
+      fixed 
+      top-0 
+      z-50 
+      h-114.5
+      w-full 
+      animate-slideDown 
+      shadow-sm 
+      bg-blue-600 
+      sm:bg-white 
+    ;
   }
   .no-scrollbar {    
-    @apply overflow-x-hidden overflow-y-scroll
+    @apply 
+      overflow-x-hidden 
+      overflow-y-scroll
+    ;
   }
   .s-1-anim {
-    @apply animate-easeIn
-  }
+    @apply 
+      animate-easeIn
+    ;
+  }     /** Working for Section One Background Active Image */
   .s-2-l2-anim {
     @apply animate-slideRight
   }
@@ -187,32 +202,33 @@
   .s-4-anim {
     @apply animate-fadeOut
   }
-  .ease-out-anim {
-    @apply animate-easeOut
+  .ease-out-anim {    /** Working */
+    @apply 
+      animate-easeOut
+      opacity-0
+    ;
+  }
+  .ease-out-anime {    /** Working for Section Two */
+    @apply 
+      animate-easeInn
+    ;
   }
   .ease-in-anim {
-    @apply animate-easeInComplete
+    @apply 
+      animate-easeInComplete
+    ;
   }
   .active {
     @apply animate-lineDropdown
   }
-  /***  Section  One  ***/
   .is-active {
     @apply flex
   }
-  /***  Section  Seven  ***/
   .activate-first {
     @apply animate-slideUpFirst
   }
   .activate-second {
     @apply animate-slideUpSecond
-  }
-  /***  Section  One  ***/
-  .z-9 {
-    z-index: 9 !important;
-  }
-  .ideal {
-    color: var(--color-light-blue) !important;
   }
   /**************************************************************************/
   /***************************** Animations CSS *****************************/
@@ -225,26 +241,37 @@
 
   
 
-  header .cta-menu {
-    @apply hidden sm:hidden lg:inline-flex lg:justify-end lg:items-center lg:space-x-10 
+  .cta-menu a {
+    @apply hidden lg:inline-flex lg:justify-end lg:items-center; 
   }
 
   .nav-links {
-     @apply hidden sm:hidden lg:inline-flex lg:justify-start lg:space-x-20 lg:cursor-pointer lg:z-10 lg:items-center
+     @apply hidden lg:inline-flex lg:justify-start lg:space-x-20 lg:cursor-pointer lg:z-10 lg:items-center;
   }
   
   .has-dropdown {
-    @apply py-10
+    @apply 
+      py-10
+    ;
   }
 
   .menu-item .nav-dropdown {
-    @apply hidden 
+    @apply 
+      w-max 
+      absolute 
+      top-19 
+      bg-white  
+      pt-12 
+      px-12 
+      pb-10 
+      shadow-sm 
+      border 
+      border-slate-200 
+      rounded-xl
+      animate-dropdown
+    ;
   }
 
-  .menu-item:hover .nav-dropdown {
-    @apply animate-dropdown w-max absolute top-19 bg-white flex pt-12 px-12 pb-10 shadow-sm border border-slate-200 rounded-xl
-  }
-  
   .menu-item p {
     @apply relative text-2xl font-normal text-slate-500
   }
@@ -282,7 +309,11 @@
   }
 
   header .cta-menu a {
-    @apply text-blue-600 text-2xl font-bold capitalize
+    @apply 
+    text-blue-600 
+    text-2xl 
+    font-bold 
+    capitalize
   }
 
   header .cta-menu a:last-child {
@@ -826,7 +857,19 @@
   @apply w-full min-h-98 bg-white border border-slate-200 shadow-lg rounded-3xl py-14.7 px-15.8 
 }
 .top-review--card {
-  @apply flex flex-row justify-between mb-8
+  @apply 
+    flex flex-col justify-between 
+    xs:flex xs:flex-row xs:mb-8 xs:items-end
+}
+.top-review--card .r-star-rating {
+  @apply 
+    flex flex-row items-start
+    xs:flex xs:flex-row xs:justify-start xs:items-center 
+}
+.top-review--card a {
+  @apply
+    mt-8
+  ;
 }
 .top-review--card .r-star-rating svg {
   @apply ml-8 h-20 w-50.4 
@@ -907,5 +950,14 @@
 @layer utilities {
   .pause {
     animation-play-state: paused;
+  }
+  .text-capitalize {
+    text-transform: capitalize;
+  }
+  .text-skin-lightblue {
+    color: var(--color-light-blue) !important;
+  }
+  .z-9 {
+    z-index: 9 !important;
   }
 }

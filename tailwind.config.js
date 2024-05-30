@@ -82,10 +82,11 @@ module.exports = {
       animation: {   
         dropdown: 'showDropdown 0.5s ease',     /** NAV MENU */
         lineDropdown: 'lineDropdown 0.5s linear',
-        easeIn: 'easeIn 0.5s ease-out',               /** SECTION 1 ANIMATION */
+        easeIn: 'easeIn 0.25s ease-out',               /** SECTION 1 ANIMATION */
+        easeInn: 'easeInn 1s ease-in-out',             /** SECTION 2 ANIMATION */
         easeInComplete: '0.8s linear',
-        easeInFast: 'easeInFast 3s ease',             /** SECTION 3 ANIMATION */
-        easeOut: 'easeOut 1s linear',             /** SECTION 1 ANIMATION */
+        easeInFast: 'easeInFast 3s ease-in',             /** SECTION 3 ANIMATION */
+        easeOut: 'easeOut 1s ease-in-out',             /** SECTION 1 ANIMATION */
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
         fadeOut: 'fadeOut 21s linear infinite',   /** SECTION 4 CARDS SLIDE ANIMATION */  
@@ -181,14 +182,22 @@ module.exports = {
       keyframes: {
         easeIn: {    
           from: {
-            transform: "translate3d(0px, 0.7294px, 0px) rotate(2deg) scale(1.0396, 1.03964)",
+            transform: "translate3d(0px, 100px, 0px) rotate(15deg) scale(1.0796, 1.07955)",
             opacity: 0.8,
-            height: "95%",
+            height: "50%",
           },
           to: {
             transform: "translateX(0)",
             opacity: 1,
             height: "100%",
+          }
+        },      /** ANIMATION FOR SECTION ONE */
+        easeInn: {
+          from: {
+            opacity: 0,
+          },
+          to: {
+            opacity: 1,
           }
         },
         easeInFast: {    
@@ -202,7 +211,7 @@ module.exports = {
           }
         },
         easeOut: {
-          '0%': {
+          from: {
             opacity: 1,
           },
           to: {
@@ -215,7 +224,6 @@ module.exports = {
           },
           '100%': { 
             transform: 'translate3d(-100%, 0, 0)',
-            opacity: 1,
           },
         },
         slideRight: {

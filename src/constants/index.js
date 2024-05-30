@@ -3,7 +3,6 @@ import { mayokun, wande, wura } from "../assets/images"
 
 
 
-
 export const customersQuotes = [
     { 
         textQuote: "I've become more conscious of how I spend my money and also about investing. Now, I feel comfortable spending knowing my Cowrywise account is there.",
