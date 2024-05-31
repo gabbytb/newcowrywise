@@ -59,7 +59,7 @@ const HomeSectionOne = () => {
         return () => {
             clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes
         };
-    }, [inViewport]);   // Pass inViewport & enterCount as array dependencies!     
+    }, [inViewport]);   // Pass inViewport as array dependencies!     
     
 
 
@@ -135,7 +135,7 @@ const HomeSectionOne = () => {
         };
          // Call the function when the activeImage state changes
         realFunc();
-    }, [activeImage, customThumbnails]);    // PASS: "activeImage" && "customThumbnails" as array dependencies for useEffect() hook to rely on!
+    }, [activeImage]);    // PASS: "activeImage" as array dependency for useEffect() hook to rely on!
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
 
