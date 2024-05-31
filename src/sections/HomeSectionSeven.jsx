@@ -52,11 +52,14 @@ const HomeSectionSeven = () => {
             };
         };
 
+               
         // Setup interval
         var intervalId = setInterval(myFunction, 2500);
     
         // Clean up interval when component unmount
-        return () => clearInterval(intervalId);
+        return () => {
+            clearInterval(intervalId);
+        };
     }, [count]); 
     // NOTE: Empty dependency array means this runs once on mount and cleans up on unmount
     

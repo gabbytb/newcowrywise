@@ -15,11 +15,10 @@ import { wura } from "../assets/images";
 const HomeSectionOne = () => { 
     
 
-
     const myRef = useRef();
     const {
         inViewport,
-        // enterCount,
+        enterCount,
         // leaveCount,
       } = useInViewport(
         myRef,
@@ -27,26 +26,29 @@ const HomeSectionOne = () => {
         // config = { disconnectOnLeave: false },
         // props
     );
+    const [hasLoaded, setHasLoaded] = useState(0);
+   
+       
 
-    
 
-
-    // Check when Component is in viewport
+    // Check when Component is in viewport, LOAD THE BACKGROUND ACTIVE IMAGE WITH ANIMATION
     useEffect(() => {
         function myFunc() {
             if (inViewport) {
-                var testimonialMedia = document.querySelector(".testimonial .testimonial-media");             
-                testimonialMedia.classList.remove('hidden');
-                setTimeout(() => {
-                    testimonialMedia.classList.add('s-1-anim');
-                }, 0);
+                setHasLoaded(enterCount);
 
-                setTimeout(() => {
-                    testimonialMedia.classList.remove('s-1-anim');
-                }, 400);
+                if (hasLoaded === 0) {
+                    var testimonialMedia = document.querySelector("#testimonialId .testimonial-media");             
+                    testimonialMedia.classList.remove('hidden');
+                    testimonialMedia.classList.add('s-1-anim');
+
+                    setTimeout(() => {
+                        testimonialMedia.classList.remove('s-1-anim');
+                    }, 400);
+                };
             };
 
-            document.querySelector(".testimonial .testimonial-video-ctrl").classList.add('z-9');
+            document.querySelector("#testimonialId .testimonial-video-ctrl").classList.add('z-9');
         };
 
         //  Not empty Array, so this should run multiple times as "inViewport" would keep changing state everytime this section of my webpage is in view.
@@ -57,18 +59,18 @@ const HomeSectionOne = () => {
         return () => {
             clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes
         };
-    }, [inViewport]);   // Pass inViewport as array dependency!     
+    }, [inViewport]);   // Pass inViewport & enterCount as array dependencies!     
     
 
 
-
+    
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
     // PRESENT STATE of Active Image
     /***********************************************************************************************************************/
     const [activeImage, setActiveImage] = useState(wura);
     /***********************************************************************************************************************/
-    // FOR: When "activeImage" state changes
+    // FOR: When "activeImage" state changes, LOAD THE CURRENT BACKGROUND ACTIVE IMAGE WITH ANIMATION
     /***********************************************************************************************************************/
     useEffect(() => {
         // Create function
@@ -76,11 +78,11 @@ const HomeSectionOne = () => {
             // if the "activeImage" value is Truthy
             if (activeImage) {
                 // This should execute first
-                document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
+                document.querySelector("#testimonialId .testimonial-media").classList.add('s-1-anim');
 
                 // This should executed @ .4ms later
                 setTimeout(() => {                   
-                    document.querySelector(".testimonial .testimonial-media").classList.remove('s-1-anim');       
+                    document.querySelector("#testimonialId .testimonial-media").classList.remove('s-1-anim');       
                 }, 400);
             };
         };
@@ -91,7 +93,7 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
 
 
-
+    
 
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
@@ -133,7 +135,7 @@ const HomeSectionOne = () => {
         };
          // Call the function when the activeImage state changes
         realFunc();
-    }, [activeImage, customThumbnails]);    // PASS: "activeImage" && "customThumbnails" as array dependencies for the useEffect() hook to rely on!
+    }, [activeImage, customThumbnails]);    // PASS: "activeImage" && "customThumbnails" as array dependencies for useEffect() hook to rely on!
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
 
@@ -147,9 +149,8 @@ const HomeSectionOne = () => {
 
 
                     <div className="home-section-one--left">
-
                         <div className="customers-testimonials">
-                            <div className="testimonial">
+                            <div id="testimonialId">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {
@@ -182,7 +183,6 @@ const HomeSectionOne = () => {
                                 })
                             }
                         </ul>
-                        
                     </div>
 
                     

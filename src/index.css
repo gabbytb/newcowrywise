@@ -377,43 +377,43 @@
     @apply relative mt-12 ml-12 min-h-125 xs:mt-0 xs:ml-0 xs:min-h-116 lg:mt-12 lg:ml-12 lg:min-h-125
   }
 
-  .home-section-one--left .testimonial {
+  .home-section-one--left #testimonialId {
     @apply relative top-0 left-0 min-h-125 xs:min-h-116 lg:min-h-125
   }
 
-  .testimonial .testimonial-backdrop {
+  #testimonialId .testimonial-backdrop {
     @apply bg-pink-600/25 w-125 -top-60 -left-80 xs:h-129 sm:h-850 xs:w-100 xs:-top-212 lg:w-125 lg:-top-60
   }
 
-  .testimonial .testimonial-video-ctrl {
+  #testimonialId .testimonial-video-ctrl {
     @apply w-11 h-11 absolute top-8 right-214 z-3
   }
 
-  .testimonial .testimonial-video-ctrl svg {
+  #testimonialId .testimonial-video-ctrl svg {
     @apply w-10 h-10 cursor-pointer
   }
 
-  .testimonial-quotes {
+  #testimonialId .testimonial-quotes {
     @apply bg-white z-5 w-123 min-h-44 py-14.4 px-14.7 flex-col justify-between absolute -bottom-10 xs:left-0 xs:-bottom-0 sm:right-0 lg:-bottom-10 lg:-right-2.5 lg:left-auto
   }
 
-  .testimonial .testimonial-quotes blockquote {
+  #testimonialId .testimonial-quotes blockquote {
     @apply text-15xl/tighter font-medium text-skin-gray
   }
 
-  .testimonial .testimonial-quotes .testimonial-author {
+  #testimonialId .testimonial-quotes .testimonial-author {
     @apply flex justify-between mt-13.4
   }
 
-  .testimonial .testimonial-quotes .testimonial-author span {
+  #testimonialId .testimonial-quotes .testimonial-author span {
     @apply text-15xl font-medium text-skin-darkBlue
   }
 
-  .testimonial .testimonial-quotes .testimonial-author a {
+  #testimonialId .testimonial-quotes .testimonial-author a {
     @apply text-blue-500 text-15xl font-medium 
   }
 
-  .testimonial .testimonial-media {
+  #testimonialId .testimonial-media {
     @apply absolute top-0 left-0 bottom-0 right-0 h-130 w-135 z-3 xs:w-full xs:h-122 sm:h-130 lg:w-135 
   } 
   
