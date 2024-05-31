@@ -87,6 +87,7 @@ module.exports = {
         easeInComplete: '0.8s linear',
         easeInFast: 'easeInFast 3s ease-in',             /** SECTION 3 ANIMATION */
         easeOut: 'easeOut 1s ease-in-out',             /** WORKING: SECTION 1 ANIMATION */
+        easeOutt: 'easeIn 0.25s ease-out',
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
         fadeOut: 'fadeOut 21s linear infinite',   /** WORKING: SECTION 4 CARDS SLIDE ANIMATION */  
@@ -191,10 +192,18 @@ module.exports = {
             opacity: 1,
             height: "100%",
           }
-        },      /** ANIMATION FOR SECTION ONE */
+        },      /** ANIMATION FOR SECTION ONE ACTIVE IMAGE AND THUMBNAIL IMAGE */
         easeInn: {
           from: {
             opacity: 0,
+          },
+          to: {
+            opacity: 1,
+          }
+        },
+        easeOutt: {
+          from: {
+            opacity: 0.8,
           },
           to: {
             opacity: 1,

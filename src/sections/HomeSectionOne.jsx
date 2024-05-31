@@ -37,20 +37,19 @@ const HomeSectionOne = () => {
             if (inViewport) {
                 var testimonialMedia = document.querySelector(".testimonial .testimonial-media");             
                 testimonialMedia.classList.remove('hidden');
-                testimonialMedia.classList.add('s-1-anim');
+                setTimeout(() => {
+                    testimonialMedia.classList.add('s-1-anim');
+                }, 0);
 
-                if (testimonialMedia.classList.contains('s-1-anim')) {
-                    setTimeout(() => {
-                        testimonialMedia.classList.remove('s-1-anim');
-                    }, 400);
-                };
+                setTimeout(() => {
+                    testimonialMedia.classList.remove('s-1-anim');
+                }, 400);
             };
 
             document.querySelector(".testimonial .testimonial-video-ctrl").classList.add('z-9');
         };
 
-        //  Not empty Array, so this should run multiple times as 
-        //  as "inViewport" would keep changing state everytime this section of my webpage is in view.
+        //  Not empty Array, so this should run multiple times as "inViewport" would keep changing state everytime this section of my webpage is in view.
         //  This is used to clear the setTimeout function after it has run once!
         var timer = setTimeout(myFunc, 400);
         
@@ -58,7 +57,7 @@ const HomeSectionOne = () => {
         return () => {
             clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes
         };
-    }, [!inViewport]);   // Pass inViewport as array dependency!     
+    }, [inViewport]);   // Pass inViewport as array dependency!     
     
 
 
@@ -69,24 +68,27 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     const [activeImage, setActiveImage] = useState(wura);
     /***********************************************************************************************************************/
+    // FOR: When "activeImage" state changes
     /***********************************************************************************************************************/
-
-    
-
-
-    // Run when activeImage state changes
     useEffect(() => {
+        // Create function
         function onActiveImgChange() {
+            // if the "activeImage" value is Truthy
             if (activeImage) {
+                // This should execute first
                 document.querySelector(".testimonial .testimonial-media").classList.add('s-1-anim');
 
+                // This should executed @ .4ms later
                 setTimeout(() => {                   
                     document.querySelector(".testimonial .testimonial-media").classList.remove('s-1-anim');       
                 }, 400);
             };
         };
+        // Call Function
         onActiveImgChange();
-    }, [activeImage]);  // Pass activeImage as array dependency!
+    }, [activeImage]);      // PASS: "activeImage" as array dependency for the useEffect() hook to rely on!
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
 
 
 
@@ -97,32 +99,33 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     const [customThumbnails, setCustomThumbnails] = useState(customersThumbnails);
     /***********************************************************************************************************************/
+    // FOR: When "activeImage" state changes
     /***********************************************************************************************************************/
-    
-
     useEffect(() => {        
         function realFunc() {       
-            // Loop through each thumbnail 
+            // Initiate a variable to be all the 'index' of customThumbnails.
             for (var n = 0; n < customThumbnails.length; n++) {
 
-                // HERE: Check to find the one that matches the Current activeImage.
+                // HERE: Find the 'index' of customThumbnails that has the same "imgURI" value as the "activeImage" value.
+                // If Truthy,
                 if (activeImage === customThumbnails[n]?.imgURI) {
                     
-                    var findTestimonial = document.getElementById('customers-testimonial');
-                    var testimonialQuotes = findTestimonial.getElementsByClassName('testimonial-quotes');           // Get all elements inside testimonial, with the className 'testimonial-quotes'
-                    
-                    // Loop through each testimonial quote
+                    // Find all DOM elements with the className 'testimonial-quotes'.
+                    var testimonialQuotes = document.querySelectorAll(".testimonial-quotes");
                     for (var i = 0; i < testimonialQuotes.length; i++) {
-                        
-                        // HERE: If the current ACTIVE thumbnail index matches with the index of the testimonial quote, i.e n === i, Select Quote as ACTIVE, hide others!
-                        if (n !== i) {
-                            // Hide other testimonial quotes
-                            testimonialQuotes[i].classList.add('hidden');
-                            testimonialQuotes[i].classList.remove('is-active');
-                        } else {
-                            // Otherwise, show the testimonial quote as active
+                 
+                        // HERE: If the current ACTIVE thumbnail index matches with the index of the testimonial quote.
+                        // If Truthy,
+                        if (n === i) {      // NOTE: ...how to make an index becomes active, based on another index.... (FYI)
+                            // If the "index" value of testimonialQuotes is the same as the "index" value of customThumbnails; 
+                            // Show item - (remove the 'hidden' css class).
                             testimonialQuotes[i].classList.remove('hidden');
-                            testimonialQuotes[i].classList.add('is-active');
+                            testimonialQuotes[i].classList.add('flex');
+                        } else {
+                            // If the "index" value of testimonialQuotes is not the same as the "index" value of customThumbnails;
+                            // Hide item(s) - (use the 'hidden' css class).
+                            testimonialQuotes[i].classList.add('hidden');
+                            testimonialQuotes[i].classList.remove('flex');                            
                         };
                     };
                 };
@@ -130,7 +133,10 @@ const HomeSectionOne = () => {
         };
          // Call the function when the activeImage state changes
         realFunc();
-    }, [activeImage, customThumbnails]);
+    }, [activeImage, customThumbnails]);    // PASS: "activeImage" && "customThumbnails" as array dependencies for the useEffect() hook to rely on!
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+
         
     
 
@@ -143,7 +149,7 @@ const HomeSectionOne = () => {
                     <div className="home-section-one--left">
 
                         <div className="customers-testimonials">
-                            <div id="customers-testimonial" className="testimonial">
+                            <div className="testimonial">
                                 <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {

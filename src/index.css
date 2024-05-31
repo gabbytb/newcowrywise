@@ -176,11 +176,11 @@
       overflow-y-scroll
     ;
   }
-  .s-1-anim {
+  .s-1-anim {       /** Working for Section One **/
     @apply 
       animate-easeIn
     ;
-  }     /** Working for Section One Background Active Image */
+  }
   .s-2-l2-anim {
     @apply animate-slideRight
   }
@@ -202,13 +202,13 @@
   .s-4-anim {
     @apply animate-fadeOut
   }
-  .ease-out-anim {    /** Working */
+  .ease-out-anim {      /** Working for Section Three */
     @apply 
       animate-easeOut
       opacity-0
     ;
   }
-  .ease-out-anime {    /** Working for Section Two */
+  .ease-out-anime {     /** Working for Section Two */
     @apply 
       animate-easeInn
     ;
@@ -221,13 +221,10 @@
   .active {
     @apply animate-lineDropdown
   }
-  .is-active {
-    @apply flex
-  }
-  .activate-first {
+  .activate-first {     /** Working for Section Seven */
     @apply animate-slideUpFirst
   }
-  .activate-second {
+  .activate-second {    /** Working for Section Seven */
     @apply animate-slideUpSecond
   }
   /**************************************************************************/

@@ -874,6 +874,10 @@ header {
   overflow-y: scroll;
 }
 
+.s-1-anim {
+  /** Working for Section One **/
+}
+
 @keyframes easeIn {
   from {
     transform: translate3d(0px, 100px, 0px) rotate(15deg) scale(1.0796, 1.07955);
@@ -891,8 +895,6 @@ header {
 .s-1-anim {
   animation: easeIn 0.25s ease-out;
 }
-
-/** Working for Section One Background Active Image */
 
 @keyframes slideRight {
   0% {
@@ -1010,7 +1012,7 @@ header {
 }
 
 .ease-out-anim {
-  /** Working */
+  /** Working for Section Three */
 }
 
 @keyframes easeOut {
@@ -1026,6 +1028,24 @@ header {
 .ease-out-anim {
   animation: easeOut 1s ease-in-out;
   opacity: 0;
+}
+
+.ease-out-anime {
+  /** Working for Section Two */
+}
+
+@keyframes easeInn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.ease-out-anime {
+  animation: easeInn 1s ease-in-out;
 }
 
 .ease-in-anim {
@@ -1048,8 +1068,8 @@ header {
   animation: lineDropdown 0.5s linear;
 }
 
-.is-active {
-  display: flex;
+.activate-first {
+  /** Working for Section Seven */
 }
 
 @keyframes slideUp {
@@ -1071,6 +1091,10 @@ header {
 
 .activate-first {
   animation: slideUp 0.3s ease-in;
+}
+
+.activate-second {
+  /** Working for Section Seven */
 }
 
 @keyframes slideUp {
