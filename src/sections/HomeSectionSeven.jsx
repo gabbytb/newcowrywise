@@ -12,6 +12,7 @@ const HomeSectionSeven = () => {
     
     const [itemsToFlip, setItemsToFlip] = useState(flipItems);
     
+    
     const [count, setCount] = useState(0);
 
 
