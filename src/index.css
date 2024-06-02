@@ -78,10 +78,17 @@
     --color-light-blue: rgb(0, 102, 245);
     --color-lighter-gray: rgb(108, 130, 163);  
     --color-lightest-gray: rgb(174, 185, 204);
-    --shadow-gray-opacity: hsla(0,0%,100%,.3);
+
+    
+    --sw-gray: hsla(0,0%,100%,.3);
+    --sw-dark-blue: rgba(24, 26, 27, 0.3);
+
+
     --color-opacity: hsla(0,0%,100%,.7);
+
     --background-sky-blue: rgb(230, 250, 255);     /**   TopBar BackgroundColor   */
     --background-transparent-blue: hsla(0,0%,100%,.25);
+    --bg-light-blue: rgb(0, 82, 196);
     font-size: 10px;
     font-family: sans-serif;
     line-height: 1.15;
@@ -361,10 +368,6 @@
     @apply w-full px-8 my-0 mx-auto
   }
 
-  .s1-grids-wrap {
-    @apply flex flex-col-reverse xs:gap-y-12 sm:py-12 lg:grid lg:grid-cols-16 lg:gap-x-32 lg:py-32 lg:px-0
-  }
-
   .home-section-one--right {
     @apply pt-12 sm:pt-0 lg:pt-24 
   }
@@ -374,8 +377,38 @@
   }
 
   .home-section-one--left {
-    @apply relative mt-12 ml-12 min-h-125 xs:mt-0 xs:ml-0 xs:min-h-116 lg:mt-12 lg:ml-12 lg:min-h-125
+    @apply 
+      relative 
+      mt-0 
+      ml-0 
+      min-h-125 
+
+      xs:min-h-116 
+
+      sm:mt-12 
+      sm:ml-12 
+    
+      lg:min-h-125
+    ; 
   }
+  .s1-grids-wrap {
+    @apply 
+      flex 
+      flex-col-reverse 
+      gap-y-12 
+      
+      sm:py-12 
+      sm:px-0
+
+      lg:grid 
+      lg:grid-cols-16 
+      lg:gap-x-32 
+      lg:gap-y-0
+      lg:py-32
+    ;
+  }
+
+
 
   .home-section-one--left #testimonialId {
     @apply relative top-0 left-0 min-h-125 xs:min-h-116 lg:min-h-125
@@ -691,7 +724,7 @@
     }
 
     .h-investment-wrap img {
-      @apply relative top-23
+      @apply relative top-23 
     }
   
     .home-section-five--right {
@@ -763,7 +796,7 @@
 
   /* Section six */
   .home-section-six {
-    @apply relative pt-20 pb-60 bg-blue-600
+    @apply relative pt-20 pb-60 bg-blue-600 dark:bg-blue-500
   }
   .home-section-six::after {
     @apply content-[''] h-790 w-780 absolute -right-15.9 top-40
@@ -791,7 +824,18 @@
     @apply relative mt-12 sm:mt-12 pl-16  
   }
   .home-section-six--right .card-item .card-item--icon::before { 
-    @apply content-[''] bg-white shadow-skin-hsla h-6 w-6 absolute left-0 top-2 rounded-md 
+    @apply
+      content-[''] 
+      bg-white 
+      h-6 
+      w-6 
+      absolute 
+      left-0 
+      top-2 
+      rounded-md 
+      shadow-3xl 
+      dark:shadow-5xl
+    ;
   }
   .home-section-six--right .card-item h5 {
     @apply text-21xl font-semibold text-white font-firma mb-6

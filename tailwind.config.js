@@ -101,8 +101,9 @@ module.exports = {
         skin: {
           skyblue: 'var(--background-sky-blue)',
           transparentblue: 'var(--background-transparent-blue)',
+          lightblue: 'var(--bg-light-blue)',
           opaque: 'var(--color-opacity)',
-        }
+        },
       },
       backgroundImage: {
         'dropdown-icon': "url('/src/assets/icons/dropdown.svg')",
@@ -110,9 +111,12 @@ module.exports = {
         'device-section': "url('/src/assets/images/home-device-section.svg')",
         'security-pattern': "url('/src/assets/images/security-section.svg')",
       },
+      boxShadow: {
+        '3xl': '3px 3px 0 0 var(--sw-gray)',
+        '5xl': 'var(--sw-dark-blue) 3px 3px 0px 0px',
+      },
       boxShadowColor: {
         skin: {
-          hsla: 'var(--shadow-gray-opacity)',
           transparentblue: 'var(--background-transparent-blue)',
         }
       },
@@ -406,5 +410,6 @@ module.exports = {
     },
   },
   plugins: [],
+  darkMode: 'class',
 }
 
