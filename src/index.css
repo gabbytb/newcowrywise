@@ -78,20 +78,25 @@
     --color-light-blue: rgb(0, 102, 245);
     --color-lighter-gray: rgb(108, 130, 163);  
     --color-lightest-gray: rgb(174, 185, 204);
-
     
     --sw-gray: hsla(0,0%,100%,.3);
     --sw-dark-blue: rgba(24, 26, 27, 0.3);
-
 
     --color-opacity: hsla(0,0%,100%,.7);
 
     --background-sky-blue: rgb(230, 250, 255);     /**   TopBar BackgroundColor   */
     --background-transparent-blue: hsla(0,0%,100%,.25);
-    --bg-light-blue: rgb(0, 82, 196);
-    font-size: 10px;
-    font-family: sans-serif;
-    line-height: 1.15;
+    --bg-light-blue: rgba(0, 82, 196, 0.2);              /**   Section Six DarkMode   */
+
+    --root-font-size: 10px;
+    --root-font-family: sans-serif;
+    --root-line-height: 1.15;
+  }
+
+  html {
+    font-size: var(--root-font-size);
+    font-family: var(--root-font-family);
+    line-height: var(--root-line-height);
     scroll-behavior: smooth;
   }
 
@@ -415,7 +420,20 @@
   }
 
   #testimonialId .testimonial-backdrop {
-    @apply bg-pink-600/25 w-125 -top-60 -left-80 xs:h-129 sm:h-850 xs:w-100 xs:-top-212 lg:w-125 lg:-top-60
+    @apply 
+      w-125 
+      -top-60 
+      -left-80 
+
+      xs:w-100
+      xs:h-129
+      xs:-top-212
+
+      sm:h-850   
+      
+      lg:-top-60
+      lg:w-125 
+    ;
   }
 
   #testimonialId .testimonial-video-ctrl {

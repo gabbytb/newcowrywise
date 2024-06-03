@@ -297,7 +297,27 @@ module.exports = {
             opacity: 1,
             transform: 'translate(0px, 0px)',
           },
-        }         /** Section Five */
+        },         /** Section Five */
+        scaleCirle: {
+          from: {
+            opacity: 1,
+            transform: "scale(.8)",
+          },
+          to: {
+              opacity: 0,
+              transform: "scale(1.3)",
+          }
+        },
+        scaleCircle2: {
+          to: {
+            opacity: 1,
+            transform: "scale(.8)",
+          },
+          from: {
+              opacity: 0,
+              transform: "scale(4.9)",
+          }
+        }
       },
       lineHeight: {
         'to-tight': '1.1',

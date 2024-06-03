@@ -560,10 +560,17 @@ video {
   --background-sky-blue: rgb(230, 250, 255);
   /**   TopBar BackgroundColor   */
   --background-transparent-blue: hsla(0,0%,100%,.25);
-  --bg-light-blue: rgb(0, 82, 196);
-  font-size: 10px;
-  font-family: sans-serif;
-  line-height: 1.15;
+  --bg-light-blue: rgba(0, 82, 196, 0.2);
+  /**   Section Six DarkMode   */
+  --root-font-size: 10px;
+  --root-font-family: sans-serif;
+  --root-line-height: 1.15;
+}
+
+html {
+  font-size: var(--root-font-size);
+  font-family: var(--root-font-family);
+  line-height: var(--root-line-height);
   scroll-behavior: smooth;
 }
 
@@ -1451,7 +1458,6 @@ header .cta-menu a:last-child {
   top: -6rem;
   left: -8rem;
   width: 40rem;
-  background-color: rgb(219 39 119 / 0.25);
 }
 
 @media (min-width: 601px) {
@@ -3089,6 +3095,14 @@ header .cta-menu a:last-child {
 .bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
+
+.bg-blue-600\/25 {
+  background-color: rgb(37 99 235 / 0.25);
+}
+
+.bg-pink-600\/25 {
+  background-color: rgb(219 39 119 / 0.25);
 }
 
 .bg-skin-skyblue {

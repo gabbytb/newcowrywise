@@ -118,11 +118,22 @@ const HomeSectionOne = () => {
                  
                         // HERE: If the current ACTIVE thumbnail index matches with the index of the testimonial quote.
                         // If Truthy,
-                        if (n === i) {      // NOTE: ...how to make an index becomes active, based on another index.... (FYI)
+                        if (n === i) {      // NOTE: ...how to make an index become active, based on another index.... (FYI)
                             // If the "index" value of testimonialQuotes is the same as the "index" value of customThumbnails; 
                             // Show item - (remove the 'hidden' css class).
                             testimonialQuotes[i].classList.remove('hidden');
                             testimonialQuotes[i].classList.add('flex');
+
+                            // HERE: If the current ACTIVE quote index is the first index (i.e 0), change "Backdrop" BackgroundColor to Pink.
+                            // If Truthy,
+                            var backDrop = document.querySelector('#testimonialId .testimonial-backdrop');
+                            if (i === 0) {
+                                backDrop.classList.remove('bg-blue-600/25');
+                                backDrop.classList.add('bg-pink-600/25');
+                            } else {
+                                backDrop.classList.remove('bg-pink-600/25');
+                                backDrop.classList.add('bg-blue-600/25');
+                            };
                         } else {
                             // If the "index" value of testimonialQuotes is not the same as the "index" value of customThumbnails;
                             // Hide item(s) - (use the 'hidden' css class).
