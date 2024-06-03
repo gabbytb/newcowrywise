@@ -91,11 +91,14 @@ module.exports = {
         slideRight: 'slideRight 0.5s ease',   /** SECTION 2 H5 ANIMATION */
         slideLeft: 'slideLeft 0.5s ease',     /** SECTION 2 H2 ANIMATION */
         fadeOut: 'fadeOut 21s linear infinite',   /** WORKING: SECTION 4 CARDS SLIDE ANIMATION */  
+        scaleOutSmall: 'scaleCircle .5s linear forwards',
+        scaleOutBig: 'scaleCircle2 .5s linear forwards',
         slideUp: 'slideUp 1.7s linear',     /** SECTION 2 GRAPH ANIMATION */
         slideUpFirst: 'slideUp 0.3s ease-in',     /** SECTION 7 DISCUSS ANIMATION */
         slideUpSecond: 'slideUp 0.6s ease-in',     /** SECTION 7 DISCUSS ANIMATION */
         slideUpSpan: 'slideUp 0.7s linear',     /** SECTION 2 H2 SPAN ANIMATION */
         slideDown: 'slideDown .6s ease-in-out',      /** STICKY HEADER **/
+        slideDownSlow: 'slideDownSlow 0.3s ease-in-out',      /** SECTION 1 BACKGROUND IMAGE **/
       },
       backgroundColor: {
         skin: {
@@ -103,6 +106,7 @@ module.exports = {
           transparentblue: 'var(--background-transparent-blue)',
           lightblue: 'var(--bg-light-blue)',
           opaque: 'var(--color-opacity)',
+          darkbrown: 'var(--bg-dark-brown)',
         },
       },
       backgroundImage: {
@@ -239,6 +243,26 @@ module.exports = {
             transform: 'translate3d(-100%, 0, 0)',
           },
         },
+        scaleCircle: {
+          from: {
+              opacity: 1,
+              transform: "scale(.8)",
+          },
+          to: {
+              opacity: 0,
+              transform: "scale(1.3)",
+          }
+        },
+        scaleCircle2: {
+          from: {
+              opacity: 1,
+              transform: "scale(.8)",
+          },
+          to: {
+              opacity: 0,
+              transform: "scale(4.9)",
+          }
+        },
         slideRight: {
           '0%': { 
             opacity: 0,
@@ -269,6 +293,18 @@ module.exports = {
             transform: 'translateZ(0)',
           },
         },        /** Info Notes ontop Graph */
+        slideDownSlow: {
+          from: { 
+            transform: 'translate3d(0, -100%, 0)',
+            // opacity: 0.8,
+            height: "0%",
+          },
+          to: { 
+            transform: 'translateZ(0)',
+            // opacity: 1,
+            height: "100%",
+          },
+        },
         slideUp: { 
           '0%': {
             clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
@@ -432,4 +468,3 @@ module.exports = {
   plugins: [],
   darkMode: 'class',
 }
-

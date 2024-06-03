@@ -16,28 +16,32 @@ const HomeSectionFive = () => {
     useEffect(() => {
         function myFunction() {
             if (inViewport) {
+                console.log("Section 5 is in Viewport: ", inViewport);
                 setTimeout(() => {
-                    document.querySelector('.registration-steps-wrap .step-one').classList.remove('opacity-50');
+                    document.querySelector('#registrationsStepsId .step-one').classList.remove('opacity-50');
                     setTimeout(() => {
-                        document.querySelector('.registration-steps-wrap .step-one').classList.add('ease-in-anim');
+                        document.querySelector('#registrationsStepsId .step-one').classList.add('ease-in-anim');
+                        // countValue[n]?.classList.add("s-5-anim");
                     }, 300);
-                    document.querySelector('.registration-steps-wrap .step-one .step-item-count').classList.add('ease-in-anim');
+                    document.querySelector('#registrationsStepsId .step-one .step-item-count').classList.add('ease-in-anim');
                 }, 400);
 
                 setTimeout(() => {
-                    document.querySelector('.registration-steps-wrap .step-two').classList.remove('opacity-50');
+                    document.querySelector('#registrationsStepsId .step-two').classList.remove('opacity-50');
                     setTimeout(() => {
-                        document.querySelector('.registration-steps-wrap .step-two').classList.add('ease-in-anim');
+                        document.querySelector('#registrationsStepsId .step-two').classList.add('ease-in-anim');
+                        // countValue[n]?.classList.add("s-5-anim");
                     }, 700);
-                    document.querySelector('.registration-steps-wrap .step-two .step-item-count').classList.add('ease-in-anim');
+                    document.querySelector('#registrationsStepsId .step-two .step-item-count').classList.add('ease-in-anim');
                 }, 800);
 
                 setTimeout(() => {
-                    document.querySelector('.registration-steps-wrap .step-three').classList.remove('opacity-50');
+                    document.querySelector('#registrationsStepsId .step-three').classList.remove('opacity-50');
                     setTimeout(() => {
-                        document.querySelector('.registration-steps-wrap .step-three').classList.add('ease-in-anim');
+                        document.querySelector('#registrationsStepsId .step-three').classList.add('ease-in-anim');
+                        // countValue[n]?.classList.add("s-5-anime");
                     }, 1100);
-                    document.querySelector('.registration-steps-wrap .step-three .step-item-count').classList.add('ease-in-anim');
+                    document.querySelector('#registrationsStepsId .step-three .step-item-count').classList.add('ease-in-anim');
                 }, 1200);
             };
         };
@@ -57,7 +61,7 @@ const HomeSectionFive = () => {
                     </div>
                     <div className="home-section-five--right">
                         <h2>It only takes 5 minutes</h2>
-                        <div className="registration-steps-wrap">
+                        <div id="registrationsStepsId">
 
                             {/* First Step */}
                             <div className="step-item step-one opacity-50">
@@ -74,8 +78,8 @@ const HomeSectionFive = () => {
                             <div className="step-item step-two opacity-50">
                                 <span className="h-full step-item-count"></span>
                                 <div className="step-item-info">
-                                    <span>Add a payment method</span>
-                                    <p ref={myRef}>Using your debit card or a bank transfer, setup your first plan.</p>
+                                    <span ref={myRef}>Add a payment method</span>
+                                    <p>Using your debit card or a bank transfer, setup your first plan.</p>
                                 </div>
                             </div>
                             {/* Second Step */}

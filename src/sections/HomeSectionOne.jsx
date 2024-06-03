@@ -28,7 +28,7 @@ const HomeSectionOne = () => {
     );
     const [hasLoaded, setHasLoaded] = useState(0);
    
-       
+    
 
 
     // Check when Component is in viewport, LOAD THE BACKGROUND ACTIVE IMAGE WITH ANIMATION
@@ -76,15 +76,15 @@ const HomeSectionOne = () => {
         // Create function
         function onActiveImgChange() {
             // if the "activeImage" value is Truthy
-            if (activeImage) {
+            if (activeImage && hasLoaded === 1) {
                 // This should execute first
-                document.querySelector("#testimonialId .testimonial-media").classList.add('s-1-anim');
-
+                document.querySelector("#testimonialId .testimonial-media").classList.add('s-1-animate');
+                
                 // This should executed @ .4ms later
                 setTimeout(() => {                   
-                    document.querySelector("#testimonialId .testimonial-media").classList.remove('s-1-anim');       
-                }, 400);
-            };
+                    document.querySelector("#testimonialId .testimonial-media").classList.remove('s-1-animate');       
+                }, 300);
+            }
         };
         // Call Function
         onActiveImgChange();
@@ -130,7 +130,7 @@ const HomeSectionOne = () => {
                             if (i === 0) {
                                 backDrop.classList.remove('bg-blue-600/25');
                                 backDrop.classList.add('bg-pink-600/25');
-                            } else {
+                            } else {                               
                                 backDrop.classList.remove('bg-pink-600/25');
                                 backDrop.classList.add('bg-blue-600/25');
                             };

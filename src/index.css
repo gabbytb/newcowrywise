@@ -87,6 +87,7 @@
     --background-sky-blue: rgb(230, 250, 255);     /**   TopBar BackgroundColor   */
     --background-transparent-blue: hsla(0,0%,100%,.25);
     --bg-light-blue: rgba(0, 82, 196, 0.2);              /**   Section Six DarkMode   */
+    --bg-dark-brown: rgb(73 34 0);        /**    Section 1 Backdrop   **/
 
     --root-font-size: 10px;
     --root-font-family: sans-serif;
@@ -99,7 +100,7 @@
     line-height: var(--root-line-height);
     scroll-behavior: smooth;
   }
-
+  
   h1,h2,h3,h4,h5,h6,li,p,a,span,blockquote {
     color: var(--color-dark-blue);
     font-family: "firma";
@@ -193,6 +194,11 @@
       animate-easeIn
     ;
   }
+  .s-1-animate {    /** Working for Section One when ActiveImage changes **/
+    @apply 
+      animate-slideDownSlow
+    ;
+  }
   .s-2-l2-anim {
     @apply animate-slideRight
   }
@@ -213,6 +219,16 @@
   }
   .s-4-anim {
     @apply animate-fadeOut
+  }
+  .s-5-anim {
+    @apply
+      animate-scaleOutSmall
+    ;
+  }
+  .s-5-anime {
+    @apply
+      animate-scaleOutBig
+    ;
   }
   .ease-out-anim {      /** Working for Section Three */
     @apply 
@@ -753,37 +769,35 @@
       @apply text-40xl sm:text-7xl font-bold mt-16 mb-14
     }
   
-    .registration-steps-wrap {
+    #registrationsStepsId {
       @apply mt-24 w-full
     }
   
-    .registration-steps-wrap .step-item {
+    #registrationsStepsId .step-item {
       @apply relative sm:flex sm:justify-start mb-20
     }
   
-    .registration-steps-wrap .step-item::before {
+    #registrationsStepsId .step-item::before {
       @apply content-[''] w-0.5 h-4/5 bg-blue-600 absolute left-5 top-20
     }
   
-    .registration-steps-wrap .step-item.step-item.step-three::before {
+    #registrationsStepsId .step-item.step-three::before {
       @apply hidden
     }
   
-    .registration-steps-wrap .step-item.step-one .step-item-count::before,   
-    .registration-steps-wrap .step-item.step-two .step-item-count::before, 
-    .registration-steps-wrap .step-item.step-three .step-item-count::before {
+    #registrationsStepsId .step-item .step-item-count::before {
       @apply content-[''] w-24 h-24 absolute -top-210 -left-208 rounded-full
     }
-  
-    .registration-steps-wrap .step-item.step-one .step-item-count::after {
+         
+    #registrationsStepsId .step-item.step-one .step-item-count::after {
       @apply content-['01'] text-19xl font-semibold text-blue-600
     }
   
-    .registration-steps-wrap .step-item.step-two .step-item-count::after {
+    #registrationsStepsId .step-item.step-two .step-item-count::after {
       @apply content-['02'] text-19xl font-semibold text-blue-600
     }
   
-    .registration-steps-wrap .step-item.step-three .step-item-count::after {
+    #registrationsStepsId .step-item.step-three .step-item-count::after {
       @apply content-['03'] text-19xl font-semibold text-blue-600
     }
   
@@ -907,23 +921,57 @@
 
 /**  Footer  **/
 .container-fc {
-  @apply w-full px-8 py-0 my-0 mx-auto
+  @apply 
+    w-full 
+    px-8 
+    py-0 
+    my-0 
+    mx-auto
+  ;
 }
 .app-reviews {
-  @apply grid grid-cols-22 gap-16
+  @apply 
+    grid 
+    grid-cols-22 
+    gap-16
+  ;
 }
 .app-review--card {
-  @apply w-full min-h-98 bg-white border border-slate-200 shadow-lg rounded-3xl py-14.7 px-15.8 
+  @apply 
+    w-full 
+    min-h-98 
+    bg-white 
+    border 
+    border-slate-200 
+    shadow-lg 
+    rounded-3xl 
+    py-14.7 
+    px-15.8 
+  ;
 }
 .top-review--card {
   @apply 
-    flex flex-col justify-between 
-    xs:flex xs:flex-row xs:mb-8 xs:items-end
+    flex 
+    flex-col
+    justify-between
+
+    xs:flex 
+    xs:flex-row
+    xs:items-end
+    xs:mb-8
+  ;
 }
 .top-review--card .r-star-rating {
   @apply 
-    flex flex-row items-start
-    xs:flex xs:flex-row xs:justify-start xs:items-center 
+    flex 
+    flex-row 
+    items-start
+
+    xs:flex 
+    xs:flex-row 
+    xs:items-center 
+    xs:justify-start
+  ;
 }
 .top-review--card a {
   @apply
@@ -931,25 +979,52 @@
   ;
 }
 .top-review--card .r-star-rating svg {
-  @apply ml-8 h-20 w-50.4 
+  @apply 
+    ml-8 
+    h-20 
+    w-50.4 
+  ;
 }
 .top-review--card h3 {
-  @apply text-6xl font-semibold flex items-end
+  @apply 
+    text-6xl 
+    font-semibold
+    flex 
+    items-end
+  ;
 }
 .top-review--card h3 sub {
-  @apply contents items-center h-full text-19xl text-skin-lightgray
+  @apply 
+    contents 
+    items-center 
+    h-full 
+    text-19xl 
+    text-skin-lightgray
+  ;
 }
 .top-review--card a svg {
-  @apply w-48 h-20
+  @apply 
+    w-48 
+    h-20
+  ;
 }
 .bottom-review--card a {
-  @apply uppercase
+  @apply 
+    uppercase
+  ;
 }
 .bottom-review--card h6 {
-  @apply text-21xl font-semibold mb-6 
+  @apply 
+    text-21xl 
+    font-semibold 
+    mb-6 
+  ;
 }
 .bottom-review--card p {
-  @apply text-10xl/more-loose my-6
+  @apply 
+    text-10xl/more-loose 
+    my-6
+  ;
 }
 .bottom-review--card a {
   @apply mt-8 flex justify-start items-center text-xl font-semibold text-skin-lightblue min-h-20
@@ -1000,6 +1075,7 @@
   @apply text-2xl my-6 font-firma font-medium text-slate-600
 }
 /**  Footer  **/
+
 
 
 
