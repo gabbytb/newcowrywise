@@ -2902,8 +2902,16 @@ header .cta-menu a:last-child {
   left: 0px;
 }
 
+.right-106 {
+  right: 0.6rem;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.top-106 {
+  top: 0.6rem;
 }
 
 .my-4 {
@@ -3610,18 +3618,6 @@ header .cta-menu a:last-child {
 /**  Footer  **/
 
 @media (min-width: 601px) {
-  .xs\:absolute {
-    position: absolute;
-  }
-
-  .xs\:right-106 {
-    right: 0.6rem;
-  }
-
-  .xs\:top-106 {
-    top: 0.6rem;
-  }
-
   .xs\:my-12 {
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -3631,55 +3627,12 @@ header .cta-menu a:last-child {
     display: flex;
   }
 
-  .xs\:hidden {
-    display: none;
-  }
-
-  .xs\:h-20 {
-    height: 5rem;
-  }
-
   .xs\:max-w-80 {
     max-width: 80%;
   }
 
-  .xs\:shrink-0 {
-    flex-shrink: 0;
-  }
-
   .xs\:basis-full {
     flex-basis: 100%;
-  }
-
-  .xs\:rounded-xl {
-    border-radius: 0.75rem;
-  }
-
-  .xs\:bg-white {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  }
-
-  .xs\:px-12 {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
-  .xs\:text-14xl {
-    font-size: 1.6rem;
-  }
-
-  .xs\:font-semibold {
-    font-weight: 600;
-  }
-
-  .xs\:capitalize {
-    text-transform: capitalize;
-  }
-
-  .xs\:text-black {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
   }
 }
 
@@ -3688,12 +3641,20 @@ header .cta-menu a:last-child {
     margin-left: 0px;
   }
 
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:flex {
     display: flex;
   }
 
   .sm\:grid {
     display: grid;
+  }
+
+  .sm\:hidden {
+    display: none;
   }
 
   .sm\:w-full {
