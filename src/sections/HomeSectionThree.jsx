@@ -1,6 +1,7 @@
-import { useState, useEffect, } from 'react';
+import { useEffect, useRef, } from 'react';
 import { ArrowDown } from "../assets/icons";
 import { ButtonComponent, ButtonLinkComponent } from "../components";
+import { useInViewport } from 'react-in-viewport';
 
 
 
@@ -11,12 +12,14 @@ import { ButtonComponent, ButtonLinkComponent } from "../components";
 const HomeSectionThree = () => {
 
     
-    const [isVisible, setIsVisible] = useState(false);
-        
+    // const [isVisible, setIsVisible] = useState(false);
+    const myRef = useRef();
+    const { inViewport, enterCount } = useInViewport(myRef);
+
 
     useEffect(() => {
         function myFunction() {
-            if (isVisible) {
+            if (inViewport && enterCount === 1) {
                 setTimeout(() => {
                     document.querySelector(".roi-investments-overlay").classList.remove('hidden');
                     document.querySelector(".roi-investments-overlay").classList.add('ease-out-anime');
@@ -26,7 +29,7 @@ const HomeSectionThree = () => {
             document.querySelector(".roi-investments-overlay").classList.add('hidden'); 
         };
         myFunction();
-    }, [isVisible]);
+    }, [inViewport], [enterCount]);
 
 
 
@@ -67,8 +70,8 @@ const HomeSectionThree = () => {
                             <input type="range" min="5000" max="10000000" step="1000" defaultValue="100000" />
                         </div>
                     </div>
-                    <div className="relative">
-                        <div className="text-center roi-investment" onMouseOver={(e) => setIsVisible(true)}>
+                    <div ref={myRef} className="relative">
+                        <div className="text-center roi-investment">
                             <h6>Today, you’d have</h6>
                             <p>
                                 <sup>₦</sup>

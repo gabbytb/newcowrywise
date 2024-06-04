@@ -2102,18 +2102,20 @@ header .cta-menu a:last-child {
 }
 
 .roi-input input[type="tel"] {
-  width: 100%;
+  min-width: 0px;
   background-color: transparent;
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: right;
   font-family: firma;
+  font-size: 5rem;
   font-weight: 400;
   color: var(--color-dark-blue);
 }
 
 @media (min-width: 601px) {
   .roi-input input[type="tel"] {
+    width: 100%;
     text-align: center;
     font-size: 8rem;
   }
@@ -2875,18 +2877,30 @@ header .cta-menu a:last-child {
 }
 
 .disqus .disqus-q {
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: 400;
   letter-spacing: -0.3rem;
   color: var(--color-lighter-gray);
 }
 
+@media (min-width: 769px) {
+  .disqus .disqus-q {
+    font-size: 6rem;
+  }
+}
+
 .disqus .disqus-a {
-  margin-left: 2.4rem;
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: 400;
   letter-spacing: -0.3rem;
   color: var(--color-dark-blue);
+}
+
+@media (min-width: 769px) {
+  .disqus .disqus-a {
+    margin-left: 2.4rem;
+    font-size: 6rem;
+  }
 }
 
 /** Section Seven **/
@@ -3058,10 +3072,6 @@ header .cta-menu a:last-child {
 
 .basis-1\/4 {
   flex-basis: 25%;
-}
-
-.basis-5\/12 {
-  flex-basis: 41.666667%;
 }
 
 .basis-7\/12 {
@@ -3533,10 +3543,12 @@ header .cta-menu a:last-child {
 
 .footer-email--wrap h3 {
   font-size: 3rem;
+  line-height: 1.4;
   font-weight: 700;
+  letter-spacing: -0.04em;
 }
 
-@media (min-width: 601px) {
+@media (min-width: 769px) {
   .footer-email--wrap h3 {
     font-size: 3.9rem;
   }
@@ -3673,6 +3685,10 @@ header .cta-menu a:last-child {
     width: 100%;
   }
 
+  .sm\:basis-1\/2 {
+    flex-basis: 50%;
+  }
+
   .sm\:basis-5\/12 {
     flex-basis: 41.666667%;
   }
@@ -3721,6 +3737,10 @@ header .cta-menu a:last-child {
 
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:basis-5\/12 {
+    flex-basis: 41.666667%;
   }
 
   .lg\:flex-row {

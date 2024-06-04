@@ -81,10 +81,10 @@ const Footer = () => {
             </div>
 
             <div className="shadow-2xl rounded-3xl footer-email--wrap">
-                <div className="basis-5/12 p-4">
+                <div className="sm:basis-5/12 p-4">
                     <h3 className="text-white font-semibold">Sign up for free.<br/>Start investing today.</h3>
                 </div>
-                <div className="basis-5/12 p-4">
+                <div className="sm:basis-1/2 lg:basis-5/12 p-4">
                     <form className="w-full" action="https://cowrywise.com/choose-account" method="GET">
                         <div className="footer_email">
                             <input className="text--white" type="email" name="email" required="required" placeholder="Your email..." />

@@ -632,7 +632,16 @@
 }
 
 .roi-input input[type="tel"] {
-  @apply w-full xs:text-16xl xs:text-center sm:text-12xl bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
+  @apply 
+    min-w-0 
+    text-7xl
+
+    xs:w-full
+    xs:text-16xl 
+    xs:text-center 
+
+    sm:text-12xl 
+    bg-transparent font-normal font-firma text-skin-darkBlue text-right py-4
 }
 
 .roi-dropdown-wrap {
@@ -931,10 +940,10 @@
     @apply flex flex-row absolute 
   }
   .disqus .disqus-q {
-    @apply text-8xl font-normal -tracking-tightest text-skin-gray
+    @apply text-6xl sm:text-8xl font-normal -tracking-tightest text-skin-gray
   }
   .disqus .disqus-a {
-    @apply text-8xl font-normal -tracking-tightest text-skin-darkBlue ml-13.4
+    @apply text-6xl sm:text-8xl font-normal -tracking-tightest text-skin-darkBlue sm:ml-13.4
   }
   /** Section Seven **/
 }
@@ -1087,7 +1096,7 @@
   
 }
 .footer-email--wrap h3 {
-  @apply text-5xl xs:text-18xl font-bold 
+  @apply text-5xl/very-loose sm:text-18xl font-bold -tracking-tightened
 }
 .footer_email {
   @apply py-4 px-14.4 w-full rounded-2xl bg-skin-transparentblue relative
