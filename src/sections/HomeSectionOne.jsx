@@ -1,4 +1,4 @@
-import {useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useInViewport } from "react-in-viewport";
 import { customersQuotes, customersThumbnails } from "../constants";
 import { TestimonialQuotes, TestimonialThumbnails } from "../components";
@@ -96,6 +96,7 @@ const HomeSectionOne = () => {
 
     
 
+
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
     // PRESENT STATE of Customers Thumbnails
@@ -166,7 +167,7 @@ const HomeSectionOne = () => {
                     <div className="home-section-one--left">
                         <div className="customers-testimonials">
                             <div id="testimonialId">
-                                <div className="absolute testimonial-backdrop opacity-100 dark:opacity-0"></div>
+                                <div className="absolute testimonial-backdrop"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {
                                     customersQuotes.map((item) => {

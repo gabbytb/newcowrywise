@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="scrollbar">
+<html lang="en" id="scrollbar" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style.css">
@@ -42,43 +42,20 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      function myFunction() {
-        var foundScrollbar = document.getElementById('scrollbar');
-        var foundHeader = document.getElementById('header');
-        var scroll = window.scrollY;
-        // console.log('Scroll: ', scroll);
+        function myFunction() {
+            var foundScrollbar = document.getElementById('scrollbar');
+            var foundHeader = document.getElementById('header');
+            var scroll = window.scrollY;
+            // console.log('Scroll: ', scroll);
 
-        if (scroll > 5) {
-          foundHeader.classList.add('sticky-header');
-          foundScrollbar.classList.add('no-scrollbar');
-        } else {
-          foundHeader.classList.remove('sticky-header');
-          foundScrollbar.classList.remove('no-scrollbar');
-        }
-      };  
-
-
-      // //Check if the document is loaded (so that this script can be placed in the <head>)
-      // document.addEventListener("DOMContentLoaded", () => {
-
-      // // Use Intersection Observer to determine if objects are within the viewport
-      // const observer = new IntersectionObserver(entries => {
-      //   entries.forEach(entry => {
-      //   if (entry.isIntersecting) {
-      //     entry.target.classList.add('in-view');
-      //     return;
-      //   }
-      //   entry.target.classList.remove('in-view');
-      //   });
-      // });
-
-      // // Get all the elements with the .animate class applied
-      // const allAnimatedElements = document.querySelectorAll('.animate');
-
-      // // Add the observer to each of those elements
-      // allAnimatedElements.forEach((element) => observer.observe(element));
-
-      // }); 
+            if (scroll > 5) {
+              foundHeader.classList.add('sticky-header');
+              foundScrollbar.classList.add('no-scrollbar');
+            } else {
+              foundHeader.classList.remove('sticky-header');
+              foundScrollbar.classList.remove('no-scrollbar');
+            }
+        };  
     </script>
   </body>
 </html>

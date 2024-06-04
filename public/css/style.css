@@ -1890,7 +1890,7 @@ header .cta-menu a:last-child {
 }
 
 .home-section-two--right .card-wrap .card-item {
-  display: flex;
+  display: none;
   height: 100%;
   width: 100%;
   flex-direction: column;
@@ -1907,6 +1907,12 @@ header .cta-menu a:last-child {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 601px) {
+  .home-section-two--right .card-wrap .card-item {
+    display: flex;
+  }
 }
 
 .home-section-two .card-item-one {
@@ -2341,6 +2347,7 @@ header .cta-menu a:last-child {
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 0px;
+  min-height: 40rem;
   width: 100vw;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -2391,6 +2398,9 @@ header .cta-menu a:last-child {
   position: relative;
   margin-right: 2rem;
   display: flex;
+  min-height: 20rem;
+  max-width: 32rem;
+  align-items: center;
   justify-content: center;
   border-radius: 1.5rem;
   border-width: 2px;
@@ -2398,15 +2408,13 @@ header .cta-menu a:last-child {
   border-color: rgb(96 165 250 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding: 3.2rem;
   text-align: center;
 }
 
 @media (min-width: 601px) {
   .home-section-four .slider-wrapper .slides .slider-item {
-    min-height: 20rem;
-    max-width: 32rem;
     align-items: flex-end;
-    padding: 3.2rem;
   }
 }
 
@@ -2424,6 +2432,8 @@ header .cta-menu a:last-child {
   width: 100%;
   text-align: left;
   font-family: firma;
+  font-size: 3.4rem;
+  line-height: 1.1;
   font-weight: 600;
   letter-spacing: -0.06em;
   --tw-text-opacity: 1;
@@ -2636,7 +2646,7 @@ header .cta-menu a:last-child {
   padding-bottom: 15rem;
 }
 
-.home-section-six:is(.dark *) {
+.home-section-six:where([data-mode="dark"], [data-mode="dark"] *) {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
@@ -2781,7 +2791,7 @@ header .cta-menu a:last-child {
   content: var(--tw-content);
 }
 
-.home-section-six--right .card-item .card-item--icon:is(.dark *)::before {
+.home-section-six--right .card-item .card-item--icon:where([data-mode="dark"], [data-mode="dark"] *)::before {
   --tw-shadow: var(--sw-dark-blue) 3px 3px 0px 0px;
   --tw-shadow-colored: 3px 3px 0px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -2892,16 +2902,8 @@ header .cta-menu a:last-child {
   left: 0px;
 }
 
-.right-106 {
-  right: 0.6rem;
-}
-
 .top-0 {
   top: 0px;
-}
-
-.top-106 {
-  top: 0.6rem;
 }
 
 .my-4 {
@@ -3319,10 +3321,6 @@ header .cta-menu a:last-child {
   opacity: 0;
 }
 
-.opacity-100 {
-  opacity: 1;
-}
-
 .opacity-50 {
   opacity: 0.5;
 }
@@ -3611,10 +3609,6 @@ header .cta-menu a:last-child {
 
 /**  Footer  **/
 
-.dark\:opacity-0:is(.dark *) {
-  opacity: 0 !important;
-}
-
 @media (min-width: 601px) {
   .xs\:absolute {
     position: absolute;
@@ -3657,18 +3651,6 @@ header .cta-menu a:last-child {
     flex-basis: 100%;
   }
 
-  .xs\:flex-row {
-    flex-direction: row;
-  }
-
-  .xs\:items-center {
-    align-items: center;
-  }
-
-  .xs\:justify-center {
-    justify-content: center;
-  }
-
   .xs\:rounded-xl {
     border-radius: 0.75rem;
   }
@@ -3702,18 +3684,6 @@ header .cta-menu a:last-child {
 }
 
 @media (min-width: 769px) {
-  .sm\:absolute {
-    position: absolute;
-  }
-
-  .sm\:right-106 {
-    right: 0.6rem;
-  }
-
-  .sm\:top-106 {
-    top: 0.6rem;
-  }
-
   .sm\:ml-0 {
     margin-left: 0px;
   }
@@ -3726,20 +3696,8 @@ header .cta-menu a:last-child {
     display: grid;
   }
 
-  .sm\:hidden {
-    display: none;
-  }
-
-  .sm\:h-20 {
-    height: 5rem;
-  }
-
   .sm\:w-full {
     width: 100%;
-  }
-
-  .sm\:shrink-0 {
-    flex-shrink: 0;
   }
 
   .sm\:basis-5\/12 {
@@ -3772,36 +3730,9 @@ header .cta-menu a:last-child {
     margin-bottom: calc(4rem * var(--tw-space-y-reverse));
   }
 
-  .sm\:rounded-xl {
-    border-radius: 0.75rem;
-  }
-
-  .sm\:bg-white {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  }
-
-  .sm\:px-12 {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
   .sm\:text-35xl\/tight {
     font-size: 6.4rem;
     line-height: 1.25;
-  }
-
-  .sm\:font-semibold {
-    font-weight: 600;
-  }
-
-  .sm\:capitalize {
-    text-transform: capitalize;
-  }
-
-  .sm\:text-black {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
   }
 }
 

@@ -70,7 +70,7 @@ const HomeSectionTwo = () => {
       <section id="sectionTwoID" className="home-section-two opacity-0">
         {/* {`Enter viewport: ${enterCount} times`} */}
           <div className="h-container-2 container">
-              <div className="flex flex-row sm:grid sm:grid-cols-18 gap-16 px-10 min-h-138">
+              <div className="flex flex-col sm:grid sm:grid-cols-18 gap-16 px-10 min-h-138">
 
 
                   {/* Left Side */}

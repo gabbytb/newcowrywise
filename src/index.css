@@ -556,7 +556,7 @@
   }
 
   .home-section-two--right .card-wrap .card-item {
-    @apply bg-white w-full h-full pt-6.4 pb-14.4 px-14.4 rounded-lg border border-slate-200 shadow-md flex flex-col
+    @apply hidden xs:flex bg-white w-full h-full pt-6.4 pb-14.4 px-14.4 rounded-lg border border-slate-200 shadow-md flex-col
   }
 
   .home-section-two .card-item-one {
@@ -709,7 +709,7 @@
     @apply sm:pt-20 sm:pb-0 lg:py-20 flex flex-col space-y-16
   }
   .home-section-four .slider-wrapper {
-      @apply mb-0 mx-0 w-screen xs:min-h-106 lg:min-h-104 relative bg-white z-20
+      @apply mb-0 mx-0 w-screen min-h-106 xs:min-h-106 lg:min-h-104 relative bg-white z-20
   }
   .h-container-4 {
     @apply h-full w-full px-10 mx-auto my-0
@@ -722,10 +722,33 @@
       @apply flex shrink-0
   }
   .home-section-four .slider-wrapper .slides .slider-item {
-      @apply flex justify-center mr-8 border-2 border-blue-400 relative text-center rounded-3xl bg-white xs:max-w-100 xs:min-h-97 xs:p-14.7 xs:items-end lg:max-w-3xl lg:min-h-98 lg:p-16 lg:items-center 
+      @apply 
+      flex 
+      justify-center 
+      items-center 
+      text-center 
+      p-14.7 
+      mr-8
+      bg-white
+      border-2 
+      border-blue-400 
+      rounded-3xl            
+      max-w-100 
+      min-h-97
+      relative
+      
+      xs:items-end
+      /* xs:p-14.7 
+      xs:max-w-100 
+      xs:min-h-97  */
+      
+      lg:items-center 
+      lg:p-16
+      lg:max-w-3xl 
+      lg:min-h-98 
   }
   .home-section-four .slider-wrapper .slides .slider-item h4 {
-      @apply font-semibold font-firma w-full relative text-left xs:text-34xl/to-tight lg:text-7xl/to-tight -tracking-extratight text-blue-600
+      @apply font-semibold font-firma w-full relative text-left text-34xl/to-tight xs:text-34xl/to-tight lg:text-7xl/to-tight -tracking-extratight text-blue-600
   }
   .home-section-four .slider-wrapper .slides .slider-item h4::before {
       @apply content-["“"] absolute -top-60 left-0 text-9xl font-normal text-blue-600
