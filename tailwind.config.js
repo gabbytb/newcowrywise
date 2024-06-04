@@ -15,9 +15,9 @@ module.exports = {
       'auto': 'auto',
       'cover': 'cover',
       'contain': 'contain',
+      '16': '4rem',
       '50%': '50%',
       '77%': '77%',
-      '16': '4rem',
       '110%': '110%',
     },
     fontFamily: {
@@ -466,5 +466,5 @@ module.exports = {
     },
   },
   plugins: [],
-  darkMode: 'class',
+  darkMode: 'class'
 }

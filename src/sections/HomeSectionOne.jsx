@@ -62,6 +62,7 @@ const HomeSectionOne = () => {
     }, [inViewport]);   // Pass inViewport as array dependencies!     
     
 
+  
 
     
     /***********************************************************************************************************************/
@@ -150,9 +151,12 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
 
-        
-    
 
+
+
+
+
+       
     return (
         <section ref={myRef} className="home-section-one">
             <div className="h-container-1 container">
@@ -162,7 +166,7 @@ const HomeSectionOne = () => {
                     <div className="home-section-one--left">
                         <div className="customers-testimonials">
                             <div id="testimonialId">
-                                <div className="absolute testimonial-backdrop"></div>
+                                <div className="absolute testimonial-backdrop opacity-100 dark:opacity-0"></div>
                                 <div className="testimonial-video-ctrl"><VideoIcon /></div>
                                 {
                                     customersQuotes.map((item) => {

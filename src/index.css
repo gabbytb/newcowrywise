@@ -90,8 +90,11 @@
     --bg-dark-brown: rgb(73 34 0);        /**    Section 1 Backdrop   **/
 
     --root-font-size: 10px;
-    --root-font-family: sans-serif;
     --root-line-height: 1.15;
+    --root-font-family: sans-serif;
+    --root-max-width: 1380px;
+
+    --font-family-firma: "firma";
   }
 
   html {
@@ -103,7 +106,7 @@
   
   h1,h2,h3,h4,h5,h6,li,p,a,span,blockquote {
     color: var(--color-dark-blue);
-    font-family: "firma";
+    font-family: var(--font-family-firma);
   }
 
   sub, sup {
@@ -111,7 +114,7 @@
   }
 
   .container {
-    max-width: 1380px !important;
+    max-width: var(--root-max-width) !important;
   }
 
   .text--white {
@@ -953,24 +956,35 @@
   @apply 
     flex 
     flex-col
+    items-start
     justify-between
+    mb-8
 
     xs:flex 
     xs:flex-row
-    xs:items-end
+    xs:items-start
     xs:mb-8
+
   ;
 }
 .top-review--card .r-star-rating {
   @apply 
     flex 
-    flex-row 
+    flex-row
+    flex-wrap
     items-start
+    justify-start
 
-    xs:flex 
-    xs:flex-row 
-    xs:items-center 
+    xs:flex
+    xs:flex-row
+    xs:flex-wrap
+    xs:items-start
     xs:justify-start
+
+    sm:flex
+    sm:flex-col
+    sm:items-start
+    sm:justify-start
   ;
 }
 .top-review--card a {
@@ -1036,7 +1050,7 @@
   @apply bg-blue-700 py-32 px-4 mb-16 shadow-2xl
 }
 .footer-email--wrap h3 {
-  @apply text-18xl font-bold 
+  @apply text-5xl xs:text-18xl font-bold 
 }
 .footer_email {
   @apply py-4 px-14.4 w-full rounded-2xl bg-skin-transparentblue relative
@@ -1086,13 +1100,16 @@
   .pause {
     animation-play-state: paused;
   }
-  .text-capitalize {
+  /* .text-capitalize {
     text-transform: capitalize;
-  }
+  } */
   .text-skin-lightblue {
     color: var(--color-light-blue) !important;
   }
   .z-9 {
     z-index: 9 !important;
+  }
+  .opacity-0 {
+    opacity: 0 !important;
   }
 }

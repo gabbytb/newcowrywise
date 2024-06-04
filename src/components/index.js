@@ -20,7 +20,7 @@ import FooterSocialCard from "./FooterSocialCard";
 export {
     Nav,
     HomeBody,
-
+    
 
     TestimonialQuotes,
     TestimonialThumbnails,
