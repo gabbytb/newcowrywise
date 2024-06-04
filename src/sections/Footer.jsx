@@ -98,7 +98,7 @@ const Footer = () => {
                             />
                         </div>
                         <ButtonComponent 
-                            btnProps="block text-center text-black bg-white capitalize h-20 px-12 text-14xl font-semibold shrink-0 rounded-xl shrink-0 rounded-xl mt-8 sm:hidden"
+                            btnProps="block sm:hidden text-center text-black bg-white capitalize h-20 px-12 text-14xl font-semibold shrink-0 rounded-xl shrink-0 rounded-xl mt-8"
                             btnType="submit" 
                             label="Sign up for free" 
                         />
