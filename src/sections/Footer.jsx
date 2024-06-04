@@ -80,7 +80,7 @@ const Footer = () => {
 
             </div>
 
-            <div className="flex flex-col justify-start sm:flex sm:flex-row sm:items-center sm:justify-center rounded-3xl footer-email--wrap">
+            <div className="shadow-2xl rounded-3xl footer-email--wrap">
                 <div className="basis-5/12 p-4">
                     <h3 className="text-white font-semibold">Sign up for free.<br/>Start investing today.</h3>
                 </div>
@@ -98,7 +98,7 @@ const Footer = () => {
                             />
                         </div>
                         <ButtonComponent 
-                            btnProps="block sm:hidden text-center text-black bg-white capitalize h-20 px-12 text-14xl font-semibold shrink-0 rounded-xl shrink-0 rounded-xl mt-8"
+                            btnProps="block sm:hidden text-center text-14xl text-black font-semibold capitalize bg-white h-20 px-12 mt-8 shrink-0 rounded-xl"
                             btnType="submit" 
                             label="Sign up for free" 
                         />

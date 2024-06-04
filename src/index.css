@@ -1070,7 +1070,21 @@
   @apply ml-2.9 fill-blue-600 w-5 h-5
 }
 .footer-email--wrap {
-  @apply bg-blue-700 py-32 px-4 mb-16 shadow-2xl
+  @apply 
+    bg-blue-700
+    py-32 
+    px-4 
+    mb-16 
+    
+    flex
+    flex-col
+    justify-start 
+    
+    sm:flex
+    sm:flex-row
+    sm:items-center
+    sm:justify-center
+  
 }
 .footer-email--wrap h3 {
   @apply text-5xl xs:text-18xl font-bold 
