@@ -644,7 +644,7 @@
 }
 
 .roi-dropdown-wrap .roi--select-input {
-  @apply text-3xl text-blue-600 font-firma xs:font-light lg:font-medium appearance-none outline-none py-4 px-5.4
+  @apply xs:font-light lg:font-medium text-3xl text-blue-600 font-firma bg-transparent appearance-none outline-none py-4 px-5.4
 }
 
 .slider-wrap .slider {

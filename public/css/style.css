@@ -2144,6 +2144,7 @@ header .cta-menu a:last-child {
 .roi-dropdown-wrap .roi--select-input {
   -webkit-appearance: none;
           appearance: none;
+  background-color: transparent;
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 0.4rem;
@@ -2646,9 +2647,11 @@ header .cta-menu a:last-child {
   padding-bottom: 15rem;
 }
 
-.home-section-six:where([data-mode="dark"], [data-mode="dark"] *) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+@media (prefers-color-scheme: dark) {
+  .home-section-six {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+  }
 }
 
 .home-section-six::after {
@@ -2791,10 +2794,12 @@ header .cta-menu a:last-child {
   content: var(--tw-content);
 }
 
-.home-section-six--right .card-item .card-item--icon:where([data-mode="dark"], [data-mode="dark"] *)::before {
-  --tw-shadow: var(--sw-dark-blue) 3px 3px 0px 0px;
-  --tw-shadow-colored: 3px 3px 0px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+@media (prefers-color-scheme: dark) {
+  .home-section-six--right .card-item .card-item--icon::before {
+    --tw-shadow: var(--sw-dark-blue) 3px 3px 0px 0px;
+    --tw-shadow-colored: 3px 3px 0px 0px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
 }
 
 .home-section-six--right .card-item h5 {

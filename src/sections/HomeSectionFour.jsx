@@ -8,13 +8,13 @@ import { sliderItems } from "../constants";
 const HomeSectionFour = () => {
     
         
-    // useEffect(() => {
-    //     function scrollFunction() {   
-    //         var scrollWheel = document.getElementById('autoScroll');
-    //         scrollWheel.classList.add('s-4-anim');
-    //     };
-    //     scrollFunction();
-    // }, []);
+    useEffect(() => {
+        function scrollFunction() {   
+            var scrollWheel = document.getElementById('autoScroll');
+            scrollWheel.classList.add('s-4-anim');
+        };
+        scrollFunction();
+    }, []);
 
 
     return (
