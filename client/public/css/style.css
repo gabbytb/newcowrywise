@@ -2662,8 +2662,6 @@ header .cta-menu a:last-child {
   top: 10rem;
   height: 79rem;
   width: 78rem;
-  --tw-content: '';
-  content: var(--tw-content);
 }
 
 @media (min-width: 981px) {
