@@ -143,7 +143,7 @@ exports.signUp = async (req, res) => {
         try {
             const mailSender = await transporter.sendMail(mailOptions);
             console.log("E-mail Service Details:", mailSender.envelope,
-                `\nE-mail Service Response: ${mailSender.response}`);
+                        `\nE-mail Service Response: ${mailSender.response}`);
         } catch (error) {
             console.error('Error sending email: ', error);
         };
@@ -193,7 +193,7 @@ exports.accountVerification = async (req, res) => {
                 success: false, 
                 message: "Unauthorized",
             }
-            console.log("Authorization: ", responseData);
+            console.log("Handle Authorization: ", responseData);
             return res.status(401).json(responseData);
         }
         

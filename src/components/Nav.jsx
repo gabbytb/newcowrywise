@@ -170,8 +170,8 @@ const Nav = () => {
                             </ul>
 
                             <div className="space-x-10 cta-menu">
-                                <Link to="#">log in</Link>
-                                <Link to="#">sign up for free</Link>
+                                <Link to="/user/login">log in</Link>
+                                <Link to="/user/signup">sign up for free</Link>
                             </div>
                             
                             <div className="mobile-nav">

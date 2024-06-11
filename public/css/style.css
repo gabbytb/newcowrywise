@@ -3098,10 +3098,6 @@ header .cta-menu a:last-child {
   width: 4rem;
 }
 
-.w-52 {
-  width: 13rem;
-}
-
 .w-full {
   width: 100%;
 }
@@ -3207,6 +3203,10 @@ header .cta-menu a:last-child {
   gap: 1.5rem;
 }
 
+.gap-y-10 {
+  row-gap: 2.5rem;
+}
+
 .space-x-10 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(2.5rem * var(--tw-space-x-reverse));
@@ -3237,11 +3237,6 @@ header .cta-menu a:last-child {
 
 .border-e-2 {
   border-inline-end-width: 2px;
-}
-
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .bg-blue-600 {
@@ -3739,6 +3734,16 @@ header .cta-menu a:last-child {
 }
 
 /**  Footer  **/
+
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.focus\:bg-blue-700:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
 
 @media (min-width: 601px) {
   .xs\:my-12 {

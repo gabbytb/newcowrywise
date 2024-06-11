@@ -6,6 +6,7 @@ import TestimonialQuotes from "./TestimonialQuotes";
 import TestimonialThumbnails from "./TestimonialThumbnails";
 import ButtonComponent from "./ButtonComponent";
 import ButtonLinkComponent from "./ButtonLinkComponent";
+import ButtonSubmit from "./ButtonSubmit";
 import GraphComponent from "./GraphComponent";
 import SliderCards from "./SliderCards";
 import DisqusCard from "./DisqusCard";
@@ -26,6 +27,7 @@ export {
     TestimonialThumbnails,
     ButtonComponent,
     ButtonLinkComponent,
+    ButtonSubmit,
     GraphComponent,
     SliderCards,
     DisqusCard,
