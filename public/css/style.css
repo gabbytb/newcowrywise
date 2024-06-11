@@ -591,8 +591,14 @@ sub, sup {
   max-width: var(--root-max-width) !important;
 }
 
-.text--white {
-  color: white !important;
+input[type="text"], input[type="email"] {
+  line-height: var(--root-line-height);
+  width: 100%;
+  height: 4rem;
+  background-color: rgb(247, 247, 247);
+  border-radius: 6px;
+  padding: 10px 15px;
+  outline: none;
 }
 
 *, ::before, ::after {
@@ -781,6 +787,11 @@ header {
     max-width: 65%;
   }
 }
+
+/* 
+  .text--white {
+    color: white !important;
+  } */
 
 /** Mobile Nav Config */
 
@@ -1188,6 +1199,33 @@ header {
 /***************************** Animations CSS *****************************/
 
 /**************************************************************************/
+
+#signUp {
+  display: flex;
+  min-height: 38rem;
+  width: 34rem;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+#signUp .form--title h5 {
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+#signUp .form--wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
 
 .cta-menu a {
   display: none;
@@ -2992,6 +3030,10 @@ header .cta-menu a:last-child {
   margin-top: 1rem;
 }
 
+.mt-40 {
+  margin-top: 10rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -3010,6 +3052,10 @@ header .cta-menu a:last-child {
 
 .hidden {
   display: none;
+}
+
+.h-128 {
+  height: 58rem;
 }
 
 .h-15 {
@@ -3032,6 +3078,10 @@ header .cta-menu a:last-child {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .min-h-138 {
   min-height: 78rem;
 }
@@ -3046,6 +3096,10 @@ header .cta-menu a:last-child {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-52 {
+  width: 13rem;
 }
 
 .w-full {
@@ -3113,8 +3167,16 @@ header .cta-menu a:last-child {
   flex-direction: row;
 }
 
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -3135,6 +3197,14 @@ header .cta-menu a:last-child {
 
 .gap-16 {
   gap: 4rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]) {
@@ -3167,6 +3237,11 @@ header .cta-menu a:last-child {
 
 .border-e-2 {
   border-inline-end-width: 2px;
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .bg-blue-600 {
@@ -3227,14 +3302,28 @@ header .cta-menu a:last-child {
   padding-right: 1.25rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.pb-20 {
+  padding-bottom: 5rem;
 }
 
 .pr-20 {
@@ -3243,6 +3332,14 @@ header .cta-menu a:last-child {
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-16 {
+  padding-top: 4rem;
+}
+
+.pt-24 {
+  padding-top: 6rem;
 }
 
 .pt-5 {

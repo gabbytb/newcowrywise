@@ -117,14 +117,17 @@
     max-width: var(--root-max-width) !important;
   }
 
-  .text--white {
-    color: white !important;
+  input[type="text"], input[type="email"] {
+    line-height: var(--root-line-height);
+    width: 100%;
+    height: 4rem;
+    background-color: rgb(247, 247, 247);
+    border-radius: 6px;
+    padding: 10px 15px;
+    outline: none;
   }
+    
 }
-
-
-
-
 
 
 
@@ -141,7 +144,10 @@
   .content p {
     @apply text-center text-15xl/more-loose text-skin-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
   }
-
+/* 
+  .text--white {
+    color: white !important;
+  } */
 
 
 
@@ -266,6 +272,35 @@
 
 
 
+#signUp {
+  @apply
+    flex
+    flex-col
+    items-center
+    gap-y-12
+    w-123
+    min-h-104
+
+    rounded-2xl 
+    border 
+    border-slate-200 
+    shadow-md
+  ;
+}
+#signUp .form--title h5 {
+  @apply
+    text-3xl
+    font-semibold
+  ;
+}
+#signUp .form--wrapper {
+  @apply
+    w-full 
+    flex
+    flex-col
+
+  ;
+}
 
   
 
