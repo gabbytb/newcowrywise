@@ -266,24 +266,25 @@
   }
 
 
-  .success-message, 
-  .error-message {
+
+  /*****  Error Message CSS  *****/
+  .success, .error {
     @apply
       hidden
     ;
   }
-
   .success-message-info {
     @apply
-      bg-green-600
+    bg-green-600
       rounded-2xl
       min-w-96
       p-6
-      mb-12
+      mt-6
+      mx-auto
       flex
       justify-center
-      text-center
-      text-white
+      text-center      
+    text-white
       text-2xl
       font-semibold
     ;
@@ -293,7 +294,7 @@
       bg-red-600
       rounded-2xl
       min-w-96
-      p-6
+      p-6 
       mb-12
       flex
       justify-center
@@ -303,6 +304,7 @@
       font-semibold
     ;
   }
+  /*****  Error Message CSS  *****/
   /**************************************************************************/
   /***************************** Animations CSS *****************************/
   /**************************************************************************/
@@ -311,36 +313,38 @@
 
 
 
-#signUp {
-  @apply
-    flex
-    flex-col
-    items-center
-    gap-y-12
-    w-123
-    min-h-104
+  #signUp {
+    @apply
+      flex
+      flex-col
+      items-center
+      w-123
+      m-auto
+      min-h-104
 
-    rounded-2xl 
-    border 
-    border-slate-200 
-    shadow-md
-  ;
-}
-#signUp .form--title h5 {
-  @apply
-    text-3xl
-    font-semibold
-  ;
-}
-#signUp .form--wrapper {
-  @apply
-    w-full 
-    flex
-    flex-col
+      rounded-2xl 
+      border 
+      border-slate-200 
+      shadow-md
+    ;
+  }
+  #signUp .form--title h5 {
+    @apply
+      text-3xl
+      font-semibold
+    ;
+  }
+  #signUp .form--wrapper {
+    @apply
+      w-full 
+      flex
+      flex-col
 
-  ;
-}
+    ;
+  }
 
+
+  
   
 
   .cta-menu a {

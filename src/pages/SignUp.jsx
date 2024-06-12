@@ -10,7 +10,7 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const SignUp = () => {
 
-    console.clear();
+    // console.clear();
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
     console.log("Collected User Details: ", user);
@@ -54,25 +54,47 @@ const SignUp = () => {
 
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
-            const { success, message, data } = res.data;        
+            const { success, message, data } = res.data; 
+            var errMsg = document.querySelector('#signUp .error'); 
+            var successMsg = document.querySelector('#signUp .success');
+
             if (!success && message === "Fill all the required inputs.") {
                 setFormMessage(message);
-                setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nMessage: ", message);
-            } else if (!success && message === "E-mail exists. Please sign-in.") {
+                setFormSubmitted(success);     
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
+             } else if (!success && message === "E-mail exists. Please sign-in.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nMessage: ", message);
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
             } else if (!success && message === "Username exists. Please sign-in.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nMessage: ", message);
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
             } else {
                 setFormMessage(message);
                 setFormSubmitted(success);
+                successMsg.classList.remove('success');
+                successMsg.classList.add('success-message-info');
+                setTimeout(() => {
+                    successMsg.classList.remove('success-message-info');
+                    successMsg.classList.add('success');
+                }, 2800);
+
                 console.log("Success: ", success, 
                             "\nData: ", data, 
                             "\nMessage: ", message);
@@ -82,55 +104,29 @@ const SignUp = () => {
         .catch((error) => {
             console.log("Error encountered: ", error);
         });
-
-
-
-        var errMsg = document.querySelector('#signUp .form--title .error');
-        if (!formSubmitted) {
-            errMsg.classList.remove('error-message');
-            errMsg.classList.add('error-message-info');
-
-            setTimeout(() => {
-                errMsg.classList.remove('error-message-info');
-                errMsg.classList.add('error-message');
-            }, 2800);
-        } else {
-            errMsg.classList.remove('success-message');
-            errMsg.classList.add('success-message-info');
-
-            setTimeout(() => {
-                errMsg.classList.remove('success-message-info');
-                errMsg.classList.add('success-message');
-            }, 2800); 
-        }
     };
+     
+
     
-    
-
-
-
-
     return (
         <>
             <Nav />
             <div className="absolute top-0 w-full h-screen">
                 <main className="w-full h-128 relative">
-                    <div className="flex justify-center mt-40 pt-24">
-             
 
+                    <div className="mt-40 pt-24 items-center">
                         <form id="signUp" onSubmit={handleSubmit}>
 
-
-                            <div className="text-center pt-16 gap-y-10 form--title">
-                                <div className={`error ${formSubmitted ? 'success-message' : 'error-message'}`}>
+                            <div className="text-center pt-16 form--title">
+                                <div className="error">
                                     {formMessage}
-                                </div>
+                                </div>                          
 
                                 <h5>Registration Form</h5>
                             </div>
 
 
-                            <div className="px-8 pb-20">
+                            <div className="px-8 pt-14 pb-20">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
@@ -164,6 +160,10 @@ const SignUp = () => {
                                         btnBg
                                         label="submit"
                                     />
+                                </div>
+
+                                <div className="success">
+                                    {formMessage}
                                 </div>
                             </div>
 

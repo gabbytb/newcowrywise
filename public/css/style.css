@@ -1194,16 +1194,24 @@ header {
   animation: slideUp 0.6s ease-in;
 }
 
-.success-message, 
-  .error-message {
+/*****  Error Message CSS  *****/
+
+.\!success {
+  display: none;
+}
+
+.success, .error {
   display: none;
 }
 
 .success-message-info {
-  margin-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
   display: flex;
-  width: 30rem;
+  min-width: 24rem;
   justify-content: center;
+  border-radius: 1rem;
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
   padding: 1.5rem;
@@ -1217,8 +1225,9 @@ header {
 .error-message-info {
   margin-bottom: 3rem;
   display: flex;
-  width: 30rem;
+  min-width: 24rem;
   justify-content: center;
+  border-radius: 1rem;
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
   padding: 1.5rem;
@@ -1229,6 +1238,8 @@ header {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+/*****  Error Message CSS  *****/
+
 /**************************************************************************/
 
 /***************************** Animations CSS *****************************/
@@ -1236,12 +1247,12 @@ header {
 /**************************************************************************/
 
 #signUp {
+  margin: auto;
   display: flex;
   min-height: 38rem;
   width: 34rem;
   flex-direction: column;
   align-items: center;
-  row-gap: 3rem;
   border-radius: 1rem;
   border-width: 1px;
   --tw-border-opacity: 1;
@@ -3362,6 +3373,10 @@ header .cta-menu a:last-child {
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
 .pt-16 {
