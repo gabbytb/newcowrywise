@@ -264,6 +264,45 @@
   .activate-second {    /** Working for Section Seven */
     @apply animate-slideUpSecond
   }
+
+
+  .success-message, 
+  .error-message {
+    @apply
+      hidden
+    ;
+  }
+
+  .success-message-info {
+    @apply
+      bg-green-600
+      rounded-2xl
+      min-w-96
+      p-6
+      mb-12
+      flex
+      justify-center
+      text-center
+      text-white
+      text-2xl
+      font-semibold
+    ;
+  }
+  .error-message-info {
+    @apply
+      bg-red-600
+      rounded-2xl
+      min-w-96
+      p-6
+      mb-12
+      flex
+      justify-center
+      text-center
+      text-white
+      text-2xl
+      font-semibold
+    ;
+  }
   /**************************************************************************/
   /***************************** Animations CSS *****************************/
   /**************************************************************************/

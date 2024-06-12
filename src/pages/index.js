@@ -1,10 +1,12 @@
 import Home from "./Home";
-import Registration from "./Registration";
+import SignUp from "./SignUp";
+import SignUpVerification from "./SignUpVerification";
 
 
 
 
 export {
     Home,
-    Registration,
+    SignUp,
+    SignUpVerification,
 }

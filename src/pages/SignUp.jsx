@@ -8,7 +8,7 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
-const Registration = () => {
+const SignUp = () => {
 
     console.clear();
     const randNum = Math.floor(256*Math.random());
@@ -18,7 +18,7 @@ const Registration = () => {
     const [formMessage, setFormMessage] = useState(null);
     console.log("Form Message: ", formMessage);
 
-    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(null);
     console.log("Form Submitted: ", formSubmitted);
 
 
@@ -50,9 +50,11 @@ const Registration = () => {
     function handleSubmit(e) {
         e.preventDefault();
 
+
+
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
-            const { success, message, data } = res.data;
+            const { success, message, data } = res.data;        
             if (!success && message === "Fill all the required inputs.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
@@ -80,6 +82,27 @@ const Registration = () => {
         .catch((error) => {
             console.log("Error encountered: ", error);
         });
+
+
+
+        var errMsg = document.querySelector('#signUp .form--title .error');
+        if (!formSubmitted) {
+            errMsg.classList.remove('error-message');
+            errMsg.classList.add('error-message-info');
+
+            setTimeout(() => {
+                errMsg.classList.remove('error-message-info');
+                errMsg.classList.add('error-message');
+            }, 2800);
+        } else {
+            errMsg.classList.remove('success-message');
+            errMsg.classList.add('success-message-info');
+
+            setTimeout(() => {
+                errMsg.classList.remove('success-message-info');
+                errMsg.classList.add('success-message');
+            }, 2800); 
+        }
     };
     
     
@@ -97,11 +120,15 @@ const Registration = () => {
 
                         <form id="signUp" onSubmit={handleSubmit}>
 
-        
-                            <div className="text-center pt-16 form--title">
-                                {/* flex flex-col gap-y-10 */}
+
+                            <div className="text-center pt-16 gap-y-10 form--title">
+                                <div className={`error ${formSubmitted ? 'success-message' : 'error-message'}`}>
+                                    {formMessage}
+                                </div>
+
                                 <h5>Registration Form</h5>
                             </div>
+
 
                             <div className="px-8 pb-20">
                                 <div className="form--wrapper gap-6">
@@ -148,4 +175,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default SignUp;

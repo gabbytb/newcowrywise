@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Registration } from "./pages";
+import { Home, SignUp, SignUpVerification, } from "./pages";
 
 
 
@@ -8,7 +8,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/user/signup" element={<Registration />} />
+      <Route path="/user/signup" element={<SignUp />} />
+      <Route path="/user/verify/:token" element={<SignUpVerification />} />
     </Routes>
   );
 };

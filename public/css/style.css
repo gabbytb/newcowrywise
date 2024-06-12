@@ -1194,6 +1194,41 @@ header {
   animation: slideUp 0.6s ease-in;
 }
 
+.success-message, 
+  .error-message {
+  display: none;
+}
+
+.success-message-info {
+  margin-bottom: 3rem;
+  display: flex;
+  width: 30rem;
+  justify-content: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.error-message-info {
+  margin-bottom: 3rem;
+  display: flex;
+  width: 30rem;
+  justify-content: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 /**************************************************************************/
 
 /***************************** Animations CSS *****************************/
