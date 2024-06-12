@@ -7,15 +7,12 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
-
-
 const SignUpVerification = () => {
 
-    console.clear();
+    // console.clear();
     const { token } = useParams();
     const [existingUser, setExistingUser] = useState({ _id: token.id });
     console.log("Existing User: ", existingUser);
-
 
     useEffect(() => {
         axios.post(`http://127.0.0.1:3000/user/verify/${token}`, existingUser, {
@@ -34,6 +31,7 @@ const SignUpVerification = () => {
 
 
 
+    // SignUp Integration
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
     console.log("Collected User Details: ", user);
@@ -73,60 +71,78 @@ const SignUpVerification = () => {
     function handleSubmit(e) {
         e.preventDefault();
 
+
+
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
-            const { success, message, data } = res.data;
+            const { success, message, data } = res.data; 
+            var errMsg = document.querySelector('#signUp .error'); 
+            var successMsg = document.querySelector('#signUp .success');
+
             if (!success && message === "Fill all the required inputs.") {
                 setFormMessage(message);
-                setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nMessage: ", message);
-            } else if (!success && message === "E-mail exists. Please sign-in.") {
+                setFormSubmitted(success);     
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
+             } else if (!success && message === "E-mail exists. Please sign-in.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nMessage: ", message);
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
             } else if (!success && message === "Username exists. Please sign-in.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nMessage: ", message);
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
             } else {
                 setFormMessage(message);
                 setFormSubmitted(success);
-                console.log("Success: ", success, 
-                            "\nData: ", data, 
-                            "\nMessage: ", message);
-                
+                successMsg.classList.remove('success');
+                successMsg.classList.add('success-message-info');
+                setTimeout(() => {
+                    successMsg.classList.remove('success-message-info');
+                    successMsg.classList.add('success');
+                }, 2800);                
             };
         })
         .catch((error) => {
             console.log("Error encountered: ", error);
         });
     };
+    // SignUp Integration
 
-
-
+    
     return (
         <>
             <Nav />
             <div className="absolute top-0 w-full h-screen">
                 <main className="w-full h-128 relative">
-                    <div className="flex justify-center mt-40 pt-24">
-             
 
+                    <div className="mt-40 pt-24 items-center">
                         <form id="signUp" onSubmit={handleSubmit}>
 
-                            <div className={`${formSubmitted ? 'hidden' : 'block'}`}>
-
-                            </div>
-        
                             <div className="text-center pt-16 form--title">
-                                {/* flex flex-col gap-y-10 */}
+                                <div className="error">
+                                    {formMessage}
+                                </div>                          
+
                                 <h5>Registration Form</h5>
                             </div>
 
-                            <div className="px-8 pb-20">
+
+                            <div className="px-8 pt-14 pb-20">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
@@ -160,6 +176,10 @@ const SignUpVerification = () => {
                                         btnBg
                                         label="submit"
                                     />
+                                </div>
+
+                                <div className="success">
+                                    {formMessage}
                                 </div>
                             </div>
 

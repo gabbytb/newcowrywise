@@ -93,12 +93,7 @@ const SignUp = () => {
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                }, 2800);
-
-                console.log("Success: ", success, 
-                            "\nData: ", data, 
-                            "\nMessage: ", message);
-                
+                }, 2800);                
             };
         })
         .catch((error) => {
