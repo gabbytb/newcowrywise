@@ -4,12 +4,13 @@ import { Home, SignUp, SignUpVerification, } from "./pages";
 
 
 
+
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/user/signup" element={<SignUp />} />
-      <Route path="/user/verify/:token" element={<SignUpVerification />} />
+      <Route path="/user/signup" element={<SignUp />}></Route>
+      <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
     </Routes>
   );
 };

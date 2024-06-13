@@ -160,7 +160,7 @@ exports.signUp = async (req, res) => {
                     "\n*********************************************************",
                     "\n*****          NEW USER ACCOUNT DETAILS             *****",
                     "\n*********************************************************",
-                    `\nNew User: ${user}`,
+                    `=====>>  New User: ${user}`,
                     "\n*********************************************************");
 
         const responseData = {
@@ -168,7 +168,7 @@ exports.signUp = async (req, res) => {
             data: user,
             message: "Successful",
         };
-        console.log("*** NEW USER: ", responseData);
+        // console.log("*** NEW USER: ", responseData);
         res.status(201).json(responseData);
         return;
 
@@ -212,8 +212,14 @@ exports.accountVerification = async (req, res) => {
             // If token was signed to an Existing User, find the Existing User ID !
             const _id = decodedData.id
             const user = await User.findById(_id);
+
+            //  If the User Exists
             if (user) {
+
+                // find the UserByEmail to Update previous User Record 
                 const email = user.email;
+
+                // Update this User Records in Particular !
                 const dataToUpdate = {
                     accessToken: token,
                     isActivated: true,

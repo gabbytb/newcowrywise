@@ -13,13 +13,13 @@ const SignUp = () => {
     // console.clear();
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
-    console.log("Collected User Details: ", user);
+    // console.log("Collected User Details: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    console.log("Form Message: ", formMessage);
+    // console.log("Form Message: ", formMessage);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    console.log("Form Submitted: ", formSubmitted);
+    // console.log("Form Submitted: ", formSubmitted);
 
 
 
@@ -50,8 +50,7 @@ const SignUp = () => {
     function handleSubmit(e) {
         e.preventDefault();
 
-
-
+        
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
             const { success, message, data } = res.data; 
@@ -93,7 +92,11 @@ const SignUp = () => {
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                }, 2800);                
+                }, 2800);   
+
+                // console.log("Success: ", success);
+                // console.log("Message: ", message);
+                // console.log("Data: ", data);             
             };
         })
         .catch((error) => {
@@ -106,7 +109,7 @@ const SignUp = () => {
     return (
         <>
             <Nav />
-            <div className="absolute top-0 w-full h-screen">
+            <div className="absolute top-0 w-full h-screen -z-10">
                 <main className="w-full h-128 relative">
 
                     <div className="mt-40 pt-24 items-center">

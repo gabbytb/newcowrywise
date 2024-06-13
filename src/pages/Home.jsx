@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <Nav />
-      <div className="absolute top-0 w-full">
+      <div className="absolute top-0 w-full -z-10">
         <HomeBody />
         <Footer />
       </div>
