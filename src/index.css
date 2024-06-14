@@ -270,13 +270,14 @@
   /*****  Error Message CSS  *****/
   .success, .error {
     @apply
-      hidden
+      hidden      
     ;
   }
   .success-message-info {
     @apply
     bg-green-600
       rounded-2xl
+      /* w-123 */
       min-w-96
       p-6
       mt-6
@@ -293,7 +294,8 @@
     @apply
       bg-red-600
       rounded-2xl
-      min-w-96
+      w-123
+      /* min-w-96 */
       p-6 
       mb-12
       flex
@@ -321,7 +323,7 @@
       w-123
       m-auto
       min-h-104
-
+      gap-y-16
       rounded-2xl 
       border 
       border-slate-200 

@@ -132,6 +132,10 @@ exports.signUp = async (req, res) => {
         const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
         const verifyActivationLink = `http://127.0.0.1:3000/user/verify/${token}`;
         const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
+        // const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
+        // :visited {background: green}
+        // :hover {background: yellow}
+        // :visited:hover {background: purple}
         const activationLink = `<span style="color:black;font-size:10px;">or copy and paste this link on your browser</span><br /><a href="http://127.0.0.1:3000/user/verify/${token}" alt="activation link" style="font-size:10px;">http://127.0.0.1:3000/user/verify/${token}</a>`;
         const mailOptions = {
             from: `Samuel Akinola Foundation <${mailServiceUser}>`,
@@ -155,12 +159,12 @@ exports.signUp = async (req, res) => {
         // ****************************************************************",
         console.log("\n*********************************************************",
                     "\n*****        TOKEN GENERATED FOR NEW USER           *****",
-                    "\n*********************************************************",
-                    `\nToken: ${token}`,
+                    `\n*********************************************************,
+                    \nToken: ${token}`,
                     "\n*********************************************************",
                     "\n*****          NEW USER ACCOUNT DETAILS             *****",
-                    "\n*********************************************************",
-                    `=====>>  New User: ${user}`,
+                    `\n*********************************************************,
+                    \n=====>>  New User: ${user}`,
                     "\n*********************************************************");
 
         const responseData = {

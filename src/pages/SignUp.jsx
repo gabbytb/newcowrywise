@@ -11,6 +11,7 @@ import { Nav, ButtonSubmit, } from "../components";
 const SignUp = () => {
 
     // console.clear();
+
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
     // console.log("Collected User Details: ", user);
@@ -54,7 +55,7 @@ const SignUp = () => {
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
             const { success, message, data } = res.data; 
-            var errMsg = document.querySelector('#signUp .error'); 
+            var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
 
             if (!success && message === "Fill all the required inputs.") {
@@ -94,9 +95,9 @@ const SignUp = () => {
                     successMsg.classList.add('success');
                 }, 2800);   
 
-                // console.log("Success: ", success);
-                // console.log("Message: ", message);
-                // console.log("Data: ", data);             
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+                console.log("Data: ", data);             
             };
         })
         .catch((error) => {
@@ -112,19 +113,21 @@ const SignUp = () => {
             <div className="absolute top-0 w-full h-screen -z-10">
                 <main className="w-full h-128 relative">
 
-                    <div className="mt-40 pt-24 items-center">
+                    <div className="mt-40 pt-24 items-center">`
+                        <div className="mx-auto error">
+                            <pre className="hidden">
+                                {formSubmitted}
+                            </pre>
+                            {formMessage}
+                        </div>
+
                         <form id="signUp" onSubmit={handleSubmit}>
 
                             <div className="text-center pt-16 form--title">
-                                <div className="error">
-                                    {formMessage}
-                                </div>                          
-
-                                <h5>Registration Form</h5>
+                                <h5 className="capitalize">sign up</h5>
                             </div>
 
-
-                            <div className="px-8 pt-14 pb-20">
+                            <div className="px-8 pb-20">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
@@ -160,7 +163,7 @@ const SignUp = () => {
                                     />
                                 </div>
 
-                                <div className="success">
+                                <div className="mx-auto success">
                                     {formMessage}
                                 </div>
                             </div>

@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
-import { BrandLogo, BrandLogoWhite } from "../assets/images";
-import { PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, } from "../assets/icons";
-import { useEffect, useState } from "react";
+import { 
+    BrandLogo, 
+    BrandLogoWhite, 
+} from "../assets/images";
+import { 
+    PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
+    BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, 
+    LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, 
+} from "../assets/icons";
+
+
 
 
 
@@ -11,18 +19,6 @@ import { useEffect, useState } from "react";
 
 const Nav = () => {
     
-
-    const [clicked, setClicked] = useState(false);
-    // const [exited, setExited] = useState(false);
-
-
-    useEffect(() => {       
-        function myFunction() {
-            // console.clear();
-        };
-        myFunction();
-    }, [clicked]);
-
 
     return (
         <>
@@ -39,17 +35,17 @@ const Nav = () => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex items-center h-full px-0 relative ">                
-                        <Link className="mt-1.5 ml-2 mr-24 brand">
+                        <Link to={"/"} className="mt-1.5 ml-2 mr-24 brand">
                             <BrandLogo />
                         </Link>
-                        <Link className="-mt-2 ml-2 mr-24 brand-white">
+                        <Link to={"/"} className="-mt-2 ml-2 mr-24 brand-white">
                             <BrandLogoWhite />
                         </Link>
 
 
                         <div className="flex justify-end items-center w-full h-full sm:justify-end lg:justify-between">
                             <ul id="nav-menus-wrap" className="nav-links">
-                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
+                                <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Personal</p>
                                     <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left border-e-2 mr-20 pr-20">
@@ -90,7 +86,7 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
+                                <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Business</p>
                                     <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left mr-20 pr-20">
@@ -106,7 +102,7 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
+                                <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Developer</p>
                                     <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left border-e-2 mr-20 pr-20">
@@ -137,7 +133,7 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative" onClick={(e) => setClicked(true)}>
+                                <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Learn</p>
                                     <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left mr-20 pr-20">
@@ -170,8 +166,8 @@ const Nav = () => {
                             </ul>
 
                             <div className="space-x-10 cta-menu">
-                                <Link to="/user/login">log in</Link>
-                                <Link to="/user/signup">sign up for free</Link>
+                                <Link to={"/user/login"}>log in</Link>
+                                <Link to={"/user/signup"}>sign up for free</Link>
                             </div>
                             
                             <div className="mobile-nav">

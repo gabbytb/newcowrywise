@@ -1225,7 +1225,7 @@ header {
 .error-message-info {
   margin-bottom: 3rem;
   display: flex;
-  min-width: 24rem;
+  width: 34rem;
   justify-content: center;
   border-radius: 1rem;
   --tw-bg-opacity: 1;
@@ -1253,6 +1253,7 @@ header {
   width: 34rem;
   flex-direction: column;
   align-items: center;
+  row-gap: 4rem;
   border-radius: 1rem;
   border-width: 1px;
   --tw-border-opacity: 1;
@@ -3017,6 +3018,11 @@ header .cta-menu a:last-child {
 
 .-z-10 {
   z-index: -10;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .my-4 {
