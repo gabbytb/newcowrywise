@@ -1,6 +1,3 @@
-import { useState, } from "react";
-import axios from "axios";
-import { Nav, ButtonSubmit, } from "../components";
 
 
 
@@ -8,12 +5,11 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
-const SignUp = () => {
 
-    // console.clear();
 
-    const randNum = Math.floor(256*Math.random());
-    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
+const Login = () => {
+
+    const [user, setUser] = useState({ email: "", password: "", });
     // console.log("Collected User Details: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
@@ -66,7 +62,7 @@ const SignUp = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
-             } else if (!success && message === "E-mail exists. Please sign-in.") {
+            } else if (!success && message === "E-mail exists. Please sign-in.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
                 errMsg.classList.remove('error');
@@ -103,9 +99,9 @@ const SignUp = () => {
             console.log("Error encountered: ", error);
         });
     };
-     
 
-    
+
+
     return (
         <>
             <Nav />
@@ -129,29 +125,12 @@ const SignUp = () => {
                             <div className="px-8 pb-20">
                                 <div className="form--wrapper gap-6">
 
-                                    <label htmlFor="username">
-                                        <input type="text" name="username" value={user.username} placeholder="Username" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    </label>
-
-                                    <div className="flex flex-row gap-4">
-                                        <label htmlFor="firstName">
-                                            <input type="text" name="firstName" value={user.firstName} placeholder="First Name" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                        </label>
-                                        <label htmlFor="lastName">
-                                            <input type="text" name="lastName" value={user.lastName} placeholder="Last Name" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                        </label>
-                                    </div>
-
                                     <label htmlFor="email">
                                         <input type="email" name="email" value={user.email} placeholder="example@email.com" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <label htmlFor="password">
                                         <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    </label>
-
-                                    <label htmlFor="isActivated" className="flex justify-end items-end flex-row-reverse gap-4">I agree to terms & conditions?
-                                        <input type="checkbox" name="isActivated" value={user.isActivated} onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <ButtonSubmit 
@@ -173,6 +152,6 @@ const SignUp = () => {
             </div>
         </>
     );
-};
+}
 
-export default SignUp;
+export default Login
