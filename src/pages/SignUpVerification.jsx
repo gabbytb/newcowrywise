@@ -198,20 +198,21 @@ const SignUpVerification = () => {
             <div className="absolute top-0 w-full h-screen -z-10">
                 <main className="w-full h-128 relative">
 
-                    <div className="mt-40 pt-24 items-center">
+                    <div className="mt-40 pt-24 items-center">`
+                        <div className="mx-auto error">
+                            <pre className="hidden">
+                                {formSubmitted}
+                            </pre>
+                            {formMessage}
+                        </div>
+
                         <form id="signUp" onSubmit={handleSubmit}>
 
                             <div className="text-center pt-16 form--title">
-                                <div className="error">
-                                    <pre className="hidden">{formSubmitted}</pre>
-                                    {formMessage}
-                                </div>                          
-
                                 <h5 className="capitalize">sign up</h5>
                             </div>
 
-
-                            <div className="px-8 pt-14 pb-20">
+                            <div className="px-8 pb-20">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
@@ -247,7 +248,7 @@ const SignUpVerification = () => {
                                     />
                                 </div>
 
-                                <div className="success">
+                                <div className="mx-auto success">
                                     {formMessage}
                                 </div>
                             </div>
