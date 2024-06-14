@@ -269,7 +269,7 @@ exports.logIn = async (req, res) => {
         if (!(email && password )) {
             const responseData = { 
                 success: false, 
-                message: "All fields are required",
+                message: "All fields are required.",
             };
             console.log("***********************************",
                         "\n*********  LOGIN ATTEMPT  *********",
@@ -282,7 +282,7 @@ exports.logIn = async (req, res) => {
         if (!user) {        // 2) Check if Email exists for any User
             const responseData = { 
                 success: false, 
-                message: "Incorrect password or email",
+                message: "Incorrect password or email.",
             };
             console.log("***********************************",
                         "\n*****    LOG-IN ATTEMPT BY    *****",
@@ -298,7 +298,7 @@ exports.logIn = async (req, res) => {
         if (!auth) {        // 4) Check if Password for Existing User is Correct
             const responseData = { 
                 success: false, 
-                message: "Incorrect password or email",
+                message: "Incorrect password or email.",
             };
             console.log("***********************************",
                         "\n*****    LOG-IN ATTEMPT BY    *****",

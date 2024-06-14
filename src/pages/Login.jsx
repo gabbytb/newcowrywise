@@ -1,3 +1,7 @@
+import { useState, } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { Nav, ButtonSubmit, } from "../components";
 
 
 
@@ -9,14 +13,15 @@
 
 const Login = () => {
 
-    const [user, setUser] = useState({ email: "", password: "", });
-    // console.log("Collected User Details: ", user);
+    // const { token } = useParams();
+    const [user, setUser] = useState({ email: "", password: "", accessToken: null });
+    console.log("User attempting Log-in: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    // console.log("Form Message: ", formMessage);
+    console.log("Form Message: ", formMessage);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    // console.log("Form Submitted: ", formSubmitted);
+    console.log("Form Submitted: ", formSubmitted);
 
 
 
@@ -44,16 +49,20 @@ const Login = () => {
 
 
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         
-        axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+        axios.post("http://127.0.0.1:8000/api/v1/auth/login", user, {
+            headers: {
+                Authorization: `Bearer ${user.accessToken}`,
+            },
+        })
         .then((res) => {
             const { success, message, data } = res.data; 
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
 
-            if (!success && message === "Fill all the required inputs.") {
+            if (!success && message === "All fields are required.") {
                 setFormMessage(message);
                 setFormSubmitted(success);     
                 errMsg.classList.remove('error');
@@ -62,16 +71,7 @@ const Login = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
-            } else if (!success && message === "E-mail exists. Please sign-in.") {
-                setFormMessage(message);
-                setFormSubmitted(success);
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-                setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-                }, 2800);
-            } else if (!success && message === "Username exists. Please sign-in.") {
+            } else if (!success && message === "Incorrect password or email.") {
                 setFormMessage(message);
                 setFormSubmitted(success);
                 errMsg.classList.remove('error');
@@ -119,10 +119,10 @@ const Login = () => {
                         <form id="signUp" onSubmit={handleSubmit}>
 
                             <div className="text-center pt-16 form--title">
-                                <h5 className="capitalize">sign up</h5>
+                                <h5 className="capitalize">log in</h5>
                             </div>
 
-                            <div className="px-8 pb-20">
+                            <div className="px-8 pb-20 w-full">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="email">
@@ -139,6 +139,10 @@ const Login = () => {
                                         btnBg
                                         label="submit"
                                     />
+
+                                    <div className="text-2xl/normal text-slate-600 font-medium">Don't have an account? 
+                                        <Link className="text-black font-semibold capitalize" to={"/user/signup"}> sign up</Link>
+                                    </div>
                                 </div>
 
                                 <div className="mx-auto success">

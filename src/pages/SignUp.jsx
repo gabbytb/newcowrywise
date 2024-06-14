@@ -1,4 +1,5 @@
 import { useState, } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Nav, ButtonSubmit, } from "../components";
 
@@ -14,13 +15,13 @@ const SignUp = () => {
 
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
-    // console.log("Collected User Details: ", user);
+    console.log("New Account Info: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    // console.log("Form Message: ", formMessage);
+    console.log("Form Message: ", formMessage);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    // console.log("Form Submitted: ", formSubmitted);
+    console.log("Form Submitted: ", formSubmitted);
 
 
 
@@ -126,7 +127,7 @@ const SignUp = () => {
                                 <h5 className="capitalize">sign up</h5>
                             </div>
 
-                            <div className="px-8 pb-20">
+                            <div className="px-8 pb-20 w-full">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
@@ -160,6 +161,10 @@ const SignUp = () => {
                                         btnBg
                                         label="submit"
                                     />
+
+                                    <div className="text-2xl/normal text-slate-600 font-medium">Have an account? 
+                                        <Link className="text-black font-semibold capitalize" to={"/user/login"}> sign in</Link>
+                                    </div>
                                 </div>
 
                                 <div className="mx-auto success">
