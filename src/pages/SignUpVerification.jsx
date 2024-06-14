@@ -1,5 +1,5 @@
 import { useState, useEffect, } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Nav, ButtonSubmit, } from "../components";
 
@@ -53,7 +53,7 @@ const SignUpVerification = () => {
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
             const { success, message, data } = res.data; 
-            var errMsg = document.querySelector('#signUp .error'); 
+            var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
 
             if (!success && message === "Fill all the required inputs.") {
@@ -110,7 +110,8 @@ const SignUpVerification = () => {
 
     const { token } = useParams();
     const [existingUser, setExistingUser] = useState({ accessToken: token });
-    console.log("Find Existing User this Token was assigned to: ", existingUser);
+    console.log("*****  Checking if 'token' is assigned to an Existing User  *****",
+        "\nExisting User: ", existingUser);
 
     const [isVerified, setIsVerified] = useState(false);
     console.log("Account Is Verified: ", isVerified);
@@ -161,7 +162,7 @@ const SignUpVerification = () => {
             })
             .finally(disableIsLoading);
         }
-        setTimeout(verifyAccountRegistration, 5000);
+        setTimeout(verifyAccountRegistration, 2300);
 
 
 
@@ -180,10 +181,68 @@ const SignUpVerification = () => {
                 <div className="absolute top-0 w-full h-screen -z-10">
                     <main className="w-full h-128 relative">
 
-                        <div className="mt-40 pt-24 items-center">
-                            <div className="text-center pt-16 form--title">
-                                <h5>Processing...</h5>
+                        <div className="mt-40 pt-24 items-center">`
+                            <div className="mx-auto error">
+                                <pre className="hidden">
+                                    {formSubmitted}
+                                </pre>
+                                {formMessage}
                             </div>
+
+                            <form id="signUp" onSubmit={handleSubmit}>
+
+                                <div className="text-center pt-16 form--title">
+                                    <h5 className="capitalize">sign up</h5>
+                                </div>
+
+                                <div className="px-8 pb-20">
+                                    <div className="form--wrapper gap-6">
+
+                                        <label htmlFor="username">
+                                            <input type="text" name="username" value={user.username} placeholder="Username" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        </label>
+
+                                        <div className="flex flex-row gap-4">
+                                            <label htmlFor="firstName">
+                                                <input type="text" name="firstName" value={user.firstName} placeholder="First Name" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                            </label>
+                                            <label htmlFor="lastName">
+                                                <input type="text" name="lastName" value={user.lastName} placeholder="Last Name" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                            </label>
+                                        </div>
+
+                                        <label htmlFor="email">
+                                            <input type="email" name="email" value={user.email} placeholder="example@email.com" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        </label>
+
+                                        <label htmlFor="password">
+                                            <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        </label>
+
+                                        <label htmlFor="isActivated" className="flex justify-end items-end flex-row-reverse gap-4">I agree to terms & conditions?
+                                            <input type="checkbox" name="isActivated" value={user.isActivated} onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        </label>
+
+                                        <ButtonSubmit 
+                                            btnType="submit"
+                                            btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg"
+                                            btnBg
+                                            label="submit"
+                                        />
+
+                                        <div className="text-2xl/normal text-slate-600 font-medium">Have an account? 
+                                            <Link className="text-black font-semibold capitalize" to={"/user/login"}> sign in</Link>
+                                        </div>
+                                    </div>
+
+                                    <div className="mx-auto success">
+                                        {formMessage}
+                                    </div>
+                                    <div className="success-message-info mt-8">    
+                                        Processing...
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </main>
                 </div>
@@ -198,7 +257,7 @@ const SignUpVerification = () => {
             <div className="absolute top-0 w-full h-screen -z-10">
                 <main className="w-full h-128 relative">
 
-                    <div className="mt-40 pt-24 items-center">`
+                    <div className="mt-40 pt-24 items-center">
                         <div className="mx-auto error">
                             <pre className="hidden">
                                 {formSubmitted}
@@ -246,6 +305,10 @@ const SignUpVerification = () => {
                                         btnBg
                                         label="submit"
                                     />
+
+                                    <div className="text-2xl/normal text-slate-600 font-medium">Have an account? 
+                                        <Link className="text-black font-semibold capitalize" to={"/user/login"}> sign in</Link>
+                                    </div>
                                 </div>
 
                                 <div className="mx-auto success">
