@@ -7,10 +7,6 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
-
-
-
-
 const Login = () => {
 
     console.clear();
@@ -23,7 +19,6 @@ const Login = () => {
 
     const [formSubmitted, setFormSubmitted] = useState(null);
     console.log("Login Successful: ", formSubmitted);
-
 
     async function handleKeyUp(e) {
         const name = e.target.name;

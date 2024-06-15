@@ -111,8 +111,6 @@ const SignUpVerification = () => {
 
 
 
-
-
     // ******************************** //
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
@@ -134,52 +132,54 @@ const SignUpVerification = () => {
             setIsLoading(false);
         }
         function verifyAccountRegistration() {
-            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
-                headers: {                    
-                    Authorization: `Bearer ${token}`,
-                }
-            })
-            .then((response) => {
-                const { success, data, message } = response.data;                
-                if ((!success) && (message === "Unauthorized")) {
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                    return;
-                } else if ((!success) && (message === "Token does not exist")) {
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                    return;
-                } else if ((!success) && (message === "unauthorized")) {
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                    return;
-                } else {
-                    setIsVerified(success);
-                    setExistingUser(data);
-                    setAuthenticationResponseMsg(message);
-                    return;
-                };      
-            })
-            .catch((error) => {
-                console.log("Account Verification Error: ", error);
-            })
-            .finally(disableIsLoading);
-        }
-        setTimeout(verifyAccountRegistration, 2300);
+            if (token !== null) {
+                axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
+                    headers: {                    
+                        Authorization: `Bearer ${token}`,
+                    }
+                })
+                .then((response) => {
+                    const { success, data, message } = response.data;    
+                    const pageTitle = "Account Verification",
+                    siteTitle = "Samuel Akinola Foundation";
+                    document.title = `${pageTitle} - ${data.email} | ${siteTitle}`;            
 
-
-        // function redirToLogin() {
-        //     const loginURL = "/user/login";
-        //     window.location = loginURL;
-        // }
-        // setTimeout(redirToLogin, 8000);
+                    if ((!success) && (message === "Unauthorized")) {
+                        setIsVerified(success);
+                        setAuthenticationResponseMsg(message);
+                        return;
+                    } else if ((!success) && (message === "Token does not exist")) {
+                        setIsVerified(success);
+                        setAuthenticationResponseMsg(message);
+                        return;
+                    } else if ((!success) && (message === "unauthorized")) {
+                        setIsVerified(success);
+                        setAuthenticationResponseMsg(message);
+                        return;
+                    } else {
+                        setIsVerified(success);
+                        setExistingUser(data);
+                        setAuthenticationResponseMsg(message);
+                        return;
+                    };      
+                })
+                .catch((error) => {
+                    console.log("Account Verification Error: ", error);
+                })
+                .finally(disableIsLoading);
+            } else {
+                return null;
+            };
+        };
+        
+        let timeout = setTimeout(verifyAccountRegistration, 2300);
+        return () => {
+            clearTimeout(timeout);
+        };
+    // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
-        const pageTitle = "Account Verification",
-        siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} - ${existingUser.email} | ${siteTitle}`;
-
         const endVerificationSuccessfulMessage = document.querySelector('#signUpVerificationID .success-verify');
         if (isVerified) {
             endVerificationSuccessfulMessage.classList.remove('success-verify');
@@ -188,11 +188,14 @@ const SignUpVerification = () => {
                 endVerificationSuccessfulMessage.classList.remove('success-message-info');
                 endVerificationSuccessfulMessage.classList.add('success-verify');
             }, 2300);
-        };
+        } else {
+            return;
+        }
     }, [isVerified]);
     // ******************************** //
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
+
 
 
 

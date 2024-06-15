@@ -237,6 +237,7 @@ exports.accountVerification = async (req, res) => {
 
             } else {
                 // If token was signed to an Existing User, but Existing User cannot be found !
+                // Account Verification Error:  TypeError: Cannot read properties of undefined (reading 'email')
                 const responseData = { 
                     success: false,
                     message: "Failed",

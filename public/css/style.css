@@ -1200,7 +1200,7 @@ header {
   display: none;
 }
 
-.success, .error {
+.success, .error, .success-verify {
   display: none;
 }
 
@@ -3143,6 +3143,10 @@ header .cta-menu a:last-child {
 
 .min-h-20 {
   min-height: 5rem;
+}
+
+.w-123 {
+  width: 34rem;
 }
 
 .w-136 {
