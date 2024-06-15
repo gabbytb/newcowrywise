@@ -197,8 +197,8 @@ exports.accountVerification = async (req, res) => {
                 success: false, 
                 message: "Unauthorized",
             }
-            console.log("Handle Authorization: ", responseData);
-            return res.status(401).json(responseData);
+            console.log("Missing Token for Account Verification: ", responseData);
+            return res.status(403).json(responseData);
         }
         
         const token = AuthHeader.split(" ")[1];
@@ -219,20 +219,14 @@ exports.accountVerification = async (req, res) => {
 
             //  If the User Exists
             if (user) {
-
-                // Update this User Records Upon Account Verification
+                // Step 2: Update these Records for the User upon Account Verification
                 const dataToUpdate = {
                     accessToken: token,
                     isActivated: true,
                 };
-
-                // find the UserByEmail to Update previous User Record 
-                const email = user.email;
-                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
-                // console.log("*********************************************************",
-                //             "\n*****          NEW ACCOUNT VERIFICATION             *****",
-                //             "\n*********************************************************",
-                //             `\nVerified User: ${updatedUser}`);                
+                const email = user.email;       // Step 1: find the UserByEmail to Update previous User Record 
+                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+                
                 const responseData = {
                     success: true,
                     data: updatedUser,

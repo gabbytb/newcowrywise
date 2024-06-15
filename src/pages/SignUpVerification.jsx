@@ -11,8 +11,14 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const SignUpVerification = () => {
 
-    console.clear();
-        
+
+    // console.clear();
+
+
+
+    // *************************** //
+    // ***** CREATE NEW USER ***** //
+    // *************************** //
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
     // console.log("Collected User Details: ", user);
@@ -22,7 +28,6 @@ const SignUpVerification = () => {
 
     const [formSubmitted, setFormSubmitted] = useState(null);
     // console.log("Form Submitted: ", formSubmitted);
-
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -34,7 +39,6 @@ const SignUpVerification = () => {
         });
     };
 
-
     async function handleChange(e) {
         const name = e.target.name;
         const value = e.target.checkbox ? e.target.checked : e.target.value;
@@ -45,11 +49,9 @@ const SignUpVerification = () => {
         });        
     };
 
-
     async function handleSubmit(e) {
         e.preventDefault();
-
-        
+   
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((res) => {
             const { success, message, data } = res.data; 
@@ -102,40 +104,43 @@ const SignUpVerification = () => {
             console.log("Error encountered: ", error);
         });
     };
+    // *************************** //
+    // ***** CREATE NEW USER ***** //
+    // *************************** //
 
 
 
 
 
 
+    // ******************************** //
+    // ***** VERIFY EXISTING USER ***** //
+    // ******************************** //
     const { token } = useParams();
     const [existingUser, setExistingUser] = useState({ accessToken: token });
-    console.log("*****  Checking if 'token' is assigned to an Existing User  *****",
-        "\nExisting User: ", existingUser);
-
-    const [isVerified, setIsVerified] = useState(false);
-    console.log("Account Is Verified: ", isVerified);
+    // console.log("***  Token was assigned to User  ***", "\nAccount: ", existingUser);
 
     const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
-    console.log("Verification Status: ", authenticationResponseMsg);
+    // console.log("Account Verification: ", authenticationResponseMsg);
 
-    const [isLoading, setIsLoading] = useState(true);
-    console.log("Is Loading: ", isLoading);
-
+    const [isVerified, setIsVerified] = useState(false);
+    // console.log("Account Verified: ", isVerified);
     
+    const [isLoading, setIsLoading] = useState(true);
+    // console.log("Is Loading: ", isLoading);
 
     useEffect(() => {   
         function disableIsLoading() {
             setIsLoading(false);
         }
         function verifyAccountRegistration() {
-            axios.post(`http://127.0.0.1:8000/user/verify/${existingUser.accessToken}`, existingUser, {
-                headers: {
-                    Authorization: `Bearer ${existingUser.accessToken}`,
+            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
+                headers: {                    
+                    Authorization: `Bearer ${token}`,
                 }
             })
             .then((response) => {
-                const { success, data, message } = response.data;
+                const { success, data, message } = response.data;                
                 if ((!success) && (message === "Unauthorized")) {
                     setIsVerified(success);
                     setAuthenticationResponseMsg(message);
@@ -152,11 +157,8 @@ const SignUpVerification = () => {
                     setIsVerified(success);
                     setExistingUser(data);
                     setAuthenticationResponseMsg(message);
-                };
-
-                const pageTitle = "Account Verification",
-                siteTitle = "Samuel Akinola Foundation";
-                document.title = `${pageTitle} - ${data.email} | ${siteTitle}`;
+                    return;
+                };      
             })
             .catch((error) => {
                 console.log("Account Verification Error: ", error);
@@ -166,13 +168,34 @@ const SignUpVerification = () => {
         setTimeout(verifyAccountRegistration, 2300);
 
 
-
         // function redirToLogin() {
         //     const loginURL = "/user/login";
         //     window.location = loginURL;
         // }
         // setTimeout(redirToLogin, 8000);
     }, []);
+
+    useEffect(() => {
+        const pageTitle = "Account Verification",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} - ${existingUser.email} | ${siteTitle}`;
+
+        const endVerificationSuccessfulMessage = document.querySelector('#signUpVerificationID .success-verify');
+        if (isVerified) {
+            endVerificationSuccessfulMessage.classList.remove('success-verify');
+            endVerificationSuccessfulMessage.classList.add('success-message-info');
+            setTimeout(() => {
+                endVerificationSuccessfulMessage.classList.remove('success-message-info');
+                endVerificationSuccessfulMessage.classList.add('success-verify');
+            }, 2300);
+        };
+    }, [isVerified]);
+
+    // ******************************** //
+    // ***** VERIFY EXISTING USER ***** //
+    // ******************************** //
+
+
 
 
     if (isLoading) {
@@ -189,7 +212,7 @@ const SignUpVerification = () => {
                                 </pre>
                                 {formMessage}
                             </div>
-
+                       
                             <form id="signUp" onSubmit={handleSubmit}>
 
                                 <div className="text-center pt-16 form--title">
@@ -251,12 +274,11 @@ const SignUpVerification = () => {
         );
     };
 
-
     return (
         <>
             <Nav />
             <div className="absolute top-0 w-full h-screen -z-10">
-                <main className="w-full h-128 relative">
+                <main id="signUpVerificationID" className="w-full h-128 relative">
 
                     <div className="mt-40 pt-24 items-center">
                         <div className="mx-auto error">
@@ -264,6 +286,9 @@ const SignUpVerification = () => {
                                 {formSubmitted}
                             </pre>
                             {formMessage}
+                        </div>
+                        <div className="w-123 mb-12 success-verify">
+                            {authenticationResponseMsg}
                         </div>
 
                         <form id="signUp" onSubmit={handleSubmit}>
@@ -324,5 +349,6 @@ const SignUpVerification = () => {
         </>
     );
 };
+
 
 export default SignUpVerification;
