@@ -25,7 +25,7 @@ module.exports = app => {
 
 
     // Login User
-    router.post("/api/v1/auth/login", requireAUTH, users.logIn);
+    router.post("/api/v1/auth/login", users.logIn);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/login") for the frontend to access.
 
     

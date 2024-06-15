@@ -11,7 +11,7 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const SignUpVerification = () => {
 
-    // console.clear();
+    console.clear();
         
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
@@ -46,7 +46,7 @@ const SignUpVerification = () => {
     };
 
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         
@@ -122,13 +122,14 @@ const SignUpVerification = () => {
     const [isLoading, setIsLoading] = useState(true);
     console.log("Is Loading: ", isLoading);
 
+    
 
     useEffect(() => {   
         function disableIsLoading() {
             setIsLoading(false);
         }
         function verifyAccountRegistration() {
-            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
+            axios.post(`http://127.0.0.1:8000/user/verify/${existingUser.accessToken}`, existingUser, {
                 headers: {
                     Authorization: `Bearer ${existingUser.accessToken}`,
                 }
@@ -171,7 +172,7 @@ const SignUpVerification = () => {
         //     window.location = loginURL;
         // }
         // setTimeout(redirToLogin, 8000);
-    }, [token]);
+    }, []);
 
 
     if (isLoading) {

@@ -11,7 +11,7 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const SignUp = () => {
 
-    // console.clear();
+    console.clear();
 
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
@@ -49,7 +49,7 @@ const SignUp = () => {
 
 
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)

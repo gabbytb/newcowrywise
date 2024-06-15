@@ -13,50 +13,40 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const Login = () => {
 
-    // const { token } = useParams();
-    const [user, setUser] = useState({ email: "", password: "", accessToken: null });
-    console.log("User attempting Log-in: ", user);
+    console.clear();
+    
+    const [user, setUser] = useState({ email: "", password: "", });
+    console.log("Login Attempt By: ", user.email);
 
     const [formMessage, setFormMessage] = useState(null);
-    console.log("Form Message: ", formMessage);
+    console.log("Login Attempt: ", formMessage);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    console.log("Form Submitted: ", formSubmitted);
-
+    console.log("Login Successful: ", formSubmitted);
 
 
     async function handleKeyUp(e) {
         const name = e.target.name;
-        const value = e.target.checkbox ? e.target.checked : e.target.value;
-
+        const value = e.target.value;
         setUser({
             ...user,
             [name]: value
         });
     };
 
-
-
     async function handleChange(e) {
         const name = e.target.name;
-        const value = e.target.checkbox ? e.target.checked : e.target.value;
-
+        const value = e.target.value;
         setUser({
             ...user,
             [name]: value
         });        
     };
 
-
-
-    async function handleSubmit(e) {
+    async function handleLogin(e) {
         e.preventDefault();
-        
-        axios.post("http://127.0.0.1:8000/api/v1/auth/login", user, {
-            headers: {
-                Authorization: `Bearer ${user.accessToken}`,
-            },
-        })
+
+        axios.post("http://127.0.0.1:8000/api/v1/auth/login", user)
         .then((res) => {
             const { success, message, data } = res.data; 
             var errMsg = document.querySelector('.error'); 
@@ -81,18 +71,32 @@ const Login = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else {
+                // // Console Logs
+                // console.log("Success: ", success);
+                // console.log("Message: ", message);
+                // console.log("Data: ", data);     
+                // // Console Logs
+
+
+
+                // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);
+                localStorage.setItem('user', JSON.stringify(data));
+
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
+
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                }, 2800);   
+                }, 2000);
 
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-                console.log("Data: ", data);             
+                setTimeout(() => {
+                    const redirToAdminDashboard = "/admin/dashboard";
+                    window.location = redirToAdminDashboard;
+                }, 3000);
+                // Perform These Actions
             };
         })
         .catch((error) => {
@@ -116,7 +120,7 @@ const Login = () => {
                             {formMessage}
                         </div>
 
-                        <form id="signUp" onSubmit={handleSubmit}>
+                        <form id="signUp" onSubmit={handleLogin}>
 
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">log in</h5>
@@ -126,7 +130,7 @@ const Login = () => {
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="email">
-                                        <input type="email" name="email" value={user.email} placeholder="example@email.com" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        <input type="email" name="email" value={user.email} placeholder="E-mail address" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <label htmlFor="password">
@@ -158,4 +162,4 @@ const Login = () => {
     );
 }
 
-export default Login
+export default Login;

@@ -220,19 +220,19 @@ exports.accountVerification = async (req, res) => {
             //  If the User Exists
             if (user) {
 
-                // find the UserByEmail to Update previous User Record 
-                const email = user.email;
-
-                // Update this User Records in Particular !
+                // Update this User Records Upon Account Verification
                 const dataToUpdate = {
                     accessToken: token,
                     isActivated: true,
                 };
+
+                // find the UserByEmail to Update previous User Record 
+                const email = user.email;
                 const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
-                console.log("*********************************************************",
-                            "\n*****          NEW ACCOUNT VERIFICATION             *****",
-                            "\n*********************************************************",
-                            `\nVerified User: ${updatedUser}`);                
+                // console.log("*********************************************************",
+                //             "\n*****          NEW ACCOUNT VERIFICATION             *****",
+                //             "\n*********************************************************",
+                //             `\nVerified User: ${updatedUser}`);                
                 const responseData = {
                     success: true,
                     data: updatedUser,
@@ -373,7 +373,7 @@ exports.findAll = async (req, res) => {
 exports.findUserById = async (req, res) => {
     
     try {
-        const _id = req.params.id;
+        const { _id } = req.params.id;
         const userId = await User.findById(_id);
 
         if (!userId) {
