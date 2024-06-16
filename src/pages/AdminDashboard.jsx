@@ -6,34 +6,40 @@ import axios from "axios";
 
 
 
+
 const AdminDashboard = () => {
     
     const [isLoading, setIsLoading] = useState(true);
 
 
-    // ************************************
-    // LOG-OUT CURRENTLY ACTIVE (LOGGED-IN USER)
-    // ************************************
-    function handleLogout() {
+
+    // *********************************************
+    // CURRENTLY ACTIVE:- (LOGGED-IN USER)
+    // *********************************************
+    const isLoggedIn = JSON.parse(localStorage.getItem("user"));    
+    console.log('LOGGED-IN USER:- ', isLoggedIn);  
+    // *********************************************
+    // *********************************************
+
+
+    // *********************************************
+    // FUNCTION TO HANDLE:-  (LOG-OUT)
+    // *********************************************
+    function logOut() {
         localStorage.clear();
         const redirToLogin = "/user/login";
         window.location = redirToLogin;
     }
-    // ************************************
-    // LOG-OUT CURRENTLY ACTIVE (LOGGED-IN USER)
-    // ************************************
+    // *********************************************
+    // *********************************************
 
 
-    // ************************************
-    // CURRENTLY ACTIVE (LOGGED-IN USER)
-    // ************************************
-    // LOGGED-IN USER
-    const isLoggedIn = JSON.parse(localStorage.getItem("user"));      // console.log('Current Active User: ', isLoggedIn);
-    // LOGGED-IN USER TOKEN
-    const token = isLoggedIn.accessToken ? isLoggedIn.accessToken : handleLogout();
-    // ************************************
-    // CURRENTLY ACTIVE (LOGGED-IN USER
-    // ************************************
+    // *********************************************
+    // DESTRUCTURE:-  (LOGGED-IN USER Props)
+    // *********************************************
+    const token = isLoggedIn.accessToken ? isLoggedIn.accessToken : logOut();
+
+
 
 
 
@@ -42,18 +48,17 @@ const AdminDashboard = () => {
 
 
     // ************************************
-    // FIND ALL USERS
+    // MANAGE  STATE:-  ALL USERS
     // ************************************
     const [users, setUsers] = useState([]);
     console.log('All Users: ', users);
     // ************************************
-    // FIND ALL USERS
     // ************************************
 
 
-    // ************************************
-    // // FIND ALL USERS
-    // ************************************
+    // *******************************************************
+    // API:-  FIND ALL USERS
+    // *******************************************************
     useEffect(() => {
         function disableIsLoading() {
             setIsLoading(false);
@@ -80,10 +85,9 @@ const AdminDashboard = () => {
             .finally(disableIsLoading);
         };
         setTimeout(findAllUsers, 1800);
-    }, [token]);
-    // ************************************
-    // USE LOGGED-IN USER's 'TOKEN' FOR API:-  FIND ALL USERS
-    // ************************************
+    }, [token]);  // As Dependency Array:- Means Use Logged-in User's 'token' to trigger react useEffect() hook !
+    // *******************************************************
+    // *******************************************************
 
 
     

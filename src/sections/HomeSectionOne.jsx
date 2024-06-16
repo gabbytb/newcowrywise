@@ -37,7 +37,7 @@ const HomeSectionOne = () => {
     useEffect(() => {
         function componentIsInViewport() {
             var testimonialMedia = document.querySelector("#testimonialId .testimonial-media");             
-            if (inViewport && hasLoaded === 0) {
+            if (inViewport && hasLoaded <= 0) {
                 testimonialMedia.classList.remove('hidden');
                 testimonialMedia.classList.add('s-1-anim');
 
@@ -45,21 +45,19 @@ const HomeSectionOne = () => {
                     testimonialMedia.classList.remove('s-1-anim');
                 }, 400);
             };
-            // Increment as enterCount increases
-            setHasLoaded(enterCount);
             document.querySelector("#testimonialId .testimonial-video-ctrl").classList.add('z-9');
         };
+        setTimeout(componentIsInViewport, 400);
 
-        //  Not empty Array, so this should run multiple times as "inViewport" would keep changing state everytime this section of my webpage is in view.
-        //  This is used to clear the setTimeout function after it has run once!
-        var timer = setTimeout(componentIsInViewport, 400);
-    
-        //  Return a cleanup function to clear the timer
-        return () => {
-            clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes state.
-        };
+        // Increment as enterCount increases
+        setHasLoaded(enterCount);
+
     // eslint-disable-next-line
-    }, [inViewport]);     // As Depedency Array Means:-  Anytime 'inViewport' changes state, trigger this react useEffect() hook !
+    }, [inViewport]);     //  "inViewport" as Depedency Array means:-  EVERYTIME 'inViewport' changes state, trigger this react useEffect() hook !
+    /***********************************************************************************************************************/
+    // NOTE:-  EVEN WITH Depedency Array, the function componentIsInViewport() WILL NOT WORK, if its conditions are not met !
+    // NOTE:-  Handle State Management for "hasLoaded, outside function componentIsInViewport(), 
+    //         ==> It will rely on the Dependency Array !
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
 
@@ -106,18 +104,18 @@ const HomeSectionOne = () => {
     // PRESENT STATE of Customers Thumbnails
     /***********************************************************************************************************************/
     // eslint-disable-next-line
-    const [customThumbnails, setCustomThumbnails] = useState(customersThumbnails);
+    const [customersThumbnail, setCustomersThumbnail] = useState(customersThumbnails);
     /***********************************************************************************************************************/
     // FOR: When "activeImage" state changes
     /***********************************************************************************************************************/
     useEffect(() => {        
         function realFunc() {       
-            // Initiate a variable to be all the 'index' of customThumbnails.
-            for (var n = 0; n < customThumbnails.length; n++) {
+            // Initiate a variable to be all the 'index' of customersThumbnail.
+            for (var n = 0; n < customersThumbnail.length; n++) {
 
-                // HERE: Find the 'index' of customThumbnails that has the same "imgURI" value as the "activeImage" value.
+                // HERE: Find the 'index' of customersThumbnail that has the same "imgURI" value as the "activeImage" value.
                 // If Truthy,
-                if (activeImage === customThumbnails[n]?.imgURI) {
+                if (activeImage === customersThumbnail[n]?.imgURI) {
                     
                     // Find all DOM elements with the className 'testimonial-quotes'.
                     var testimonialQuotes = document.querySelectorAll(".testimonial-quotes");
@@ -153,6 +151,9 @@ const HomeSectionOne = () => {
         };
          // Call the function when the activeImage state changes
         realFunc();
+
+
+    // eslint-disable-next-line
     }, [activeImage]);    // PASS: "activeImage" as array dependency for useEffect() hook to rely on!
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
