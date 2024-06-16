@@ -1,5 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, SignUp, SignUpVerification, Login, AdminDashboard, AccountUsers,} from "./pages";
+import { 
+  Home, 
+  SignUp, SignUpVerification, 
+  Login, 
+  AdminDashboard, AccountUsers,
+} from "./pages";
 
 
 

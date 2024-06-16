@@ -101,9 +101,13 @@ const AdminDashboard = () => {
 
 
     return (
-        <div>
-        
-        </div>
+        <section className="admin-dashboard">
+            <div className="h-container-1 container">
+                <div className="s1-grids-wrap">
+                
+                </div>
+            </div>
+        </section>
     );
 };
 

@@ -504,7 +504,7 @@
       sm:px-0
 
       lg:grid 
-      lg:grid-cols-16 
+      lg:grid-cols-16
       lg:gap-x-32 
       lg:gap-y-0
       lg:py-32
@@ -514,7 +514,13 @@
 
 
   .home-section-one--left #testimonialId {
-    @apply relative top-0 left-0 min-h-125 xs:min-h-116 lg:min-h-125
+    @apply 
+    relative 
+    top-0 
+    left-0 
+    min-h-125 
+    xs:min-h-116 
+    lg:min-h-125
   }
 
   #testimonialId .testimonial-backdrop {

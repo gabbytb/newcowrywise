@@ -14,7 +14,11 @@ import { wura } from "../assets/images";
 
 const HomeSectionOne = () => { 
     
-
+      
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+    // init: REFERENCE ELEMENT TO BE IN-VIEWOPORT
+    /***********************************************************************************************************************/
     const myRef = useRef();
     const {
         inViewport,
@@ -27,40 +31,38 @@ const HomeSectionOne = () => {
         // props
     );
     const [hasLoaded, setHasLoaded] = useState(0);
-   
-    
-
-
-    // Check when Component is in viewport, LOAD THE BACKGROUND ACTIVE IMAGE WITH ANIMATION
+    /***********************************************************************************************************************/
+    // If Component referenced is (inViewport && hasLoaded === 0), LOAD THE BACKGROUND ACTIVE IMAGE WITH ANIMATION
+    /***********************************************************************************************************************/
     useEffect(() => {
-        function myFunc() {
-            if (inViewport) {
-                setHasLoaded(enterCount);
+        function componentIsInViewport() {
+            var testimonialMedia = document.querySelector("#testimonialId .testimonial-media");             
+            if (inViewport && hasLoaded === 0) {
+                testimonialMedia.classList.remove('hidden');
+                testimonialMedia.classList.add('s-1-anim');
 
-                if (hasLoaded === 0) {
-                    var testimonialMedia = document.querySelector("#testimonialId .testimonial-media");             
-                    testimonialMedia.classList.remove('hidden');
-                    testimonialMedia.classList.add('s-1-anim');
-
-                    setTimeout(() => {
-                        testimonialMedia.classList.remove('s-1-anim');
-                    }, 400);
-                };
+                setTimeout(() => {
+                    testimonialMedia.classList.remove('s-1-anim');
+                }, 400);
             };
-
+            // Increment as enterCount increases
+            setHasLoaded(enterCount);
             document.querySelector("#testimonialId .testimonial-video-ctrl").classList.add('z-9');
         };
 
         //  Not empty Array, so this should run multiple times as "inViewport" would keep changing state everytime this section of my webpage is in view.
         //  This is used to clear the setTimeout function after it has run once!
-        var timer = setTimeout(myFunc, 400);
-        
+        var timer = setTimeout(componentIsInViewport, 400);
+    
         //  Return a cleanup function to clear the timer
         return () => {
-            clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes
+            clearTimeout(timer); // This will clear the timer when the component unmounts or when inViewport changes state.
         };
-    }, [inViewport]);   // Pass inViewport as array dependencies!     
-    
+    // eslint-disable-next-line
+    }, [inViewport]);     // As Depedency Array Means:-  Anytime 'inViewport' changes state, trigger this react useEffect() hook !
+    /***********************************************************************************************************************/
+    /***********************************************************************************************************************/
+
 
   
 
@@ -71,13 +73,13 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     const [activeImage, setActiveImage] = useState(wura);
     /***********************************************************************************************************************/
-    // FOR: When "activeImage" state changes, LOAD THE CURRENT BACKGROUND ACTIVE IMAGE WITH ANIMATION
+    // If You detect change in 'activeImage' state value, LOAD ActiveImage BACKDROP WITH ANIMATION !
     /***********************************************************************************************************************/
     useEffect(() => {
         // Create function
-        function onActiveImgChange() {
+        function onActiveImageChange() {
             // if the "activeImage" value is Truthy
-            if (activeImage && hasLoaded === 1) {
+            if (activeImage && hasLoaded > 0) {
                 // This should execute first
                 document.querySelector("#testimonialId .testimonial-media").classList.add('s-1-animate');
                 
@@ -88,8 +90,10 @@ const HomeSectionOne = () => {
             }
         };
         // Call Function
-        onActiveImgChange();
-    }, [activeImage]);      // PASS: "activeImage" as array dependency for the useEffect() hook to rely on!
+        onActiveImageChange();
+
+    // eslint-disable-next-line
+    }, [activeImage]);  // As Depedency Array Means:-  Anytime ActiveImage changes state, trigger this react useEffect() hook !
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
 
@@ -101,6 +105,7 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     // PRESENT STATE of Customers Thumbnails
     /***********************************************************************************************************************/
+    // eslint-disable-next-line
     const [customThumbnails, setCustomThumbnails] = useState(customersThumbnails);
     /***********************************************************************************************************************/
     // FOR: When "activeImage" state changes
@@ -151,9 +156,6 @@ const HomeSectionOne = () => {
     }, [activeImage]);    // PASS: "activeImage" as array dependency for useEffect() hook to rely on!
     /***********************************************************************************************************************/
     /***********************************************************************************************************************/
-
-
-
 
 
 
@@ -220,6 +222,9 @@ const HomeSectionOne = () => {
             </div>
         </section>
     );
+
 };
+
+
 
 export default HomeSectionOne;

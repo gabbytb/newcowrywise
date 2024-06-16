@@ -128,10 +128,11 @@ module.exports = {
         'skin-gray': 'var(--color-lighter-gray)',
       },
       gridTemplateColumns: {
-        '16': '1fr 1fr',
-        '18': '54% 1fr',
-        '20': '1fr',
-        '22': 'repeat(auto-fit,minmax(240px,1fr))',
+        '16': '1fr 1fr', // Used for Section 1: .s1-grids-wrap
+        '18': '54% 1fr', // Used for Section 2 after: .h-container-2
+        // '20': '1fr',
+        '22': 'repeat(auto-fit,minmax(240px,1fr))', // Used for Footer: .app-reviews
+        '24': '1fr 2fr', // Used for Admin Dashboard
       },
       height: {
         '13': '3.2rem',
