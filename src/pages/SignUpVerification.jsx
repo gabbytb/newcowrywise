@@ -15,19 +15,20 @@ const SignUpVerification = () => {
     // console.clear();
 
 
+    
 
     // *************************** //
     // ***** CREATE NEW USER ***** //
     // *************************** //
     const randNum = Math.floor(256*Math.random());
-    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
-    // console.log("Collected User Details: ", user);
+    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
+    // console.log("***  Account Registration  ***", "\nAccount: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    // console.log("Form Message: ", formMessage);
+    // console.log("Registration Process: ", authenticationResponseMsg);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    // console.log("Form Submitted: ", formSubmitted);
+    // console.log("Registration Successful: ", formSubmitted);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -132,44 +133,40 @@ const SignUpVerification = () => {
             setIsLoading(false);
         }
         function verifyAccountRegistration() {
-            if (token !== null) {
-                axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
-                    headers: {                    
-                        Authorization: `Bearer ${token}`,
-                    }
-                })
-                .then((response) => {
-                    const { success, data, message } = response.data;    
-                    const pageTitle = "Account Verification",
-                    siteTitle = "Samuel Akinola Foundation";
-                    document.title = `${pageTitle} - ${data.email} | ${siteTitle}`;            
+            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
+                headers: {                    
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            .then((response) => {
+                const { success, data, message } = response.data;    
+                const pageTitle = "Account Verification",
+                siteTitle = "Samuel Akinola Foundation";
+                document.title = `${pageTitle} - ${data.email} | ${siteTitle}`;            
 
-                    if ((!success) && (message === "Unauthorized")) {
-                        setIsVerified(success);
-                        setAuthenticationResponseMsg(message);
-                        return;
-                    } else if ((!success) && (message === "Token does not exist")) {
-                        setIsVerified(success);
-                        setAuthenticationResponseMsg(message);
-                        return;
-                    } else if ((!success) && (message === "unauthorized")) {
-                        setIsVerified(success);
-                        setAuthenticationResponseMsg(message);
-                        return;
-                    } else {
-                        setIsVerified(success);
-                        setExistingUser(data);
-                        setAuthenticationResponseMsg(message);
-                        return;
-                    };      
-                })
-                .catch((error) => {
-                    console.log("Account Verification Error: ", error);
-                })
-                .finally(disableIsLoading);
-            } else {
-                return null;
-            };
+                if ((!success) && (message === "Unauthorized")) {
+                    setIsVerified(success);
+                    setAuthenticationResponseMsg(message);
+                    return;
+                } else if ((!success) && (message === "Token does not exist")) {
+                    setIsVerified(success);
+                    setAuthenticationResponseMsg(message);
+                    return;
+                } else if ((!success) && (message === "unauthorized")) {
+                    setIsVerified(success);
+                    setAuthenticationResponseMsg(message);
+                    return;
+                } else {
+                    setIsVerified(success);
+                    setExistingUser(data);
+                    setAuthenticationResponseMsg(message);
+                    return;
+                };      
+            })
+            .catch((error) => {
+                console.log("Account Verification Error: ", error);
+            })
+            .finally(disableIsLoading);
         };
         
         let timeout = setTimeout(verifyAccountRegistration, 2300);
@@ -198,8 +195,7 @@ const SignUpVerification = () => {
 
 
 
-
-
+    
     if (isLoading) {
         return(
             <>

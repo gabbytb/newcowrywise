@@ -3805,9 +3805,27 @@ header .cta-menu a:last-child {
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
+.hover\:outline-green-400:hover {
+  outline-color: #4ade80;
+}
+
+.hover\:ring-green-400:hover {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(74 222 128 / var(--tw-ring-opacity));
+}
+
 .focus\:bg-blue-700:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.focus\:outline-green-400:focus {
+  outline-color: #4ade80;
+}
+
+.focus\:ring-green-400:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(74 222 128 / var(--tw-ring-opacity));
 }
 
 @media (min-width: 601px) {

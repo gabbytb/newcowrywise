@@ -1,4 +1,4 @@
-import { useState, } from "react";
+import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Nav, ButtonSubmit, } from "../components";
@@ -11,19 +11,23 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const SignUp = () => {
 
-    console.clear();
+    
+    // console.clear();
 
+
+
+    // *************************** //
+    // ***** CREATE NEW USER ***** //
+    // *************************** //
     const randNum = Math.floor(256*Math.random());
-    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });
-    console.log("New Account Info: ", user);
+    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
+    // console.log("***  Account Registration  ***", "\nAccount: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    console.log("Form Message: ", formMessage);
+    // console.log("Registration Process: ", authenticationResponseMsg);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    console.log("Form Submitted: ", formSubmitted);
-
-
+    // console.log("Registration Successful: ", formSubmitted);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -35,8 +39,6 @@ const SignUp = () => {
         });
     };
 
-
-
     async function handleChange(e) {
         const name = e.target.name;
         const value = e.target.checkbox ? e.target.checked : e.target.value;
@@ -46,8 +48,6 @@ const SignUp = () => {
             [name]: value
         });        
     };
-
-
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -104,9 +104,18 @@ const SignUp = () => {
             console.log("Error encountered: ", error);
         });
     };
+    // *************************** //
+    // ***** CREATE NEW USER ***** //
+    // *************************** //
      
 
-    
+    useEffect(() => {
+        const pageTitle = "Sign Up",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+
+
     return (
         <>
             <Nav />
@@ -157,8 +166,9 @@ const SignUp = () => {
 
                                     <ButtonSubmit 
                                         btnType="submit"
-                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg"
                                         btnBg
+                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
+                                        hover:bg-blue-700 focus:bg-blue-700 hover:outline-green-400 focus:outline-green-400 hover:ring-green-400 focus:ring-green-400"
                                         label="submit"
                                     />
 
@@ -179,5 +189,6 @@ const SignUp = () => {
         </>
     );
 };
+
 
 export default SignUp;

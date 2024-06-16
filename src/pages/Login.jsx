@@ -1,4 +1,4 @@
-import { useState, } from "react";
+import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Nav, ButtonSubmit, } from "../components";
@@ -99,7 +99,11 @@ const Login = () => {
         });
     };
 
-
+    useEffect(() => {
+        const pageTitle = "Log In",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
 
     return (
         <>
