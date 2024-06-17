@@ -190,10 +190,9 @@ exports.signUp = async (req, res) => {
                 }
             });
         };
-        attemptSend();  // Start the initial attempt to send email
+        attemptSend();
 
         
-
         // NOTE: 
         // Don't parse token to User accessToken until it is verified!",
         // Use JWT.verify to verify the signed "token" sent to User E-mail;",
