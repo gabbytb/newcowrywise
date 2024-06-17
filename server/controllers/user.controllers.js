@@ -66,15 +66,16 @@ exports.signUp = async (req, res) => {
         
     
         // ***************************************************************//
-        // PICKING SINGLE ROLES
+        // PICK A SINGLE ROLE
         // ***************************************************************//
         const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
-        // PICKING MULTIPLE ROLES
+        // PICK ALL ROLES
         // ***************************************************************//
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" }), 
+        // roleEditor = await Role.findOne({ role: "ROLE_EDITOR" }), 
         // roleStaff = await Role.findOne({ role: "ROLE_STAFF" }), 
         // roleUsers = await Role.findOne({ role: "ROLE_USERS" });        
         // ***************************************************************//
@@ -96,6 +97,12 @@ exports.signUp = async (req, res) => {
                     createdAt: roleAdmin.createdAt,
                     updatedAt: roleAdmin.updatedAt,
                 },
+                // {
+                //     _id: roleEditor._id, 
+                //     role: roleEditor.role, 
+                //     createdAt: roleEditor.createdAt, 
+                //     updatedAt: roleEditor.updatedAt, 
+                // },
                 // {
                 //     _id: roleStaff._id, 
                 //     role: roleStaff.role, 
@@ -130,7 +137,8 @@ exports.signUp = async (req, res) => {
             },
         });
      
-    
+        
+        
         const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
         const verifyActivationLink = `http://127.0.0.1:3000/user/verify/${token}`;
         const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
@@ -138,21 +146,53 @@ exports.signUp = async (req, res) => {
         // :visited {background: green}
         // :hover {background: yellow}
         // :visited:hover {background: purple}
+        // // Message object
+        //    let message = {
+        //     from: 'your_email@gmail.com',
+        //     to: 'recipient@example.com',
+        //     subject: 'Subject of your email',
+        //     text: 'This is the body of your email'
+        // };
         const activationLink = `<span style="color:black;font-size:10px;">or copy and paste this link on your browser</span><br /><a href="http://127.0.0.1:3000/user/verify/${token}" alt="activation link" style="font-size:10px;">http://127.0.0.1:3000/user/verify/${token}</a>`;
-        const mailOptions = {
+       
+       
+        let mailOptions = {
             from: `Samuel Akinola Foundation <${mailServiceUser}>`,
             to: user.email,
             subject: 'Account Activation',
             text: `Hello ${user.firstName}, \nThank you for registering with us at www.samuelakinolafoundation.com \nWe are more than just a foundation. \nPlease verify your account by clicking the link below to have a personalized experience. \n\n\n ${verificationLink} \n${activationLink}`,
             html: `<strong>Hello ${user.firstName} ${user.lastName}</strong>, <br /><br />Thank you for registering with us at ${siteURL}. <br /><br />We are more than just a charity organization. <br /><br />Please verify your account by clicking the link below to have a personalized experience. <br /><br /><div className="mailer-wrapper">${verificationLink}</div> <br />${activationLink}<br /><br /><br />`,
         };
-        try {
-            const mailSender = await transporter.sendMail(mailOptions);
-            console.log("E-mail Service Details:", mailSender.envelope,
-                        `\nE-mail Service Response: ${mailSender.response}`);
-        } catch (error) {
-            console.error('Error sending email: ', error);
+
+
+        // Attempt to send email with retry logic
+        let retryAttempts = 0;  // Track number of retry attempts
+        const maxRetries = 3;   // Maximum number of retry attempts before giving up
+        function attemptSend() {
+            // Attempt to send email
+            transporter.sendMail(mailOptions, (error, mail) => {
+                if (error) {
+                    console.log('Error sending email:', error.message);
+
+                    // Implement retry logic here to attempt resending
+                    if (retryAttempts < maxRetries) {
+                        console.log(`Retrying... Attempt ${retryAttempts + 1} of ${maxRetries}`);
+                        retryAttempts++;
+
+                        // Retry sending after a delay (e.g., 5 seconds)
+                        setTimeout(attemptSend, 15000); // Retry after 15 seconds
+                    } else {
+                        console.log(`Max retries (${maxRetries}) exceeded. Could not send email.`);
+                    }
+                } else {
+                    console.log("E-mail Service Details:", mail.envelope,
+                        `\nE-mail Sent successfully:: ${mail.response}`);
+                }
+            });
         };
+        attemptSend();  // Start the initial attempt to send email
+
+        
 
         // NOTE: 
         // Don't parse token to User accessToken until it is verified!",

@@ -14,7 +14,7 @@ const AdminDashboard = () => {
     // CURRENTLY ACTIVE:- (LOGGED-IN USER)
     // *********************************************
     const isLoggedIn = JSON.parse(localStorage.getItem("user"));    
-    console.log('LOGGED-IN USER:- ', isLoggedIn);  
+    // console.log('LOGGED-IN USER:- ', isLoggedIn);  
     // *********************************************
     // *********************************************
 
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     // *********************************************
     const token = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    console.log("User Roles: ", userRoles);
+    console.log("LOGGED-IN USER's Roles: ", userRoles);
 
 
 
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     console.log('All Users: ', users);
     // ************************************
-    // API:-  FIND ALL USERS
+    // CALL TO API:-  FIND ALL USERS
     // ************************************
     function findAllUsers() {
         // setIsLoading(true); // Set isLoading state to true when fetching starts
@@ -111,23 +111,25 @@ const AdminDashboard = () => {
 
     return (
         <>
-            {isLoading ? (
-                <section className="admin-dashboard">
-                    <div className="h-container-1 container">
-                        <div className="s1-grids-wrap">
-                            <h5>Processing...</h5>
+            { 
+                isLoading ? (
+                    <section className="admin-dashboard">
+                        <div className="h-container-1 container">
+                            <div className="s1-grids-wrap">
+                                <h5>Processing...</h5>
+                            </div>
                         </div>
-                    </div>
-                </section> 
-            ) : (
-                <section className="admin-dashboard">
-                    <div className="h-container-1 container">
-                        <div className="s1-grids-wrap">
-                        
+                    </section> 
+                ) : (
+                    <section className="admin-dashboard">
+                        <div className="h-container-1 container">
+                            <div className="s1-grids-wrap">
+                            
+                            </div>
                         </div>
-                    </div>
-                </section>
-            )}
+                    </section>
+                )
+            }
         </>
     );
 };
