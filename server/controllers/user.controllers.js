@@ -172,7 +172,7 @@ exports.signUp = async (req, res) => {
             // Attempt to send email
             transporter.sendMail(mailOptions, (error, mail) => {
                 if (error) {
-                    console.log('Error sending email:', error.message);
+                    console.log('Error sending ACCOUNT VERIFICATION e-mail:', error.message);
 
                     // Implement retry logic here to attempt resending
                     if (retryAttempts < maxRetries) {
