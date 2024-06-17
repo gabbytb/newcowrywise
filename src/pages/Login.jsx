@@ -10,7 +10,13 @@ import { Nav, ButtonSubmit, } from "../components";
 const Login = () => {
 
     console.clear();
-    
+    useEffect(() => {
+        const pageTitle = "Log In",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+
+
     const [user, setUser] = useState({ email: "", password: "", });
     console.log("Login Attempt By: ", user.email);
 
@@ -66,32 +72,43 @@ const Login = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else {
-                // // Console Logs
-                // console.log("Success: ", success);
-                // console.log("Message: ", message);
-                // console.log("Data: ", data);     
-                // // Console Logs
+                // Console Logs
+                // console.log("Retrieving User Data: ", data);     
+           
+                if (data?.isActivated === false) {
 
+                    // Perform These Actions
+                    setFormMessage(`Kindly verify your account. Visit your email address: ${data?.email}.`);
+                    setFormSubmitted(false);
+                    errMsg.classList.remove('error');
+                    errMsg.classList.add('error-message-info');
+                    setTimeout(() => {
+                        errMsg.classList.remove('error-message-info');
+                        errMsg.classList.add('error');
+                    }, 2800);
+                    // Perform These Actions
 
+                } else {
 
-                // Perform These Actions
-                setFormMessage(message);
-                setFormSubmitted(success);
-                localStorage.setItem('user', JSON.stringify(data));
+                    // Perform These Actions
+                    setFormMessage(message);
+                    setFormSubmitted(success);
+                    localStorage.setItem('user', JSON.stringify(data));
 
-                successMsg.classList.remove('success');
-                successMsg.classList.add('success-message-info');
+                    successMsg.classList.remove('success');
+                    successMsg.classList.add('success-message-info');
 
-                setTimeout(() => {
-                    successMsg.classList.remove('success-message-info');
-                    successMsg.classList.add('success');
-                }, 2000);
+                    setTimeout(() => {
+                        successMsg.classList.remove('success-message-info');
+                        successMsg.classList.add('success');
+                    }, 2000);
 
-                setTimeout(() => {
-                    const redirToAdminDashboard = "/admin/dashboard";
-                    window.location = redirToAdminDashboard;
-                }, 3000);
-                // Perform These Actions
+                    setTimeout(() => {
+                        const redirToAdminDashboard = "/admin/dashboard";
+                        window.location = redirToAdminDashboard;
+                    }, 3000);
+                    // Perform These Actions
+                };
             };
         })
         .catch((error) => {
@@ -99,11 +116,7 @@ const Login = () => {
         });
     };
 
-    useEffect(() => {
-        const pageTitle = "Log In",
-        siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
+
 
     return (
         <>

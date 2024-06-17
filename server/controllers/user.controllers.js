@@ -121,13 +121,15 @@ exports.signUp = async (req, res) => {
 
 
         // E-mail Service Config
-        const transporter = nodemailer.createTransport({
+        var transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com", // hostname
             service: mailServiceProvider,
             auth: {
                 user: mailServiceUser,
                 pass: mailServicePwd,
             },
         });
+     
     
         const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
         const verifyActivationLink = `http://127.0.0.1:3000/user/verify/${token}`;
@@ -274,7 +276,8 @@ exports.logIn = async (req, res) => {
         };
 
         const user = await User.findOne({ email });        
-        if (!user) {        // 2) Check if Email exists for any User
+        const auth = await bcrypt.compare(password, user.password);     // 3) Use 'bCrypt' to compare Password with User's Existing Password 
+        if (!user || !auth) {        // 2) Check if Email exists for any User
             const responseData = { 
                 success: false, 
                 message: "Incorrect password or email.",
@@ -282,32 +285,17 @@ exports.logIn = async (req, res) => {
             console.log("***********************************",
                         "\n*****    LOG-IN ATTEMPT BY    *****",
                         "\n***********************************",
-                        "\nUSER INFO: ", user?.firstName + " " + user?.lastName, 
-                        "\nUSER E-MAIL: ", user?.email,
-                        "\n\nUSER TOKEN: ", user?.accessToken +
-                        "\n***********************************");
-            return res.status(200).json(responseData);
-        }
-
-        const auth = await bcrypt.compare(password, user.password);     // 3) Used bCrypt to compare Password with User's Existing Password 
-        if (!auth) {        // 4) Check if Password for Existing User is Correct
-            const responseData = { 
-                success: false, 
-                message: "Incorrect password or email.",
-            };
-            console.log("***********************************",
-                        "\n*****    LOG-IN ATTEMPT BY    *****",
-                        "\n***********************************",
-                        "\nUSER INFO: ", user?.firstName + " " + user?.lastName, 
-                        "\nUSER E-MAIL: ", user?.email,
+                        "\nAccount ID: ", user._id,
+                        "\nAccount Owner: ", user.firstName + " " + user.lastName,
+                        "\nAccount E-mail: ", user.email,
                         "\nIS PASSWORD CORRECT?: ", auth +
-                        "\nACCESS TOKEN: ", user?.accessToken,
+                        "\nAccount Token: ", user.accessToken,
                         "\n***********************************");
             return res.status(200).json(responseData);
         }
 
         // ***********************************************************************************//
-        // ***********                 USER CURRENT INFORMATION                   ************//
+        // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
         // ***********************************************************************************//
         console.log("***********************************************",
                     "\n*****   LOGGED-IN USER CURRENT DETAILS   ******",
@@ -317,11 +305,11 @@ exports.logIn = async (req, res) => {
                     "\nAccount E-mail: ", user.email,
                     "\nAccount Token: ", user.accessToken,
                     "\nAccount isVerified: ", user.isActivated,
-                    "\nAccount HAVE ROLE(S): ", user.roles, "\n");
+                    "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
         // ***********************************************************************************//
         // NOTE:- Use USER accessToken for Authorization in headers.
         // ***********************************************************************************//
-
+        
         const responseData = {
             success: true,
             data: user,

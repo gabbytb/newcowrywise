@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useInViewport } from "react-in-viewport";
 import { customersQuotes, customersThumbnails } from "../constants";
-import { TestimonialQuotes, TestimonialThumbnails } from "../components";
+import { SingleCustomerTestimonialQuote, TestimonialThumbnails } from "../components";
 import { AppStoreIcon, PlayStoreIcon, VideoIcon } from "../assets/icons";
 import { wura } from "../assets/images";
 
@@ -105,12 +105,13 @@ const HomeSectionOne = () => {
     /***********************************************************************************************************************/
     // eslint-disable-next-line
     const [customersThumbnail, setCustomersThumbnail] = useState(customersThumbnails);
+    console.log("Customers Thumbnails: ", customersThumbnail);
     /***********************************************************************************************************************/
     // FOR: When "activeImage" state changes
     /***********************************************************************************************************************/
     useEffect(() => {        
-        function realFunc() {       
-            // Initiate a variable to be all the 'index' of customersThumbnail.
+        function sync_activeImage_customersThumbnails_backdrop() {       
+            // Initiate a variable to be all the 'index' of customersThumbnail
             for (var n = 0; n < customersThumbnail.length; n++) {
 
                 // HERE: Find the 'index' of customersThumbnail that has the same "imgURI" value as the "activeImage" value.
@@ -150,7 +151,7 @@ const HomeSectionOne = () => {
             };
         };
          // Call the function when the activeImage state changes
-        realFunc();
+         sync_activeImage_customersThumbnails_backdrop();
 
 
     // eslint-disable-next-line
@@ -168,6 +169,9 @@ const HomeSectionOne = () => {
 
 
                     <div className="home-section-one--left">
+
+
+                        {/* MAPPED:-  all customersQuotes here */}
                         <div className="customers-testimonials">
                             <div id="testimonialId">
                                 <div className="absolute testimonial-backdrop"></div>
@@ -175,7 +179,7 @@ const HomeSectionOne = () => {
                                 {
                                     customersQuotes.map((item) => {
                                         return (
-                                            <TestimonialQuotes key={item.textAuthor} {...item} />
+                                            <SingleCustomerTestimonialQuote key={item.textAuthor} {...item} />
                                         );
                                     })
                                 
@@ -186,7 +190,13 @@ const HomeSectionOne = () => {
                                 </div>
                             </div>
                         </div>
+                        {/* MAPPED:-  all customersQuotes here */}
+
                         
+
+                        {/* // NOTE: Here, We don't use the spread operator.
+                        // We Want To Work With One Item at a time, so we pass  */}
+                        {/* MAPPED:- all customersThumbnails here */}
                         <ul className="testimonials-thumbnail">
                             {
                                 customersThumbnails.map((item) => {
@@ -202,6 +212,9 @@ const HomeSectionOne = () => {
                                 })
                             }
                         </ul>
+                        {/* MAPPED:- all customersThumbnails here */}
+
+
                     </div>
 
                     

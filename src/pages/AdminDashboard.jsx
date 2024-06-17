@@ -9,9 +9,6 @@ import axios from "axios";
 
 const AdminDashboard = () => {
     
-    const [isLoading, setIsLoading] = useState(true);
-
-
 
     // *********************************************
     // CURRENTLY ACTIVE:- (LOGGED-IN USER)
@@ -37,10 +34,20 @@ const AdminDashboard = () => {
     // *********************************************
     // DESTRUCTURE:-  (LOGGED-IN USER Props)
     // *********************************************
-    const token = isLoggedIn.accessToken ? isLoggedIn.accessToken : logOut();
+    const token = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
+    const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+    console.log("User Roles: ", userRoles);
 
 
 
+
+
+
+    // *******************************************************************
+    // *******************************************************************
+    const [isLoading, setIsLoading] = useState(true);
+    // *******************************************************************
+    // *******************************************************************
 
 
 
@@ -53,65 +60,75 @@ const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     console.log('All Users: ', users);
     // ************************************
-    // ************************************
-
-
-    // *******************************************************
     // API:-  FIND ALL USERS
-    // *******************************************************
-    useEffect(() => {
-        function disableIsLoading() {
-            setIsLoading(false);
-        };
-        function findAllUsers() {
-            axios.get("http://127.0.0.1:8000/api/v1/admin/users/manage", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then((res) => {
-                const { success, data, message } = res.data;
+    // ************************************
+    function findAllUsers() {
+        // setIsLoading(true); // Set isLoading state to true when fetching starts
+        axios.get("http://127.0.0.1:8000/api/v1/admin/users/manage", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((response) => {
+            const { success, data, message } = response.data;
                 if ((!success) || (message === "Users not found")) {
                     console.log("Success: ", success);
                     console.log("Message: ", message);
                 };
-                
-                // Perform These Actions
+            
+                // Perform Actions Here if Truthy
                 setUsers(data);
-            })
-            .catch((error) => {
-                console.log("Error encountered: ", error);
-            })
-            .finally(disableIsLoading);
-        };
-        setTimeout(findAllUsers, 1800);
-    }, [token]);  // As Dependency Array:- Means Use Logged-in User's 'token' to trigger react useEffect() hook !
-    // *******************************************************
-    // *******************************************************
-
-
-    
-
-
-    if (isLoading) {
-        return (
-            <div>
-                <h5>Processing...</h5>
-            </div>
-        );
+        })
+        .catch((error) => {
+            // Handle error state or logging here
+            console.log("Error encountered: ", error);
+        })
+        .finally(() => {
+            setIsLoading(false);    // Always disable loading state, whether successful or not
+        });
     };
+    useEffect(() => {      
+        // SET PAGE TITLE  
+        const pageTitle = "Admin Dashboard",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+
+
+        var timerID = setTimeout(findAllUsers, 1800);   // Delay execution of findAllUsers by 1800ms
+        return () => {
+            clearTimeout(timerID);   // Clean up timer if component unmounts or token changes
+        };
+    }, [token]);  // useEffect dependency on token
+    // *******************************************************************************************//
+    // Means Logged-in Users 'token' is responsible for triggering this react useEffect() hook !
+    // *******************************************************************************************//
+    // *******************************************************************************************//
+
+
 
 
 
 
     return (
-        <section className="admin-dashboard">
-            <div className="h-container-1 container">
-                <div className="s1-grids-wrap">
-                
-                </div>
-            </div>
-        </section>
+        <>
+            {isLoading ? (
+                <section className="admin-dashboard">
+                    <div className="h-container-1 container">
+                        <div className="s1-grids-wrap">
+                            <h5>Processing...</h5>
+                        </div>
+                    </div>
+                </section> 
+            ) : (
+                <section className="admin-dashboard">
+                    <div className="h-container-1 container">
+                        <div className="s1-grids-wrap">
+                        
+                        </div>
+                    </div>
+                </section>
+            )}
+        </>
     );
 };
 

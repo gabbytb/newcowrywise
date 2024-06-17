@@ -1,5 +1,4 @@
-const requireAUTH = (req, res, next) => {
-
+const requireAUTHORIZATION = (req, res, next) => {
     
     const bearerHeader = req.headers.authorization;
     if (!bearerHeader || !bearerHeader.startsWith('Bearer ')) {
@@ -13,5 +12,4 @@ const requireAUTH = (req, res, next) => {
     next();
 }
 
-
-module.exports = requireAUTH;
+module.exports = requireAUTHORIZATION;

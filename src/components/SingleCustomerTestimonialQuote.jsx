@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const TestimonialQuotes = ({ textQuote, textAuthor, linkURL, linkText }) => {
+const SingleCustomerTestimonialQuote = ({ textQuote, textAuthor, linkURL, linkText }) => {
 
 
     return (
@@ -16,4 +16,4 @@ const TestimonialQuotes = ({ textQuote, textAuthor, linkURL, linkText }) => {
 };
 
 
-export default TestimonialQuotes;
+export default SingleCustomerTestimonialQuote;

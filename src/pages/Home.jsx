@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Nav, HomeBody, } from "../components";
 import { Footer } from "../sections";
 
@@ -5,6 +6,18 @@ import { Footer } from "../sections";
 
 
 const Home = () => {
+
+
+
+
+  useEffect(() => {
+    const pageTitle = "Home",
+    siteTitle = "Samuel Akinola Foundation";
+    document.title = `${pageTitle} | ${siteTitle}`;
+}, []);
+
+
+
 
   return (
     <>

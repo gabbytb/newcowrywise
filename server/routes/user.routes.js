@@ -8,7 +8,7 @@ module.exports = app => {
         credentials: true,
     }
     const cors = require("cors");
-    const requireAUTH = require("../middlewares/Authorization.js");
+    const requireAUTHORIZATION = require("../middlewares/RequireAuthorization.js");
     const users = require("../controllers/user.controllers.js");   
 
     
@@ -30,7 +30,7 @@ module.exports = app => {
 
     
     // Fetch all "Users" DATA from using API
-    router.get("/api/v1/admin/users/manage", requireAUTH, users.findAll);
+    router.get("/api/v1/admin/users/manage", requireAUTHORIZATION, users.findAll);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.
 
 
