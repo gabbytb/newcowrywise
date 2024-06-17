@@ -207,7 +207,6 @@ exports.signUp = async (req, res) => {
                     `\n*********************************************************,
                     \nRegistration Status: ${user}`,
                     "\n*********************************************************");
-
         const responseData = {
             success: true,
             data: user,
