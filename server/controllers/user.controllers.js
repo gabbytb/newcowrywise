@@ -186,7 +186,8 @@ exports.signUp = async (req, res) => {
                     }
                 } else {
                     console.log("E-mail Service Details:", mail.envelope,
-                        `\nE-mail Sent successfully:: ${mail.response}`);
+                        `\nE-mail Sent successfully:: ${mail.response}`,
+                    "\n\n******************************************************************************************\n");
                 }
             });
         };
@@ -202,11 +203,11 @@ exports.signUp = async (req, res) => {
                     "\n*****        TOKEN GENERATED FOR NEW USER           *****",
                     `\n*********************************************************,
                     \nToken: ${token}`,
-                    "\n*********************************************************",
+                    "\n\n*********************************************************",
                     "\n*****          NEW USER ACCOUNT DETAILS             *****",
                     `\n*********************************************************,
                     \nRegistration Status: ${user}`,
-                    "\n*********************************************************");
+                    "\n\n******************************************************************************************\n");
         const responseData = {
             success: true,
             data: user,
@@ -272,7 +273,11 @@ exports.accountVerification = async (req, res) => {
                     data: updatedUser,
                     message: "Successful"
                 };
-                console.log("Verification Status: ", responseData);
+                console.log("*********************************************************",
+                    "\n*****           NEW ACCOUNT VERIFICATION             ****",
+                    "\n*********************************************************",
+                    "\n\nVerification Status: ", responseData,
+                    "\n\n*********************************************************\n\n");
                 return res.status(200).json(responseData);
 
             } else {
@@ -282,7 +287,7 @@ exports.accountVerification = async (req, res) => {
                     success: false,
                     message: "Failed",
                 };
-                console.log("Verification Status: ", responseData);
+                console.log("Verification Status: ", responseData, "\n");
                 return res.status(200).json(responseData);
             };
         });

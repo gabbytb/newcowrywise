@@ -1246,6 +1246,12 @@ header {
 
 /**************************************************************************/
 
+/* #signUpID .content-wrapper {
+    @apply
+      min-h-121.5
+    ;
+  } */
+
 #signUp {
   margin: auto;
   display: flex;
@@ -3105,6 +3111,10 @@ header .cta-menu a:last-child {
   display: table;
 }
 
+.grid {
+  display: grid;
+}
+
 .hidden {
   display: none;
 }
@@ -3129,6 +3139,12 @@ header .cta-menu a:last-child {
   height: 7rem;
 }
 
+.h-fit {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-full {
   height: 100%;
 }
@@ -3137,12 +3153,20 @@ header .cta-menu a:last-child {
   height: 100vh;
 }
 
+.min-h-120\.5 {
+  min-height: 60.5rem;
+}
+
 .min-h-138 {
   min-height: 78rem;
 }
 
 .min-h-20 {
   min-height: 5rem;
+}
+
+.min-h-125 {
+  min-height: 65rem;
 }
 
 .w-123 {
@@ -3216,6 +3240,10 @@ header .cta-menu a:last-child {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-row {

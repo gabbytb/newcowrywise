@@ -131,6 +131,8 @@
 
 
 
+
+
 @layer components {
 
   header {
@@ -315,6 +317,11 @@
 
 
 
+  /* #signUpID .content-wrapper {
+    @apply
+      min-h-121.5
+    ;
+  } */
   #signUp {
     @apply
       flex

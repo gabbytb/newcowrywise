@@ -1,4 +1,4 @@
-import { useEffect, useState, } from "react";
+import { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Nav, ButtonSubmit, } from "../components";
@@ -9,10 +9,30 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
+
+
+
 const SignUp = () => {
 
-    
+
     // console.clear();
+
+
+    
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        const pageTitle = "Sign Up",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+
+
 
 
 
@@ -57,8 +77,10 @@ const SignUp = () => {
             const { success, message, data } = res.data; 
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
+            var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
             if (!success && message === "Fill all the required inputs.") {
+                window.scrollTo(0, 0);
                 setFormMessage(message);
                 setFormSubmitted(success);     
                 errMsg.classList.remove('error');
@@ -67,7 +89,8 @@ const SignUp = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
-             } else if (!success && message === "E-mail exists. Please sign-in.") {
+            } else if (!success && message === "E-mail exists. Please sign-in.") {
+                window.scrollTo(0, 0);
                 setFormMessage(message);
                 setFormSubmitted(success);
                 errMsg.classList.remove('error');
@@ -77,6 +100,7 @@ const SignUp = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else if (!success && message === "Username exists. Please sign-in.") {
+                window.scrollTo(0, 0);
                 setFormMessage(message);
                 setFormSubmitted(success);
                 errMsg.classList.remove('error');
@@ -85,15 +109,34 @@ const SignUp = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
-            } else {
+            } else {                          
+                function scrollToBottom() {
+                    window.scroll({
+                        top: document.documentElement.scrollHeight,
+                        behavior: 'smooth',
+                    });   
+                };
+                scrollToBottom();
+
+
                 setFormMessage(message);
                 setFormSubmitted(success);
+                
+                
+                signUpContentWrapper.classList.remove('min-h-120.5');
+                signUpContentWrapper.classList.add('min-h-125');                        
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
+
+
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                }, 2800);   
+
+                    signUpContentWrapper.classList.remove('min-h-125');
+                    signUpContentWrapper.classList.add('min-h-120.5');
+                    window.scrollTo(0, 0);
+                }, 3300);   
 
                 console.log("Success: ", success);
                 console.log("Message: ", message);
@@ -109,20 +152,17 @@ const SignUp = () => {
     // *************************** //
      
 
-    useEffect(() => {
-        const pageTitle = "Sign Up",
-        siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
+
+
 
 
     return (
         <>
             <Nav />
-            <div className="absolute top-0 w-full h-screen -z-10">
-                <main className="w-full h-128 relative">
+            <main id="signUpID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
+                <div className="relative w-full h-full">
 
-                    <div className="mt-40 pt-24 items-center">`
+                    <div className="mt-40 pt-24 items-center min-h-120.5 content-wrapper">
                         <div className="mx-auto error">
                             <pre className="hidden">
                                 {formSubmitted}
@@ -184,8 +224,8 @@ const SignUp = () => {
 
                         </form>
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </>
     );
 };
