@@ -136,7 +136,7 @@
 @layer components {
 
   header {
-    @apply sm:h-114.5 lg:h-28 bg-white
+    @apply h-114.5 lg:h-28 bg-white
   }
 
   .default-header .container {
@@ -157,19 +157,19 @@
 
   /** Mobile Nav Config */
   .mobile-nav {
-    @apply block sm:flex lg:hidden
+    @apply flex xs:flex lg:hidden
   }
 
   .mobile-nav .hamburger {
-    @apply w-10
+    @apply w-10 xs:w-10
   }
 
   .mobile-nav .hamburger span::before {
-    @apply content-[''] bg-white sm:bg-black w-10 h-1 absolute top-11
+    @apply content-[''] bg-black w-10 h-1 absolute top-11
   }
 
   .mobile-nav .hamburger span::after {
-    @apply content-[''] bg-white sm:bg-black w-10 h-100 absolute top-14
+    @apply content-[''] bg-black w-10 h-100 absolute top-14
   }
 
 

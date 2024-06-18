@@ -167,18 +167,19 @@ exports.signUp = async (req, res) => {
 
         // Attempt to send email with retry logic
         let retryAttempts = 0;  // Track number of retry attempts
-        const maxRetries = 3;   // Maximum number of retry attempts before giving up
+        const maxRetries = 10;   // Maximum number of retry attempts before giving up
+        // Implement retry logic here to attempt resending
         function attemptSend() {
             // Attempt to send email
             transporter.sendMail(mailOptions, (error, mail) => {
                 if (error) {
-                    console.log('Error sending ACCOUNT VERIFICATION e-mail:', error.message);
+                    console.log('Error sending USER their "ACCOUNT VERIFICATION" E-mail:', error.message);
 
-                    // Implement retry logic here to attempt resending
                     if (retryAttempts < maxRetries) {
-                        console.log(`Retrying... Attempt ${retryAttempts + 1} of ${maxRetries}`);
-                        retryAttempts++;
 
+                        retryAttempts++;
+                        console.log(`Retrying... Attempt ${retryAttempts} of ${maxRetries}`);
+                        
                         // Retry sending after a delay (e.g., 5 seconds)
                         setTimeout(attemptSend, 15000); // Retry after 15 seconds
                     } else {

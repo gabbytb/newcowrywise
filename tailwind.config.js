@@ -407,6 +407,8 @@ module.exports = {
         '116': '46rem',
         '120.5': '60.5rem',       /** Sign-Up Page: 'Body' **/
         '125': '65rem',
+        '126.5': '66.5rem',
+        '128': '68rem',
         '138': '78rem',
       },
       minWidth: {

@@ -10,8 +10,6 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
-
-
 const SignUp = () => {
 
 
@@ -110,30 +108,32 @@ const SignUp = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else {                          
-                function scrollToBottom() {
-                    window.scroll({
-                        top: document.documentElement.scrollHeight,
-                        behavior: 'smooth',
-                    });   
-                };
-                scrollToBottom();
-
-
                 setFormMessage(message);
                 setFormSubmitted(success);
-                
-                
-                signUpContentWrapper.classList.remove('min-h-120.5');
-                signUpContentWrapper.classList.add('min-h-125');                        
+
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
 
+                signUpContentWrapper.classList.remove('min-h-120.5');
+                signUpContentWrapper.classList.add('min-h-126.5');                        
 
+                // window.scroll(0,150);
+                function scrollToBottom() {
+                    window.scroll({
+                        left: 0,
+                        top: document.documentElement.scrollHeight,
+                        behavior: 'smooth',
+                    });   
+                    // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+                };
+                scrollToBottom();
+
+                
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
 
-                    signUpContentWrapper.classList.remove('min-h-125');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
                     signUpContentWrapper.classList.add('min-h-120.5');
                     window.scrollTo(0, 0);
                 }, 3300);   
