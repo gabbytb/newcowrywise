@@ -146,10 +146,12 @@
   .content p {
     @apply text-center text-15xl/more-loose text-skin-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
   }
-/* 
-  .text--white {
-    color: white !important;
-  } */
+
+  /* 
+    .text--white {
+      color: white !important;
+    } 
+  */
 
 
 
@@ -165,11 +167,23 @@
   }
 
   .mobile-nav .hamburger span::before {
-    @apply content-[''] bg-black w-10 h-1 absolute top-11
+    /* @apply content-span-before bg-black w-10 h-1 absolute top-11 */
+    content: var(--before-content, '');
+    background-color: var(--before-bg-color, black);
+    width: 2.5rem;
+    height: 0.25rem;
+    position: absolute;
+    top: 2.75rem;
   }
 
   .mobile-nav .hamburger span::after {
-    @apply content-[''] bg-black w-10 h-100 absolute top-14
+    /* @apply content- bg-black w-10 h-100 absolute top-14 */
+    content: var(--after-content, '');
+    background-color: var(--after-bg-color, black);
+    width: 2.5rem;
+    height: 0.2rem;
+    position: absolute;
+    top: 3.5rem;
   }
 
 

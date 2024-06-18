@@ -127,6 +127,9 @@ module.exports = {
       colors: {
         'skin-gray': 'var(--color-lighter-gray)',
       },
+      // content: {
+      //   'span-before': 'var(--before-background, "black")',
+      // },
       gridTemplateColumns: {
         '16': '1fr 1fr', // Used for Section 1: .s1-grids-wrap
         '18': '54% 1fr', // Used for Section 2 after: .h-container-2

@@ -738,14 +738,9 @@ input[type="text"], input[type="email"] {
 }
 
 header {
+  height: 7.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-@media (min-width: 769px) {
-  header {
-    height: 7.5rem;
-  }
 }
 
 @media (min-width: 981px) {
@@ -796,16 +791,10 @@ header {
 /** Mobile Nav Config */
 
 .mobile-nav {
-  display: block;
+  display: flex;
 }
 
 @media (min-width: 601px) {
-  .mobile-nav {
-    display: flex;
-  }
-}
-
-@media (min-width: 769px) {
   .mobile-nav {
     display: flex;
   }
@@ -828,41 +817,23 @@ header {
 }
 
 .mobile-nav .hamburger span::before {
+  /* @apply content-span-before bg-black w-10 h-1 absolute top-11 */
+  content: var(--before-content, '');
+  background-color: var(--before-bg-color, black);
+  width: 2.5rem;
+  height: 0.25rem;
   position: absolute;
   top: 2.75rem;
-  height: 0.25rem;
-  width: 2.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-content: '';
-  content: var(--tw-content);
-}
-
-@media (min-width: 601px) {
-  .mobile-nav .hamburger span::before {
-    height: 0.25rem;
-    --tw-bg-opacity: 1;
-    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-  }
 }
 
 .mobile-nav .hamburger span::after {
+  /* @apply content- bg-black w-10 h-100 absolute top-14 */
+  content: var(--after-content, '');
+  background-color: var(--after-bg-color, black);
+  width: 2.5rem;
+  height: 0.2rem;
   position: absolute;
   top: 3.5rem;
-  height: 0.2rem;
-  width: 2.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-content: '';
-  content: var(--tw-content);
-}
-
-@media (min-width: 601px) {
-  .mobile-nav .hamburger span::after {
-    height: 0.2rem;
-    --tw-bg-opacity: 1;
-    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-  }
 }
 
 /**************************************************************************/
