@@ -125,6 +125,8 @@
     border-radius: 6px;
     padding: 10px 15px;
     outline: none;
+    font-size: 15px;
+    letter-spacing: 0.06em;
   }
     
 }
@@ -356,7 +358,7 @@
       min-h-121.5
     ;
   } */
-  #signUp {
+  #signUp, #logIn {
     @apply
       flex
       flex-col
@@ -370,13 +372,17 @@
       shadow-md
     ;
   }
-  #signUp .form--title h5 {
+  
+  #signUp .form--title h5, 
+  #logIn .form--title h5 {
     @apply
       text-3xl
       font-semibold
     ;
   }
-  #signUp .form--wrapper {
+  
+  #signUp .form--wrapper, 
+  #logIn .form--wrapper {
     @apply
       w-full 
       flex
@@ -385,7 +391,8 @@
     ;
   }
 
-
+  
+  
   
   
 
@@ -465,7 +472,29 @@
   }
 
   header .cta-menu a:last-child {
-    @apply text-2xl text-white bg-blue-600 px-9 py-5 rounded-xl
+    @apply 
+      text-2xl 
+      px-9 
+      py-5 
+      rounded-xl
+    text-white 
+    bg-blue-600 
+
+    hover:bg-blue-700 
+    focus:bg-blue-700 
+      
+    hover:ring-blue-300 
+    focus:ring-blue-300 
+
+      hover:ring-2 
+      focus:ring-2
+
+      ease-in-out
+      duration-300 
+      /* visited:ring-4 
+    visited:ring-red-400 
+      */
+    ;
   }
 
   #header .brand {
@@ -473,7 +502,9 @@
   }
 
   #header .brand-white {
-    @apply hidden sm:hidden
+    @apply 
+      hidden
+    ;
   }
   
   #header.sticky-header .brand {

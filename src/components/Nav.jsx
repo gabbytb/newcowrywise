@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { 
-    BrandLogo, 
-    BrandLogoWhite,
+    // BrandLogo, 
+    // BrandLogoWhite,
     brandOfficialLogo, 
 } from "../assets/images";
 import { 

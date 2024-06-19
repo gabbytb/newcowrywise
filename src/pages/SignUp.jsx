@@ -78,34 +78,58 @@ const SignUp = () => {
             var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
             if (!success && message === "Fill all the required inputs.") {
-                window.scrollTo(0, 0);
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
                 setFormMessage(message);
-                setFormSubmitted(success);     
+                setFormSubmitted(success);
+
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
+
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
+
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
             } else if (!success && message === "E-mail exists. Please sign-in.") {
-                window.scrollTo(0, 0);
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
                 setFormMessage(message);
                 setFormSubmitted(success);
+
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
+
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
+
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
             } else if (!success && message === "Username exists. Please sign-in.") {
-                window.scrollTo(0, 0);
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
                 setFormMessage(message);
                 setFormSubmitted(success);
+
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
+
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
+
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
             } else {                          
                 setFormMessage(message);
@@ -116,24 +140,11 @@ const SignUp = () => {
 
                 signUpContentWrapper.classList.remove('min-h-120');
                 signUpContentWrapper.classList.add('min-h-126.5');                        
-                // window.scroll(0,150);
-                // function scrollToBottom() {
-                    // window.scroll({
-                    //     left: 0,
-                    //     top: document.documentElement.scrollHeight,
-                    //     behavior: 'smooth',
-                    // });   
-
-                    function pageScroll() {
-                        window.scroll({ left: 0, top: 180, behavior: 'smooth', }); // horizontal and vertical scroll increments
-                    };
-                    pageScroll();
-                    
-                
-                    // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-                    // };
-                    // scrollToBottom();
-
+                // window.scrollTo(0, 0);
+                // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+                // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                   
+                window.scroll({ left: 0, top: 180, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
+    
                 
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
@@ -141,7 +152,10 @@ const SignUp = () => {
 
                     signUpContentWrapper.classList.remove('min-h-126.5');
                     signUpContentWrapper.classList.add('min-h-120');
-                    window.scrollTo(0, 0);
+                    // window.scrollTo(0, 0);
+                    // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+                    // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                   
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
                 }, 3300);   
 
                 console.log("Success: ", success);
@@ -157,7 +171,6 @@ const SignUp = () => {
     // ***** CREATE NEW USER ***** //
     // *************************** //
      
-
 
 
 
@@ -206,7 +219,8 @@ const SignUp = () => {
                                     </label>
 
                                     <label htmlFor="password">
-                                        <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        {/* className={`${pwdIsHidden ? "hide" : "show"}`} */}
+                                        <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} className="pwd" />
                                     </label>
 
                                     <label htmlFor="isActivated" className="flex justify-end items-end flex-row-reverse gap-4">I agree to terms & conditions?
@@ -217,7 +231,14 @@ const SignUp = () => {
                                         btnType="submit"
                                         btnBg
                                         btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
-                                        hover:bg-blue-700 focus:bg-blue-700 hover:outline-green-400 focus:outline-green-400 hover:ring-green-400 focus:ring-green-400"
+                                            hover:bg-blue-700 
+                                            focus:bg-blue-700 
+                                            hover:ring-blue-300 
+                                            focus:ring-blue-300
+                                            hover:ring-2 
+                                            focus:ring-2
+                                            ease-in-out
+                                            duration-300"
                                         label="submit"
                                     />
 

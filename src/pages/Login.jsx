@@ -51,7 +51,7 @@ const Login = () => {
         .then((res) => {
             const { success, message, data } = res.data; 
             var errMsg = document.querySelector('.error'); 
-            var successMsg = document.querySelector('#signUp .success');
+            var successMsg = document.querySelector('#logIn .success');
 
             if (!success && message === "All fields are required.") {
                 setFormMessage(message);
@@ -141,13 +141,13 @@ const Login = () => {
                             {formMessage}
                         </div>
 
-                        <form id="signUp" onSubmit={handleLogin}>
+                        <form id="logIn" onSubmit={handleLogin}>
 
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">log in</h5>
                             </div>
 
-                            <div className="px-8 pb-20 w-full">
+                            <div className="px-8 pb-32 w-full">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="email">
@@ -160,7 +160,15 @@ const Login = () => {
 
                                     <ButtonSubmit 
                                         btnType="submit"
-                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg"
+                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
+                                            hover:bg-blue-700 
+                                            focus:bg-blue-700 
+                                            hover:ring-blue-300 
+                                            focus:ring-blue-300
+                                            hover:ring-2 
+                                            focus:ring-2
+                                            ease-in-out
+                                            duration-300"
                                         btnBg
                                         label="submit"
                                     />
