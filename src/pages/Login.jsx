@@ -71,6 +71,15 @@ const Login = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+            } else if (!success && message === "Invalid account.") {
+                setFormMessage(message);
+                setFormSubmitted(success);
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 2800);
             } else {
                 // Console Logs
                 // console.log("Retrieving User Data: ", data);     

@@ -43,12 +43,11 @@
     -->
     <script>
         function myFunction() {
+            var scroll = window.scrollY;
             var foundScrollbar = document.getElementById('scrollbar');
             var foundHeader = document.getElementById('header');
-            var scroll = window.scrollY;
-            // console.log('Scroll: ', scroll);
-      
-            const beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
+            var beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
+            
             if (scroll > 5) {
               foundHeader.classList.add('sticky-header');
               foundScrollbar.classList.add('no-scrollbar');
@@ -59,7 +58,7 @@
               foundScrollbar.classList.remove('no-scrollbar');
               beforePseudoElement.style.setProperty('--before-bg-color', "black");
               beforePseudoElement.style.setProperty('--after-bg-color', "black");
-            }
+           };
         };  
     </script>
   </body>

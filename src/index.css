@@ -136,7 +136,15 @@
 @layer components {
 
   header {
-    @apply h-114.5 lg:h-28 bg-white
+    @apply 
+    bg-white
+      h-114.5 
+      /* lg:h-28 */
+      /***** Just Added these *****/
+      lg:h-40
+      relative
+      top-103
+    ;
   }
 
   .default-header .container {
@@ -157,34 +165,46 @@
 
 
 
-  /** Mobile Nav Config */
+  /**************************************************************************/
+  /*************************    Mobile Nav Config   *************************/
+  /**************************************************************************/
   .mobile-nav {
     @apply flex xs:flex lg:hidden
   }
 
   .mobile-nav .hamburger {
-    @apply w-10 xs:w-10
+    @apply 
+      w-10 
+      xs:w-10
   }
 
   .mobile-nav .hamburger span::before {
-    /* @apply content-span-before bg-black w-10 h-1 absolute top-11 */
-    content: var(--before-content, '');
-    background-color: var(--before-bg-color, black);
-    width: 2.5rem;
-    height: 0.25rem;
-    position: absolute;
-    top: 2.75rem;
+    @apply 
+      content-beforeContent 
+      bg-skin-before-hamburger 
+      sm:bg-black 
+      w-10
+      h-1 
+      absolute 
+      top-11
+    ;
   }
 
   .mobile-nav .hamburger span::after {
-    /* @apply content- bg-black w-10 h-100 absolute top-14 */
-    content: var(--after-content, '');
-    background-color: var(--after-bg-color, black);
-    width: 2.5rem;
-    height: 0.2rem;
-    position: absolute;
-    top: 3.5rem;
+    @apply
+      content-afterContent 
+      bg-skin-after-hamburger
+      sm:bg-black 
+      w-10 
+      h-100 
+      absolute 
+      top-14
+    ;
   }
+  /**************************************************************************/
+  /*************************    Mobile Nav Config   *************************/
+  /**************************************************************************/
+
 
 
 
@@ -448,24 +468,36 @@
     @apply text-2xl text-white bg-blue-600 px-9 py-5 rounded-xl
   }
 
-  .brand {
+  #header .brand {
     @apply block 
   }
 
-  .brand-white {
-    @apply block sm:hidden
+  #header .brand-white {
+    @apply hidden sm:hidden
   }
   
-  .sticky-header .brand {
+  #header.sticky-header .brand {
     @apply hidden sm:block
   }
 
-  .brand svg {
-    @apply w-52.5
+  #header.sticky-header .brand-white {
+    @apply block sm:hidden
   }
 
-  .brand-white svg {
-    @apply w-52.5
+  .brand img {
+    @apply 
+      /* w-52.5  */
+      max-w-52
+      xs:max-w-60
+    ;
+  }
+
+  .brand-white img {
+    @apply 
+      /* w-52.5  */
+      max-w-52
+      xs:max-w-60
+    ;
   }
 
   .social-icons {
@@ -1062,7 +1094,6 @@
     @apply text-6xl sm:text-8xl font-normal -tracking-tightest text-skin-darkBlue sm:ml-13.4
   }
   /** Section Seven **/
-}
 
 
 
@@ -1070,188 +1101,189 @@
 
 
 
-/**  Footer  **/
-.container-fc {
-  @apply 
-    w-full 
-    px-8 
-    py-0 
-    my-0 
-    mx-auto
-  ;
-}
-.app-reviews {
-  @apply 
-    grid 
-    grid-cols-22 
-    gap-16
-  ;
-}
-.app-review--card {
-  @apply 
-    w-full 
-    min-h-98 
-    bg-white 
-    border 
-    border-slate-200 
-    shadow-lg 
-    rounded-3xl 
-    py-14.7 
-    px-15.8 
-  ;
-}
-.top-review--card {
-  @apply 
-    flex 
-    flex-col
-    items-start
-    justify-between
-    mb-8
 
-    xs:flex 
-    xs:flex-row
-    xs:items-start
-    xs:mb-8
+  /**  Footer  **/
+  .container-fc {
+    @apply 
+      w-full 
+      px-8 
+      py-0 
+      my-0 
+      mx-auto
+    ;
+  }
+  .app-reviews {
+    @apply 
+      grid 
+      grid-cols-22 
+      gap-16
+    ;
+  }
+  .app-review--card {
+    @apply 
+      w-full 
+      min-h-98 
+      bg-white 
+      border 
+      border-slate-200 
+      shadow-lg 
+      rounded-3xl 
+      py-14.7 
+      px-15.8 
+    ;
+  }
+  .top-review--card {
+    @apply 
+      flex 
+      flex-col
+      items-start
+      justify-between
+      mb-8
 
-  ;
-}
-.top-review--card .r-star-rating {
-  @apply 
-    flex 
-    flex-row
-    flex-wrap
-    items-start
-    justify-start
+      xs:flex 
+      xs:flex-row
+      xs:items-start
+      xs:mb-8
 
-    xs:flex
-    xs:flex-row
-    xs:flex-wrap
-    xs:items-start
-    xs:justify-start
+    ;
+  }
+  .top-review--card .r-star-rating {
+    @apply 
+      flex 
+      flex-row
+      flex-wrap
+      items-start
+      justify-start
 
-    sm:flex
-    sm:flex-col
-    sm:items-start
-    sm:justify-start
-  ;
-}
-.top-review--card a {
-  @apply
-    mt-8
-  ;
-}
-.top-review--card .r-star-rating svg {
-  @apply 
-    ml-8 
-    h-20 
-    w-50.4 
-  ;
-}
-.top-review--card h3 {
-  @apply 
-    text-6xl 
-    font-semibold
-    flex 
-    items-end
-  ;
-}
-.top-review--card h3 sub {
-  @apply 
-    contents 
-    items-center 
-    h-full 
-    text-19xl 
-    text-skin-lightgray
-  ;
-}
-.top-review--card a svg {
-  @apply 
-    w-48 
-    h-20
-  ;
-}
-.bottom-review--card a {
-  @apply 
-    uppercase
-  ;
-}
-.bottom-review--card h6 {
-  @apply 
-    text-21xl 
-    font-semibold 
-    mb-6 
-  ;
-}
-.bottom-review--card p {
-  @apply 
-    text-10xl/more-loose 
-    my-6
-  ;
-}
-.bottom-review--card a {
-  @apply mt-8 flex justify-start items-center text-xl font-semibold text-skin-lightblue min-h-20
-}
-.bottom-review--card a svg {
-  @apply ml-2.9 fill-blue-600 w-5 h-5
-}
-.footer-email--wrap {
-  @apply 
-    bg-blue-700
-    py-32 
-    px-4 
-    mb-16 
+      xs:flex
+      xs:flex-row
+      xs:flex-wrap
+      xs:items-start
+      xs:justify-start
+
+      sm:flex
+      sm:flex-col
+      sm:items-start
+      sm:justify-start
+    ;
+  }
+  .top-review--card a {
+    @apply
+      mt-8
+    ;
+  }
+  .top-review--card .r-star-rating svg {
+    @apply 
+      ml-8 
+      h-20 
+      w-50.4 
+    ;
+  }
+  .top-review--card h3 {
+    @apply 
+      text-6xl 
+      font-semibold
+      flex 
+      items-end
+    ;
+  }
+  .top-review--card h3 sub {
+    @apply 
+      contents 
+      items-center 
+      h-full 
+      text-19xl 
+      text-skin-lightgray
+    ;
+  }
+  .top-review--card a svg {
+    @apply 
+      w-48 
+      h-20
+    ;
+  }
+  .bottom-review--card a {
+    @apply 
+      uppercase
+    ;
+  }
+  .bottom-review--card h6 {
+    @apply 
+      text-21xl 
+      font-semibold 
+      mb-6 
+    ;
+  }
+  .bottom-review--card p {
+    @apply 
+      text-10xl/more-loose 
+      my-6
+    ;
+  }
+  .bottom-review--card a {
+    @apply mt-8 flex justify-start items-center text-xl font-semibold text-skin-lightblue min-h-20
+  }
+  .bottom-review--card a svg {
+    @apply ml-2.9 fill-blue-600 w-5 h-5
+  }
+  .footer-email--wrap {
+    @apply 
+      bg-blue-700
+      py-32 
+      px-4 
+      mb-16 
+      
+      flex
+      flex-col
+      justify-start 
+      
+      sm:flex
+      sm:flex-row
+      sm:items-center
+      sm:justify-center
     
-    flex
-    flex-col
-    justify-start 
-    
-    sm:flex
-    sm:flex-row
-    sm:items-center
-    sm:justify-center
-  
+  }
+  .footer-email--wrap h3 {
+    @apply text-5xl/very-loose sm:text-18xl font-bold -tracking-tightened
+  }
+  .footer_email {
+    @apply py-4 px-14.4 w-full rounded-2xl bg-skin-transparentblue relative
+  }
+  .footer_email input[type="email"] {
+    @apply min-h-16 w-full max-w-101 bg-transparent text-15xl
+  }
+  .footer-menu--wrap h4 {
+    @apply text-19xl font-semibold capitalize -tracking-tightened mt-13.7 mb-12
+  }
+  .footer-menu--wrap {
+    @apply mt-40 mb-16
+  }
+  .footer-menu--wrap a {
+    @apply text-42xl
+  }
+  .footer-menu--wrap div:first-of-type a {
+    @apply capitalize
+  }
+  .footer-menu--wrap ul li {
+    @apply text-31xl/more-loose mt-3.2 
+  }
+  .footer-menu--wrap ul li a {
+    @apply text-42xl font-medium text-slate-400
+  }
+  .footer-social--wrap ul li {
+    @apply flex space-x-6 h-full mt-8
+  }
+  .footer-social--wrap ul li a {
+    @apply flex w-6 h-6 fill-skin-gray
+  }
+  .footer-social--wrap ul li a svg {
+    @apply flex h-full fill-skin-gray
+  }
+  .footer-badge p {
+    @apply text-2xl my-6 font-firma font-medium text-slate-600
+  }
+  /**  Footer  **/
 }
-.footer-email--wrap h3 {
-  @apply text-5xl/very-loose sm:text-18xl font-bold -tracking-tightened
-}
-.footer_email {
-  @apply py-4 px-14.4 w-full rounded-2xl bg-skin-transparentblue relative
-}
-.footer_email input[type="email"] {
-  @apply min-h-16 w-full max-w-101 bg-transparent text-15xl
-}
-.footer-menu--wrap h4 {
-  @apply text-19xl font-semibold capitalize -tracking-tightened mt-13.7 mb-12
-}
-.footer-menu--wrap {
-  @apply mt-40 mb-16
-}
-.footer-menu--wrap a {
-  @apply text-42xl
-}
-.footer-menu--wrap div:first-of-type a {
-  @apply capitalize
-}
-.footer-menu--wrap ul li {
-  @apply text-31xl/more-loose mt-3.2 
-}
-.footer-menu--wrap ul li a {
-  @apply text-42xl font-medium text-slate-400
-}
-.footer-social--wrap ul li {
-  @apply flex space-x-6 h-full mt-8
-}
-.footer-social--wrap ul li a {
-  @apply flex w-6 h-6 fill-skin-gray
-}
-.footer-social--wrap ul li a svg {
-  @apply flex h-full fill-skin-gray
-}
-.footer-badge p {
-  @apply text-2xl my-6 font-firma font-medium text-slate-600
-}
-/**  Footer  **/
-
 
 
 

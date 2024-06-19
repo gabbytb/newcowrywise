@@ -114,19 +114,25 @@ const SignUp = () => {
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
 
-                signUpContentWrapper.classList.remove('min-h-120.5');
+                signUpContentWrapper.classList.remove('min-h-120');
                 signUpContentWrapper.classList.add('min-h-126.5');                        
-
                 // window.scroll(0,150);
-                function scrollToBottom() {
-                    window.scroll({
-                        left: 0,
-                        top: document.documentElement.scrollHeight,
-                        behavior: 'smooth',
-                    });   
+                // function scrollToBottom() {
+                    // window.scroll({
+                    //     left: 0,
+                    //     top: document.documentElement.scrollHeight,
+                    //     behavior: 'smooth',
+                    // });   
+
+                    function pageScroll() {
+                        window.scroll({ left: 0, top: 180, behavior: 'smooth', }); // horizontal and vertical scroll increments
+                    };
+                    pageScroll();
+                    
+                
                     // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-                };
-                scrollToBottom();
+                    // };
+                    // scrollToBottom();
 
                 
                 setTimeout(() => {
@@ -134,7 +140,7 @@ const SignUp = () => {
                     successMsg.classList.add('success');
 
                     signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                     window.scrollTo(0, 0);
                 }, 3300);   
 
@@ -162,7 +168,9 @@ const SignUp = () => {
             <main id="signUpID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
                 <div className="relative w-full h-full">
 
-                    <div className="mt-40 pt-24 items-center min-h-120.5 content-wrapper">
+
+
+                    <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
                         <div className="mx-auto error">
                             <pre className="hidden">
                                 {formSubmitted}
@@ -170,8 +178,9 @@ const SignUp = () => {
                             {formMessage}
                         </div>
 
-                        <form id="signUp" onSubmit={handleSubmit}>
 
+
+                        <form id="signUp" onSubmit={handleSubmit}>
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">sign up</h5>
                             </div>

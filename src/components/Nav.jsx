@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { 
     BrandLogo, 
-    BrandLogoWhite, 
+    BrandLogoWhite,
+    brandOfficialLogo, 
 } from "../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
@@ -36,10 +37,12 @@ const Nav = () => {
                 <div className="container">
                     <div className="flex items-center h-full px-0 relative ">                
                         <Link to={"/"} className="mt-1.5 ml-2 mr-24 brand">
-                            <BrandLogo />
+                            {/* <BrandLogo /> */}
+                            <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="-mt-2 ml-2 mr-24 brand-white">
-                            <BrandLogoWhite />
+                        <Link to={"/"} className="ml-2 mr-24 brand-white">
+                            {/* -mt-2 <BrandLogoWhite   /> */}
+                            <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
 
 

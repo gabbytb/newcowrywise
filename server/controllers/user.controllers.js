@@ -315,13 +315,12 @@ exports.logIn = async (req, res) => {
             console.log("***********************************",
                         "\n*********  LOGIN ATTEMPT  *********",
                         "\n***********************************",
-                        "\nLogin Error: ", responseData.message)
+                        "\nLogin Error: ", responseData.message + "\n\n");
             return res.status(200).json(responseData);
         };
 
         const user = await User.findOne({ email });        
-        const auth = await bcrypt.compare(password, user.password);     // 3) Use 'bCrypt' to compare Password with User's Existing Password 
-        if (!user || !auth) {        // 2) Check if Email exists for any User
+        if (!user) {        // 2) Check if Email exists for any User
             const responseData = { 
                 success: false, 
                 message: "Incorrect password or email.",
@@ -337,6 +336,25 @@ exports.logIn = async (req, res) => {
                         "\n***********************************");
             return res.status(200).json(responseData);
         }
+
+        const auth = await bcrypt.compare(password, user.password);     // 3) Use 'bCrypt' to compare Password with User's Existing Password 
+        if (!auth) {        // 3) Check if Email exists for any User
+            const responseData = { 
+                success: false, 
+                message: "Incorrect password or email.",
+            };
+            console.log("***********************************",
+                        "\n*****    LOG-IN ATTEMPT BY    *****",
+                        "\n***********************************",
+                        "\nAccount ID: ", user._id,
+                        "\nAccount Owner: ", user.firstName + " " + user.lastName,
+                        "\nAccount E-mail: ", user.email,
+                        "\nIS PASSWORD CORRECT?: ", auth +
+                        "\nAccount Token: ", user.accessToken,
+                        "\n***********************************");
+            return res.status(200).json(responseData);
+        }
+
 
         // ***********************************************************************************//
         // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//

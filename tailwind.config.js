@@ -107,6 +107,8 @@ module.exports = {
           lightblue: 'var(--bg-light-blue)',
           opaque: 'var(--color-opacity)',
           darkbrown: 'var(--bg-dark-brown)',
+          'before-hamburger': 'var(--before-bg-color, black)',
+          'after-hamburger': 'var(--after-bg-color, black)',
         },
       },
       backgroundImage: {
@@ -127,9 +129,14 @@ module.exports = {
       colors: {
         'skin-gray': 'var(--color-lighter-gray)',
       },
-      // content: {
-      //   'span-before': 'var(--before-background, "black")',
-      // },
+      content: {
+        // 'span-before': 'var(--before-background, "black")',
+        // Define your custom CSS variable
+        // Replace `beforeContent` with a meaningful name
+        // Example:
+        'afterContent': 'var(--after-content, "")',
+        'beforeContent': 'var(--before-content, "")',
+      },
       gridTemplateColumns: {
         '16': '1fr 1fr', // Used for Section 1: .s1-grids-wrap
         '18': '54% 1fr', // Used for Section 2 after: .h-container-2
@@ -172,6 +179,7 @@ module.exports = {
         '128.6': '18.6rem',
       },
       inset: {
+        '103': '0.3rem',
         '106': '0.6rem',
         '208': '1.7rem',
         '210': '1.8rem',
@@ -408,9 +416,9 @@ module.exports = {
         '104': '38rem',
         '106': '40rem',
         '116': '46rem',
-        '120.5': '60.5rem',       /** Sign-Up Page: 'Body' **/
+        '120': '60rem',       /** Sign-Up Page: 'Body Inner Height' **/
         '125': '65rem',
-        '126.5': '66.5rem',
+        '126.5': '66.5rem',       /** Sign-Up Page: 'Body Inner Height' **/
         '128': '68rem',
         '138': '78rem',
       },
@@ -474,7 +482,7 @@ module.exports = {
       zIndex: {
         '3': '3',
         '5': '5',
-      }
+      },
     },
   },
   plugins: [],
