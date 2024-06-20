@@ -1,9 +1,9 @@
 import { useRef, useEffect, useState } from "react";
 import { useInViewport } from "react-in-viewport";
-import { customersQuotes, customersThumbnails } from "../constants";
-import { SingleCustomerTestimonialQuote, TestimonialThumbnails } from "../components";
-import { AppStoreIcon, PlayStoreIcon, VideoIcon } from "../assets/icons";
-import { wura } from "../assets/images";
+import { customersQuotes, customersThumbnails } from "../../constants";
+import { SingleCustomerTestimonialQuote, TestimonialThumbnails } from "../../components";
+import { AppStoreIcon, PlayStoreIcon, VideoIcon } from "../../assets/icons";
+import { wura } from "../../assets/images";
 
 
 

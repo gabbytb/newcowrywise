@@ -1,13 +1,12 @@
 module.exports = app => {
          
-    const express = require('express');
-    const router = express.Router();
+    const router = require('express').Router();
+    const cors = require("cors");
     const corsOptions = {        
         origin: ["http://127.0.0.1:3000"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     }
-    const cors = require("cors");
     const requireAUTHORIZATION = require("../middlewares/RequireAuthorization.js");
     const users = require("../controllers/user.controllers.js");   
 

@@ -324,7 +324,7 @@
       justify-center
       text-center      
     text-white
-      text-2xl
+      text-2xl/normal
       font-semibold
     ;
   }
@@ -340,7 +340,7 @@
       justify-center
       text-center
       text-white
-      text-2xl
+      text-2xl/normal
       font-semibold
     ;
   }

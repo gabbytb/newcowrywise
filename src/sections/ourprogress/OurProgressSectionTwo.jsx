@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useInViewport } from 'react-in-viewport';
-import { ButtonLinkComponent, GraphComponent } from "../components"
+import { ButtonLinkComponent, GraphComponent } from "../../components"
 
 
 

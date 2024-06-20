@@ -1,22 +1,22 @@
-import HomeSectionOne from "./HomeSectionOne";
-import HomeSectionTwo from "./HomeSectionTwo";
-import HomeSectionThree from "./HomeSectionThree";
-import HomeSectionFour from "./HomeSectionFour";
-import HomeSectionFive from "./HomeSectionFive";
-import HomeSectionSix from "./HomeSectionSix";
-import HomeSectionSeven from "./HomeSectionSeven";
+import OurProgressSectionOne from "./ourprogress/OurProgressSectionOne";
+import OurProgressSectionTwo from "./ourprogress/OurProgressSectionTwo";
+import OurProgressSectionThree from "./ourprogress/OurProgressSectionThree";
+import OurProgressSectionFour from "./ourprogress/OurProgressSectionFour";
+import OurProgressSectionFive from "./ourprogress/OurProgressSectionFive";
+import OurProgressSectionSix from "./ourprogress/OurProgressSectionSix";
+import OurProgressSectionSeven from "./ourprogress/OurProgressSectionSeven";
 import Footer from "./Footer";
 
 
 
 
 export {
-    HomeSectionOne,
-    HomeSectionTwo,
-    HomeSectionThree,
-    HomeSectionFour,
-    HomeSectionFive,
-    HomeSectionSix,
-    HomeSectionSeven,
+    OurProgressSectionOne,
+    OurProgressSectionTwo,
+    OurProgressSectionThree,
+    OurProgressSectionFour,
+    OurProgressSectionFive,
+    OurProgressSectionSix,
+    OurProgressSectionSeven,
     Footer,
 };

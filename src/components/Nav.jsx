@@ -3,6 +3,7 @@ import {
     // BrandLogo, 
     // BrandLogoWhite,
     brandOfficialLogo, 
+    brandOfficialWhiteLogo,
 } from "../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
@@ -42,7 +43,7 @@ const Nav = () => {
                         </Link>
                         <Link to={"/"} className="ml-2 mr-24 brand-white">
                             {/* -mt-2 <BrandLogoWhite   /> */}
-                            <img src={brandOfficialLogo} alt="official logo" />
+                            <img src={brandOfficialWhiteLogo} alt="official logo" />
                         </Link>
 
 

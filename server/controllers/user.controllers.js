@@ -4,7 +4,7 @@ const Role = db.roles;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const encryptPassword = require("../middlewares/EncryptPassword");
-const createJWT = require("../middlewares/CreateToken");
+const createJWT = require("../middlewares/GenerateToken");
 const nodemailer = require("nodemailer");
 const { secretKey, mailServiceProvider, mailServiceUser, mailServicePwd } = process.env;
 console.log("***********************************************",
@@ -45,6 +45,7 @@ exports.signUp = async (req, res) => {
                 message: "E-mail exists. Please sign-in."
             };
             // console.log("E-mail Exists: ", emailExists);
+            console.log("E-mail Exists: ", responseData);
             return res.status(200).json(responseData);
         }
         
@@ -55,16 +56,20 @@ exports.signUp = async (req, res) => {
                 message: "Username exists. Please sign-in."
             };
             // console.log("Username Exists: ", usernameExists);
+            console.log("Username Exists: ", responseData);
             return res.status(200).json(responseData);
         }
 
+
         // ***************************************************************//
-        // Hash Password
+        // Hash/Encrypt Password
         // ***************************************************************//
         const encryptedPassword = await encryptPassword(password);
+        bcrypt.hashSync(password, bcrypt.genSaltSync());
         // const encryptedPassword = await bcrypt.hashSync(password, bcrypt.genSaltSync());
         
     
+
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
@@ -80,6 +85,7 @@ exports.signUp = async (req, res) => {
         // roleUsers = await Role.findOne({ role: "ROLE_USERS" });        
         // ***************************************************************//
         // ***************************************************************//
+
 
 
         const newUser = new User({
@@ -120,14 +126,17 @@ exports.signUp = async (req, res) => {
         const user = await newUser.save();
 
 
-        // ***********************************************************************************//
-        // ***********  USE MIDDLEWARE (JWT) FOR AUTHENTICATION AND AUTHORIZATION  ***********//
-        // ***********************************************************************************//
+
+        // *************************************************************************************************//
+        // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // *************************************************************************************************//
         const token = createJWT(user._id);
         
 
 
+        // ***************************************************************//
         // E-mail Service Config
+        // ***************************************************************//
         var transporter = nodemailer.createTransport({
             host: "smtp.gmail.com", // hostname
             service: mailServiceProvider,
@@ -136,9 +145,6 @@ exports.signUp = async (req, res) => {
                 pass: mailServicePwd,
             },
         });
-     
-        
-        
         const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
         const verifyActivationLink = `http://127.0.0.1:3000/user/verify/${token}`;
         const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
@@ -154,8 +160,6 @@ exports.signUp = async (req, res) => {
         //     text: 'This is the body of your email'
         // };
         const activationLink = `<span style="color:black;font-size:10px;">or copy and paste this link on your browser</span><br /><a href="http://127.0.0.1:3000/user/verify/${token}" alt="activation link" style="font-size:10px;">http://127.0.0.1:3000/user/verify/${token}</a>`;
-       
-       
         let mailOptions = {
             from: `Samuel Akinola Foundation <${mailServiceUser}>`,
             to: user.email,
@@ -163,8 +167,6 @@ exports.signUp = async (req, res) => {
             text: `Hello ${user.firstName}, \nThank you for registering with us at www.samuelakinolafoundation.com \nWe are more than just a foundation. \nPlease verify your account by clicking the link below to have a personalized experience. \n\n\n ${verificationLink} \n${activationLink}`,
             html: `<strong>Hello ${user.firstName} ${user.lastName}</strong>, <br /><br />Thank you for registering with us at ${siteURL}. <br /><br />We are more than just a charity organization. <br /><br />Please verify your account by clicking the link below to have a personalized experience. <br /><br /><div className="mailer-wrapper">${verificationLink}</div> <br />${activationLink}<br /><br /><br />`,
         };
-
-
         // Attempt to send email with retry logic
         let retryAttempts = 0;  // Track number of retry attempts
         const maxRetries = 10;   // Maximum number of retry attempts before giving up
@@ -193,6 +195,11 @@ exports.signUp = async (req, res) => {
             });
         };
         attemptSend();
+        // ***************************************************************//
+        // E-mail Service Config
+        // ***************************************************************//
+
+
 
         
         // NOTE: 
@@ -219,13 +226,14 @@ exports.signUp = async (req, res) => {
         return;
 
     } catch (error) {
-        return res.status(500).send(`Internal Server Error ${error}`);
-        // const errResponseData = { 
-        //     success: false, 
-        //     message: "INTERNAL SERVER ERROR: ", 
-        //     error: error.message 
-        // }
-        // return res.status(500).json(errResponseData);    
+        // return res.status(409).json({ message: error.message});     
+        // return res.status(500).json({ message: error.message});     
+        const errorResponseData = { 
+            success: false, 
+            error: "INTERNAL SERVER ERROR", 
+            message: error.message 
+        }
+        return res.status(500).json(errorResponseData);    
     }
 };
 
@@ -306,7 +314,7 @@ exports.logIn = async (req, res) => {
 
         const { email, password } = req.body;
 
-        // Verify important Payload
+        // 1) Verify Payload.
         if (!(email && password )) {
             const responseData = { 
                 success: false, 
@@ -319,8 +327,9 @@ exports.logIn = async (req, res) => {
             return res.status(200).json(responseData);
         };
 
+        // 2) Check if Email belongs to Existing User.
         const user = await User.findOne({ email });        
-        if (!user) {        // 2) Check if Email exists for any User
+        if (!user) {        
             const responseData = { 
                 success: false, 
                 message: "Incorrect password or email.",
@@ -337,8 +346,9 @@ exports.logIn = async (req, res) => {
             return res.status(200).json(responseData);
         }
 
-        const auth = await bcrypt.compare(password, user.password);     // 3) Use 'bCrypt' to compare Password with User's Existing Password 
-        if (!auth) {        // 3) Check if Email exists for any User
+        // 3) Use Middleware: 'bCrypt' to compare Password entered, with User's Existing Password.
+        const auth = await bcrypt.compare(password, user.password);
+        if (!auth) {        
             const responseData = { 
                 success: false, 
                 message: "Incorrect password or email.",
@@ -360,7 +370,7 @@ exports.logIn = async (req, res) => {
         // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
         // ***********************************************************************************//
         console.log("***********************************************",
-                    "\n*****   LOGGED-IN USER CURRENT DETAILS   ******",
+                    "\n*****     CURRENT USER LOGIN DETAILS     ******",
                     "\n***********************************************",
                     "\nAccount ID: ", user._id,
                     "\nAccount Owner: ", user.firstName + " " + user.lastName,
@@ -369,9 +379,8 @@ exports.logIn = async (req, res) => {
                     "\nAccount isVerified: ", user.isActivated,
                     "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
         // ***********************************************************************************//
-        // NOTE:- Use USER accessToken for Authorization in headers.
-        // ***********************************************************************************//
-        
+        // NOTE:- Use USER 'accessToken' for Authentication & Authorization
+        // ***********************************************************************************//  
         const responseData = {
             success: true,
             data: user,

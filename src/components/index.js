@@ -1,7 +1,11 @@
+// HEADER
 import Nav from "./Nav";
-import HomeBody from "./HomeBody";
+// HEADER
 
 
+// OUR PROGRESS MAIN: BODY !
+import OurProgressBody from "./OurProgressBody";
+// ALL INSIDE: OUR PROGRESS MAIN !!
 import SingleCustomerTestimonialQuote from "./SingleCustomerTestimonialQuote";
 import TestimonialThumbnails from "./TestimonialThumbnails";
 import ButtonComponent from "./ButtonComponent";
@@ -10,19 +14,27 @@ import ButtonSubmit from "./ButtonSubmit";
 import GraphComponent from "./GraphComponent";
 import SliderCards from "./SliderCards";
 import DisqusCard from "./DisqusCard";
+// ALL INSIDE: OUR PROGRESS MAIN !!!
 
 
+// FOOTER
 import FooterCard from "./FooterCard";
 import FooterSocialCard from "./FooterSocialCard";
+// FOOTER
+
+
 
 
 
 
 export {
+    // HEADER
     Nav,
-    HomeBody,
-    
+    // HEADER
 
+
+    // OUR PROGRESS MAIN: BODY !
+    OurProgressBody,
     SingleCustomerTestimonialQuote,
     TestimonialThumbnails,
     ButtonComponent,
@@ -31,8 +43,12 @@ export {
     GraphComponent,
     SliderCards,
     DisqusCard,
+    // OUR PROGRESS MAIN: BODY !
 
 
+    // FOOTER
     FooterCard,
     FooterSocialCard,
+    // FOOTER
 }
+

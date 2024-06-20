@@ -39,14 +39,16 @@ const SignUp = () => {
     // *************************** //
     const randNum = Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
-    // console.log("***  Account Registration  ***", "\nAccount: ", user);
+    console.log("***  Account Registration  ***", "\nAccount: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    // console.log("Registration Process: ", authenticationResponseMsg);
+    console.log("Sign-Up Response: ", formMessage);
 
+    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(null);
-    // console.log("Registration Successful: ", formSubmitted);
+    console.log("Sign-Up Successful: ", formSubmitted);
 
+    
     async function handleKeyUp(e) {
         const name = e.target.name;
         const value = e.target.checkbox ? e.target.checked : e.target.value;
@@ -71,91 +73,84 @@ const SignUp = () => {
         e.preventDefault();
         
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
-        .then((res) => {
-            const { success, message, data } = res.data; 
+        .then((response) => {
+            const { success, message, data } = response.data; 
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
             var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
-            if (!success && message === "Fill all the required inputs.") {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
-                setFormMessage(message);
-                setFormSubmitted(success);
-
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
-
-                setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
-                }, 2800);
-            } else if (!success && message === "E-mail exists. Please sign-in.") {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
-                setFormMessage(message);
-                setFormSubmitted(success);
-
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
-
-                setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
-                }, 2800);
-            } else if (!success && message === "Username exists. Please sign-in.") {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
-                setFormMessage(message);
-                setFormSubmitted(success);
-
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
-
-                setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
-                }, 2800);
-            } else {                          
-                setFormMessage(message);
-                setFormSubmitted(success);
-
-                successMsg.classList.remove('success');
-                successMsg.classList.add('success-message-info');
-
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');                        
+            if ((!success) && (message === "Fill all the required inputs.")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 // window.scrollTo(0, 0);
                 // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-                // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                   
-                window.scroll({ left: 0, top: 180, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
-    
+                // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
+                setFormSubmitted(success);
+                setFormMessage(message);
                 
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
+                }, 2800);
+            } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                setFormSubmitted(success);
+                setFormMessage(message);
+
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
+                }, 2800);
+            } else if ((!success) && (message === "Username exists. Please sign-in.")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                setFormSubmitted(success);
+                setFormMessage(message);
+
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
+                }, 2800);
+            } else {         
+                // async function takeAction() {
+                //     window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
+                // };
+                // takeAction();
+                setFormSubmitted(success);
+                setFormMessage(message);
+                setTimeout(() => {
+                    window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
+                }, 100);  
+                successMsg.classList.remove('success');
+                successMsg.classList.add('success-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');                        
+                                
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-
                     signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
-                    // window.scrollTo(0, 0);
-                    // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-                    // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                   
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth', }); // horizontal and vertical scroll increments                           
+                    signUpContentWrapper.classList.add('min-h-120');                
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 }, 3300);   
 
                 console.log("Success: ", success);
@@ -185,9 +180,9 @@ const SignUp = () => {
 
                     <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
                         <div className="mx-auto error">
-                            <pre className="hidden">
+                            {/* <pre className="block">
                                 {formSubmitted}
-                            </pre>
+                            </pre> */}
                             {formMessage}
                         </div>
 

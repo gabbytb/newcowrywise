@@ -4,9 +4,10 @@ const express = require("express");
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
 const cors = require("cors");
-const connection = require("./db");
+const Connection = require("./config/dbConfig");
 require("dotenv").config();
 const { port } = process.env;
+
 
 
 
@@ -14,23 +15,25 @@ const { port } = process.env;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DATABASE:-  Connection
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-connection();
+// const USERNAME = process.env.DB_USERNAME;
+// const PASSWORD = process.env.DB_PASSWORD;
+Connection();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SERVER:-  Port
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(port, () => {
     console.log("***********************************************",
                 "\n*********      SERVER CONNECTION      *********",
-                `\n\nPort: ${port}`,
-                "\n***********************************************",
-                "\n***********************************************\n\n");
+                `\n\nPort: ${port}`);
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ===========================================================================================================================//
 // MIDDLEWARES =========================================================================================================>
 // ===========================================================================================================================//
-// The express.json() will add a body property to the request or req object. This includes the request body's parsed JSON data. req.body in your route handler function will allow you to access this data.
-app.use(express.json({ limit: '50mb' }));
+// The express.json() will add a body property to the request or req object. 
+// This includes the request body's parsed JSON data. 
+// req.body in your route handler function will allow you to access this data.
+app.use(express.json({ limit: '50mb' , extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 // Serve uploaded files statically
 // app.use('/uploads', express.static('uploads'));
@@ -67,20 +70,6 @@ require("./routes/role.routes")(app);
 require("./routes/image.routes")(app);
 require("./routes/product.routes")(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,4 +1,5 @@
 import brandOfficialLogo from "./logo.jpg";
+import brandOfficialWhiteLogo from "./logo.jpg";
 
 import BrandLogo from "./BrandLogo";
 import BrandLogoWhite from "./BrandLogoWhite";
@@ -12,6 +13,7 @@ import investmentPlatform from "./investment-platform.png";
 
 export {
     brandOfficialLogo,
+    brandOfficialWhiteLogo,
     
     BrandLogo,
     BrandLogoWhite,

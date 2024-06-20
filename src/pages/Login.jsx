@@ -9,12 +9,26 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const Login = () => {
 
-    console.clear();
+
+    // console.clear();
+
+
+
+    
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
     useEffect(() => {
+        window.scrollTo(0, 0);
         const pageTitle = "Log In",
         siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+
+
 
 
     const [user, setUser] = useState({ email: "", password: "", });
@@ -94,7 +108,7 @@ const Login = () => {
                     setTimeout(() => {
                         errMsg.classList.remove('error-message-info');
                         errMsg.classList.add('error');
-                    }, 2800);
+                    }, 3500);
                     // Perform These Actions
 
                 } else {

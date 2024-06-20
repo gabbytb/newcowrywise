@@ -1,4 +1,5 @@
 import Home from "./Home";
+import OurProgress from "./OurProgress";
 import SignUp from "./SignUp";
 import SignUpVerification from "./SignUpVerification";
 import Login from "./Login";
@@ -15,6 +16,9 @@ import AccountUsers from "./AccountUsers";
 
 export {
     Home,
+
+    
+    OurProgress,
     SignUp,
     SignUpVerification,
     Login,

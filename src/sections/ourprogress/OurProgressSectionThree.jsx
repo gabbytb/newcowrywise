@@ -1,6 +1,6 @@
 import { useEffect, useRef, } from 'react';
-import { ArrowDown } from "../assets/icons";
-import { ButtonComponent, ButtonLinkComponent } from "../components";
+import { ArrowDown } from "../../assets/icons";
+import { ButtonComponent, ButtonLinkComponent } from "../../components";
 import { useInViewport } from 'react-in-viewport';
 
 

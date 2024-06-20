@@ -1231,6 +1231,7 @@ header {
   padding: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
+  line-height: 1.5;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1247,6 +1248,7 @@ header {
   padding: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
+  line-height: 1.5;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));

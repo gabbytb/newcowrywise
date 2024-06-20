@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { 
-  Home, 
+  Home,
+  OurProgress, 
   SignUp, SignUpVerification, 
   Login, 
   AdminDashboard, AccountUsers,
@@ -14,6 +15,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/our-progress" element={<OurProgress />}></Route>
       <Route path="/user/signup" element={<SignUp />}></Route>
       <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
       <Route path="/user/login" element={<Login />}></Route>

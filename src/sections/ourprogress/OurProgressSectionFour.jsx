@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { SliderCards } from "../components";
-import { sliderItems } from "../constants";
+import { SliderCards } from "../../components";
+import { sliderItems } from "../../constants";
 
 
 

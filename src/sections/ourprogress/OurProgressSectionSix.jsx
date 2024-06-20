@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "../assets/icons";
+import { ArrowRight } from "../../assets/icons";
 
 
 

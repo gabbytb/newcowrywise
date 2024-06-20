@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { flipItems } from "../constants";
-import { DisqusCard } from "../components";
+import { flipItems } from "../../constants";
+import { DisqusCard } from "../../components";
 
 
 

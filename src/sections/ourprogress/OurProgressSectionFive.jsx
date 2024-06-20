@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useInViewport } from "react-in-viewport";
-import { investmentPlatform } from "../assets/images";
-import { ButtonLinkComponent } from "../components";
+import { investmentPlatform } from "../../assets/images";
+import { ButtonLinkComponent } from "../../components";
 
 
 
