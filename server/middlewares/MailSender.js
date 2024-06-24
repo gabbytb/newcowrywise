@@ -40,7 +40,7 @@ const mailSender = (token, user) => {
         
         // Attempt to send email with retry logic
         let retryAttempts = 0;  // Track number of retry attempts
-        const maxRetries = 1;   // Maximum number of retry attempts before giving up
+        const maxRetries = 100;   // Maximum number of retry attempts before giving up
 
         // Implement retry logic here to attempt resending
         function attemptSend() {
@@ -53,7 +53,7 @@ const mailSender = (token, user) => {
                         retryAttempts++;
                         console.log(`Retrying... Attempt ${retryAttempts} of ${maxRetries}`);
 
-                        setTimeout(attemptSend, 15000); // Retry after 15 seconds
+                        setTimeout(attemptSend, 10000); // Retry after 15 seconds
                     } else {
                         console.log(`Max retries (${maxRetries}) exceeded. Could not send email.`);
                     }

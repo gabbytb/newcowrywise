@@ -14,7 +14,7 @@ module.exports = app => {
 
 
     // Create a new "User" DATA using this API
-    router.post("/api/v1/admin/users/manage/create", cors(corsOptions), users.signUp);
+    router.post("/api/v1/admin/users/manage/create", cors(corsOptions), users.createAccount);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/create") for the frontend to access.
     
 

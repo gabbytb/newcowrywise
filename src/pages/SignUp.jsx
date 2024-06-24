@@ -218,7 +218,7 @@ const SignUp = () => {
                                         <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} className="pwd" />
                                     </label>
 
-                                    <label htmlFor="isActivated" className="flex justify-end items-end flex-row-reverse gap-4">I agree to terms & conditions?
+                                    <label htmlFor="isActivated" className="flex justify-start items-end flex-row gap-4">I agree to terms & conditions?
                                         <input type="checkbox" name="isActivated" value={user.isActivated} onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 

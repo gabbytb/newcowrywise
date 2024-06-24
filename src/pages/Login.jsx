@@ -7,6 +7,8 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
+
+
 const Login = () => {
 
 
@@ -14,7 +16,6 @@ const Login = () => {
 
 
 
-    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -30,15 +31,14 @@ const Login = () => {
 
 
 
-
     const [user, setUser] = useState({ email: "", password: "", });
-    console.log("Login Attempt By: ", user.email);
+    // console.log("Login Attempt By: ", user.email);
 
     const [formMessage, setFormMessage] = useState(null);
-    console.log("Login Attempt: ", formMessage);
+    // console.log("Login Attempt: ", formMessage);
 
     const [formSubmitted, setFormSubmitted] = useState(null);
-    console.log("Login Successful: ", formSubmitted);
+    // console.log("Login Successful: ", formSubmitted);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -62,10 +62,13 @@ const Login = () => {
         e.preventDefault();
 
         axios.post("http://127.0.0.1:8000/api/v1/auth/login", user)
-        .then((res) => {
-            const { success, message, data } = res.data; 
+        .then((response) => {
+            const { success, message, data } = response.data; 
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#logIn .success');
+            var reactivateAccountMsg = document.querySelector("#logIn .validate-account");
+            // console.log("Re-activate Account: ", reactivateAccountMsg);
+
 
             if (!success && message === "All fields are required.") {
                 setFormMessage(message);
@@ -77,8 +80,8 @@ const Login = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else if (!success && message === "Incorrect password or email.") {
-                setFormMessage(message);
                 setFormSubmitted(success);
+                setFormMessage(message);
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
                 setTimeout(() => {
@@ -86,52 +89,53 @@ const Login = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else if (!success && message === "Invalid account.") {
-                setFormMessage(message);
                 setFormSubmitted(success);
+                setFormMessage(message);
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+            } else if (!success && message === "Kindly verify your account.") {
+                // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
+                
+                setTimeout(() => {
+                    reactivateAccountMsg.classList.remove("hidden");
+                }, 1800);
+
+                setTimeout(() => {
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
+                }, 3500);
+                // Perform These Actions
+
             } else {
-                // Console Logs
-                // console.log("Retrieving User Data: ", data);     
-           
-                if (data?.isActivated === false) {
+                reactivateAccountMsg.classList.add("hidden");
+                
+                // Perform These Actions
+                setFormMessage(message);
+                setFormSubmitted(success);
 
-                    // Perform These Actions
-                    setFormMessage(`Kindly verify your account. Visit your email address: ${data?.email}.`);
-                    setFormSubmitted(false);
-                    errMsg.classList.remove('error');
-                    errMsg.classList.add('error-message-info');
-                    setTimeout(() => {
-                        errMsg.classList.remove('error-message-info');
-                        errMsg.classList.add('error');
-                    }, 3500);
-                    // Perform These Actions
+                localStorage.setItem('user', JSON.stringify(data));
+                
+                successMsg.classList.remove('success');
+                successMsg.classList.add('success-message-info');
 
-                } else {
+                setTimeout(() => {
+                    successMsg.classList.remove('success-message-info');
+                    successMsg.classList.add('success');
+                }, 2000);
 
-                    // Perform These Actions
-                    setFormMessage(message);
-                    setFormSubmitted(success);
-                    localStorage.setItem('user', JSON.stringify(data));
-
-                    successMsg.classList.remove('success');
-                    successMsg.classList.add('success-message-info');
-
-                    setTimeout(() => {
-                        successMsg.classList.remove('success-message-info');
-                        successMsg.classList.add('success');
-                    }, 2000);
-
-                    setTimeout(() => {
-                        const redirToAdminDashboard = "/admin/dashboard";
-                        window.location = redirToAdminDashboard;
-                    }, 3000);
-                    // Perform These Actions
-                };
+                setTimeout(() => {
+                    const redirToAdminDashboard = "/admin/dashboard";
+                    window.location = redirToAdminDashboard;
+                }, 3000);
+                // Perform These Actions
             };
         })
         .catch((error) => {
@@ -139,6 +143,7 @@ const Login = () => {
         });
     };
 
+    
 
 
     return (
@@ -190,6 +195,11 @@ const Login = () => {
                                     <div className="text-2xl/normal text-slate-600 font-medium">Don't have an account? 
                                         <Link className="text-black font-semibold capitalize" to={"/user/signup"}> sign up</Link>
                                     </div>
+
+                                    <div className="text-2xl/normal text-slate-600 font-medium hidden validate-account">
+                                        To resend activation e-mail
+                                        <Link className="text-black font-semibold capitalize" to={"/user/verify"}> click here</Link>
+                                    </div>
                                 </div>
 
                                 <div className="mx-auto success">
@@ -203,6 +213,7 @@ const Login = () => {
             </div>
         </>
     );
-}
+};
+
 
 export default Login;

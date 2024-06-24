@@ -3595,6 +3595,10 @@ header .cta-menu a:last-child:focus {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-end {
   justify-content: flex-end;
 }

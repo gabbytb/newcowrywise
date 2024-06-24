@@ -77,7 +77,7 @@ const RevalidateSignUp = () => {
             var successMsg = document.querySelector('#signUp .success');
             var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
-            if ((!success) && (message === "User does not exist. Sign up !")) {
+            if ((!success) && (message === "User does not exist. Sign up.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });                                     
                 setFormSubmitted(success);
                 setFormMessage(message);

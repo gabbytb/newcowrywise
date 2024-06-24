@@ -30,6 +30,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
         const redirToLogin = "/user/login";
         window.location = redirToLogin;
     }
+    // logOut();
     // *********************************************
     // *********************************************
 

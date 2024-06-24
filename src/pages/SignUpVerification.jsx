@@ -157,9 +157,11 @@ const SignUpVerification = () => {
                     setAuthenticationResponseMsg(message);
                     return;
                 } else {
-                    setIsVerified(success);
-                    setExistingUser(data);
-                    setAuthenticationResponseMsg(message);
+                    setTimeout(() => {
+                        setIsVerified(success);
+                        setExistingUser(data);
+                        setAuthenticationResponseMsg(message);
+                    }, 5000);
                     return;
                 };      
             })
@@ -173,8 +175,7 @@ const SignUpVerification = () => {
         return () => {
             clearTimeout(timeout);
         };
-    // eslint-disable-next-line
-    }, []);
+    }, []); // eslint-disable-next-line
 
     useEffect(() => {
         const endVerificationSuccessfulMessage = document.querySelector('#signUpVerificationID .success-verify');
