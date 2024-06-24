@@ -9,20 +9,21 @@ import axios from "axios";
 
 
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ isLoggedIn }) => {
     
 
     // *********************************************
     // CURRENTLY ACTIVE:- (LOGGED-IN USER)
     // *********************************************
-    const isLoggedIn = JSON.parse(localStorage.getItem("user"));    
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));    
     // console.log('LOGGED-IN USER:- ', isLoggedIn);  
     // *********************************************
     // *********************************************
+    
 
 
     // *********************************************
-    // FUNCTION TO HANDLE:-  (LOG-OUT)
+    // FUNCTION TO LOG-OUT LOGGED-IN USER
     // *********************************************
     function logOut() {
         localStorage.clear();
@@ -33,15 +34,14 @@ const AdminDashboard = () => {
     // *********************************************
 
 
+
     // *********************************************
     // DESTRUCTURE:-  (LOGGED-IN USER Props)
     // *********************************************
-    const token = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     console.log("LOGGED-IN USER's Roles: ", userRoles);
-
-
-
+    const userAccessToken = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
+    console.log("LOGGED-IN USER's AccessToken: ", userAccessToken);
 
 
 
@@ -53,9 +53,6 @@ const AdminDashboard = () => {
 
 
 
-
-
-
     // ************************************
     // MANAGE  STATE:-  ALL USERS
     // ************************************
@@ -64,31 +61,6 @@ const AdminDashboard = () => {
     // ************************************
     // CALL TO API:-  FIND ALL USERS
     // ************************************
-    function findAllUsers() {
-        // setIsLoading(true); // Set isLoading state to true when fetching starts
-        axios.get("http://127.0.0.1:8000/api/v1/admin/users/manage", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-        .then((response) => {
-            const { success, data, message } = response.data;
-                if ((!success) || (message === "Users not found")) {
-                    console.log("Success: ", success);
-                    console.log("Message: ", message);
-                };
-            
-                // Perform Actions Here if Truthy
-                setUsers(data);
-        })
-        .catch((error) => {
-            // Handle error state or logging here
-            console.log("Error encountered: ", error);
-        })
-        .finally(() => {
-            setIsLoading(false);    // Always disable loading state, whether successful or not
-        });
-    };
     useEffect(() => {      
         // SET PAGE TITLE  
         const pageTitle = "Admin Dashboard",
@@ -96,13 +68,33 @@ const AdminDashboard = () => {
         document.title = `${pageTitle} | ${siteTitle}`;
 
 
+        function findAllUsers() {
+            // setIsLoading(true); // Set isLoading state to true when fetching starts
+            axios.get("http://127.0.0.1:8000/api/v1/admin/users/manage")
+            .then((response) => {
+                const { success, data, message } = response.data;
+                    if ((!success) || (message === "Users not found")) {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+                
+                    // Perform Actions Here if Truthy
+                    setUsers(data);
+            })
+            .catch((error) => {
+                // Handle error state or logging here
+                console.log("Error encountered: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);    // Always disable loading state, whether successful or not
+            });
+        }
+
         var timerID = setTimeout(findAllUsers, 1800);   // Delay execution of findAllUsers by 1800ms
         return () => {
             clearTimeout(timerID);   // Clean up timer if component unmounts or token changes
         };
-    }, [token]);  // useEffect dependency on token
-    // *******************************************************************************************//
-    // Means Logged-in Users 'token' is responsible for triggering this react useEffect() hook !
+    }, []);
     // *******************************************************************************************//
     // *******************************************************************************************//
 

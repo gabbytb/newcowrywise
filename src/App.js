@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { 
   Home,
   OurProgress, 
-  SignUp, SignUpVerification, 
+  SignUp, SignUpVerification, RevalidateSignUp,
   Login, 
   AdminDashboard, AccountUsers,
 } from "./pages";
@@ -17,6 +17,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/our-progress" element={<OurProgress />}></Route>
       <Route path="/user/signup" element={<SignUp />}></Route>
+      <Route path="/user/verify" element={<RevalidateSignUp />}></Route>
       <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
       <Route path="/user/login" element={<Login />}></Route>
       <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>

@@ -3,11 +3,7 @@ const mongoose = require("mongoose");
 
 
 
-
-
-
-
-const Connection = async (username, password) => {
+const DB_Connection = async (username, password) => {
 
     const { emoji } = process.env;
     const db = require("../models");
@@ -15,9 +11,9 @@ const Connection = async (username, password) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DATABASE:- Connection
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const alpha = emoji || `mongodb+srv://${username}:${password}@cluster0.povoawa.mongodb.net/?retryWrites=true&w=majority`;
-    const beta = db.url === db.url ? db.url : null;
-    const DB_URI = alpha+beta;
+    var linkURI = emoji || `mongodb+srv://${username}:${password}@cluster0.povoawa.mongodb.net/?retryWrites=true&w=majority`;
+    var dbURI = db.url === db.url ? db.url : null;
+    const DB_URI = linkURI+dbURI;
 
 
     try {
@@ -25,7 +21,8 @@ const Connection = async (username, password) => {
         await mongoose.connect(DB_URI);
         console.log("***********************************************",
                     "\n*********     DATABASE CONNECTION     *********",
-                    `\n\nConnected to: ${beta}`,
+                    `\n***********************************************`,
+                    `\n\nCONNECTED TO: ${dbURI} 🤓`,
                     "\n***********************************************",
                     "\n***********************************************\n\n");
     } catch(error) {
@@ -47,4 +44,4 @@ const Connection = async (username, password) => {
 };
 
 
-module.exports = Connection;
+module.exports = DB_Connection;

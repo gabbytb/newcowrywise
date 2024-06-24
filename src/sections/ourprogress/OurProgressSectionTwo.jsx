@@ -9,7 +9,7 @@ import { ButtonLinkComponent, GraphComponent } from "../../components"
 
 
 
-const HomeSectionTwo = () => {
+const OurProgressSectionTwo = () => {
 
 
   
@@ -129,4 +129,4 @@ const HomeSectionTwo = () => {
     );
 };
 
-export default HomeSectionTwo;
+export default OurProgressSectionTwo;

@@ -9,7 +9,7 @@ import { useInViewport } from 'react-in-viewport';
 
 
 
-const HomeSectionThree = () => {
+const OurProgressSectionThree = () => {
 
     
     // const [isVisible, setIsVisible] = useState(false);
@@ -29,7 +29,8 @@ const HomeSectionThree = () => {
             document.querySelector(".roi-investments-overlay").classList.add('hidden'); 
         };
         myFunction();
-    }, [inViewport], [enterCount]);
+    // eslint-disable-next-line
+    }, [inViewport]);
 
 
 
@@ -105,4 +106,4 @@ const HomeSectionThree = () => {
     );
 };
 
-export default HomeSectionThree;
+export default OurProgressSectionThree;

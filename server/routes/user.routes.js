@@ -22,6 +22,11 @@ module.exports = app => {
     router.post("/user/verify/:token", cors(corsOptions), users.accountVerification); 
     // Expose this endpoint(i.e "http://127.0.0.1:3000/user/verify/:token") for the frontend to access.
 
+    
+    // Verify Unverified Existing "User" Accounts using this API
+    router.post("/api/v1/admin/users/manage/account/verify", cors(corsOptions), users.retryAccountVerification);
+    // Expose this endpoint(i.e "http://127.0.0.1:3000/api/v1/admin/users/manage/account-revalidation") for the frontend to access.
+
 
     // Login User
     router.post("/api/v1/auth/login", users.logIn);
@@ -29,7 +34,7 @@ module.exports = app => {
 
     
     // Fetch all "Users" DATA from using API
-    router.get("/api/v1/admin/users/manage", requireAUTHORIZATION, users.findAll);
+    router.get("/api/v1/admin/users/manage", users.findAll);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.
 
 
@@ -49,12 +54,12 @@ module.exports = app => {
 
 
     // Delete a "Single User" DATA by it's ID, using this API
-    router.delete("/api/v1/admin/users/manage/delete/:id", users.deleteUser);
+    router.delete("/api/v1/admin/users/manage/delete/:id", requireAUTHORIZATION, users.deleteUser);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/delete/:id") for the frontend to access.
 
 
     // Delete all "Users" DATA using this API
-    router.delete("/api/v1/admin/users/manage/delete", users.deleteAllUsers);
+    router.delete("/api/v1/admin/users/manage/delete", requireAUTHORIZATION, users.deleteAllUsers);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/delete") for the frontend to access.
 
 

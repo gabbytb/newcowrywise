@@ -7,7 +7,7 @@ import { DisqusCard } from "../../components";
 
 
 
-const HomeSectionSeven = () => {
+const OurProgressSectionSeven = () => {
     
     
     const [itemsToFlip, setItemsToFlip] = useState(flipItems);
@@ -88,4 +88,4 @@ const HomeSectionSeven = () => {
 };
 
 
-export default HomeSectionSeven;
+export default OurProgressSectionSeven;

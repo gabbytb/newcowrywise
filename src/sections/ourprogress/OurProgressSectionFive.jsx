@@ -6,7 +6,7 @@ import { ButtonLinkComponent } from "../../components";
 
 
 
-const HomeSectionFive = () => {
+const OurProgressSectionFive = () => {
 
 
     const myRef = useRef();
@@ -110,4 +110,4 @@ const HomeSectionFive = () => {
     );
 };
 
-export default HomeSectionFive;
+export default OurProgressSectionFive;

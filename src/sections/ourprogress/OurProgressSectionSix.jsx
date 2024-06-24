@@ -5,7 +5,7 @@ import { ArrowRight } from "../../assets/icons";
 
 
 
-const HomeSectionSix = () => {
+const OurProgressSectionSix = () => {
     
     return (
       <section className="home-section-six">
@@ -54,4 +54,4 @@ const HomeSectionSix = () => {
     );
 };
 
-export default HomeSectionSix;
+export default OurProgressSectionSix;

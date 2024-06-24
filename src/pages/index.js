@@ -2,6 +2,7 @@ import Home from "./Home";
 import OurProgress from "./OurProgress";
 import SignUp from "./SignUp";
 import SignUpVerification from "./SignUpVerification";
+import RevalidateSignUp from "./RevalidateSignUp";
 import Login from "./Login";
 
 
@@ -21,6 +22,7 @@ export {
     OurProgress,
     SignUp,
     SignUpVerification,
+    RevalidateSignUp,
     Login,
 
 

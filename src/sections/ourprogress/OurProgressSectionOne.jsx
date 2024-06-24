@@ -12,7 +12,7 @@ import { wura } from "../../assets/images";
 
 
 
-const HomeSectionOne = () => { 
+const OurProgressSectionOne = () => { 
     
       
     /***********************************************************************************************************************/
@@ -241,4 +241,4 @@ const HomeSectionOne = () => {
 
 
 
-export default HomeSectionOne;
+export default OurProgressSectionOne;

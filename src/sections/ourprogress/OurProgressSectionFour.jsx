@@ -5,7 +5,7 @@ import { sliderItems } from "../../constants";
 
 
 
-const HomeSectionFour = () => {
+const OurProgressSectionFour = () => {
     
         
     useEffect(() => {
@@ -45,4 +45,4 @@ const HomeSectionFour = () => {
     );
 };
 
-export default HomeSectionFour;
+export default OurProgressSectionFour;
