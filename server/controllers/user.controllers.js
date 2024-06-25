@@ -19,7 +19,7 @@ exports.createAccount = async (req, res) => {
     try {
 
         // Generate a Random Number
-        const randNum = await Math.floor(21 * Math.random()) + Math.floor(47 * Math.random()) + Math.floor(98 * Math.random());
+        const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
         const { id, username, firstName, lastName, email, password, isActivated } = req.body;
@@ -63,7 +63,6 @@ exports.createAccount = async (req, res) => {
         const encryptedPassword = await encryptPassword(password);
        
     
-
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
@@ -81,13 +80,15 @@ exports.createAccount = async (req, res) => {
         // ***************************************************************//
 
 
-
+        // ************************************* //
+        // ***     SAVE USER INFORMATION     *** //
+        // ************************************* //
         const newUser = new User({
             _id: id * randNum,
             username: username.toLowerCase(),    // sanitize: convert username to lowercase.
             firstName,
             lastName,
-            email: email.toLowerCase(),         // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
             isActivated,
             roles: [
@@ -120,11 +121,10 @@ exports.createAccount = async (req, res) => {
         const user = await newUser.save();
 
 
-
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
-        const token = createJWT(user._id);
+        const token = await createJWT(user._id);
         
 
         // ***************************************************************//
@@ -132,38 +132,30 @@ exports.createAccount = async (req, res) => {
         // ***************************************************************//
         await mailSender(token, user);
 
-        
-        // SUMMARY: 
-        // Don't parse token to User accessToken until it is verified!",
-        // Use JWT.verify to verify the signed "token" sent to User E-mail;",
-        // So until "token" is Verified, 'user.accessToken === undefined && user.isActive === false' will remain like this.",
-        // ****************************************************************",
+
         console.log("\n*********************************************************",
-                    "\n*****        TOKEN GENERATED FOR NEW USER           *****",
-                    `\n*********************************************************
-                    \nAccess Token: ${token}`,
-                    "\n\n*********************************************************",
-                    "\n*****          NEW USER ACCOUNT DETAILS             *****",
-                    `\n*********************************************************
-                    \nRegistration Status: ${user}`,
-                    "\n\n******************************************************************************************\n");
+            "\n*****        TOKEN GENERATED FOR NEW USER           *****",
+            `\n*********************************************************
+            \nAccess Token: ${token}`,
+            "\n\n*********************************************************",
+            "\n*****          NEW USER ACCOUNT DETAILS             *****",
+            `\n*********************************************************
+            \nRegistration Status: ${user}`,
+            "\n\n******************************************************************************************\n");
         const responseData = {
             success: true,
             data: user,
             message: "Successful",
         };
-        // console.log("*** NEW USER: ", responseData);
-        res.status(201).json(responseData);
-        return;
-
+        return res.status(201).json(responseData);
     } catch (error) {
         // return res.status(409).json({ message: error.message});
-        const errorResponseData = { 
+        const responseData = { 
             success: false, 
-            error: "INTERNAL SERVER ERROR", 
-            message: error.message 
-        }
-        return res.status(500).json(errorResponseData);    
+            message: "Internal Server Error",
+        };
+        console.error("Unexpected error during account verification: ", error);
+        return res.status(500).json(responseData);  
     }
 };
 
@@ -182,8 +174,8 @@ exports.accountVerification = async (req, res) => {
         
         const token = AuthHeader.split(" ")[1];
         try {
-            const decodedData = jwt.verify(token, secretKey);
-            const _id = decodedData.id;
+            const existingUser = await jwt.verify(token, secretKey);
+            const _id = existingUser.id;
             
             try {
                 const user = await User.findById(_id);
@@ -210,8 +202,12 @@ exports.accountVerification = async (req, res) => {
                 console.log("Account verification status: ", responseData);
                 return res.status(200).json(responseData);
             } catch (error) {
+                const responseData = { 
+                    success: false, 
+                    message: "Internal Server Error" 
+                };
                 console.error("Database error during account verification: ", error);
-                return res.status(500).json({ success: false, message: "Internal Server Error" });
+                return res.status(500).json(responseData);
             }
         } catch (error) {
             const responseData = { 
@@ -222,23 +218,26 @@ exports.accountVerification = async (req, res) => {
             return res.status(403).json(responseData);
         }
     } catch (error) {
+        const responseData = { 
+            success: false, 
+            message: "Internal Server Error",
+        };
         console.error("Unexpected error during account verification: ", error);
-        return res.status(500).json({ success: false, message: "Internal Server Error" });
+        return res.status(500).json(responseData);
     }
 };
 
 // Our Account Re-Verification Logic starts here
 exports.retryAccountVerification = async (req, res) => {
     
+    const { email } = req.body;
+
     try {
-        const { email } = req.body;
-        const existingUser = await User.findOne({ email: email.toLowerCase() });
-        
-        
+        const existingUser = await User.findOne({ email: email.toLowerCase() });        
         if (!existingUser) {
             const responseData = {
                 success: false,
-                message: "User does not exist. Sign up.",
+                message: "User not found !",
             }
             return res.status(404).json(responseData);
         }
@@ -247,7 +246,7 @@ exports.retryAccountVerification = async (req, res) => {
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
-        const token = createJWT(existingUser._id);
+        const token = await createJWT(existingUser._id);
         
 
         // ***************************************************************//
@@ -268,20 +267,16 @@ exports.retryAccountVerification = async (req, res) => {
         const responseData = {
             success: true,
             data: existingUser,
-            message: "Resent activation e-mail",
+            message: "Re-sent activation e-mail",
         };
-        // console.log("*** NEW USER: ", responseData);
-        res.status(200).json(responseData);
-        return;
-
+        return res.status(200).json(responseData);
     } catch (error) {
-        // return res.status(409).json({ message: error.message});     
-        const errorResponseData = { 
+        const responseData = { 
             success: false, 
-            error: "INTERNAL SERVER ERROR", 
-            message: error.message 
-        }
-        return res.status(500).json(errorResponseData);    
+            message: "Internal Server Error" 
+        };
+        console.error("Database error during account re-verification: ", error);
+        return res.status(500).json(responseData); 
     }
 }
 

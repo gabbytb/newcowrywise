@@ -76,7 +76,7 @@ const SignUpReVerification = () => {
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#reverifySignUp .success');
 
-            if ((!success) && (message === "User does not exist. Sign up !")) {
+            if ((!success) && (message === "User not found !")) {
                 setFormSubmitted(success);
                 setFormMessage(message);
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
@@ -101,7 +101,7 @@ const SignUpReVerification = () => {
             };
         })
         .catch((error) => {
-            console.log("Error encountered: ", error);
+            console.log("Error encountered: ", error.response.data);
         });
     };
     // *************************** //
@@ -119,9 +119,6 @@ const SignUpReVerification = () => {
 
                 <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
                     <div className="mx-auto error">
-                        {/* <pre className="block">
-                            {formSubmitted}
-                        </pre> */}
                         {formMessage}
                     </div>
 
