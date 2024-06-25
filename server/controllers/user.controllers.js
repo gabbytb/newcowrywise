@@ -227,7 +227,6 @@ exports.accountVerification = async (req, res) => {
     }
 };
 
-
 // Our Account Re-Verification Logic starts here
 exports.retryAccountVerification = async (req, res) => {
     
