@@ -626,7 +626,25 @@
 
 
 
+  /***   ADMIN DASHBOARD CSS   ***/
+  #adminDashboardID .dash-container-1 {
+    @apply w-full h-full px-0 my-0 mx-auto flex
+  }
+  #adminDashboardID .dash-container-1 .left-pane {
+    @apply
+      basis-1/5
+    ;
+  }
+  #adminDashboardID .dash-container-1 .right-pane {
+    @apply
+      basis-4/5
+    ;
+  }
+  /***   ADMIN DASHBOARD CSS   ***/
  
+
+
+
 
 
   /* Section One */

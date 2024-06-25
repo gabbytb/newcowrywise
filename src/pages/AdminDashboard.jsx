@@ -109,16 +109,19 @@ const AdminDashboard = ({ isLoggedIn }) => {
             { 
                 isLoading ? (
                     <section className="admin-dashboard">
-                        <div className="h-container-1 container">
+                        <div className="dash-container-1 container">
                             <div className="s1-grids-wrap">
                                 <h5>Processing...</h5>
                             </div>
                         </div>
                     </section> 
                 ) : (
-                    <section className="admin-dashboard">
-                        <div className="h-container-1 container">
-                            <div className="s1-grids-wrap">
+                    <section id="adminDashboardID" className="h-screen admin-dashboard">
+                        <div className="dash-container-1 container">
+                            <div className="left-pane">
+                            
+                            </div>
+                            <div className="right-pane">
                             
                             </div>
                         </div>
