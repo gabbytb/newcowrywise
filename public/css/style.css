@@ -753,6 +753,11 @@ input[type="text"], input[type="email"] {
   z-index: -1;
 }
 
+#homeTopBarID span:last-of-type {
+  display: flex;
+  height: 100%;
+}
+
 #homeHeader, 
   #header {
   position: relative;

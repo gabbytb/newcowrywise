@@ -46,7 +46,7 @@
         function myFunction() {
             var scroll = window.scrollY;
             var foundScrollbar = document.getElementById('scrollbar');
-            var foundHeader = document.getElementById('header');
+            var foundHeader = document.getElementById('header') || document.getElementById('homeHeader');
             var beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
             
             if (scroll > 5) {

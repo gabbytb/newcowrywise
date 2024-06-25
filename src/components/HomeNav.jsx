@@ -10,7 +10,8 @@ import {
     BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, 
     LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, 
 } from "../assets/icons";
-
+import { footerLinks } from "../constants";
+import { FooterSocialCard } from "../components";
 
 
 
@@ -24,8 +25,23 @@ const HomeNav = () => {
     return (
         <>
             {/* Top bar */}
-            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" 
-                to={"/user/signup"} target="_blank">Welcome to Samuel Akinola Foundation 💙 . Need an account? <strong className="text-xl">&nbsp; Click here ↗</strong>
+            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"} target="_blank">
+                <span>
+                    Welcome to Samuel Akinola Foundation 💙 . Need an account? <strong className="text-xl">&nbsp; Click here ↗</strong>
+                </span>
+                <span>
+                    <ul>
+                        <li>
+                            {
+                                footerLinks.map((item) => {
+                                    return (
+                                        <FooterSocialCard key={item.linkURL} {...item} />
+                                    );
+                                })
+                            }
+                        </li>
+                    </ul>
+                </span>
             </Link>
             {/* Top bar */}
 
