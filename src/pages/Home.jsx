@@ -1,13 +1,16 @@
-
+import { HomeNav } from "../components"
 
 
 
 
 const Home = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <HomeNav />
+      <main>
+
+      </main>
+    </>
   )
 }
 

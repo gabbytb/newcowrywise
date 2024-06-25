@@ -1,5 +1,8 @@
 import Home from "./Home";
 import OurProgress from "./OurProgress";
+import DonationPage from "./DonationPage";
+
+
 import SignUp from "./SignUp";
 import SignUpVerification from "./SignUpVerification";
 import SignUpReVerification from "./SignUpReVerification";
@@ -17,8 +20,9 @@ import AccountUsers from "./AccountUsers";
 
 export {
     Home,
-    
+    DonationPage,
     OurProgress,
+    
     SignUp,
     SignUpVerification,
     SignUpReVerification,

@@ -1,4 +1,5 @@
 // HEADER
+import HomeNav from "./HomeNav";
 import Nav from "./Nav";
 // HEADER
 
@@ -29,6 +30,7 @@ import FooterSocialCard from "./FooterSocialCard";
 
 export {
     // HEADER
+    HomeNav,
     Nav,
     // HEADER
 
