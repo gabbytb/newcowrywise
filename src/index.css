@@ -137,12 +137,12 @@
 
 @layer components {
 
-  #homeTopBarID ::before {
+  #homeTopBarID::before {
     content: '';
     position: absolute;
     clip-path: polygon(0 0%, 100% 0%, 100% 100%, 5% 100%);
-    width: 1240px;
-    height: 45px;
+    width: 124rem;
+    height: 3.6rem;
     right: 0;
     top: 0;
     background: var(--background-sky-blue);
@@ -150,8 +150,28 @@
     z-index: -1;
   }
 
-  #homeTopBarID span:last-of-type {
-    @apply flex h-full 
+  #homeTopBarID div {
+    @apply 
+      h-full 
+      flex 
+      items-center
+    ;
+  }
+
+  #homeTopBarID .social--icons a {
+    @apply 
+      flex
+      h-full
+      w-7
+    ;
+  }
+
+  #homeTopBarID .social--icons a svg {
+    @apply
+      h-full
+      w-full
+      fill-white
+    ;
   }
 
   #homeHeader, 

@@ -209,12 +209,12 @@ export const footerContact = [
 
 export const footerLinks = [
     {
-        // title: "@cowrywise",
-        linkURL: "https://twitter.com/cowrywise",
+        // title: "@samuelakinolafoundation",
+        linkURL: "https://twitter.com/samuelakinolafoundation",
         iconURI: <TwitterIcon />,
     },
     {
-        linkURL: "https://facebook.com/cowrywise",
+        linkURL: "https://facebook.com/samuelakinolafoundation",
         iconURI: <FacebookIcon />,
     },
     {
@@ -222,11 +222,11 @@ export const footerLinks = [
         iconURI: <WhatsappIcon />,
     },
     {
-        linkURL: "https://t.me/cowrywise",
+        linkURL: "https://t.me/samuelakinolafoundation",
         iconURI: <TelegramIcon />,
     },
     {
-        linkURL: "https://instagram.com/cowrywise",
+        linkURL: "https://instagram.com/samuelakinolafoundation",
         iconURI: <InstagramIcon />,
     },
     {

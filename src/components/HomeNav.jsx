@@ -25,23 +25,21 @@ const HomeNav = () => {
     return (
         <>
             {/* Top bar */}
-            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"} target="_blank">
-                <span>
+            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-end items-center cursor-pointer" to={"/user/signup"} target="_blank">
+                <div>
                     Welcome to Samuel Akinola Foundation 💙 . Need an account? <strong className="text-xl">&nbsp; Click here ↗</strong>
-                </span>
-                <span>
-                    <ul>
-                        <li>
-                            {
-                                footerLinks.map((item) => {
-                                    return (
-                                        <FooterSocialCard key={item.linkURL} {...item} />
-                                    );
-                                })
-                            }
-                        </li>
-                    </ul>
-                </span>
+                </div>
+                <ul className="flex h-full basis-1/3 social--icons">
+                    <li className="flex fill-white w-full justify-end gap-8 pe-10">
+                        {
+                            footerLinks.map((item) => {
+                                return (
+                                    <FooterSocialCard key={item.linkURL} {...item} />
+                                );
+                            })
+                        }
+                    </li>
+                </ul>
             </Link>
             {/* Top bar */}
 
