@@ -27,6 +27,7 @@ const SignUpVerification = () => {
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Registration Process: ", authenticationResponseMsg);
 
+    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(null);
     // console.log("Registration Successful: ", formSubmitted);
 
@@ -52,53 +53,87 @@ const SignUpVerification = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-   
-        axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
-        .then((res) => {
-            const { success, message, data } = res.data; 
-            var errMsg = document.querySelector('.error'); 
-            var successMsg = document.querySelector('#signUp .success');
 
-            if (!success && message === "Fill all the required inputs.") {
+        axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+        .then((response) => {
+            const { success, message } = response.data; 
+            var errMsg = document.querySelector('.error'); 
+            var successMsg = document.querySelector('#signUpVerification .success');
+            var signUpContentWrapper = document.querySelector("#signUpVerificationID .content-wrapper");
+
+            if ((!success) && (message === "Fill all the required inputs.")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                // window.scrollTo(0, 0);
+                // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+                // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
+                setFormSubmitted(success);
                 setFormMessage(message);
-                setFormSubmitted(success);     
+                
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
-             } else if (!success && message === "E-mail exists. Please sign-in.") {
-                setFormMessage(message);
+            } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 setFormSubmitted(success);
+                setFormMessage(message);
+
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
-            } else if (!success && message === "Username exists. Please sign-in.") {
-                setFormMessage(message);
+            } else if ((!success) && (message === "Username exists. Please sign-in.")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 setFormSubmitted(success);
+                setFormMessage(message);
+
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');  
+
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
-            } else {
-                setFormMessage(message);
+            } else {         
+                // async function takeAction() {
+                //     window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
+                // };
+                // takeAction();
                 setFormSubmitted(success);
+                setFormMessage(message);
+                setTimeout(() => {
+                    window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
+                }, 100);  
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
+                signUpContentWrapper.classList.remove('min-h-120');
+                signUpContentWrapper.classList.add('min-h-126.5');                        
+                                
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                }, 2800);   
-
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-                console.log("Data: ", data);             
+                    signUpContentWrapper.classList.remove('min-h-126.5');
+                    signUpContentWrapper.classList.add('min-h-120');                
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                }, 3300);             
             };
         })
         .catch((error) => {
@@ -109,7 +144,7 @@ const SignUpVerification = () => {
     // ***** CREATE NEW USER ***** //
     // *************************** //
 
-
+    
 
 
     // ******************************** //
@@ -128,7 +163,9 @@ const SignUpVerification = () => {
     const [isLoading, setIsLoading] = useState(true);
     // console.log("Is Loading: ", isLoading);
 
-    useEffect(() => {   
+    useEffect(() => {  
+        window.scroll({ left: 0, top: 300, behavior: "smooth" });
+
         function disableIsLoading() {
             setIsLoading(false);
         }
@@ -142,17 +179,17 @@ const SignUpVerification = () => {
                 const { success, data, message } = response.data;    
                 const pageTitle = "Account Verification",
                 siteTitle = "Samuel Akinola Foundation";
-                document.title = `${pageTitle} - ${data.email} | ${siteTitle}`;            
+                document.title = `${pageTitle} - ${data?.email} | ${siteTitle}`;            
 
-                if ((!success) && (message === "Unauthorized")) {
+                if ((!success) && (message === "Unauthorized: Bearer token required")) {
                     setIsVerified(success);
                     setAuthenticationResponseMsg(message);
                     return;
-                } else if ((!success) && (message === "Token does not exist")) {
+                } else if ((!success) && (message === "User not found")) {
                     setIsVerified(success);
                     setAuthenticationResponseMsg(message);
                     return;
-                } else if ((!success) && (message === "unauthorized")) {
+                } else if ((!success) && (message === "token does not exist")) {
                     setIsVerified(success);
                     setAuthenticationResponseMsg(message);
                     return;
@@ -161,7 +198,7 @@ const SignUpVerification = () => {
                         setIsVerified(success);
                         setExistingUser(data);
                         setAuthenticationResponseMsg(message);
-                    }, 5000);
+                    }, 2500);
                     return;
                 };      
             })
@@ -175,20 +212,24 @@ const SignUpVerification = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, []); // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         const endVerificationSuccessfulMessage = document.querySelector('#signUpVerificationID .success-verify');
-        if (isVerified) {
-            endVerificationSuccessfulMessage.classList.remove('success-verify');
-            endVerificationSuccessfulMessage.classList.add('success-message-info');
-            setTimeout(() => {
-                endVerificationSuccessfulMessage.classList.remove('success-message-info');
-                endVerificationSuccessfulMessage.classList.add('success-verify');
-            }, 2300);
-        } else {
+        if (!isVerified) {
             return;
         }
+
+        endVerificationSuccessfulMessage.classList.remove('success-verify');
+        endVerificationSuccessfulMessage.classList.add('success-message-info');
+        setTimeout(() => {
+            endVerificationSuccessfulMessage.classList.remove('success-message-info');
+            endVerificationSuccessfulMessage.classList.add('success-verify');
+        }, 3500);
+
+        setTimeout(() => {
+            window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+        }, 3750);
     }, [isVerified]);
     // ******************************** //
     // ***** VERIFY EXISTING USER ***** //
@@ -201,24 +242,19 @@ const SignUpVerification = () => {
         return(
             <>
                 <Nav />
-                <div className="absolute top-0 w-full h-screen -z-10">
-                    <main className="w-full h-128 relative">
-
-                        <div className="mt-40 pt-24 items-center">`
+                <main id="signUpVerificationID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
+                    <div className="relative w-full h-full">
+                        <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
                             <div className="mx-auto error">
-                                <pre className="hidden">
-                                    {formSubmitted}
-                                </pre>
                                 {formMessage}
                             </div>
-                       
-                            <form id="signUp" onSubmit={handleSubmit}>
 
+                            <form id="signUpVerification" onSubmit={handleSubmit}>
                                 <div className="text-center pt-16 form--title">
                                     <h5 className="capitalize">sign up</h5>
                                 </div>
 
-                                <div className="px-8 pb-20">
+                                <div className="px-8 pb-20 w-full">
                                     <div className="form--wrapper gap-6">
 
                                         <label htmlFor="username">
@@ -239,17 +275,25 @@ const SignUpVerification = () => {
                                         </label>
 
                                         <label htmlFor="password">
-                                            <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                            <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} className="pwd" />
                                         </label>
 
-                                        <label htmlFor="isActivated" className="flex justify-end items-end flex-row-reverse gap-4">I agree to terms & conditions?
+                                        <label htmlFor="isActivated" className="flex justify-start items-end flex-row gap-4">I agree to terms & conditions?
                                             <input type="checkbox" name="isActivated" value={user.isActivated} onChange={handleChange} onKeyUp={handleKeyUp} />
                                         </label>
 
                                         <ButtonSubmit 
                                             btnType="submit"
-                                            btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg"
                                             btnBg
+                                            btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
+                                                hover:bg-blue-700 
+                                                focus:bg-blue-700 
+                                                hover:ring-blue-300 
+                                                focus:ring-blue-300
+                                                hover:ring-2 
+                                                focus:ring-2
+                                                ease-in-out
+                                                duration-300"
                                             label="submit"
                                         />
 
@@ -258,45 +302,39 @@ const SignUpVerification = () => {
                                         </div>
                                     </div>
 
-                                    <div className="mx-auto success">
-                                        {formMessage}
-                                    </div>
-                                    <div className="success-message-info mt-8">    
+                                    <div className="mx-auto success-message-info">
                                         Processing...
                                     </div>
                                 </div>
+
                             </form>
                         </div>
-                    </main>
-                </div>
+                    </div>
+                </main>
             </>
         );
     };
 
+
+
+
     return (
         <>
             <Nav />
-            <div className="absolute top-0 w-full h-screen -z-10">
-                <main id="signUpVerificationID" className="w-full h-128 relative">
-
-                    <div className="mt-40 pt-24 items-center">
+            <main id="signUpVerificationID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
+                <div className="relative w-full h-full">
+                    <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
                         <div className="mx-auto error">
-                            <pre className="hidden">
-                                {formSubmitted}
-                            </pre>
                             {formMessage}
                         </div>
-                        <div className="w-123 mb-12 success-verify">
-                            {authenticationResponseMsg}
-                        </div>
 
-                        <form id="signUp" onSubmit={handleSubmit}>
 
+                        <form id="signUpVerification" onSubmit={handleSubmit}>
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">sign up</h5>
                             </div>
 
-                            <div className="px-8 pb-20">
+                            <div className="px-8 pb-20 w-full">
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
@@ -317,17 +355,25 @@ const SignUpVerification = () => {
                                     </label>
 
                                     <label htmlFor="password">
-                                        <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} className="pwd" />
                                     </label>
 
-                                    <label htmlFor="isActivated" className="flex justify-end items-end flex-row-reverse gap-4">I agree to terms & conditions?
+                                    <label htmlFor="isActivated" className="flex justify-start items-end flex-row gap-4">I agree to terms & conditions?
                                         <input type="checkbox" name="isActivated" value={user.isActivated} onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <ButtonSubmit 
                                         btnType="submit"
-                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg"
                                         btnBg
+                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
+                                            hover:bg-blue-700 
+                                            focus:bg-blue-700 
+                                            hover:ring-blue-300 
+                                            focus:ring-blue-300
+                                            hover:ring-2 
+                                            focus:ring-2
+                                            ease-in-out
+                                            duration-300"
                                         label="submit"
                                     />
 
@@ -336,15 +382,19 @@ const SignUpVerification = () => {
                                     </div>
                                 </div>
 
+                                
                                 <div className="mx-auto success">
                                     {formMessage}
+                                </div>
+                                <div className="mx-auto success-verify">
+                                    {authenticationResponseMsg}
                                 </div>
                             </div>
 
                         </form>
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </>
     );
 };

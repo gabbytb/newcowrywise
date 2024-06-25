@@ -8,14 +8,14 @@ import { Nav, ButtonSubmit } from "../components";
 
 
 
-const RevalidateSignUp = () => {
+
+const SignUpReVerification = () => {
 
 
     // console.clear();
 
 
     
-
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -34,17 +34,17 @@ const RevalidateSignUp = () => {
 
 
     // ******************************************** //
-    // ***** REVALIDATE EXISTING USER ACCOUNT ***** //
+    // ***** RE-VALIDATE EXISTING USER ACCOUNT ***** //
     // ******************************************** //
     const [user, setUser] = useState({ email: "" });    
-    console.log("*** Re-activate Account  ***", "\nAccount: ", user);
+    // console.log("*** Re-activate Account  ***", "\nAccount: ", user);
 
     const [formMessage, setFormMessage] = useState(null);
-    console.log("Re-activate Account Response: ", formMessage);
+    // console.log("Account Re-activation Response: ", formMessage);
 
     // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(null);
-    console.log("Re-activate Account Successful: ", formSubmitted);
+    // console.log("Account Re-activation: ", formSubmitted);
 
     
     async function handleKeyUp(e) {
@@ -72,49 +72,32 @@ const RevalidateSignUp = () => {
         
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify", user)
         .then((response) => {
-            const { success, message, data } = response.data; 
+            const { success, message } = response.data; 
             var errMsg = document.querySelector('.error'); 
-            var successMsg = document.querySelector('#signUp .success');
-            var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
+            var successMsg = document.querySelector('#reverifySignUp .success');
 
-            if ((!success) && (message === "User does not exist. Sign up.")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', });                                     
+            if ((!success) && (message === "User does not exist. Sign up !")) {
                 setFormSubmitted(success);
                 setFormMessage(message);
+                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
 
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
+                    errMsg.classList.add('error');                    
                 }, 2800);
             } else {
                 setFormSubmitted(success);
-                setFormMessage(message);
-                setTimeout(() => {
-                    window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
-                }, 100);  
+                setFormMessage(message);       
                 successMsg.classList.remove('success');
-                successMsg.classList.add('success-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');                        
+                successMsg.classList.add('success-message-info');                 
                                 
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');                
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                }, 3300);   
-
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-                console.log("Data: ", data);             
+                }, 3300);  
             };
         })
         .catch((error) => {
@@ -131,18 +114,18 @@ const RevalidateSignUp = () => {
     return (
         <>
         <Nav />
-        <div className="absolute top-0 w-full h-screen -z-10">
-            <main className="w-full h-128 relative">
+        <main id="reverifySignUpID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
+            <div className="relative w-full h-full">
 
-                <div className="mt-40 pt-24 items-center">`
+                <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
                     <div className="mx-auto error">
-                        <pre className="hidden">
+                        {/* <pre className="block">
                             {formSubmitted}
-                        </pre>
+                        </pre> */}
                         {formMessage}
                     </div>
 
-                    <form id="logIn" onSubmit={handleSubmit}>
+                    <form id="reverifySignUp" onSubmit={handleSubmit}>
 
                         <div className="text-center pt-16 form--title">
                             <h5 className="capitalize">Account Activation</h5>
@@ -182,10 +165,11 @@ const RevalidateSignUp = () => {
 
                     </form>
                 </div>
-            </main>
-        </div>
+
+            </div>
+        </main>
     </>
     );
 }
 
-export default RevalidateSignUp
+export default SignUpReVerification;

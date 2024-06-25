@@ -1268,7 +1268,10 @@ header {
     ;
   } */
 
-#signUp, #logIn {
+#signUp, 
+  #logIn, 
+  #signUpVerification, 
+  #reverifySignUp {
   margin: auto;
   display: flex;
   width: 34rem;
@@ -1285,13 +1288,17 @@ header {
 }
 
 #signUp .form--title h5, 
-  #logIn .form--title h5 {
+  #logIn .form--title h5,
+  #signUpVerification .form--title h5, 
+  #reverifySignUp .form--title h5 {
   font-size: 1.875rem;
   font-weight: 600;
 }
 
 #signUp .form--wrapper, 
-  #logIn .form--wrapper {
+  #logIn .form--wrapper,
+  #signUpVerification .form--wrapper,
+  #reverifySignUp .form--wrapper {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -3498,10 +3505,6 @@ header .cta-menu a:last-child:focus {
   min-height: 5rem;
 }
 
-.w-123 {
-  width: 34rem;
-}
-
 .w-136 {
   width: 56rem;
 }
@@ -3577,10 +3580,6 @@ header .cta-menu a:last-child:focus {
 
 .flex-row {
   flex-direction: row;
-}
-
-.flex-row-reverse {
-  flex-direction: row-reverse;
 }
 
 .flex-col {

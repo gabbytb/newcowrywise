@@ -151,11 +151,7 @@ const SignUp = () => {
                     signUpContentWrapper.classList.remove('min-h-126.5');
                     signUpContentWrapper.classList.add('min-h-120');                
                     window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                }, 3300);   
-
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-                console.log("Data: ", data);             
+                }, 3300);             
             };
         })
         .catch((error) => {

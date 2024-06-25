@@ -358,7 +358,10 @@
       min-h-121.5
     ;
   } */
-  #signUp, #logIn {
+  #signUp, 
+  #logIn, 
+  #signUpVerification, 
+  #reverifySignUp {
     @apply
       flex
       flex-col
@@ -374,7 +377,9 @@
   }
   
   #signUp .form--title h5, 
-  #logIn .form--title h5 {
+  #logIn .form--title h5,
+  #signUpVerification .form--title h5, 
+  #reverifySignUp .form--title h5 {
     @apply
       text-3xl
       font-semibold
@@ -382,7 +387,9 @@
   }
   
   #signUp .form--wrapper, 
-  #logIn .form--wrapper {
+  #logIn .form--wrapper,
+  #signUpVerification .form--wrapper,
+  #reverifySignUp .form--wrapper {
     @apply
       w-full 
       flex

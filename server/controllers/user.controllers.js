@@ -3,9 +3,11 @@ const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { secretKey } = process.env;
 const encryptPassword = require("../middlewares/EncryptPassword");
 const createJWT = require("../middlewares/GenerateToken");
 const mailSender = require("../middlewares/MailSender");
+
 
 
 
@@ -167,73 +169,64 @@ exports.createAccount = async (req, res) => {
 
 // Our Account Verification Logic starts here
 exports.accountVerification = async (req, res) => {
-
     try {
         const AuthHeader = req.headers.authorization;
         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
             const responseData = { 
                 success: false, 
-                message: "Unauthorized",
-            }
-            console.log("Require Token TO AUTH Account Verification: ", responseData);
+                message: "Unauthorized: Bearer token required",
+            };
+            console.log("Token required to verify account: ", responseData);
             return res.status(403).json(responseData);
         }
         
         const token = AuthHeader.split(" ")[1];
-        jwt.verify(token, secretKey, async (err, decodedData) => {            
-            // If any error whatsoever, is encountered during Account Verification, Log Error !
-            if (err) {
-                const responseData = { 
-                    success: false, 
-                    message: "token does not exist",
-                };
-                console.log("Email verification error: ", responseData);
-                return res.status(404).json(responseData);
-            }
+        try {
+            const decodedData = jwt.verify(token, secretKey);
+            const _id = decodedData.id;
+            
+            try {
+                const user = await User.findById(_id);
+                if (!user) {
+                    const responseData = { 
+                        success: false,
+                        message: "User not found",
+                    };
+                    console.log("Account verification failed: ", responseData);
+                    return res.status(404).json(responseData);
+                }
 
-            // If token was signed to an Existing User, find the Existing User ID !
-            const _id = decodedData.id
-            const user = await User.findById(_id);
-
-            //  If the User Exists
-            if (user) {
-                // Step 2: Update these Records for the User upon Account Verification
                 const dataToUpdate = {
                     accessToken: token,
                     isActivated: true,
                 };
-                const email = user.email;       // Step 1: find the UserByEmail to Update previous User Record 
-                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
-                
+                const email = user.email;
+                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
                 const responseData = {
                     success: true,
                     data: updatedUser,
-                    message: "Successful"
+                    message: "Account verification successful",
                 };
-                console.log("*********************************************************",
-                    "\n*****           NEW ACCOUNT VERIFICATION             ****",
-                    "\n*********************************************************",
-                    "\n\nVerification Status: ", responseData,
-                    "\n\n*********************************************************\n\n");
+                console.log("Account verification status: ", responseData);
                 return res.status(200).json(responseData);
-
-            } else {
-                // If token was signed to an Existing User, but Existing User cannot be found !
-                // Account Verification Error:  TypeError: Cannot read properties of undefined (reading 'email')
-                const responseData = { 
-                    success: false,
-                    message: "Failed",
-                };
-                console.log("Verification Status: ", responseData, "\n");
-                return res.status(200).json(responseData);
+            } catch (error) {
+                console.error("Database error during account verification: ", error);
+                return res.status(500).json({ success: false, message: "Internal Server Error" });
+            }
+        } catch (error) {
+            const responseData = { 
+                success: false, 
+                message: "Invalid token",
             };
-        });
-
+            console.log("Error validating account: ", error);
+            return res.status(403).json(responseData);
+        }
     } catch (error) {
-        return res.status(500).send(`Internal Server Error: ${error}`);
+        console.error("Unexpected error during account verification: ", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
     }
-
 };
+
 
 // Our Account Re-Verification Logic starts here
 exports.retryAccountVerification = async (req, res) => {
@@ -276,7 +269,7 @@ exports.retryAccountVerification = async (req, res) => {
         const responseData = {
             success: true,
             data: existingUser,
-            message: "Resending Account Verification E-mail was Successful",
+            message: "Resent activation e-mail",
         };
         // console.log("*** NEW USER: ", responseData);
         res.status(200).json(responseData);
