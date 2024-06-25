@@ -11,9 +11,7 @@ import { Nav, ButtonSubmit, } from "../components";
 
 const Login = () => {
 
-
-    // console.clear();
-
+    
 
 
     // *************************** //
@@ -28,7 +26,6 @@ const Login = () => {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-
 
 
     const [user, setUser] = useState({ email: "", password: "", });
@@ -71,6 +68,7 @@ const Login = () => {
 
 
             if (!success && message === "All fields are required.") {
+                // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);     
                 errMsg.classList.remove('error');
@@ -79,7 +77,9 @@ const Login = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+                // Perform These Actions
             } else if (!success && message === "Incorrect password or email.") {
+                // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
                 errMsg.classList.remove('error');
@@ -88,7 +88,9 @@ const Login = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+                // Perform These Actions
             } else if (!success && message === "Invalid account.") {
+                // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
                 errMsg.classList.remove('error');
@@ -97,6 +99,7 @@ const Login = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+                // Perform These Actions
             } else if (!success && message === "Kindly verify your account.") {
                 // Perform These Actions
                 setFormSubmitted(success);
@@ -113,7 +116,6 @@ const Login = () => {
                     errMsg.classList.add('error');
                 }, 3500);
                 // Perform These Actions
-
             } else {
                 reactivateAccountMsg.classList.add("hidden");
                 
@@ -131,10 +133,10 @@ const Login = () => {
                     successMsg.classList.add('success');
                 }, 2000);
 
-                setTimeout(() => {
-                    const redirToAdminDashboard = "/admin/dashboard";
-                    window.location = redirToAdminDashboard;
-                }, 3000);
+                // setTimeout(() => {
+                //     const redirToAdminDashboard = "/admin/dashboard";
+                //     window.location = redirToAdminDashboard;
+                // }, 3000);
                 // Perform These Actions
             };
         })
@@ -154,21 +156,16 @@ const Login = () => {
 
                     <div className="mt-40 pt-24 items-center">`
                         <div className="mx-auto error">
-                            <pre className="hidden">
-                                {formSubmitted}
-                            </pre>
                             {formMessage}
                         </div>
 
                         <form id="logIn" onSubmit={handleLogin}>
-
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">log in</h5>
                             </div>
 
                             <div className="px-8 pb-32 w-full">
                                 <div className="form--wrapper gap-6">
-
                                     <label htmlFor="email">
                                         <input type="email" name="email" value={user.email} placeholder="E-mail address" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
