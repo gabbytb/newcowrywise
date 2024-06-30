@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import { 
-    // BrandLogo, 
-    // BrandLogoWhite,
+import {
     brandOfficialLogo, 
     brandOfficialWhiteLogo,
 } from "../assets/images";
@@ -19,20 +17,11 @@ import {
 
 
 
-const Nav = () => {
+const NavNoTopBar = () => {
     
 
     return (
         <>
-            {/* Top bar */}
-            <Link className="bg-skin-skyblue h-15 text-10xl text-skin-gray font-medium text-center flex justify-center items-center cursor-pointer" 
-                to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" 
-                target="_blank">Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
-            </Link>
-            {/* Top bar */}
-
-
-
             {/* Top Header  */}
             <header id="header" className="default-header">
                 <div className="container">
@@ -186,4 +175,4 @@ const Nav = () => {
         </>
     );
 };
-export default Nav;
+export default NavNoTopBar;

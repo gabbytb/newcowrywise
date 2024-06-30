@@ -179,12 +179,13 @@
   #header {
     @apply 
     bg-white
-      h-114.5 
+      h-114.5
+      shadow-sm 
       /* lg:h-28 */
       /***** Just Added these *****/
-      lg:h-40
+      lg:h-32
       relative
-      top-103
+      top-0
     ;
   }
 
@@ -198,6 +199,7 @@
     text-blue-600 
     text-2xl 
     font-bold 
+    shrink-0
     capitalize
   }
   #homeHeader .cta-menu a {
@@ -373,14 +375,15 @@
   .sticky-header {
     @apply 
       fixed 
-      top-0 
+      top-0
       z-50 
-      h-114.5
+      h-32
       w-full 
       animate-slideDown 
       shadow-sm 
       bg-blue-600 
       sm:bg-white 
+      !important
     ;
   }
   .no-scrollbar {    

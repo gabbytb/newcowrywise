@@ -1,7 +1,7 @@
 import { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Nav, ButtonSubmit, } from "../components";
+import { NavNoTopBar, ButtonSubmit, } from "../components";
 
 
 
@@ -37,7 +37,7 @@ const SignUp = () => {
     // *************************** //
     // ***** CREATE NEW USER ***** //
     // *************************** //
-    const randNum = Math.floor(256*Math.random());
+    const randNum = Math.floor(256*Math.random()) * Math.floor(256*Math.random());
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
     console.log("***  Account Registration  ***", "\nAccount: ", user);
 
@@ -142,14 +142,19 @@ const SignUp = () => {
                 }, 100);  
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');                        
+                // signUpContentWrapper.classList.remove('min-h-120');
+                // signUpContentWrapper.classList.add('min-h-126.5');   
+                signUpContentWrapper.classList.remove('mb-16');
+                signUpContentWrapper.classList.add('mb-12');   
+                                    
                                 
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');                
+                    // signUpContentWrapper.classList.remove('min-h-126.5');
+                    // signUpContentWrapper.classList.add('min-h-120'); 
+                    signUpContentWrapper.classList.remove('mb-12');
+                    signUpContentWrapper.classList.add('mb-16');                
                     window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 }, 3300);             
             };
@@ -168,13 +173,13 @@ const SignUp = () => {
 
     return (
         <>
-            <Nav />
+            <NavNoTopBar />
             <main id="signUpID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full pt-14">
 
 
 
-                    <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
+                    <div className="mt-40 mb-16 items-center content-wrapper">
                         <div className="mx-auto error">
                             {/* <pre className="block">
                                 {formSubmitted}

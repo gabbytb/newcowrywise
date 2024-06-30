@@ -1,6 +1,7 @@
 // HEADER
 import HomeNav from "./HomeNav";
 import Nav from "./Nav";
+import NavNoTopBar from "./NavNoTopBar";
 // HEADER
 
 
@@ -32,6 +33,7 @@ export {
     // HEADER
     HomeNav,
     Nav,
+    NavNoTopBar,
     // HEADER
 
 

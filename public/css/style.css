@@ -775,16 +775,19 @@ input[type="text"], input[type="email"] {
 #homeHeader, 
   #header {
   position: relative;
-  top: 0.3rem;
+  top: 0px;
   height: 7.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 @media (min-width: 981px) {
   #homeHeader, 
   #header {
-    height: 10rem;
+    height: 8rem;
   }
 }
 
@@ -801,6 +804,7 @@ input[type="text"], input[type="email"] {
 }
 
 #header .cta-menu a {
+  flex-shrink: 0;
   font-size: 1.5rem;
   font-weight: 700;
   text-transform: capitalize;
@@ -1064,11 +1068,11 @@ input[type="text"], input[type="email"] {
 /**************************************************************************/
 
 .sticky-header {
-  position: fixed;
-  top: 0px;
-  z-index: 50;
-  height: 7.5rem;
-  width: 100%;
+  position: fixed !important;
+  top: 0px !important;
+  z-index: 50 !important;
+  height: 8rem !important;
+  width: 100% !important;
 }
 
 @keyframes slideDown {
@@ -1084,18 +1088,18 @@ input[type="text"], input[type="email"] {
 }
 
 .sticky-header {
-  animation: slideDown .6s ease-in-out;
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  animation: slideDown .6s ease-in-out !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
 @media (min-width: 769px) {
   .sticky-header {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
   }
 }
 
@@ -3470,6 +3474,10 @@ input[type="text"], input[type="email"] {
   margin-bottom: 3rem;
 }
 
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
 .mb-40 {
   margin-bottom: 10rem;
 }
@@ -3482,10 +3490,6 @@ input[type="text"], input[type="email"] {
   margin-left: 4rem;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
 .ml-56 {
   margin-left: 14rem;
 }
@@ -3496,10 +3500,6 @@ input[type="text"], input[type="email"] {
 
 .mr-20 {
   margin-right: 5rem;
-}
-
-.mr-24 {
-  margin-right: 6rem;
 }
 
 .mr-4 {
@@ -3873,6 +3873,10 @@ input[type="text"], input[type="email"] {
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
 .pt-16 {

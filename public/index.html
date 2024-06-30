@@ -44,11 +44,11 @@
     -->
     <script>
         function myFunction() {
-            var scroll = window.scrollY;
-            var foundScrollbar = document.getElementById('scrollbar');
-            var foundHeader = document.getElementById('header');
-            var foundHomeHeader = document.getElementById('#homeHeader');
-            var beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
+            let scroll = window.scrollY;
+            let foundScrollbar = document.getElementById('scrollbar');
+            let foundHeader = document.getElementById('header');
+            let foundHomeHeader = document.getElementById('#homeHeader');
+            let beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
             
             if (scroll > 5) {
               foundHeader?.classList.add('sticky-header');
