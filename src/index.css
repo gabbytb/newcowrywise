@@ -87,6 +87,7 @@
     --background-sky-blue: rgb(230, 250, 255);     /**   TopBar BackgroundColor   */
     --background-transparent-blue: hsla(0,0%,100%,.25);
     --bg-light-blue: rgba(0, 82, 196, 0.2);              /**   Section Six DarkMode   */
+    --bg-dark-blue: rgb(6, 6, 73);
     --bg-dark-brown: rgb(73 34 0);        /**    Section 1 Backdrop   **/
 
     --root-font-size: 10px;
@@ -146,8 +147,7 @@
     height: 3.6rem;
     right: 0;
     top: 0;
-    background: var(--background-sky-blue);
-    background: rgb(6, 6, 73);
+    background: var(--bg-dark-blue);
     z-index: -1;
   }
 
@@ -196,7 +196,7 @@
   
   #header .cta-menu a {
     @apply 
-    text-blue-600 
+    text-slate-900 
     text-2xl 
     font-bold 
     shrink-0
@@ -214,17 +214,17 @@
   #header .cta-menu a:last-child {
     @apply 
       text-2xl 
-      px-9 
-      py-5 
-      rounded-xl
+      px-12 
+      py-6
+      rounded-full
     text-white 
-    bg-blue-600 
+    bg-red-600 
 
-    hover:bg-blue-700 
-    focus:bg-blue-700 
+    hover:bg-red-700 
+    focus:bg-red-700 
       
-    hover:ring-blue-300 
-    focus:ring-blue-300 
+    hover:ring-red-300 
+    focus:ring-red-300 
 
       hover:ring-2 
       focus:ring-2

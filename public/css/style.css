@@ -562,6 +562,7 @@ video {
   --background-transparent-blue: hsla(0,0%,100%,.25);
   --bg-light-blue: rgba(0, 82, 196, 0.2);
   /**   Section Six DarkMode   */
+  --bg-dark-blue: rgb(6, 6, 73);
   --bg-dark-brown: rgb(73 34 0);
   /**    Section 1 Backdrop   **/
   --root-font-size: 10px;
@@ -749,8 +750,7 @@ input[type="text"], input[type="email"] {
   height: 3.6rem;
   right: 0;
   top: 0;
-  background: var(--background-sky-blue);
-  background: rgb(6, 6, 73);
+  background: var(--bg-dark-blue);
   z-index: -1;
 }
 
@@ -3524,6 +3524,10 @@ input[type="text"], input[type="email"] {
 
 .mt-40 {
   margin-top: 10rem;
+}
+
+.mt-48 {
+  margin-top: 12rem;
 }
 
 .mt-8 {

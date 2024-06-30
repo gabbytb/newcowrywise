@@ -49,7 +49,6 @@ const HomeNav = () => {
             <header id="homeHeader" className="default-home-header">
                 <div className="container">
                     <div className="flex justify-between items-center h-full px-0 relative">                
-                    {/* ml-16  */}
                         <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
@@ -192,7 +191,6 @@ const HomeNav = () => {
                                 <span></span>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </header>

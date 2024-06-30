@@ -1,7 +1,7 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Nav, ButtonSubmit, } from "../components";
+import { NavNoTopBar, ButtonSubmit, } from "../components";
 
 
 
@@ -150,7 +150,7 @@ const Login = () => {
 
     return (
         <>
-            <Nav />
+            <NavNoTopBar />
             <div className="absolute top-0 w-full h-screen -z-10">
                 <main className="w-full h-128 relative">
 

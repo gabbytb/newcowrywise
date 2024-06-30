@@ -1,7 +1,7 @@
 import { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { NavNoTopBar, ButtonSubmit, } from "../components";
+import { Nav, ButtonSubmit, } from "../components";
 
 
 
@@ -160,13 +160,13 @@ const SignUp = () => {
 
     return (
         <>
-            <NavNoTopBar />
+            <Nav />
             <main id="signUpID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
                 <div className="relative w-full h-full pt-14">
 
 
 
-                    <div className="mt-40 mb-16 items-center content-wrapper">
+                    <div className="mt-48 mb-16 items-center content-wrapper">
                         <div className="mx-auto error">
                             {/* <pre className="block">
                                 {formSubmitted}

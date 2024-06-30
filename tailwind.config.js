@@ -105,6 +105,7 @@ module.exports = {
           skyblue: 'var(--background-sky-blue)',
           transparentblue: 'var(--background-transparent-blue)',
           lightblue: 'var(--bg-light-blue)',
+          darkblue: 'var(--bg-dark-blue)',
           opaque: 'var(--color-opacity)',
           darkbrown: 'var(--bg-dark-brown)',
           'before-hamburger': 'var(--before-bg-color, black)',

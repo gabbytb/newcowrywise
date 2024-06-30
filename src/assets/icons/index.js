@@ -22,6 +22,7 @@ import ArrowRight from "./ArrowRight";
 // Arrow Keys
 
 
+import HeartIcon from "./HeartIcon";
 import StarRating from "./StarRating";
 
 
@@ -42,6 +43,7 @@ export {
     ArrowDown,
     ArrowRight,
     
+    HeartIcon,
     StarRating,
 
     VideoIcon,
