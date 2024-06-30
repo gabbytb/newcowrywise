@@ -47,21 +47,21 @@
             var scroll = window.scrollY;
             var foundScrollbar = document.getElementById('scrollbar');
             var foundHeader = document.getElementById('header');
-            var foundHomeHeader = document.getElementById('homeHeader');
+            var foundHomeHeader = document.getElementById('#homeHeader');
             var beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
             
             if (scroll > 5) {
-              foundHeader.classList.add('sticky-header');
-              foundHomeHeader.classList.add('sticky-header');
-              foundScrollbar.classList.add('no-scrollbar');
-              beforePseudoElement.style.setProperty('--before-bg-color', "white");
-              beforePseudoElement.style.setProperty('--after-bg-color', "white");
+              foundHeader?.classList.add('sticky-header');
+              foundHomeHeader?.classList.add('sticky-header');
+              foundScrollbar?.classList.add('no-scrollbar');
+              beforePseudoElement?.style.setProperty('--before-bg-color', "white");
+              beforePseudoElement?.style.setProperty('--after-bg-color', "white");
             } else {
-              foundHeader.classList.remove('sticky-header');
-              foundHomeHeader.classList.remove('sticky-header');
-              foundScrollbar.classList.remove('no-scrollbar');
-              beforePseudoElement.style.setProperty('--before-bg-color', "black");
-              beforePseudoElement.style.setProperty('--after-bg-color', "black");
+              foundHeader?.classList.remove('sticky-header');
+              foundHomeHeader?.classList.remove('sticky-header');
+              foundScrollbar?.classList.remove('no-scrollbar');
+              beforePseudoElement?.style.setProperty('--before-bg-color', "black");
+              beforePseudoElement?.style.setProperty('--after-bg-color', "black");
            };
         };  
     </script>
