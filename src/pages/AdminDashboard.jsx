@@ -1,11 +1,10 @@
-import { useEffect, useState, } from "react";
+import { act, useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { brandOfficialLogo } from "../assets/images";
-import { adminDashboardMenu } from "../constants";
-import { DashboardMenuCard } from "../components";
-
-
+import { UsersIcon } from "../assets/icons";
+// import { dashboardMenuUsers } from "../constants";
+// import { DashboardMenuCard } from "../components";
 
 
 
@@ -105,6 +104,39 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
 
+    // *******************************************************************************************//
+    // ADMIN MENU: DropDown Controller
+    // *******************************************************************************************//
+    function dropdownFunction() {
+        var usersDropDown = document.getElementById("usersDropdown"),
+        staffsDropDown = document.getElementById("staffsDropdown");
+
+
+        if (usersDropDown?.classList.contains('hidden')) {
+            usersDropDown?.classList.remove('hidden');
+            usersDropDown?.classList.add('flex');
+        } else {
+            usersDropDown?.classList.remove('flex');
+            usersDropDown?.classList.add('hidden');
+        };
+
+
+        if (staffsDropDown?.classList.contains('hidden')) {
+            staffsDropDown?.classList.remove('hidden');
+            staffsDropDown?.classList.add('flex');
+        } else {
+            staffsDropDown?.classList.remove('flex');
+            staffsDropDown?.classList.add('hidden');
+        };
+    };
+    // *******************************************************************************************//
+    // *******************************************************************************************//
+
+
+
+    const [activeDisplay, setActiveDisplay] = useState("/");
+
+
 
 
 
@@ -112,44 +144,121 @@ const AdminDashboard = ({ isLoggedIn }) => {
         <>
             { 
                 isLoading ? (
-                    <section className="admin-dashboard">
+                    <main className="admin-dashboard">
                         <div className="container admin-container">
                             <div className="s1-grids-wrap">
                                 <h5>Processing...</h5>
                             </div>
                         </div>
-                    </section> 
+                    </main> 
                 ) : (
-                    <section id="adminDashboardID" className="admin-dashboard">
+                    <main id="adminDashboardID" className="admin-dashboard">
                         <div className="container flex admin-container">
-                            <div className="h-screen w-full">
+                            <div className="h-screen w-full grid grid-cols-24">
 
-                                <div className="flex flex-col gap-8 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue">         
+                                <section className="flex flex-col gap-8 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue">         
                                     <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white brand">
                                         <img src={brandOfficialLogo} alt="official logo" />
                                     </Link>
 
                                     <ul className="flex flex-col w-full px-8">
-                                        <small className="text-white text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
-                                        {
-                                            adminDashboardMenu.map((item) => {
-                                                return (
-                                                    <DashboardMenuCard key={item.label} {...item} />
-                                                );
-                                            })
-                                        }
+                                        {/* SETTINGS MENU */}
+                                        <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
+                                        <div className="flex flex-col gap-8">
+                                            <div className="flex flex-col gap-4 dropdown">
+                                                <button onClick={dropdownFunction} className="dropbtn">
+                                                    <UsersIcon /> <span>users</span>
+                                                </button>
+                                                <div id="usersDropdown" className="hidden flex-col gap-4 px-15.9">
+                                                    <Link to="javascript:void(0)" onClick={(e) => setActiveDisplay("users")}>user management</Link>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-col gap-4 dropdown">
+                                                <button onClick={dropdownFunction} className="dropbtn">
+                                                    <UsersIcon /> <span>staffs</span>
+                                                </button>
+                                                <div id="staffsDropdown" className="hidden flex-col gap-4 px-15.9">
+                                                    <Link to="javascript:void(0)" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* SETTINGS MENU */}
                                     </ul>
-                                </div>
+                                </section>
 
 
 
-                                <div className="right-pane">
-                                    
-                                </div>
+                                <aside className={`right-pane bg-red-500 ${activeDisplay === "users" ? "block" : "hidden" }`}>
+                                    <table className="table-fixed capitalize">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>NAME</th>
+                                                <th>E-MAIL</th>
+                                                <th>STATUS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                users.map((user) => {
+                                                    return (
+                                                        user?.roles?.map((roleStaff, index) => {
+                                                            if (roleStaff?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="bg-green-500 text-white font-medium text-xl rounded-full  h-2 py-2 px-8">{user?.isActivated  === true ? `approved` : `pending`}</td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </aside>
 
+                                <aside className={`right-pane bg-red-500 ${activeDisplay === "staffs" ? "block" : "hidden" }`}>
+                                    <table className="table-fixed capitalize">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>NAME</th>
+                                                <th>E-MAIL</th>
+                                                <th>STATUS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            {
+                                                users.map((user) => {
+                                                    return (
+                                                        user?.roles?.map((roleStaff) => {
+                                                            if (roleStaff?.role === "ROLE_EDITOR") {
+                                                                return (
+                                                                    <>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="bg-green-500 text-white font-medium text-xl rounded-full h-8 py-2 px-8">{user?.isActivated  === true ? `approved` : `pending`}</td>
+                                                                    </>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                })
+                                            }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </aside>
                             </div>
                         </div>
-                    </section>
+                    </main>
                 )
             }
         </>

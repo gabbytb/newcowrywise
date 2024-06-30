@@ -1,4 +1,4 @@
-import { FacebookIcon, InstagramIcon, TelegramIcon, TwitterIcon, UsersIcon, WhatsappIcon, YoutubeIcon } from "../assets/icons"
+import { FacebookIcon, InstagramIcon, TelegramIcon, TwitterIcon, WhatsappIcon, YoutubeIcon } from "../assets/icons"
 import { mayokun, wande, wura } from "../assets/images"
 
 
@@ -242,10 +242,17 @@ export const footerLinks = [
 
 
 // Admin Dashboard Menu
-export const adminDashboardMenu = [
-    {
-        iconURI: <UsersIcon />,
-        label: "users",
-        linkURI: "users",
-    },
-]
+// export const dashboardMenuUsers = [
+//     {
+//         linkURI: "users",
+//         label: "users",
+//     },
+//     {
+//         linkURI: "staff",
+//         label: "staffs management",
+//     },
+//     {
+//         linkURI: "admins",
+//         label: "admins",
+//     }
+// ]

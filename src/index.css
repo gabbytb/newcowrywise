@@ -638,15 +638,31 @@
   }
   #adminDashboardID .admin-container .left-pane {
       @apply 
-        w-1/4
+        /* w-1/4 */
+        w-full
       ;
   }
   #adminDashboardID .admin-container .right-pane {
       @apply 
-        w-3/4
+        /* w-3/4 */
+        w-full
       ;
   }
-
+  .dropbtn, .dropbtn span {
+    @apply
+      w-full flex items-center text-2xl tracking-moretight font-bold capitalize text-white hover:text-slate-300 focus:text-slate-300 gap-6
+    ;
+  }
+  .dropbtn span {
+    @apply
+      text-white
+    ;
+  }
+  #usersDropdown a {
+    @apply
+      text-xl tracking-moretight font-bold capitalize text-white hover:text-slate-300
+    ;
+  }
 
 
 
