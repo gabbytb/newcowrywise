@@ -156,6 +156,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                         <div className="container flex admin-container">
                             <div className="h-screen w-full grid grid-cols-24">
 
+
+                                {/*******************************************************************/
+                                /*************************   CONTROLLER   **************************/
+                                /*******************************************************************/}
                                 <section className="flex flex-col gap-8 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue">         
                                     <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white brand">
                                         <img src={brandOfficialLogo} alt="official logo" />
@@ -186,9 +190,17 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                         {/* SETTINGS MENU */}
                                     </ul>
                                 </section>
+                                {/*******************************************************************/
+                                /*************************   CONTROLLER   **************************/
+                                /*******************************************************************/}
 
 
 
+
+
+                                {/*******************************************************************/
+                                /****************************   VIEWS   ****************************/
+                                /*******************************************************************/}
                                 <aside className={`right-pane bg-red-500 ${activeDisplay === "users" ? "block" : "hidden" }`}>
                                     <table className="table-fixed capitalize">
                                         <thead>
@@ -256,6 +268,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                         </tbody>
                                     </table>
                                 </aside>
+                                {/*******************************************************************/
+                                /****************************   VIEWS   ****************************/
+                                /*******************************************************************/}
                             </div>
                         </div>
                     </main>
