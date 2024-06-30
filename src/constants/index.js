@@ -1,4 +1,4 @@
-import { FacebookIcon, InstagramIcon, TelegramIcon, TwitterIcon, WhatsappIcon, YoutubeIcon } from "../assets/icons"
+import { FacebookIcon, InstagramIcon, TelegramIcon, TwitterIcon, UsersIcon, WhatsappIcon, YoutubeIcon } from "../assets/icons"
 import { mayokun, wande, wura } from "../assets/images"
 
 
@@ -232,5 +232,20 @@ export const footerLinks = [
     {
         linkURL: "https://www.youtube.com/channel/UCRApoo2RnIcX4ocFmKZwYSg",
         iconURI: <YoutubeIcon />,
+    },
+]
+
+
+
+
+
+
+
+// Admin Dashboard Menu
+export const adminDashboardMenu = [
+    {
+        iconURI: <UsersIcon />,
+        label: "users",
+        linkURI: "users",
     },
 ]

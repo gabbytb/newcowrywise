@@ -312,11 +312,7 @@
     @apply text-center text-15xl/more-loose text-skin-gray font-firma mt-12 mx-auto sm:max-w-full lg:max-w-65/12
   }
 
-  /* 
-    .text--white {
-      color: white !important;
-    } 
-  */
+
 
 
 
@@ -632,6 +628,31 @@
 
 
  
+
+  #adminDashboardID .admin-container {
+      @apply 
+        px-0 
+        w-full 
+        h-full
+      ;
+  }
+  #adminDashboardID .admin-container .left-pane {
+      @apply 
+        w-1/4
+      ;
+  }
+  #adminDashboardID .admin-container .right-pane {
+      @apply 
+        w-3/4
+      ;
+  }
+
+
+
+
+
+
+
 
 
   /* Section One */

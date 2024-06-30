@@ -13,6 +13,7 @@ const SignUpVerification = () => {
 
 
     // console.clear();
+    
 
 
     
@@ -53,85 +54,73 @@ const SignUpVerification = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
+        
         axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
-            const { success, message } = response.data; 
+            const { success, message, data } = response.data; 
             var errMsg = document.querySelector('.error'); 
-            var successMsg = document.querySelector('#signUpVerification .success');
-            var signUpContentWrapper = document.querySelector("#signUpVerificationID .content-wrapper");
+            var successMsg = document.querySelector('#signUp .success');
+            var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
             if ((!success) && (message === "Fill all the required inputs.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                // window.scrollTo(0, 0);
                 // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
                 // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
                 setFormSubmitted(success);
                 setFormMessage(message);
                 
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 setFormSubmitted(success);
                 setFormMessage(message);
 
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 setFormSubmitted(success);
                 setFormMessage(message);
 
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
             } else {         
-                // async function takeAction() {
-                //     window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
-                // };
-                // takeAction();
                 setFormSubmitted(success);
                 setFormMessage(message);
                 setTimeout(() => {
                     window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
                 }, 100);  
-                successMsg.classList.remove('success');
-                successMsg.classList.add('success-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');                        
+                successMsg?.classList.remove('success');
+                successMsg?.classList.add('success-message-info');
+                // signUpContentWrapper.classList.remove('min-h-120');
+                // signUpContentWrapper.classList.add('min-h-126.5');   
+                signUpContentWrapper?.classList.remove('mb-16');
+                signUpContentWrapper?.classList.add('mb-12');   
+                                    
                                 
                 setTimeout(() => {
-                    successMsg.classList.remove('success-message-info');
-                    successMsg.classList.add('success');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');                
+                    successMsg?.classList.remove('success-message-info');
+                    successMsg?.classList.add('success');
+                    // signUpContentWrapper.classList.remove('min-h-126.5');
+                    // signUpContentWrapper.classList.add('min-h-120'); 
+                    signUpContentWrapper?.classList.remove('mb-12');
+                    signUpContentWrapper?.classList.add('mb-16');                
                     window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 }, 3300);             
             };
@@ -146,6 +135,7 @@ const SignUpVerification = () => {
 
     
 
+    
 
     // ******************************** //
     // ***** VERIFY EXISTING USER ***** //
@@ -165,7 +155,6 @@ const SignUpVerification = () => {
 
     useEffect(() => {  
         window.scroll({ left: 0, top: 300, behavior: "smooth" });
-
         function disableIsLoading() {
             setIsLoading(false);
         }
@@ -181,26 +170,35 @@ const SignUpVerification = () => {
                 siteTitle = "Samuel Akinola Foundation";
                 document.title = `${pageTitle} - ${data?.email} | ${siteTitle}`;            
 
+                var verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
                 if ((!success) && (message === "Unauthorized: Bearer token required")) {
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
                     setIsVerified(success);
                     setAuthenticationResponseMsg(message);
-                    return;
                 } else if ((!success) && (message === "User not found")) {
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
                     setIsVerified(success);
                     setAuthenticationResponseMsg(message);
-                    return;
                 } else if ((!success) && (message === "token does not exist")) {
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
                     setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                    return;
+                    setAuthenticationResponseMsg(message);                    
                 } else {
+                    setIsVerified(success);
+                    setExistingUser(data);
+                    setAuthenticationResponseMsg(message);
+
+                    verificationStatus?.classList.remove('success-verify');
+                    verificationStatus?.classList.add('success-message-info');
                     setTimeout(() => {
-                        setIsVerified(success);
-                        setExistingUser(data);
-                        setAuthenticationResponseMsg(message);
-                    }, 2500);
-                    return;
-                };      
+                        verificationStatus?.classList.remove('success-message-info');
+                        verificationStatus?.classList.add('success-verify');
+                    }, 3500);
+            
+                    setTimeout(() => {
+                        window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                    }, 3750);
+                };
             })
             .catch((error) => {
                 console.log("Account Verification Error: ", error);
@@ -212,24 +210,6 @@ const SignUpVerification = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, []);
-
-    useEffect(() => {
-        const endVerificationSuccessfulMessage = document.querySelector('#signUpVerificationID .success-verify');
-        if (!isVerified) {
-            return;
-        }
-
-        endVerificationSuccessfulMessage.classList.remove('success-verify');
-        endVerificationSuccessfulMessage.classList.add('success-message-info');
-        setTimeout(() => {
-            endVerificationSuccessfulMessage.classList.remove('success-message-info');
-            endVerificationSuccessfulMessage.classList.add('success-verify');
-        }, 3500);
-
-        setTimeout(() => {
-            window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-        }, 3750);
     }, [isVerified]);
     // ******************************** //
     // ***** VERIFY EXISTING USER ***** //
@@ -243,8 +223,8 @@ const SignUpVerification = () => {
             <>
                 <Nav />
                 <main id="signUpVerificationID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
-                    <div className="relative w-full h-full">
-                        <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
+                    <div className="relative w-full h-full pt-14">
+                        <div className="mt-48 mb-16 items-center content-wrapper">
                             <div className="mx-auto error">
                                 {formMessage}
                             </div>
@@ -322,13 +302,12 @@ const SignUpVerification = () => {
         <>
             <Nav />
             <main id="signUpVerificationID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
-                <div className="relative w-full h-full">
-                    <div className="mt-40 pt-24 items-center min-h-120 content-wrapper">
+                <div className="relative w-full h-full pt-14">
+                    <div className="mt-48 mb-16 items-center content-wrapper">
                         <div className="mx-auto error">
                             {formMessage}
                         </div>
-
-
+                  
                         <form id="signUpVerification" onSubmit={handleSubmit}>
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">sign up</h5>

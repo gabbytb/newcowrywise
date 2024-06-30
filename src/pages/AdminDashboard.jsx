@@ -1,5 +1,9 @@
 import { useEffect, useState, } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { brandOfficialLogo } from "../assets/images";
+import { adminDashboardMenu } from "../constants";
+import { DashboardMenuCard } from "../components";
 
 
 
@@ -109,17 +113,40 @@ const AdminDashboard = ({ isLoggedIn }) => {
             { 
                 isLoading ? (
                     <section className="admin-dashboard">
-                        <div className="h-container-1 container">
+                        <div className="container admin-container">
                             <div className="s1-grids-wrap">
                                 <h5>Processing...</h5>
                             </div>
                         </div>
                     </section> 
                 ) : (
-                    <section className="admin-dashboard">
-                        <div className="h-container-1 container">
-                            <div className="s1-grids-wrap">
-                            
+                    <section id="adminDashboardID" className="admin-dashboard">
+                        <div className="container flex admin-container">
+                            <div className="h-screen w-full">
+
+                                <div className="flex flex-col gap-8 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue">         
+                                    <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white brand">
+                                        <img src={brandOfficialLogo} alt="official logo" />
+                                    </Link>
+
+                                    <ul className="flex flex-col w-full px-8">
+                                        <small className="text-white text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
+                                        {
+                                            adminDashboardMenu.map((item) => {
+                                                return (
+                                                    <DashboardMenuCard key={item.label} {...item} />
+                                                );
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+
+
+
+                                <div className="right-pane">
+                                    
+                                </div>
+
                             </div>
                         </div>
                     </section>

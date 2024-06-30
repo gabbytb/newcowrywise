@@ -35,7 +35,8 @@ import InstagramIcon from "./InstagramIcon";
 import YoutubeIcon from "./YoutubeIcon";
 
 
-
+// Admin Icons
+import UsersIcon from "./UsersIcon";
 
 
 
@@ -74,4 +75,8 @@ export {
     TelegramIcon,
     InstagramIcon,
     YoutubeIcon,
+
+
+    
+    UsersIcon,
 }

@@ -71,53 +71,51 @@ const Login = () => {
                 // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);     
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
                 // Perform These Actions
             } else if (!success && message === "Incorrect password or email.") {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
                 // Perform These Actions
             } else if (!success && message === "Invalid account.") {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
                 // Perform These Actions
             } else if (!success && message === "Kindly verify your account.") {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
-                
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
                 setTimeout(() => {
-                    reactivateAccountMsg.classList.remove("hidden");
+                    reactivateAccountMsg?.classList.remove("hidden");
                 }, 1800);
-
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 3500);
                 // Perform These Actions
             } else {
-                reactivateAccountMsg.classList.add("hidden");
+                reactivateAccountMsg?.classList.add("hidden");
                 
                 // Perform These Actions
                 setFormMessage(message);
@@ -125,12 +123,12 @@ const Login = () => {
 
                 localStorage.setItem('user', JSON.stringify(data));
                 
-                successMsg.classList.remove('success');
-                successMsg.classList.add('success-message-info');
+                successMsg?.classList.remove('success');
+                successMsg?.classList.add('success-message-info');
 
                 setTimeout(() => {
-                    successMsg.classList.remove('success-message-info');
-                    successMsg.classList.add('success');
+                    successMsg?.classList.remove('success-message-info');
+                    successMsg?.classList.add('success');
                 }, 2000);
 
                 // setTimeout(() => {
