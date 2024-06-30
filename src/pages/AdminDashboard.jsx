@@ -202,36 +202,41 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 /****************************   VIEWS   ****************************/
                                 /*******************************************************************/}
                                 <aside className={`right-pane bg-red-500 ${activeDisplay === "users" ? "block" : "hidden" }`}>
-                                    <table className="table-fixed capitalize">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>NAME</th>
-                                                <th>E-MAIL</th>
-                                                <th>STATUS</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                users.map((user) => {
-                                                    return (
-                                                        user?.roles?.map((roleStaff, index) => {
-                                                            if (roleStaff?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="bg-green-500 text-white font-medium text-xl rounded-full  h-2 py-2 px-8">{user?.isActivated  === true ? `approved` : `pending`}</td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
+                                    <div className="right-top-pane">
+                                        
+                                    </div>
+                                    <div className="right-bottom-pane">
+                                        <table className="table-fixed capitalize">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>NAME</th>
+                                                    <th>E-MAIL</th>
+                                                    <th>STATUS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    users.map((user) => {
+                                                        return (
+                                                            user?.roles?.map((roleStaff, index) => {
+                                                                if (roleStaff?.role === "ROLE_ADMIN") {
+                                                                    return (
+                                                                        <tr key={index}>
+                                                                            <td>{user?._id}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="bg-green-500 text-white font-medium text-xl rounded-full  h-2 py-2 px-8">{user?.isActivated  === true ? `approved` : `pending`}</td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    })
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </aside>
 
                                 <aside className={`right-pane bg-red-500 ${activeDisplay === "staffs" ? "block" : "hidden" }`}>
