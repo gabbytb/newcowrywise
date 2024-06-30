@@ -9,6 +9,12 @@ import mayokun from "./mayokun.jpg";
 import wande from "./wande.jpg";
 import investmentPlatform from "./investment-platform.png";
 
+import adminDashboardIcon from "./admindb.png";
+
+
+
+
+
 
 
 export {
@@ -21,4 +27,6 @@ export {
     mayokun,
     wande,
     investmentPlatform,
+
+    adminDashboardIcon,
 }

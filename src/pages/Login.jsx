@@ -131,10 +131,10 @@ const Login = () => {
                     successMsg?.classList.add('success');
                 }, 2000);
 
-                // setTimeout(() => {
-                //     const redirToAdminDashboard = "/admin/dashboard";
-                //     window.location = redirToAdminDashboard;
-                // }, 3000);
+                setTimeout(() => {
+                    const redirToAdminDashboard = "/admin/dashboard";
+                    window.location = redirToAdminDashboard;
+                }, 3000);
                 // Perform These Actions
             };
         })

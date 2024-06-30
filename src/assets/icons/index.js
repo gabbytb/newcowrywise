@@ -37,6 +37,7 @@ import YoutubeIcon from "./YoutubeIcon";
 
 // Admin Icons
 import UsersIcon from "./UsersIcon";
+import StaffsIcon from "./StaffsIcon";
 
 
 
@@ -79,4 +80,5 @@ export {
 
     
     UsersIcon,
+    StaffsIcon,
 }

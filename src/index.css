@@ -648,24 +648,62 @@
         w-full
       ;
   }
-  .dropbtn, .dropbtn span {
-    @apply
-      w-full flex items-center text-2xl tracking-moretight font-bold capitalize text-white hover:text-slate-300 focus:text-slate-300 gap-6
-    ;
-  }
+  .dropbtn, 
   .dropbtn span {
     @apply
-      text-white
+      w-full 
+      flex 
+      items-center 
+      text-2xl 
+      tracking-moretight 
+      font-medium 
+      capitalize 
+      text-white 
+      hover:text-slate-300 
+      focus:text-slate-300 
+      gap-6
     ;
   }
-  #usersDropdown a {
+  #usersDropdown a,
+  #staffsDropdown a,
+  #adminsDropdown a,
+  #userProfileImgDropdown button {
     @apply
-      text-xl tracking-moretight font-bold capitalize text-white hover:text-slate-300
+      text-xl tracking-moretight font-medium capitalize text-white hover:text-slate-300
     ;
   }
-
-
-
+  .right-pane .rt-left-pane h1 {
+    @apply
+      text-4xl
+      font-normal
+      font-firma
+      text-slate-500
+    ;
+  }
+  .right-pane .rt-right-pane .user-info h4 {
+    @apply
+      text-31xl
+      tracking-supertight
+      font-medium
+      font-firma
+    ;
+  }
+  .right-pane .rt-right-pane .user-info h6 span {
+    @apply
+      capitalize
+    ;
+  }
+  .right-pane .rt-right-pane .user-profile-img {
+    @apply
+      w-20
+      flex
+    ;
+  }
+  .right-pane .rt-right-pane .user-profile-img img {
+    @apply
+      rounded-full
+    ;
+  }
 
 
 

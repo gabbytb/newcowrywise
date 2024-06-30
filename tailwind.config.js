@@ -176,6 +176,7 @@ module.exports = {
         '99.5': '0.1rem',
         '100': '0.2rem',      /** Hamburger::after Height */
         '114.5': '7.5rem',
+        '114.8': '7.8rem',
         '126.4': '12.4rem',
         '128.6': '18.6rem',
       },
