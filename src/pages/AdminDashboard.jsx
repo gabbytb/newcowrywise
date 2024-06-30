@@ -20,6 +20,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *********************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));    
     // console.log('LOGGED-IN USER:- ', isLoggedIn);  
+    const [activeDisplay, setActiveDisplay] = useState("/");
     // *********************************************
     // *********************************************
     
@@ -134,9 +135,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
 
-    const [activeDisplay, setActiveDisplay] = useState("/");
-
-
 
 
 
@@ -203,7 +201,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 /*******************************************************************/}
                                 <aside className={`right-pane bg-red-500 ${activeDisplay === "users" ? "block" : "hidden" }`}>
                                     <div className="right-top-pane">
-                                        
+
                                     </div>
                                     <div className="right-bottom-pane">
                                         <table className="table-fixed capitalize">
