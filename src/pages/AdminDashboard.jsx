@@ -156,7 +156,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
                                 {/*******************************************************************/
-                                /*************************   CONTROLLER   **************************/
+                                /***********************  CONTROLLER: Menu  ************************/
                                 /*******************************************************************/}
                                 <section className="flex flex-col gap-8 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue">         
                                     <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white brand">
@@ -189,7 +189,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                     </ul>
                                 </section>
                                 {/*******************************************************************/
-                                /*************************   CONTROLLER   **************************/
+                                /***********************  CONTROLLER: Menu  ************************/
                                 /*******************************************************************/}
 
 
