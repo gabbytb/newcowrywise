@@ -81,7 +81,6 @@ const SignUp = () => {
 
             if ((!success) && (message === "Fill all the required inputs.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                // window.scrollTo(0, 0);
                 // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
                 // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
                 setFormSubmitted(success);
@@ -89,14 +88,10 @@ const SignUp = () => {
                 
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
 
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
@@ -105,14 +100,10 @@ const SignUp = () => {
 
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
 
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
@@ -121,14 +112,10 @@ const SignUp = () => {
 
                 errMsg.classList.remove('error');
                 errMsg.classList.add('error-message-info');
-                signUpContentWrapper.classList.remove('min-h-120');
-                signUpContentWrapper.classList.add('min-h-126.5');  
 
                 setTimeout(() => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
-                    signUpContentWrapper.classList.remove('min-h-126.5');
-                    signUpContentWrapper.classList.add('min-h-120');
                 }, 2800);
             } else {         
                 // async function takeAction() {
