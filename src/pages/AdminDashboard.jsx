@@ -91,8 +91,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     async function toggleProfileImgMenu() {       
-        var userProfileImgDropDown = document.querySelector('#adminDashboardID .lp');
-        // console.log('Admins Dropdown: ', userProfileImgDropDown);
+        var userProfileImgDropDown = document.querySelector('.right-top-pane .rt-right-pane .lp');
+        console.log('Admins Dropdown: ', userProfileImgDropDown);
         if (userProfileImgDropDown?.classList.contains("hidden")) {
             userProfileImgDropDown?.classList.remove('hidden');
             userProfileImgDropDown?.classList.add('flex');
@@ -242,6 +242,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <strong className="capitalize text-black"> {userName}</strong>
                                                 </h1>
                                             </div>
+
                                             <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
                                                 <div className="user-info">
                                                     <h4>{userEmail}</h4>
@@ -274,6 +275,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
                                                     <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
+                                                        <hr />
                                                         <button to="#" onClick={logOut}>sign out</button>
                                                     </div>            
                                                 </div>
