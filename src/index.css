@@ -649,7 +649,9 @@
       ;
   }
   .dropbtn, 
-  .dropbtn span {
+  .dropbtn span,
+  .no-dropdown,
+  .no-dropdown span {
     @apply
       w-full 
       flex 
@@ -664,12 +666,24 @@
       gap-6
     ;
   }
+  .dropbtn svg, 
+  .no-dropdown svg {
+    @apply
+      w-12
+      h-12
+      text-white
+    ;
+  }
   #usersDropdown a,
   #staffsDropdown a,
-  #adminsDropdown a,
-  #userProfileImgDropdown button {
+  #adminsDropdown a {
     @apply
       text-xl tracking-moretight font-medium capitalize text-white hover:text-slate-300
+    ;
+  }
+  #userProfileImgDropdown button {
+    @apply
+      text-xl tracking-moretight font-medium capitalize text-black hover:text-black
     ;
   }
   .right-pane .rt-left-pane h1 {
@@ -680,23 +694,36 @@
       text-slate-500
     ;
   }
+  .right-pane .rt-right-pane .user-info {
+    @apply
+      flex
+      flex-col
+      gap-2
+    ;
+  }
   .right-pane .rt-right-pane .user-info h4 {
     @apply
       text-31xl
-      tracking-supertight
-      font-medium
+      -tracking-tightened
+      font-black
       font-firma
     ;
   }
   .right-pane .rt-right-pane .user-info h6 span {
     @apply
-      capitalize
+      lowercase
+      text-14xl
+      font-normal
+      font-firma
+      tracking-supertight
     ;
   }
   .right-pane .rt-right-pane .user-profile-img {
     @apply
       w-20
       flex
+      justify-start
+      relative
     ;
   }
   .right-pane .rt-right-pane .user-profile-img img {
