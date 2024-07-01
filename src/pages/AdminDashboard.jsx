@@ -275,6 +275,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
                                                     <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
+                                                        
                                                         <hr />
                                                         <button to="#" onClick={logOut}>sign out</button>
                                                     </div>            

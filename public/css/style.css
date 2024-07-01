@@ -1735,7 +1735,7 @@ input[type="text"], input[type="email"] {
 .right-top-pane .rt-right-pane .user-info h6 span {
   font-family: firma;
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: lowercase;
   letter-spacing: 0.015em;
 }

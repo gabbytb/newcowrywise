@@ -66,9 +66,9 @@ exports.createAccount = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -92,12 +92,12 @@ exports.createAccount = async (req, res) => {
             password: encryptedPassword,
             isActivated,
             roles: [
-                // {
-                //     _id: roleAdmin._id,
-                //     role: roleAdmin.role,
-                //     createdAt: roleAdmin.createdAt,
-                //     updatedAt: roleAdmin.updatedAt,
-                // },
+                {
+                    _id: roleAdmin._id,
+                    role: roleAdmin.role,
+                    createdAt: roleAdmin.createdAt,
+                    updatedAt: roleAdmin.updatedAt,
+                },
                 // {
                 //     _id: roleEditor._id, 
                 //     role: roleEditor.role, 
@@ -110,12 +110,12 @@ exports.createAccount = async (req, res) => {
                 //     createdAt: roleStaff.createdAt, 
                 //     updatedAt: roleStaff.updatedAt, 
                 // },
-                {
-                    _id: roleUsers._id, 
-                    role: roleUsers.role, 
-                    createdAt: roleUsers.createdAt, 
-                    updatedAt: roleUsers.updatedAt,
-                }
+                // {
+                //     _id: roleUsers._id, 
+                //     role: roleUsers.role, 
+                //     createdAt: roleUsers.createdAt, 
+                //     updatedAt: roleUsers.updatedAt,
+                // }
             ],
         });
         const user = await newUser.save();
