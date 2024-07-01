@@ -59,6 +59,7 @@ module.exports = {
       '40xl': '3.3rem',
       '41xl': '1.54rem',
       '42xl': '1.46rem',
+      '43xl': '0.89rem',
     },
     letterSpacing: {
       supertight: '0.015em',
@@ -144,6 +145,7 @@ module.exports = {
         // '20': '1fr',
         '22': 'repeat(auto-fit,minmax(240px,1fr))', // Used for Footer: .app-reviews
         '24': '32rem 1fr', // Used for Admin Dashboard
+        '26': '28rem 1fr', // Used for Admin Dashboard
       },
       height: {
         '13': '3.2rem',
@@ -427,7 +429,13 @@ module.exports = {
       },
       minWidth: {
         '50': '3.125rem',
+        '68': '17rem',
+        '76': '19rem',
         '80': '17.8rem',
+        '84': '19rem',
+        '98': '26rem',
+        '100': '28rem',
+        '102': '30rem',
         '134': '33.4rem',
         // '63': '61%',
       },
