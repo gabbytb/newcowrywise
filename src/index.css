@@ -686,7 +686,7 @@
       text-xl tracking-moretight font-medium capitalize text-black hover:text-black
     ;
   }
-  .right-pane .rt-left-pane h1 {
+  .right-top-pane .rt-left-pane h1 {
     @apply
       text-4xl
       font-normal
@@ -694,14 +694,14 @@
       text-slate-500
     ;
   }
-  .right-pane .rt-right-pane .user-info {
+  .right-top-pane .rt-right-pane .user-info {
     @apply
       flex
       flex-col
       gap-2
     ;
   }
-  .right-pane .rt-right-pane .user-info h4 {
+  .right-top-pane .rt-right-pane .user-info h4 {
     @apply
       text-31xl
       -tracking-tightened
@@ -709,7 +709,7 @@
       font-firma
     ;
   }
-  .right-pane .rt-right-pane .user-info h6 span {
+  .right-top-pane .rt-right-pane .user-info h6 span {
     @apply
       lowercase
       text-14xl
@@ -718,7 +718,7 @@
       tracking-supertight
     ;
   }
-  .right-pane .rt-right-pane .user-profile-img {
+  .right-top-pane .rt-right-pane .user-profile-img {
     @apply
       w-20
       flex
@@ -726,14 +726,14 @@
       relative
     ;
   }
-  .right-pane .rt-right-pane .user-profile-img img {
+  .right-top-pane .rt-right-pane .user-profile-img img {
     @apply
       rounded-full
     ;
   }
 
 
-  
+
 
 
 

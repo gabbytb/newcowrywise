@@ -20,7 +20,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *********************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));    
     // console.log('LOGGED-IN USER:- ', isLoggedIn);  
-    const [activeDisplay, setActiveDisplay] = useState("home");
     // *********************************************
     // *********************************************
     
@@ -52,28 +51,18 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     // *******************************************************************
-    // IS-LOADING.....
+    // SPECIAL FEATURES
     // *******************************************************************
     const [isLoading, setIsLoading] = useState(true);
+    const [activeDisplay, setActiveDisplay] = useState("home");
     // *******************************************************************
     // *******************************************************************
 
-    // *******************************************************************************************//
-    // ADMIN MENU: DropDown Controller
-    // *******************************************************************************************//
-    function toggleProfileImgMenu() {       
-        let userProfileImgDropDown = document.querySelector('#adminDashboardID .user-profile-img .lanky');
-        // console.log('Admins Dropdown: ', userProfileImgDropDown);
-        if (userProfileImgDropDown?.classList.contains("hidden")) {
-            userProfileImgDropDown?.classList.remove('hidden');
-            userProfileImgDropDown?.classList.add('flex');
-        } else {
-            userProfileImgDropDown?.classList.remove('flex');
-            userProfileImgDropDown?.classList.add('hidden');
-        };
-    };
 
 
+    // *******************************************************************************************//
+    // USERS MENU: DropDown Controller
+    // *******************************************************************************************//
     function usersDropdownFunction() {
         let usersDropDown = document.querySelector("#usersDropdown");
         // console.log('Users Dropdown: ', usersDropDown);    
@@ -85,8 +74,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
             usersDropDown?.classList.add('hidden');
         };
     };
-
-    
     function adminsDropdownFunction() {
         let adminsDropDown = document.querySelector("#adminsDropdown");
         // console.log('Admins Dropdown: ', adminsDropDown);
@@ -98,6 +85,23 @@ const AdminDashboard = ({ isLoggedIn }) => {
             adminsDropDown?.classList.add('hidden');
         };
     };
+    // *******************************************************************
+    // *******************************************************************
+
+
+
+    async function toggleProfileImgMenu() {       
+        var userProfileImgDropDown = document.querySelector('#adminDashboardID .lp');
+        // console.log('Admins Dropdown: ', userProfileImgDropDown);
+        if (userProfileImgDropDown?.classList.contains("hidden")) {
+            userProfileImgDropDown?.classList.remove('hidden');
+            userProfileImgDropDown?.classList.add('flex');
+        } else {
+            userProfileImgDropDown?.classList.remove('flex');
+            userProfileImgDropDown?.classList.add('hidden');
+        };
+    };
+
     // *******************************************************************************************//
     // *******************************************************************************************//
 
@@ -230,7 +234,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 {/*******************************************************************/
                                 /****************************   VIEWS   ****************************/
                                 /*******************************************************************/}
-                                <aside className={`right-pane ${activeDisplay === "home" ? "block" : "hidden" }`}>
+                                <aside className={`${activeDisplay === "home" ? "block" : "hidden" }`}>
                                     <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
@@ -269,7 +273,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <button onClick={toggleProfileImgMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 lanky">
+                                                    <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
                                                         <button to="#" onClick={logOut}>sign out</button>
                                                     </div>            
                                                 </div>
@@ -282,7 +286,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 </aside>
 
                                 
-                                <aside className={`right-pane ${activeDisplay === "users" ? "block" : "hidden" }`}>
+                                <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
                                     <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
@@ -321,7 +325,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <button onClick={toggleProfileImgMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 lanky">
+                                                    <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
                                                         <button to="#" onClick={logOut}>sign out</button>
                                                     </div>            
                                                 </div>
@@ -363,7 +367,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 </aside>
 
 
-                                <aside className={`right-pane ${activeDisplay === "admins" ? "block" : "hidden" }`}>
+                                <aside className={`${activeDisplay === "admins" ? "block" : "hidden" }`}>
                                     <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
