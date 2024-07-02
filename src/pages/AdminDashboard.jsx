@@ -139,7 +139,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     // *******************************************************************************************//
-    // Home "Profile Image" MENU:-  Controller
+    // TOGGLE: USER "Profile Image" MENU
     // *******************************************************************************************//
     function toggleUserProfileMenu() {       
         const userProfileImgDropDown = document.querySelectorAll('.upm');
@@ -174,13 +174,13 @@ const AdminDashboard = ({ isLoggedIn }) => {
                 ) : (
                     <main id="adminDashboardID" className="admin-dashboard">
                         <div className="container flex admin-container">
-                            <div className="h-screen w-full grid sm:grid-cols-26 xl:grid-cols-24">
+                            <div className="h-screen w-full grid xs:grid-cols-26">
 
 
                                 {/*******************************************************************/
                                 /***********************  CONTROLLER: Menu  ************************/
                                 /*******************************************************************/}
-                                <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue">         
+                                <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue z-50">         
                                     <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
                                         <img src={brandOfficialLogo} alt="official logo" />
                                     </Link>
@@ -231,67 +231,11 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
 
-
-
                                 {/*******************************************************************/
                                 /****************************   VIEWS   ****************************/
-                                /*******************************************************************/}
-                                {/* <aside className={`${activeDisplay === "home" ? "block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
-                                        <div className="flex justify-between items-center h-full flex-row px-10">
-                                            <div className="rt-left-pane">
-                                                <h1>Welcome 
-                                                    <strong className="capitalize text-black"> {userName}</strong>
-                                                </h1>
-                                            </div>
-
-                                            <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
-                                                <div className="user-info">
-                                                    <h4>{userEmail}</h4>
-                                                    <h6>
-                                                        {
-                                                            userRoles?.map((selectRole) => {
-                                                                if (selectRole?.role === "ROLE_ADMIN") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>admin</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_EDITOR") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>editor</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_STAFF") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>staff</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_USERS") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>user</span>
-                                                                    );
-                                                                }
-                                                            })
-                                                        }
-                                                    </h6>
-                                                </div>
-                                                <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleProfileImgMenu} className="dropbtn absolute top-0">
-                                                        <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
-                                                    </button>                                                                                                       
-                                                    <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
-                                                        
-                                                        <hr />
-                                                        <button to="#" onClick={logOut}>sign out</button>
-                                                    </div>            
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="right-bottom-pane">
-                                        
-                                    </div>
-                                </aside> */}
-
-                                <aside className={`${activeDisplay === "home" ? "d-block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
+                                /*******************************************************************/}                              
+                                <aside className={`${activeDisplay === "home" ? "block" : "hidden" }`}>
+                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
                                                 <h1>Welcome 
@@ -330,10 +274,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        
-                                                        <hr />
-                                                        <button to="#" onClick={logOut}>sign out</button>
+                                                    <div className="hidden flex-col items-start w-72 min-h-48 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
+                                                        <button className="px-6.4 py-3 w-full text-start" onClick={(e) => setActiveDisplay("account-settings")}>Account Settings</button>
+                                                        <Link className="px-6.4 py-3 w-full text-start" to="/admin/dashboard?logout" onClick={logOut}>sign out</Link>
                                                     </div>            
                                                 </div>
                                             </div>
@@ -349,14 +292,14 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 <div className="mb-6 text-14xl font-semibold">
                                                     <h1>Daily Reports</h1>
                                                 </div>
-                                                <div className="flex flex-row m-0 justify-start space-x-10 min-h-72">
-                                                    <div className="lg:min-w-68 xl:lg:min-w-98 h-52 bg-white border border-slate-100 shadow-md rounded-lg">
+                                                <div className="flex flex-row justify-start items-start m-0 gap-10 min-h-72">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
                                                         {/* <div className="min-w-32"></div> */}
                                                     </div>
-                                                    <div className="lg:min-w-68 xl:lg:min-w-98 h-52 bg-white border border-slate-100 shadow-md rounded-lg">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
 
                                                     </div>
-                                                    <div className="lg:min-w-96 xl:min-w-102 h-52 bg-white border border-slate-100 shadow-md rounded-lg">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
                                                     {/* <HotelBookings /> */}
                                                     </div>
                                                 </div>
@@ -831,8 +774,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                     </div>
                                 </aside>                           
                                 
-                                <aside className={`${activeDisplay === "users" ? "d-block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
+                                <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
+                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
                                                 <h1>Welcome 
@@ -870,8 +813,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        <button to="#" onClick={logOut}>sign out</button>
+                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
+                                                        <button className="px-6.4 py-3 w-full text-start" onClick={(e) => setActiveDisplay("account-settings")}>Account Settings</button>
+                                                        <hr></hr>
+                                                        <Link className="px-6.4 py-3 w-full text-start" to="/admin/dashboard?logout" onClick={logOut}>sign out</Link>
                                                     </div>            
                                                 </div>
                                             </div>
@@ -911,8 +856,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                     </div>
                                 </aside>
 
-                                <aside className={`${activeDisplay === "admins" ? "d-block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white">
+                                <aside className={`${activeDisplay === "admins" ? "block" : "hidden" }`}>
+                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
                                                 <h1>Welcome 
@@ -950,8 +895,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        <button to="#" onClick={logOut}>sign out</button>
+                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
+                                                        <button className="px-6.4 py-3 w-full text-start" onClick={(e) => setActiveDisplay("account-settings")}>Account Settings</button>
+                                                        <hr></hr>
+                                                        <Link className="px-6.4 py-3 w-full text-start" to="/admin/dashboard?logout" onClick={logOut}>sign out</Link>
                                                     </div>            
                                                 </div>
                                             </div>

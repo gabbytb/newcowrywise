@@ -368,11 +368,6 @@
   /**************************************************************************/
   /************************* CUSTOM / Animations CSS ************************/
   /**************************************************************************/
-  .d-block {
-    @apply
-      block
-    ;
-  }
   .sticky-header {
     @apply 
       fixed 
@@ -407,19 +402,29 @@
     @apply animate-slideRight
   }
   .s-2-ls-anim {
-    @apply animate-slideUpSpan 
+    @apply 
+      animate-slideUpSpan 
+    ;
   }
   .s-2-l5-animreverse {
-    @apply animate-slideLeft
+    @apply 
+      animate-slideLeft
+    ;
   }
   .s-2-rc-1 {
-    @apply animate-slideDown 
+    @apply 
+      animate-slideDown;
+    ;
   }
   .s-2-rc-2 {
-    @apply animate-slideDown 
+    @apply 
+      animate-slideDown
+    ;
   }
   .s-2-rc-3 {
-    @apply animate-slideDown 
+    @apply 
+      animate-slideDown
+    ;
   }
   .s-4-anim {
     @apply animate-fadeOut

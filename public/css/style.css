@@ -1061,10 +1061,6 @@ input[type="text"], input[type="email"] {
 
 /**************************************************************************/
 
-.d-block {
-  display: block;
-}
-
 .sticky-header {
   position: fixed !important;
   top: 0px !important;
@@ -3576,6 +3572,10 @@ input[type="text"], input[type="email"] {
   z-index: -10;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .m-0 {
   margin: 0px;
 }
@@ -3745,10 +3745,6 @@ input[type="text"], input[type="email"] {
 
 .h-28 {
   height: 7rem;
-}
-
-.h-52 {
-  height: 13rem;
 }
 
 .h-fit {
@@ -3932,6 +3928,10 @@ input[type="text"], input[type="email"] {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-10 {
+  gap: 2.5rem;
 }
 
 .gap-16 {
@@ -4224,6 +4224,10 @@ input[type="text"], input[type="email"] {
   text-align: center;
 }
 
+.text-start {
+  text-align: start;
+}
+
 .text-end {
   text-align: end;
 }
@@ -4430,12 +4434,24 @@ input[type="text"], input[type="email"] {
     display: flex;
   }
 
+  .xs\:h-40 {
+    height: 10rem;
+  }
+
   .xs\:max-w-80 {
     max-width: 80%;
   }
 
+  .xs\:basis-1\/3 {
+    flex-basis: 33.333333%;
+  }
+
   .xs\:basis-full {
     flex-basis: 100%;
+  }
+
+  .xs\:grid-cols-26 {
+    grid-template-columns: 28rem 1fr;
   }
 }
 
@@ -4472,10 +4488,6 @@ input[type="text"], input[type="email"] {
     grid-template-columns: 54% 1fr;
   }
 
-  .sm\:grid-cols-26 {
-    grid-template-columns: 28rem 1fr;
-  }
-
   .sm\:justify-end {
     justify-content: flex-end;
   }
@@ -4506,6 +4518,10 @@ input[type="text"], input[type="email"] {
     display: flex;
   }
 
+  .lg\:h-52 {
+    height: 13rem;
+  }
+
   .lg\:w-123 {
     width: 34rem;
   }
@@ -4516,14 +4532,6 @@ input[type="text"], input[type="email"] {
 
   .lg\:w-full {
     width: 100%;
-  }
-
-  .lg\:min-w-68 {
-    min-width: 17rem;
-  }
-
-  .lg\:min-w-96 {
-    min-width: 24rem;
   }
 
   .lg\:basis-5\/12 {
@@ -4550,12 +4558,6 @@ input[type="text"], input[type="email"] {
 }
 
 @media (min-width: 1040px) {
-  @media (min-width: 981px) {
-    .xl\:lg\:min-w-98 {
-      min-width: 26rem;
-    }
-  }
-
   .xl\:ml-44 {
     margin-left: 11rem;
   }
@@ -4566,13 +4568,5 @@ input[type="text"], input[type="email"] {
 
   .xl\:w-full {
     width: 100%;
-  }
-
-  .xl\:min-w-102 {
-    min-width: 30rem;
-  }
-
-  .xl\:grid-cols-24 {
-    grid-template-columns: 32rem 1fr;
   }
 }
