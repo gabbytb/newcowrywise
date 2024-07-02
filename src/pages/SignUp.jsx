@@ -16,12 +16,11 @@ const SignUp = () => {
     // console.clear();
 
 
-    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        window.scrollTo(0, 0);
+        window.scroll({ left: 0, top: 0, behavior: 'smooth' });
         const pageTitle = "Sign Up",
         siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
@@ -31,50 +30,49 @@ const SignUp = () => {
     // *************************** //
 
 
-
-
-
     // *************************** //
     // ***** CREATE NEW USER ***** //
     // *************************** //
     const randNum = Math.floor(256*Math.random()) * Math.floor(256*Math.random());
-    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
-    console.log("***  Account Registration  ***", "\nAccount: ", user);
-
+    const [user, setUser] = useState({        
+        id: randNum,
+        username: '', 
+        firstName: '', 
+        lastName: '', 
+        email: '',
+        password: '', 
+        approvalTandC: false,
+        isActivated: false,
+    });
+    // console.log("Registration Payload: ", user);
+ 
     const [formMessage, setFormMessage] = useState(null);
-    console.log("Sign-Up Response: ", formMessage);
+    // console.log("Sign-Up Response: ", formMessage);
 
-    // eslint-disable-next-line
-    const [formSubmitted, setFormSubmitted] = useState(null);
-    console.log("Sign-Up Successful: ", formSubmitted);
-
-    
-    async function handleKeyUp(e) {
-        const name = e.target.name;
-        const value = e.target.checkbox ? e.target.checked : e.target.value;
-
-        setUser({
-            ...user,
-            [name]: value
-        });
+    async function trackUserInput(e) {
+        let name = e.target.name;
+        let value = e.target.value;
     };
 
     async function handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.checkbox ? e.target.checked : e.target.value;
+        let name = e.target.name;
+        let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
         setUser({
             ...user,
             [name]: value
         });        
+
     };
 
     async function handleSubmit(e) {
         e.preventDefault();
-        
-        axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+
+        const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/create";
+        axios.post(url, user)
         .then((response) => {
             const { success, message, data } = response.data; 
+            
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
             var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
@@ -83,7 +81,6 @@ const SignUp = () => {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
                 // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
-                setFormSubmitted(success);
                 setFormMessage(message);
                 
                 errMsg.classList.remove('error');
@@ -95,7 +92,6 @@ const SignUp = () => {
                 }, 2800);
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                setFormSubmitted(success);
                 setFormMessage(message);
 
                 errMsg.classList.remove('error');
@@ -107,7 +103,6 @@ const SignUp = () => {
                 }, 2800);
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                setFormSubmitted(success);
                 setFormMessage(message);
 
                 errMsg.classList.remove('error');
@@ -118,15 +113,9 @@ const SignUp = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else {         
-                // async function takeAction() {
-                //     window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
-                // };
-                // takeAction();
-                setFormSubmitted(success);
+                window.scroll({ left: 0, top: 500, behavior: 'smooth', });
                 setFormMessage(message);
-                setTimeout(() => {
-                    window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
-                }, 100);  
+
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
                 // signUpContentWrapper.classList.remove('min-h-120');
@@ -134,7 +123,6 @@ const SignUp = () => {
                 signUpContentWrapper.classList.remove('mb-16');
                 signUpContentWrapper.classList.add('mb-12');   
                                     
-                                
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
@@ -142,8 +130,9 @@ const SignUp = () => {
                     // signUpContentWrapper.classList.add('min-h-120'); 
                     signUpContentWrapper.classList.remove('mb-12');
                     signUpContentWrapper.classList.add('mb-16');                
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                }, 3300);             
+                    // window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                    window.location.reload();                    
+                }, 3300);
             };
         })
         .catch((error) => {
@@ -155,7 +144,7 @@ const SignUp = () => {
     // *************************** //
      
 
-
+  
 
 
     return (
@@ -165,7 +154,7 @@ const SignUp = () => {
                 <div className="relative w-full h-full pt-14">
                     <div className="mt-48 mb-16 items-center content-wrapper">
                         <div className="mx-auto error">
-                            {formMessage}
+                            { formMessage }
                         </div>
 
                         <form id="signUp" onSubmit={handleSubmit}>
@@ -177,32 +166,32 @@ const SignUp = () => {
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
-                                        <input type="text" name="username" value={user.username} placeholder="Username" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        <input type="text" name="username" placeholder="Username" onChange={handleChange} onKeyUp={trackUserInput} />
                                     </label>
 
                                     <div className="flex flex-row gap-4">
                                         <label htmlFor="firstName">
-                                            <input type="text" name="firstName" value={user.firstName} placeholder="First Name" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                            <input type="text" name="firstName" placeholder="First Name" onChange={handleChange}  onKeyUp={trackUserInput} />
                                         </label>
                                         <label htmlFor="lastName">
-                                            <input type="text" name="lastName" value={user.lastName} placeholder="Last Name" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                            <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange}  onKeyUp={trackUserInput} />
                                         </label>
                                     </div>
 
                                     <label htmlFor="email">
-                                        <input type="email" name="email" value={user.email} placeholder="example@email.com" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        <input type="email" name="email" placeholder="example@email.com" onChange={handleChange}  onKeyUp={trackUserInput} />
                                     </label>
 
                                     <label htmlFor="password">
-                                        {/* className={`${pwdIsHidden ? "hide" : "show"}`} */}
-                                        <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} className="pwd" />
+                                        <input className="pwd" type="text" name="password" placeholder="*************" onChange={handleChange}  onKeyUp={trackUserInput} />
+                                    </label>
+   
+                                    <label htmlFor="approvalTandC" className="flex justify-start items-end flex-row gap-4">I agree to terms & conditions?
+                                        <input type="checkbox" name="approvalTandC" onChange={handleChange} onKeyUp={trackUserInput} />
                                     </label>
 
-                                    <label htmlFor="isActivated" className="flex justify-start items-end flex-row gap-4">I agree to terms & conditions?
-                                        <input type="checkbox" name="isActivated" value={user.isActivated} onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    </label>
-
-                                    <ButtonSubmit 
+                                    <ButtonSubmit
+                                        label="submit"
                                         btnType="submit"
                                         btnBg
                                         btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
@@ -214,7 +203,6 @@ const SignUp = () => {
                                             focus:ring-2
                                             ease-in-out
                                             duration-300"
-                                        label="submit"
                                     />
 
                                     <div className="text-2xl/normal text-slate-600 font-medium">Have an account? 
@@ -223,7 +211,7 @@ const SignUp = () => {
                                 </div>
 
                                 <div className="mx-auto success">
-                                    {formMessage}
+                                    { formMessage }
                                 </div>
                             </div>
 

@@ -48,6 +48,9 @@ module.exports = mongoose => {
             max: 1022,
             min: 8,
         },
+        approvalTandC: {
+            type: Boolean
+        },
         isActivated: {
             type: Boolean,
         },

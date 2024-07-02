@@ -25,12 +25,11 @@ const SignUpVerification = () => {
     const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
     // console.log("***  Account Registration  ***", "\nAccount: ", user);
 
-    const [formMessage, setFormMessage] = useState(null);
-    // console.log("Registration Process: ", authenticationResponseMsg);
-
-    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(null);
     // console.log("Registration Successful: ", formSubmitted);
+
+    const [formMessage, setFormMessage] = useState(null);
+    // console.log("Registration Process: ", authenticationResponseMsg);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -141,36 +140,33 @@ const SignUpVerification = () => {
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
     const { token } = useParams();
-    const [existingUser, setExistingUser] = useState({ accessToken: token });
+    const [registeredUser, setRegisteredUser] = useState(null);
     // console.log("***  Token was assigned to User  ***", "\nAccount: ", existingUser);
-
-    const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
-    // console.log("Account Verification: ", authenticationResponseMsg);
 
     const [isVerified, setIsVerified] = useState(false);
     // console.log("Account Verified: ", isVerified);
+
+    const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
+    // console.log("Account Verification: ", authenticationResponseMsg);
     
     const [isLoading, setIsLoading] = useState(true);
     // console.log("Is Loading: ", isLoading);
 
     useEffect(() => {  
         window.scroll({ left: 0, top: 300, behavior: "smooth" });
-        function disableIsLoading() {
-            setIsLoading(false);
-        }
+
         function verifyAccountRegistration() {
-            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, existingUser, {
+            const url = `http://127.0.0.1:8000/user/verify/${token}`;
+            const payload = {
+                accessToken: token,
+            };
+            axios.post(url, payload, {
                 headers: {                    
                     Authorization: `Bearer ${token}`,
                 }
             })
             .then((response) => {
-                const { success, data, message } = response.data;    
-                const pageTitle = "Account Verification",
-                siteTitle = "Samuel Akinola Foundation";
-                document.title = `${pageTitle} - ${data?.email} | ${siteTitle}`;            
-
-                var verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
+                const { success, data, message } = response.data;              
                 if ((!success) && (message === "Unauthorized: Bearer token required")) {
                     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
                     setIsVerified(success);
@@ -185,11 +181,13 @@ const SignUpVerification = () => {
                     setAuthenticationResponseMsg(message);                    
                 } else {
                     setIsVerified(success);
-                    setExistingUser(data);
                     setAuthenticationResponseMsg(message);
+                    setRegisteredUser(data);
 
+                    let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
                     verificationStatus?.classList.remove('success-verify');
                     verificationStatus?.classList.add('success-message-info');
+                    
                     setTimeout(() => {
                         verificationStatus?.classList.remove('success-message-info');
                         verificationStatus?.classList.add('success-verify');
@@ -203,18 +201,26 @@ const SignUpVerification = () => {
             .catch((error) => {
                 console.log("Account Verification Error: ", error);
             })
-            .finally(disableIsLoading);
+            .finally(() => {
+                setIsLoading(false);
+            });
         };
         
         let timeout = setTimeout(verifyAccountRegistration, 2300);
         return () => {
             clearTimeout(timeout);
         };
-    }, [isVerified]);
+    }, []);
     // ******************************** //
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
 
+
+
+    useEffect(() => {
+        let pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
+    }, [registeredUser]);
 
 
     
@@ -297,7 +303,6 @@ const SignUpVerification = () => {
 
 
 
-
     return (
         <>
             <Nav />
@@ -361,7 +366,6 @@ const SignUpVerification = () => {
                                     </div>
                                 </div>
 
-                                
                                 <div className="mx-auto success">
                                     {formMessage}
                                 </div>

@@ -22,10 +22,10 @@ exports.createAccount = async (req, res) => {
         const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
-        const { id, username, firstName, lastName, email, password, isActivated } = req.body;
+        const { id, username, firstName, lastName, email, password, approvalTandC, isActivated } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!(username && firstName && lastName && email && password)) {
+        if (!( username && firstName && lastName && email && password )) {
             const responseData = {
                 success: false,
                 message: 'Fill all the required inputs.'
@@ -90,6 +90,7 @@ exports.createAccount = async (req, res) => {
             lastName,
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
+            approvalTandC,
             isActivated,
             roles: [
                 {
@@ -362,6 +363,11 @@ exports.logIn = async (req, res) => {
             return res.status(200).json(responseData);
         }
         
+        
+        // Set Token with Timer for Logged-In User
+        const token = await createJWT(user._id);
+        user.accessToken = token;
+
         // ***********************************************************************************//
         // *************                CURRENT LOGGED-IN USER                  **************//
         // ***********************************************************************************//
