@@ -55,31 +55,62 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************
     const [isLoading, setIsLoading] = useState(true);
     const [activeDisplay, setActiveDisplay] = useState("home");
-    const [manageActiveUsersDisplay, setManageActiveUsersDisplay] = useState(null);
-    const [manageActiveAdminsDisplay, setManageActiveAdminsDisplay] = useState("admins");
     // *******************************************************************
     // *******************************************************************
 
 
+    // ************************************
+    // MANAGE STATE:-  FOR ALL USERS
+    // ************************************
+    const [users, setUsers] = useState([]);
+    console.log('All Users: ', users);
 
-    function handleUsersDisplay() {
-        if (activeDisplay === "users") {
-            setManageActiveUsersDisplay(activeDisplay);
+
+    // ************************************
+    // CALL TO API:-  FIND ALL USERS
+    // ************************************
+    useEffect(() => {      
+        // SET PAGE TITLE  
+        const pageTitle = "Admin Dashboard",
+        siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+
+
+        function findAllUsers() {
+            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+            axios.get(url)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                if ((!success) || (message === "Users not found")) {
+                    console.log("Success: ", success);
+                    console.log("Message: ", message);
+                }
+                                
+                if (activeDisplay === "users" || activeDisplay === "admins") {
+                    // Perform Actions Here if Truthy
+                    setUsers(data);
+                };
+            })
+            .catch((error) => {
+                // Handle error state or logging here
+                console.log("Error encountered: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);    // Always disable loading state, whether successful or not
+            });
         };
-    }
-    handleUsersDisplay();
-    function handleAdminsDisplay() {
-        if (activeDisplay === "admins") {
-            setManageActiveAdminsDisplay(activeDisplay);
+        
+        var timerID = setTimeout(findAllUsers, 1800);   // Delay execution of findAllUsers by 1800ms
+        return () => {
+            clearTimeout(timerID);   // Clean up timer if component unmounts or token changes
         };
-    }
-    handleAdminsDisplay();
-
-
+    }, [activeDisplay]);
+    // *******************************************************************************************//
+    // *******************************************************************************************//
 
 
     // *******************************************************************************************//
-    // USERS MENU: DropDown Controller
+    // USERS "DropDown" MENU:-  Controller
     // *******************************************************************************************//
     function usersDropdownFunction() {
         let usersDropDown = document.querySelector("#usersDropdown");
@@ -107,7 +138,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************
 
 
-
+    // *******************************************************************************************//
+    // Home "Profile Image" MENU:-  Controller
+    // *******************************************************************************************//
     async function toggleProfileImgMenu() {       
         var userProfileImgDropDown = document.querySelector('.right-top-pane .rt-right-pane .lp');
         console.log('Admins Dropdown: ', userProfileImgDropDown);
@@ -119,98 +152,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
             userProfileImgDropDown?.classList.add('hidden');
         };
     };
-
     // *******************************************************************************************//
     // *******************************************************************************************//
-
-
-
-
-    // ************************************
-    // MANAGE  STATE:-  ALL USERS
-    // ************************************
-    const [users, setUsers] = useState([]);
-    console.log('All Users: ', users);
-    // ************************************
-    // CALL TO API:-  FIND ALL USERS
-    // ************************************
-    useEffect(() => {      
-        // SET PAGE TITLE  
-        const pageTitle = "Admin Dashboard",
-        siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-
-
-        function findAllUsers() {
-                // setIsLoading(true); // Set isLoading state to true when fetching starts
-                axios.get("http://127.0.0.1:8000/api/v1/admin/users/manage")
-                .then((response) => {
-                    const { success, data, message } = response.data;
-                        if ((!success) || (message === "Users not found")) {
-                            console.log("Success: ", success);
-                            console.log("Message: ", message);
-                        };
-                    
-                        if (activeDisplay === "users") {
-                            if (manageActiveUsersDisplay === activeDisplay) {
-                                // Perform Actions Here if Truthy
-                                setUsers(data);
-                            };
-                        };
-                })
-                .catch((error) => {
-                    // Handle error state or logging here
-                    console.log("Error encountered: ", error);
-                })
-                .finally(() => {
-                    setIsLoading(false);    // Always disable loading state, whether successful or not
-                });
-            // };
-        }
-
-        var timerID = setTimeout(findAllUsers, 1800);   // Delay execution of findAllUsers by 1800ms
-        return () => {
-            clearTimeout(timerID);   // Clean up timer if component unmounts or token changes
-        };
-    }, [activeDisplay, manageActiveUsersDisplay]);
-
-
-    useEffect(() => {
-        function findAllAdmins() {
-            // setIsLoading(true); // Set isLoading state to true when fetching starts
-            axios.get("http://127.0.0.1:8000/api/v1/admin/users/manage")
-            .then((response) => {
-                const { success, data, message } = response.data;
-                    if ((!success) || (message === "Users not found")) {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
-                    };
-                
-                    if (activeDisplay === "users") {
-                        if (manageActiveUsersDisplay === activeDisplay) {
-                            // Perform Actions Here if Truthy
-                            setUsers(data);
-                        };
-                    };
-            })
-            .catch((error) => {
-                // Handle error state or logging here
-                console.log("Error encountered: ", error);
-            })
-            .finally(() => {
-                setIsLoading(false);    // Always disable loading state, whether successful or not
-            });
-        };
-        
-        var timerID = setTimeout(findAllAdmins, 1800);   // Delay execution of findAllUsers by 1800ms
-        return () => {
-            clearTimeout(timerID);   // Clean up timer if component unmounts or token changes
-        };
-    }, [activeDisplay, manageActiveAdminsDisplay]);
-    // *******************************************************************************************//
-    // *******************************************************************************************//
-
-
 
 
 
