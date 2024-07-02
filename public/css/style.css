@@ -1683,9 +1683,9 @@ input[type="text"], input[type="email"] {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-#usersDropdown a,
-  #staffsDropdown a,
-  #adminsDropdown a {
+.usersDropdown a,
+  .staffsDropdown a,
+  .adminsDropdown a {
   font-size: 1.25rem;
   font-weight: 500;
   text-transform: capitalize;
@@ -1694,25 +1694,11 @@ input[type="text"], input[type="email"] {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-#usersDropdown a:hover,
-  #staffsDropdown a:hover,
-  #adminsDropdown a:hover {
+.usersDropdown a:hover,
+  .staffsDropdown a:hover,
+  .adminsDropdown a:hover {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
-}
-
-#userProfileImgDropdown button {
-  font-size: 1.25rem;
-  font-weight: 500;
-  text-transform: capitalize;
-  letter-spacing: 0.065em;
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-#userProfileImgDropdown button:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .right-top-pane .rt-left-pane h1 {

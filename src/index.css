@@ -679,14 +679,14 @@
       text-white
     ;
   }
-  #usersDropdown a,
-  #staffsDropdown a,
-  #adminsDropdown a {
+  .usersDropdown a,
+  .staffsDropdown a,
+  .adminsDropdown a {
     @apply
       text-xl tracking-moretight font-medium capitalize text-white hover:text-slate-300
     ;
   }
-  #userProfileImgDropdown button {
+  .userProfileImgDropdown button {
     @apply
       text-xl tracking-moretight font-medium capitalize text-black hover:text-black
     ;

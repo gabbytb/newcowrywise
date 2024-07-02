@@ -112,8 +112,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
     // USERS "DropDown" MENU:-  Controller
     // *******************************************************************************************//
-    function usersDropdownFunction() {
-        let usersDropDown = document.querySelector("#usersDropdown");
+    function toggleUsersDropdown() {
+        let usersDropDown = document.querySelector(".usersDropdown");
         // console.log('Users Dropdown: ', usersDropDown);    
         if (usersDropDown?.classList.contains('hidden')) {
             usersDropDown?.classList.remove('hidden');
@@ -123,8 +123,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
             usersDropDown?.classList.add('hidden');
         };
     };
-    function adminsDropdownFunction() {
-        let adminsDropDown = document.querySelector("#adminsDropdown");
+    function toggleAdminsDropdown() {
+        let adminsDropDown = document.querySelector(".adminsDropdown");
         // console.log('Admins Dropdown: ', adminsDropDown);
         if (adminsDropDown?.classList.contains('hidden')) {
             adminsDropDown?.classList.remove('hidden');
@@ -141,15 +141,17 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
     // Home "Profile Image" MENU:-  Controller
     // *******************************************************************************************//
-    async function toggleProfileImgMenu() {       
-        var userProfileImgDropDown = document.querySelector('.right-top-pane .rt-right-pane .lp');
-        console.log('Admins Dropdown: ', userProfileImgDropDown);
-        if (userProfileImgDropDown?.classList.contains("hidden")) {
-            userProfileImgDropDown?.classList.remove('hidden');
-            userProfileImgDropDown?.classList.add('flex');
-        } else {
-            userProfileImgDropDown?.classList.remove('flex');
-            userProfileImgDropDown?.classList.add('hidden');
+    function toggleUserProfileMenu() {       
+        const userProfileImgDropDown = document.querySelectorAll('.upm');
+        for (var i = 0; i < userProfileImgDropDown.length; i++)  {
+            // console.log('Admins Dropdown: ', userProfileImgDropDown);
+            if (userProfileImgDropDown[i]?.classList.contains("hidden")) {
+                userProfileImgDropDown[i]?.classList.remove('hidden');
+                userProfileImgDropDown[i]?.classList.add('flex');
+            } else {
+                userProfileImgDropDown[i]?.classList.remove('flex');
+                userProfileImgDropDown[i]?.classList.add('hidden');
+            };
         };
     };
     // *******************************************************************************************//
@@ -202,19 +204,19 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                             <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
                                             <div className="flex flex-col gap-8">
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button onClick={usersDropdownFunction} className="dropbtn">
+                                                    <button onClick={toggleUsersDropdown} className="dropbtn">
                                                         <UsersIcon /> <span>users</span>
                                                     </button>
-                                                    <div id="usersDropdown" className="hidden flex-col gap-4 px-15.9">
+                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
                                                         <Link to="#" onClick={(e) => setActiveDisplay("users")}>user management</Link>
                                                     </div>
                                                 </div>
 
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button onClick={adminsDropdownFunction} className="dropbtn">
+                                                    <button onClick={toggleAdminsDropdown} className="dropbtn">
                                                         <StaffsIcon /> <span>staffs</span>
                                                     </button>
-                                                    <div id="adminsDropdown" className="hidden flex-col gap-4 px-15.9">
+                                                    <div className="hidden flex-col gap-4 px-15.9 adminsDropdown">
                                                         <Link to="#" onClick={(e) => setActiveDisplay("admins")}>staff management</Link>
                                                     </div>
                                                 </div>
@@ -325,10 +327,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     </h6>
                                                 </div>
                                                 <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleProfileImgMenu} className="dropbtn absolute top-0">
+                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
+                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 upm">
                                                         
                                                         <hr />
                                                         <button to="#" onClick={logOut}>sign out</button>
@@ -865,10 +867,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     </h6>
                                                 </div>
                                                 <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleProfileImgMenu} className="dropbtn absolute top-0">
+                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 hidden lp">
+                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 upm">
                                                         <button to="#" onClick={logOut}>sign out</button>
                                                     </div>            
                                                 </div>
@@ -945,10 +947,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     </h6>
                                                 </div>
                                                 <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleProfileImgMenu} className="dropbtn absolute top-0">
+                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                         <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                     </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 lanky">
+                                                    <div className="hidden flex-col items-start gap-4 w-72 min-h-48 py-6 px-6.4 shadow-lg rounded-lg relative top-20 -left-52 upm">
                                                         <button to="#" onClick={logOut}>sign out</button>
                                                     </div>            
                                                 </div>
