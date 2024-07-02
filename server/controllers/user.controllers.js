@@ -66,9 +66,9 @@ exports.createAccount = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -93,12 +93,12 @@ exports.createAccount = async (req, res) => {
             approvalTandC,
             isActivated,
             roles: [
-                {
-                    _id: roleAdmin._id,
-                    role: roleAdmin.role,
-                    createdAt: roleAdmin.createdAt,
-                    updatedAt: roleAdmin.updatedAt,
-                },
+                // {
+                //     _id: roleAdmin._id,
+                //     role: roleAdmin.role,
+                //     createdAt: roleAdmin.createdAt,
+                //     updatedAt: roleAdmin.updatedAt,
+                // },
                 // {
                 //     _id: roleEditor._id, 
                 //     role: roleEditor.role, 
@@ -111,12 +111,12 @@ exports.createAccount = async (req, res) => {
                 //     createdAt: roleStaff.createdAt, 
                 //     updatedAt: roleStaff.updatedAt, 
                 // },
-                // {
-                //     _id: roleUsers._id, 
-                //     role: roleUsers.role, 
-                //     createdAt: roleUsers.createdAt, 
-                //     updatedAt: roleUsers.updatedAt,
-                // }
+                {
+                    _id: roleUsers._id, 
+                    role: roleUsers.role, 
+                    createdAt: roleUsers.createdAt, 
+                    updatedAt: roleUsers.updatedAt,
+                }
             ],
         });
         const user = await newUser.save();
@@ -363,7 +363,7 @@ exports.logIn = async (req, res) => {
             return res.status(200).json(responseData);
         }
         
-        
+
         // Set Token with Timer for Logged-In User
         const token = await createJWT(user._id);
         user.accessToken = token;
