@@ -3777,8 +3777,8 @@ input[type="text"], input[type="email"] {
   min-height: 5rem;
 }
 
-.min-h-48 {
-  min-height: 12rem;
+.min-h-24 {
+  min-height: 6rem;
 }
 
 .min-h-72 {
@@ -3936,6 +3936,10 @@ input[type="text"], input[type="email"] {
 
 .gap-16 {
   gap: 4rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
 }
 
 .gap-24 {
@@ -4148,6 +4152,10 @@ input[type="text"], input[type="email"] {
   padding-bottom: 1.5rem;
 }
 
+.pb-11 {
+  padding-bottom: 2.75rem;
+}
+
 .pb-20 {
   padding-bottom: 5rem;
 }
@@ -4220,6 +4228,10 @@ input[type="text"], input[type="email"] {
   padding-top: 1.25rem;
 }
 
+.pt-9 {
+  padding-top: 2.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -4249,6 +4261,10 @@ input[type="text"], input[type="email"] {
   line-height: 4.4rem;
 }
 
+.text-21xl {
+  font-size: 2.1rem;
+}
+
 .text-2xl {
   font-size: 1.5rem;
 }
@@ -4265,6 +4281,10 @@ input[type="text"], input[type="email"] {
 
 .text-xl {
   font-size: 1.25rem;
+}
+
+.text-41xl {
+  font-size: 1.54rem;
 }
 
 .font-bold {

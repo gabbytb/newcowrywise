@@ -37,9 +37,11 @@ import YoutubeIcon from "./YoutubeIcon";
 
 // Admin Icons
 import HomeIcon from "./HomeIcon";
+import IconIncrease from "./IconIncrease";
+import IconDecrease from "./IconDecrease";
 import UsersIcon from "./UsersIcon";
 import StaffsIcon from "./StaffsIcon";
-
+import LogOutIcon from "./LogOutIcon";
 
 
 export {
@@ -80,6 +82,9 @@ export {
 
 
     HomeIcon,
+    IconIncrease,
+    IconDecrease,
     UsersIcon,
     StaffsIcon,
+    LogOutIcon,
 }
