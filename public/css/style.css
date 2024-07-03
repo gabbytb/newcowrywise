@@ -604,6 +604,10 @@ input[type="text"], input[type="email"] {
   letter-spacing: 0.06em;
 }
 
+tr {
+  text-align: justify;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -3817,10 +3821,6 @@ input[type="text"], input[type="email"] {
   width: 100%;
 }
 
-.min-w-32 {
-  min-width: 8rem;
-}
-
 .min-w-80 {
   min-width: 17.8rem;
 }
@@ -4261,10 +4261,6 @@ input[type="text"], input[type="email"] {
   line-height: 4.4rem;
 }
 
-.text-21xl {
-  font-size: 2.1rem;
-}
-
 .text-2xl {
   font-size: 1.5rem;
 }
@@ -4274,6 +4270,10 @@ input[type="text"], input[type="email"] {
   line-height: 1.5;
 }
 
+.text-41xl {
+  font-size: 1.54rem;
+}
+
 .text-8xl\/tighter {
   font-size: 6rem;
   line-height: 1.35;
@@ -4281,10 +4281,6 @@ input[type="text"], input[type="email"] {
 
 .text-xl {
   font-size: 1.25rem;
-}
-
-.text-41xl {
-  font-size: 1.54rem;
 }
 
 .font-bold {

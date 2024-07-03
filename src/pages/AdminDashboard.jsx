@@ -2,7 +2,7 @@ import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { adminDashboardIcon, brandOfficialLogo } from "../assets/images";
-import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
+import { HomeIcon, IconDecrease, IconIncrease, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
 // import { dashboardMenuUsers } from "../constants";
 // import { DashboardMenuCard } from "../components";
 
@@ -14,16 +14,6 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
 
 const AdminDashboard = ({ isLoggedIn }) => {
     
-
-    // *********************************************
-    // CURRENTLY ACTIVE:- (LOGGED-IN USER)
-    // *********************************************
-    isLoggedIn = JSON.parse(localStorage.getItem("user"));    
-    // console.log('LOGGED-IN USER:- ', isLoggedIn);  
-    // *********************************************
-    // *********************************************
-    
-
 
     // *********************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
@@ -38,20 +28,30 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
 
+    // ***********************************************
+    // PAGE TITLE | CURRENTLY ACTIVE:- LOGGED-IN USER
+    // ***********************************************
+    const pageTitle = "Admin Dashboard", siteTitle = "Samuel Akinola Foundation";
+    document.title = `${pageTitle} | ${siteTitle}`;
+
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));
+    // *********************************************
+    // *********************************************
+    
+
+
     // *********************************************
     // DESTRUCTURE:-  (LOGGED-IN USER Props)
     // *********************************************
     const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    // console.log("LOGGED-IN USER's Roles: ", userRoles);
     // const userAccessToken = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
-    // console.log("LOGGED-IN USER's AccessToken: ", userAccessToken);
-
+    
 
 
     // *******************************************************************
-    // SPECIAL FEATURES
+    // MANAGE STATE:-  SPECIAL FEATURES
     // *******************************************************************
     const [isLoading, setIsLoading] = useState(true);
     const [activeDisplay, setActiveDisplay] = useState("home");
@@ -59,34 +59,29 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************
 
 
+
     // ************************************
-    // MANAGE STATE:-  FOR ALL USERS
+    // MANAGE STATE:-  ALL USERS
     // ************************************
     const [users, setUsers] = useState([]);
-    console.log('All Users: ', users);
+    
 
 
     // ************************************
     // CALL TO API:-  FIND ALL USERS
     // ************************************
     useEffect(() => {      
-        // SET PAGE TITLE  
-        const pageTitle = "Admin Dashboard",
-        siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-
-
         function findAllUsers() {
             const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
             axios.get(url)
             .then((response) => {
-                const { success, data, message } = response.data;
-                if ((!success) || (message === "Users not found")) {
-                    console.log("Success: ", success);
-                    console.log("Message: ", message);
-                }
-                                
                 if (activeDisplay === "users" || activeDisplay === "admins") {
+                    const { success, data, message } = response.data;
+                    if ((!success) || (message === "Users not found")) {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    }
+                                
                     // Perform Actions Here if Truthy
                     setUsers(data);
                 };
@@ -109,29 +104,36 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
 
 
+
+    // console.clear();
+    const [activeUserMenuIndex, setActiveUserMenuIndex] = useState(0);
     // *******************************************************************************************//
     // USERS "DropDown" MENU:-  Controller
     // *******************************************************************************************//
-    function toggleUsersDropdown() {
-        let usersDropDown = document.querySelector(".usersDropdown");
-        // console.log('Users Dropdown: ', usersDropDown);    
-        if (usersDropDown?.classList.contains('hidden')) {
-            usersDropDown?.classList.remove('hidden');
-            usersDropDown?.classList.add('flex');
-        } else {
-            usersDropDown?.classList.remove('flex');
-            usersDropDown?.classList.add('hidden');
-        };
-    };
-    function toggleAdminsDropdown() {
-        let adminsDropDown = document.querySelector(".adminsDropdown");
-        // console.log('Admins Dropdown: ', adminsDropDown);
-        if (adminsDropDown?.classList.contains('hidden')) {
-            adminsDropDown?.classList.remove('hidden');
-            adminsDropDown?.classList.add('flex');
-        } else {
-            adminsDropDown?.classList.remove('flex');
-            adminsDropDown?.classList.add('hidden');
+    function toggleUsersDropdown() {       
+        const usersDropDown = document.querySelectorAll('.usersDropdown');
+        for (var i = 0; i < usersDropDown.length; i++)  {       
+            console.log("User Dropdown: ", i);
+                        
+            if (i < usersDropDown.length) {
+                if (activeUserMenuIndex !== i) {                   
+                    setActiveUserMenuIndex(i);
+
+                    console.log("Active User Menu Number: ", activeUserMenuIndex);
+                };
+                // console.log("User Dropdown Shuffled: ", usersDropDown[i]);
+        
+
+                    // if (usersDropDown[i]?.classList.contains("hidden")) {
+                    //     usersDropDown[i]?.classList.remove('hidden');
+                    //     usersDropDown[i]?.classList.add('flex');
+                    //     usersDropDown[i]?.classList.add("active-menu");
+                    // } else {
+                    //     usersDropDown[i]?.classList.remove('active-menu');
+                    //     usersDropDown[i]?.classList.remove('flex');
+                    //     usersDropDown[i]?.classList.add('hidden');
+                    // };
+            };
         };
     };
     // *******************************************************************
@@ -142,15 +144,14 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // TOGGLE: USER "Profile Image" MENU
     // *******************************************************************************************//
     function toggleUserProfileMenu() {       
-        const userProfileImgDropDown = document.querySelectorAll('.upm');
-        for (var i = 0; i < userProfileImgDropDown.length; i++)  {
-            // console.log('Admins Dropdown: ', userProfileImgDropDown);
-            if (userProfileImgDropDown[i]?.classList.contains("hidden")) {
-                userProfileImgDropDown[i]?.classList.remove('hidden');
-                userProfileImgDropDown[i]?.classList.add('flex');
+        const userDpMenu = document.querySelectorAll('.upm');
+        for (var i = 0; i < toggleUserProfileMenu.length; i++)  {
+            if (userDpMenu[i]?.classList.contains("hidden")) {
+                userDpMenu[i]?.classList.remove('hidden');
+                userDpMenu[i]?.classList.add('flex');
             } else {
-                userProfileImgDropDown[i]?.classList.remove('flex');
-                userProfileImgDropDown[i]?.classList.add('hidden');
+                userDpMenu[i]?.classList.remove('flex');
+                userDpMenu[i]?.classList.add('hidden');
             };
         };
     };
@@ -213,10 +214,10 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 </div>
 
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button onClick={toggleAdminsDropdown} className="dropbtn">
+                                                    <button onClick={toggleUsersDropdown} className="dropbtn">
                                                         <StaffsIcon /> <span>staffs</span>
                                                     </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 adminsDropdown">
+                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
                                                         <Link to="#" onClick={(e) => setActiveDisplay("admins")}>staff management</Link>
                                                     </div>
                                                 </div>
@@ -303,7 +304,13 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 </div>
                                                 <div className="flex flex-row justify-start items-start m-0 gap-10 min-h-72">
                                                     <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
-                                                        {/* <div className="min-w-32"></div> */}
+                                                        <div className="flex flex-row">
+                                                            <p>{}</p>
+                                                            <div className="flex flex-col">
+                                                                <IconIncrease/>
+                                                                <IconDecrease/>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
 
