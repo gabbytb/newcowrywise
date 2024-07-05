@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { adminDashboardIcon, brandOfficialLogo } from "../assets/images";
 import { HomeIcon, IconDecrease, IconIncrease, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
-// import { dashboardMenuUsers } from "../constants";
+import { dashboardMenuUsers } from "../constants";
 // import { DashboardMenuCard } from "../components";
 
 
@@ -104,40 +104,25 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
 
 
-
-    // console.clear();
-    const [activeUserMenuIndex, setActiveUserMenuIndex] = useState(0);
+   
+    // const [dashboardUsersMenu, setDashboardUsersMenu] = useState(dashboardMenuUsers);
     // *******************************************************************************************//
     // USERS "DropDown" MENU:-  Controller
     // *******************************************************************************************//
     function toggleUsersDropdown() {       
-        const usersDropDown = document.querySelectorAll('.usersDropdown');
-        for (var i = 0; i < usersDropDown.length; i++)  {       
-            console.log("User Dropdown: ", i);
-                        
-            if (i < usersDropDown.length) {
-                if (activeUserMenuIndex !== i) {                   
-                    setActiveUserMenuIndex(i);
-
-                    console.log("Active User Menu Number: ", activeUserMenuIndex);
-                };
-                // console.log("User Dropdown Shuffled: ", usersDropDown[i]);
-        
-
-                    // if (usersDropDown[i]?.classList.contains("hidden")) {
-                    //     usersDropDown[i]?.classList.remove('hidden');
-                    //     usersDropDown[i]?.classList.add('flex');
-                    //     usersDropDown[i]?.classList.add("active-menu");
-                    // } else {
-                    //     usersDropDown[i]?.classList.remove('active-menu');
-                    //     usersDropDown[i]?.classList.remove('flex');
-                    //     usersDropDown[i]?.classList.add('hidden');
-                    // };
-            };
-        };
+        // if (usersDropDown[i]?.classList.contains("hidden")) {
+        //     usersDropDown[i]?.classList.remove('hidden');
+        //     usersDropDown[i]?.classList.add('flex');
+        //     usersDropDown[i]?.classList.add("active-menu");
+        // } else {
+        //     usersDropDown[i]?.classList.remove('active-menu');
+        //     usersDropDown[i]?.classList.remove('flex');
+        //     usersDropDown[i]?.classList.add('hidden');
+        // };
     };
     // *******************************************************************
     // *******************************************************************
+
 
 
     // *******************************************************************************************//
@@ -218,7 +203,16 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                         <StaffsIcon /> <span>staffs</span>
                                                     </button>
                                                     <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("admins")}>staff management</Link>
+                                                        <Link to="#" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col gap-4 dropdown">
+                                                    <button onClick={toggleUsersDropdown} className="dropbtn">
+                                                        <StaffsIcon /> <span>admins</span>
+                                                    </button>
+                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
+                                                        <Link to="#" onClick={(e) => setActiveDisplay("admins")}>admins management</Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -295,29 +289,66 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
                                     {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                                    <div className="right-bottom-pane relative h-full flex flex-col">
+                                    <div className="right-bottom-pane gap-12 relative h-full flex flex-col">
                                         {/* Section Body:  Row 1 [Date] */}
                                         <div className="flex flex-row">
                                             <div className="mx-0 px-12 h-full w-full">
                                                 <div className="mb-6 text-14xl font-semibold">
-                                                    <h1>Daily Reports</h1>
+                                                    <h1>Total Revenue</h1>
                                                 </div>
-                                                <div className="flex flex-row justify-start items-start m-0 gap-10 min-h-72">
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
-                                                        <div className="flex flex-row">
-                                                            <p>{}</p>
-                                                            <div className="flex flex-col">
+                                                <div className="flex flex-row justify-start items-start m-0 gap-10">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-green-600 shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                        <div className="flex flex-row h-full sales-stats--wrap">
+                                                            <div className="flex flex-col pl-10 sales_stats w-4/5">
+                                                                <p>Daily Revenue</p>
+                                                                <div className="flex flex-col gap-6">
+                                                                    <strong>N 13,872,924.63</strong>
+                                                                    <strong>
+                                                                        24% <span>of 100%</span>
+                                                                    </strong>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex flex-col sales_direction w-1/5">
                                                                 <IconIncrease/>
                                                                 <IconDecrease/>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
-
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-green-600 shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                        <div className="flex flex-row h-full sales-stats--wrap">
+                                                            <div className="flex flex-col pl-10 sales_stats w-4/5">
+                                                                <p>Weekly Revenue</p>
+                                                                <div className="flex flex-col gap-6">
+                                                                    <strong> ₦ 23,572,587.48</strong>
+                                                                    <strong>
+                                                                        48% <span>of 100%</span>
+                                                                    </strong>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex flex-col sales_direction w-1/5">
+                                                                <IconIncrease/>
+                                                                <IconDecrease/>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-white border border-slate-100 shadow-md rounded-lg">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-green-600 shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                        <div className="flex flex-row h-full sales-stats--wrap">
+                                                            <div className="flex flex-col pl-10 sales_stats w-4/5">
+                                                                <p>Monthly Revenue</p>
+                                                                <div className="flex flex-col gap-6">
+                                                                    <strong>N 59,892,366.96</strong>
+                                                                    <strong>
+                                                                        48% <span>of 100%</span>
+                                                                    </strong>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex flex-col sales_direction w-1/5">
+                                                                <IconIncrease/>
+                                                                <IconDecrease/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     {/* <HotelBookings /> */}
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

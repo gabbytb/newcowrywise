@@ -141,6 +141,73 @@
 
 @layer components {
 
+  .sales-stats--wrap .sales_direction svg {
+    @apply
+      h-full
+      w-10
+    ;
+  }
+
+  .sales-stats--wrap .sales_direction svg.sales-increase,
+  .sales-stats--wrap .sales_direction svg.sales-decrease {
+    @apply
+      max-h-12
+    ;
+  }
+
+  .sales-stats--wrap .sales_direction svg.sales-decrease {
+    @apply
+      animate-pulse
+    ;
+  }
+
+  .sales-stats--wrap .sales_stats {
+    @apply
+      justify-start
+      gap-6
+    ;
+  }
+
+  .sales-stats--wrap .sales_stats p {
+    @apply
+      text-base 
+      font-black 
+      tracking-verytight 
+      mt-7
+      mb-0
+      text-white
+    ;
+  }
+
+  .sales-stats--wrap .sales_stats strong {
+    @apply
+      text-2xl
+      font-medium
+      text-white
+    ;
+  }
+  .sales-stats--wrap .sales_stats strong:first-of-type {
+    @apply
+      text-4xl
+      font-semibold
+      tracking-verytight
+    ;
+  }
+
+  .sales-stats--wrap .sales_stats strong span {
+    @apply
+      text-3xl
+      font-medium
+      text-white
+    ;
+  }
+
+  .sales-stats--wrap .sales_direction {
+    @apply
+      justify-center
+      gap-2
+    ;
+  }
   #homeTopBarID::before {
     content: '';
     position: absolute;

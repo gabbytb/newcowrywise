@@ -25,17 +25,17 @@ const NavNoTopBar = () => {
             {/* Top Header  */}
             <header id="header" className="default-header">
                 <div className="container">
-                    <div className="flex items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
+                    <div className="flex justify-center items-center h-full px-0 relative ">                
+                        <Link to={"/"} className="mt-0 brand w-60 justify-center">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="ml-16 brand-white w-1/6">
+                        <Link to={"/"} className="mt-0 ml-16 brand-white w-60 justify-center">
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialWhiteLogo} alt="official logo" />
                         </Link>
 
-                        <div className="flex justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between">
+                        <div className="justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between hidden">
                             <ul id="nav-menus-wrap" className="nav-links">
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Personal</p>
@@ -158,12 +158,12 @@ const NavNoTopBar = () => {
                             </ul>
                         </div>
                         
-                        <div className="space-x-10 cta-menu flex justify-end w-1/5">
+                        <div className="space-x-10 cta-menu justify-end w-1/5 hidden">
                             <Link to={"/user/login"}>log in</Link>
                             <Link to={"/donations"}>donate now</Link>
                         </div>
                         
-                        <div className="mobile-nav">
+                        <div className="mobile-nav xl:flex fixed top-2 right-24">
                             <div className="hamburger">
                                 <span></span>
                             </div>
