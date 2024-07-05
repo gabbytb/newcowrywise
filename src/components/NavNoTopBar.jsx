@@ -26,11 +26,11 @@ const NavNoTopBar = () => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex justify-center items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-0 brand w-60 justify-center">
+                        <Link to={"/"} className="m-0 brand w-60 justify-center">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="mt-0 ml-16 brand-white w-60 justify-center">
+                        <Link to={"/"} className="ml-16 brand-white w-60 justify-center">
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialWhiteLogo} alt="official logo" />
                         </Link>

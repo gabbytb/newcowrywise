@@ -1,5 +1,5 @@
 import brandOfficialLogo from "./logo.jpg";
-import brandOfficialWhiteLogo from "./logo.jpg";
+import brandOfficialWhiteLogo from "./logo-trans.png";
 
 import BrandLogo from "./BrandLogo";
 import BrandLogoWhite from "./BrandLogoWhite";

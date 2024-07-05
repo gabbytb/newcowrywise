@@ -118,6 +118,7 @@ module.exports = {
         'return-invested': "url('/src/assets/images/return-pattern.svg')",
         'device-section': "url('/src/assets/images/home-device-section.svg')",
         'security-pattern': "url('/src/assets/images/security-section.svg')",
+        'login': "url('/src/assets/images/login-bg.png')",
       },
       boxShadow: {
         '3xl': '3px 3px 0 0 var(--sw-gray)',

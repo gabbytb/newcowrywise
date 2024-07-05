@@ -150,14 +150,14 @@ const Login = () => {
         <>
             <NavNoTopBar />
             <div className="absolute top-0 w-full h-screen -z-10">
-                <main className="w-full h-128 relative">
+                <main className="w-full h-128 relative bg-login bg-no-repeat bg-top-left bg-cover">
 
-                    <div className="mt-40 pt-24 items-center">`
+                    <div className="mt-32 pt-32 items-center">
                         <div className="mx-auto error">
                             {formMessage}
                         </div>
 
-                        <form id="logIn" onSubmit={handleLogin}>
+                        {/* <form id="logIn" onSubmit={handleLogin}>
                             <div className="text-center pt-16 form--title">
                                 <h5 className="capitalize">log in</h5>
                             </div>
@@ -165,7 +165,7 @@ const Login = () => {
                             <div className="px-8 pb-32 w-full">
                                 <div className="form--wrapper gap-6">
                                     <label htmlFor="email">
-                                        <input type="email" name="email" value={user.email} placeholder="E-mail address" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        <input type="email" name="email" value={user.email} placeholder="Email ID" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <label htmlFor="password">
@@ -174,8 +174,10 @@ const Login = () => {
 
                                     <ButtonSubmit 
                                         btnType="submit"
-                                        btnProps="text-white text-2xl font-bold capitalize px-6 py-5 w-full rounded-lg 
-                                            hover:bg-blue-700 
+                                        btnProps="text-black text-2xl font-bold capitalize px-6 py-5 w-full rounded-full 
+                                            hover:text-white
+                                            focus:text-white
+                                            hover:bg-blue-700
                                             focus:bg-blue-700 
                                             hover:ring-blue-300 
                                             focus:ring-blue-300
@@ -187,13 +189,13 @@ const Login = () => {
                                         label="submit"
                                     />
 
-                                    <div className="text-2xl/normal text-slate-600 font-medium">Don't have an account? 
-                                        <Link className="text-black font-semibold capitalize" to={"/user/signup"}> sign up</Link>
+                                    <div className="text-2xl/normal text-slate-300 font-medium text-center">Don't have an account? 
+                                        <Link className="text-white font-semibold capitalize" to={"/user/signup"}> Register</Link>
                                     </div>
 
-                                    <div className="text-2xl/normal text-slate-600 font-medium hidden validate-account">
+                                    <div className="text-2xl/normal text-slate-300 font-medium hidden validate-account">
                                         To resend activation e-mail
-                                        <Link className="text-black font-semibold capitalize" to={"/user/verify"}> click here</Link>
+                                        <Link className="text-slate-50 font-semibold capitalize" to={"/user/verify"}> click here</Link>
                                     </div>
                                 </div>
 
@@ -201,7 +203,38 @@ const Login = () => {
                                     {formMessage}
                                 </div>
                             </div>
+                        </form> */}
 
+
+                        <form action="" class="login__form">
+                            <h1 class="login__title">Login</h1>
+
+                            <div class="login__inputs">
+                                <div class="login__box">
+                                    <input type="email" placeholder="Email ID" required class="login__input" />
+                                    <i class="ri-mail-fill"></i>
+                                </div>
+
+                                <div class="login__box">
+                                    <input type="password" placeholder="Password" required class="login__input" />
+                                    <i class="ri-lock-2-fill"></i>
+                                </div>
+                            </div>
+
+                            <div class="login__check">
+                                <div class="login__check-box">
+                                    <input type="checkbox" class="login__check-input" id="user-check" />
+                                    <label for="user-check" class="login__check-label">Remember me</label>
+                                </div>
+
+                                <a href="#" class="login__forgot">Forgot Password?</a>
+                            </div>
+
+                            <button type="submit" class="login__button">Login</button>
+
+                            <div class="login__register">
+                                Don't have an account? <a href="#">Register</a>
+                            </div>
                         </form>
                     </div>
                 </main>

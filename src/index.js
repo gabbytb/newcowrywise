@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,8 +12,6 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <TawkMessengerReact 
-          propertyId="644562484247f20fefed482e" widgetId="1gungfrgj" />
     </BrowserRouter>
   </React.StrictMode>
 );
