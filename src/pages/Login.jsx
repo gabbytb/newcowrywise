@@ -206,34 +206,34 @@ const Login = () => {
                         </form> */}
 
 
-                        <form action="" class="login__form">
-                            <h1 class="login__title">Login</h1>
+                        <form id="logIn" className="login__form" onSubmit={handleLogin}>
+                            <h1 className="login__title text-white mt-4 mb-16 capitalize">log in</h1>
 
-                            <div class="login__inputs">
-                                <div class="login__box">
-                                    <input type="email" placeholder="Email ID" required class="login__input" />
+                            <div className="login__inputs">
+                                <label className="login__box" htmlFor="email">
+                                    <input className="login__input" type="email" name="email" value={user.email} placeholder="Email ID" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     <i class="ri-mail-fill"></i>
-                                </div>
+                                </label>
 
-                                <div class="login__box">
-                                    <input type="password" placeholder="Password" required class="login__input" />
+                                <label className="login__box" htmlFor="password">
+                                    <input className="login__input" type="password" name="password" value={user.password} placeholder="Password" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     <i class="ri-lock-2-fill"></i>
-                                </div>
+                                </label>
                             </div>
 
-                            <div class="login__check">
-                                <div class="login__check-box">
-                                    <input type="checkbox" class="login__check-input" id="user-check" />
-                                    <label for="user-check" class="login__check-label">Remember me</label>
+                            <div className="login__check">
+                                <div className="login__check-box">
+                                    <input type="checkbox" className="login__check-input" id="user-check" />
+                                    <label htmlFor="user-check" className="login__check-label">Remember me</label>
                                 </div>
 
-                                <a href="#" class="login__forgot">Forgot Password?</a>
+                                <Link to="#" className="login__forgot">Forgot Password?</Link>
                             </div>
 
-                            <button type="submit" class="login__button">Login</button>
+                            <button type="submit" className="login__button">Login</button>
 
-                            <div class="login__register">
-                                Don't have an account? <a href="#">Register</a>
+                            <div className="login__register">
+                                Don't have an account? <Link to="#">Register</Link>
                             </div>
                         </form>
                     </div>
