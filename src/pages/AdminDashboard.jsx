@@ -297,12 +297,12 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <h1>Total Revenue</h1>
                                                 </div>
                                                 <div className="flex flex-row justify-start items-start m-0 gap-10">
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-green-600 shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-skin-simple-green shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
                                                         <div className="flex flex-row h-full sales-stats--wrap">
                                                             <div className="flex flex-col pl-10 sales_stats w-4/5">
                                                                 <p>Daily Revenue</p>
                                                                 <div className="flex flex-col gap-6">
-                                                                    <strong>N 13,872,924.63</strong>
+                                                                    <strong>₦ 13,872,924.63</strong>
                                                                     <strong>
                                                                         24% <span>of 100%</span>
                                                                     </strong>
@@ -314,12 +314,12 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-green-600 shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-skin-simple-blue shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
                                                         <div className="flex flex-row h-full sales-stats--wrap">
                                                             <div className="flex flex-col pl-10 sales_stats w-4/5">
                                                                 <p>Weekly Revenue</p>
                                                                 <div className="flex flex-col gap-6">
-                                                                    <strong> ₦ 23,572,587.48</strong>
+                                                                    <strong>₦ 23,572,587.48</strong>
                                                                     <strong>
                                                                         48% <span>of 100%</span>
                                                                     </strong>
@@ -331,12 +331,12 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-green-600 shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-skin-simple-purple shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
                                                         <div className="flex flex-row h-full sales-stats--wrap">
                                                             <div className="flex flex-col pl-10 sales_stats w-4/5">
                                                                 <p>Monthly Revenue</p>
                                                                 <div className="flex flex-col gap-6">
-                                                                    <strong>N 59,892,366.96</strong>
+                                                                    <strong>₦ 59,892,366.96</strong>
                                                                     <strong>
                                                                         48% <span>of 100%</span>
                                                                     </strong>

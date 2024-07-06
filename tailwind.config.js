@@ -111,6 +111,9 @@ module.exports = {
           darkbrown: 'var(--bg-dark-brown)',
           'before-hamburger': 'var(--before-bg-color, black)',
           'after-hamburger': 'var(--after-bg-color, black)',
+          'simple-green': 'var(--admin-total-revenue-card-1)',
+          'simple-blue': 'var(--admin-total-revenue-card-2)',
+          'simple-purple': 'var(--admin-total-revenue-card-3)',
         },
       },
       backgroundImage: {

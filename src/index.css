@@ -115,6 +115,10 @@
     --login-h1-font-size: 2rem;
     --login-normal-font-size: 1rem;
     --login-small-font-size: .813rem;
+
+    --admin-total-revenue-card-1: rgba(8, 157, 0, 1);
+    --admin-total-revenue-card-2: rgba(28, 35, 133, 1);
+    --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
   }
 
   * {
