@@ -9,9 +9,7 @@ import {
 
 
 
-
-
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />

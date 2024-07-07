@@ -252,7 +252,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                                     return (
                                                                         <span key={selectRole?._id}>user</span>
                                                                     );
-                                                                }
+                                                                } else {
+                                                                    return <span>INVALID ACCOUNT</span>;
+                                                                };
                                                             })
                                                         }
                                                     </h6>

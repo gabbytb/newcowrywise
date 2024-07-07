@@ -316,7 +316,7 @@ exports.logIn = async (req, res) => {
                         "\nAccount E-mail: ", user.email,
                         "\nIS PASSWORD CORRECT?: ", auth +
                         "\nAccount Token: ", user.accessToken,
-                        "\n***********************************");
+                        "\n***********************************\n");
             return res.status(200).json(responseData);
         }
 
@@ -335,7 +335,7 @@ exports.logIn = async (req, res) => {
                         "\nAccount E-mail: ", user.email,
                         "\nIS PASSWORD CORRECT?: ", auth +
                         "\nAccount Token: ", user.accessToken,
-                        "\n***********************************");
+                        "\n***********************************\n");
             return res.status(200).json(responseData);
         }
 
