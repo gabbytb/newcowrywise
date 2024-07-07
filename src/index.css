@@ -228,8 +228,11 @@
   padding-inline: 1.25rem;
   border-radius: 4rem;
   color: black;
-  background-color: transparent;
+  /* background-color: #e8f0fe; */
+  background-color: none;
 }
+
+.login__box:active, .login__box  {
 
 .login__input, 
 .login__button {

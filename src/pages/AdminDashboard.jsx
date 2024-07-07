@@ -129,15 +129,13 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // TOGGLE: USER "Profile Image" MENU
     // *******************************************************************************************//
     function toggleUserProfileMenu() {       
-        const userDpMenu = document.querySelectorAll('.upm');
-        for (var i = 0; i < toggleUserProfileMenu.length; i++)  {
-            if (userDpMenu[i]?.classList.contains("hidden")) {
-                userDpMenu[i]?.classList.remove('hidden');
-                userDpMenu[i]?.classList.add('flex');
-            } else {
-                userDpMenu[i]?.classList.remove('flex');
-                userDpMenu[i]?.classList.add('hidden');
-            };
+        var userDpMenu = document.querySelector('.upm');
+        if (userDpMenu?.classList.contains("hidden")) {
+            userDpMenu?.classList.remove('hidden');
+            userDpMenu?.classList.add('flex');
+        } else {
+            userDpMenu?.classList.remove('flex');
+            userDpMenu?.classList.add('hidden');
         };
     };
     // *******************************************************************************************//
