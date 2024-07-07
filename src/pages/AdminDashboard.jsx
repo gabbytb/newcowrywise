@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { adminDashboardIcon, brandOfficialLogo } from "../assets/images";
 import { HomeIcon, IconDecrease, IconIncrease, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
-import { dashboardMenuUsers } from "../constants";
+// import { dashboardMenuUsers } from "../constants";
 // import { DashboardMenuCard } from "../components";
 
 
@@ -104,32 +104,16 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
 
 
-   
+    // *******************************************************************************************//
     // const [dashboardUsersMenu, setDashboardUsersMenu] = useState(dashboardMenuUsers);
     // *******************************************************************************************//
-    // USERS "DropDown" MENU:-  Controller
-    // *******************************************************************************************//
-    function toggleUsersDropdown() {       
-        // if (usersDropDown[i]?.classList.contains("hidden")) {
-        //     usersDropDown[i]?.classList.remove('hidden');
-        //     usersDropDown[i]?.classList.add('flex');
-        //     usersDropDown[i]?.classList.add("active-menu");
-        // } else {
-        //     usersDropDown[i]?.classList.remove('active-menu');
-        //     usersDropDown[i]?.classList.remove('flex');
-        //     usersDropDown[i]?.classList.add('hidden');
-        // };
-    };
-    // *******************************************************************
-    // *******************************************************************
-
-
-
+    
+    
     // *******************************************************************************************//
     // TOGGLE: USER "Profile Image" MENU
     // *******************************************************************************************//
     function toggleUserProfileMenu() {       
-        var userDpMenu = document.querySelector('.upm');
+        const userDpMenu = document.querySelector('.upm');
         if (userDpMenu?.classList.contains("hidden")) {
             userDpMenu?.classList.remove('hidden');
             userDpMenu?.classList.add('flex');
@@ -188,7 +172,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                             <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
                                             <div className="flex flex-col gap-8">
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button onClick={toggleUsersDropdown} className="dropbtn">
+                                                    <button className="dropbtn">
                                                         <UsersIcon /> <span>users</span>
                                                     </button>
                                                     <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
@@ -197,7 +181,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 </div>
 
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button onClick={toggleUsersDropdown} className="dropbtn">
+                                                    <button className="dropbtn">
                                                         <StaffsIcon /> <span>staffs</span>
                                                     </button>
                                                     <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
@@ -206,7 +190,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 </div>
 
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button onClick={toggleUsersDropdown} className="dropbtn">
+                                                    <button className="dropbtn">
                                                         <StaffsIcon /> <span>admins</span>
                                                     </button>
                                                     <div className="hidden flex-col gap-4 px-15.9 usersDropdown">

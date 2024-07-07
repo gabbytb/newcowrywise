@@ -1855,6 +1855,14 @@ tr {
   font-weight: 600;
 }
 
+/***   ADMIN DASHBOARD CSS   ***/
+
+#adminDashboardID .dash-container-1 .left-pane{
+  flex-basis: 20%;
+}
+
+/***   ADMIN DASHBOARD CSS   ***/
+
 #adminDashboardID .admin-container{
   height: 100%;
   width: 100%;
