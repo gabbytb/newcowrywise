@@ -234,3 +234,25 @@ export const footerLinks = [
         iconURI: <YoutubeIcon />,
     },
 ]
+
+
+
+
+
+
+
+// Admin Dashboard Menu
+export const dashboardMenuUsers = [
+    {
+        linkURI: "users",
+        label: "users",
+    },
+    {
+        linkURI: "staff",
+        label: "staffs management",
+    },
+    {
+        linkURI: "admins",
+        label: "admins",
+    }
+]

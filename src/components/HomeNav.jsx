@@ -25,12 +25,12 @@ const HomeNav = () => {
     return (
         <>
             {/* Top bar */}
-            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-end items-center cursor-pointer" to={"/user/signup"} target="_blank">
-                <div>
+            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"} target="_blank">
+                <div className="basis-3/4 justify-center ml-56 pl-64">
                     Welcome to Samuel Akinola Foundation 💙 . Need an account? <strong className="text-xl">&nbsp; Click here ↗</strong>
                 </div>
-                <ul className="flex h-full basis-1/3 social--icons">
-                    <li className="flex fill-white w-full justify-end gap-8 pe-10">
+                <ul className="flex h-full basis-1/4 social--icons">
+                    <li className="flex fill-white w-full justify-end gap-7 pr-24">
                         {
                             footerLinks.map((item) => {
                                 return (
@@ -48,18 +48,17 @@ const HomeNav = () => {
             {/* Top Header  */}
             <header id="homeHeader" className="default-home-header">
                 <div className="container">
-                    <div className="flex items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-1.5 ml-2 mr-24 brand">
+                    <div className="flex justify-between items-center h-full px-0 relative">                
+                        <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="ml-2 mr-24 brand-white">
+                        <Link to={"/"} className="ml-16 brand-white w-1/6">
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialWhiteLogo} alt="official logo" />
                         </Link>
 
-
-                        <div className="flex justify-end items-center w-full h-full sm:justify-end lg:justify-between">
+                        <div className="flex justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between">
                             <ul id="nav-menus-wrap" className="nav-links">
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Personal</p>
@@ -180,16 +179,16 @@ const HomeNav = () => {
                                     </div>
                                 </li>
                             </ul>
-
-                            <div className="space-x-10 cta-menu">
-                                <Link to={"/user/login"}>log in</Link>
-                                <Link to={"/donations"}>donate now</Link>
-                            </div>
-                            
-                            <div className="mobile-nav">
-                                <div className="hamburger">
-                                    <span></span>
-                                </div>
+                        </div>
+                        
+                        <div className="space-x-10 cta-menu flex justify-end w-1/5">
+                            <Link to={"/user/login"}>log in</Link>
+                            <Link to={"/donations"}>donate now</Link>
+                        </div>
+                        
+                        <div className="mobile-nav">
+                            <div className="hamburger">
+                                <span></span>
                             </div>
                         </div>
                     </div>

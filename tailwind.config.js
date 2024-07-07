@@ -59,6 +59,7 @@ module.exports = {
       '40xl': '3.3rem',
       '41xl': '1.54rem',
       '42xl': '1.46rem',
+      '43xl': '0.89rem',
     },
     letterSpacing: {
       supertight: '0.015em',
@@ -105,10 +106,14 @@ module.exports = {
           skyblue: 'var(--background-sky-blue)',
           transparentblue: 'var(--background-transparent-blue)',
           lightblue: 'var(--bg-light-blue)',
+          darkblue: 'var(--bg-dark-blue)',
           opaque: 'var(--color-opacity)',
           darkbrown: 'var(--bg-dark-brown)',
           'before-hamburger': 'var(--before-bg-color, black)',
           'after-hamburger': 'var(--after-bg-color, black)',
+          'simple-green': 'var(--admin-total-revenue-card-1)',
+          'simple-blue': 'var(--admin-total-revenue-card-2)',
+          'simple-purple': 'var(--admin-total-revenue-card-3)',
         },
       },
       backgroundImage: {
@@ -116,6 +121,7 @@ module.exports = {
         'return-invested': "url('/src/assets/images/return-pattern.svg')",
         'device-section': "url('/src/assets/images/home-device-section.svg')",
         'security-pattern': "url('/src/assets/images/security-section.svg')",
+        'login': "url('/src/assets/images/login-bg.png')",
       },
       boxShadow: {
         '3xl': '3px 3px 0 0 var(--sw-gray)',
@@ -142,7 +148,7 @@ module.exports = {
         '18': '54% 1fr', // Used for Section 2 after: .h-container-2
         // '20': '1fr',
         '22': 'repeat(auto-fit,minmax(240px,1fr))', // Used for Footer: .app-reviews
-        // '24': '1fr 2fr', // Used for Admin Dashboard
+        '26': '28rem 1fr', // Used for Admin Dashboard
       },
       height: {
         '13': '3.2rem',
@@ -175,11 +181,12 @@ module.exports = {
         '99.5': '0.1rem',
         '100': '0.2rem',      /** Hamburger::after Height */
         '114.5': '7.5rem',
+        '114.8': '7.8rem',
         '126.4': '12.4rem',
         '128.6': '18.6rem',
       },
       inset: {
-        '103': '0.3rem',
+        // '103': '0.3rem',
         '106': '0.6rem',
         '208': '1.7rem',
         '210': '1.8rem',
@@ -187,7 +194,8 @@ module.exports = {
         '214': '9.5rem',
         '15': '3.75rem',
         '16.5': '3.85rem',
-        '18': '4.5rem',  
+        '18': '4.5rem',
+        '18.8': '6.6rem',
         '19': '6.8rem',
         '21': '2.75rem',
         // '21.5': '2.85rem',
@@ -424,7 +432,13 @@ module.exports = {
       },
       minWidth: {
         '50': '3.125rem',
+        '68': '17rem',
+        '76': '19rem',
         '80': '17.8rem',
+        '84': '19rem',
+        '98': '26rem',
+        '100': '28rem',
+        '102': '30rem',
         '134': '33.4rem',
         // '63': '61%',
       },
@@ -438,6 +452,7 @@ module.exports = {
         '14.7': '3.2rem',
         '15.5': '3.35rem',
         '15.8': '3.6rem',
+        '15.9': '3.8rem',
         '18.5': '4.86rem',
       },
       textColor: {

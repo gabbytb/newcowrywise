@@ -128,7 +128,7 @@ const SignUpReVerification = () => {
                             <h5 className="capitalize">Account Activation</h5>
                         </div>
 
-                        <div className="px-8 pb-32 w-full">
+                        <div className="px-8 pb-20 w-full">
                             <div className="form--wrapper gap-6">
 
                                 <label htmlFor="email">

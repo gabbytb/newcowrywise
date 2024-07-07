@@ -25,7 +25,7 @@ const Nav = () => {
     return (
         <>
             {/* Top bar */}
-            <Link className="bg-skin-skyblue h-15 text-10xl text-skin-gray font-medium text-center flex justify-center items-center cursor-pointer" 
+            <Link className="bg-skin-darkblue h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" 
                 to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" 
                 target="_blank">Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
             </Link>
@@ -37,17 +37,16 @@ const Nav = () => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-1.5 ml-2 mr-24 brand">
+                        <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="ml-2 mr-24 brand-white">
+                        <Link to={"/"} className="ml-16 brand-white w-1/6">
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialWhiteLogo} alt="official logo" />
                         </Link>
 
-
-                        <div className="flex justify-end items-center w-full h-full sm:justify-end lg:justify-between">
+                        <div className="flex justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between">
                             <ul id="nav-menus-wrap" className="nav-links">
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Personal</p>
@@ -168,16 +167,16 @@ const Nav = () => {
                                     </div>
                                 </li>
                             </ul>
-
-                            <div className="space-x-10 cta-menu">
-                                <Link to={"/user/login"}>log in</Link>
-                                <Link to={"/user/signup"}>sign up for free</Link>
-                            </div>
-                            
-                            <div className="mobile-nav">
-                                <div className="hamburger">
-                                    <span></span>
-                                </div>
+                        </div>
+                        
+                        <div className="space-x-10 cta-menu flex justify-end w-1/5">
+                            <Link to={"/user/login"}>log in</Link>
+                            <Link to={"/donations"}>donate now</Link>
+                        </div>
+                        
+                        <div className="mobile-nav">
+                            <div className="hamburger">
+                                <span></span>
                             </div>
                         </div>
                     </div>

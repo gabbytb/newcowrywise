@@ -17,6 +17,7 @@ module.exports = mongoose => {
     // Role.create({ _id: 627, role: "ROLE_EDITOR", });
     // Role.create({ _id: 90210, role: "ROLE_STAFF", });
     // Role.create({ _id: 366247, role: "ROLE_USERS", });
+    // console.log("Created Role: ", Role);
     return Role;
 
 };

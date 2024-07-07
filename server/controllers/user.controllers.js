@@ -22,10 +22,10 @@ exports.createAccount = async (req, res) => {
         const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
-        const { id, username, firstName, lastName, email, password, isActivated } = req.body;
+        const { id, username, firstName, lastName, email, password, approvalTandC, isActivated } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!(username && firstName && lastName && email && password)) {
+        if (!( username && firstName && lastName && email && password )) {
             const responseData = {
                 success: false,
                 message: 'Fill all the required inputs.'
@@ -66,9 +66,9 @@ exports.createAccount = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -85,19 +85,20 @@ exports.createAccount = async (req, res) => {
         // ************************************* //
         const newUser = new User({
             _id: id * randNum,
-            username: username.toLowerCase(),    // sanitize: convert username to lowercase.
+            username: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             firstName,
             lastName,
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
+            approvalTandC,
             isActivated,
             roles: [
-                {
-                    _id: roleAdmin._id,
-                    role: roleAdmin.role,
-                    createdAt: roleAdmin.createdAt,
-                    updatedAt: roleAdmin.updatedAt,
-                },
+                // {
+                //     _id: roleAdmin._id,
+                //     role: roleAdmin.role,
+                //     createdAt: roleAdmin.createdAt,
+                //     updatedAt: roleAdmin.updatedAt,
+                // },
                 // {
                 //     _id: roleEditor._id, 
                 //     role: roleEditor.role, 
@@ -110,12 +111,12 @@ exports.createAccount = async (req, res) => {
                 //     createdAt: roleStaff.createdAt, 
                 //     updatedAt: roleStaff.updatedAt, 
                 // },
-                // {
-                //     _id: roleUsers._id, 
-                //     role: roleUsers.role, 
-                //     createdAt: roleUsers.createdAt, 
-                //     updatedAt: roleUsers.updatedAt,
-                // }
+                {
+                    _id: roleUsers._id, 
+                    role: roleUsers.role, 
+                    createdAt: roleUsers.createdAt, 
+                    updatedAt: roleUsers.updatedAt,
+                }
             ],
         });
         const user = await newUser.save();
@@ -362,6 +363,11 @@ exports.logIn = async (req, res) => {
             return res.status(200).json(responseData);
         }
         
+
+        // Set Token with Timer for Logged-In User
+        const token = await createJWT(user._id);
+        user.accessToken = token;
+
         // ***********************************************************************************//
         // *************                CURRENT LOGGED-IN USER                  **************//
         // ***********************************************************************************//

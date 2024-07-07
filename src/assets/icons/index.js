@@ -22,6 +22,7 @@ import ArrowRight from "./ArrowRight";
 // Arrow Keys
 
 
+import HeartIcon from "./HeartIcon";
 import StarRating from "./StarRating";
 
 
@@ -34,14 +35,20 @@ import InstagramIcon from "./InstagramIcon";
 import YoutubeIcon from "./YoutubeIcon";
 
 
-
-
+// Admin Icons
+import HomeIcon from "./HomeIcon";
+import IconIncrease from "./IconIncrease";
+import IconDecrease from "./IconDecrease";
+import UsersIcon from "./UsersIcon";
+import StaffsIcon from "./StaffsIcon";
+import LogOutIcon from "./LogOutIcon";
 
 
 export {
     ArrowDown,
     ArrowRight,
     
+    HeartIcon,
     StarRating,
 
     VideoIcon,
@@ -72,4 +79,12 @@ export {
     TelegramIcon,
     InstagramIcon,
     YoutubeIcon,
+
+
+    HomeIcon,
+    IconIncrease,
+    IconDecrease,
+    UsersIcon,
+    StaffsIcon,
+    LogOutIcon,
 }
