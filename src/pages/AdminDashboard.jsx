@@ -14,6 +14,15 @@ import { HomeIcon, IconDecrease, IconIncrease, LogOutIcon, StaffsIcon, UsersIcon
 
 const AdminDashboard = ({ isLoggedIn }) => {
     
+    
+    // *******************************************************************
+    // MANAGE STATE:-  SPECIAL FEATURES
+    // *******************************************************************
+    const [isLoading, setIsLoading] = useState(true);
+    const [activeDisplay, setActiveDisplay] = useState("home");
+    // *******************************************************************
+    // *******************************************************************
+    
 
     // *********************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
@@ -27,18 +36,22 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *********************************************
 
 
-
     // ***********************************************
-    // PAGE TITLE | CURRENTLY ACTIVE:- LOGGED-IN USER
+    // PAGE TITLE
     // ***********************************************
     const pageTitle = "Admin Dashboard", siteTitle = "Samuel Akinola Foundation";
     document.title = `${pageTitle} | ${siteTitle}`;
+    // *********************************************
+    // *********************************************
 
+
+    // ***********************************************
+    // CURRENTLY ACTIVE:-  USER
+    // ***********************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
     // *********************************************
     // *********************************************
     
-
 
     // *********************************************
     // DESTRUCTURE:-  (LOGGED-IN USER Props)
@@ -50,36 +63,32 @@ const AdminDashboard = ({ isLoggedIn }) => {
     
 
 
-    // *******************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // *******************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("home");
-    // *******************************************************************
-    // *******************************************************************
-
-
 
     // ************************************
-    // MANAGE STATE:-  ALL USERS
+    // MANAGE STATE:-  TO FIND ALL USERS
     // ************************************
     const [users, setUsers] = useState([]);
-    
+    // const []
+    // const [fetchUsersStatusMsg, setFetchUsersStatusMsg] = useState(null);
 
 
-    // ************************************
-    // CALL TO API:-  FIND ALL USERS
-    // ************************************
+    // **************************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS, IF "activeDisplay" is either USERS or STAFFS
+    // **************************************************************************************************
     useEffect(() => {      
         function findAllUsers() {
             const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
             axios.get(url)
             .then((response) => {
-                if (activeDisplay === "users" || activeDisplay === "admins") {
-                    const { success, data, message } = response.data;
+                const { success, data, message } = response.data;
+
+                if (activeDisplay === "users" || activeDisplay === "staffs") {
                     if ((!success) || (message === "Users not found")) {
-                        console.log("Success: ", success);
+
+                        // setFetchUsersStatusMsg(message);
+                        // console.log("Fetching Users Status Message: ", fetchUsersStatusMsg);
                         console.log("Message: ", message);
+                        console.log("Success: ", success);
                     }
                                 
                     // Perform Actions Here if Truthy
@@ -97,7 +106,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
         
         var timerID = setTimeout(findAllUsers, 1800);   // Delay execution of findAllUsers by 1800ms
         return () => {
-            clearTimeout(timerID);   // Clean up timer if component unmounts or token changes
+            // Clean up timer if component unmounts or token changes
+            clearTimeout(timerID);
         };
     }, [activeDisplay]);
     // *******************************************************************************************//
@@ -107,8 +117,35 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
     // const [dashboardUsersMenu, setDashboardUsersMenu] = useState(dashboardMenuUsers);
     // *******************************************************************************************//
+        
     
+    // *******************************************************************************************//
+    // TOGGLE: USER "Profile Image" MENU
+    // *******************************************************************************************//
+    function toggleUsersMenu() {
+        let toggleUserMenu = document.querySelector('.usersDropdown');
+        if (toggleUserMenu?.classList.contains("hidden")) {
+            toggleUserMenu?.classList.remove('hidden');
+            toggleUserMenu?.classList.add('flex');
+        } else {
+            toggleUserMenu?.classList.remove('flex');
+            toggleUserMenu?.classList.add('hidden');
+        };
+    };
+    function handleStaffsView() {
+        let toggleStaffMenu = document.querySelector('.staffsDropdown');
+        if (toggleStaffMenu?.classList.contains("hidden")) {
+            toggleStaffMenu?.classList.remove('hidden');
+            toggleStaffMenu?.classList.add('flex');
+        } else {
+            toggleStaffMenu?.classList.remove('flex');
+            toggleStaffMenu?.classList.add('hidden');
+        };
+    };
+    // *******************************************************************************************//
+    // *******************************************************************************************//
     
+
     // *******************************************************************************************//
     // TOGGLE: USER "Profile Image" MENU
     // *******************************************************************************************//
@@ -171,8 +208,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                         <div id="userMenuId">
                                             <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
                                             <div className="flex flex-col gap-8">
-                                                <div className="flex flex-col gap-4 dropdown">
-                                                    <button className="dropbtn">
+                                                <div className="dropdown">
+                                                    <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
                                                         <UsersIcon /> <span>users</span>
                                                     </button>
                                                     <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
@@ -181,20 +218,11 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 </div>
 
                                                 <div className="flex flex-col gap-4 dropdown">
-                                                    <button className="dropbtn">
+                                                    <button className="dropdown-toggle" type="button" onClick={handleStaffsView}>
                                                         <StaffsIcon /> <span>staffs</span>
                                                     </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
+                                                    <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
                                                         <Link to="#" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex flex-col gap-4 dropdown">
-                                                    <button className="dropbtn">
-                                                        <StaffsIcon /> <span>admins</span>
-                                                    </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("admins")}>admins management</Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,7 +301,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
                                     {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                                    <div className="right-bottom-pane gap-12 relative h-full flex flex-col">
+                                    <div className="right-bottom-pane gap-20 relative h-full flex flex-col">
                                         {/* Section Body:  Row 1 [Date] */}
                                         <div className="flex flex-row">
                                             <div className="mx-0 px-12 h-full w-full">
@@ -339,10 +367,17 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                         {/* Section Body:  Row 1 [END] */}
 
 
-                                        {/* Section Body:  Row 2 [Bar Chart] */}
-                                        <div className="row m-0 justify-content-center">
-                                            <div className="col-11 mx-0 shadow-lg px-0 bg-white">
-                                                {/* <DailyVisitorsAnalytics /> */}
+                                        {/* Section Body:  Row 2 [Bar Chart] */}                                           
+                                        <div className="flex flex-row">
+                                            <div className="mx-0 px-12 h-full w-full">
+                                                <div className="mb-6 text-14xl font-semibold">
+                                                    <h1>Daily Visitors Analytics</h1>
+                                                </div>
+                                                <div className="flex flex-row justify-start items-start m-0 gap-10 h-full">
+                                                    <div className="xs:w-full xs:min-h-40 lg:min-h-98 bg-white shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                      {/* <DailyVisitorsAnalytics /> */}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         {/* Section Body:  Row 2 [END] */}
@@ -807,7 +842,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                  {/******************************************************************************************/}
                                 {/******************************************************************************************/}
 
-                                
+
                                 {/******************************************************************************************/}
                                 {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                                 {/******************************************************************************************/}
@@ -837,9 +872,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                                     return (
                                                                         <span key={selectRole?._id}>staff</span>
                                                                     );
-                                                                } else if (selectRole?.role === "ROLE_USERS") {
+                                                                } else {
                                                                     return (
-                                                                        <span key={selectRole?._id}>user</span>
+                                                                        <span>No assigned role</span>
                                                                     );
                                                                 }
                                                             })
@@ -852,11 +887,12 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     </button>                                                                                                       
                                                     <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
                                                         <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
-                                                    </div>            
+                                                    </div>           
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
 
                                     {/*********************   SECTION BODY STARTS HERE   *******************/}
 
@@ -896,11 +932,12 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 {/******************************************************************************************/}
                                 {/******************************************************************************************/}
 
-
+                                
+                                
                                 {/******************************************************************************************/}
                                 {/*******************************    SETTINGS:- Staffs VIEW    *****************************/}
                                 {/******************************************************************************************/}
-                                <aside className={`${activeDisplay === "admins" ? "block" : "hidden" }`}>
+                                <aside className={`${activeDisplay === "staffs" ? "block" : "hidden" }`}>
                                     <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                         <div className="flex justify-between items-center h-full flex-row px-10">
                                             <div className="rt-left-pane">
@@ -926,9 +963,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                                     return (
                                                                         <span key={selectRole?._id}>staff</span>
                                                                     );
-                                                                } else if (selectRole?.role === "ROLE_USERS") {
+                                                                } else {
                                                                     return (
-                                                                        <span key={selectRole?._id}>user</span>
+                                                                        <span>No assigned role</span>
                                                                     );
                                                                 }
                                                             })
@@ -946,6 +983,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     
                                     {/*********************   SECTION BODY STARTS HERE   *******************/}
 

@@ -581,8 +581,8 @@ video {
   --login-h1-font-size: 2rem;
   --login-normal-font-size: 1rem;
   --login-small-font-size: 0.813rem;
-  --admin-total-revenue-card-1: rgba(8, 157, 0, 1);
-  --admin-total-revenue-card-2: rgba(28, 35, 133, 1);
+  --admin-total-revenue-card-1: rgba(18, 169, 10, 1);
+  --admin-total-revenue-card-2: rgb(124, 64, 135, 1);
   --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
 }
 
@@ -1843,6 +1843,10 @@ tr {
   font-weight: 600;
 }
 
+div#users a {
+  height: 100%;
+}
+
 #adminDashboardID .admin-container{
   height: 100%;
   width: 100%;
@@ -1858,8 +1862,8 @@ tr {
   width: 100%;
 }
 
-.dropbtn, 
-  .dropbtn span,
+.dropdown-toggle,
+  .dropdown-toggle span,
   .no-dropdown,
   .no-dropdown span{
   display: flex;
@@ -1874,23 +1878,23 @@ tr {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.dropbtn:hover, 
-  .dropbtn span:hover,
+.dropdown-toggle:hover,
+  .dropdown-toggle span:hover,
   .no-dropdown:hover,
   .no-dropdown span:hover{
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
 }
 
-.dropbtn:focus, 
-  .dropbtn span:focus,
+.dropdown-toggle:focus,
+  .dropdown-toggle span:focus,
   .no-dropdown:focus,
   .no-dropdown span:focus{
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
 }
 
-.dropbtn svg, 
+.dropdown-toggle svg, 
   .no-dropdown svg{
   height: 3rem;
   width: 3rem;
@@ -1899,8 +1903,7 @@ tr {
 }
 
 .usersDropdown a,
-  .staffsDropdown a,
-  .adminsDropdown a{
+  .staffsDropdown a{
   font-size: 1.25rem;
   font-weight: 500;
   text-transform: capitalize;
@@ -1910,8 +1913,7 @@ tr {
 }
 
 .usersDropdown a:hover,
-  .staffsDropdown a:hover,
-  .adminsDropdown a:hover{
+  .staffsDropdown a:hover{
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
 }
@@ -4169,16 +4171,16 @@ tr {
   gap: 2.5rem;
 }
 
-.gap-12{
-  gap: 3rem;
-}
-
 .gap-16{
   gap: 4rem;
 }
 
 .gap-2{
   gap: 0.5rem;
+}
+
+.gap-20{
+  gap: 5rem;
 }
 
 .gap-24{
@@ -4751,6 +4753,14 @@ tr {
     height: 10rem;
   }
 
+  .xs\:min-h-40{
+    min-height: 10rem;
+  }
+
+  .xs\:w-full{
+    width: 100%;
+  }
+
   .xs\:max-w-80{
     max-width: 80%;
   }
@@ -4833,6 +4843,10 @@ tr {
 
   .lg\:h-52{
     height: 13rem;
+  }
+
+  .lg\:min-h-98{
+    min-height: 32rem;
   }
 
   .lg\:w-123{
