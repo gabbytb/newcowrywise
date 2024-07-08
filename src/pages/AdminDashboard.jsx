@@ -1,10 +1,12 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
 import { adminDashboardIcon, brandOfficialLogo } from "../assets/images";
 import { HomeIcon, IconDecrease, IconIncrease, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
 // import { dashboardMenuUsers } from "../constants";
 // import { DashboardMenuCard } from "../components";
+
 
 
 
@@ -37,21 +39,25 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     // ***********************************************
-    // PAGE TITLE
-    // ***********************************************
-    const pageTitle = "Admin Dashboard", siteTitle = "Samuel Akinola Foundation";
-    document.title = `${pageTitle} | ${siteTitle}`;
-    // *********************************************
-    // *********************************************
-
-
-    // ***********************************************
     // CURRENTLY ACTIVE:-  USER
     // ***********************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
     // *********************************************
     // *********************************************
     
+
+    // ***********************************************
+    // SET PAGE TITLE
+    // ***********************************************
+    useEffect(() => {
+        if (isLoggedIn) {
+            const pageTitle = "Admin Dashboard", siteTitle = "Samuel Akinola Foundation";
+            document.title = `${pageTitle} | ${siteTitle}`;
+        };
+    }, [isLoggedIn]);
+    // *********************************************
+    // *********************************************
+
 
     // *********************************************
     // DESTRUCTURE:-  (LOGGED-IN USER Props)
@@ -61,8 +67,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // const userAccessToken = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
     
-
-
 
     // ************************************
     // MANAGE STATE:-  TO FIND ALL USERS
@@ -84,7 +88,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
                 if (activeDisplay === "users" || activeDisplay === "staffs") {
                     if ((!success) || (message === "Users not found")) {
-
                         // setFetchUsersStatusMsg(message);
                         // console.log("Fetching Users Status Message: ", fetchUsersStatusMsg);
                         console.log("Message: ", message);
@@ -122,6 +125,23 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
     // TOGGLE: USER "Profile Image" MENU
     // *******************************************************************************************//
+    function toggleUserProfileMenu() {       
+        const userDpMenu = document.querySelector('.upm');
+        if (userDpMenu?.classList.contains("hidden")) {
+            userDpMenu?.classList.remove('hidden');
+            userDpMenu?.classList.add('flex');
+        } else {
+            userDpMenu?.classList.remove('flex');
+            userDpMenu?.classList.add('hidden');
+        };
+    };
+    // *******************************************************************************************//
+    // *******************************************************************************************//
+
+
+    // *******************************************************************************************//
+    // TOGGLE: USER "Profile Image" MENU
+    // *******************************************************************************************//
     function toggleUsersMenu() {
         let toggleUserMenu = document.querySelector('.usersDropdown');
         if (toggleUserMenu?.classList.contains("hidden")) {
@@ -137,6 +157,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
         if (toggleStaffMenu?.classList.contains("hidden")) {
             toggleStaffMenu?.classList.remove('hidden');
             toggleStaffMenu?.classList.add('flex');
+
+            let toggleUserMenu = document.querySelector('.usersDropdown');
         } else {
             toggleStaffMenu?.classList.remove('flex');
             toggleStaffMenu?.classList.add('hidden');
@@ -146,21 +168,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
     
 
-    // *******************************************************************************************//
-    // TOGGLE: USER "Profile Image" MENU
-    // *******************************************************************************************//
-    function toggleUserProfileMenu() {       
-        const userDpMenu = document.querySelector('.upm');
-        if (userDpMenu?.classList.contains("hidden")) {
-            userDpMenu?.classList.remove('hidden');
-            userDpMenu?.classList.add('flex');
-        } else {
-            userDpMenu?.classList.remove('flex');
-            userDpMenu?.classList.add('hidden');
-        };
-    };
-    // *******************************************************************************************//
-    // *******************************************************************************************//
 
 
 
@@ -216,8 +223,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                         <Link to="#" onClick={(e) => setActiveDisplay("users")}>user management</Link>
                                                     </div>
                                                 </div>
-
-                                                <div className="flex flex-col gap-4 dropdown">
+                                                
+                                                <div className="dropdown">
                                                     <button className="dropdown-toggle" type="button" onClick={handleStaffsView}>
                                                         <StaffsIcon /> <span>staffs</span>
                                                     </button>
@@ -225,6 +232,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                         <Link to="#" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
                                                     </div>
                                                 </div>
+                                                {/* flex flex-col gap-4  */}
                                             </div>
                                         </div>
                                         {/* USERS MENU */}

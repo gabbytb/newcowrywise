@@ -27,6 +27,7 @@ import FooterSocialCard from "./FooterSocialCard";
 
 // ADMIN DASHBOARD
 import DashboardMenuCard from "./DashboardMenuCard";
+import DashboardUsersMenu from "./DashboardUsersMenu";
 // ADMIN DASHBOARD
 
 
@@ -65,7 +66,8 @@ export {
 
 
     // ADMIN DASHBOARD
-    DashboardMenuCard
+    DashboardMenuCard,
+    DashboardUsersMenu,
     // ADMIN DASHBOARD
 }
 
