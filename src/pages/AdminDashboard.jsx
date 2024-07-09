@@ -1,7 +1,6 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import { adminDashboardIcon, brandOfficialLogo } from "../assets/images";
 import { HomeIcon, IconDecrease, IconIncrease, LogOutIcon, StaffsIcon, UsersIcon } from "../assets/icons";
 // import { dashboardMenuUsers } from "../constants";
@@ -39,7 +38,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     // ***********************************************
-    // CURRENTLY ACTIVE:-  USER
+    // CURRENTLY ACTIVE USER:-
     // ***********************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
     // *********************************************
@@ -47,12 +46,16 @@ const AdminDashboard = ({ isLoggedIn }) => {
     
 
     // ***********************************************
-    // SET PAGE TITLE
+    // SET PAGE TITLE IF USER IS LOGGED-IN:-
     // ***********************************************
     useEffect(() => {
         if (isLoggedIn) {
-            const pageTitle = "Admin Dashboard", siteTitle = "Samuel Akinola Foundation";
+            const pageTitle = "Reaching out to great minds", 
+                siteTitle = "Samuel Akinola Foundation";
             document.title = `${pageTitle} | ${siteTitle}`;
+
+            let adminRoot = document.querySelector("#root");
+            adminRoot?.classList.add("admin__dashboard");
         };
     }, [isLoggedIn]);
     // *********************************************
@@ -60,7 +63,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     // *********************************************
-    // DESTRUCTURE:-  (LOGGED-IN USER Props)
+    // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // *********************************************
     const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
@@ -117,56 +120,59 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // *******************************************************************************************//
 
 
+
+
+
+
     // *******************************************************************************************//
-    // const [dashboardUsersMenu, setDashboardUsersMenu] = useState(dashboardMenuUsers);
-    // *******************************************************************************************//
-        
-    
-    // *******************************************************************************************//
-    // TOGGLE: USER "Profile Image" MENU
+    // TOGGLE DROPDOWN: USER "Profile Image" MENU
     // *******************************************************************************************//
     function toggleUserProfileMenu() {       
         const userDpMenu = document.querySelector('.upm');
         if (userDpMenu?.classList.contains("hidden")) {
             userDpMenu?.classList.remove('hidden');
             userDpMenu?.classList.add('flex');
+            userDpMenu?.classList.add('active-menu');
+
+            if (!userDpMenu?.classList.contains("active-menu")) {
+                userDpMenu?.classList.remove('flex');
+                userDpMenu?.classList.add('hidden');
+            };
         } else {
             userDpMenu?.classList.remove('flex');
+            userDpMenu?.classList.remove('active-menu');
             userDpMenu?.classList.add('hidden');
         };
     };
     // *******************************************************************************************//
-    // *******************************************************************************************//
-
-
-    // *******************************************************************************************//
-    // TOGGLE: USER "Profile Image" MENU
+    // TOGGLE DROPDOWN: USER/STAFF
     // *******************************************************************************************//
     function toggleUsersMenu() {
         let toggleUserMenu = document.querySelector('.usersDropdown');
-        if (toggleUserMenu?.classList.contains("hidden")) {
+        if (toggleUserMenu?.classList.contains("hidden") ) {
             toggleUserMenu?.classList.remove('hidden');
             toggleUserMenu?.classList.add('flex');
+            toggleUserMenu?.classList.add('active-menu');
         } else {
+            toggleUserMenu?.classList.remove('active-menu');
             toggleUserMenu?.classList.remove('flex');
             toggleUserMenu?.classList.add('hidden');
         };
     };
-    function handleStaffsView() {
+    function toggleStaffsView() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
         if (toggleStaffMenu?.classList.contains("hidden")) {
             toggleStaffMenu?.classList.remove('hidden');
             toggleStaffMenu?.classList.add('flex');
-
-            let toggleUserMenu = document.querySelector('.usersDropdown');
+            toggleStaffMenu?.classList.add('active-menu');
         } else {
+            toggleStaffMenu?.classList.remove('active-menu');
             toggleStaffMenu?.classList.remove('flex');
             toggleStaffMenu?.classList.add('hidden');
         };
     };
     // *******************************************************************************************//
     // *******************************************************************************************//
-    
 
 
 
@@ -220,19 +226,18 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                         <UsersIcon /> <span>users</span>
                                                     </button>
                                                     <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("users")}>user management</Link>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div className="dropdown">
-                                                    <button className="dropdown-toggle" type="button" onClick={handleStaffsView}>
-                                                        <StaffsIcon /> <span>staffs</span>
-                                                    </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
+                                                        <Link to="/admin/users">user management</Link>
                                                     </div>
                                                 </div>
                                                 {/* flex flex-col gap-4  */}
+                                                <div className="dropdown">
+                                                    <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                                        <StaffsIcon /> <span>staffs</span>
+                                                    </button>
+                                                    <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
+                                                        <Link to="/admin/staffs" >staff management</Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         {/* USERS MENU */}
@@ -245,14 +250,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
 
-
-
-
-
-
-                                {/***************************************/
-                                 /**************   VIEWS   **************/
-                                 /***************************************/}      
 
 
                                 {/******************************************************************************************/}
@@ -289,7 +286,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                                         <span key={selectRole?._id}>user</span>
                                                                     );
                                                                 } else {
-                                                                    return <span>INVALID ACCOUNT</span>;
+                                                                    return (
+                                                                        <span>Unassigned Role</span>
+                                                                    );
                                                                 };
                                                             })
                                                         }
@@ -317,8 +316,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                     <h1>Total Revenue</h1>
                                                 </div>
                                                 <div className="flex flex-row justify-start items-start m-0 gap-10">
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-skin-simple-green shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
-                                                        <div className="flex flex-row h-full sales-stats--wrap">
+                                                    <div className="xs:basis-2/7 xs:h-40 lg:h-52 flex bg-skin-simple-green shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                        <div className="flex flex-row h-full w-full sales-stats--wrap">
                                                             <div className="flex flex-col pl-10 sales_stats w-4/5">
                                                                 <p>Daily Revenue</p>
                                                                 <div className="flex flex-col gap-6">
@@ -334,8 +333,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-skin-simple-blue shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
-                                                        <div className="flex flex-row h-full sales-stats--wrap">
+                                                    <div className="xs:basis-2/7 xs:h-40 lg:h-52 flex bg-skin-simple-blue shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                        <div className="flex flex-row h-full w-full sales-stats--wrap">
                                                             <div className="flex flex-col pl-10 sales_stats w-4/5">
                                                                 <p>Weekly Revenue</p>
                                                                 <div className="flex flex-col gap-6">
@@ -351,8 +350,8 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="xs:basis-1/3 xs:h-40 lg:h-52 bg-skin-simple-purple shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
-                                                        <div className="flex flex-row h-full sales-stats--wrap">
+                                                    <div className="xs:basis-4/8 xs:h-40 lg:h-52 flex bg-skin-simple-purple shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
+                                                        <div className="flex flex-row h-full w-full sales-stats--wrap">
                                                             <div className="flex flex-col pl-10 sales_stats w-4/5">
                                                                 <p>Monthly Revenue</p>
                                                                 <div className="flex flex-col gap-6">
@@ -849,192 +848,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 </aside>                           
                                  {/******************************************************************************************/}
                                 {/******************************************************************************************/}
-
-
-                                {/******************************************************************************************/}
-                                {/*******************************    SETTINGS:- Users VIEW    ******************************/}
-                                {/******************************************************************************************/}
-                                <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
-                                        <div className="flex justify-between items-center h-full flex-row px-10">
-                                            <div className="rt-left-pane">
-                                                <h1>Welcome 
-                                                    <strong className="capitalize text-black"> {userName}</strong>
-                                                </h1>
-                                            </div>
-                                            <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
-                                                <div className="user-info">
-                                                    <h4>{userEmail}</h4>
-                                                    <h6>
-                                                        {
-                                                            userRoles?.map((selectRole) => {
-                                                                if (selectRole?.role === "ROLE_ADMIN") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>admin</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_EDITOR") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>editor</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_STAFF") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>staff</span>
-                                                                    );
-                                                                } else {
-                                                                    return (
-                                                                        <span>No assigned role</span>
-                                                                    );
-                                                                }
-                                                            })
-                                                        }
-                                                    </h6>
-                                                </div>
-                                                <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
-                                                        <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
-                                                    </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
-                                                    </div>           
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-
-                                    {/*********************   SECTION BODY STARTS HERE   *******************/}
-
-                                    <div className="right-bottom-pane relative h-full flex flex-col">
-                                        <table className="table-fixed capitalize">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/N</th>
-                                                    <th>FULL NAME</th>
-                                                    <th>E-MAIL</th>
-                                                    <th>STATUS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    users.map((user) => {
-                                                        return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if (roleUsers?.role === "ROLE_USERS") {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className={`text-white font-medium text-xl rounded-full h-2 py-2 px-8 ${user?.isActivated ? "bg-green-500" : "bg-orange-500" }`}>{user?.isActivated  === true ? `approved` : `pending`}</td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
-                                                        );
-                                                    })
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </aside>
-                                {/******************************************************************************************/}
-                                {/******************************************************************************************/}
-
-                                
-                                
-                                {/******************************************************************************************/}
-                                {/*******************************    SETTINGS:- Staffs VIEW    *****************************/}
-                                {/******************************************************************************************/}
-                                <aside className={`${activeDisplay === "staffs" ? "block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
-                                        <div className="flex justify-between items-center h-full flex-row px-10">
-                                            <div className="rt-left-pane">
-                                                <h1>Welcome 
-                                                    <strong className="capitalize text-black"> {userName}</strong>
-                                                </h1>
-                                            </div>
-                                            <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
-                                                <div className="user-info">
-                                                    <h4>{userEmail}</h4>
-                                                    <h6>
-                                                        {
-                                                            userRoles?.map((selectRole) => {
-                                                                if (selectRole?.role === "ROLE_ADMIN") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>admin</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_EDITOR") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>editor</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_STAFF") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>staff</span>
-                                                                    );
-                                                                } else {
-                                                                    return (
-                                                                        <span>No assigned role</span>
-                                                                    );
-                                                                }
-                                                            })
-                                                        }
-                                                    </h6>
-                                                </div>
-                                                <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
-                                                        <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
-                                                    </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
-                                                    </div>           
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    {/*********************   SECTION BODY STARTS HERE   *******************/}
-
-                                    <div className="right-bottom-pane relative h-full flex flex-col">
-                                        <table className="table-fixed capitalize">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/N</th>
-                                                    <th>FULL NAME</th>
-                                                    <th>E-MAIL</th>
-                                                    <th>STATUS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    users.map((user) => {
-                                                        return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if (roleUsers?.role === "ROLE_ADMIN" || roleUsers?.role === "ROLE_EDITOR" || roleUsers?.role === "ROLE_STAFF" ) {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className={`text-white font-medium text-xl rounded-full h-2 py-2 px-8 ${user?.isActivated ? "bg-green-500" : "bg-orange-500" }`}>{user?.isActivated  === true ? `approved` : `pending`}</td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
-                                                        );
-                                                    })
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </aside>
-                                {/******************************************************************************************/}
-                                {/******************************************************************************************/}
-
-
-                                {/***************************************/
-                                 /**************   VIEWS   **************/
-                                 /***************************************/}
                             </div>
                         </div>
                     </main>

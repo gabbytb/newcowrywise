@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import axios from 'axios';
-// import $ from 'jquery';
 
 
 
@@ -167,6 +166,5 @@ function Registration() {
         </div>
     );
 }
-
 
 export default Registration;

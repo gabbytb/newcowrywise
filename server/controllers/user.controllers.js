@@ -429,28 +429,28 @@ exports.findAll = async (req, res) => {
 exports.findUserById = async (req, res) => {
     
     try {
-        const { _id } = req.params.id;
+        const _id = req.params.id;
         const userId = await User.findById(_id);
 
-        if (!userId) {
+        if (!(userId)) {
             const responseData = {
                 success: false,
-                message: "Failed to retrieve Single User"
+                message: "Users not found",
             };
+            console.log("Failed to fetch all User items: ", responseData);
             return res.status(404).json(responseData);
         }
-
+        
         const responseData = {
-            success: true,
-            data: userId,
-            message: "Successful",
+                success: true,
+                data: userId,
+                message: "Successful",
         };
         return res.status(200).json(responseData);
-
     } catch (error) {
         // Catch error
         return res.status(500).send(`Internal Server Error ${error}`);
-    }
+    };
 };
 
 // Finding All isActivated Users

@@ -4,7 +4,9 @@ import {
   OurProgress, DonationPage,
   SignUp, SignUpVerification, SignUpReVerification,
   Login, 
-  AdminDashboard, AccountUsers,
+  AdminDashboard, 
+  DashboardUsersPage, DashboardUsersDetailsPage,
+  AccountUsers,
 } from "./pages";
 
 
@@ -19,7 +21,11 @@ const App = () => {
       <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
       <Route path="/user/verify" element={<SignUpReVerification />}></Route>
       <Route path="/user/login" element={<Login />}></Route>
+
+      
       <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+      <Route path="/admin/users" element={<DashboardUsersPage />}></Route>
+      <Route path="/admin/users/:id" element={<DashboardUsersDetailsPage />}></Route>
       <Route path="/admin/users/manage" element={<AccountUsers />}></Route>
     </Routes>
   );

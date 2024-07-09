@@ -143,6 +143,15 @@ module.exports = {
         'afterContent': 'var(--after-content, "")',
         'beforeContent': 'var(--before-content, "")',
       },
+      flexBasis: {
+        '1/7': '14.2857143%',
+        '2/7': '28.5714286%',
+        '3/7': '42.8571429%',
+        '4/7': '57.1428571%',
+        '5/7': '71.4285714%',
+        '6/7': '85.7142857%',
+        '4/8': '30.3333333%',
+      },
       gridTemplateColumns: {
         '16': '1fr 1fr', // Used for Section 1: .s1-grids-wrap
         '18': '54% 1fr', // Used for Section 2 after: .h-container-2

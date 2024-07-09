@@ -340,14 +340,17 @@
       text-white
     ;
   }
+  
   .sales-stats--wrap .sales_stats strong:first-of-type {
     @apply
-      text-4xl
-      font-semibold
-      tracking-verytight
+      lg:font-semibold
+      lg:text-3xl
+      lg:tracking-moretight
+      /* xl:text-4xl
+      xl:tracking-verytight */
     ;
   }
-
+  
   .sales-stats--wrap .sales_stats strong span {
     @apply
       text-3xl
@@ -858,8 +861,23 @@
 
 
 
-div#users a {
+/* div#users a {
     height: 100%;
+} */
+.admin__dashboard {
+  @apply
+    h-screen
+    w-full
+  ;
+}
+
+#adminDashboardID, 
+#dashboardUsersID, 
+#dashboardUsersDetailsID {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
 }
 
 #adminDashboardID .admin-container {

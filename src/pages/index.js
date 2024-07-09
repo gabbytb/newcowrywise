@@ -9,6 +9,8 @@ import SignUpReVerification from "./SignUpReVerification";
 import Login from "./Login";
 
 import AdminDashboard from "./AdminDashboard";
+import DashboardUsersPage from "./dashboard/DashboardUsersPage";
+import DashboardUsersDetailsPage from "./dashboard/DashboardUsersDetailsPage";
 import AccountUsers from "./AccountUsers";
 
 
@@ -29,5 +31,9 @@ export {
     Login,
 
     AdminDashboard,
+    DashboardUsersPage,
+    DashboardUsersDetailsPage,
+
+    // Misc
     AccountUsers,
 }
