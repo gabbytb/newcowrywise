@@ -10,7 +10,9 @@ import Login from "./Login";
 
 import AdminDashboard from "./AdminDashboard";
 import DashboardUsersPage from "./dashboard/DashboardUsersPage";
+import DashboardStaffsPage from "./dashboard/DashboardStaffsPage";
 import DashboardUsersDetailsPage from "./dashboard/DashboardUsersDetailsPage";
+import DashboardStaffsDetailsPage from "./dashboard/DashboardStaffsDetailsPage";
 import AccountUsers from "./AccountUsers";
 
 
@@ -31,8 +33,11 @@ export {
     Login,
 
     AdminDashboard,
+    
     DashboardUsersPage,
+    DashboardStaffsPage,
     DashboardUsersDetailsPage,
+    DashboardStaffsDetailsPage,
 
     // Misc
     AccountUsers,

@@ -73,22 +73,24 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     const [users, setUsers] = useState([]);
  
 
-    // **************************************************************************************************
+    // *********************************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS, IF "activeDisplay" is USERS
-    // **************************************************************************************************
+    // *********************************************************************************************
     useEffect(() => {      
         function findAllUsers() {
             const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
             axios.get(url)
             .then((response) => {
                 const { success, data, message } = response.data;
-                if ((!success) || (message === "Users not found")) {
-                    console.log("Message: ", message);
-                    console.log("Success: ", success);
-                }
-                            
-                // Perform Actions Here if Truthy
-                setUsers(data);
+                if (activeDisplay === "users") {
+                    if ((!success) || (message === "Users not found")) {
+                        console.log("Message: ", message);
+                        console.log("Success: ", success);
+                    };
+                                
+                    // Perform Actions Here if Truthy
+                    setUsers(data);
+                };
             })
             .catch((error) => {
                 // Handle error state or logging here
@@ -99,15 +101,15 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
             });
         };
         
-        var timerID = setTimeout(findAllUsers, 1800);   // Delay execution of findAllUsers by 1800ms
+        var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
         return () => {
             // Clean up timer if component unmounts or token changes
             clearTimeout(timerID);
         };
-    }, []);
+    }, [activeDisplay]);
     // *******************************************************************************************//
     // *******************************************************************************************//
-        
+
 
     // *******************************************************************************************//
     // TOGGLE DROPDOWN: USER "Profile Image" MENU
@@ -149,143 +151,140 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // *******************************************************************************************//
 
 
+    
+    if (isLoading) {
+        return (
+            <>
+                <main id="dashboardUsersID" className="admin-dashboard">
+                    <div className="container flex admin-container">
+                        <div className="h-screen w-full grid xs:grid-cols-26">
+                            {/*******************************************************************/
+                            /************************  DASHBOARD: Menu  ************************/
+                            /*******************************************************************/}
+                            <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue z-50">         
+                                <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
+                                    <img src={brandOfficialLogo} alt="official logo" />
+                                </Link>
 
-
-
-    return (
-        <>
-            { 
-                isLoading ? (
-                    <main id="dashboardUsersID" className="admin-dashboard">
-                        <div className="container flex admin-container">
-                            <div className="h-screen w-full grid xs:grid-cols-26">
-                                {/*******************************************************************/
-                                /************************  DASHBOARD: Menu  ************************/
-                                /*******************************************************************/}
-                                <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue z-50">         
-                                    <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
-                                        <img src={brandOfficialLogo} alt="official logo" />
-                                    </Link>
-
-                                    <ul className="flex flex-col w-full px-8 gap-16 mb-40">
-                                        {/* MAIN MENU */}
-                                        <div id="mainMenuId">
-                                            <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
-                                            <div className="flex flex-col gap-8">
-                                                <Link to="/admin/dashboard" className="no-dropdown">
-                                                    <HomeIcon /> <span>Dashboard</span>
-                                                </Link>
-                                            </div>
+                                <ul className="flex flex-col w-full px-8 gap-16 mb-40">
+                                    {/* MAIN MENU */}
+                                    <div id="mainMenuId">
+                                        <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
+                                        <div className="flex flex-col gap-8">
+                                            <Link to="/admin/dashboard/" className="no-dropdown">
+                                                <HomeIcon /> <span>Dashboard</span>
+                                            </Link>
                                         </div>
-                                        {/* MAIN MENU */}
+                                    </div>
+                                    {/* MAIN MENU */}
 
 
 
-                                        {/* USERS MENU */}
-                                        <div id="userMenuId">
-                                            <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
-                                            <div className="flex flex-col gap-8">
-                                                <div className="dropdown">
-                                                    <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
-                                                        <UsersIcon /> <span>users</span>
-                                                    </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("users")}>user management</Link>
-                                                    </div>
+                                    {/* USERS MENU */}
+                                    <div id="userMenuId">
+                                        <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
+                                        <div className="flex flex-col gap-8">
+                                            <div className="dropdown">
+                                                <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
+                                                    <UsersIcon /> <span>users</span>
+                                                </button>
+                                                <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
+                                                    <Link to="/admin/users">user management</Link>
                                                 </div>
-                                                
-                                                <div className="dropdown">
-                                                    <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
-                                                        <StaffsIcon /> <span>staffs</span>
-                                                    </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
-                                                    </div>
-                                                </div>
-                                                {/* flex flex-col gap-4  */}
                                             </div>
-                                        </div>
-                                        {/* USERS MENU */}
-                                    </ul>
-                                </section>
-                                {/*******************************************************************/
-                                /************************  DASHBOARD: Menu  ************************/
-                                /*******************************************************************/}
-
-
-
-
-                                {/******************************************************************************************/}
-                                {/*******************************    SETTINGS:- Users VIEW    ******************************/}
-                                {/******************************************************************************************/}
-                                <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
-                                        <div className="flex justify-between items-center h-full flex-row px-10">
-                                            <div className="rt-left-pane">
-                                                <h1>Welcome 
-                                                    <strong className="capitalize text-black"> {userName}</strong>
-                                                </h1>
-                                            </div>
-                                            <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
-                                                <div className="user-info">
-                                                    <h4>{userEmail}</h4>
-                                                    <h6>
-                                                        {
-                                                            userRoles?.map((selectRole) => {
-                                                                if (selectRole?.role === "ROLE_ADMIN") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>admin</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_EDITOR") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>editor</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_STAFF") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>staff</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_USERS") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>user</span>
-                                                                    );
-                                                                } else {
-                                                                    return (
-                                                                        <span>Unassigned Role</span>
-                                                                    );
-                                                                };
-                                                            })
-                                                        }
-                                                    </h6>
-                                                </div>
-                                                <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
-                                                        <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
-                                                    </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
-                                                    </div>           
+                                            {/* flex flex-col gap-4  */}
+                                            <div className="dropdown">
+                                                <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                                    <StaffsIcon /> <span>staffs</span>
+                                                </button>
+                                                <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
+                                                    <Link to="/admin/staffs" >staff management</Link>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    {/* USERS MENU */}
+                                </ul>
+                            </section>
+                            {/*******************************************************************/
+                            /************************  DASHBOARD: Menu  ************************/
+                            /*******************************************************************/}
 
-                                    {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                                    <div className="right-bottom-pane relative h-full flex flex-col">
-                                        <table className="table-fixed capitalize">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/N</th>
-                                                    <th>NAME</th>
-                                                    <th>E-MAIL</th>
-                                                    <th>STATUS</th>
-                                                    <th>ACTION</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    users.map((user) => {
+
+
+                            {/******************************************************************************************/}
+                            {/*******************************    SETTINGS:- Users VIEW    ******************************/}
+                            {/******************************************************************************************/}
+                            <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
+                                <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
+                                    <div className="flex justify-between items-center h-full flex-row px-10">
+                                        <div className="rt-left-pane">
+                                            <h1>Welcome 
+                                                <strong className="capitalize text-black"> {userName}</strong>
+                                            </h1>
+                                        </div>
+                                        <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
+                                            <div className="user-info">
+                                                <h4>{userEmail}</h4>
+                                                <h6>
+                                                    {
+                                                        userRoles?.map((selectRole) => {
+                                                            if (selectRole?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <span key={selectRole?._id}>admin</span>
+                                                                );
+                                                            } else if (selectRole?.role === "ROLE_EDITOR") {
+                                                                return (
+                                                                    <span key={selectRole?._id}>editor</span>
+                                                                );
+                                                            } else if (selectRole?.role === "ROLE_STAFF") {
+                                                                return (
+                                                                    <span key={selectRole?._id}>staff</span>
+                                                                );
+                                                            } else if (selectRole?.role === "ROLE_USERS") {
+                                                                return (
+                                                                    <span key={selectRole?._id}>user</span>
+                                                                );
+                                                            } else {
+                                                                return (
+                                                                    <span>Unassigned Role</span>
+                                                                );
+                                                            };
+                                                        })
+                                                    }
+                                                </h6>
+                                            </div>
+                                            <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
+                                                <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
+                                                    <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
+                                                </button>                                                                                                       
+                                                <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
+                                                    <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
+                                                </div>           
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                {/*********************   SECTION BODY STARTS HERE   *******************/}
+
+                                <div className="right-bottom-pane relative h-full flex flex-col">
+                                    <table className="table-fixed capitalize">
+                                        <thead>
+                                            <tr>
+                                                <th>S/N</th>
+                                                <th>NAME</th>
+                                                <th>E-MAIL</th>
+                                                <th>STATUS</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                users.map((user) => {
+                                                    if (!user?.isActivated && user?.approvalTandC) {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
                                                                 if (roleUsers?.role === "ROLE_USERS") {
@@ -294,166 +293,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className={`text-white font-medium text-xl rounded-full h-2 py-2 px-8 ${user?.isActivated ? "bg-green-500" : "bg-orange-500" }`}>{user?.isActivated  === true ? `approved` : `pending`}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/users/${user._id}`} alt="view user details">view details</Link>
-                                                                            </td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
-                                                        );
-                                                    })
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </aside>
-                                {/******************************************************************************************/}
-                                {/******************************************************************************************/}
-                            </div>
-                        </div>
-                    </main>
-                ) : (
-                    <main id="dashboardUsersID" className="admin-dashboard">
-                        <div className="container flex admin-container">
-                            <div className="h-screen w-full grid xs:grid-cols-26">
-                                {/*******************************************************************/
-                                /************************  DASHBOARD: Menu  ************************/
-                                /*******************************************************************/}
-                                <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue z-50">         
-                                    <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
-                                        <img src={brandOfficialLogo} alt="official logo" />
-                                    </Link>
-
-                                    <ul className="flex flex-col w-full px-8 gap-16 mb-40">
-                                        {/* MAIN MENU */}
-                                        <div id="mainMenuId">
-                                            <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
-                                            <div className="flex flex-col gap-8">
-                                                <Link to="/admin/dashboard" className="no-dropdown">
-                                                    <HomeIcon /> <span>Dashboard</span>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        {/* MAIN MENU */}
-
-
-
-                                        {/* USERS MENU */}
-                                        <div id="userMenuId">
-                                            <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
-                                            <div className="flex flex-col gap-8">
-                                                <div className="dropdown">
-                                                    <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
-                                                        <UsersIcon /> <span>users</span>
-                                                    </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("users")}>user management</Link>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div className="dropdown">
-                                                    <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
-                                                        <StaffsIcon /> <span>staffs</span>
-                                                    </button>
-                                                    <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                        <Link to="#" onClick={(e) => setActiveDisplay("staffs")}>staff management</Link>
-                                                    </div>
-                                                </div>
-                                                {/* flex flex-col gap-4  */}
-                                            </div>
-                                        </div>
-                                        {/* USERS MENU */}
-                                    </ul>
-                                </section>
-                                {/*******************************************************************/
-                                /************************  DASHBOARD: Menu  ************************/
-                                /*******************************************************************/}
-
-
-
-
-                                {/******************************************************************************************/}
-                                {/*******************************    SETTINGS:- Users VIEW    ******************************/}
-                                {/******************************************************************************************/}
-                                <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
-                                    <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
-                                        <div className="flex justify-between items-center h-full flex-row px-10">
-                                            <div className="rt-left-pane">
-                                                <h1>Welcome 
-                                                    <strong className="capitalize text-black"> {userName}</strong>
-                                                </h1>
-                                            </div>
-                                            <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
-                                                <div className="user-info">
-                                                    <h4>{userEmail}</h4>
-                                                    <h6>
-                                                        {
-                                                            userRoles?.map((selectRole) => {
-                                                                if (selectRole?.role === "ROLE_ADMIN") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>admin</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_EDITOR") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>editor</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_STAFF") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>staff</span>
-                                                                    );
-                                                                } else if (selectRole?.role === "ROLE_USERS") {
-                                                                    return (
-                                                                        <span key={selectRole?._id}>user</span>
-                                                                    );
-                                                                } else {
-                                                                    return (
-                                                                        <span>Unassigned Role</span>
-                                                                    );
-                                                                };
-                                                            })
-                                                        }
-                                                    </h6>
-                                                </div>
-                                                <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
-                                                    <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
-                                                        <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
-                                                    </button>                                                                                                       
-                                                    <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                        <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
-                                                    </div>           
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-
-                                    {/*********************   SECTION BODY STARTS HERE   *******************/}
-
-                                    <div className="right-bottom-pane relative h-full flex flex-col">
-                                        <table className="table-fixed capitalize">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/N</th>
-                                                    <th>NAME</th>
-                                                    <th>E-MAIL</th>
-                                                    <th>STATUS</th>
-                                                    <th>ACTION</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    users.map((user) => {
-                                                        return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if (roleUsers?.role === "ROLE_USERS") {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className={`text-white font-medium text-xl rounded-full h-2 py-2 px-8 ${user?.isActivated ? "bg-green-500" : "bg-orange-500" }`}>{user?.isActivated  === true ? `approved` : `pending`}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
                                                                             <td>
                                                                                 <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
@@ -462,21 +302,259 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                 };
                                                             })
                                                         );
+                                                    } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                        return (
+                                                            user?.roles?.map((roleUsers, index) => {
+                                                                if (roleUsers?.role === "ROLE_USERS") {
+                                                                    return (
+                                                                        <tr key={index}>
+                                                                            <td>{user?._id}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                            <td>
+                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    } else {
+                                                        return (
+                                                            user?.roles?.map((roleUsers, index) => {
+                                                                if (roleUsers?.role === "ROLE_USERS") {
+                                                                    return (
+                                                                        <tr key={index}>
+                                                                            <td>{user?._id}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                            <td>
+                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    };
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </aside>
+                            {/******************************************************************************************/}
+                            {/******************************************************************************************/}
+                        </div>
+                    </div>
+                </main>
+            </>
+        );
+    };
+
+
+    return (
+        <>
+            <main id="dashboardUsersID" className="admin-dashboard">
+                <div className="container flex admin-container">
+                    <div className="h-screen w-full grid xs:grid-cols-26">
+                        {/*******************************************************************/
+                        /************************  DASHBOARD: Menu  ************************/
+                        /*******************************************************************/}
+                        <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue z-50">         
+                            <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
+                                <img src={brandOfficialLogo} alt="official logo" />
+                            </Link>
+
+                            <ul className="flex flex-col w-full px-8 gap-16 mb-40">
+                                {/* MAIN MENU */}
+                                <div id="mainMenuId">
+                                        <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
+                                        <div className="flex flex-col gap-8">
+                                            <Link to="/admin/dashboard/" className="no-dropdown">
+                                                <HomeIcon /> <span>Dashboard</span>
+                                            </Link>
+                                        </div>
+                                </div>
+                                {/* MAIN MENU */}
+
+
+
+                                {/* USERS MENU */}
+                                <div id="userMenuId">
+                                    <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
+                                    <div className="flex flex-col gap-8">
+                                        <div className="dropdown">
+                                            <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
+                                                <UsersIcon /> <span>users</span>
+                                            </button>
+                                            <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
+                                                <Link to="/admin/users">user management</Link>
+                                            </div>
+                                        </div>
+                                        {/* flex flex-col gap-4  */}
+                                        <div className="dropdown">
+                                            <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                                <StaffsIcon /> <span>staffs</span>
+                                            </button>
+                                            <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
+                                                <Link to="/admin/staffs" >staff management</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* USERS MENU */}
+                            </ul>
+                        </section>
+                        {/*******************************************************************/
+                        /************************  DASHBOARD: Menu  ************************/
+                        /*******************************************************************/}
+
+
+
+
+                        {/******************************************************************************************/}
+                        {/*******************************    SETTINGS:- Users VIEW    ******************************/}
+                        {/******************************************************************************************/}
+                        <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
+                            <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
+                                <div className="flex justify-between items-center h-full flex-row px-10">
+                                    <div className="rt-left-pane">
+                                        <h1>Welcome 
+                                            <strong className="capitalize text-black"> {userName}</strong>
+                                        </h1>
+                                    </div>
+                                    <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
+                                        <div className="user-info">
+                                            <h4>{userEmail}</h4>
+                                            <h6>
+                                                {
+                                                    userRoles?.map((selectRole) => {
+                                                        if (selectRole?.role === "ROLE_ADMIN") {
+                                                            return (
+                                                                <span key={selectRole?._id}>admin</span>
+                                                            );
+                                                        } else if (selectRole?.role === "ROLE_EDITOR") {
+                                                            return (
+                                                                <span key={selectRole?._id}>editor</span>
+                                                            );
+                                                        } else if (selectRole?.role === "ROLE_STAFF") {
+                                                            return (
+                                                                <span key={selectRole?._id}>staff</span>
+                                                            );
+                                                        } else if (selectRole?.role === "ROLE_USERS") {
+                                                            return (
+                                                                <span key={selectRole?._id}>user</span>
+                                                            );
+                                                        } else {
+                                                            return (
+                                                                <span>Unassigned Role</span>
+                                                            );
+                                                        };
                                                     })
                                                 }
-                                            </tbody>
-                                        </table>
+                                            </h6>
+                                        </div>
+                                        <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
+                                            <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
+                                                <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
+                                            </button>                                                                                                       
+                                            <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
+                                                <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
+                                            </div>           
+                                        </div>
                                     </div>
-                                </aside>
-                                {/******************************************************************************************/}
-                                {/******************************************************************************************/}
+                                </div>
                             </div>
-                        </div>
-                    </main>
-                )
-            }
+                            
+
+                            {/*********************   SECTION BODY STARTS HERE   *******************/}
+
+                            <div className="right-bottom-pane relative h-full flex flex-col">
+                                <table className="table-fixed capitalize">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>NAME</th>
+                                            <th>E-MAIL</th>
+                                            <th>STATUS</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            users.map((user) => {
+                                                if (!user?.isActivated && user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_USERS") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_USERS") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_USERS") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                };
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </aside>
+                        {/******************************************************************************************/}
+                        {/******************************************************************************************/}
+                    </div>
+                </div>
+            </main>
         </>
     );
+
 };
 
 
