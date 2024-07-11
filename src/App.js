@@ -1,4 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import ReactGA from 'react-ga';
+import { Routes, Route } from 'react-router-dom';
 import { 
   Home,
   OurProgress, DonationPage,
@@ -10,9 +12,28 @@ import {
   DashboardStaffsPage, DashboardStaffsDetailsPage,
 } from "./pages";
 
+// PRODUCTION Data
+// const TRACKING_ID = "UA-277984631-1";   // OLD_TRACKING_ID
+// const TRACKING_ID = "397205433";   // NEW_TRACKING_ID
+
+// DEVELOPMENT Data
+const TRACKING_ID = "UA-220438183-5";
+ReactGA.initialize(TRACKING_ID);
+
+
+
+
+
+
 
 
 const App = () => {
+  
+  useEffect(() => {
+    var pageViews = ReactGA.pageview(window.location.pathname + window.location.search);
+    console.log("TRACKING PAGE VIEWS: ", pageViews);
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -33,4 +54,6 @@ const App = () => {
     </Routes>
   );
 };
+
 export default App;
+

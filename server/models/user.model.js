@@ -48,6 +48,10 @@ module.exports = mongoose => {
             max: 1022,
             min: 8,
         },
+        status: { 
+            type: String, 
+            default: 'pending',
+        },
         approvalTandC: {
             type: Boolean
         },

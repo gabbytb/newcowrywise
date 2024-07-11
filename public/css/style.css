@@ -612,7 +612,9 @@ sub, sup {
   max-width: var(--root-max-width) !important;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"], 
+  input[type="email"], 
+  input[type="password"] {
   line-height: var(--root-line-height);
   width: 100%;
   height: 5rem;
@@ -902,29 +904,19 @@ tr {
   text-decoration: underline;
 }
 
-.sales-stats--wrap .sales_direction svg{
-  height: 100%;
-  width: 2.5rem;
-}
-
-.sales-stats--wrap .sales_direction svg.sales-increase,
-  .sales-stats--wrap .sales_direction svg.sales-decrease{
-  max-height: 3rem;
-}
-
-@keyframes pulse{
-  50%{
-    opacity: .5;
-  }
-}
-
-.sales-stats--wrap .sales_direction svg.sales-decrease{
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
 .sales-stats--wrap .sales_stats{
+  width: 80%;
+  flex-direction: column;
   justify-content: flex-start;
   gap: 1.5rem;
+  padding-left: 2.5rem;
+}
+
+.sales-stats--wrap .sales_direction{
+  width: 20%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .sales-stats--wrap .sales_stats p{
@@ -946,9 +938,16 @@ tr {
 
 @media (min-width: 981px){
   .sales-stats--wrap .sales_stats strong:first-of-type{
-    font-size: 1.875rem;
+    font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 0.065em;
+  }
+}
+
+@media (min-width: 1040px){
+  .sales-stats--wrap .sales_stats strong:first-of-type{
+    font-size: 1.875rem;
+    letter-spacing: 0.1rem;
   }
 }
 
@@ -959,9 +958,24 @@ tr {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.sales-stats--wrap .sales_direction{
-  justify-content: center;
-  gap: 0.5rem;
+.sales-stats--wrap .sales_direction svg{
+  height: 100%;
+  width: 2.5rem;
+}
+
+.sales-stats--wrap .sales_direction svg.sales-increase,
+  .sales-stats--wrap .sales_direction svg.sales-decrease{
+  max-height: 3rem;
+}
+
+@keyframes pulse{
+  50%{
+    opacity: .5;
+  }
+}
+
+.sales-stats--wrap .sales_direction svg.sales-decrease{
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 #homeTopBarID::before {
@@ -4014,6 +4028,10 @@ tr {
   height: 100vh;
 }
 
+.min-h-106{
+  min-height: 40rem;
+}
+
 .min-h-120{
   min-height: 60rem;
 }
@@ -4763,6 +4781,11 @@ tr {
 .focus\:ring-blue-300:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity));
+}
+
+.data-\[focus\]\:bg-blue-100[data-focus]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 601px){

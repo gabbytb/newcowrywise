@@ -22,7 +22,7 @@ exports.createAccount = async (req, res) => {
         const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
-        const { id, username, firstName, lastName, email, password, approvalTandC, isActivated } = req.body;
+        const { id, username, firstName, lastName, email, password, approvalTandC, isActivated, } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
         if (!( username && firstName && lastName && email && password )) {
@@ -66,9 +66,9 @@ exports.createAccount = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -92,13 +92,14 @@ exports.createAccount = async (req, res) => {
             password: encryptedPassword,
             approvalTandC,
             isActivated,
+            status: 'pending',
             roles: [
-                // {
-                //     _id: roleAdmin._id,
-                //     role: roleAdmin.role,
-                //     createdAt: roleAdmin.createdAt,
-                //     updatedAt: roleAdmin.updatedAt,
-                // },
+                {
+                    _id: roleAdmin._id,
+                    role: roleAdmin.role,
+                    createdAt: roleAdmin.createdAt,
+                    updatedAt: roleAdmin.updatedAt,
+                },
                 // {
                 //     _id: roleEditor._id, 
                 //     role: roleEditor.role, 
@@ -111,12 +112,12 @@ exports.createAccount = async (req, res) => {
                 //     createdAt: roleStaff.createdAt, 
                 //     updatedAt: roleStaff.updatedAt, 
                 // },
-                {
-                    _id: roleUsers._id, 
-                    role: roleUsers.role, 
-                    createdAt: roleUsers.createdAt, 
-                    updatedAt: roleUsers.updatedAt,
-                }
+                // {
+                //     _id: roleUsers._id, 
+                //     role: roleUsers.role, 
+                //     createdAt: roleUsers.createdAt, 
+                //     updatedAt: roleUsers.updatedAt,
+                // }
             ],
         });
         const user = await newUser.save();
@@ -181,6 +182,12 @@ exports.accountVerification = async (req, res) => {
             try {
                 const user = await User.findById(_id);
                 if (!user) {
+                    const dataToUpdate = {
+                        status: 'failed',
+                    };
+                    const email = user.email;
+                    await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
                     const responseData = { 
                         success: false,
                         message: "User not found",
@@ -190,6 +197,7 @@ exports.accountVerification = async (req, res) => {
                 }
 
                 const dataToUpdate = {
+                    status: 'approved',
                     accessToken: token,
                     isActivated: true,
                 };
@@ -202,6 +210,7 @@ exports.accountVerification = async (req, res) => {
                 };
                 console.log("Account verification status: ", responseData);
                 return res.status(200).json(responseData);
+
             } catch (error) {
                 const responseData = { 
                     success: false, 
@@ -398,16 +407,27 @@ exports.logIn = async (req, res) => {
 // Finding All Users
 exports.findAll = async (req, res) => {
 
-    const allUsers = await User.find({});
+    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters
 
     try {
+        let query = {};
 
-        if (!allUsers) {
+        // Add status filter if provided
+        if (status) {
+            query.status = status;
+        }
+
+        // Pagination logic
+        const allUsers = await User.find(query)
+                                .skip((page - 1) * limit)
+                                .limit(parseInt(limit));
+
+        if (allUsers.length === 0) {
             const responseData = {
                 success: false,
                 message: "Users not found",
             };
-            console.log("Failed to fetch all User items: ", responseData);
+            console.log("Failed to fetch users: ", responseData);
             return res.status(404).json(responseData);
         }
 
@@ -419,10 +439,9 @@ exports.findAll = async (req, res) => {
         return res.status(200).json(responseData);
 
     } catch (error) {
-        // Catch error
-        return res.status(500).send(`Internal Server Error ${error}`);
-    }
-
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
 };
 
 // Find a Single User by their ID

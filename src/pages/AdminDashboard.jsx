@@ -918,7 +918,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                         <div className="flex flex-row justify-start items-start m-0 gap-10">
                                             <div className="xs:basis-2/7 xs:h-40 lg:h-52 flex bg-skin-simple-green shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
                                                 <div className="flex flex-row h-full w-full sales-stats--wrap">
-                                                    <div className="flex flex-col pl-10 sales_stats w-4/5">
+                                                    <div className="flex sales_stats">
                                                         <p>Daily Revenue</p>
                                                         <div className="flex flex-col gap-6">
                                                             <strong>₦ 13,872,924.63</strong>
@@ -927,7 +927,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </strong>
                                                         </div>
                                                     </div>
-                                                    <div className="flex flex-col sales_direction w-1/5">
+                                                    <div className="flex sales_direction">
                                                         <IconIncrease/>
                                                         <IconDecrease/>
                                                     </div>
@@ -935,7 +935,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                             </div>
                                             <div className="xs:basis-2/7 xs:h-40 lg:h-52 flex bg-skin-simple-blue shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
                                                 <div className="flex flex-row h-full w-full sales-stats--wrap">
-                                                    <div className="flex flex-col pl-10 sales_stats w-4/5">
+                                                    <div className="flex sales_stats">
                                                         <p>Weekly Revenue</p>
                                                         <div className="flex flex-col gap-6">
                                                             <strong>₦ 23,572,587.48</strong>
@@ -944,7 +944,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </strong>
                                                         </div>
                                                     </div>
-                                                    <div className="flex flex-col sales_direction w-1/5">
+                                                    <div className="flex sales_direction">
                                                         <IconIncrease/>
                                                         <IconDecrease/>
                                                     </div>
@@ -952,7 +952,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                             </div>
                                             <div className="xs:basis-4/8 xs:h-40 lg:h-52 flex bg-skin-simple-purple shadow hover:shadow-md focus:shadow-md ease-linear duration-300 rounded-lg">
                                                 <div className="flex flex-row h-full w-full sales-stats--wrap">
-                                                    <div className="flex flex-col pl-10 sales_stats w-4/5">
+                                                    <div className="flex sales_stats">
                                                         <p>Monthly Revenue</p>
                                                         <div className="flex flex-col gap-6">
                                                             <strong>₦ 59,892,366.96</strong>
@@ -961,7 +961,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                             </strong>
                                                         </div>
                                                     </div>
-                                                    <div className="flex flex-col sales_direction w-1/5">
+                                                    <div className="flex sales_direction">
                                                         <IconIncrease/>
                                                         <IconDecrease/>
                                                     </div>

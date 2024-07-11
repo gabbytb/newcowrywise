@@ -76,37 +76,132 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // *********************************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS, IF "activeDisplay" is USERS
     // *********************************************************************************************
-    useEffect(() => {      
-        function findAllUsers() {
-            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-            axios.get(url)
-            .then((response) => {
-                const { success, data, message } = response.data;
-                if (activeDisplay === "users") {
-                    if ((!success) || (message === "Users not found")) {
-                        console.log("Message: ", message);
-                        console.log("Success: ", success);
-                    };
+    // useEffect(() => {      
+    //     async function findAllUsers() {
+    //         const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+    //         await axios.get(url, {
+    //             params: {
+    //                 page: 1,
+    //                 limit: 10,
+    //                 status: 'approved'
+    //             },
+    //         })
+    //         .then((response) => {
+    //             const { success, data, message } = response.data;
+    //             if (activeDisplay === "users") {
+    //                 if ((!success) || (message === "Users not found")) {
+    //                     console.log("Message: ", message);
+    //                     console.log("Success: ", success);
+    //                 };
                                 
-                    // Perform Actions Here if Truthy
-                    setUsers(data);
-                };
-            })
-            .catch((error) => {
-                // Handle error state or logging here
-                console.log("Error encountered: ", error);
-            })
-            .finally(() => {
-                setIsLoading(false);    // Always disable loading state, whether successful or not
-            });
-        };
+    //                 // Perform Actions Here if Truthy
+    //                 setUsers(data);
+    //             };
+    //         })
+    //         .catch((error) => {
+    //             // Handle error state or logging here
+    //             console.log("Error encountered: ", error);
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);    // Always disable loading state, whether successful or not
+    //         });
+    //     };
         
-        var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+    //     var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+    //     return () => {
+    //         // Clean up timer if component unmounts or token changes
+    //         clearTimeout(timerID);
+    //     };
+    // }, [activeDisplay]);
+    
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+                const response = await axios.get(url, {
+                    params: {
+                        page: 1,
+                        limit: 10,
+                        status: "",
+                    },
+                });
+
+                const { success, data, message } = response.data;
+                if (!success || message === "Users not found") {
+                    console.log("Success: ", success);
+                    console.log("Message: ", message);
+                };
+
+                setIsLoading(success);
+                setUsers(data);
+                
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            };
+        };
+        var timerID = setTimeout(fetchUsers, 300);   // Delay execution of findAllUsers by 1800ms
         return () => {
             // Clean up timer if component unmounts or token changes
             clearTimeout(timerID);
         };
-    }, [activeDisplay]);
+    }, []);
+
+    const fetchApprovedUsers = async () => {
+        try {
+            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+            const response = await axios.get(url, {
+                params: {
+                    page: 1,
+                    limit: 10,
+                    status: 'pending'
+                }
+            });
+
+            setUsers(response.data.data);
+            setIsLoading(false);
+
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
+
+    const fetchPendingUsers = async () => {
+        try {
+            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+            const response = await axios.get(url, {
+                params: {
+                    page: 1,
+                    limit: 10,
+                    status: 'pending'
+                }
+            });
+
+            setUsers(response.data.data);
+            setIsLoading(false);
+
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
+
+    const fetchFailedUsers = async () => {
+        try {
+            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+            const response = await axios.get(url, {
+                params: {
+                    page: 1,
+                    limit: 10,
+                    status: 'pending'
+                }
+            });
+
+            setUsers(response.data.data);
+            setIsLoading(false);
+
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
     // *******************************************************************************************//
     // *******************************************************************************************//
 
