@@ -21,8 +21,7 @@ const SignUp = () => {
     // *************************** //
     useEffect(() => {
         window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-        const pageTitle = "Sign Up",
-        siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -44,25 +43,29 @@ const SignUp = () => {
         approvalTandC: false,
         isActivated: false,
     });
-    // console.log("Registration Payload: ", user);
- 
-    const [formMessage, setFormMessage] = useState(null);
-    // console.log("Sign-Up Response: ", formMessage);
+     
+    const [formMessage, setFormMessage] = useState(null);       // console.log("Sign-Up Response: ", formMessage);
 
-    async function trackUserInput(e) {
+    async function handleKeyUp(e) {
+        // console.clear();
         let name = e.target.name;
         let value = e.target.value;
-    };
+        // console.log(`COLLECTING USER DETAILS.....
+        //     \nUsername: ${user.username} 
+        //     \nFull Name: ${user.firstName} ${user.lastName} 
+        //     \nEmail: ${user.email} 
+        //     \nPassword: ${user.password} 
+        //     \nT&C approval: ${user.approvalTandC} 
+        //     \nisActive: ${user.isActivated}`);
+    }
 
     async function handleChange(e) {
         let name = e.target.name;
         let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
         setUser({
             ...user,
             [name]: value
         });        
-
     };
 
     async function handleSubmit(e) {
@@ -166,28 +169,29 @@ const SignUp = () => {
                                 <div className="form--wrapper gap-6">
 
                                     <label htmlFor="username">
-                                        <input type="text" name="username" placeholder="Username" onChange={handleChange} onKeyUp={trackUserInput} />
+                                        <input type="text" name="username" placeholder="Username" onChange={handleChange} onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <div className="flex flex-row gap-4">
                                         <label htmlFor="firstName">
-                                            <input type="text" name="firstName" placeholder="First Name" onChange={handleChange}  onKeyUp={trackUserInput} />
+                                            <input type="text" name="firstName" placeholder="First Name" onChange={handleChange}  onKeyUp={handleKeyUp} />
                                         </label>
                                         <label htmlFor="lastName">
-                                            <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange}  onKeyUp={trackUserInput} />
+                                            <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange}  onKeyUp={handleKeyUp} />
                                         </label>
                                     </div>
 
                                     <label htmlFor="email">
-                                        <input type="email" name="email" placeholder="example@email.com" onChange={handleChange}  onKeyUp={trackUserInput} />
+                                        <input type="email" name="email" placeholder="example@email.com" onChange={handleChange}  onKeyUp={handleKeyUp} />
                                     </label>
 
                                     <label htmlFor="password">
-                                        <input className="pwd" type="text" name="password" placeholder="*************" onChange={handleChange}  onKeyUp={trackUserInput} />
+                                        <input className="pwd" type="text" name="password" placeholder="*************" onChange={handleChange}  onKeyUp={handleKeyUp} />
                                     </label>
    
-                                    <label htmlFor="approvalTandC" className="flex justify-start items-end flex-row gap-4">I agree to terms & conditions?
-                                        <input type="checkbox" name="approvalTandC" onChange={handleChange} onKeyUp={trackUserInput} />
+                                    <label htmlFor="approvalTandC" className="flex justify-start items-end flex-row gap-4">
+                                        <input type="checkbox" name="approvalTandC" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                        By proceeding, I acknowledge that I have read and agreed to Samuel Akinola Foundation's terms & conditions
                                     </label>
 
                                     <ButtonSubmit

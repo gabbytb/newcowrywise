@@ -581,7 +581,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                     <tbody>
                                         {
                                             users.map((user) => {
-                                                if (!user?.isActivated && user?.approvalTandC) {
+                                                if (user?.status === "pending") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
                                                             if (roleUsers?.role === "ROLE_USERS") {
@@ -590,7 +590,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         <td>{user?._id}</td>
                                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                                         <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                         <td>
                                                                             <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
@@ -599,7 +599,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                             };
                                                         })
                                                     );
-                                                } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                } else if (user?.status === "failed") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
                                                             if (roleUsers?.role === "ROLE_USERS") {
@@ -608,7 +608,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         <td>{user?._id}</td>
                                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                                         <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                         <td>
                                                                             <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
@@ -626,7 +626,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         <td>{user?._id}</td>
                                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                                         <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                         <td>
                                                                             <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
