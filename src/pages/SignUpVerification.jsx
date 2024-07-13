@@ -156,7 +156,7 @@ const SignUpVerification = () => {
         window.scroll({ left: 0, top: 300, behavior: "smooth" });
 
         function verifyAccountRegistration() {
-            const url = `http://127.0.0.1:8000/user/verify/${token}`;
+            const url = `http://127.0.0.1:8000/user/verify?token=${token}`;
             const payload = {
                 accessToken: token,
             };

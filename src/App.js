@@ -6,7 +6,7 @@ import {
   OurProgress, DonationPage,
   SignUp, SignUpVerification, SignUpReVerification,
   Login, 
-  AdminDashboard, 
+  AdminDashboard, AdminDashboardTwo, 
   DashboardUsersPage, DashboardUsersDetailsPage,
   AccountUsers,
   DashboardStaffsPage, DashboardStaffsDetailsPage,
@@ -40,12 +40,12 @@ const App = () => {
       <Route path="/our-progress" element={<OurProgress />}></Route>
       <Route path="/donations" element={<DonationPage />}></Route>
       <Route path="/user/signup" element={<SignUp />}></Route>
-      <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
+      <Route path="/user/verify?token=:token" element={<SignUpVerification />}></Route>
       <Route path="/user/verify" element={<SignUpReVerification />}></Route>
       <Route path="/user/login" element={<Login />}></Route>
 
-      
-      <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+      {/* <Route path="/admin/dashboardtwo" element={<AdminDashboard />}></Route> */}
+      <Route path="/admin/dashboard" element={<AdminDashboardTwo />}></Route>
       <Route path="/admin/users" element={<DashboardUsersPage />}></Route>
       <Route path="/admin/staffs" element={<DashboardStaffsPage />}></Route>
       <Route path="/admin/users/:id" element={<DashboardUsersDetailsPage />}></Route>

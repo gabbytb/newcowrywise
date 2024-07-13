@@ -17,7 +17,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // MANAGE STATE:-  SPECIAL FEATURES
     // *******************************************************************
     const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("staffs");
     // *******************************************************************
     // *******************************************************************
     
@@ -76,37 +75,138 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // *********************************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS, IF "activeDisplay" is STAFFS
     // *********************************************************************************************
-    useEffect(() => {      
-        function findAllUsers() {
-            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-            axios.get(url)
-            .then((response) => {
-                const { success, data, message } = response.data;
-                if (activeDisplay === "staffs") {
-                    if ((!success) || (message === "Users not found")) {
-                        console.log("Message: ", message);
-                        console.log("Success: ", success);
-                    };
+    // useEffect(() => {      
+    //     function findAllUsers() {
+    //         const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
+    //         axios.get(url)
+    //         .then((response) => {
+    //             const { success, data, message } = response.data;
+    //             if (activeDisplay === "staffs") {
+    //                 if ((!success) || (message === "Users not found")) {
+    //                     console.log("Message: ", message);
+    //                     console.log("Success: ", success);
+    //                 };
                                 
-                    // Perform Actions Here if Truthy
-                    setUsers(data);
-                };
-            })
-            .catch((error) => {
-                // Handle error state or logging here
-                console.log("Error encountered: ", error);
-            })
-            .finally(() => {
-                setIsLoading(false);    // Always disable loading state, whether successful or not
-            });
-        };
+    //                 // Perform Actions Here if Truthy
+    //                 setUsers(data);
+    //             };
+    //         })
+    //         .catch((error) => {
+    //             // Handle error state or logging here
+    //             console.log("Error encountered: ", error);
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);    // Always disable loading state, whether successful or not
+    //         });
+    //     };
         
-        var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+    //     var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+    //     return () => {
+    //         // Clean up timer if component unmounts or token changes
+    //         clearTimeout(timerID);
+    //     };
+    // }, [activeDisplay]);
+
+
+    
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const limit = 10; // Number of items per page
+  
+    useEffect(() => {
+        var timerID = setTimeout(fetchData, 300);   // Delay execution of findAllUsers by 1800ms
         return () => {
-            // Clean up timer if component unmounts or token changes
-            clearTimeout(timerID);
+            clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
         };
-    }, [activeDisplay]);
+    }, [currentPage]); // Fetch data when currentPage changes
+  
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}`);
+        const { success, data, message } = response.data;
+        if (!success || message === "Users not found") {
+            console.log("Success: ", success);
+            console.log("Message: ", message);
+        };
+
+        setUsers(data);        
+        setIsLoading(false);
+
+        // Assuming your backend also sends total number of pages
+        setTotalPages(Math.ceil(response.data.totalCount / limit));
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+         
+    const fetchApprovedUsers = async () => {
+        try {
+            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${users?.status}`;
+            const response = await axios.get(url);
+            const { success, data, message } = response.data;
+            if (!success || message === "Users not found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+    
+            setUsers(data);        
+            setIsLoading(false);
+    
+            // Assuming your backend also sends total number of pages
+            setTotalPages(Math.ceil(response.data.totalCount / limit));
+    
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        };
+    };
+
+    const fetchPendingUsers = async () => {
+        try {
+            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${users?.status}`;
+            const response = await axios.get(url);
+            const { success, data, message } = response.data;
+            if (!success || message === "Users not found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+    
+            setUsers(data);        
+            setIsLoading(false);
+    
+            // Assuming your backend also sends total number of pages
+            setTotalPages(Math.ceil(response.data.totalCount / limit));
+    
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        };
+    };
+
+    const fetchFailedUsers = async () => {
+        try {
+            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${users?.status}`;
+            const response = await axios.get(url);
+            const { success, data, message } = response.data;
+            if (!success || message === "Users not found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+    
+            setUsers(data);        
+            setIsLoading(false);
+    
+            // Assuming your backend also sends total number of pages
+            setTotalPages(Math.ceil(response.data.totalCount / limit));
+    
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        };
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
     // *******************************************************************************************//
     // *******************************************************************************************//
 
@@ -216,7 +316,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             {/******************************************************************************************/}
                             {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                             {/******************************************************************************************/}
-                            <aside className={`${activeDisplay === "staffs" ? "block" : "hidden" }`}>
+                            <aside className="block">
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
                                         <div className="rt-left-pane">
@@ -417,7 +517,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                         {/******************************************************************************************/}
                         {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                         {/******************************************************************************************/}
-                        <aside className={`${activeDisplay === "staffs" ? "block" : "hidden" }`}>
+                        <aside className="block">
                             <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
@@ -471,7 +571,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                             {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                            <div className="right-bottom-pane relative h-full flex flex-col">
+                            <div className="right-bottom-pane relative flex flex-col">
                                 <table className="table-fixed capitalize">
                                     <thead>
                                         <tr>
@@ -485,16 +585,16 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     <tbody>
                                         {
                                             users.map((user) => {
-                                                if (!user?.isActivated && user?.approvalTandC) {
+                                                if (user?.status === "pending") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR")) {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
                                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                                         <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                         <td>
                                                                             <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
@@ -503,16 +603,16 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                             };
                                                         })
                                                     );
-                                                } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                } else if (user?.status === "failed") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR")) {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
                                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                                         <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                         <td>
                                                                             <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
@@ -524,7 +624,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 } else {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR")) {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
@@ -544,6 +644,45 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         }
                                     </tbody>
                                 </table>
+
+
+                                {/* Pagination controls */}
+                                <div className="flex justify-center mt-4">
+                                    <nav className="relative z-0 inline-flex shadow-sm">
+                                    {/* Previous page button */}
+                                    <button
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={currentPage === 1}
+                                    >
+                                        Prev
+                                    </button>
+
+
+                                    {/* Page numbers */}
+                                    {Array.from({ length: totalPages }, (_, index) => (
+                                        <button
+                                        key={index}
+                                        onClick={() => handlePageChange(index + 1)}
+                                        className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                        {index + 1}
+                                        </button>
+                                    ))}
+
+
+                                    {/* Next page button */}
+                                    <button
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        Next
+                                    </button>
+                                    </nav>
+                                </div>
+                                {/* <div>
+                                    <Link onClick={fetchUsers} className="text-2xl bg-blue-500 text-white">Goto Next Page</Link>
+                                </div> */}
                             </div>
                         </aside>
                         {/******************************************************************************************/}

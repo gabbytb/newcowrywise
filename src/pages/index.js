@@ -9,8 +9,10 @@ import SignUpReVerification from "./SignUpReVerification";
 import Login from "./Login";
 
 import AdminDashboard from "./AdminDashboard";
+import AdminDashboardTwo from "./AdminDashboardTwo";
 import DashboardUsersPage from "./dashboard/DashboardUsersPage";
 import DashboardStaffsPage from "./dashboard/DashboardStaffsPage";
+import AllUsersComponent from "./dashboard/AllUsersComponent";
 import DashboardUsersDetailsPage from "./dashboard/DashboardUsersDetailsPage";
 import DashboardStaffsDetailsPage from "./dashboard/DashboardStaffsDetailsPage";
 import AccountUsers from "./AccountUsers";
@@ -33,9 +35,11 @@ export {
     Login,
 
     AdminDashboard,
+    AdminDashboardTwo,
     
     DashboardUsersPage,
     DashboardStaffsPage,
+    AllUsersComponent,
     DashboardUsersDetailsPage,
     DashboardStaffsDetailsPage,
 

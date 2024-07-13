@@ -4,9 +4,18 @@ const Role = db.roles;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { secretKey } = process.env;
+
+
+// *****************************************************************
+// Middlewares
+// *****************************************************************
 const encryptPassword = require("../middlewares/EncryptPassword");
 const createJWT = require("../middlewares/GenerateToken");
 const mailSender = require("../middlewares/MailSender");
+// *****************************************************************
+// *****************************************************************
+
+
 
 
 
@@ -161,6 +170,59 @@ exports.createAccount = async (req, res) => {
     }
 };
 
+// Our Account Re-Activation Logic starts here
+exports.completeSignUp = async (req, res) => {
+    
+    const { email } = req.body;
+
+    try {
+        const existingUser = await User.findOne({ email: email.toLowerCase() });        
+        if (!existingUser) {
+            const responseData = {
+                success: false,
+                message: "User not found !",
+            }
+            return res.status(404).json(responseData);
+        }
+
+
+        // *************************************************************************************************//
+        // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // *************************************************************************************************//
+        const token = await createJWT(existingUser._id);
+        
+
+        // ***************************************************************//
+        // E-mail Service Config
+        // ***************************************************************//
+        await mailSender(token, existingUser);
+
+
+        console.log("\n*********************************************************",
+                    "\n*****    NEW TOKEN GENERATED FOR EXISTING USER      *****",
+                    `\n*********************************************************
+                    \nNew Access Token: ${token}`,
+                    "\n\n*********************************************************",
+                    "\n*****        EXISTING USER ACCOUNT DETAILS          *****",
+                    `\n*********************************************************
+                    \nExisting Account | Registration Status: ${existingUser}`,
+                    "\n\n******************************************************************************************\n");
+        const responseData = {
+            success: true,
+            data: existingUser,
+            message: "Re-sent activation e-mail",
+        };
+        return res.status(200).json(responseData);
+    } catch (error) {
+        const responseData = { 
+            success: false, 
+            message: "Internal Server Error" 
+        };
+        console.error("Database error during account re-verification: ", error);
+        return res.status(500).json(responseData); 
+    }
+}
+
 // Our Account Verification Logic starts here
 exports.accountVerification = async (req, res) => {
     try {
@@ -175,7 +237,7 @@ exports.accountVerification = async (req, res) => {
         }
         
         const token = AuthHeader.split(" ")[1];
-        try {
+        try {          
             const existingUser = await jwt.verify(token, secretKey);
             const _id = existingUser.id;
             
@@ -236,59 +298,6 @@ exports.accountVerification = async (req, res) => {
         return res.status(500).json(responseData);
     }
 };
-
-// Our Account Re-Verification Logic starts here
-exports.retryAccountVerification = async (req, res) => {
-    
-    const { email } = req.body;
-
-    try {
-        const existingUser = await User.findOne({ email: email.toLowerCase() });        
-        if (!existingUser) {
-            const responseData = {
-                success: false,
-                message: "User not found !",
-            }
-            return res.status(404).json(responseData);
-        }
-
-
-        // *************************************************************************************************//
-        // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // *************************************************************************************************//
-        const token = await createJWT(existingUser._id);
-        
-
-        // ***************************************************************//
-        // E-mail Service Config
-        // ***************************************************************//
-        await mailSender(token, existingUser);
-
-
-        console.log("\n*********************************************************",
-                    "\n*****    NEW TOKEN GENERATED FOR EXISTING USER      *****",
-                    `\n*********************************************************
-                    \nNew Access Token: ${token}`,
-                    "\n\n*********************************************************",
-                    "\n*****        EXISTING USER ACCOUNT DETAILS          *****",
-                    `\n*********************************************************
-                    \nExisting Account | Registration Status: ${existingUser}`,
-                    "\n\n******************************************************************************************\n");
-        const responseData = {
-            success: true,
-            data: existingUser,
-            message: "Re-sent activation e-mail",
-        };
-        return res.status(200).json(responseData);
-    } catch (error) {
-        const responseData = { 
-            success: false, 
-            message: "Internal Server Error" 
-        };
-        console.error("Database error during account re-verification: ", error);
-        return res.status(500).json(responseData); 
-    }
-}
 
 // Our Login Logic starts here
 exports.logIn = async (req, res) => {
@@ -410,17 +419,25 @@ exports.findAll = async (req, res) => {
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters
 
     try {
-        let query = {};
+        let allUserObjects = {};
 
         // Add status filter if provided
         if (status) {
-            query.status = status;
-        }
+            allUserObjects.status = status;
+        };
+        // if (status === "approved" || status === "pending" || status === "failed"){
+        //     users.status = status;
+        // };
 
         // Pagination logic
-        const allUsers = await User.find(query)
-                                .skip((page - 1) * limit)
-                                .limit(parseInt(limit));
+        const allUsers = await User.find(allUserObjects)
+                               .skip((page - 1) * limit)
+                               .limit(parseInt(limit));
+
+        // const allUsers = await User.find(query)
+        //                         .skip((page - 1) * limit)
+        //                         .limit(parseInt(limit));
+
 
         if (allUsers.length === 0) {
             const responseData = {
