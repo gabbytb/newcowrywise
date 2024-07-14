@@ -10,6 +10,8 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 
 
 
+
+
 const DashboardStaffsPage = ({ isLoggedIn }) => {
     
 
@@ -31,7 +33,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [activeDisplay, setActiveDisplay] = useState('allStaffs');
-    
     const [isLoading, setIsLoading] = useState(true);
     // ****************************************************************************
     // ****************************************************************************
@@ -54,10 +55,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
     // ****************************************************************************
-    // ****************************************************************************
-    
-
-    // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // ****************************************************************************
     const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
@@ -65,44 +62,43 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
 
 
-
-    // ************************************
+    // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
-    // ************************************
+    // ****************************************************************************
     const [users, setUsers] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
 
-
+ 
     useEffect(() => {
         if (activeDisplay === "allApprovedStaffs") {
-            var timerID = setTimeout(fetchAllApprovedUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            var timerID = setTimeout(fetchApprovedStaffs, 300);   // Delay execution of findAllUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         } else if (activeDisplay === "allPendingStaffs") {
-            var timerID = setTimeout(fetchAllPendingUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            var timerID = setTimeout(fetchPendingStaffs, 300);   // Delay execution of findAllUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         } else if (activeDisplay === "allFailedStaffs") {
-            var timerID = setTimeout(fetchAllFailedUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            var timerID = setTimeout(fetchFailedStaffs, 300);   // Delay execution of findAllUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         } else {
-            var timerID = setTimeout(fetchAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            var timerID = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // *********************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
-    // *********************************************************************************************               
-    async function fetchAllUsers() {
+    // ****************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
+    // ****************************************************************************             
+    async function fetchAllStaffs() {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}`);
         const { allUsers, totalPages } = response.data;
@@ -120,14 +116,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
         console.error('Error fetching data:', error);
       };
     };
-
-    const [approvedStaffsStatus, setApprovedStaffsStatus] = useState("approved");
-    // *********************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
-    // *********************************************************************************************               
-    async function fetchAllApprovedUsers() {
+    
+    // ****************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+    // ****************************************************************************             
+    async function fetchApprovedStaffs() {
+        const approvedStatus = "approved";
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${approvedStaffsStatus}`);
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${approvedStatus}`);
           const { allUsers, totalPages } = response.data;
           
           setUsers(allUsers);
@@ -143,13 +139,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
           console.error('Error fetching data:', error);
         };
     };
-    const [pendingStaffsStatus, setPendingStaffsStatus] = useState("pending");
-    // *********************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
-    // *********************************************************************************************               
-    async function fetchAllPendingUsers() {
+    
+    // ****************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" STAFFS
+    // ****************************************************************************
+    async function fetchPendingStaffs() {
+        const pendingStatus = "pending";
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${pendingStaffsStatus}`);
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${pendingStatus}`);
           const { allUsers, totalPages } = response.data;
           
           setUsers(allUsers);
@@ -161,13 +158,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
           console.error('Error fetching data:', error);
         };
     };
-    const [failedStaffsStatus, setFailedStaffsStatus] = useState("failed");
-    // *********************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "FAILED" USERS
-    // *********************************************************************************************               
-    async function fetchAllFailedUsers() {
+    
+    // ****************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "FAILED" STAFFS
+    // ****************************************************************************
+    async function fetchFailedStaffs() {
+        const failedStatus = "failed";
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${failedStaffsStatus}`);
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${failedStatus}`);
           const { allUsers, totalPages } = response.data;
           
           setUsers(allUsers);
@@ -183,18 +181,22 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
           console.error('Error fetching data:', error);
         };
     };
-    // *********************************************************************************************
-    // *********************************************************************************************   
+    
+    
+
+    // ****************************************************************************
+    // ****************************************************************************
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-    // *******************************************************************************************//
-    // *******************************************************************************************//
+    // ****************************************************************************
+    // ****************************************************************************
 
 
-    // *******************************************************************************************//
+
+    // ****************************************************************************
     // TOGGLE DROPDOWN: USER "Profile Image" MENU
-    // *******************************************************************************************//
+    // ****************************************************************************
     function toggleUserProfileMenu() {       
         const userDpMenu = document.querySelector('.upm');
         if (userDpMenu?.classList.contains("hidden")) {
@@ -205,9 +207,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
             userDpMenu?.classList.add('hidden');
         };
     };
-    // *******************************************************************************************//
+    // ****************************************************************************
     // TOGGLE DROPDOWN: USER/STAFF
-    // *******************************************************************************************//
+    // ****************************************************************************
     function toggleUsersMenu() {
         let toggleUserMenu = document.querySelector('.usersDropdown');
         if (toggleUserMenu?.classList.contains("hidden") ) {
@@ -218,7 +220,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
             toggleUserMenu?.classList.add('hidden');
         };
     };
-    
     function toggleStaffsView() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
         if (toggleStaffMenu?.classList.contains("hidden")) {
@@ -229,8 +230,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
             toggleStaffMenu?.classList.add('hidden');
         };
     };
-    // *******************************************************************************************//
-    // *******************************************************************************************//
+    // ****************************************************************************
+    // ****************************************************************************
 
 
     
@@ -299,6 +300,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                             {/******************************************************************************************/}
                             <aside className="block">
+
                                 {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
@@ -351,7 +353,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
                                 {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
-                                    <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
+                                <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
                                     <table className="table-fixed capitalize">
                                         <thead>
                                             <tr>
@@ -368,7 +370,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                     if (user?.status === "pending") {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
-                                                                if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={index}>
                                                                             <td>{user?._id}</td>
@@ -386,7 +388,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                     } else if (user?.status === "failed") {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
-                                                                if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={index}>
                                                                             <td>{user?._id}</td>
@@ -404,7 +406,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                     } else {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
-                                                                if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={index}>
                                                                             <td>{user?._id}</td>
@@ -425,6 +427,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         </tbody>
                                     </table>
     
+
     
                                     {/* Pagination controls */}
                                     <div className="flex justify-center mt-4">
@@ -460,7 +463,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         </button>
                                         </nav>
                                     </div>
+                                    {/* Pagination controls */}
                                 </div>
+
                             </aside>
                             {/******************************************************************************************/}
                             {/******************************************************************************************/}
@@ -529,7 +534,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                         /************************  DASHBOARD: Menu  ************************/
                         /*******************************************************************/}
 
-    
 
 
 
@@ -537,6 +541,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                         {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                         {/******************************************************************************************/}
                         <aside className="block">
+
+                            {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
                             <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
@@ -585,8 +591,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             
 
 
-                            {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
 
+
+                            {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
                             <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
                                 <table className="table-fixed capitalize">
                                     <thead>
@@ -604,7 +611,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 if (user?.status === "pending") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
@@ -622,7 +629,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 } else if (user?.status === "failed") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
@@ -640,7 +647,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 } else {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
@@ -660,6 +667,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         }
                                     </tbody>
                                 </table>
+
 
 
                                 {/* Pagination controls */}
@@ -696,7 +704,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     </button>
                                     </nav>
                                 </div>
+                                {/* Pagination controls */}
                             </div>
+                            
                         </aside>
                         {/******************************************************************************************/}
                         {/******************************************************************************************/}
