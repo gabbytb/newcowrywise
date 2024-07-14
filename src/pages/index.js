@@ -10,11 +10,11 @@ import Login from "./Login";
 
 import AdminDashboard from "./AdminDashboard";
 
-import DashboardUsersPage from "./dashboard/DashboardUsersPage";
-import DashboardStaffsPage from "./dashboard/DashboardStaffsPage";
+import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
+import DashboardStaffsPage from "./dashboard/dashboardSettings/DashboardStaffsPage";
 
-import DashboardUsersDetailsPage from "./dashboard/DashboardUsersDetailsPage";
-import DashboardStaffsDetailsPage from "./dashboard/DashboardStaffsDetailsPage";
+import DashboardUsersDetailsPage from "./dashboard/dashboardSettings/DashboardUsersDetailsPage";
+import DashboardStaffsDetailsPage from "./dashboard/dashboardSettings/DashboardStaffsDetailsPage";
 
 import AccountUsers from "./AccountUsers";
 

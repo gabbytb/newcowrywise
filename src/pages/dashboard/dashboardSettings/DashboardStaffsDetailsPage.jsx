@@ -1,8 +1,8 @@
 import { useEffect, useState, } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { adminDashboardIcon, brandOfficialLogo } from "../../assets/images";
-import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../assets/icons";
+import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
+import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 
 
 
@@ -12,7 +12,7 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../assets/icons"
 
 
 
-const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
+const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     
     
     // *******************************************************************
@@ -151,10 +151,11 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
 
 
 
+
     if (isLoading) {
         return (
             <>
-                <main id="dashboardUsersDetailsID" className="admin-dashboard">
+                <main id="dashboardStaffsDetailsID" className="admin-dashboard">
                     <div className="container flex admin-container">
                         <div className="h-screen w-full grid xs:grid-cols-26">
 
@@ -215,7 +216,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                             {/******************************************************************************************/}
                             {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                             {/******************************************************************************************/}
-                            <aside className={`${activeDisplay === "usersDetails" ? "block" : "hidden" }`}>
+                            <aside className={`${activeDisplay === "staffsDetails" ? "block" : "hidden" }`}>
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
                                         <div className="rt-left-pane">
@@ -285,9 +286,10 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
 
     return (
         <>
-            <main id="dashboardUsersDetailsID" className="admin-dashboard">
+            <main id="dashboardStaffsDetailsID" className="admin-dashboard">
                 <div className="container flex admin-container">
                     <div className="h-screen w-full grid xs:grid-cols-26">
+                       
                         {/*******************************************************************/
                         /************************  DASHBOARD: Menu  ************************/
                         /*******************************************************************/}
@@ -345,7 +347,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                         {/******************************************************************************************/}
                         {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                         {/******************************************************************************************/}
-                        <aside className={`${activeDisplay === "usersDetails" ? "block" : "hidden" }`}>
+                        <aside className={`${activeDisplay === "staffsDetails" ? "block" : "hidden" }`}>
                             <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
@@ -413,4 +415,4 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
 };
 
 
-export default DashboardUsersDetailsPage;
+export default DashboardStaffsDetailsPage;

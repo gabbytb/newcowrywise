@@ -1,8 +1,10 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { adminDashboardIcon, brandOfficialLogo } from "../../assets/images";
-import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../assets/icons";
+import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
+import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
+
+
 
 
 
@@ -12,195 +14,181 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../assets/icons"
 
 const DashboardUsersPage = ({ isLoggedIn }) => {
     
-    
-    // *******************************************************************
+
+    // ****************************************************************************
+    // SET PAGE TITLE && ADD CUSTOM "admin__dashboard" CLASS TO ADMIN DASHBOARD
+    // ****************************************************************************
+    useEffect(() => {
+        var pageTitle = "Reaching out to great minds", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+
+        var adminRoot = document.querySelector("#root");
+        adminRoot?.classList.add("admin__dashboard");
+    }, []);
+    // ****************************************************************************
+    // ****************************************************************************
+
+
+    // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
-    // *******************************************************************
+    // ****************************************************************************
+    const [activeDisplay, setActiveDisplay] = useState('allUsers');
+    
     const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("users");
-    // *******************************************************************
-    // *******************************************************************
+    // ****************************************************************************
+    // ****************************************************************************
     
 
-    // *********************************************
+    // ****************************************************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
-    // *********************************************
+    // ****************************************************************************
     function logOut() {
         localStorage.clear();
         const redirToLogin = "/user/login";
         window.location = redirToLogin;
     }
-    // *********************************************
-    // *********************************************
+    // ****************************************************************************
+    // ****************************************************************************
 
 
-    // ***********************************************
+    // ****************************************************************************
     // CURRENTLY ACTIVE USER:-
-    // ***********************************************
+    // ****************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // *********************************************
-    // *********************************************
+    // ****************************************************************************
+    // ****************************************************************************
     
 
-    // ***********************************************
-    // SET PAGE TITLE IF USER IS LOGGED-IN:-
-    // ***********************************************
-    useEffect(() => {
-        if (isLoggedIn) {
-            const pageTitle = "Reaching out to great minds", 
-                siteTitle = "Samuel Akinola Foundation";
-            document.title = `${pageTitle} | ${siteTitle}`;
-
-            var adminRoot = document.querySelector("#root");
-            adminRoot?.classList.add("admin__dashboard");
-        };
-    }, [isLoggedIn]);
-    // *********************************************
-    // *********************************************
-
-
-    // *********************************************
+    // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
-    // *********************************************
+    // ****************************************************************************
     const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+
 
 
     // ************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ************************************
     const [users, setUsers] = useState([]);
- 
-
-    // *********************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS, IF "activeDisplay" is USERS
-    // *********************************************************************************************
-    // useEffect(() => {      
-    //     async function findAllUsers() {
-    //         const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-    //         await axios.get(url, {
-    //             params: {
-    //                 page: 1,
-    //                 limit: 10,
-    //                 status: 'approved'
-    //             },
-    //         })
-    //         .then((response) => {
-    //             const { success, data, message } = response.data;
-    //             if (activeDisplay === "users") {
-    //                 if ((!success) || (message === "Users not found")) {
-    //                     console.log("Message: ", message);
-    //                     console.log("Success: ", success);
-    //                 };
-                                
-    //                 // Perform Actions Here if Truthy
-    //                 setUsers(data);
-    //             };
-    //         })
-    //         .catch((error) => {
-    //             // Handle error state or logging here
-    //             console.log("Error encountered: ", error);
-    //         })
-    //         .finally(() => {
-    //             setIsLoading(false);    // Always disable loading state, whether successful or not
-    //         });
-    //     };
-        
-    //     var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
-    //     return () => {
-    //         // Clean up timer if component unmounts or token changes
-    //         clearTimeout(timerID);
-    //     };
-    // }, [activeDisplay]);
+    const [totalPages, setTotalPages] = useState(0);
     
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10; // Number of items per page
+
+
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-                const response = await axios.get(url, {
-                    params: {
-                        page: 1,
-                        limit: 10,
-                        status: "",
-                    },
-                });
-
-                const { success, data, message } = response.data;
-                if (!success || message === "Users not found") {
-                    console.log("Success: ", success);
-                    console.log("Message: ", message);
-                };
-
-                setIsLoading(success);
-                setUsers(data);
-                
-            } catch (error) {
-                console.error("Error fetching users:", error);
+        if (activeDisplay === "allApprovedStaffs") {
+            var timerID = setTimeout(fetchAllApprovedUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        };
-        var timerID = setTimeout(fetchUsers, 300);   // Delay execution of findAllUsers by 1800ms
-        return () => {
-            // Clean up timer if component unmounts or token changes
-            clearTimeout(timerID);
-        };
-    }, []);
-
-    const fetchApprovedUsers = async () => {
-        try {
-            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-            const response = await axios.get(url, {
-                params: {
-                    page: 1,
-                    limit: 10,
-                    status: 'pending'
-                }
-            });
-
-            setUsers(response.data.data);
-            setIsLoading(false);
-
-        } catch (error) {
-            console.error("Error fetching users:", error);
+        } else if (activeDisplay === "allPendingStaffs") {
+            var timerID = setTimeout(fetchAllPendingUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
+        } else if (activeDisplay === "allFailedStaffs") {
+            var timerID = setTimeout(fetchAllFailedUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
+        } else {
+            var timerID = setTimeout(fetchAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
         }
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
+    // *********************************************************************************************               
+    async function fetchAllUsers() {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}`);
+        const { allUsers, totalPages } = response.data;
+        
+        setUsers(allUsers);
+        setTotalPages(totalPages);
+
+        // console.log("Data: ", allUsers);
+        // console.log("Current Page: ", currentPage);
+        // console.log("Total Pages: ", totalPages);
+
+        setIsLoading(false);
+    
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      };
     };
 
-    const fetchPendingUsers = async () => {
+    const [approvedStaffsStatus, setApprovedStaffsStatus] = useState("approved");
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
+    // *********************************************************************************************               
+    async function fetchAllApprovedUsers() {
         try {
-            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-            const response = await axios.get(url, {
-                params: {
-                    page: 1,
-                    limit: 10,
-                    status: 'pending'
-                }
-            });
-
-            setUsers(response.data.data);
-            setIsLoading(false);
-
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${approvedStaffsStatus}`);
+          const { allUsers, totalPages } = response.data;
+          
+          setUsers(allUsers);
+          setTotalPages(totalPages);
+  
+          // console.log("Data: ", allUsers);
+          // console.log("Current Page: ", currentPage);
+          // console.log("Total Pages: ", totalPages);
+  
+          setIsLoading(false);
+      
         } catch (error) {
-            console.error("Error fetching users:", error);
-        }
+          console.error('Error fetching data:', error);
+        };
     };
-
-    const fetchFailedUsers = async () => {
+    const [pendingStaffsStatus, setPendingStaffsStatus] = useState("pending");
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
+    // *********************************************************************************************               
+    async function fetchAllPendingUsers() {
         try {
-            const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-            const response = await axios.get(url, {
-                params: {
-                    page: 1,
-                    limit: 10,
-                    status: 'pending'
-                }
-            });
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${pendingStaffsStatus}`);
+          const { allUsers, totalPages } = response.data;
+          
+          setUsers(allUsers);
+          setTotalPages(totalPages);
 
-            setUsers(response.data.data);
-            setIsLoading(false);
-
+          setIsLoading(false);
+      
         } catch (error) {
-            console.error("Error fetching users:", error);
-        }
+          console.error('Error fetching data:', error);
+        };
+    };
+    const [failedStaffsStatus, setFailedStaffsStatus] = useState("failed");
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "FAILED" USERS
+    // *********************************************************************************************               
+    async function fetchAllFailedUsers() {
+        try {
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${failedStaffsStatus}`);
+          const { allUsers, totalPages } = response.data;
+          
+          setUsers(allUsers);
+          setTotalPages(totalPages);
+  
+          // console.log("Data: ", allUsers);
+          // console.log("Current Page: ", currentPage);
+          // console.log("Total Pages: ", totalPages);
+  
+          setIsLoading(false);
+      
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        };
+    };
+    // *********************************************************************************************
+    // *********************************************************************************************   
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
     // *******************************************************************************************//
     // *******************************************************************************************//
@@ -232,6 +220,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
             toggleUserMenu?.classList.add('hidden');
         };
     };
+    
     function toggleStaffsView() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
         if (toggleStaffMenu?.classList.contains("hidden")) {
@@ -250,7 +239,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     if (isLoading) {
         return (
             <>
-                <main id="dashboardUsersID" className="admin-dashboard">
+                <main id="dashboardStaffsID" className="admin-dashboard">
                     <div className="container flex admin-container">
                         <div className="h-screen w-full grid xs:grid-cols-26">
                             {/*******************************************************************/
@@ -260,21 +249,21 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                 <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
                                     <img src={brandOfficialLogo} alt="official logo" />
                                 </Link>
-
+    
                                 <ul className="flex flex-col w-full px-8 gap-16 mb-40">
                                     {/* MAIN MENU */}
                                     <div id="mainMenuId">
                                         <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
                                         <div className="flex flex-col gap-8">
-                                            <Link to="/admin/dashboard/" className="no-dropdown">
+                                            <Link to="/admin/dashboard" className="no-dropdown">
                                                 <HomeIcon /> <span>Dashboard</span>
                                             </Link>
                                         </div>
                                     </div>
                                     {/* MAIN MENU */}
-
-
-
+    
+    
+    
                                     {/* USERS MENU */}
                                     <div id="userMenuId">
                                         <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
@@ -293,7 +282,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                     <StaffsIcon /> <span>staffs</span>
                                                 </button>
                                                 <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                    <Link to="/admin/staffs" >staff management</Link>
+                                                    <Link to="/admin/staffs">staff management</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -304,14 +293,15 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                             {/*******************************************************************/
                             /************************  DASHBOARD: Menu  ************************/
                             /*******************************************************************/}
-
-
-
-
+    
+    
+    
+    
                             {/******************************************************************************************/}
                             {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                             {/******************************************************************************************/}
-                            <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
+                            <aside className="block">
+                                {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
                                         <div className="rt-left-pane">
@@ -337,10 +327,6 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                 return (
                                                                     <span key={selectRole?._id}>staff</span>
                                                                 );
-                                                            } else if (selectRole?.role === "ROLE_USERS") {
-                                                                return (
-                                                                    <span key={selectRole?._id}>user</span>
-                                                                );
                                                             } else {
                                                                 return (
                                                                     <span>Unassigned Role</span>
@@ -362,10 +348,12 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                     </div>
                                 </div>
                                 
+    
+    
 
-                                {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                                <div className="right-bottom-pane relative h-full flex flex-col">
+                                {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
+                                    <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allUsers' ? 'flex' : 'hidden'}`}>
                                     <table className="table-fixed capitalize">
                                         <thead>
                                             <tr>
@@ -379,7 +367,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                         <tbody>
                                             {
                                                 users.map((user) => {
-                                                    if (!user?.isActivated && user?.approvalTandC) {
+                                                    if (user?.status === "pending") {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
                                                                 if (roleUsers?.role === "ROLE_USERS") {
@@ -388,16 +376,16 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
                                                                 };
                                                             })
                                                         );
-                                                    } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                    } else if (user?.status === "failed") {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
                                                                 if (roleUsers?.role === "ROLE_USERS") {
@@ -406,9 +394,9 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -424,9 +412,9 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -438,6 +426,42 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             }
                                         </tbody>
                                     </table>
+    
+    
+                                    {/* Pagination controls */}
+                                    <div className="flex justify-center mt-4">
+                                        <nav className="relative z-0 inline-flex shadow-sm">
+                                        {/* Previous page button */}
+                                        <button
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            disabled={currentPage === 1}
+                                        >
+                                            Prev
+                                        </button>
+    
+    
+                                        {/* Page numbers */}
+                                        {Array.from({ length: totalPages }, (_, index) => (
+                                            <button
+                                            key={index}
+                                            onClick={() => handlePageChange(index + 1)}
+                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                            {index + 1}
+                                            </button>
+                                        ))}
+    
+    
+                                        {/* Next page button */}
+                                        <button
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            disabled={currentPage === totalPages}
+                                        >
+                                            Next
+                                        </button>
+                                        </nav>
+                                    </div>
                                 </div>
                             </aside>
                             {/******************************************************************************************/}
@@ -452,7 +476,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
     return (
         <>
-            <main id="dashboardUsersID" className="admin-dashboard">
+            <main id="dashboardStaffsID" className="admin-dashboard">
                 <div className="container flex admin-container">
                     <div className="h-screen w-full grid xs:grid-cols-26">
                         {/*******************************************************************/
@@ -466,12 +490,12 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                             <ul className="flex flex-col w-full px-8 gap-16 mb-40">
                                 {/* MAIN MENU */}
                                 <div id="mainMenuId">
-                                        <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
-                                        <div className="flex flex-col gap-8">
-                                            <Link to="/admin/dashboard/" className="no-dropdown">
-                                                <HomeIcon /> <span>Dashboard</span>
-                                            </Link>
-                                        </div>
+                                    <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
+                                    <div className="flex flex-col gap-8">
+                                        <Link to="/admin/dashboard" className="no-dropdown">
+                                            <HomeIcon /> <span>Dashboard</span>
+                                        </Link>
+                                    </div>
                                 </div>
                                 {/* MAIN MENU */}
 
@@ -495,7 +519,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                <Link to="/admin/staffs" >staff management</Link>
+                                                <Link to="/admin/staffs">staff management</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -507,13 +531,14 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                         /************************  DASHBOARD: Menu  ************************/
                         /*******************************************************************/}
 
+    
 
 
 
                         {/******************************************************************************************/}
                         {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                         {/******************************************************************************************/}
-                        <aside className={`${activeDisplay === "users" ? "block" : "hidden" }`}>
+                        <aside className="block">
                             <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
@@ -527,21 +552,9 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             <h6>
                                                 {
                                                     userRoles?.map((selectRole) => {
-                                                        if (selectRole?.role === "ROLE_ADMIN") {
+                                                        if (selectRole?.role === "ROLE_USERS") {
                                                             return (
                                                                 <span key={selectRole?._id}>admin</span>
-                                                            );
-                                                        } else if (selectRole?.role === "ROLE_EDITOR") {
-                                                            return (
-                                                                <span key={selectRole?._id}>editor</span>
-                                                            );
-                                                        } else if (selectRole?.role === "ROLE_STAFF") {
-                                                            return (
-                                                                <span key={selectRole?._id}>staff</span>
-                                                            );
-                                                        } else if (selectRole?.role === "ROLE_USERS") {
-                                                            return (
-                                                                <span key={selectRole?._id}>user</span>
                                                             );
                                                         } else {
                                                             return (
@@ -565,9 +578,10 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                             </div>
                             
 
-                            {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                            <div className="right-bottom-pane relative h-full flex flex-col">
+                            {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
+
+                            <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
                                 <table className="table-fixed capitalize">
                                     <thead>
                                         <tr>
@@ -592,7 +606,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         <td className="lowercase">{user?.email}</td>
                                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                         <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -610,7 +624,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         <td className="lowercase">{user?.email}</td>
                                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                         <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -628,7 +642,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         <td className="lowercase">{user?.email}</td>
                                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                         <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -640,6 +654,42 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                         }
                                     </tbody>
                                 </table>
+
+
+                                {/* Pagination controls */}
+                                <div className="flex justify-center mt-4">
+                                    <nav className="relative z-0 inline-flex shadow-sm">
+                                    {/* Previous page button */}
+                                    <button
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={currentPage === 1}
+                                    >
+                                        Prev
+                                    </button>
+
+
+                                    {/* Page numbers */}
+                                    {Array.from({ length: totalPages }, (_, index) => (
+                                        <button
+                                        key={index}
+                                        onClick={() => handlePageChange(index + 1)}
+                                        className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                        {index + 1}
+                                        </button>
+                                    ))}
+
+
+                                    {/* Next page button */}
+                                    <button
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        Next
+                                    </button>
+                                    </nav>
+                                </div>
                             </div>
                         </aside>
                         {/******************************************************************************************/}

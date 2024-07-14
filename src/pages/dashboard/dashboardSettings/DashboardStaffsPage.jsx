@@ -1,8 +1,8 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { adminDashboardIcon, brandOfficialLogo } from "../../assets/images";
-import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../assets/icons";
+import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
+import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 
 
 
@@ -247,21 +247,21 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
                                     <img src={brandOfficialLogo} alt="official logo" />
                                 </Link>
-
+    
                                 <ul className="flex flex-col w-full px-8 gap-16 mb-40">
                                     {/* MAIN MENU */}
                                     <div id="mainMenuId">
                                         <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
                                         <div className="flex flex-col gap-8">
-                                            <Link to="/admin/dashboard/" className="no-dropdown">
+                                            <Link to="/admin/dashboard" className="no-dropdown">
                                                 <HomeIcon /> <span>Dashboard</span>
                                             </Link>
                                         </div>
                                     </div>
                                     {/* MAIN MENU */}
-
-
-
+    
+    
+    
                                     {/* USERS MENU */}
                                     <div id="userMenuId">
                                         <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
@@ -280,7 +280,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                     <StaffsIcon /> <span>staffs</span>
                                                 </button>
                                                 <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                    <Link to="/admin/staffs" >staff management</Link>
+                                                    <Link to="/admin/staffs">staff management</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -291,14 +291,15 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             {/*******************************************************************/
                             /************************  DASHBOARD: Menu  ************************/
                             /*******************************************************************/}
-
-
-
-
+    
+    
+    
+    
                             {/******************************************************************************************/}
                             {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                             {/******************************************************************************************/}
-                            <aside className={`${activeDisplay ? "block" : "hidden"}`}>
+                            <aside className="block">
+                                {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
                                         <div className="rt-left-pane">
@@ -324,10 +325,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 return (
                                                                     <span key={selectRole?._id}>staff</span>
                                                                 );
-                                                            } else if (selectRole?.role === "ROLE_USERS") {
-                                                                return (
-                                                                    <span key={selectRole?._id}>user</span>
-                                                                );
                                                             } else {
                                                                 return (
                                                                     <span>Unassigned Role</span>
@@ -349,10 +346,12 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     </div>
                                 </div>
                                 
+    
+    
 
-                                {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                                <div className="right-bottom-pane relative h-full flex flex-col">
+                                {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
+                                    <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
                                     <table className="table-fixed capitalize">
                                         <thead>
                                             <tr>
@@ -366,7 +365,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         <tbody>
                                             {
                                                 users.map((user) => {
-                                                    if (!user?.isActivated && user?.approvalTandC) {
+                                                    if (user?.status === "pending") {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
                                                                 if (roleUsers?.role === "ROLE_ADMIN") {
@@ -375,16 +374,16 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
                                                                 };
                                                             })
                                                         );
-                                                    } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                    } else if (user?.status === "failed") {
                                                         return (
                                                             user?.roles?.map((roleUsers, index) => {
                                                                 if (roleUsers?.role === "ROLE_ADMIN") {
@@ -393,9 +392,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -411,9 +410,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                             <td>{user?._id}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -425,6 +424,42 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                             }
                                         </tbody>
                                     </table>
+    
+    
+                                    {/* Pagination controls */}
+                                    <div className="flex justify-center mt-4">
+                                        <nav className="relative z-0 inline-flex shadow-sm">
+                                        {/* Previous page button */}
+                                        <button
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            disabled={currentPage === 1}
+                                        >
+                                            Prev
+                                        </button>
+    
+    
+                                        {/* Page numbers */}
+                                        {Array.from({ length: totalPages }, (_, index) => (
+                                            <button
+                                            key={index}
+                                            onClick={() => handlePageChange(index + 1)}
+                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                            {index + 1}
+                                            </button>
+                                        ))}
+    
+    
+                                        {/* Next page button */}
+                                        <button
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            disabled={currentPage === totalPages}
+                                        >
+                                            Next
+                                        </button>
+                                        </nav>
+                                    </div>
                                 </div>
                             </aside>
                             {/******************************************************************************************/}
@@ -455,7 +490,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 <div id="mainMenuId">
                                     <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
                                     <div className="flex flex-col gap-8">
-                                        <Link to="/admin/dashboard/" className="no-dropdown">
+                                        <Link to="/admin/dashboard" className="no-dropdown">
                                             <HomeIcon /> <span>Dashboard</span>
                                         </Link>
                                     </div>
@@ -494,6 +529,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                         /************************  DASHBOARD: Menu  ************************/
                         /*******************************************************************/}
 
+    
 
 
 
@@ -576,7 +612,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                         <td className="lowercase">{user?.email}</td>
                                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                         <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -594,7 +630,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                         <td className="lowercase">{user?.email}</td>
                                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                         <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -612,7 +648,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                         <td className="lowercase">{user?.email}</td>
                                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                         <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -661,231 +697,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     </nav>
                                 </div>
                             </div>
-
-                            {/* <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === "allApprovedStaffs" ? "flex" : "hidden"}`}>
-                                <table className="table-fixed capitalize">
-                                    <thead>
-                                        <tr>
-                                            <th>S/N</th>
-                                            <th>NAME</th>
-                                            <th>E-MAIL</th>
-                                            <th>STATUS</th>
-                                            <th>ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            users.map((user) => {
-                                                if (!user?.isActivated && user?.approvalTandC) {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else if (!user?.isActivated && !user?.approvalTandC) {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                };
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === "allPendingStaffs" ? "flex" : "hidden"}`}>
-                                <table className="table-fixed capitalize">
-                                    <thead>
-                                        <tr>
-                                            <th>S/N</th>
-                                            <th>NAME</th>
-                                            <th>E-MAIL</th>
-                                            <th>STATUS</th>
-                                            <th>ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            users.map((user) => {
-                                                if (!user?.isActivated && user?.approvalTandC) {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else if (!user?.isActivated && !user?.approvalTandC) {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                };
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === "allFailedStaffs" ? "flex" : "hidden"}`}>
-                                <table className="table-fixed capitalize">
-                                    <thead>
-                                        <tr>
-                                            <th>S/N</th>
-                                            <th>NAME</th>
-                                            <th>E-MAIL</th>
-                                            <th>STATUS</th>
-                                            <th>ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            users.map((user) => {
-                                                if (!user?.isActivated && user?.approvalTandC) {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else if (!user?.isActivated && !user?.approvalTandC) {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_ADMIN") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                };
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                            </div> */}
                         </aside>
                         {/******************************************************************************************/}
                         {/******************************************************************************************/}
