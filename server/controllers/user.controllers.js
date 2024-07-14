@@ -417,43 +417,42 @@ exports.logIn = async (req, res) => {
 exports.findAll = async (req, res) => {
 
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters
-
+    
     try {
-        let allUserObjects = {};
+        let query = {};
 
         // Add status filter if provided
         if (status) {
-            allUserObjects.status = status;
+            query.status = status;
         };
-        // if (status === "approved" || status === "pending" || status === "failed"){
-        //     users.status = status;
-        // };
-
+        
         // Pagination logic
-        const allUsers = await User.find(allUserObjects)
-                               .skip((page - 1) * limit)
-                               .limit(parseInt(limit));
-
-        // const allUsers = await User.find(query)
-        //                         .skip((page - 1) * limit)
-        //                         .limit(parseInt(limit));
+        const allUsers = await User.find(query)
+                                .skip((page - 1) * limit)
+                                .limit(parseInt(limit));
 
 
-        if (allUsers.length === 0) {
-            const responseData = {
-                success: false,
-                message: "Users not found",
-            };
-            console.log("Failed to fetch users: ", responseData);
-            return res.status(404).json(responseData);
-        }
+        // if (allUsers.length === 0) {
+        //     const responseData = {
+        //         success: true,
+        //         message: "Users not found",
+        //     }
+        //     res.status(200).json(responseData);
+        // }
 
-        const responseData = {
-            success: true,
-            data: allUsers,
-            message: "Successful",
-        };
-        return res.status(200).json(responseData);
+        // const responseData = {
+        //     success: true,
+        //     data: allUsers,
+        //     message: "Successful",
+        // };
+        // return res.status(200).json(responseData);
+        const totalUsers = await User.countDocuments(query); // Total number of users with the given status
+        const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
+        
+        res.status(200).json({
+            allUsers,
+            totalPages
+        });
 
     } catch (error) {
         console.error("Internal Server Error:", error);

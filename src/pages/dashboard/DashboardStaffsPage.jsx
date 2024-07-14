@@ -12,198 +12,179 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../assets/icons"
 
 const DashboardStaffsPage = ({ isLoggedIn }) => {
     
-    
-    // *******************************************************************
+
+    // ****************************************************************************
+    // SET PAGE TITLE && ADD CUSTOM "admin__dashboard" CLASS TO ADMIN DASHBOARD
+    // ****************************************************************************
+    useEffect(() => {
+        var pageTitle = "Reaching out to great minds", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+
+        var adminRoot = document.querySelector("#root");
+        adminRoot?.classList.add("admin__dashboard");
+    }, []);
+    // ****************************************************************************
+    // ****************************************************************************
+
+
+    // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
-    // *******************************************************************
+    // ****************************************************************************
+    const [activeDisplay, setActiveDisplay] = useState('allStaffs');
+    
     const [isLoading, setIsLoading] = useState(true);
-    // *******************************************************************
-    // *******************************************************************
+    // ****************************************************************************
+    // ****************************************************************************
     
 
-    // *********************************************
+    // ****************************************************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
-    // *********************************************
+    // ****************************************************************************
     function logOut() {
         localStorage.clear();
         const redirToLogin = "/user/login";
         window.location = redirToLogin;
     }
-    // *********************************************
-    // *********************************************
+    // ****************************************************************************
+    // ****************************************************************************
 
 
-    // ***********************************************
+    // ****************************************************************************
     // CURRENTLY ACTIVE USER:-
-    // ***********************************************
+    // ****************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // *********************************************
-    // *********************************************
+    // ****************************************************************************
+    // ****************************************************************************
     
 
-    // ***********************************************
-    // SET PAGE TITLE IF USER IS LOGGED-IN:-
-    // ***********************************************
-    useEffect(() => {
-        if (isLoggedIn) {
-            const pageTitle = "Reaching out to great minds", 
-                siteTitle = "Samuel Akinola Foundation";
-            document.title = `${pageTitle} | ${siteTitle}`;
-
-            var adminRoot = document.querySelector("#root");
-            adminRoot?.classList.add("admin__dashboard");
-        };
-    }, [isLoggedIn]);
-    // *********************************************
-    // *********************************************
-
-
-    // *********************************************
+    // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
-    // *********************************************
+    // ****************************************************************************
     const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+
 
 
     // ************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ************************************
     const [users, setUsers] = useState([]);
- 
-
-    // *********************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS, IF "activeDisplay" is STAFFS
-    // *********************************************************************************************
-    // useEffect(() => {      
-    //     function findAllUsers() {
-    //         const url = "http://127.0.0.1:8000/api/v1/admin/users/manage";
-    //         axios.get(url)
-    //         .then((response) => {
-    //             const { success, data, message } = response.data;
-    //             if (activeDisplay === "staffs") {
-    //                 if ((!success) || (message === "Users not found")) {
-    //                     console.log("Message: ", message);
-    //                     console.log("Success: ", success);
-    //                 };
-                                
-    //                 // Perform Actions Here if Truthy
-    //                 setUsers(data);
-    //             };
-    //         })
-    //         .catch((error) => {
-    //             // Handle error state or logging here
-    //             console.log("Error encountered: ", error);
-    //         })
-    //         .finally(() => {
-    //             setIsLoading(false);    // Always disable loading state, whether successful or not
-    //         });
-    //     };
-        
-    //     var timerID = setTimeout(findAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
-    //     return () => {
-    //         // Clean up timer if component unmounts or token changes
-    //         clearTimeout(timerID);
-    //     };
-    // }, [activeDisplay]);
-
-
-    
-
-    const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    
+    const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
-  
+
+
     useEffect(() => {
-        var timerID = setTimeout(fetchData, 300);   // Delay execution of findAllUsers by 1800ms
-        return () => {
-            clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-        };
-    }, [currentPage]); // Fetch data when currentPage changes
-  
-    const fetchData = async () => {
+        if (activeDisplay === "allApprovedStaffs") {
+            var timerID = setTimeout(fetchAllApprovedUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
+        } else if (activeDisplay === "allPendingStaffs") {
+            var timerID = setTimeout(fetchAllPendingUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
+        } else if (activeDisplay === "allFailedStaffs") {
+            var timerID = setTimeout(fetchAllFailedUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
+        } else {
+            var timerID = setTimeout(fetchAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };
+        }
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
+    // *********************************************************************************************               
+    async function fetchAllUsers() {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}`);
-        const { success, data, message } = response.data;
-        if (!success || message === "Users not found") {
-            console.log("Success: ", success);
-            console.log("Message: ", message);
-        };
+        const { allUsers, totalPages } = response.data;
+        
+        setUsers(allUsers);
+        setTotalPages(totalPages);
 
-        setUsers(data);        
+        // console.log("Data: ", allUsers);
+        // console.log("Current Page: ", currentPage);
+        // console.log("Total Pages: ", totalPages);
+
         setIsLoading(false);
-
-        // Assuming your backend also sends total number of pages
-        setTotalPages(Math.ceil(response.data.totalCount / limit));
-
+    
       } catch (error) {
         console.error('Error fetching data:', error);
-      }
-    };
-         
-    const fetchApprovedUsers = async () => {
-        try {
-            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${users?.status}`;
-            const response = await axios.get(url);
-            const { success, data, message } = response.data;
-            if (!success || message === "Users not found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-    
-            setUsers(data);        
-            setIsLoading(false);
-    
-            // Assuming your backend also sends total number of pages
-            setTotalPages(Math.ceil(response.data.totalCount / limit));
-    
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        };
+      };
     };
 
-    const fetchPendingUsers = async () => {
+    const [approvedStaffsStatus, setApprovedStaffsStatus] = useState("approved");
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
+    // *********************************************************************************************               
+    async function fetchAllApprovedUsers() {
         try {
-            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${users?.status}`;
-            const response = await axios.get(url);
-            const { success, data, message } = response.data;
-            if (!success || message === "Users not found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-    
-            setUsers(data);        
-            setIsLoading(false);
-    
-            // Assuming your backend also sends total number of pages
-            setTotalPages(Math.ceil(response.data.totalCount / limit));
-    
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${approvedStaffsStatus}`);
+          const { allUsers, totalPages } = response.data;
+          
+          setUsers(allUsers);
+          setTotalPages(totalPages);
+  
+          // console.log("Data: ", allUsers);
+          // console.log("Current Page: ", currentPage);
+          // console.log("Total Pages: ", totalPages);
+  
+          setIsLoading(false);
+      
         } catch (error) {
-            console.error('Error fetching data:', error);
+          console.error('Error fetching data:', error);
         };
     };
-
-    const fetchFailedUsers = async () => {
+    const [pendingStaffsStatus, setPendingStaffsStatus] = useState("pending");
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
+    // *********************************************************************************************               
+    async function fetchAllPendingUsers() {
         try {
-            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${users?.status}`;
-            const response = await axios.get(url);
-            const { success, data, message } = response.data;
-            if (!success || message === "Users not found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-    
-            setUsers(data);        
-            setIsLoading(false);
-    
-            // Assuming your backend also sends total number of pages
-            setTotalPages(Math.ceil(response.data.totalCount / limit));
-    
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${pendingStaffsStatus}`);
+          const { allUsers, totalPages } = response.data;
+          
+          setUsers(allUsers);
+          setTotalPages(totalPages);
+
+          setIsLoading(false);
+      
         } catch (error) {
-            console.error('Error fetching data:', error);
+          console.error('Error fetching data:', error);
         };
     };
-
+    const [failedStaffsStatus, setFailedStaffsStatus] = useState("failed");
+    // *********************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "FAILED" USERS
+    // *********************************************************************************************               
+    async function fetchAllFailedUsers() {
+        try {
+          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${failedStaffsStatus}`);
+          const { allUsers, totalPages } = response.data;
+          
+          setUsers(allUsers);
+          setTotalPages(totalPages);
+  
+          // console.log("Data: ", allUsers);
+          // console.log("Current Page: ", currentPage);
+          // console.log("Total Pages: ", totalPages);
+  
+          setIsLoading(false);
+      
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        };
+    };
+    // *********************************************************************************************
+    // *********************************************************************************************   
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -237,6 +218,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
             toggleUserMenu?.classList.add('hidden');
         };
     };
+    
     function toggleStaffsView() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
         if (toggleStaffMenu?.classList.contains("hidden")) {
@@ -316,7 +298,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             {/******************************************************************************************/}
                             {/*******************************    SETTINGS:- Users VIEW    ******************************/}
                             {/******************************************************************************************/}
-                            <aside className="block">
+                            <aside className={`${activeDisplay ? "block" : "hidden"}`}>
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
                                         <div className="rt-left-pane">
@@ -500,7 +482,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                <Link to="/admin/staffs" >staff management</Link>
+                                                <Link to="/admin/staffs">staff management</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -511,6 +493,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                         {/*******************************************************************/
                         /************************  DASHBOARD: Menu  ************************/
                         /*******************************************************************/}
+
 
 
 
@@ -543,10 +526,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                             return (
                                                                 <span key={selectRole?._id}>staff</span>
                                                             );
-                                                        } else if (selectRole?.role === "ROLE_USERS") {
-                                                            return (
-                                                                <span key={selectRole?._id}>user</span>
-                                                            );
                                                         } else {
                                                             return (
                                                                 <span>Unassigned Role</span>
@@ -569,9 +548,10 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             </div>
                             
 
-                            {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                            <div className="right-bottom-pane relative flex flex-col">
+                            {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
+
+                            <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
                                 <table className="table-fixed capitalize">
                                     <thead>
                                         <tr>
@@ -588,7 +568,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 if (user?.status === "pending") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR")) {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
@@ -606,7 +586,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 } else if (user?.status === "failed") {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR")) {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
@@ -624,13 +604,13 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 } else {
                                                     return (
                                                         user?.roles?.map((roleUsers, index) => {
-                                                            if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR")) {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
                                                                 return (
                                                                     <tr key={index}>
                                                                         <td>{user?._id}</td>
                                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                                         <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                         <td>
                                                                             <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
@@ -680,10 +660,232 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     </button>
                                     </nav>
                                 </div>
-                                {/* <div>
-                                    <Link onClick={fetchUsers} className="text-2xl bg-blue-500 text-white">Goto Next Page</Link>
-                                </div> */}
                             </div>
+
+                            {/* <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === "allApprovedStaffs" ? "flex" : "hidden"}`}>
+                                <table className="table-fixed capitalize">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>NAME</th>
+                                            <th>E-MAIL</th>
+                                            <th>STATUS</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            users.map((user) => {
+                                                if (!user?.isActivated && user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                };
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === "allPendingStaffs" ? "flex" : "hidden"}`}>
+                                <table className="table-fixed capitalize">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>NAME</th>
+                                            <th>E-MAIL</th>
+                                            <th>STATUS</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            users.map((user) => {
+                                                if (!user?.isActivated && user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                };
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === "allFailedStaffs" ? "flex" : "hidden"}`}>
+                                <table className="table-fixed capitalize">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>NAME</th>
+                                            <th>E-MAIL</th>
+                                            <th>STATUS</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            users.map((user) => {
+                                                if (!user?.isActivated && user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">pending</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else if (!user?.isActivated && !user?.approvalTandC) {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">failed</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                } else {
+                                                    return (
+                                                        user?.roles?.map((roleUsers, index) => {
+                                                            if (roleUsers?.role === "ROLE_ADMIN") {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{user?._id}</td>
+                                                                        <td>{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="lowercase">{user?.email}</td>
+                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">approved</td>
+                                                                        <td>
+                                                                            <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    );
+                                                };
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div> */}
                         </aside>
                         {/******************************************************************************************/}
                         {/******************************************************************************************/}
