@@ -100,18 +100,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************             
     async function fetchAllStaffs() {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}`);
-        const { allUsers, totalPages } = response.data;
-        
-        setUsers(allUsers);
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`);
+        // const { success, data, message } = response.data;
+        // if ((!success) && (message === "Users not found")) {
+        //     
+        // } 
+        const { accountList, totalPages } = response.data;
+
+        setUsers(accountList);
         setTotalPages(totalPages);
 
-        // console.log("Data: ", allUsers);
-        // console.log("Current Page: ", currentPage);
-        // console.log("Total Pages: ", totalPages);
-
         setIsLoading(false);
-    
+
       } catch (error) {
         console.error('Error fetching data:', error);
       };
@@ -326,6 +326,10 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                             } else if (selectRole?.role === "ROLE_STAFF") {
                                                                 return (
                                                                     <span key={selectRole?._id}>staff</span>
+                                                                );
+                                                            } else if (selectRole?.role === "ROLE_USERS") {
+                                                                return (
+                                                                    <span key={selectRole?._id}>user</span>
                                                                 );
                                                             } else {
                                                                 return (
@@ -567,6 +571,10 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                         } else if (selectRole?.role === "ROLE_STAFF") {
                                                             return (
                                                                 <span key={selectRole?._id}>staff</span>
+                                                            );
+                                                        } else if (selectRole?.role === "ROLE_USERS") {
+                                                            return (
+                                                                <span key={selectRole?._id}>user</span>
                                                             );
                                                         } else {
                                                             return (

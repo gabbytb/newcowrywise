@@ -328,6 +328,10 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                 return (
                                                                     <span key={selectRole?._id}>staff</span>
                                                                 );
+                                                            } else if (selectRole?.role === "ROLE_USERS") {
+                                                                return (
+                                                                    <span key={selectRole?._id}>user</span>
+                                                                );
                                                             } else {
                                                                 return (
                                                                     <span>Unassigned Role</span>
@@ -568,6 +572,10 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                         } else if (selectRole?.role === "ROLE_STAFF") {
                                                             return (
                                                                 <span key={selectRole?._id}>staff</span>
+                                                            );
+                                                        } else if (selectRole?.role === "ROLE_USERS") {
+                                                            return (
+                                                                <span key={selectRole?._id}>user</span>
                                                             );
                                                         } else {
                                                             return (

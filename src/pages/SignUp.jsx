@@ -14,16 +14,23 @@ const SignUp = () => {
 
 
     // console.clear();
-
+    
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+        var timeout = setTimeout(autoEffect, 180);
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
+
+    function autoEffect() {
+        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
+    }
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -133,9 +140,10 @@ const SignUp = () => {
                     // signUpContentWrapper.classList.add('min-h-120'); 
                     signUpContentWrapper.classList.remove('mb-12');
                     signUpContentWrapper.classList.add('mb-16');                
-                    // window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                    window.location.reload();                    
+                    // window.scroll({ left: 0, top: 0, behavior: 'smooth', });               
                 }, 3300);
+
+                window.location.reload();
             };
         })
         .catch((error) => {

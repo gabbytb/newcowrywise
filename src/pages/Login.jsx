@@ -34,7 +34,7 @@ const Login = () => {
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
 
-    const [formSubmitted, setFormSubmitted] = useState(null);
+    const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
 
     async function handleKeyUp(e) {
@@ -233,7 +233,7 @@ const Login = () => {
                             <button type="submit" className="login__button">Login</button>
 
                             <div className="login__register">
-                                Don't have an account? <Link to="/user/signup">Register</Link>
+                                Don't have an account? <Link to={"/user/signup"}>Register</Link>
                             </div>
                         </form>
                     </div>

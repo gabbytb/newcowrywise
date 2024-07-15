@@ -25,7 +25,7 @@ const HomeNav = () => {
     return (
         <>
             {/* Top bar */}
-            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"} target="_blank">
+            <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"}>
                 <div className="basis-3/4 justify-center ml-56 pl-64">
                     Welcome to Samuel Akinola Foundation 💙 . Need an account? <strong className="text-xl">&nbsp; Click here ↗</strong>
                 </div>

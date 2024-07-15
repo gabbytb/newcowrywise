@@ -414,9 +414,72 @@ exports.logIn = async (req, res) => {
 }
 
 // Finding All Users
-exports.findAll = async (req, res) => {
+exports.findAllAdmins = async (req, res) => {
 
-    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters
+    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
+    
+    try {
+        let query = {};
+
+        // Add status filter if provided
+        if (status) {
+            query.status = status;
+        }
+
+        // Pagination logic
+        const accountList = await User.find(query)
+                                .skip((page - 1) * limit)
+                                .limit(parseInt(limit));
+
+        const totalUsers = await User.countDocuments(query); // Total number of users with the given status
+        const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
+        // var hasNext, 
+        //     hasPrev,
+        //     next, 
+        //     previous;
+        
+        
+        // if (page) {
+        //     hasNext = true
+        //     hasPrev = false
+        //     next = parseInt(page) + 1
+        //     previous = parseInt(page) - 1
+        // } else {
+        //     hasNext = false
+        //     hasPrev = true
+        //     previous = parseInt(page) - 1
+        // }
+        
+
+        // const pagination = {
+        //     currentPage: parseInt(page),
+        //     hasNext: hasNext,
+        //     next: next,
+        //     hasPrev: hasPrev,
+        //     previous: previous,
+        //     lastPage: totalPages,                       
+        //     numberPerPage: parseInt(limit),
+        // }
+        
+        // const responseData = {
+        //     success: true,
+        //     data: {
+        //         accountList,
+        //         pagination
+        //     },
+        //     message: "Items retrieved successfully",
+        // }
+        res.status(200).json({ accountList, totalPages });
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};
+
+exports.findAllUsers = async (req, res) => {
+
+    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
     
     try {
         let query = {};
@@ -427,32 +490,22 @@ exports.findAll = async (req, res) => {
         };
         
         // Pagination logic
-        const allUsers = await User.find(query)
+        const accountList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
 
-
-        // if (allUsers.length === 0) {
-        //     const responseData = {
-        //         success: true,
-        //         message: "Users not found",
-        //     }
-        //     res.status(200).json(responseData);
-        // }
-
-        // const responseData = {
-        //     success: true,
-        //     data: allUsers,
-        //     message: "Successful",
-        // };
-        // return res.status(200).json(responseData);
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
-        
-        res.status(200).json({
-            allUsers,
-            totalPages
-        });
+
+        const responseData = {
+            data: {
+                accountList,
+                totalPages
+            },
+            success: true,
+            message: "Items retrieved successfully",
+        }
+        res.status(200).json(responseData);
 
     } catch (error) {
         console.error("Internal Server Error:", error);
