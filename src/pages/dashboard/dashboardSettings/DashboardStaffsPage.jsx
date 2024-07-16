@@ -67,6 +67,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     const [users, setUsers] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [totalUsers, setTotalUsers] = useState(null);
     
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
@@ -99,45 +100,84 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
     async function fetchAllStaffs() {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`);
-        // const { success, data, message } = response.data;
-        // if ((!success) && (message === "Users not found")) {
-        //     
-        // } 
-        const { accountList, totalPages } = response.data;
+    //   try {
+    //     const response = await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`);
+    //     // const { success, data, message } = response.data;
+    //     // if ((!success) && (message === "Users not found")) {
+    //     //     
+    //     // } 
+    //     const { accountList, totalPages } = response.data;
 
-        setUsers(accountList);
-        setTotalPages(totalPages);
+    //     setUsers(accountList);
+    //     setTotalPages(totalPages);
 
-        setIsLoading(false);
+    //     setIsLoading(false);
 
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      };
+    //   } catch (error) {
+    //     console.error('Error fetching data:', error);
+    //   };
+
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
+        .then((response) => {
+            const { success, data, message } = response.data;
+            const { accountList, pagination } = data;
+
+            if (!success && message === "No admin found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+
+            setUsers(accountList)
+            setTotalPages(pagination?.lastPage);
+            setTotalUsers(pagination?.adminRecords);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
     };
     
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
     // ****************************************************************************             
     async function fetchApprovedStaffs() {
-        const approvedStatus = "approved";
-        try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${approvedStatus}`);
-          const { allUsers, totalPages } = response.data;
+        // const approvedStatus = "approved";
+        // try {
+        //   const response = await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`);
+        //   const { allUsers, totalPages } = response.data;
           
-          setUsers(allUsers);
-          setTotalPages(totalPages);
-  
-          // console.log("Data: ", allUsers);
-          // console.log("Current Page: ", currentPage);
-          // console.log("Total Pages: ", totalPages);
-  
-          setIsLoading(false);
+        //   setUsers(allUsers);
+        //   setTotalPages(totalPages);
+    
+        //   setIsLoading(false);
       
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        };
+        // } catch (error) {
+        //   console.error('Error fetching data:', error);
+        // };
+        
+        const approvedStatus = "approved";
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
+        .then((response) => {
+            const { success, data, message } = response.data;
+            const { accountList, pagination } = data;
+
+            if (!success && message === "No admin found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+
+            setUsers(accountList)
+            setTotalPages(pagination?.lastPage);
+            setTotalUsers(pagination?.adminRecords);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
     };
     
     // ****************************************************************************
@@ -145,18 +185,26 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     async function fetchPendingStaffs() {
         const pendingStatus = "pending";
-        try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${pendingStatus}`);
-          const { allUsers, totalPages } = response.data;
-          
-          setUsers(allUsers);
-          setTotalPages(totalPages);
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
+        .then((response) => {
+            const { success, data, message } = response.data;
+            const { accountList, pagination } = data;
 
-          setIsLoading(false);
-      
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        };
+            if (!success && message === "No admin found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+
+            setUsers(accountList)
+            setTotalPages(pagination?.lastPage);
+            setTotalUsers(pagination?.adminRecords);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
     };
     
     // ****************************************************************************
@@ -164,22 +212,26 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     async function fetchFailedStaffs() {
         const failedStatus = "failed";
-        try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}&status=${failedStatus}`);
-          const { allUsers, totalPages } = response.data;
-          
-          setUsers(allUsers);
-          setTotalPages(totalPages);
-  
-          // console.log("Data: ", allUsers);
-          // console.log("Current Page: ", currentPage);
-          // console.log("Total Pages: ", totalPages);
-  
-          setIsLoading(false);
-      
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        };
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${failedStatus}`)
+        .then((response) => {
+            const { success, data, message } = response.data;
+            const { accountList, pagination } = data;
+
+            if (!success && message === "No admin found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+
+            setUsers(accountList)
+            setTotalPages(pagination?.lastPage);
+            setTotalUsers(pagination?.adminRecords);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
     };
     
     
@@ -603,6 +655,13 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                             {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
                             <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
+                                <div className="flex flex-row gap-3">
+                                    <Link onClick={(e) => setActiveDisplay("allStaffs")}>All({totalUsers})</Link>
+                                    <Link onClick={fetchApprovedStaffs}>Approved( )</Link>
+                                    <Link onClick={fetchPendingStaffs}>Pending( )</Link>
+                                    <Link onClick={fetchFailedStaffs}>Failed( )</Link>
+                                </div>
+
                                 <table className="table-fixed capitalize">
                                     <thead>
                                         <tr>

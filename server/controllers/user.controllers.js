@@ -413,7 +413,7 @@ exports.logIn = async (req, res) => {
     }
 }
 
-// Finding All Users
+// Finding All ADMINS
 exports.findAllAdmins = async (req, res) => {
 
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
@@ -421,11 +421,12 @@ exports.findAllAdmins = async (req, res) => {
     try {
         let query = {};
 
-        // Add status filter if provided
+        // Add "status" filter
         if (status) {
             query.status = status;
-        }
+        };
 
+        
         // Pagination logic
         const accountList = await User.find(query)
                                 .skip((page - 1) * limit)
@@ -433,22 +434,29 @@ exports.findAllAdmins = async (req, res) => {
 
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
+
         // var hasNext, 
         //     hasPrev,
         //     next, 
         //     previous;
         
         
-        // if (page) {
+        // if () {
         //     hasNext = true
         //     hasPrev = false
+        //     next = parseInt(page) + 1
+        //     previous = parseInt(page) - 1
+        // } else  if () {
+        //     hasNext = true
+        //     hasPrev = true
         //     next = parseInt(page) + 1
         //     previous = parseInt(page) - 1
         // } else {
         //     hasNext = false
         //     hasPrev = true
+        //     next = null
         //     previous = parseInt(page) - 1
-        // }
+        // };
         
 
         // const pagination = {
@@ -461,15 +469,20 @@ exports.findAllAdmins = async (req, res) => {
         //     numberPerPage: parseInt(limit),
         // }
         
-        // const responseData = {
-        //     success: true,
-        //     data: {
-        //         accountList,
-        //         pagination
-        //     },
-        //     message: "Items retrieved successfully",
-        // }
-        res.status(200).json({ accountList, totalPages });
+        const pagination = {
+            adminRecords: totalUsers,
+            lastPage: totalPages,
+        };
+
+        const responseData = {
+            success: true,
+            data: {
+                accountList,
+                pagination
+            },
+            message: "Items retrieved successfully",
+        }
+        res.status(200).json(responseData);
 
     } catch (error) {
         console.error("Internal Server Error:", error);
@@ -477,6 +490,7 @@ exports.findAllAdmins = async (req, res) => {
     };
 };
 
+// Finding All USERS
 exports.findAllUsers = async (req, res) => {
 
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
@@ -489,8 +503,9 @@ exports.findAllUsers = async (req, res) => {
             query.status = status;
         };
         
+
         // Pagination logic
-        const accountList = await User.find(query)
+        const usersList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
 
@@ -498,11 +513,11 @@ exports.findAllUsers = async (req, res) => {
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
 
         const responseData = {
+            success: true,
             data: {
-                accountList,
+                usersList,
                 totalPages
             },
-            success: true,
             message: "Items retrieved successfully",
         }
         res.status(200).json(responseData);

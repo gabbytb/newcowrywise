@@ -99,24 +99,44 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
     // ****************************************************************************             
     async function fetchAllUsers() {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/manage?page=${currentPage}&limit=${limit}`);
-        const { allUsers, totalPages } = response.data;
-        
-        setUsers(allUsers);
-        setTotalPages(totalPages);
-
-        // console.log("Data: ", allUsers);
-        // console.log("Current Page: ", currentPage);
-        // console.log("Total Pages: ", totalPages);
-
-        setIsLoading(false);
+        //   try {
+        //     const response = await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`);
+        //     // const { success, data, message } = response.data;
+        //     // if ((!success) && (message === "Users not found")) {
+        //     //     
+        //     // } 
+        //     const { accountList, totalPages } = response.data;
     
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      };
+        //     setUsers(accountList);
+        //     setTotalPages(totalPages);
+    
+        //     setIsLoading(false);
+    
+        //   } catch (error) {
+        //     console.error('Error fetching data:', error);
+        //   };
+    
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}`)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                const { usersList, totalPages, totalUsers } = data;
+
+                if (!success && message === "No users found") {
+                    console.log("Success: ", success);
+                    console.log("Message: ", message);
+                };
+
+                setUsers(usersList)
+                setTotalPages(totalPages);
+            })
+            .catch((error) => {
+                console.log("Error fetching data: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
-    
+        
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
     // ****************************************************************************             
@@ -617,60 +637,66 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                     <tbody>
                                         {
                                             users.map((user) => {
-                                                if (user?.status === "pending") {
+                                                if (!user) {
                                                     return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_USERS") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
-                                                } else if (user?.status === "failed") {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_USERS") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
+                                                        <div>No users found</div>
                                                     );
                                                 } else {
-                                                    return (
-                                                        user?.roles?.map((roleUsers, index) => {
-                                                            if (roleUsers?.role === "ROLE_USERS") {
-                                                                return (
-                                                                    <tr key={index}>
-                                                                        <td>{user?._id}</td>
-                                                                        <td>{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="lowercase">{user?.email}</td>
-                                                                        <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                        <td>
-                                                                            <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            };
-                                                        })
-                                                    );
+                                                    if (user?.status === "pending") {
+                                                        return (
+                                                            user?.roles?.map((roleUsers, index) => {
+                                                                if (roleUsers?.role === "ROLE_USERS") {
+                                                                    return (
+                                                                        <tr key={index}>
+                                                                            <td>{user?._id}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                            <td>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    } else if (user?.status === "failed") {
+                                                        return (
+                                                            user?.roles?.map((roleUsers, index) => {
+                                                                if (roleUsers?.role === "ROLE_USERS") {
+                                                                    return (
+                                                                        <tr key={index}>
+                                                                            <td>{user?._id}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                            <td>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    } else {
+                                                        return (
+                                                            user?.roles?.map((roleUsers, index) => {
+                                                                if (roleUsers?.role === "ROLE_USERS") {
+                                                                    return (
+                                                                        <tr key={index}>
+                                                                            <td>{user?._id}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                            <td>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    };
                                                 };
                                             })
                                         }
