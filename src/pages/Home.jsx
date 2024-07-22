@@ -32,12 +32,16 @@ const Home = () => {
           </div>
         </div>
       </main>
-      <TawkMessengerReact 
+
+
+      {/* Production Data Supplied */}
+      <TawkMessengerReact
         propertyId="644562484247f20fefed482e" 
         widgetId="1gungfrgj" 
         // onLoad={onLoad}
         onClick={handleMinimize}
       />
+      {/* Production Data Supplied */}
     </>
   );
 };

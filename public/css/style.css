@@ -572,6 +572,9 @@ video {
   --root-font-family: sans-serif;
   --root-max-width: 1380px;
   --font-family-firma: "firma";
+  --signup-bg-color: linear-gradient(45deg, #0F468B  0%, #FEDC65  33%, #BD15B4  66%, #0D8CD2 100%);
+  /* --signup-box-bg-color: rgb(0, 30, 60); */
+  --signup-box-bg-color: rgb(253 253 253);
   /* LOGIN COLORS:-  Color mode HSL(hue, saturation, lightness) */
   --login-white-color: hsl(0, 0%, 100%);
   --login-black-color: hsl(0, 0%, 0%);
@@ -612,18 +615,17 @@ sub, sup {
   max-width: var(--root-max-width) !important;
 }
 
-input[type="text"], 
-  input[type="email"], 
-  input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] {
   line-height: var(--root-line-height);
   width: 100%;
   height: 5rem;
-  background-color: rgb(247, 247, 247);
-  border-radius: 6px;
+  background-color: transparent;
+  border-radius: 5px;
   padding: 10px 15px;
   outline: none;
   font-size: 15px;
   letter-spacing: 0.06em;
+  border-bottom: 3px solid limegreen;
 }
 
 tr {
@@ -1729,6 +1731,14 @@ tr {
   flex-direction: column;
 }
 
+#signUpID img{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
+  height: 9rem;
+  width: 18rem;
+}
+
 .cta-menu a{
   display: none;
 }
@@ -1859,9 +1869,33 @@ tr {
   font-weight: 600;
 }
 
-/* div#users a {
-    height: 100%;
-} */
+.staff__table{
+  border-collapse: collapse;
+}
+
+.staff__table thead{
+  display: table-header-group;
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
+  font-size: 1.54rem;
+  letter-spacing: 0.045em;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+#dashboardStaffsID .right-bottom-pane div:first-of-type a{
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1.5rem;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 
 .admin__dashboard{
   height: 100vh;
@@ -3946,6 +3980,14 @@ tr {
   margin-top: 0.375rem;
 }
 
+.mt-10{
+  margin-top: 2.5rem;
+}
+
+.mt-13\.7{
+  margin-top: 2.7rem;
+}
+
 .mt-14{
   margin-top: 3.5rem;
 }
@@ -4074,6 +4116,10 @@ tr {
 
 .w-100{
   width: 30rem;
+}
+
+.w-135{
+  width: 52rem;
 }
 
 .w-136{
@@ -4213,6 +4259,10 @@ tr {
   justify-content: space-between;
 }
 
+.gap-1{
+  gap: 0.25rem;
+}
+
 .gap-10{
   gap: 2.5rem;
 }
@@ -4233,6 +4283,10 @@ tr {
   gap: 6rem;
 }
 
+.gap-3{
+  gap: 0.75rem;
+}
+
 .gap-4{
   gap: 1rem;
 }
@@ -4249,8 +4303,8 @@ tr {
   gap: 2rem;
 }
 
-.gap-3{
-  gap: 0.75rem;
+.gap-x-3{
+  column-gap: 0.75rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
@@ -4312,6 +4366,11 @@ tr {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.bg-blue-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .bg-blue-600{
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -4349,6 +4408,10 @@ tr {
   background-color: var(--bg-dark-blue);
 }
 
+.bg-skin-signup-box-bg{
+  background-color: var(--signup-box-bg-color);
+}
+
 .bg-skin-simple-blue{
   background-color: var(--admin-total-revenue-card-2);
 }
@@ -4372,6 +4435,10 @@ tr {
 
 .bg-login{
   background-image: url('/src/assets/images/login-bg.png');
+}
+
+.bg-signup-bg{
+  background-image: var(--signup-bg-color);
 }
 
 .bg-cover{
@@ -4441,6 +4508,11 @@ tr {
   padding-right: 1rem;
 }
 
+.px-40{
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
 .px-5{
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -4489,6 +4561,10 @@ tr {
 .py-6{
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.pb-10{
+  padding-bottom: 2.5rem;
 }
 
 .pb-11{
@@ -4571,6 +4647,10 @@ tr {
   padding-top: 1.25rem;
 }
 
+.pt-6{
+  padding-top: 1.5rem;
+}
+
 .pt-9{
   padding-top: 2.25rem;
 }
@@ -4604,6 +4684,11 @@ tr {
   line-height: 4.4rem;
 }
 
+.text-24xl\/relaxed{
+  font-size: 2.4rem;
+  line-height: 1.625;
+}
+
 .text-2xl{
   font-size: 1.5rem;
 }
@@ -4611,6 +4696,11 @@ tr {
 .text-2xl\/normal{
   font-size: 1.5rem;
   line-height: 1.5;
+}
+
+.text-2xl\/snug{
+  font-size: 1.5rem;
+  line-height: 1.375;
 }
 
 .text-41xl{
@@ -4630,12 +4720,25 @@ tr {
   font-size: 1.25rem;
 }
 
+.text-xl\/snug{
+  font-size: 1.25rem;
+  line-height: 1.375;
+}
+
+.font-black{
+  font-weight: 900;
+}
+
 .font-bold{
   font-weight: 700;
 }
 
 .font-medium{
   font-weight: 500;
+}
+
+.font-normal{
+  font-weight: 400;
 }
 
 .font-semibold{
@@ -4664,6 +4767,10 @@ tr {
 
 .tracking-moretight{
   letter-spacing: 0.065em;
+}
+
+.tracking-supertight{
+  letter-spacing: 0.015em;
 }
 
 .text-black{
@@ -4750,6 +4857,10 @@ tr {
   transition-duration: 300ms;
 }
 
+.duration-75{
+  transition-duration: 75ms;
+}
+
 .ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -4775,6 +4886,11 @@ tr {
 }
 
 /* ********************  BASE  ******************** */
+
+.hover\:bg-blue-600:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
 
 .hover\:bg-blue-700:hover{
   --tw-bg-opacity: 1;
@@ -4806,6 +4922,16 @@ tr {
 .hover\:ring-blue-300:hover{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity));
+}
+
+.hover\:ring-green-300:hover{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(134 239 172 / var(--tw-ring-opacity));
+}
+
+.focus\:bg-blue-600:focus{
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
 .focus\:bg-blue-700:focus{

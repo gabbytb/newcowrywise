@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { 
   Home,
   OurProgress, DonationPage,
+  Register,
   SignUp, SignUpVerification, SignUpReVerification,
   Login, 
   AdminDashboard, 
@@ -12,9 +13,10 @@ import {
   AccountUsers,
 } from "./pages";
 
-// PRODUCTION Data
+// PRODUCTION Data for Travelbeta Blog
 // const TRACKING_ID = "UA-277984631-1";   // OLD_TRACKING_ID
-// const TRACKING_ID = "397205433";   // NEW_TRACKING_ID
+// const TRACKING_ID = "397205433";        // NEW_TRACKING_ID
+
 
 // DEVELOPMENT Data
 const TRACKING_ID = "UA-220438183-5";
@@ -39,7 +41,9 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/our-progress" element={<OurProgress />}></Route>
       <Route path="/donations" element={<DonationPage />}></Route>
-      <Route path="/user/signup" element={<SignUp />}></Route>
+      <Route path="/user/signup-two" element={<SignUp />}></Route>
+      <Route path="/user/signup" element={<Register />}></Route>
+
       <Route path="/user/verify?token=:token" element={<SignUpVerification />}></Route>
       <Route path="/user/verify" element={<SignUpReVerification />}></Route>
       <Route path="/user/login" element={<Login />}></Route>

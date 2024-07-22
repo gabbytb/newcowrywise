@@ -114,6 +114,8 @@ module.exports = {
           'simple-green': 'var(--admin-total-revenue-card-1)',
           'simple-blue': 'var(--admin-total-revenue-card-2)',
           'simple-purple': 'var(--admin-total-revenue-card-3)',
+          'signup-box-bg': 'var(--signup-box-bg-color)',
+
         },
       },
       backgroundImage: {
@@ -122,6 +124,7 @@ module.exports = {
         'device-section': "url('/src/assets/images/home-device-section.svg')",
         'security-pattern': "url('/src/assets/images/security-section.svg')",
         'login': "url('/src/assets/images/login-bg.png')",
+        'signup-bg': 'var(--signup-bg-color)',
       },
       boxShadow: {
         '3xl': '3px 3px 0 0 var(--sw-gray)',
