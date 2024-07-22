@@ -13,11 +13,11 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [users, setUsers] = useState([]);
-    console.log("APPROVED USERS: ", users);
+    const [pendingAdmins, setPendingAdmins] = useState([]);
+    console.log("PENDING ADMINS: ", pendingAdmins);
 
     const [totalPages, setTotalPages] = useState(0);
-    const [totalUsers, setTotalUsers] = useState(null);
+    const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
 
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
@@ -26,8 +26,8 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
 
     useEffect(() => {
-        if (activeDisplay === "allApprovedStaffs") {
-            var timerID = setTimeout(fetchApprovedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+        if (activeDisplay === "allPendingStaffs") {
+            var timerID = setTimeout(fetchPendingStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
@@ -36,9 +36,9 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
     // ****************************************************************************             
-    async function fetchApprovedStaffs() {        
-        const approvedStatus = "approved";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
+    async function fetchPendingStaffs() {        
+        const pendingStatus = "pending";
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
             const { accountList, pagination } = data;
@@ -48,9 +48,10 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                 console.log("Message: ", message);
             };
 
-            setUsers(accountList)
+            setPendingAdmins(accountList)
+
             setTotalPages(pagination?.lastPage);
-            setTotalUsers(pagination?.adminRecords);
+            setTotalPendingAdminUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -59,7 +60,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
-        currentPage(page);
+        setCurrentPage(page);
     };
     // ****************************************************************************
     // ****************************************************************************
@@ -69,7 +70,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
    return (
         <>
-            <div className={`capitalize ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
+            <div className={`capitalize ${activeDisplay === "allPendingStaffs" ? "grid" : "hidden"}`}>
                 <table className="table-fixed capitalize w-full staff__table">
                     <thead>
                         <tr>
@@ -82,14 +83,14 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user) => {
+                            pendingAdmins.map((user, userIndex) => {
                                 if (user?.status === "pending") {
                                     return (
-                                        user?.roles?.map((roleUsers, index) => {
+                                        user?.roles?.map((roleUsers) => {
                                             if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                 return (
-                                                    <tr key={index}>
-                                                        <td>{user?._id}</td>
+                                                    <tr key={userIndex}>
+                                                        <td>{userIndex+1}</td>
                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                         <td className="lowercase">{user?.email}</td>
                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
@@ -109,11 +110,11 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                     );
                                 } else if (user?.status === "failed") {
                                     return (
-                                        user?.roles?.map((roleUsers, index) => {
+                                        user?.roles?.map((roleUsers) => {
                                             if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                 return (
-                                                    <tr key={index}>
-                                                        <td>{user?._id}</td>
+                                                    <tr key={userIndex}>
+                                                        <td>{userIndex+1}</td>
                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                         <td className="lowercase">{user?.email}</td>
                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
@@ -133,11 +134,11 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                     );
                                 } else {
                                     return (
-                                        user?.roles?.map((roleUsers, index) => {
+                                        user?.roles?.map((roleUsers) => {
                                             if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                 return (
-                                                    <tr key={index}>
-                                                        <td>{user?._id}</td>
+                                                    <tr key={userIndex}>
+                                                        <td>{userIndex+1}</td>
                                                         <td>{user?.firstName} {user?.lastName}</td>
                                                         <td className="lowercase">{user?.email}</td>
                                                         <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
@@ -164,7 +165,10 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
 
                 {/* Pagination controls */}
-                <div className="flex justify-center mt-4">
+                <div className="flex justify-between mt-4">
+                    <div>
+                        {limit}
+                    </div>
                     <nav className="relative z-0 inline-flex shadow-sm">
 
                         {/* Previous page button */}

@@ -4,6 +4,7 @@ import axios from "axios";
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 import DashboardStaffsApprovedPage from "./DashboardStaffsApprovedPage";
+import DashboardStaffsPendingPage from "./DashboardStaffsPendingPage";
 
 
 
@@ -639,34 +640,34 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
                             <div className="right-bottom-pane relative h-full flex flex-col px-12">
                                 <div className="flex flex-row gap-3 mt-4 mb-10">
-                                    <Link onClick={() => setActiveDisplay("allStaffs")}>All({totalUsers})</Link>
-                                    <Link onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved( )</Link>
-                                    <Link onClick={() => setActiveDisplay("allPendingStaffs")}>Pending( )</Link>
-                                    <Link onClick={() => setActiveDisplay("allFailedStaffs")}>Failed( )</Link>
+                                    <Link onClick={() => setActiveDisplay("allStaffs")}>All</Link>
+                                    <Link onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
+                                    <Link onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
+                                    <Link onClick={() => setActiveDisplay("allFailedStaffs")}>Failed</Link>
                                 </div>
 
 
-                                <div className={`capitalize ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
-                                    <table className="table-fixed capitalize w-full staff__table">
+                                <div className={`capitalize border ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
+                                    <table className="table-fixed capitalize w-full border staff__table">
                                         <thead>
                                             <tr>
                                                 <th>S/N</th>
                                                 <th>NAME</th>
-                                                <th>E-MAIL</th>
-                                                <th>STATUS</th>
-                                                <th>ACTION</th>
+                                                <th>E-MAIL ADDRESS</th>
+                                                <th className="text-center">STATUS</th>
+                                                <th className="text-center">ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                users.map((user) => {
+                                                users.map((user, userIndex) => {
                                                     if (user?.status === "pending") {
                                                         return (
-                                                            user?.roles?.map((roleUsers, index) => {
+                                                            user?.roles?.map((roleUsers) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
+                                                                        <tr key={userIndex}>
+                                                                            <td>{userIndex+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
                                                                             <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
@@ -684,7 +685,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={index}>
-                                                                            <td>{user?._id}</td>
+                                                                            <td>{index+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
                                                                             <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
@@ -702,7 +703,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={index}>
-                                                                            <td>{user?._id}</td>
+                                                                            <td>{index+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
                                                                             <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
@@ -723,7 +724,10 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
                                     {/* Pagination controls */}
-                                    <div className="flex justify-center mt-4">
+                                    <div className="flex justify-between">
+                                        <div className="border-e-2 border-gray-200/50 p-4 font-black text-42xl font-firma tracking-supertight">
+                                            {limit}
+                                        </div>
                                         <nav className="relative z-0 inline-flex shadow-sm">
                                             {/* Previous page button */}
                                             <button
@@ -759,17 +763,13 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     {/* Pagination controls */}
                                 </div>
                                 
-                                <DashboardStaffsApprovedPage
-                                   activeDisplay={activeDisplay}
-                                />
+                                <DashboardStaffsApprovedPage activeDisplay={activeDisplay} />
 
-                                <DashboardStaffsPendingPage
-                                   activeDisplay={activeDisplay}
-                                />
+                                <DashboardStaffsPendingPage activeDisplay={activeDisplay} />
 
-                                <DashboardStaffsFailedPage
+                                {/* <DashboardStaffsFailedPage
                                    activeDisplay={activeDisplay}
-                                />
+                                /> */}
                             </div>
                             
                         </aside>
