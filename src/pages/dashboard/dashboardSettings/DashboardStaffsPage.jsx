@@ -75,103 +75,11 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     const [totalUsers, setTotalUsers] = useState(null);
     
     const [currentPage, setCurrentPage] = useState(1);
-    
-    const [currentPendingPage, setCurrentPendingPage] = useState(1);
-    const [currentFailedPage, setCurrentFailedPage] = useState(1);
     const limit = 10; // Number of items per page
 
-     
 
-        
+
     
-    useEffect(() => {
-        if (activeDisplay === "allPendingStaffs") {
-            var timerID = setTimeout(fetchPendingStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
-            return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-            };
-        }
-    }, [activeDisplay, currentPendingPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" STAFFS
-    // ****************************************************************************
-    async function fetchPendingStaffs() {
-        const pendingStatus = "pending";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
-
-            if (!success && message === "No admin found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setUsers(accountList)
-            setTotalPages(pagination?.lastPage);
-            setTotalUsers(pagination?.adminRecords);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
-    };
-    // ****************************************************************************
-    // ****************************************************************************
-    const handlePendingPageChange = (pagePending) => {
-        setCurrentPendingPage(pagePending);
-    };    
-    // ****************************************************************************
-    // ****************************************************************************
-
-
-
-
-    useEffect(() => {
-        if (activeDisplay === "allFailedStaffs") {
-            var timerID = setTimeout(fetchFailedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
-            return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-            };
-        }
-    }, [activeDisplay, currentFailedPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "FAILED" STAFFS
-    // ****************************************************************************
-    async function fetchFailedStaffs() {
-        const failedStatus = "failed";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${failedStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
-
-            if (!success && message === "No admin found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setUsers(accountList)
-            setTotalPages(pagination?.lastPage);
-            setTotalUsers(pagination?.adminRecords);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
-    };
-    // ****************************************************************************
-    // ****************************************************************************    
-    const handleFailedPageChange = (pageFailed) => {
-        setCurrentFailedPage(pageFailed);
-    };
-    // ****************************************************************************
-    // ****************************************************************************
-        
-
 
     useEffect(() => {
         if (activeDisplay === "allStaffs") {
@@ -231,7 +139,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     // ****************************************************************************
 
-
     
     // ****************************************************************************
     // TOGGLE DROPDOWN: USER "Profile Image" MENU
@@ -247,7 +154,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
         };
     };
     // ****************************************************************************
-    // TOGGLE DROPDOWN: USER/STAFF
+    // TOGGLE DROPDOWN: USER/STAFF MENU
     // ****************************************************************************
     function toggleUsersMenu() {
         let toggleUserMenu = document.querySelector('.usersDropdown');
@@ -271,6 +178,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     };
     // ****************************************************************************
     // ****************************************************************************
+
+
 
 
     
@@ -685,6 +594,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 </div>
 
 
+
+                                {/***********  Views  ***********/}
                                 <div className={`capitalize border ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
                                     <table className="table-fixed capitalize w-full border staff__table">
                                         <thead>
@@ -723,12 +634,12 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={userIndex}>
-                                                                            <td>{userIndex+1}</td>
+                                                                            <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                            <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                            <td className="flex justify-center">
+                                                                                <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -741,12 +652,12 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={userIndex}>
-                                                                            <td>{userIndex+1}</td>
+                                                                            <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                            <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                            <td className="flex justify-center">
+                                                                                <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -812,6 +723,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 <DashboardStaffsPendingPage activeDisplay={activeDisplay} />
 
                                 <DashboardStaffsRejectedPage activeDisplay={activeDisplay} />
+                                {/***********  Views  ***********/}
                             </div>
                             
                         </aside>
