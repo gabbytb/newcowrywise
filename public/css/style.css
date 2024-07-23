@@ -3945,6 +3945,10 @@ tbody tr{
   margin-bottom: 1.5rem;
 }
 
+.mb-8{
+  margin-bottom: 2rem;
+}
+
 .me-2{
   margin-inline-end: 0.5rem;
 }
@@ -4714,6 +4718,10 @@ tbody tr{
 .text-2xl\/snug{
   font-size: 1.5rem;
   line-height: 1.375;
+}
+
+.text-3xl{
+  font-size: 1.875rem;
 }
 
 .text-41xl{

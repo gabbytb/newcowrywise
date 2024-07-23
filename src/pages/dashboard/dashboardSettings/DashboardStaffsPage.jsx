@@ -593,7 +593,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     <Link onClick={() => setActiveDisplay("allRejectedStaffs")}>Failed</Link>
                                 </div>
 
-
+                                <div className="mt-10 mb-8 font-black text-3xl tracking-supertight">
+                                    <h2>All Staffs</h2>
+                                </div>
 
                                 {/***********  Views  ***********/}
                                 <div className={`capitalize border ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
