@@ -161,6 +161,23 @@
   tr {
     text-align: justify;
   }
+
+  thead {
+    @apply
+      bg-blue-900
+      text-white
+      table-header-group
+      text-41xl
+      tracking-tightener
+      h-16
+    ;
+  }
+  
+  tbody tr {
+    @apply
+      h-16
+    ;
+  }
 }
 
 
@@ -886,17 +903,6 @@
     border-collapse
   ;
 }
-
-.staff__table thead {
-  @apply
-    bg-blue-900
-    text-white
-    table-header-group
-    text-41xl
-    tracking-tightener
-  ;
-}
-
 
 
 #dashboardStaffsID .right-bottom-pane div:first-of-type a {

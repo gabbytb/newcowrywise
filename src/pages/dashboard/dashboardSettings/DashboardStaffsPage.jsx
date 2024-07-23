@@ -1,10 +1,13 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
-import DashboardStaffsApprovedPage from "./DashboardStaffsApprovedPage";
-import DashboardStaffsPendingPage from "./DashboardStaffsPendingPage";
+
+import DashboardStaffsApprovedPage from "./staffs/DashboardStaffsApprovedPage";
+import DashboardStaffsPendingPage from "./staffs/DashboardStaffsPendingPage";
+import DashboardStaffsRejectedPage from "./staffs/DashboardStaffsRejectedpage";
 
 
 
@@ -256,14 +259,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
             toggleUserMenu?.classList.add('hidden');
         };
     };
-    function toggleStaffsView() {
+    function toggleStaffsMenu() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
-        if (toggleStaffMenu?.classList.contains("hidden")) {
-            toggleStaffMenu?.classList.remove('hidden');
-            toggleStaffMenu?.classList.add('flex');
-        } else {
+        if (toggleStaffMenu?.classList.contains("flex")) {
             toggleStaffMenu?.classList.remove('flex');
             toggleStaffMenu?.classList.add('hidden');
+        } else {
+            toggleStaffMenu?.classList.remove('hidden');
+            toggleStaffMenu?.classList.add('flex');
         };
     };
     // ****************************************************************************
@@ -313,10 +316,10 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                             </div>
                                             {/* flex flex-col gap-4  */}
                                             <div className="dropdown">
-                                                <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                                <button className="dropdown-toggle" type="button" onClick={toggleStaffsMenu}>
                                                     <StaffsIcon /> <span>staffs</span>
                                                 </button>
-                                                <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
+                                                <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
                                                     <Link to="/admin/staffs">staff management</Link>
                                                 </div>
                                             </div>
@@ -340,12 +343,16 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
                                 <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                     <div className="flex justify-between items-center h-full flex-row px-10">
+                                       
+                                       
                                         <div className="rt-left-pane">
-                                            <h1>Welcome 
-                                                <strong className="capitalize text-black"> {userName}</strong>
-                                            </h1>
+                                            <h1>Welcome <strong className="capitalize text-black"> {userName}</strong></h1>
                                         </div>
-                                        <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
+                                       
+
+
+
+                                        <div className="rt-right-pane flex flex-row items-center gap-8 h-full relative">
                                             <div className="user-info">
                                                 <h4>{userEmail}</h4>
                                                 <h6>
@@ -369,14 +376,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 );
                                                             } else {
                                                                 return (
-                                                                    <span>Unassigned Role</span>
+                                                                    <span>Role is not assigned to this User</span>
                                                                 );
                                                             };
                                                         })
                                                     }
                                                 </h6>
                                             </div>
-                                            <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
+                                            <div className="user-profile-img dropdown flex flex-col gap-4 h-20 relative top-0 left-0">
                                                 <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                     <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                 </button>                                                                                                       
@@ -385,6 +392,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 </div>           
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                                 
@@ -393,80 +402,101 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
                                 {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
-                                <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'flex' : 'hidden'}`}>
-                                    <table className="table-fixed capitalize">
-                                        <thead>
-                                            <tr>
-                                                <th>S/N</th>
-                                                <th>NAME</th>
-                                                <th>E-MAIL</th>
-                                                <th>STATUS</th>
-                                                <th>ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                users.map((user) => {
-                                                    if (user?.status === "pending") {
-                                                        return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                            </td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
-                                                        );
-                                                    } else if (user?.status === "failed") {
-                                                        return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                            </td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{user?._id}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                            </td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
-                                                        );
-                                                    };
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
-    
+                                <div className={`right-bottom-pane relative h-full flex-col ${activeDisplay === 'allStaffs' ? 'grid' : 'hidden'}`}>
+                                    {
+                                        users.length !== 0 ?
+                                            <table className="table-fixed capitalize w-full border staff__table">
+                                                <thead>
+                                                    <tr>
+                                                        <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                                                        <th>NAME</th>
+                                                        <th>E-MAIL</th>
+                                                        <th>STATUS</th>
+                                                        <th>ACTION</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        users.map((user, userIndex) => {
+                                                            if (user?.status === "pending") {
+                                                                return (
+                                                                    user?.roles?.map((roleUsers) => {
+                                                                        if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                                            return (
+                                                                                <tr key={userIndex}>
+                                                                                    <td>{userIndex+1}</td>
+                                                                                    <td>{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="lowercase">{user?.email}</td>
+                                                                                    <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                                    <td>
+                                                                                        <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            );
+                                                                        };
+                                                                    })
+                                                                );
+                                                            } else if (user?.status === "rejected") {
+                                                                return (
+                                                                    user?.roles?.map((roleUsers) => {
+                                                                        if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                                            return (
+                                                                                <tr key={userIndex}>
+                                                                                    <td>{userIndex+1}</td>
+                                                                                    <td>{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="lowercase">{user?.email}</td>
+                                                                                    <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                                    <td>
+                                                                                        <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            );
+                                                                        };
+                                                                    })
+                                                                );
+                                                            } else {
+                                                                return (
+                                                                    user?.roles?.map((roleUsers) => {
+                                                                        if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                                            return (
+                                                                                <tr key={userIndex}>
+                                                                                    <td>{userIndex+1}</td>
+                                                                                    <td>{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="lowercase">{user?.email}</td>
+                                                                                    <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                                    <td>
+                                                                                        <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            );
+                                                                        };
+                                                                    })
+                                                                );
+                                                            };
+                                                        })
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        :
+                                            <table className="table-fixed capitalize w-full border staff__table">
+                                                <thead>
+                                                    <tr>
+                                                        <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                                                        <th>NAME</th>
+                                                        <th>E-MAIL</th>
+                                                        <th>STATUS</th>
+                                                        <th>ACTION</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr className="flex justify-center">
+                                                        <td className="">No admin record found.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    }
+                                
+                                        
 
     
                                     {/* Pagination controls */}
@@ -558,10 +588,10 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         </div>
                                         {/* flex flex-col gap-4  */}
                                         <div className="dropdown">
-                                            <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                            <button className="dropdown-toggle" type="button" onClick={toggleStaffsMenu}>
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
-                                            <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
+                                            <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
                                                 <Link to="/admin/staffs">staff management</Link>
                                             </div>
                                         </div>
@@ -585,12 +615,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
                             <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
                                 <div className="flex justify-between items-center h-full flex-row px-10">
+                                    
+                                    
                                     <div className="rt-left-pane">
                                         <h1>Welcome 
                                             <strong className="capitalize text-black"> {userName}</strong>
                                         </h1>
                                     </div>
-                                    <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
+                                    
+
+
+
+                                    <div className="rt-right-pane flex flex-row items-center gap-8 h-full relative">
                                         <div className="user-info">
                                             <h4>{userEmail}</h4>
                                             <h6>
@@ -614,14 +650,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                             );
                                                         } else {
                                                             return (
-                                                                <span>Unassigned Role</span>
+                                                                <span>Role is not assigned to this User</span>
                                                             );
                                                         };
                                                     })
                                                 }
                                             </h6>
                                         </div>
-                                        <div className="flex flex-col gap-4 dropdown h-20 relative top-0 left-0 user-profile-img">
+                                        <div className="user-profile-img dropdown flex flex-col gap-4 h-20 relative top-0 left-0">
                                             <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                 <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                             </button>                                                                                                       
@@ -630,6 +666,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                             </div>           
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
                             
@@ -643,7 +681,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     <Link onClick={() => setActiveDisplay("allStaffs")}>All</Link>
                                     <Link onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
                                     <Link onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
-                                    <Link onClick={() => setActiveDisplay("allFailedStaffs")}>Failed</Link>
+                                    <Link onClick={() => setActiveDisplay("allRejectedStaffs")}>Failed</Link>
                                 </div>
 
 
@@ -651,7 +689,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     <table className="table-fixed capitalize w-full border staff__table">
                                         <thead>
                                             <tr>
-                                                <th>S/N</th>
+                                                <th className="w-20 h-16 flex justify-center items-center">S/N</th>
                                                 <th>NAME</th>
                                                 <th>E-MAIL ADDRESS</th>
                                                 <th className="text-center">STATUS</th>
@@ -667,30 +705,48 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
                                                                         <tr key={userIndex}>
-                                                                            <td>{userIndex+1}</td>
+                                                                            <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                            <td className="flex justify-center">
+                                                                                <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
                                                                 };
                                                             })
                                                         );
-                                                    } else if (user?.status === "failed") {
+                                                    } else if (user?.status === "rejected") {
                                                         return (
-                                                            user?.roles?.map((roleUsers, index) => {
+                                                            user?.roles?.map((roleUsers) => {
                                                                 if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                     return (
-                                                                        <tr key={index}>
-                                                                            <td>{index+1}</td>
+                                                                        <tr key={userIndex}>
+                                                                            <td>{userIndex+1}</td>
                                                                             <td>{user?.firstName} {user?.lastName}</td>
                                                                             <td className="lowercase">{user?.email}</td>
                                                                             <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                             <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    );
+                                                                };
+                                                            })
+                                                        );
+                                                    } else if (user?.status === "approved") {
+                                                        return (
+                                                            user?.roles?.map((roleUsers) => {
+                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                                    return (
+                                                                        <tr key={userIndex}>
+                                                                            <td>{userIndex+1}</td>
+                                                                            <td>{user?.firstName} {user?.lastName}</td>
+                                                                            <td className="lowercase">{user?.email}</td>
+                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                            <td>
+                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                             </td>
                                                                         </tr>
                                                                     );
@@ -699,21 +755,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                         );
                                                     } else {
                                                         return (
-                                                            user?.roles?.map((roleUsers, index) => {
-                                                                if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                                    return (
-                                                                        <tr key={index}>
-                                                                            <td>{index+1}</td>
-                                                                            <td>{user?.firstName} {user?.lastName}</td>
-                                                                            <td className="lowercase">{user?.email}</td>
-                                                                            <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                            <td>
-                                                                                <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                            </td>
-                                                                        </tr>
-                                                                    );
-                                                                };
-                                                            })
+                                                            <tr key={userIndex}>
+                                                                <td>No admin record found</td>
+                                                            </tr>
                                                         );
                                                     };
                                                 })
@@ -767,9 +811,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                                 <DashboardStaffsPendingPage activeDisplay={activeDisplay} />
 
-                                {/* <DashboardStaffsFailedPage
-                                   activeDisplay={activeDisplay}
-                                /> */}
+                                <DashboardStaffsRejectedPage activeDisplay={activeDisplay} />
                             </div>
                             
                         </aside>

@@ -14,9 +14,9 @@ import AdminDashboard from "./AdminDashboard";
 
 import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
 import DashboardStaffsPage from "./dashboard/dashboardSettings/DashboardStaffsPage";
-import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/DashboardStaffsApprovedPage";
-import DashboardStaffsPendingPage from "./dashboard/dashboardSettings/DashboardStaffsPendingPage";
-
+import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsApprovedPage";
+import DashboardStaffsPendingPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsPendingPage";
+import DashboardStaffsRejectedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsRejectedpage";
 
 import DashboardUsersDetailsPage from "./dashboard/dashboardSettings/DashboardUsersDetailsPage";
 import DashboardStaffsDetailsPage from "./dashboard/dashboardSettings/DashboardStaffsDetailsPage";
@@ -49,7 +49,8 @@ export {
     DashboardStaffsPage,
     DashboardStaffsApprovedPage,
     DashboardStaffsPendingPage,
-
+    DashboardStaffsRejectedPage,
+    
     DashboardUsersDetailsPage,
     DashboardStaffsDetailsPage,
 
