@@ -905,7 +905,7 @@
 }
 
 
-#dashboardStaffsID .right-bottom-pane div:first-of-type a {
+.right-bottom-pane div:first-of-type a {
   @apply
     border
     shadow-lg 

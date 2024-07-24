@@ -13,9 +13,9 @@ import Login from "./Login";
 import AdminDashboard from "./AdminDashboard";
 
 import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
-import DashboardUsersApprovedPage from "./dashboard/dashboardSettings/users/DashboardStaffsApprovedPage";
-import DashboardUsersPendingPage from "./dashboard/dashboardSettings/users/DashboardStaffsPendingPage";
-import DashboardUsersRejectedPage from "./dashboard/dashboardSettings/users/DashboardStaffsRejectedpage";
+import DashboardUsersApprovedPage from "./dashboard/dashboardSettings/users/DashboardUsersApprovedPage";
+import DashboardUsersPendingPage from "./dashboard/dashboardSettings/users/DashboardUsersPendingPage";
+import DashboardUsersRejectedPage from "./dashboard/dashboardSettings/users/DashboardUsersRejectedpage";
 
 import DashboardStaffsPage from "./dashboard/dashboardSettings/DashboardStaffsPage";
 import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsApprovedPage";

@@ -1888,7 +1888,7 @@ tbody tr{
   border-collapse: collapse;
 }
 
-#dashboardStaffsID .right-bottom-pane div:first-of-type a{
+.right-bottom-pane div:first-of-type a{
   border-width: 1px;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));

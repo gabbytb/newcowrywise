@@ -7,38 +7,37 @@ import axios from "axios";
 
 
 
-const DashboardUsersApprovedPage = ({ activeDisplay }) => {
+const DashboardUsersPendingPage = ({ activeDisplay }) => {  
+
+    // ****************************************************************************
+    // MANAGE STATE:-  TO FIND ALL PENDING USERS
+    // ****************************************************************************
+    const [pendingUsers, setPendingUsers] = useState([]);
+    console.log("PENDING USERS: ", pendingUsers);
     
-
-    // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL USERS
-    // ****************************************************************************
-    const [approvedUsers, setApprovedUsers] = useState([]);
-
     const [totalPages, setTotalPages] = useState(0);
-    const [totalApprovedUsers, setTotalApprovedUsers] = useState(null);
+    const [totalPendingUsers, setTotalPendingUsers] = useState(null);
 
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
-
-
-
-
-
+    
+    
+    
+    
     useEffect(() => {
-        if (activeDisplay === "allApprovedUsers") {
-            var timerID = setTimeout(fetchApprovedUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+        if (activeDisplay === "allPendingUsers") {
+            var timerID = setTimeout(fetchPendingUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
     // ****************************************************************************             
-    async function fetchApprovedUsers() {        
-        const approvedStatus = "approved";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
+    async function fetchPendingUsers() {        
+        const pendingStatus = "pending";
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/users/BY_ROLE?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
             const { accountList, pagination } = data;
@@ -48,11 +47,10 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                 console.log("Message: ", message);
             };
 
-            setApprovedUsers(accountList);
-            console.log("APPROVED USERS: ", approvedUsers);
+            setPendingUsers(accountList);
 
             setTotalPages(pagination?.lastPage);
-            setTotalApprovedUsers(pagination?.adminRecords);
+            setTotalPendingUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -66,13 +64,14 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // ****************************************************************************
 
-    
-    
+
+
+
     return (
         <>
-            <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
+            <div className={`capitalize border ${activeDisplay === "allPendingUsers" ? "grid" : "hidden"}`}>
                 {
-                    approvedUsers.length !== 0 ?
+                    pendingUsers?.length ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -85,7 +84,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    approvedUsers.map((user, userIndex) => {
+                                    pendingUsers?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
@@ -158,7 +157,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 <tr className="flex justify-center">
-                                    <td className="">No admin record found.</td>
+                                    <td className="">No user record found.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -208,8 +207,8 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
         </>
     );
 };
-      
-
-export default DashboardUsersApprovedPage;
+    
+    
+export default DashboardUsersPendingPage;
 
 

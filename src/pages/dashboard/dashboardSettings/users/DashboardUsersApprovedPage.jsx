@@ -7,17 +7,17 @@ import axios from "axios";
 
 
 
-const DashboardUsersRejectedPage = ({ activeDisplay }) => {  
-
+const DashboardUsersApprovedPage = ({ activeDisplay }) => {
+    
 
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL USERS
+    // MANAGE STATE:-  TO FIND ALL APPROVED USERS
     // ****************************************************************************
-    const [rejectedUsers, setRejectedUsers] = useState([]);
-    console.log("REJECTED USERS: ", rejectedUsers);
-
+    const [approvedUsers, setApprovedUsers] = useState([]);
+    console.log("APPROVED USERS: ", approvedUsers);
+    
     const [totalPages, setTotalPages] = useState(0);
-    const [totalRejectedUsers, setTotalRejectedUsers] = useState(null);
+    const [totalApprovedUsers, setTotalApprovedUsers] = useState(null);
 
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
@@ -25,33 +25,34 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
 
 
 
+
     useEffect(() => {
-        if (activeDisplay === "allRejectedUsers") {
-            var timerID = setTimeout(fetchRejectedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+        if (activeDisplay === "allApprovedUsers") {
+            var timerID = setTimeout(fetchApprovedUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
     // ****************************************************************************             
-    async function fetchRejectedStaffs() {        
-        const rejectedStatus = "rejected";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
+    async function fetchApprovedUsers() {        
+        const approvedStatus = "approved";
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
             const { accountList, pagination } = data;
 
-            if (!success && message === "No admin found") {
+            if (!success && message === "No user found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setRejectedUsers(accountList)
+            setApprovedUsers(accountList);
 
             setTotalPages(pagination?.lastPage);
-            setTotalRejectedUsers(pagination?.adminRecords);
+            setTotalApprovedUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -65,14 +66,13 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // ****************************************************************************
 
-
-
-
+    
+    
     return (
         <>
-            <div className={`capitalize border ${activeDisplay === "allRejectedUsers" ? "grid" : "hidden"}`}>
+            <div className={`capitalize border ${activeDisplay === "allApprovedUsers" ? "grid" : "hidden"}`}>
                 {
-                    rejectedUsers.length !== 0 ?
+                    approvedUsers?.length ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -85,7 +85,7 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    rejectedUsers.map((user, userIndex) => {
+                                    approvedUsers?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
@@ -115,7 +115,7 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                                                                 <td className="lowercase">{user?.email}</td>
                                                                 <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                 <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                    <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -133,7 +133,7 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                                                                 <td className="lowercase">{user?.email}</td>
                                                                 <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                 <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                    <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -158,7 +158,7 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 <tr className="flex justify-center">
-                                    <td className="">No admin record found.</td>
+                                    <td className="">No user record found.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -208,11 +208,8 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
         </>
     );
 };
+      
 
-
-export default DashboardUsersRejectedPage;
-
-
-
+export default DashboardUsersApprovedPage;
 
 
