@@ -10,11 +10,14 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
+
+
 const SignUp = () => {
 
 
     // console.clear();
     
+
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -36,6 +39,8 @@ const SignUp = () => {
     // *************************** //
 
 
+
+
     // *************************** //
     // ***** CREATE NEW USER ***** //
     // *************************** //
@@ -51,7 +56,11 @@ const SignUp = () => {
         isActivated: false,
     });
      
-    const [formMessage, setFormMessage] = useState(null);       // console.log("Sign-Up Response: ", formMessage);
+    const [formMessage, setFormMessage] = useState(null);       
+    // console.log("Sign-Up Response: ", formMessage);
+
+    const [formSubmitted, setFormSubmitted] = useState(false);           
+    // console.log("Registration Successful: ", formSubmitted);
 
     async function handleKeyUp(e) {
         // console.clear();
@@ -82,15 +91,16 @@ const SignUp = () => {
         axios.post(url, user)
         .then((response) => {
             const { success, message, data } = response.data; 
-            
+
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
             var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
             if ((!success) && (message === "Fill all the required inputs.")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
                 // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
                 // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
+                setFormSubmitted(success);
                 setFormMessage(message);
                 
                 errMsg.classList.remove('error');
@@ -101,7 +111,8 @@ const SignUp = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+                setFormSubmitted(success);
                 setFormMessage(message);
 
                 errMsg.classList.remove('error');
@@ -112,7 +123,8 @@ const SignUp = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+                setFormSubmitted(success);
                 setFormMessage(message);
 
                 errMsg.classList.remove('error');
@@ -123,7 +135,8 @@ const SignUp = () => {
                     errMsg.classList.add('error');
                 }, 2800);
             } else {         
-                window.scroll({ left: 0, top: 500, behavior: 'smooth', });
+                window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
+                setFormSubmitted(success);
                 setFormMessage(message);
 
                 successMsg.classList.remove('success');
