@@ -14,37 +14,45 @@ const SignUpVerification = () => {
 
     // console.clear();
     
-
-
     
 
     // *************************** //
     // ***** CREATE NEW USER ***** //
     // *************************** //
-    const randNum = Math.floor(256*Math.random());
-    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", isActivated: false, });    
-    // console.log("***  Account Registration  ***", "\nAccount: ", user);
-
-    const [formSubmitted, setFormSubmitted] = useState(null);
-    // console.log("Registration Successful: ", formSubmitted);
-
+    const randNum = Math.floor(256*Math.random()) * Math.floor(256*Math.random());
+    const [user, setUser] = useState({        
+        id: randNum,
+        username: '', 
+        firstName: '', 
+        lastName: '', 
+        email: '',
+        password: '', 
+        approvalTandC: false,
+        isActivated: false,
+    });
+     
     const [formMessage, setFormMessage] = useState(null);
-    // console.log("Registration Process: ", authenticationResponseMsg);
+    // console.log("Sign-Up Response: ", formMessage);
+
+    const [formSubmitted, setFormSubmitted] = useState(false);           
+    // console.log("Registration Successful: ", formSubmitted);    
 
     async function handleKeyUp(e) {
-        const name = e.target.name;
-        const value = e.target.checkbox ? e.target.checked : e.target.value;
-
-        setUser({
-            ...user,
-            [name]: value
-        });
-    };
+        // console.clear();
+        let name = e.target.name;
+        let value = e.target.value;
+        // console.log(`COLLECTING USER DETAILS.....
+        //     \nUsername: ${user.username} 
+        //     \nFull Name: ${user.firstName} ${user.lastName} 
+        //     \nEmail: ${user.email} 
+        //     \nPassword: ${user.password} 
+        //     \nT&C approval: ${user.approvalTandC} 
+        //     \nisActive: ${user.isActivated}`);
+    }
 
     async function handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.checkbox ? e.target.checked : e.target.value;
-
+        let name = e.target.name;
+        let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setUser({
             ...user,
             [name]: value
@@ -53,10 +61,12 @@ const SignUpVerification = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        
-        axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+
+        const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/create";
+        axios.post(url, user)
         .then((response) => {
             const { success, message, data } = response.data; 
+            
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
             var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
@@ -68,60 +78,60 @@ const SignUpVerification = () => {
                 setFormSubmitted(success);
                 setFormMessage(message);
                 
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
                 }, 2800);
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 setFormSubmitted(success);
                 setFormMessage(message);
 
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
                 }, 2800);
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
                 setFormSubmitted(success);
                 setFormMessage(message);
 
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
                 }, 2800);
             } else {         
+                window.scroll({ left: 0, top: 500, behavior: 'smooth', });
                 setFormSubmitted(success);
                 setFormMessage(message);
-                setTimeout(() => {
-                    window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
-                }, 100);  
-                successMsg?.classList.remove('success');
-                successMsg?.classList.add('success-message-info');
+
+                successMsg.classList.remove('success');
+                successMsg.classList.add('success-message-info');
                 // signUpContentWrapper.classList.remove('min-h-120');
                 // signUpContentWrapper.classList.add('min-h-126.5');   
-                signUpContentWrapper?.classList.remove('mb-16');
-                signUpContentWrapper?.classList.add('mb-12');   
+                signUpContentWrapper.classList.remove('mb-16');
+                signUpContentWrapper.classList.add('mb-12');   
                                     
-                                
                 setTimeout(() => {
-                    successMsg?.classList.remove('success-message-info');
-                    successMsg?.classList.add('success');
+                    successMsg.classList.remove('success-message-info');
+                    successMsg.classList.add('success');
                     // signUpContentWrapper.classList.remove('min-h-126.5');
                     // signUpContentWrapper.classList.add('min-h-120'); 
-                    signUpContentWrapper?.classList.remove('mb-12');
-                    signUpContentWrapper?.classList.add('mb-16');                
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                }, 3300);             
+                    signUpContentWrapper.classList.remove('mb-12');
+                    signUpContentWrapper.classList.add('mb-16');                
+                    // window.scroll({ left: 0, top: 0, behavior: 'smooth', });               
+                }, 3300);
+
+                window.location.reload();
             };
         })
         .catch((error) => {
@@ -132,7 +142,9 @@ const SignUpVerification = () => {
     // ***** CREATE NEW USER ***** //
     // *************************** //
 
+
     
+
 
     
 
@@ -140,90 +152,93 @@ const SignUpVerification = () => {
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
     const { token } = useParams();
-    const [registeredUser, setRegisteredUser] = useState(null);
-    // console.log("***  Token was assigned to User  ***", "\nAccount: ", existingUser);
+    const [registeredUser, setRegisteredUser] = useState();
+    console.log("***  Token was assigned to User  ***", 
+                "\nAccount: ", registeredUser);
 
     const [isVerified, setIsVerified] = useState(false);
     // console.log("Account Verified: ", isVerified);
-
+    
     const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
     // console.log("Account Verification: ", authenticationResponseMsg);
-    
+
     const [isLoading, setIsLoading] = useState(true);
     // console.log("Is Loading: ", isLoading);
 
     useEffect(() => {  
         window.scroll({ left: 0, top: 300, behavior: "smooth" });
-
-        function verifyAccountRegistration() {
-            const url = `http://127.0.0.1:8000/user/verify?token=${token}`;
-            const payload = {
-                accessToken: token,
-            };
-            axios.post(url, payload, {
-                headers: {                    
-                    Authorization: `Bearer ${token}`,
-                }
-            })
-            .then((response) => {
-                const { success, data, message } = response.data;              
-                if ((!success) && (message === "Unauthorized: Bearer token required")) {
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                } else if ((!success) && (message === "User not found")) {
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                } else if ((!success) && (message === "token does not exist")) {
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);                    
-                } else {
-                    setIsVerified(success);
-                    setAuthenticationResponseMsg(message);
-                    setRegisteredUser(data);
-
-                    let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
-                    verificationStatus?.classList.remove('success-verify');
-                    verificationStatus?.classList.add('success-message-info');
-                    
-                    setTimeout(() => {
-                        verificationStatus?.classList.remove('success-message-info');
-                        verificationStatus?.classList.add('success-verify');
-                    }, 3500);
-            
-                    setTimeout(() => {
-                        window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                    }, 3750);
-                };
-            })
-            .catch((error) => {
-                console.log("Account Verification Error: ", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-        };
-        
+       
         let timeout = setTimeout(verifyAccountRegistration, 2300);
         return () => {
             clearTimeout(timeout);
         };
     }, []);
-    // ******************************** //
-    // ***** VERIFY EXISTING USER ***** //
-    // ******************************** //
+    function verifyAccountRegistration() {
+        const url = `http://127.0.0.1:8000/user/verify/${token}`;
+        const payload = {
+            accessToken: token,
+        };
 
 
+        axios.post(url, payload, {
+            headers: {                    
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        .then((response) => {
+            const { success, data, message } = response.data;              
+            if ((!success) && (message === "Unauthorized: Bearer token required")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                setIsVerified(success);
+                setAuthenticationResponseMsg(message);
+            } else if ((!success) && (message === "User not found")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                setIsVerified(success);
+                setAuthenticationResponseMsg(message);
+            } else if ((!success) && (message === "token does not exist")) {
+                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                setIsVerified(success);
+                setAuthenticationResponseMsg(message);                    
+            } else {
+                setIsVerified(success);
+                setAuthenticationResponseMsg(message);
+                setRegisteredUser(data);
 
+                let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
+                verificationStatus?.classList.remove('success-verify');
+                verificationStatus?.classList.add('success-message-info');
+                
+                setTimeout(() => {
+                    verificationStatus?.classList.remove('success-message-info');
+                    verificationStatus?.classList.add('success-verify');
+                }, 3500);
+        
+                setTimeout(() => {
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                }, 3750);
+            };
+        })
+        .catch((error) => {
+            console.log("Account Verification Error: ", error);
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
+    };
+    
     useEffect(() => {
-        let pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
     }, [registeredUser]);
+    // ******************************** //
+    // ***** VERIFY EXISTING USER ***** //
+    // ******************************** //    
 
 
-    
+
+
+
+
     if (isLoading) {
         return(
             <>
@@ -300,7 +315,6 @@ const SignUpVerification = () => {
             </>
         );
     };
-
 
 
     return (

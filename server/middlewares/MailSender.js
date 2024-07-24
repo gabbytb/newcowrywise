@@ -25,7 +25,7 @@ const mailSender = (token, user) => {
             },
         });
         const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
-        const verifyActivationLink = `http://127.0.0.1:3000/user/verify?token=${token}`;
+        const verifyActivationLink = `http://127.0.0.1:3000/user/verify/${token}`;
         const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
         const activationLink = `<span style="color:black;font-size:10px;">or copy and paste this link on your browser</span><br /><a href="http://127.0.0.1:3000/user/verify/${token}" alt="activation link" style="font-size:10px;">http://127.0.0.1:3000/user/verify/${token}</a>`;
 
@@ -56,12 +56,12 @@ const mailSender = (token, user) => {
                         setTimeout(attemptSend, 10000); // Retry after 15 seconds
                     } else {
                         console.log(`Max retries (${maxRetries}) exceeded. Could not send email.`);
-                    }
+                    };
                 } else {
                     console.log("E-mail Service Details:", mail.envelope,
                         `\nE-mail Sent successfully:: ${mail.response}`,
                     "\n\n******************************************************************************************\n");
-                }
+                };
             });
         };
         attemptSend();
