@@ -50,7 +50,7 @@ module.exports = mongoose => {
         },
         status: { 
             type: String, 
-            default: 'rejected',
+            default: 'pending',
         },
         approvalTandC: {
             type: Boolean
