@@ -4328,6 +4328,10 @@ tbody tr{
   gap: 2.5rem;
 }
 
+.gap-12{
+  gap: 3rem;
+}
+
 .gap-16{
   gap: 4rem;
 }
@@ -4362,10 +4366,6 @@ tbody tr{
 
 .gap-8{
   gap: 2rem;
-}
-
-.gap-12{
-  gap: 3rem;
 }
 
 .gap-x-3{
