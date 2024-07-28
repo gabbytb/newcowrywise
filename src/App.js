@@ -4,8 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 import { 
   Home,
   OurProgress, DonationPage,
-  Register,
-  SignUp, SignUpVerification, 
+  OLDRegister,
+  OLDSignUp, 
+  // SignUpVerification, 
   // SignUpReVerification,
   Login, 
   AdminDashboard, 
@@ -42,10 +43,10 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/our-progress" element={<OurProgress />}></Route>
       <Route path="/donations" element={<DonationPage />}></Route>
-      <Route path="/user/signup-two" element={<SignUp />}></Route>
-      <Route path="/user/signup" element={<Register />}></Route>
+      <Route path="/user/signup-two" element={<OLDSignUp />}></Route>
+      <Route path="/user/signup-three" element={<OLDRegister />}></Route>
 
-      <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
+      {/* <Route path="/user/verify/:token" element={<SignUpVerification />}></Route> */}
       {/* <Route path="/user/verify" element={<SignUpReVerification />}></Route> */}
       <Route path="/user/login" element={<Login />}></Route>
 

@@ -12,7 +12,7 @@ import { Nav, ButtonSubmit, } from "../components";
 
 
 
-const SignUp = () => {
+const OLDSignUp = () => {
 
 
     // console.clear();
@@ -260,4 +260,4 @@ const SignUp = () => {
 };
 
 
-export default SignUp;
+export default OLDSignUp;

@@ -11,7 +11,7 @@ import { ButtonSubmit } from "../components";
 
 
 
-const Register = () => {
+const OLDRegister = () => {
 
 
     // console.clear();
@@ -261,4 +261,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default OLDRegister;

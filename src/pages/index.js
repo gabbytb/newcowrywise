@@ -3,11 +3,13 @@ import OurProgress from "./OurProgress";
 import DonationPage from "./DonationPage";
 
 
-import SignUp from "./SignUp";
-import Register from "./Register";
-
+import OLDSignUp from "./OLDSignUp";
+import OLDRegister from "./OLDRegister";
 import SignUpVerification from "./SignUpVerification";
 import SignUpReVerification from "./SignUpReVerification";
+
+
+// import SignUp from "./SignUp";
 import Login from "./Login";
 
 import AdminDashboard from "./AdminDashboard";
@@ -39,8 +41,8 @@ export {
     DonationPage,
     OurProgress,
     
-    SignUp,
-    Register,
+    OLDSignUp,
+    OLDRegister,
     SignUpVerification,
     SignUpReVerification,
     Login,
