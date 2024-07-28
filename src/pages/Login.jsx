@@ -1,4 +1,5 @@
 import { useState, useEffect, } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import loginImg from '../assets/login.jpg'
 import { BrandLogo, BrandLogoWhite, brandOfficialLogo, brandOfficialWhiteLogo } from '../assets/images';
@@ -164,20 +165,25 @@ export default function Login() {
             <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
                 <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
                     <h2 className='text-4xl dark:text-white font-bold text-center'>SIGN IN</h2>
+                    
                     <div className='flex flex-col text-gray-400 py-2'>
-                        <label>Username</label>
+                        <label>E-mail address</label>
                         <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="email" value={user.email} onChange={handleChange} onKeyUp={handleKeyUp} />
                     </div>
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label>Password</label>
                         <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" value={user.password} onChange={handleChange} onKeyUp={handleKeyUp} />
                     </div>
-                    <div className='flex justify-between text-gray-400 py-2'>
-                        <p className='flex items-center'><input className='mr-2' type="checkbox" /> Remember Me</p>
-                        <p>Forgot Password</p>
+                    <div className='flex justify-between py-2'>{/* text-gray-400 */}
+                        <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
+                        <p><Link className='text-white' to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
-                    <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'>SIGNIN</button>
                     
+                    <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'>SIGNIN</button>
+
+                    <div className="text-white login__register">
+                        Don't have an account? <Link className='capitalize' to={"/user/signup"}>sign up</Link>
+                    </div>
                 </form>
             </div>
         </div>
