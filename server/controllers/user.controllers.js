@@ -23,7 +23,7 @@ const mailSender = require("../middlewares/MailSender");
             
 
 // Our Account Creation Logic starts here
-exports.createAccount = async (req, res) => {
+exports.signUp = async (req, res) => {
 
     try {
 
@@ -54,7 +54,7 @@ exports.createAccount = async (req, res) => {
             return res.status(200).json(responseData);
         }
         
-        const usernameExists = await User.findOne({ username: username.toLowerCase() });
+        const usernameExists = await User.findOne({ userName: username.toLowerCase() });
         if (usernameExists) {
             const responseData = {
                 success: false,
@@ -94,7 +94,7 @@ exports.createAccount = async (req, res) => {
         // ************************************* //
         const newUser = new User({
             _id: id * randNum,
-            username: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             firstName,
             lastName,
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
@@ -281,7 +281,7 @@ exports.completeSignUp = async (req, res) => {
 //         return res.status(500).json(responseData);
 //     }
 // };
-exports.accountVerification = async (req, res) => {
+exports.verifySignUp = async (req, res) => {
     try {
         const AuthHeader = req.headers.authorization;
         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {

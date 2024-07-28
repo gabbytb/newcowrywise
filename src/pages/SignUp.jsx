@@ -19,7 +19,7 @@ function SignUp() {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Log In", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -27,8 +27,19 @@ function SignUp() {
     // *************************** //
 
 
-    const [user, setUser] = useState({ email: "", password: "", });
-    // console.log("Login Attempt By: ", user.email);
+
+    // ******************************** //
+    // *** USER PAYLOAD FOR SIGN UP *** //
+    // ******************************** //
+    let randNum = Math.floor(298 * Math.random()) + Math.floor(286 * Math.random());
+    const [user, setUser] = useState({ id: randNum, username: "", firstName: "", lastName: "", email: "", password: "", approvesTandC: false, isActivated: false, });
+    // console.log("CREATE NEW ACCOUNT: ", user);
+    // ******************************** //
+    // *** USER PAYLOAD FOR SIGN UP *** //
+    // ******************************** //
+
+
+
 
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
@@ -36,9 +47,12 @@ function SignUp() {
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
 
+
+
+
     async function handleKeyUp(e) {
         const name = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setUser({
             ...user,
             [name]: value
@@ -47,17 +61,17 @@ function SignUp() {
 
     async function handleChange(e) {
         const name = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setUser({
             ...user,
             [name]: value
         });        
     };
 
-    async function handleLogin(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/api/v1/auth/login", user)
+        await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data } = response.data; 
             var errMsg = document.querySelector('.error'); 
@@ -66,11 +80,12 @@ function SignUp() {
             // console.log("Re-activate Account: ", reactivateAccountMsg);
 
 
-            if (!success && message === "All fields are required.") {
+            if (!success && message === "Fill all the required inputs.") {
 
                 // Perform These Actions
+                setFormSubmitted(success);
                 setFormMessage(message);
-                setFormSubmitted(success);     
+                   
                 errMsg?.classList.remove('error');
                 errMsg?.classList.add('error-message-info');
 
@@ -80,71 +95,55 @@ function SignUp() {
                 }, 2800);
                 // Perform These Actions
 
-            } else if (!success && message === "Incorrect password or email.") {
-                
-                // Perform These Actions
+            } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
+                /// Scroll to Top
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 setFormSubmitted(success);
                 setFormMessage(message);
-                
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
+
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
                 }, 2800);
-                // Perform These Actions
 
-            } else if (!success && message === "Invalid account.") {
-                
-                // Perform These Actions
+            } else if ((!success) && (message === "Username exists. Please sign-in.")) {
+                /// Scroll to Top
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 setFormSubmitted(success);
                 setFormMessage(message);
 
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
+                errMsg.classList.remove('error');
+                errMsg.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
+                    errMsg.classList.remove('error-message-info');
+                    errMsg.classList.add('error');
                 }, 2800);
-                // Perform These Actions
 
-            } else if (!success && message === "Kindly verify your account.") {
-
-                // Perform These Actions
-                setFormSubmitted(success);
-                setFormMessage(message);
-
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
-
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
-                // Perform These Actions
-
-            } else {
-
-                // Perform These Actions
-                setFormMessage(message);
-                setFormSubmitted(success);
-
-                localStorage.setItem('user', JSON.stringify(data));
+            } else {         
+                /// Scroll to Bottom
+                window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
                 
-                successMsg?.classList.remove('success');
-                successMsg?.classList.add('success-message-info');
+                setFormSubmitted(success);
+                setFormMessage(message);
 
+                successMsg.classList.remove('success');
+                successMsg.classList.add('success-message-info'); 
+                                    
                 setTimeout(() => {
-                    successMsg?.classList.remove('success-message-info');
-                    successMsg?.classList.add('success');
-                }, 2500);
+                    successMsg.classList.remove('success-message-info');
+                    successMsg.classList.add('success');              
+                    
+                    /// Scroll to Top
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });               
+                }, 3300);
 
-                const redirToAdminDashboard = "/admin/dashboard";
-                window.location = redirToAdminDashboard;
-                // Perform These Actions
-
+                window.location.reload();
             };
         })
         .catch((error) => {
@@ -153,8 +152,10 @@ function SignUp() {
     };
 
 
+
+    
     return (
-        <div id="loginId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
+        <div id="signUpId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block left-pane'>
                 <img className='w-full h-full object-cover' src={loginImg} alt="background-img" />
                 {/* <div className='flex justify-center'>
@@ -163,26 +164,44 @@ function SignUp() {
             </div>
 
             <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
-                <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
-                    <h2 className='text-4xl dark:text-white font-bold text-center'>SIGN IN</h2>
+                <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 py-8 px-10' onSubmit={handleSubmit}>
+                    <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6 uppercase'>sign up</h2>
                     
                     <div className='flex flex-col text-gray-400 py-2'>
-                        <label>E-mail address</label>
-                        <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="email" value={user.email} onChange={handleChange} onKeyUp={handleKeyUp} />
+                        <label htmlFor="username">Username
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="username" value={user.username} onChange={handleChange} onKeyUp={handleKeyUp} />
+                        </label>
                     </div>
-                    <div className='flex flex-col text-gray-400 py-2'>
-                        <label>Password</label>
-                        <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" value={user.password} onChange={handleChange} onKeyUp={handleKeyUp} />
-                    </div>
-                    <div className='flex justify-between py-2'>{/* text-gray-400 */}
-                        <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
-                        <p><Link className='text-white' to={"/user/password-reset"}>Forgot Password</Link></p>
-                    </div>
-                    
-                    <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'>SIGNIN</button>
+                    <div className='flex flex-row text-gray-400 py-2 gap-12'>
+                        <label htmlFor="firstName">First Name
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="firstName" value={user.firstName} onChange={handleChange} onKeyUp={handleKeyUp} />
+                        </label>
 
-                    <div className="text-white login__register">
-                        Don't have an account? <Link className='capitalize' to={"/user/signup"}>sign up</Link>
+                        <label htmlFor="lastName">Last Name
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="lastName" value={user.lastName} onChange={handleChange} onKeyUp={handleKeyUp} />
+                        </label>
+                    </div>
+                    <div className='flex flex-col text-gray-400 py-2'>
+                        <label htmlFor="email">E-mail address
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" value={user.email} onChange={handleChange} onKeyUp={handleKeyUp} />
+                        </label>
+                    </div>
+                    <div className='flex flex-col text-gray-400 py-2'>
+                        <label htmlFor="password">Password
+                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" value={user.password} onChange={handleChange} onKeyUp={handleKeyUp} />
+                        </label>
+                    </div>
+                    <div className="text-white py-2">{/* text-gray-400 */}
+                        <label className="flex justify-center items-center gap-2 leading-6" htmlFor="approvesTandC">
+                            <input className='mr-2 w-8 h-8' type="checkbox" name="approvesTandC" value={user.approvesTandC}  /> I have read and understood Samuel Akinola Foundation's terms and conditions.
+                        </label>
+                    </div>
+                    
+                    <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase'>submit</button>
+
+                    <div className="login__register flex flex-col mt-4 mb-6 gap-4">
+                        <p className="text-white">Have an account? <Link className='capitalize' to={"/user/login"}>sign in</Link></p>
+                        <p className="text-white"><Link to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
                 </form>
             </div>
