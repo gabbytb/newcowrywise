@@ -28,7 +28,6 @@ const SignUp = () => {
             clearTimeout(timeout);
         };
     }, []);
-
     function autoEffect() {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
@@ -52,15 +51,15 @@ const SignUp = () => {
         lastName: '', 
         email: '',
         password: '', 
-        approvalTandC: false,
+        approvesTandC: false,
         isActivated: false,
     });
      
-    const [formMessage, setFormMessage] = useState(null);       
-    // console.log("Sign-Up Response: ", formMessage);
-
     const [formSubmitted, setFormSubmitted] = useState(false);           
     // console.log("Registration Successful: ", formSubmitted);
+
+    const [formMessage, setFormMessage] = useState(null);       
+    // console.log("Sign-Up Response: ", formMessage);
 
     async function handleKeyUp(e) {
         // console.clear();
@@ -94,12 +93,12 @@ const SignUp = () => {
 
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#signUp .success');
-            var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
+            // var signUpContentWrapper = document.querySelector("#signUpID .content-wrapper");
 
             if ((!success) && (message === "Fill all the required inputs.")) {
+                /// Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-                // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-                // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
+                
                 setFormSubmitted(success);
                 setFormMessage(message);
                 
@@ -110,8 +109,11 @@ const SignUp = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
+                /// Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 setFormSubmitted(success);
                 setFormMessage(message);
 
@@ -122,8 +124,11 @@ const SignUp = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
+                /// Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 setFormSubmitted(success);
                 setFormMessage(message);
 
@@ -134,29 +139,32 @@ const SignUp = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+
             } else {         
+                /// Scroll to Bottom
                 window.scrollTo({ left: 0, top: 500, behavior: 'smooth', });
+                
                 setFormSubmitted(success);
                 setFormMessage(message);
 
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info');
-                // signUpContentWrapper.classList.remove('min-h-120');
-                // signUpContentWrapper.classList.add('min-h-126.5');   
-                signUpContentWrapper.classList.remove('mb-16');
-                signUpContentWrapper.classList.add('mb-12');   
+
+                // signUpContentWrapper.classList.remove('mb-16');
+                // signUpContentWrapper.classList.add('mb-12');   
                                     
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');
-                    // signUpContentWrapper.classList.remove('min-h-126.5');
-                    // signUpContentWrapper.classList.add('min-h-120'); 
-                    signUpContentWrapper.classList.remove('mb-12');
-                    signUpContentWrapper.classList.add('mb-16');                
-                    // window.scroll({ left: 0, top: 0, behavior: 'smooth', });               
+
+                    // signUpContentWrapper.classList.remove('mb-12');
+                    // signUpContentWrapper.classList.add('mb-16');                
+                    
+                    /// Scroll to Top
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth', });               
                 }, 3300);
 
-                window.location.reload();
+                // window.location.reload();
             };
         })
         .catch((error) => {
@@ -177,9 +185,12 @@ const SignUp = () => {
             <main id="signUpID" className="absolute top-0 w-full h-fit grid grid-cols-1 -z-10">
                 <div className="relative w-full h-full pt-14">
                     <div className="mt-48 mb-16 items-center content-wrapper">
+
+                        
                         <div className="mx-auto error">
                             { formMessage }
                         </div>
+                        
 
                         <form id="signUp" onSubmit={handleSubmit}>
                             <div className="text-center pt-16 form--title">
@@ -210,8 +221,8 @@ const SignUp = () => {
                                         <input className="pwd" type="text" name="password" placeholder="*************" onChange={handleChange}  onKeyUp={handleKeyUp} />
                                     </label>
    
-                                    <label htmlFor="approvalTandC" className="flex justify-start items-end flex-row gap-4">
-                                        <input type="checkbox" name="approvalTandC" onChange={handleChange} onKeyUp={handleKeyUp} />
+                                    <label htmlFor="approvesTandC" className="flex justify-start items-end flex-row gap-4">
+                                        <input type="checkbox" name="approvesTandC" onChange={handleChange} onKeyUp={handleKeyUp} />
                                         By proceeding, I acknowledge that I have read and agreed to Samuel Akinola Foundation's terms & conditions
                                     </label>
 

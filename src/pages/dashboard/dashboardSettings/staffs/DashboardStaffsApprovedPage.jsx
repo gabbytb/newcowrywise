@@ -75,13 +75,13 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                     approvedAdmins.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
-                                <tr>
-                                    <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                                    <th>NAME</th>
-                                    <th>E-MAIL ADDRESS</th>
-                                    <th className="text-center">STATUS</th>
-                                    <th className="text-center">ACTION</th>
-                                </tr>
+                                            <tr>
+                                                <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                                                <th>NAME</th>
+                                                <th>E-MAIL ADDRESS</th>
+                                                <th className="text-center">STATUS</th>
+                                                <th className="text-center">ACTION</th>
+                                            </tr>
                             </thead>
                             <tbody>
                                 {
@@ -92,12 +92,12 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -110,12 +110,30 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
+                                            );
+                                        } else if (user?.status === "approved") {
+                                            return (
+                                                user?.roles?.map((roleUsers) => {
+                                                    if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -124,21 +142,9 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                             );
                                         } else {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex}>
+                                                    <td>No admin record found</td>
+                                                </tr>
                                             );
                                         };
                                     })

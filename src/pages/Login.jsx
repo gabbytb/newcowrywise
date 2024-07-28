@@ -1,7 +1,7 @@
-import { useEffect, useState, } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { NavNoTopBar, ButtonSubmit, } from "../components";
+import { useState, useEffect, } from 'react';
+import axios from 'axios';
+import loginImg from '../assets/login.jpg'
+import { BrandLogo, BrandLogoWhite, brandOfficialLogo, brandOfficialWhiteLogo } from '../assets/images';
 
 
 
@@ -9,18 +9,16 @@ import { NavNoTopBar, ButtonSubmit, } from "../components";
 
 
 
-const Login = () => {
+
+export default function Login() {
 
     
-
-
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        window.scrollTo(0, 0);
-        const pageTitle = "Log In",
-        siteTitle = "Samuel Akinola Foundation";
+        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+        const pageTitle = "Log In", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -63,60 +61,71 @@ const Login = () => {
             const { success, message, data } = response.data; 
             var errMsg = document.querySelector('.error'); 
             var successMsg = document.querySelector('#logIn .success');
-            var reactivateAccountMsg = document.querySelector("#logIn .validate-account");
+            // var reactivateAccountMsg = document.querySelector("#logIn .validate-account");
             // console.log("Re-activate Account: ", reactivateAccountMsg);
 
 
             if (!success && message === "All fields are required.") {
+
                 // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);     
                 errMsg?.classList.remove('error');
                 errMsg?.classList.add('error-message-info');
+
                 setTimeout(() => {
                     errMsg?.classList.remove('error-message-info');
                     errMsg?.classList.add('error');
                 }, 2800);
                 // Perform These Actions
+
             } else if (!success && message === "Incorrect password or email.") {
-                // Perform These Actions
-                setFormSubmitted(success);
-                setFormMessage(message);
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
-                // Perform These Actions
-            } else if (!success && message === "Invalid account.") {
-                // Perform These Actions
-                setFormSubmitted(success);
-                setFormMessage(message);
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
-                // Perform These Actions
-            } else if (!success && message === "Kindly verify your account.") {
-                // Perform These Actions
-                setFormSubmitted(success);
-                setFormMessage(message);
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
-                setTimeout(() => {
-                    reactivateAccountMsg?.classList.remove("hidden");
-                }, 1800);
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 3500);
-                // Perform These Actions
-            } else {
-                reactivateAccountMsg?.classList.add("hidden");
                 
+                // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+                
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
+
+                setTimeout(() => {
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
+                }, 2800);
+                // Perform These Actions
+
+            } else if (!success && message === "Invalid account.") {
+                
+                // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
+
+                setTimeout(() => {
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
+                }, 2800);
+                // Perform These Actions
+
+            } else if (!success && message === "Kindly verify your account.") {
+
+                // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
+
+                setTimeout(() => {
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
+                }, 2800);
+                // Perform These Actions
+
+            } else {
+
                 // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);
@@ -129,13 +138,12 @@ const Login = () => {
                 setTimeout(() => {
                     successMsg?.classList.remove('success-message-info');
                     successMsg?.classList.add('success');
-                }, 2000);
+                }, 2500);
 
-                setTimeout(() => {
-                    const redirToAdminDashboard = "/admin/dashboard";
-                    window.location = redirToAdminDashboard;
-                }, 3000);
+                const redirToAdminDashboard = "/admin/dashboard";
+                window.location = redirToAdminDashboard;
                 // Perform These Actions
+
             };
         })
         .catch((error) => {
@@ -143,105 +151,35 @@ const Login = () => {
         });
     };
 
-    
-
 
     return (
-        <>
-            <NavNoTopBar />
-            <div className="absolute top-0 w-full h-screen -z-10">
-                <main className="w-full h-128 relative bg-login bg-no-repeat bg-top-left bg-cover">
-
-                    <div className="mt-32 pt-32 items-center">
-                        <div className="mx-auto error">
-                            {formMessage}
-                        </div>
-
-                        {/* <form id="logIn" onSubmit={handleLogin}>
-                            <div className="text-center pt-16 form--title">
-                                <h5 className="capitalize">log in</h5>
-                            </div>
-
-                            <div className="px-8 pb-32 w-full">
-                                <div className="form--wrapper gap-6">
-                                    <label htmlFor="email">
-                                        <input type="email" name="email" value={user.email} placeholder="Email ID" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    </label>
-
-                                    <label htmlFor="password">
-                                        <input type="text" name="password" value={user.password} placeholder="*************" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    </label>
-
-                                    <ButtonSubmit 
-                                        btnType="submit"
-                                        btnProps="text-black text-2xl font-bold capitalize px-6 py-5 w-full rounded-full 
-                                            hover:text-white
-                                            focus:text-white
-                                            hover:bg-blue-700
-                                            focus:bg-blue-700 
-                                            hover:ring-blue-300 
-                                            focus:ring-blue-300
-                                            hover:ring-2 
-                                            focus:ring-2
-                                            ease-in-out
-                                            duration-300"
-                                        btnBg
-                                        label="submit"
-                                    />
-
-                                    <div className="text-2xl/normal text-slate-300 font-medium text-center">Don't have an account? 
-                                        <Link className="text-white font-semibold capitalize" to={"/user/signup"}> Register</Link>
-                                    </div>
-
-                                    <div className="text-2xl/normal text-slate-300 font-medium hidden validate-account">
-                                        To resend activation e-mail
-                                        <Link className="text-slate-50 font-semibold capitalize" to={"/user/verify"}> click here</Link>
-                                    </div>
-                                </div>
-
-                                <div className="mx-auto success">
-                                    {formMessage}
-                                </div>
-                            </div>
-                        </form> */}
-
-
-                        <form id="logIn" className="login__form" onSubmit={handleLogin}>
-                            <h1 className="login__title text-white mt-4 mb-16 capitalize">log in</h1>
-
-                            <div className="login__inputs">
-                                <label className="login__box" htmlFor="email">
-                                    <input className="login__input" type="email" name="email" value={user.email} placeholder="Email ID" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    <i class="ri-mail-fill"></i>
-                                </label>
-
-                                <label className="login__box" htmlFor="password">
-                                    <input className="login__input" type="password" name="password" value={user.password} placeholder="Password" onChange={handleChange} onKeyUp={handleKeyUp} />
-                                    <i class="ri-lock-2-fill"></i>
-                                </label>
-                            </div>
-
-                            <div className="login__check">
-                                <div className="login__check-box">
-                                    <input type="checkbox" className="login__check-input" id="user-check" />
-                                    <label htmlFor="user-check" className="login__check-label">Remember me</label>
-                                </div>
-
-                                <Link to="#" className="login__forgot">Forgot Password?</Link>
-                            </div>
-
-                            <button type="submit" className="login__button">Login</button>
-
-                            <div className="login__register">
-                                Don't have an account? <Link to={"/user/signup"}>Register</Link>
-                            </div>
-                        </form>
-                    </div>
-                </main>
+        <div id="loginId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
+            <div className='hidden sm:block left-pane'>
+                <img className='w-full h-full object-cover' src={loginImg} alt="background-img" />
+                {/* <div className='flex justify-center'>
+                    <img src={brandOfficialLogo} />
+                </div> */}
             </div>
-        </>
+
+            <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
+                <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
+                    <h2 className='text-4xl dark:text-white font-bold text-center'>SIGN IN</h2>
+                    <div className='flex flex-col text-gray-400 py-2'>
+                        <label>Username</label>
+                        <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="email" value={user.email} onChange={handleChange} onKeyUp={handleKeyUp} />
+                    </div>
+                    <div className='flex flex-col text-gray-400 py-2'>
+                        <label>Password</label>
+                        <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" value={user.password} onChange={handleChange} onKeyUp={handleKeyUp} />
+                    </div>
+                    <div className='flex justify-between text-gray-400 py-2'>
+                        <p className='flex items-center'><input className='mr-2' type="checkbox" /> Remember Me</p>
+                        <p>Forgot Password</p>
+                    </div>
+                    <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'>SIGNIN</button>
+                    
+                </form>
+            </div>
+        </div>
     );
-};
-
-
-export default Login;
+}

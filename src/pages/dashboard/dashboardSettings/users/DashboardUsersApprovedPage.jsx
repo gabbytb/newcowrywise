@@ -72,7 +72,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allApprovedUsers" ? "grid" : "hidden"}`}>
                 {
-                    approvedUsers?.length ?
+                    approvedUsers?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -92,12 +92,12 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -110,12 +110,30 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
+                                            );
+                                        } else if (user?.status === "approved") {
+                                            return (
+                                                user?.roles?.map((roleUsers) => {
+                                                    if (roleUsers?.role === "ROLE_USERS") {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -124,21 +142,9 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                             );
                                         } else {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if (roleUsers?.role === "ROLE_USERS") {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex}>
+                                                    <td>No admin record found</td>
+                                                </tr>
                                             );
                                         };
                                     })
@@ -158,12 +164,11 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 <tr className="flex justify-center">
-                                    <td className="">No user record found.</td>
+                                    <td className="">No admin record found.</td>
                                 </tr>
                             </tbody>
                         </table>
                 }
-
 
 
                 {/* Pagination controls */}
@@ -204,6 +209,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                     </nav>
                 </div>
                 {/* Pagination controls */}
+
             </div>
         </>
     );

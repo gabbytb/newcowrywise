@@ -801,6 +801,12 @@ tbody tr{
     object-position: center;
   } */
 
+/* #loginId .left-pane div > img {
+    @apply
+      w-64
+    ;
+  } */
+
 .login__form {
   position: relative;
   background-color: hsla(0, 0%, 100%, .01);
@@ -3901,6 +3907,11 @@ tbody tr{
   margin-bottom: 1rem;
 }
 
+.my-5{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .-ml-px{
   margin-left: -1px;
 }
@@ -3969,6 +3980,10 @@ tbody tr{
   margin-right: 3.5rem;
 }
 
+.mr-2{
+  margin-right: 0.5rem;
+}
+
 .mr-20{
   margin-right: 5rem;
 }
@@ -4001,6 +4016,10 @@ tbody tr{
   margin-top: 3.5rem;
 }
 
+.mt-2{
+  margin-top: 0.5rem;
+}
+
 .mt-32{
   margin-top: 8rem;
 }
@@ -4019,6 +4038,10 @@ tbody tr{
 
 .mt-8{
   margin-top: 2rem;
+}
+
+.box-border{
+  box-sizing: border-box;
 }
 
 .block{
@@ -4043,6 +4066,10 @@ tbody tr{
 
 .hidden{
   display: none;
+}
+
+.h-10{
+  height: 2.5rem;
 }
 
 .h-100{
@@ -4087,6 +4114,11 @@ tbody tr{
   height: 100%;
 }
 
+.h-max{
+  height: -webkit-max-content;
+  height: max-content;
+}
+
 .h-screen{
   height: 100vh;
 }
@@ -4121,6 +4153,10 @@ tbody tr{
 
 .w-1\/6{
   width: 16.666667%;
+}
+
+.w-10{
+  width: 2.5rem;
 }
 
 .w-100{
@@ -4161,6 +4197,10 @@ tbody tr{
 
 .min-w-80{
   min-width: 17.8rem;
+}
+
+.max-w-\[400px\]{
+  max-width: 400px;
 }
 
 .flex-1{
@@ -4332,6 +4372,10 @@ tbody tr{
   margin-bottom: calc(3rem * var(--tw-space-y-reverse));
 }
 
+.overflow-y-auto{
+  overflow-y: auto;
+}
+
 .rounded{
   border-radius: 0.25rem;
 }
@@ -4383,6 +4427,11 @@ tbody tr{
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.border-slate-600{
+  --tw-border-opacity: 1;
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
+}
+
 .bg-blue-500{
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
@@ -4400,6 +4449,21 @@ tbody tr{
 .bg-gray-200{
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-gray-700{
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.bg-gray-800{
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.bg-gray-900{
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
 .bg-green-500{
@@ -4441,6 +4505,11 @@ tbody tr{
   background-color: var(--admin-total-revenue-card-3);
 }
 
+.bg-teal-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 184 166 / var(--tw-bg-opacity));
+}
+
 .bg-transparent{
   background-color: transparent;
 }
@@ -4474,6 +4543,10 @@ tbody tr{
   fill: #fff;
 }
 
+.object-cover{
+  object-fit: cover;
+}
+
 .p-0{
   padding: 0px;
 }
@@ -4488,6 +4561,10 @@ tbody tr{
 
 .p-4{
   padding: 1rem;
+}
+
+.p-8{
+  padding: 2rem;
 }
 
 .px-0{
@@ -4648,6 +4725,10 @@ tbody tr{
   padding-top: 4rem;
 }
 
+.pt-2{
+  padding-top: 0.5rem;
+}
+
 .pt-24{
   padding-top: 6rem;
 }
@@ -4662,10 +4743,6 @@ tbody tr{
 
 .pt-5{
   padding-top: 1.25rem;
-}
-
-.pt-6{
-  padding-top: 1.5rem;
 }
 
 .pt-9{
@@ -4732,9 +4809,18 @@ tbody tr{
   font-size: 1.46rem;
 }
 
+.text-4xl{
+  font-size: 2.25rem;
+}
+
 .text-8xl\/tighter{
   font-size: 6rem;
   line-height: 1.35;
+}
+
+.text-lg\/6{
+  font-size: 1.125rem;
+  line-height: 1.5rem;
 }
 
 .text-sm{
@@ -4808,6 +4894,11 @@ tbody tr{
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
+.text-gray-400{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .text-gray-500{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -4878,6 +4969,11 @@ tbody tr{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-teal-500\/50{
+  --tw-shadow-color: rgb(20 184 166 / 0.5);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 .duration-300{
   transition-duration: 300ms;
 }
@@ -4938,6 +5034,11 @@ tbody tr{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.hover\:shadow-teal-500\/40:hover{
+  --tw-shadow-color: rgb(20 184 166 / 0.4);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 .hover\:ring-2:hover{
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -4954,6 +5055,11 @@ tbody tr{
   --tw-ring-color: rgb(134 239 172 / var(--tw-ring-opacity));
 }
 
+.focus\:border-blue-500:focus{
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
 .focus\:bg-blue-600:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -4962,6 +5068,11 @@ tbody tr{
 .focus\:bg-blue-700:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.focus\:bg-gray-800:focus{
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .focus\:text-white:focus{
@@ -4973,6 +5084,11 @@ tbody tr{
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.focus\:outline-none:focus{
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .focus\:ring-2:focus{
@@ -5067,6 +5183,10 @@ tbody tr{
     grid-template-columns: 54% 1fr;
   }
 
+  .sm\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:justify-end{
     justify-content: flex-end;
   }
@@ -5155,5 +5275,12 @@ tbody tr{
 
   .xl\:w-full{
     width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark){
+  .dark\:text-white{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }

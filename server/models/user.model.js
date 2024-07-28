@@ -6,7 +6,7 @@ module.exports = mongoose => {
         _id: {
             type: Number,
         },
-        username: {
+        userName: {
             type: String,
             unique: true,
             required: true,
@@ -50,13 +50,16 @@ module.exports = mongoose => {
         },
         status: { 
             type: String, 
-            default: 'pending',
+            default: 'rejected',
         },
-        approvalTandC: {
+        approvesTandC: {
             type: Boolean
         },
         isActivated: {
             type: Boolean,
+        },
+        accessToken: {
+            type: String,
         },
         roles: [
             {
@@ -66,10 +69,7 @@ module.exports = mongoose => {
                 updatedAt: Date,
             }
         ],
-        accessToken: {
-            type: String,
-        },
-    }, { versionKey: false, timestamps: true,  }); // This option disables the automatic creation of the default _id field
+    }, { versionKey: false, timestamps: true,  }); // This option disables the automatic creation of the default _id (& the _v) field.
 
 
     const User = mongoose.model("User", userSchema);

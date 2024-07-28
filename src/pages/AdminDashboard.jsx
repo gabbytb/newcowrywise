@@ -849,7 +849,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                         {/******************************    MAIN MENU:- Home VIEW    *******************************/}
                         {/******************************************************************************************/}                       
                         <aside className="block">
-                            <div className="right-top-pane h-114.8 grid sticky top-0 bg-white z-50">
+                            <div className="right-top-pane h-114.8 grid bg-white z-50">
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
                                         <h1>Welcome 

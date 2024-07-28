@@ -5,7 +5,8 @@ import {
   Home,
   OurProgress, DonationPage,
   Register,
-  SignUp, SignUpVerification, SignUpReVerification,
+  SignUp, SignUpVerification, 
+  // SignUpReVerification,
   Login, 
   AdminDashboard, 
   DashboardUsersPage, DashboardUsersDetailsPage,
@@ -32,7 +33,7 @@ ReactGA.initialize(TRACKING_ID);
 const App = () => {
   
   useEffect(() => {
-    var pageViews = ReactGA.pageview(window.location.pathname + window.location.search);
+    let pageViews = ReactGA.pageview(window.location.pathname + window.location.search);
     console.log("TRACKING PAGE VIEWS: ", pageViews);
   }, []);
 
@@ -44,8 +45,8 @@ const App = () => {
       <Route path="/user/signup-two" element={<SignUp />}></Route>
       <Route path="/user/signup" element={<Register />}></Route>
 
-      <Route path="/user/verify?token=:token" element={<SignUpVerification />}></Route>
-      <Route path="/user/verify" element={<SignUpReVerification />}></Route>
+      <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
+      {/* <Route path="/user/verify" element={<SignUpReVerification />}></Route> */}
       <Route path="/user/login" element={<Login />}></Route>
 
       <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>

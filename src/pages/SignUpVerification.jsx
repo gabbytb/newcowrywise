@@ -155,12 +155,9 @@ const SignUpVerification = () => {
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
     const { token } = useParams();
-    const [registeredUser, setRegisteredUser] = useState();
-    console.log("***  Token was assigned to User  ***", 
-                "\nAccount: ", registeredUser);
-
-    const [isVerified, setIsVerified] = useState(false);
-    // console.log("Account Verified: ", isVerified);
+    const [registeredUser, setRegisteredUser] = useState({ accessToken: token });
+    console.log("***  Token Was VERIFIED For User  ***", 
+                "\nUser Account: ", registeredUser);
     
     const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
     // console.log("Account Verification: ", authenticationResponseMsg);
@@ -170,65 +167,63 @@ const SignUpVerification = () => {
 
     useEffect(() => {  
         window.scroll({ left: 0, top: 300, behavior: "smooth" });
-       
-        let timeout = setTimeout(verifyAccountRegistration, 2300);
+        function verifyAccountRegistration() {
+            const payload = {
+                accessToken: token,
+            };
+            axios.post(`http://127.0.0.1:3000/user/verify/${token}`, payload, {
+                headers: {                    
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                const { success, data, message } = response.data;              
+                // if (!success && message === "Unauthorized: Bearer token required") {
+                //     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                //     setAuthenticationResponseMsg(message);
+                // }
+                
+                if (!success && message === "User not found") {
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                    setAuthenticationResponseMsg(message);
+                } 
+            
+                // if (!success && message === "token does not exist") {
+                //     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                //     setAuthenticationResponseMsg(message);                    
+                // }
+
+                setAuthenticationResponseMsg(message);
+                setRegisteredUser(data);
+
+                // let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
+                // verificationStatus?.classList.remove('success-verify');
+                // verificationStatus?.classList.add('success-message-info');
+                
+                // setTimeout(() => {
+                //     verificationStatus?.classList.remove('success-message-info');
+                //     verificationStatus?.classList.add('success-verify');
+                // }, 500);
+        
+                setTimeout(() => {
+                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                }, 800);
+                
+            })
+            .catch((error) => {
+                console.log("Account Verification Error: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+        };
+        
+        let timeout = setTimeout(verifyAccountRegistration, 300);
         return () => {
             clearTimeout(timeout);
         };
     }, []);
-    function verifyAccountRegistration() {
-        const url = `http://127.0.0.1:8000/user/verify/${token}`;
-        const payload = {
-            accessToken: token,
-        };
-
-
-        axios.post(url, payload, {
-            headers: {                    
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) => {
-            const { success, data, message } = response.data;              
-            if ((!success) && (message === "Unauthorized: Bearer token required")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                setIsVerified(success);
-                setAuthenticationResponseMsg(message);
-            } else if ((!success) && (message === "User not found")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                setIsVerified(success);
-                setAuthenticationResponseMsg(message);
-            } else if ((!success) && (message === "token does not exist")) {
-                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                setIsVerified(success);
-                setAuthenticationResponseMsg(message);                    
-            } else {
-                setIsVerified(success);
-                setAuthenticationResponseMsg(message);
-                setRegisteredUser(data);
-
-                let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
-                verificationStatus?.classList.remove('success-verify');
-                verificationStatus?.classList.add('success-message-info');
-                
-                setTimeout(() => {
-                    verificationStatus?.classList.remove('success-message-info');
-                    verificationStatus?.classList.add('success-verify');
-                }, 3500);
         
-                setTimeout(() => {
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                }, 3750);
-            };
-        })
-        .catch((error) => {
-            console.log("Account Verification Error: ", error);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
-    };
-    
     useEffect(() => {
         const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  

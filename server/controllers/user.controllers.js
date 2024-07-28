@@ -31,7 +31,7 @@ exports.createAccount = async (req, res) => {
         const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
-        const { id, username, firstName, lastName, email, password, approvalTandC, isActivated, } = req.body;
+        const { id, username, firstName, lastName, email, password, approvesTandC, isActivated, } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
         if (!( username && firstName && lastName && email && password )) {
@@ -99,7 +99,7 @@ exports.createAccount = async (req, res) => {
             lastName,
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
-            approvalTandC,
+            approvesTandC,
             isActivated,
             status: 'pending',
             roles: [
@@ -224,79 +224,124 @@ exports.completeSignUp = async (req, res) => {
 }
 
 // Our Account Verification Logic starts here
+// exports.accountVerification = async (req, res) => {
+//     const AuthHeader = req.headers.authorization;
+//     if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+//         const responseData = { 
+//             success: false, 
+//             message: "Unauthorized: Bearer token required",
+//         };
+//         console.log("Token required to verify account: ", responseData);
+//         return res.status(403).json(responseData);
+//     }
+    
+//     const token = AuthHeader.split(" ")[1];
+//     try {          
+//         const existingUser = await jwt.verify(token, secretKey);
+//         const _id = existingUser.id;
+
+//         const user = await User.findById(_id);
+//         if (!user) {
+//             const dataToUpdate = {
+//                 status: 'rejected',
+//                 isActivated: false,
+//             };
+//             const email = user.email;
+//             await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
+//             const responseData = { 
+//                 success: false,
+//                 message: "User not found",
+//             };
+//             console.log("Account verification failed: ", responseData);
+//             return res.status(404).json(responseData);
+//         } 
+
+//         const dataToUpdate = {
+//             status: 'approved',
+//             accessToken: token,
+//             isActivated: true,
+//         };
+//         const email = user.email;
+//         const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+//         const responseData = {
+//             success: true,
+//             data: updatedUser,
+//             message: "Account verification successful",
+//         };
+//         console.log("Account verification status: ", responseData);
+//         return res.status(200).json(responseData);
+               
+//     } catch (error) {
+//         const responseData = { 
+//             success: false, 
+//             message: "Internal Server Error",
+//         };
+//         console.error("Unexpected error during account verification: ", error);
+//         return res.status(500).json(responseData);
+//     }
+// };
 exports.accountVerification = async (req, res) => {
     try {
         const AuthHeader = req.headers.authorization;
         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
             const responseData = { 
                 success: false, 
-                message: "Unauthorized: Bearer token required",
-            };
-            console.log("Token required to verify account: ", responseData);
+                message: "Unauthorized",
+            }
+            console.log("Missing Token for Account Verification: ", responseData);
             return res.status(403).json(responseData);
         }
         
         const token = AuthHeader.split(" ")[1];
-        try {          
-            const existingUser = await jwt.verify(token, secretKey);
-            const _id = existingUser.id;
-            
-            try {
-                const user = await User.findById(_id);
-                if (!user) {
-                    const dataToUpdate = {
-                        status: 'rejected',
-                    };
-                    const email = user.email;
-                    await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
-
-                    const responseData = { 
-                        success: false,
-                        message: "User not found",
-                    };
-                    console.log("Account verification failed: ", responseData);
-                    return res.status(404).json(responseData);
-                }
-
+        jwt.verify(token, secretKey, async (err, decodedData) => {            
+            // If any error is encountered during Account Verification, Log Error !
+            if (err) {
+                const responseData = { 
+                    success: false, 
+                    message: "token does not exist",
+                };
+                console.log("Email verification error: ", responseData);
+                return res.status(404).json(responseData);
+            }
+            // If token was signed to an Existing User, find the Existing User ID !
+            const _id = decodedData.id
+            const user = await User.findById(_id);
+            //  If the User Exists
+            if (user) {
+                // Step 2: Update these Records for the User upon Account Verification
                 const dataToUpdate = {
-                    status: 'approved',
                     accessToken: token,
                     isActivated: true,
                 };
-                const email = user.email;
-                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+                const email = user.email;       // Step 1: find the UserByEmail to Update previous User Record 
+                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+                
                 const responseData = {
                     success: true,
                     data: updatedUser,
-                    message: "Account verification successful",
+                    message: "Successful"
                 };
-                console.log("Account verification status: ", responseData);
+                console.log("*********************************************************",
+                    "\n*****           NEW ACCOUNT VERIFICATION             ****",
+                    "\n*********************************************************",
+                    "\n\nVerification Status: ", responseData,
+                    "\n\n*********************************************************\n\n");
                 return res.status(200).json(responseData);
-
-            } catch (error) {
+            } else {
+                // If token was signed to an Existing User, but Existing User cannot be found !
+                // Account Verification Error:  TypeError: Cannot read properties of undefined (reading 'email')
                 const responseData = { 
-                    success: false, 
-                    message: "Internal Server Error" 
+                    success: false,
+                    message: "Failed",
                 };
-                console.error("Database error during account verification: ", error);
-                return res.status(500).json(responseData);
-            }
-        } catch (error) {
-            const responseData = { 
-                success: false, 
-                message: "Invalid token",
+                console.log("Verification Status: ", responseData, "\n");
+                return res.status(200).json(responseData);
             };
-            console.log("Error validating account: ", error);
-            return res.status(403).json(responseData);
-        }
+        });
     } catch (error) {
-        const responseData = { 
-            success: false, 
-            message: "Internal Server Error",
-        };
-        console.error("Unexpected error during account verification: ", error);
-        return res.status(500).json(responseData);
-    }
+        return res.status(500).send(`Internal Server Error: ${error}`);
+    };
 };
 
 // Our Login Logic starts here
@@ -502,21 +547,25 @@ exports.findAllUsers = async (req, res) => {
         if (status) {
             query.status = status;
         };
-        
-
+ 
         // Pagination logic
-        const usersList = await User.find(query)
+        const accountList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
 
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
 
+        const pagination = {
+            userRecords: totalUsers,
+            lastPage: totalPages,
+        };
+
         const responseData = {
             success: true,
             data: {
-                usersList,
-                totalPages
+                accountList,
+                pagination
             },
             message: "Items retrieved successfully",
         }

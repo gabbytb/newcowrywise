@@ -203,6 +203,12 @@
     object-position: center;
   } */
 
+  /* #loginId .left-pane div > img {
+    @apply
+      w-64
+    ;
+  } */
+
   .login__form {
     position: relative;
     background-color: hsla(0, 0%, 100%, .01);

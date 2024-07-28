@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { brandOfficialWhiteLogo } from "../assets/images"
+import { ButtonSubmit } from "../components";
 
 
 
@@ -16,25 +17,25 @@ const Register = () => {
     // console.clear();
     
 
+
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-        
         var timeout = setTimeout(autoEffect, 180);
         return () => {
             clearTimeout(timeout);
         };
     }, []);
-
     function autoEffect() {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
     }
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
+
 
 
     // *************************** //
@@ -48,10 +49,13 @@ const Register = () => {
         lastName: '', 
         email: '',
         password: '', 
-        approvalTandC: false,
+        approvesTandC: false,
         isActivated: false,
     });
      
+    const [formSubmitted, setFormSubmitted] = useState(false);           
+    // console.log("Registration Successful: ", formSubmitted);
+
     const [formMessage, setFormMessage] = useState(null);       
     // console.log("Sign-Up Response: ", formMessage);
 
@@ -91,8 +95,8 @@ const Register = () => {
 
             if ((!success) && (message === "Fill all the required inputs.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
-                // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-                // window.scrollTo({ left: 0, top: document.documentElement.scrollHeight, behavior: 'smooth', });                                      
+
+                setFormSubmitted(success);
                 setFormMessage(message);
                 
                 errMsg.classList.remove('error');
@@ -102,8 +106,11 @@ const Register = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+
+                setFormSubmitted(success);
                 setFormMessage(message);
 
                 errMsg.classList.remove('error');
@@ -113,8 +120,11 @@ const Register = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
                 window.scroll({ left: 0, top: 0, behavior: 'smooth', });
+                
+                setFormSubmitted(success);
                 setFormMessage(message);
 
                 errMsg.classList.remove('error');
@@ -124,8 +134,11 @@ const Register = () => {
                     errMsg.classList.remove('error-message-info');
                     errMsg.classList.add('error');
                 }, 2800);
+                
             } else {         
                 window.scroll({ left: 0, top: 500, behavior: 'smooth', });
+                
+                setFormSubmitted(success);
                 setFormMessage(message);
 
                 successMsg.classList.remove('success');
@@ -159,8 +172,8 @@ const Register = () => {
 
 
     return (
-        <main id="signUpID" className="h-screen flex justify-center items-center bg-signup-bg">
-            <div className="block h-full w-135 bg-skin-signup-box-bg pt-6 pb-10 px-10 shadow-lg">
+        <main id="signUpID" className="h-max flex justify-center items-center bg-signup-bg">
+            <div className="block h-full w-135 bg-skin-signup-box-bg pt-2 pb-10 px-10 shadow-lg">
                 <div className="flex flex-col">
                     <Link to="/" alt="home">
                         <img src={brandOfficialWhiteLogo} alt="brand logo" />
@@ -174,7 +187,15 @@ const Register = () => {
                     </div>
 
 
-                    <form onSubmit={handleSubmit} className="mt-13.7">
+
+
+                        
+                    <div className="mx-auto error">
+                        { formMessage }
+                    </div>
+                        
+
+                    <form onSubmit={handleSubmit} className="mt-13.7 flex box-border">
                         <div className="flex flex-col gap-6">
                             <label htmlFor="username">
                                 <input type="text" placeholder="username" name="username" onChange={handleChange} onKeyUp={handleKeyUp} />
@@ -197,11 +218,39 @@ const Register = () => {
                                 <input type="password" placeholder="******************" name="password" onChange={handleChange} onKeyUp={handleKeyUp} />                                
                             </label>
 
-                            <label htmlFor="approvalTandC" className="flex items-center gap-x-3 text-xl/snug tracking-supertight mt-4">
-                                <input type="checkbox" name="approvalTandC" onChange={handleChange} onKeyUp={handleKeyUp} required /> I agree to your terms and conditions.
+                            {/* <label htmlFor="approvesTandC" className="flex items-center gap-x-3 text-xl/snug tracking-supertight mt-4">
+                                <input type="checkbox" name="approvesTandC" onChange={handleChange} onKeyUp={handleKeyUp} required /> I agree to your terms and conditions.
+                            </label> */}
+                            <label htmlFor="approvesTandC" className="flex justify-start items-center flex-row gap-4 text-lg/6 font-normal text-gray-500">
+                                <input className="w-10 h-10 rounded-lg border-slate-600" type="checkbox" name="approvesTandC" onChange={handleChange} onKeyUp={handleKeyUp} required />
+                                By proceeding, I acknowledge that I have read and agreed to Samuel Akinola Foundation's terms & conditions
                             </label>
 
-                            <button type="submit" className="w-full flex justify-center text-2xl text-white font-semibold px-40 py-5 bg-blue-500 hover:bg-blue-600 focus:bg-blue-600 hover:ring-2 hover:ring-green-300 delay-50 duration-75 rounded-lg capitalize">submit</button>
+                            <ButtonSubmit
+                                label="submit"
+                                btnType="submit"
+                                btnBg="bg-blue-600"
+                                btnProps="text-white 
+                                    text-2xl 
+                                    font-bold 
+                                    capitalize 
+                                    px-6 
+                                    py-5 
+                                    w-full 
+                                    rounded-full 
+                                    hover:bg-blue-700 
+                                    focus:bg-blue-700 
+                                    hover:ring-blue-300 
+                                    focus:ring-blue-300
+                                    hover:ring-2 
+                                    focus:ring-2
+                                    ease-in-out
+                                    duration-300"
+                            />
+
+                            <div className="text-2xl/normal text-slate-600 font-medium w-full flex justify-center items-center gap-2 mb-10">Have an account?<Link className="text-black font-semibold capitalize" to={"/user/login"}>Sign in</Link></div>
+
+                            {/* <button type="submit" className="w-full flex justify-center text-2xl text-white font-semibold px-40 py-5 bg-blue-500 hover:bg-blue-600 focus:bg-blue-600 hover:ring-2 hover:ring-green-300 delay-50 duration-75 rounded-lg capitalize">submit</button> */}
                         </div>
                     </form>
 
