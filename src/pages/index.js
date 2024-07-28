@@ -9,7 +9,7 @@ import SignUpVerification from "./SignUpVerification";
 import SignUpReVerification from "./SignUpReVerification";
 
 
-// import SignUp from "./SignUp";
+import SignUp from "./SignUp";
 import Login from "./Login";
 
 import AdminDashboard from "./AdminDashboard";
@@ -45,6 +45,8 @@ export {
     OLDRegister,
     SignUpVerification,
     SignUpReVerification,
+
+    SignUp,
     Login,
 
     AdminDashboard,

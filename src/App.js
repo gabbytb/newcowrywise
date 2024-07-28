@@ -8,6 +8,7 @@ import {
   OLDSignUp, 
   // SignUpVerification, 
   // SignUpReVerification,
+  SignUp,
   Login, 
   AdminDashboard, 
   DashboardUsersPage, DashboardUsersDetailsPage,
@@ -48,6 +49,8 @@ const App = () => {
 
       {/* <Route path="/user/verify/:token" element={<SignUpVerification />}></Route> */}
       {/* <Route path="/user/verify" element={<SignUpReVerification />}></Route> */}
+      
+      <Route path="/user/signup" element={<SignUp />}></Route>
       <Route path="/user/login" element={<Login />}></Route>
 
       <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
