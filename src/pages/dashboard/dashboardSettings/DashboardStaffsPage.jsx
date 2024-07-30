@@ -43,6 +43,50 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     
 
+        
+    // ****************************************************************************
+    // TOGGLE DROPDOWN: USER "Profile Image" MENU
+    // ****************************************************************************
+    function toggleUserProfileMenu() {       
+        const userDpMenu = document.querySelector('.upm');
+        if (userDpMenu?.classList.contains("hidden")) {
+            userDpMenu?.classList.remove('hidden');
+            userDpMenu?.classList.add('flex');
+        } else {
+            userDpMenu?.classList.remove('flex');
+            userDpMenu?.classList.add('hidden');
+        };
+    };
+    // ****************************************************************************
+    // TOGGLE DROPDOWN: USER MENU
+    // ****************************************************************************
+    function toggleUsersMenu() {
+        let toggleUserMenu = document.querySelector('.usersDropdown');
+        if (toggleUserMenu?.classList.contains("hidden") ) {
+            toggleUserMenu?.classList.remove('hidden');
+            toggleUserMenu?.classList.add('flex');
+        } else {
+            toggleUserMenu?.classList.remove('flex');
+            toggleUserMenu?.classList.add('hidden');
+        };
+    };
+    // ****************************************************************************
+    // TOGGLE DROPDOWN: STAFF MENU
+    // ****************************************************************************
+    function toggleStaffsMenu() {
+        let toggleStaffMenu = document.querySelector('.staffsDropdown');
+        if (toggleStaffMenu?.classList.contains("flex")) {
+            toggleStaffMenu?.classList.remove('flex');
+            toggleStaffMenu?.classList.add('hidden');
+        } else {
+            toggleStaffMenu?.classList.remove('hidden');
+            toggleStaffMenu?.classList.add('flex');
+        };
+    };
+    // ****************************************************************************
+    // ****************************************************************************
+
+
     // ****************************************************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
     // ****************************************************************************
@@ -71,7 +115,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [adminUsers, setAdminUsers] = useState([]);
-    // console.log("ALL ADMIN USERS: ", adminUsers);
+    // console.log("OVERALL STAFFS: ", adminUsers);
     
     const [totalPages, setTotalPages] = useState(0);
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
@@ -99,16 +143,15 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${status}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { staffsLists, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setAdminUsers(accountList);
-            console.log("ALL ADMINS: ", adminUsers);
-
+            setAdminUsers(staffsLists);
+            
             setTotalPages(pagination?.lastPage);
             setTotalAdminUsers(pagination?.adminRecords);
         })
@@ -125,46 +168,6 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
  
     const handlePageChange = (page) => {
         setCurrentPage(page);
-    };
-    // ****************************************************************************
-    // ****************************************************************************
-
-    
-    // ****************************************************************************
-    // TOGGLE DROPDOWN: USER "Profile Image" MENU
-    // ****************************************************************************
-    function toggleUserProfileMenu() {       
-        const userDpMenu = document.querySelector('.upm');
-        if (userDpMenu?.classList.contains("hidden")) {
-            userDpMenu?.classList.remove('hidden');
-            userDpMenu?.classList.add('flex');
-        } else {
-            userDpMenu?.classList.remove('flex');
-            userDpMenu?.classList.add('hidden');
-        };
-    };
-    // ****************************************************************************
-    // TOGGLE DROPDOWN: USER/STAFF MENU
-    // ****************************************************************************
-    function toggleUsersMenu() {
-        let toggleUserMenu = document.querySelector('.usersDropdown');
-        if (toggleUserMenu?.classList.contains("hidden") ) {
-            toggleUserMenu?.classList.remove('hidden');
-            toggleUserMenu?.classList.add('flex');
-        } else {
-            toggleUserMenu?.classList.remove('flex');
-            toggleUserMenu?.classList.add('hidden');
-        };
-    };
-    function toggleStaffsMenu() {
-        let toggleStaffMenu = document.querySelector('.staffsDropdown');
-        if (toggleStaffMenu?.classList.contains("flex")) {
-            toggleStaffMenu?.classList.remove('flex');
-            toggleStaffMenu?.classList.add('hidden');
-        } else {
-            toggleStaffMenu?.classList.remove('hidden');
-            toggleStaffMenu?.classList.add('flex');
-        };
     };
     // ****************************************************************************
     // ****************************************************************************
@@ -228,15 +231,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 </ul>
                             </section>
                             {/*******************************************************************/
-                            /************************  DASHBOARD: Menu  ************************/
-                            /*******************************************************************/}
+                             /************************  DASHBOARD: Menu  ************************/
+                             /*******************************************************************/}
 
 
 
 
-                            {/******************************************************************************************/}
-                            {/*******************************    SETTINGS:- Users VIEW    ******************************/}
-                            {/******************************************************************************************/}
+
+
+
+                            {/*****************************************************************************************/
+                             /*******************************   STAFFS SETTINGS:  View   ******************************/
+                             /*****************************************************************************************/}
                             <aside className="block">
 
                                 {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
@@ -277,7 +283,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 );
                                                             } else {
                                                                 return (
-                                                                    <span>Role is not assigned to this User</span>
+                                                                    <span><strong>Alert:</strong> User has not been assigned Role</span>
                                                                 );
                                                             };
                                                         })
@@ -289,7 +295,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                     <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                 </button>                                                                                                       
                                                 <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                    <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
+                                                    <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to={"/admin/dashboard?logout"} onClick={logOut}><LogOutIcon /> sign out</Link>
                                                 </div>           
                                             </div>
                                         </div>
@@ -463,15 +469,14 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                 <div className="container flex admin-container">
                     <div className="h-full w-full grid xs:grid-cols-26">
                         {/*******************************************************************/
-                        /************************  DASHBOARD: Menu  ************************/
-                        /*******************************************************************/}
+                         /************************  DASHBOARD: Menu  ************************/
+                         /*******************************************************************/}
                         <section className="flex flex-col gap-24 items-center h-full w-full px-0 relative left-pane bg-skin-darkblue z-50">         
                             <Link to={"/"} className="pt-1.5 w-full flex justify-center bg-white sticky top-0 brand">
                                 <img src={brandOfficialLogo} alt="official logo" />
                             </Link>
 
-                            {/* mb-40 */}
-                            <ul className="flex flex-col w-full px-8 gap-16 overflow-y-auto h-screen">
+                            <ul className="flex flex-col w-full px-8 gap-16 mb-40">
                                 {/* MAIN MENU */}
                                 <div id="mainMenuId">
                                     <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
@@ -512,15 +517,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             </ul>
                         </section>
                         {/*******************************************************************/
-                        /************************  DASHBOARD: Menu  ************************/
-                        /*******************************************************************/}
+                         /************************  DASHBOARD: Menu  ************************/
+                         /*******************************************************************/}
 
 
 
 
-                        {/******************************************************************************************/}
-                        {/*******************************    SETTINGS:- Users VIEW    ******************************/}
-                        {/******************************************************************************************/}
+
+
+
+                        {/*****************************************************************************************/
+                         /*******************************   STAFFS SETTINGS:  View   ******************************/
+                         /*****************************************************************************************/}
                         <aside className="block">
 
                             {/*********************   ASIDE BODY TOP STARTS HERE   *******************/}
@@ -582,23 +590,31 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                                 </div>
                             </div>
-                            
+                                
+
 
 
 
 
                             {/*********************   ASIDE BODY BOTTOM STARTS HERE   *******************/}
                             <div className="right-bottom-pane relative h-full flex flex-col px-12">
+
+
+                                {/* Staffs Navigation */}
                                 <div className="flex flex-row gap-3 mt-4 mb-10">
                                     <Link onClick={() => setActiveDisplay("allStaffs")}>All</Link>
                                     <Link onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
                                     <Link onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
                                     <Link onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected</Link>
                                 </div>
+                                {/* Staffs Navigation */}
 
+
+                                {/* Page Title Wrapper */}
                                 <div className="mt-10 mb-8 font-black text-3xl tracking-supertight">
                                     <h2 className="capitalize">all staffs</h2>
                                 </div>
+                                {/* Page Title Wrapper */}
 
 
 
@@ -698,7 +714,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 </thead>
                                                 <tbody>
                                                     <tr className="flex justify-center">
-                                                        <td className="">No admin record found.</td>
+                                                        <td className="">No staff record found.</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

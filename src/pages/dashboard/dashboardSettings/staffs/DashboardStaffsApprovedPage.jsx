@@ -14,7 +14,8 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [approvedAdmins, setApprovedAdmins] = useState([]);
-
+    // console.log("APPROVED ADMINS: ", approvedAdmins);
+    
     const [totalPages, setTotalPages] = useState(0);
     const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
 
@@ -32,7 +33,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
     // ****************************************************************************             
@@ -41,18 +42,17 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { staffsLists, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setApprovedAdmins(accountList);
-            console.log("APPROVED ADMINS: ", approvedAdmins);
+            setApprovedAdmins(staffsLists);
 
+            setTotalApprovedAdminUsers(pagination?.staffRecords);
             setTotalPages(pagination?.lastPage);
-            setTotalApprovedAdminUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -72,7 +72,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
                 {
-                    approvedAdmins.length !== 0 ?
+                    approvedAdmins?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                             <tr>
@@ -85,7 +85,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    approvedAdmins.map((user, userIndex) => {
+                                    approvedAdmins?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
@@ -143,7 +143,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                         } else {
                                             return (
                                                 <tr key={userIndex}>
-                                                    <td>No admin record found</td>
+                                                    <td>No approved staff record</td>
                                                 </tr>
                                             );
                                         };
@@ -164,7 +164,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 <tr className="flex justify-center">
-                                    <td className="">No admin record found.</td>
+                                    <td className="">No approved staff record</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -14,7 +14,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [pendingAdmins, setPendingAdmins] = useState([]);
-    console.log("PENDING ADMINS: ", pendingAdmins);
+    // console.log("PENDING ADMINS: ", pendingAdmins);
 
     const [totalPages, setTotalPages] = useState(0);
     const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
@@ -27,31 +27,31 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         if (activeDisplay === "allPendingStaffs") {
-            var timerID = setTimeout(fetchPendingStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+            var timerID = setTimeout(fetchPendingStaffs, 300);   // Delay execution of fetchPendingStaffs by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" STAFFS
     // ****************************************************************************             
     async function fetchPendingStaffs() {        
         const pendingStatus = "pending";
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { staffsLists, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setPendingAdmins(accountList)
+            setPendingAdmins(staffsLists)
 
+            setTotalPendingAdminUsers(pagination?.staffRecords);
             setTotalPages(pagination?.lastPage);
-            setTotalPendingAdminUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -72,7 +72,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allPendingStaffs" ? "grid" : "hidden"}`}>
                 {
-                    pendingAdmins.length !== 0 ?
+                    pendingAdmins?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -85,7 +85,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    pendingAdmins.map((user, userIndex) => {
+                                    pendingAdmins?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
@@ -143,7 +143,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                         } else {
                                             return (
                                                 <tr key={userIndex}>
-                                                    <td>No admin record found</td>
+                                                    <td>No pending staff record</td>
                                                 </tr>
                                             );
                                         };
@@ -151,8 +151,8 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                 }
                             </tbody>
                         </table>
-                       :
-                       <table className="table-fixed capitalize w-full border staff__table">
+                        :
+                        <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
                                     <th className="w-20 h-16 flex justify-center items-center">S/N</th>
@@ -164,7 +164,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 <tr className="flex justify-center">
-                                    <td className="">No admin record found.</td>
+                                    <td>No pending staff record</td>
                                 </tr>
                             </tbody>
                         </table>

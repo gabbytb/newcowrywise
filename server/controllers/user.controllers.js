@@ -496,59 +496,24 @@ exports.findAllAdmins = async (req, res) => {
         if (status) {
             query.status = status;
         };
-
         
         // Pagination logic
-        const accountList = await User.find(query)
+        const staffsLists = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
-
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
 
-        // var hasNext, 
-        //     hasPrev,
-        //     next, 
-        //     previous;
-        
-        
-        // if () {
-        //     hasNext = true
-        //     hasPrev = false
-        //     next = parseInt(page) + 1
-        //     previous = parseInt(page) - 1
-        // } else  if () {
-        //     hasNext = true
-        //     hasPrev = true
-        //     next = parseInt(page) + 1
-        //     previous = parseInt(page) - 1
-        // } else {
-        //     hasNext = false
-        //     hasPrev = true
-        //     next = null
-        //     previous = parseInt(page) - 1
-        // };
-        
 
-        // const pagination = {
-        //     currentPage: parseInt(page),
-        //     hasNext: hasNext,
-        //     next: next,
-        //     hasPrev: hasPrev,
-        //     previous: previous,
-        //     lastPage: totalPages,                       
-        //     numberPerPage: parseInt(limit),
-        // }
-        
         const pagination = {
-            adminRecords: totalUsers,
+            staffRecords: totalUsers,
             lastPage: totalPages,
         };
 
         const responseData = {
             success: true,
             data: {
-                accountList,
+                staffsLists,
                 pagination
             },
             message: "Items retrieved successfully",
@@ -575,7 +540,7 @@ exports.findAllUsers = async (req, res) => {
         };
  
         // Pagination logic
-        const accountList = await User.find(query)
+        const usersLists = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
 
@@ -590,7 +555,7 @@ exports.findAllUsers = async (req, res) => {
         const responseData = {
             success: true,
             data: {
-                accountList,
+                usersLists,
                 pagination
             },
             message: "Items retrieved successfully",
@@ -787,6 +752,43 @@ exports.deleteAllUsers = (req, res) => {
 
 
 
+
+
+
+        // var hasNext, 
+        //     hasPrev,
+        //     next, 
+        //     previous;
+        
+        
+        // if () {
+        //     hasNext = true
+        //     hasPrev = false
+        //     next = parseInt(page) + 1
+        //     previous = parseInt(page) - 1
+        // } else  if () {
+        //     hasNext = true
+        //     hasPrev = true
+        //     next = parseInt(page) + 1
+        //     previous = parseInt(page) - 1
+        // } else {
+        //     hasNext = false
+        //     hasPrev = true
+        //     next = null
+        //     previous = parseInt(page) - 1
+        // };
+        
+
+        // const pagination = {
+        //     currentPage: parseInt(page),
+        //     hasNext: hasNext,
+        //     next: next,
+        //     hasPrev: hasPrev,
+        //     previous: previous,
+        //     lastPage: totalPages,                       
+        //     numberPerPage: parseInt(limit),
+        // }
+        
 
 
 

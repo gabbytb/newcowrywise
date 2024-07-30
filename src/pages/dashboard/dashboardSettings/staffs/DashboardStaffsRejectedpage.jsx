@@ -14,7 +14,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [rejectedAdmins, setRejectedAdmins] = useState([]);
-    console.log("REJECTED ADMINS: ", rejectedAdmins);
+    // console.log("REJECTED ADMINS: ", rejectedAdmins);
 
     const [totalPages, setTotalPages] = useState(0);
     const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
@@ -32,26 +32,26 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" STAFFS
     // ****************************************************************************             
     async function fetchRejectedStaffs() {        
         const rejectedStatus = "rejected";
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { staffsLists, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setRejectedAdmins(accountList)
+            setRejectedAdmins(staffsLists)
 
+            setTotalRejectedAdminUsers(pagination?.staffRecords);
             setTotalPages(pagination?.lastPage);
-            setTotalRejectedAdminUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -72,7 +72,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allRejectedStaffs" ? "grid" : "hidden"}`}>
                 {
-                    rejectedAdmins.length !== 0 ?
+                    rejectedAdmins?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -143,7 +143,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                         } else {
                                             return (
                                                 <tr key={userIndex}>
-                                                    <td>No admin record found</td>
+                                                    <td>No rejected staff record</td>
                                                 </tr>
                                             );
                                         };
@@ -164,7 +164,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 <tr className="flex justify-center">
-                                    <td className="">No admin record found.</td>
+                                    <td className="">No rejected staff record</td>
                                 </tr>
                             </tbody>
                         </table>
