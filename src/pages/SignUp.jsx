@@ -29,21 +29,22 @@ function SignUp() {
 
 
     
+    // *************************************** //
+    // *** Lay reference to these Elements *** //
+    // *************************************** //
     const firstNameInput = React.useRef();
-    console.log("First Name Input: ", firstNameInput);
-
+    // console.log("First Name Input: ", firstNameInput);
     const lastNameInput = React.useRef();
-    console.log("Last Name Input: ", lastNameInput);
-
+    // console.log("Last Name Input: ", lastNameInput);
     const emailInput = React.useRef();
-    console.log("E-mail Input: ", emailInput);
-
+    // console.log("E-mail Input: ", emailInput);
     const passwordInput = React.useRef();
-    console.log("Password Input: ", passwordInput);
-
+    // console.log("Password Input: ", passwordInput);
     const checkboxInput = React.useRef();    
-    console.log("Checkbox Input: ", checkboxInput);
-
+    // console.log("Checkbox Input: ", checkboxInput);
+    // *************************************** //
+    // *** Lay reference to these Elements *** //
+    // *************************************** //
 
 
 
@@ -62,7 +63,6 @@ function SignUp() {
 
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
-
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
 
