@@ -61,7 +61,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     // *********************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // *********************************************
-    const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
+    const userName = isLoggedIn?.userName ? isLoggedIn?.userName : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
 

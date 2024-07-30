@@ -65,7 +65,6 @@ exports.signUp = async (req, res) => {
         //     return res.status(200).json(responseData);
         // }
 
-
         // ***************************************************************//
         // Hash/Encrypt Password
         // ***************************************************************//
@@ -90,76 +89,79 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
 
 
-        // ************************************* //
-        // ***     SAVE USER INFORMATION     *** //
-        // ************************************* //
-        // const newUser = new User({
-        //     _id: id * randNum,
-        //     // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-        //     firstName,
-        //     lastName,
-        //     email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-        //     password: encryptedPassword,
-        //     approvesTandC,
-        //     isActivated: false,
-        //     status: 'pending',
-        //     roles: [
-        //         // {
-        //         //     _id: roleAdmin._id,
-        //         //     role: roleAdmin.role,
-        //         //     createdAt: roleAdmin.createdAt,
-        //         //     updatedAt: roleAdmin.updatedAt,
-        //         // },
-        //         // {
-        //         //     _id: roleEditor._id, 
-        //         //     role: roleEditor.role, 
-        //         //     createdAt: roleEditor.createdAt, 
-        //         //     updatedAt: roleEditor.updatedAt, 
-        //         // },
-        //         // {
-        //         //     _id: roleStaff._id, 
-        //         //     role: roleStaff.role, 
-        //         //     createdAt: roleStaff.createdAt, 
-        //         //     updatedAt: roleStaff.updatedAt, 
-        //         // },
-        //         {
-        //             _id: roleUsers._id, 
-        //             role: roleUsers.role, 
-        //             createdAt: roleUsers.createdAt, 
-        //             updatedAt: roleUsers.updatedAt,
-        //         }
-        //     ],
-        // });
-        // const user = await newUser.save();
-
-        
-        const newUser = new User({ 
-            _id: id * randNum, 
-            firstName: "Oyebanji", 
-            lastName: "Gabriel", 
-            email: "igabrieloyebanji@gmail.com",
-            password: "London123",
-            isActivated: true, 
-            approvesTandC: true,  
-            status: "approved",
+        // **************************************** //
+        // ***    FE: SAVE USER INFORMATION     *** //
+        // **************************************** //
+        const newUser = new User({
+            _id: id * randNum,
+            // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            firstName,
+            lastName,
+            email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            password: encryptedPassword,
+            approvesTandC,
+            isActivated: false,
+            status: 'pending',
             roles: [
                 {
-                    _id: roleAdmin._id, 
-                    role: roleAdmin.role, 
-                    createdAt: roleAdmin.createdAt, 
+                    _id: roleAdmin._id,
+                    role: roleAdmin.role,
+                    createdAt: roleAdmin.createdAt,
                     updatedAt: roleAdmin.updatedAt,
                 },
-            ]
+                // {
+                //     _id: roleEditor._id, 
+                //     role: roleEditor.role, 
+                //     createdAt: roleEditor.createdAt, 
+                //     updatedAt: roleEditor.updatedAt, 
+                // },
+                // {
+                //     _id: roleStaff._id, 
+                //     role: roleStaff.role, 
+                //     createdAt: roleStaff.createdAt, 
+                //     updatedAt: roleStaff.updatedAt, 
+                // },
+                // {
+                //     _id: roleUsers._id, 
+                //     role: roleUsers.role, 
+                //     createdAt: roleUsers.createdAt, 
+                //     updatedAt: roleUsers.updatedAt,
+                // }
+            ],
         });
-        
-
+        const user = await newUser.save();        
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
-        const token = await createJWT(newUser._id);
-        newUser.accessToken = token;
+        const token = await createJWT(user._id);
+        
+   
+        // **************************************** //
+        // ***    BE: SAVE USER INFORMATION     *** //
+        // **************************************** //
+        // const newUser = new User({ 
+        //     _id: 911,
+        //     userName: "gabby",
+        //     firstName: "Oyebanji", 
+        //     lastName: "Gabriel", 
+        //     email: "igabrieloyebanji@gmail.com",
+        //     password: await encryptPassword("London123"),
+        //     isActivated: true, 
+        //     approvesTandC: true,  
+        //     status: "approved",
+        //     roles: [
+        //         {
+        //             _id: roleAdmin._id, 
+        //             role: roleAdmin.role, 
+        //             createdAt: roleAdmin.createdAt, 
+        //             updatedAt: roleAdmin.updatedAt,
+        //         },
+        //     ]
+        // });
+        // const token = await createJWT(newUser._id);
+        // newUser.accessToken = token;
+        // const user = await newUser.save();
 
-        const user = await newUser.save();
 
         // ***************************************************************//
         // E-mail Service Config

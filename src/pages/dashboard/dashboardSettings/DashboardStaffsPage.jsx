@@ -62,7 +62,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // ****************************************************************************
-    const userName = isLoggedIn?.username ? isLoggedIn?.username : logOut();
+    const userName = isLoggedIn?.userName ? isLoggedIn?.userName : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
 
@@ -76,7 +76,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     const [totalPages, setTotalPages] = useState(0);
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
     
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);  
     const limit = 10; // Number of items per page
 
 
@@ -95,7 +95,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
     async function fetchAllStaffs() {
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
+        const status = "approved" || "pending" || "rejected";
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${status}`)
         .then((response) => {
             const { success, data, message } = response.data;
             const { accountList, pagination } = data;

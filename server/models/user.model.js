@@ -1,6 +1,6 @@
 module.exports = mongoose => {
-
     
+
     const { Schema } = mongoose;
     var userSchema = new Schema({
         _id: {
@@ -72,10 +72,7 @@ module.exports = mongoose => {
 
     const User = mongoose.model("User", userSchema);
     return User;
-
 };
-
-
 
 
 
