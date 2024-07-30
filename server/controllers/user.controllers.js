@@ -31,10 +31,10 @@ exports.signUp = async (req, res) => {
         const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
-        const { id, username, firstName, lastName, email, password, approvesTandC, isActivated, } = req.body;
+        const { id, firstName, lastName, email, password, approvesTandC } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!( username && firstName && lastName && email && password )) {
+        if (!(firstName && lastName && email && password)) {
             const responseData = {
                 success: false,
                 message: 'Fill all the required inputs.'
@@ -54,16 +54,16 @@ exports.signUp = async (req, res) => {
             return res.status(200).json(responseData);
         }
         
-        const usernameExists = await User.findOne({ userName: username.toLowerCase() });
-        if (usernameExists) {
-            const responseData = {
-                success: false,
-                message: "Username exists. Please sign-in."
-            };
-            // console.log("Username Exists: ", usernameExists);
-            console.log("Username Exists: ", responseData);
-            return res.status(200).json(responseData);
-        }
+        // const usernameExists = await User.findOne({ userName: username.toLowerCase() });
+        // if (usernameExists) {
+        //     const responseData = {
+        //         success: false,
+        //         message: "Username exists. Please sign-in."
+        //     };
+        //     // console.log("Username Exists: ", usernameExists);
+        //     console.log("Username Exists: ", responseData);
+        //     return res.status(200).json(responseData);
+        // }
 
 
         // ***************************************************************//
@@ -94,13 +94,13 @@ exports.signUp = async (req, res) => {
         // ************************************* //
         const newUser = new User({
             _id: id * randNum,
-            userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             firstName,
             lastName,
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
             approvesTandC,
-            isActivated,
+            isActivated: false,
             status: 'pending',
             roles: [
                 // {
@@ -640,12 +640,16 @@ exports.findAllActive = async (req, res) => {
 exports.updateUserById = async (req, res) => {
     try {
         // const _id = req.params.id;
-        const { email, phone, address, address2, city, state, country, zipCode, isActive } = req.body;
+        const { userName, email, phone, address, address2, city, state, country, zipCode, isActive } = req.body;
 
         // To Add New Roles to Existing User's Account
+        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" });
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        
         const dataToUpdate = {
+            userName: userName.toLowerCase(),
             phone,
             address,
             address2,
@@ -655,6 +659,18 @@ exports.updateUserById = async (req, res) => {
             zipCode,
             isActive,
             //    roles: [
+            //         { 
+            //             _id: roleAdmin._id, 
+            //             role: roleAdmin.role, 
+            //             createdAt: roleAdmin.createdAt, 
+            //             updatedAt: roleAdmin.updatedAt 
+            //         },
+            //         { 
+            //             _id: roleEditor._id, 
+            //             role: roleEditor.role, 
+            //             createdAt: roleEditor.createdAt, 
+            //             updatedAt: roleEditor.updatedAt 
+            //         },
             //         { 
             //             _id: roleStaff._id, 
             //             role: roleStaff.role, 

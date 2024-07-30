@@ -13,7 +13,9 @@ import { BrandLogo, BrandLogoWhite, brandOfficialLogo, brandOfficialWhiteLogo } 
 
 export default function Login() {
 
+    // console.clear();
     
+
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -155,12 +157,19 @@ export default function Login() {
 
     return (
         <div id="loginId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
-            <div className='hidden sm:block left-pane'>
-                <img className='w-full h-full object-cover' src={loginImg} alt="background-img" />
-                {/* <div className='flex justify-center'>
-                    <img src={brandOfficialLogo} />
-                </div> */}
+            
+            
+            <div className='hidden sm:block left-pane relative'>               
+                <div className="relative h-full">
+                    <div className="flex justify-center items-center w-full h-30 bg-white px-8">
+                        <Link className="w-56" to={"/"}><img src={brandOfficialLogo} /></Link>
+                    </div>
+
+                    <img className='w-full h-full object-cover absolute top-0 -z-3' src={loginImg} alt="background-img" />
+                </div>
             </div>
+
+
 
             <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
                 <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
