@@ -75,9 +75,10 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" }),
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -129,6 +130,9 @@ exports.signUp = async (req, res) => {
         //         }
         //     ],
         // });
+        // const user = await newUser.save();
+
+        
         const newUser = new User({ 
             _id: id * randNum, 
             firstName: "Oyebanji", 
@@ -140,21 +144,22 @@ exports.signUp = async (req, res) => {
             status: "approved",
             roles: [
                 {
-                    _id: roleUsers._id, 
-                    role: roleUsers.role, 
-                    createdAt: roleUsers.createdAt, 
-                    updatedAt: roleUsers.updatedAt,
+                    _id: roleAdmin._id, 
+                    role: roleAdmin.role, 
+                    createdAt: roleAdmin.createdAt, 
+                    updatedAt: roleAdmin.updatedAt,
                 },
             ]
         });
-        const user = await newUser.save();
-
+        
 
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
-        const token = await createJWT(user._id);
-        user.accessToken = token;
+        const token = await createJWT(newUser._id);
+        newUser.accessToken = token;
+
+        const user = await newUser.save();
 
         // ***************************************************************//
         // E-mail Service Config
@@ -171,6 +176,7 @@ exports.signUp = async (req, res) => {
             `\n*********************************************************
             \nRegistration Status: ${user}`,
             "\n\n******************************************************************************************\n");
+                
         const responseData = {
             success: true,
             data: user,
