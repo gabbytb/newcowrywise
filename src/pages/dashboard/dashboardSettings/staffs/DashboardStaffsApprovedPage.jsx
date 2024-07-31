@@ -17,7 +17,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // console.log("APPROVED STAFFS: ", approvedStaffs);
     
     const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
-    console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
+    // console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);    

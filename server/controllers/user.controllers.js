@@ -74,10 +74,10 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" }),
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -92,75 +92,75 @@ exports.signUp = async (req, res) => {
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        const newUser = new User({
-            _id: id * randNum,
-            // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-            firstName,
-            lastName,
-            email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-            password: encryptedPassword,
-            approvesTandC,
-            isActivated: false,
-            status: 'pending',
-            roles: [
-                {
-                    _id: roleAdmin._id,
-                    role: roleAdmin.role,
-                    createdAt: roleAdmin.createdAt,
-                    updatedAt: roleAdmin.updatedAt,
-                },
-                // {
-                //     _id: roleEditor._id, 
-                //     role: roleEditor.role, 
-                //     createdAt: roleEditor.createdAt, 
-                //     updatedAt: roleEditor.updatedAt, 
-                // },
-                // {
-                //     _id: roleStaff._id, 
-                //     role: roleStaff.role, 
-                //     createdAt: roleStaff.createdAt, 
-                //     updatedAt: roleStaff.updatedAt, 
-                // },
-                // {
-                //     _id: roleUsers._id, 
-                //     role: roleUsers.role, 
-                //     createdAt: roleUsers.createdAt, 
-                //     updatedAt: roleUsers.updatedAt,
-                // }
-            ],
-        });
-        const user = await newUser.save();        
-        // *************************************************************************************************//
-        // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // *************************************************************************************************//
-        const token = await createJWT(user._id);
+        // const newUser = new User({
+        //     _id: id * randNum,
+        //     // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+        //     firstName,
+        //     lastName,
+        //     email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+        //     password: encryptedPassword,
+        //     approvesTandC,
+        //     isActivated: false,
+        //     status: 'pending',
+        //     roles: [
+        //         {
+        //             _id: roleAdmin._id,
+        //             role: roleAdmin.role,
+        //             createdAt: roleAdmin.createdAt,
+        //             updatedAt: roleAdmin.updatedAt,
+        //         },
+        //         // {
+        //         //     _id: roleEditor._id, 
+        //         //     role: roleEditor.role, 
+        //         //     createdAt: roleEditor.createdAt, 
+        //         //     updatedAt: roleEditor.updatedAt, 
+        //         // },
+        //         // {
+        //         //     _id: roleStaff._id, 
+        //         //     role: roleStaff.role, 
+        //         //     createdAt: roleStaff.createdAt, 
+        //         //     updatedAt: roleStaff.updatedAt, 
+        //         // },
+        //         // {
+        //         //     _id: roleUsers._id, 
+        //         //     role: roleUsers.role, 
+        //         //     createdAt: roleUsers.createdAt, 
+        //         //     updatedAt: roleUsers.updatedAt,
+        //         // }
+        //     ],
+        // });
+        // const user = await newUser.save();        
+        // // *************************************************************************************************//
+        // // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // // *************************************************************************************************//
+        // const token = await createJWT(user._id);
         
    
         // **************************************** //
         // ***    BE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        // const newUser = new User({ 
-        //     _id: 911,
-        //     userName: "gabby",
-        //     firstName: "Oyebanji", 
-        //     lastName: "Gabriel", 
-        //     email: "igabrieloyebanji@gmail.com",
-        //     password: await encryptPassword("London123"),
-        //     isActivated: true, 
-        //     approvesTandC: true,  
-        //     status: "approved",
-        //     roles: [
-        //         {
-        //             _id: roleAdmin._id, 
-        //             role: roleAdmin.role, 
-        //             createdAt: roleAdmin.createdAt, 
-        //             updatedAt: roleAdmin.updatedAt,
-        //         },
-        //     ]
-        // });
-        // const token = await createJWT(newUser._id);
-        // newUser.accessToken = token;
-        // const user = await newUser.save();
+        const newUser = new User({ 
+            _id: 300,
+            userName: "royalty",
+            firstName: "Oluwaseyi", 
+            lastName: "Nduka", 
+            email: "igabby@email.com",
+            password: await encryptPassword("London123"),
+            isActivated: true, 
+            approvesTandC: true,  
+            status: "pending",
+            roles: [
+                {
+                    _id: roleUsers._id, 
+                    role: roleUsers.role, 
+                    createdAt: roleUsers.createdAt, 
+                    updatedAt: roleUsers.updatedAt,
+                },
+            ]
+        });
+        const token = await createJWT(newUser._id);
+        newUser.accessToken = token;
+        const user = await newUser.save();
 
 
         // ***************************************************************//
@@ -501,12 +501,14 @@ exports.findAllAdmins = async (req, res) => {
         const staffsList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
+        console.log("STAFFS LIST: ", staffsList);
+
         const totalAdminUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
 
 
         const pagination = {
-            staffRecords: totalAdminUsers,
+            staffsRecord: totalAdminUsers,
             lastPage: totalPages,
         };
 
@@ -534,7 +536,6 @@ exports.findAllUsers = async (req, res) => {
     try {
         let query = {};
 
-        // Add status filter if provided
         if (status) {
             query.status = status;
         };
@@ -543,10 +544,12 @@ exports.findAllUsers = async (req, res) => {
         const usersList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
+        console.log("USERS LIST: ", usersList);
 
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
 
+        
         const pagination = {
             usersRecord: totalUsers,
             lastPage: totalPages,

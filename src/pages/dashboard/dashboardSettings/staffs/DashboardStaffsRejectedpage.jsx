@@ -17,7 +17,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     // console.log("REJECTED ADMINS: ", rejectedStaffs);
 
     const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
-    console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
+    // console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);    

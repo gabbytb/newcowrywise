@@ -72,7 +72,8 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [allUsers, setAllUsers] = useState([]);
-    // console.log("ALL USERS: ", allUsers);
+    console.log("OVERALL USERS: ", allUsers);
+    const [numBar, setNumBar] = useState(1);
     
     const [totalPages, setTotalPages] = useState(0);
     const [totalUsers, setTotalUsers] = useState(null);
@@ -82,6 +83,23 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
 
 
+    // async function filterUserByRoleFirst() {
+    //     for (var i = 0; i < allUsers?.length; i++) {
+    //         if (i < allUsers?.length) {
+    //             console.log("USERS STATUS: ", allUsers[i].status);
+
+    //             for (var n = 0; n < allUsers[i].roles.length; n++) {
+    //                 if (n < allUsers[i].roles.length) {
+    //                     console.log("USERS ROLE: ", allUsers[i].roles[n].role);
+    //                     console.log("True: ", true);
+    //                 } else {
+    //                     console.log("False: ", false);
+    //                 };
+    //             };
+    //         };
+    //     }   
+    // }
+    // filterUserByRoleFirst();
     
 
     useEffect(() => {
@@ -91,7 +109,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
     // ****************************************************************************             
@@ -493,7 +511,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
     return (
         <>
-            <main id="dashboardUsersID" className="admin-dashboard">
+            <main id="dashboardStaffsID" className="admin-dashboard">
                 <div className="container flex admin-container">
                     <div className="h-full w-full grid xs:grid-cols-26">
                         {/*******************************************************************/
@@ -596,7 +614,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                             );
                                                         } else {
                                                             return (
-                                                                <span>Role is not assigned to this User</span>
+                                                                <span><strong>Alert:</strong> User has not been assigned Role</span>
                                                             );
                                                         };
                                                     })
@@ -608,7 +626,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                 <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                             </button>                                                                                                       
                                             <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
-                                                <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
+                                                <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to={"/admin/dashboard?logout"} onClick={logOut}><LogOutIcon /> sign out</Link>
                                             </div>           
                                         </div>
                                     </div>
@@ -647,7 +665,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                 {/***********  Views  ***********/}
                                 <div className={`capitalize border ${activeDisplay === "allUsers" ? "grid" : "hidden"}`}>
                                     { 
-                                        allUsers?.length !== 0 ?
+                                        (allUsers.length !== 0) ?
                                             <table className="table-fixed capitalize w-full border staff__table">
                                                 <thead>
                                                     <tr>
@@ -661,31 +679,13 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                 <tbody>
                                                     {
                                                         allUsers?.map((user, userIndex) => {
-                                                            if (user?.status === "approved") {
+                                                            if (user?.status === "pending") {
                                                                 return (
                                                                     user?.roles?.map((roleUsers) => {
                                                                         if (roleUsers?.role === "ROLE_USERS") {
                                                                             return (
                                                                                 <tr key={userIndex}>
-                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                                    <td>{user?.firstName} {user?.lastName}</td>
-                                                                                    <td className="lowercase">{user?.email}</td>
-                                                                                    <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                                    <td className="flex justify-center">
-                                                                                        <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            );
-                                                                        };
-                                                                    })
-                                                                );
-                                                            } else if (user?.status === "pending") {
-                                                                return (
-                                                                    user?.roles?.map((roleUsers) => {
-                                                                        if (roleUsers?.role === "ROLE_USERS") {
-                                                                            return (
-                                                                                <tr key={userIndex}>
-                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex} + {numBar}</td>
                                                                                     <td>{user?.firstName} {user?.lastName}</td>
                                                                                     <td className="lowercase">{user?.email}</td>
                                                                                     <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
@@ -703,7 +703,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                         if (roleUsers?.role === "ROLE_USERS") {
                                                                             return (
                                                                                 <tr key={userIndex}>
-                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex} + {numBar}</td>
                                                                                     <td>{user?.firstName} {user?.lastName}</td>
                                                                                     <td className="lowercase">{user?.email}</td>
                                                                                     <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
@@ -717,9 +717,21 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                                 );
                                                             } else {
                                                                 return (
-                                                                    <tr key={userIndex}>
-                                                                        <td>No user record found</td>
-                                                                    </tr>
+                                                                    user?.roles?.map((roleUsers) => {
+                                                                        if (roleUsers?.role === "ROLE_USERS") {
+                                                                            return (
+                                                                                <tr key={userIndex}>
+                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex} + {numBar}</td>
+                                                                                    <td>{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="lowercase">{user?.email}</td>
+                                                                                    <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                                    <td className="flex justify-center">
+                                                                                        <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            );
+                                                                        };
+                                                                    })
                                                                 );
                                                             };
                                                         })
@@ -738,8 +750,8 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>No user record found</td>
+                                                    <tr className="flex justify-center">
+                                                        <td className="">No user record found.</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

@@ -17,7 +17,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // console.log("PENDING ADMINS: ", pendingAdmins);
 
     const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
-    console.log("PENDING STAFFS or TOTAL PENDING STAFFS: ", totalPendingAdminUsers);
+    // console.log("PENDING STAFFS or TOTAL PENDING STAFFS: ", totalPendingAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);    

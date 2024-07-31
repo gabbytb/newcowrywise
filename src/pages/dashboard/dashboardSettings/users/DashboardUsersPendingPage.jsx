@@ -13,7 +13,7 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL PENDING USERS
     // ****************************************************************************
     const [pendingUsers, setPendingUsers] = useState([]);
-    console.log("PENDING USERS: ", pendingUsers);
+    // console.log("PENDING USERS: ", pendingUsers);
     
     const [totalPages, setTotalPages] = useState(0);
     const [totalPendingUsers, setTotalPendingUsers] = useState(null);
@@ -37,7 +37,7 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
     // ****************************************************************************             
     async function fetchPendingUsers() {        
         const pendingStatus = "pending";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/users/BY_ROLE?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
+        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
             const { usersList, pagination } = data;
@@ -71,7 +71,7 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allPendingUsers" ? "grid" : "hidden"}`}>
                 {
-                    pendingUsers?.length ?
+                    (pendingUsers?.length !== 0) ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -85,25 +85,7 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
                             <tbody>
                                 {
                                     pendingUsers?.map((user, userIndex) => {
-                                        if (user?.status === "approved") {
-                                            return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if (roleUsers?.role === "ROLE_USERS") {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
-                                            );
-                                        } else if (user?.status === "pending") {
+                                        if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
@@ -141,9 +123,21 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
                                             );
                                         } else {
                                             return (
-                                                <tr key={userIndex}>
-                                                    <td>No user record found</td>
-                                                </tr>
+                                                user?.roles?.map((roleUsers) => {
+                                                    if (roleUsers?.role === "ROLE_USERS") {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
                                             );
                                         };
                                     })

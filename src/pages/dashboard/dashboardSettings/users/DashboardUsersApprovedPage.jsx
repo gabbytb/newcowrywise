@@ -14,7 +14,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL APPROVED USERS
     // ****************************************************************************
     const [approvedUsers, setApprovedUsers] = useState([]);
-    console.log("APPROVED USERS: ", approvedUsers);
+    // console.log("APPROVED USERS: ", approvedUsers);
     
     const [totalPages, setTotalPages] = useState(0);
     const [totalApprovedUsers, setTotalApprovedUsers] = useState(null);
@@ -86,31 +86,13 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                             <tbody>
                                 {
                                     approvedUsers?.map((user, userIndex) => {
-                                        if (user?.status === "approved") {
+                                        if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
-                                            );
-                                        } else if (user?.status === "pending") {
-                                            return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if (roleUsers?.role === "ROLE_USERS") {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
                                                                 <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
@@ -128,7 +110,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
                                                                 <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
@@ -142,9 +124,21 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                             );
                                         } else {
                                             return (
-                                                <tr key={userIndex}>
-                                                    <td>No user record found</td>
-                                                </tr>
+                                                user?.roles?.map((roleUsers) => {
+                                                    if (roleUsers?.role === "ROLE_USERS") {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
                                             );
                                         };
                                     })
