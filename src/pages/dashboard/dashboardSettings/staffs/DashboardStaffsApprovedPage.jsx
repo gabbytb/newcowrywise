@@ -13,12 +13,13 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [approvedAdmins, setApprovedAdmins] = useState([]);
-    // console.log("APPROVED ADMINS: ", approvedAdmins);
+    const [approvedStaffs, setApprovedStaffs] = useState([]);
+    // console.log("APPROVED STAFFS: ", approvedStaffs);
     
-    const [totalPages, setTotalPages] = useState(0);
     const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
-
+    console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
+    const [totalPages, setTotalPages] = useState(0);
+    
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
 
@@ -42,16 +43,16 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { staffsLists, pagination } = data;
+            const { staffsList, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setApprovedAdmins(staffsLists);
-
-            setTotalApprovedAdminUsers(pagination?.staffRecords);
+            setApprovedStaffs(staffsList);
+            
+            setTotalApprovedAdminUsers(pagination?.staffsRecord);
             setTotalPages(pagination?.lastPage);
         })
         .catch((error) => {
@@ -72,7 +73,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
                 {
-                    approvedAdmins?.length !== 0 ?
+                    approvedStaffs?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                             <tr>
@@ -85,7 +86,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    approvedAdmins?.map((user, userIndex) => {
+                                    approvedStaffs?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {

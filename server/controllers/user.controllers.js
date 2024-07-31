@@ -498,22 +498,22 @@ exports.findAllAdmins = async (req, res) => {
         };
         
         // Pagination logic
-        const staffsLists = await User.find(query)
+        const staffsList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
-        const totalUsers = await User.countDocuments(query); // Total number of users with the given status
-        const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
+        const totalAdminUsers = await User.countDocuments(query); // Total number of users with the given status
+        const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
 
 
         const pagination = {
-            staffRecords: totalUsers,
+            staffRecords: totalAdminUsers,
             lastPage: totalPages,
         };
 
         const responseData = {
             success: true,
             data: {
-                staffsLists,
+                staffsList,
                 pagination
             },
             message: "Items retrieved successfully",
@@ -540,7 +540,7 @@ exports.findAllUsers = async (req, res) => {
         };
  
         // Pagination logic
-        const usersLists = await User.find(query)
+        const usersList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
 
@@ -548,14 +548,14 @@ exports.findAllUsers = async (req, res) => {
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
 
         const pagination = {
-            userRecords: totalUsers,
+            usersRecord: totalUsers,
             lastPage: totalPages,
         };
 
         const responseData = {
             success: true,
             data: {
-                usersLists,
+                usersList,
                 pagination
             },
             message: "Items retrieved successfully",

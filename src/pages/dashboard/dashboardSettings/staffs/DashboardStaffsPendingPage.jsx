@@ -13,12 +13,13 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [pendingAdmins, setPendingAdmins] = useState([]);
+    const [pendingStaffs, setPendingStaffs] = useState([]);
     // console.log("PENDING ADMINS: ", pendingAdmins);
 
-    const [totalPages, setTotalPages] = useState(0);
     const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
-
+    console.log("PENDING STAFFS or TOTAL PENDING STAFFS: ", totalPendingAdminUsers);
+    const [totalPages, setTotalPages] = useState(0);
+    
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
 
@@ -41,16 +42,16 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { staffsLists, pagination } = data;
+            const { staffsList, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setPendingAdmins(staffsLists)
-
-            setTotalPendingAdminUsers(pagination?.staffRecords);
+            setPendingStaffs(staffsList);
+            
+            setTotalPendingAdminUsers(pagination?.staffsRecord);
             setTotalPages(pagination?.lastPage);
         })
         .catch((error) => {
@@ -72,7 +73,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allPendingStaffs" ? "grid" : "hidden"}`}>
                 {
-                    pendingAdmins?.length !== 0 ?
+                    pendingStaffs?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -85,7 +86,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    pendingAdmins?.map((user, userIndex) => {
+                                    pendingStaffs?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {

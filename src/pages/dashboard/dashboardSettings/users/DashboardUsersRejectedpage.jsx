@@ -11,13 +11,13 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL USERS
+    // MANAGE STATE:-  TO FIND ALL REJECTED USERS
     // ****************************************************************************
     const [rejectedUsers, setRejectedUsers] = useState([]);
     console.log("REJECTED USERS: ", rejectedUsers);
 
-    const [totalPages, setTotalPages] = useState(0);
     const [totalRejectedUsers, setTotalRejectedUsers] = useState(null);
+    const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
@@ -32,7 +32,7 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" USERS
     // ****************************************************************************             
@@ -41,17 +41,17 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { usersList, pagination } = data;
 
             if (!success && message === "No user found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setRejectedUsers(accountList);
+            setRejectedUsers(usersList);
 
+            setTotalRejectedUsers(pagination?.usersRecord);
             setTotalPages(pagination?.lastPage);
-            setTotalRejectedUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -86,18 +86,36 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                             <tbody>
                                 {
                                     rejectedUsers?.map((user, userIndex) => {
-                                        if (user?.status === "pending") {
+                                        if (user?.status === "approved") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
+                                            );
+                                        } else if (user?.status === "pending") {
+                                            return (
+                                                user?.roles?.map((roleUsers) => {
+                                                    if (roleUsers?.role === "ROLE_USERS") {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -110,12 +128,12 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -124,21 +142,9 @@ const DashboardUsersRejectedPage = ({ activeDisplay }) => {
                                             );
                                         } else {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if (roleUsers?.role === "ROLE_USERS") {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex}>
+                                                    <td>No user record found</td>
+                                                </tr>
                                             );
                                         };
                                     })

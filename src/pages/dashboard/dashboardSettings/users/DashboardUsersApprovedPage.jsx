@@ -42,17 +42,17 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { usersList, pagination } = data;
 
             if (!success && message === "No user found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setApprovedUsers(accountList);
+            setApprovedUsers(usersList);
 
+            setTotalApprovedUsers(pagination?.usersRecord);
             setTotalPages(pagination?.lastPage);
-            setTotalApprovedUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -86,7 +86,25 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                             <tbody>
                                 {
                                     approvedUsers?.map((user, userIndex) => {
-                                        if (user?.status === "pending") {
+                                        if (user?.status === "approved") {
+                                            return (
+                                                user?.roles?.map((roleUsers) => {
+                                                    if (roleUsers?.role === "ROLE_USERS") {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
+                                            );
+                                        } else if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
@@ -97,7 +115,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                                                 <td className="lowercase">{user?.email}</td>
                                                                 <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
                                                                 <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -115,25 +133,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                                                 <td className="lowercase">{user?.email}</td>
                                                                 <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
                                                                 <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
-                                            );
-                                        } else if (user?.status === "approved") {
-                                            return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if (roleUsers?.role === "ROLE_USERS") {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -143,7 +143,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                                         } else {
                                             return (
                                                 <tr key={userIndex}>
-                                                    <td>No admin record found</td>
+                                                    <td>No user record found</td>
                                                 </tr>
                                             );
                                         };

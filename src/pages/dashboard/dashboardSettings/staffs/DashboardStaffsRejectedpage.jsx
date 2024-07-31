@@ -13,12 +13,13 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [rejectedAdmins, setRejectedAdmins] = useState([]);
-    // console.log("REJECTED ADMINS: ", rejectedAdmins);
+    const [rejectedStaffs, setRejectedStaffs] = useState([]);
+    // console.log("REJECTED ADMINS: ", rejectedStaffs);
 
-    const [totalPages, setTotalPages] = useState(0);
     const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
-
+    console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
+    const [totalPages, setTotalPages] = useState(0);
+    
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
 
@@ -41,16 +42,16 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { staffsLists, pagination } = data;
+            const { staffsList, pagination } = data;
 
             if (!success && message === "No admin found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setRejectedAdmins(staffsLists)
+            setRejectedStaffs(staffsList)
 
-            setTotalRejectedAdminUsers(pagination?.staffRecords);
+            setTotalRejectedAdminUsers(pagination?.staffsRecord);
             setTotalPages(pagination?.lastPage);
         })
         .catch((error) => {
@@ -72,7 +73,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
         <>
             <div className={`capitalize border ${activeDisplay === "allRejectedStaffs" ? "grid" : "hidden"}`}>
                 {
-                    rejectedAdmins?.length !== 0 ?
+                    rejectedStaffs?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -85,7 +86,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                             </thead>
                             <tbody>
                                 {
-                                    rejectedAdmins?.map((user, userIndex) => {
+                                    rejectedStaffs?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {

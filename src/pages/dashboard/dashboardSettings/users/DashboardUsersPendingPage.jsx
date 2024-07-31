@@ -40,17 +40,17 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
         await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/users/BY_ROLE?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
         .then((response) => {
             const { success, data, message } = response.data;
-            const { accountList, pagination } = data;
+            const { usersList, pagination } = data;
 
             if (!success && message === "No user found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
 
-            setPendingUsers(accountList);
+            setPendingUsers(usersList);
 
+            setTotalPendingUsers(pagination?.usersRecord);
             setTotalPages(pagination?.lastPage);
-            setTotalPendingUsers(pagination?.adminRecords);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -85,18 +85,36 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
                             <tbody>
                                 {
                                     pendingUsers?.map((user, userIndex) => {
-                                        if (user?.status === "pending") {
+                                        if (user?.status === "approved") {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    };
+                                                })
+                                            );
+                                        } else if (user?.status === "pending") {
+                                            return (
+                                                user?.roles?.map((roleUsers) => {
+                                                    if (roleUsers?.role === "ROLE_USERS") {
+                                                        return (
+                                                            <tr key={userIndex}>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td>{user?.firstName} {user?.lastName}</td>
+                                                                <td className="lowercase">{user?.email}</td>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -109,12 +127,12 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
                                                     if (roleUsers?.role === "ROLE_USERS") {
                                                         return (
                                                             <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
+                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
                                                                 <td>{user?.firstName} {user?.lastName}</td>
                                                                 <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                <td className="flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -123,21 +141,9 @@ const DashboardUsersPendingPage = ({ activeDisplay }) => {
                                             );
                                         } else {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if (roleUsers?.role === "ROLE_USERS") {
-                                                        return (
-                                                            <tr key={userIndex}>
-                                                                <td>{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td>
-                                                                    <Link to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex}>
+                                                    <td>No user record found</td>
+                                                </tr>
                                             );
                                         };
                                     })
