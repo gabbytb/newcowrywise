@@ -15,9 +15,10 @@ import Login from "./Login";
 import AdminDashboard from "./AdminDashboard";
 
 import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
-import DashboardUsersApprovedPage from "./dashboard/dashboardSettings/users/DashboardUsersApprovedPage";
-import DashboardUsersPendingPage from "./dashboard/dashboardSettings/users/DashboardUsersPendingPage";
-import DashboardUsersRejectedPage from "./dashboard/dashboardSettings/users/DashboardUsersRejectedPage";
+import AllUsersPage from "./dashboard/dashboardSettings/users/AllUsersPage";
+import ApprovedUsersPage from "./dashboard/dashboardSettings/users/ApprovedUsersPage";
+import PendingUsersPage from "./dashboard/dashboardSettings/users/PendingUsersPage";
+import RejectedUsersPage from "./dashboard/dashboardSettings/users/RejectedUsersPage";
 
 import DashboardStaffsPage from "./dashboard/dashboardSettings/DashboardStaffsPage";
 import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsApprovedPage";
@@ -52,9 +53,10 @@ export {
     AdminDashboard,
         
     DashboardUsersPage,
-    DashboardUsersApprovedPage,
-    DashboardUsersPendingPage,
-    DashboardUsersRejectedPage,
+    AllUsersPage,
+    ApprovedUsersPage,
+    PendingUsersPage,
+    RejectedUsersPage,
     
     DashboardStaffsPage,
     DashboardStaffsApprovedPage,

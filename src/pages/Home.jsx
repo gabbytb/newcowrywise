@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, } from "react";
 import { HomeNav } from "../components"
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
@@ -20,6 +20,14 @@ const Home = () => {
   const handleMinimize = () => {
     tawkMessengerRef.current.minimize();
   };
+
+
+
+  useEffect(() => {
+    const pageTitle = "Reaching out to Great Minds", siteTitle = "Samuel Akinola Foundation";
+    document.title = `${pageTitle} | ${siteTitle}`;
+  }, []);
+
 
 
   return (

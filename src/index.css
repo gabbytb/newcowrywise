@@ -914,11 +914,12 @@
 .right-bottom-pane div:first-of-type a {
   @apply
     border
-    shadow-lg 
+    shadow-md
     px-6 
     py-3 
     bg-white
     text-2xl
+    rounded-md
   ;
 }
 
@@ -1814,6 +1815,11 @@
   }
   /**  Footer  **/
 }
+
+
+
+
+
 
 
 @layer utilities {

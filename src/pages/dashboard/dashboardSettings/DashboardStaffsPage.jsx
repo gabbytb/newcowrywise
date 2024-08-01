@@ -599,7 +599,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 <button onClick={toggleUserProfileMenu} className="dropbtn absolute top-0">
                                                     <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                                 </button>                                                                                                       
-                                                <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative top-20 -left-52 upm">
+                                                <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative z-50 top-20 -left-52 upm">
                                                     <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to={"/admin/dashboard?logout"} onClick={logOut}><LogOutIcon /> sign out</Link>
                                                 </div>           
                                             </div>

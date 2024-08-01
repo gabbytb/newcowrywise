@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 
-const DashboardUsersApprovedPage = ({ activeDisplay }) => {
+const ApprovedUsersPage = ({ activeDisplay }) => {
     
 
     // ****************************************************************************
@@ -33,7 +33,7 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay], [currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
     // ****************************************************************************             
@@ -210,6 +210,6 @@ const DashboardUsersApprovedPage = ({ activeDisplay }) => {
 };
       
 
-export default DashboardUsersApprovedPage;
+export default ApprovedUsersPage;
 
 
