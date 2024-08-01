@@ -175,17 +175,30 @@ export default function Login() {
                 <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
                     <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6 uppercase'>sign in</h2>
                     
-                    <div className='flex flex-col text-gray-400 py-2'>
+                    {/* Error Message */}
+                    <div className="mx-auto error">
+                        {formMessage}
+                    </div>
+                    {/* Error Message */}
+
+
+                    {/* E-mail Address */}
+                    <div className="flex flex-col text-gray-400 py-2">
                         <label htmlFor="email">E-mail address
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="email" value={user.email} onChange={handleChange} onKeyUp={handleKeyUp} />
+                            <input className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="text" name="email" value={user.email} onChange={handleChange} onKeyUp={handleKeyUp} />
                         </label>
                     </div>
+                    {/* E-mail Address */}
 
+
+                    {/* Password */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="password">Password
                             <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" value={user.password} onChange={handleChange} onKeyUp={handleKeyUp} />
                         </label>
                     </div>
+                    {/* Password */}
+
 
                     <div className='flex justify-between py-2'>{/* text-gray-400 */}
                         <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
@@ -197,6 +210,13 @@ export default function Login() {
                     <div className="text-white login__register">
                         Don't have an account? <Link className='capitalize' to={"/user/signup"}>sign up</Link>
                     </div>
+
+
+                    {/* Success Message */}
+                    <div className="mt-6 mx-auto success">
+                        {formMessage}
+                    </div>
+                    {/* Success Message */}
                 </form>
             </div>
         </div>

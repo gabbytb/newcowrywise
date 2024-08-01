@@ -374,7 +374,6 @@ exports.verifySignUp = async (req, res) => {
 exports.logIn = async (req, res) => {
 
     try {
-
         const { email, password } = req.body;
 
         // 1) Verify Payload.
