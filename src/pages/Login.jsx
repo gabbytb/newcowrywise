@@ -325,7 +325,7 @@ export default function Login() {
                                 <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase" type="submit">Re-send activation email</button>
 
                                 <div className="text-white login__register">
-                                    Have an account? <Link className="capitalize cursor-pointer" to={"/user/login"} title="Sign In">sign in</Link>
+                                    Have an account? <Link className="capitalize cursor-pointer" to={"/user/login"}>sign in</Link>
                                 </div>
 
 
