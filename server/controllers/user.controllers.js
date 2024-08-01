@@ -39,7 +39,10 @@ exports.signUp = async (req, res) => {
                 success: false,
                 message: 'Fill all the required inputs.'
             };
-            console.log("Payload missing: ", responseData);
+            console.log("*************************************",
+                "\n*********  SIGNUP  ATTEMPT  *********",
+                "\n*************************************",
+                "\nSignup Error: ", responseData.message + "\n\n");
             return res.status(200).json(responseData);
         }
 
@@ -202,11 +205,11 @@ exports.completeSignUp = async (req, res) => {
     const { email } = req.body;
 
     try {
-        const existingUser = await User.findOne({ email: email.toLowerCase() });        
+        const existingUser = await User.findOne(email);        
         if (!existingUser) {
             const responseData = {
                 success: false,
-                message: "User not found !",
+                message: "No match found",
             }
             return res.status(404).json(responseData);
         }
@@ -376,15 +379,15 @@ exports.logIn = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // 1) Verify Payload.
-        if (!(email && password )) {
+        // 1) Required Payload.
+        if (!(email && password)) {
             const responseData = { 
                 success: false, 
                 message: "All fields are required.",
             };
-            console.log("***********************************",
-                        "\n*********  LOGIN ATTEMPT  *********",
-                        "\n***********************************",
+            console.log("*************************************",
+                        "\n**********  LOGIN ATTEMPT  **********",
+                        "\n*************************************",
                         "\nLogin Error: ", responseData.message + "\n\n");
             return res.status(200).json(responseData);
         };
@@ -428,7 +431,7 @@ exports.logIn = async (req, res) => {
         }
 
         // 4) Check if User Has Verified their Account Registration
-        if (!user.isActivated && !user.accessToken) {
+        if (!(user.isActivated && user.accessToken)) {
             // ***********************************************************************************//
             // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
             // ***********************************************************************************//
@@ -452,24 +455,29 @@ exports.logIn = async (req, res) => {
         }
         
 
-        // Set Token with Timer for Logged-In User
+        // 5) Assign Token to Logged-In User
+        // NOTE:-  Token has a Life-span.
         const token = await createJWT(user._id);
         user.accessToken = token;
-
+        
         // ***********************************************************************************//
         // *************                CURRENT LOGGED-IN USER                  **************//
         // ***********************************************************************************//
         console.log("***********************************************",
-                    "\n*****          LOGIN SUCCESSFUL          ******",
-                    "\n***********************************************",
-                    "\nAccount ID: ", user._id,
-                    "\nAccount Owner: ", user.firstName + " " + user.lastName,
-                    "\nAccount E-mail: ", user.email,
-                    "\nAccount Token: ", user.accessToken,
-                    "\nAccount isVerified: ", user.isActivated,
-                    "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
+            "\n******     🔐  LOGIN SUCCESSFUL  🔑     ******",
+            "\n***********************************************",
+            "\n=====>       CURRENT LOGGED-IN USER      <=====",
+            "\n***********************************************",
+            "\nAccount ID: ", user._id,
+            "\nAccount Owner: ", user.firstName + " " + user.lastName,
+            "\nAccount E-mail: ", user.email,
+            "\nAccount Token: ", user.accessToken,
+            "\nAccount isVerified: ", user.isActivated,
+            "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
         // ***********************************************************************************//
-        // NOTE:- Use USER 'accessToken' for Authentication & Authorization
+        // NOTE:- By assigning Token to Logged-in User,
+        //        Now you can use User's "accessToken" 
+        //        for Headers Authentication & Authorization
         // ***********************************************************************************//  
         const responseData = {
             success: true,
