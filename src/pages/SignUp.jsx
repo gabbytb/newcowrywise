@@ -40,7 +40,7 @@ function SignUp() {
     // console.log("E-mail Input: ", emailInput);
     const passwordInput = React.useRef();
     // console.log("Password Input: ", passwordInput);
-    const checkboxInput = React.useRef();    
+    // const checkboxInput = React.useRef();    
     // console.log("Checkbox Input: ", checkboxInput);
     // *************************************** //
     // *** Lay reference to these Elements *** //
@@ -148,6 +148,10 @@ function SignUp() {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');            
                 }, 3300);
+
+                setTimeout(() => {
+                    window.location.reload();        
+                }, 3400);
             };
         })
         .catch((error) => {
@@ -167,13 +171,13 @@ function SignUp() {
             lastNameInput.current.value = lastNameInput.current.value;
             emailInput.current.value = emailInput.current.value;
             passwordInput.current.value = passwordInput.current.value;
-            checkboxInput.current.value = checkboxInput.current.value;
+            // checkboxInput.current.value = checkboxInput.current.value;
         } else {
             firstNameInput.current.value = "";
             lastNameInput.current.value = "";
             emailInput.current.value = "";
             passwordInput.current.value = "";
-            checkboxInput.current.value = false;
+            // checkboxInput.current.value = false;
         };
     };
     // Clear Input Only After Form Submission
@@ -250,7 +254,8 @@ function SignUp() {
                     {/* Approves TandC */}
                     <div className="text-white py-2">{/* text-gray-400 */}
                         <label className="flex justify-center items-center gap-2 leading-6" htmlFor="approvesTandC">
-                            <input ref={checkboxInput}  className="mr-2 w-8 h-8" type="checkbox" name="approvesTandC" onChange={handleOnChange} onKeyUp={handleOnKeyUp} /> I have read and understood Samuel Akinola Foundation's terms and conditions.
+                            {/* ref={checkboxInput} */}
+                            <input className="mr-2 w-8 h-8" type="checkbox" name="approvesTandC" onChange={handleOnChange} onKeyUp={handleOnKeyUp} /> I have read and understood Samuel Akinola Foundation's terms and conditions.
                         </label>
                     </div>
                     {/* Approves TandC */}

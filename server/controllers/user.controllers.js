@@ -102,8 +102,7 @@ exports.signUp = async (req, res) => {
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
             approvesTandC,
-            isVerified: false,
-            // status: 'pending',
+            status: 'pending',
             roles: [
                 {
                     _id: roleAdmin._id,
@@ -207,12 +206,12 @@ exports.signUp = async (req, res) => {
 // Our Account Re-Activation Logic starts here
 exports.reSignUp = async (req, res) => {
 
+    const { email } = req.query;
+
     try {
-        
-        const { email } = req.query;
         const existingUser = await User.findOne({ email });
-        
-        if (!(existingUser)) {
+
+        if (!existingUser) {
             const responseData = {
                 success: false,
                 message: "No match found",
@@ -220,7 +219,14 @@ exports.reSignUp = async (req, res) => {
             return res.status(404).json(responseData);
         }
 
-           
+        if (existingUser.isVerified) {
+            const responseData = {
+                success: false,
+                message: "User is already verified",
+            }
+            return res.status(200).json(responseData);
+        }
+
 
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
@@ -279,9 +285,10 @@ exports.reSignUp = async (req, res) => {
 
 //         const user = await User.findById(_id);
 //         if (!user) {
+            
 //             const dataToUpdate = {
 //                 status: 'rejected',
-//                 isActivated: false,
+//                 isVerified: false,
 //             };
 //             const email = user.email;
 //             await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
@@ -292,23 +299,26 @@ exports.reSignUp = async (req, res) => {
 //             };
 //             console.log("Account verification failed: ", responseData);
 //             return res.status(404).json(responseData);
-//         } 
 
-//         const dataToUpdate = {
-//             status: 'approved',
-//             accessToken: token,
-//             isActivated: true,
-//         };
-//         const email = user.email;
-//         const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
-//         const responseData = {
-//             success: true,
-//             data: updatedUser,
-//             message: "Account verification successful",
-//         };
-//         console.log("Account verification status: ", responseData);
-//         return res.status(200).json(responseData);
-               
+//         } else {
+
+//             const dataToUpdate = {
+//                 status: 'approved',
+//                 accessToken: token,
+//                 isActivated: true,
+//             };
+//             const email = user.email;
+//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
+//             const responseData = {
+//                 success: true,
+//                 data: updatedUser,
+//                 message: "Account verification successful",
+//             };
+//             console.log("Account verification status: ", responseData);
+//             return res.status(200).json(responseData);
+
+//         }
 //     } catch (error) {
 //         const responseData = { 
 //             success: false, 
