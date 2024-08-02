@@ -51,8 +51,8 @@ function SignUp() {
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
-    let randNum = Math.floor(298 * Math.random()) + Math.floor(286 * Math.random());
-    const [user, setUser] = useState({ id: randNum, firstName: "", lastName: "", email: "", password: "", approvesTandC: false, isActivated: false, });
+    const randNum = Math.floor(298 * Math.random()) + Math.floor(286 * Math.random());
+    const [user, setUser] = useState({ id: randNum, firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
     console.log("*** CREATE NEW ACCOUNT FOR USER ***\nUser: ", user);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
@@ -159,7 +159,9 @@ function SignUp() {
 
     // Clear Input Only After Form Submission
     useEffect(() => {
-        clearInput();
+        if (formSubmitted === true) {
+            clearInput();
+        };
     }, [formSubmitted]);
     function clearInput() {
         if (formSubmitted !== true) {
@@ -167,11 +169,13 @@ function SignUp() {
             lastNameInput.current.value = lastNameInput.current.value;
             emailInput.current.value = emailInput.current.value;
             passwordInput.current.value = passwordInput.current.value;
+            checkboxInput.current.value = checkboxInput.current.value;
         } else {
             firstNameInput.current.value = "";
             lastNameInput.current.value = "";
             emailInput.current.value = "";
             passwordInput.current.value = "";
+            checkboxInput.current.value = false;
         };
     };
     // Clear Input Only After Form Submission

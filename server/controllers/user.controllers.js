@@ -28,7 +28,7 @@ exports.signUp = async (req, res) => {
     try {
 
         // Generate a Random Number
-        const randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
+        var randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
         
         // Payload
         const { id, firstName, lastName, email, password, approvesTandC } = req.body;
@@ -37,7 +37,7 @@ exports.signUp = async (req, res) => {
         if (!(firstName && lastName && email && password)) {
             const responseData = {
                 success: false,
-                message: 'Fill all the required inputs.'
+                message: "Fill all the required inputs."
             };
             console.log("*************************************",
                 "\n*********  SIGNUP  ATTEMPT  *********",
@@ -52,8 +52,7 @@ exports.signUp = async (req, res) => {
                 success: false,
                 message: "E-mail exists. Please sign-in."
             };
-            // console.log("E-mail Exists: ", emailExists);
-            console.log("E-mail Exists: ", responseData);
+            console.log("E-mail Exists: ", emailExists);
             return res.status(200).json(responseData);
         }
         
@@ -95,7 +94,7 @@ exports.signUp = async (req, res) => {
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        const newUser = new User({
+        const user = new User({
             _id: id * randNum,
             // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             firstName,
@@ -104,7 +103,7 @@ exports.signUp = async (req, res) => {
             password: encryptedPassword,
             approvesTandC,
             isVerified: false,
-            status: 'pending',
+            // status: 'pending',
             roles: [
                 {
                     _id: roleAdmin._id,
@@ -132,17 +131,17 @@ exports.signUp = async (req, res) => {
                 // }
             ],
         });
-        const user = await newUser.save();        
-        // *************************************************************************************************//
-        // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // *************************************************************************************************//
-        const token = await createJWT(user._id);
+        const newUser = await user.save();        
+        // ******************************************************************************************************//
+        // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // ******************************************************************************************************//
+        const token = await createJWT(newUser._id);
         
    
         // **************************************** //
         // ***    BE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        // const newUser = new User({ 
+        // const user = new User({ 
         //     _id: 1007,
         //     userName: "jwick",
         //     firstName: "Bigg", 
@@ -161,15 +160,21 @@ exports.signUp = async (req, res) => {
         //         },
         //     ]
         // });
-        // const token = await createJWT(newUser._id);
-        // newUser.accessToken = token;
-        // const user = await newUser.save();
+        // ******************************************************************************************************//
+        // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // ******************************************************************************************************//
+        // const token = await createJWT(user._id);
+        // ******************************************************************************************************//
+        // ***  Add Generated TOKEN to New User before Saving to DB ***//
+        // ******************************************************************************************************//
+        // user.accessToken = token;
+        // const newUser = await user.save();
 
 
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        await mailSender(token, user);
+        await mailSender(token, newUser);
 
 
         console.log("\n*********************************************************",
@@ -179,12 +184,12 @@ exports.signUp = async (req, res) => {
             "\n\n*********************************************************",
             "\n*****          NEW USER ACCOUNT DETAILS             *****",
             `\n*********************************************************
-            \nRegistration Status: ${user}`,
+            \nRegistration Status: ${newUser}`,
             "\n\n******************************************************************************************\n");
                 
         const responseData = {
             success: true,
-            data: user,
+            data: newUser,
             message: "Successful",
         };
         return res.status(201).json(responseData);
@@ -204,8 +209,8 @@ exports.reSignUp = async (req, res) => {
 
     try {
         
-        const { email } = req.body;
-        const existingUser = await User.findOne({ email: email.toLowerCase() });
+        const { email } = req.query;
+        const existingUser = await User.findOne({ email });
         
         if (!(existingUser)) {
             const responseData = {

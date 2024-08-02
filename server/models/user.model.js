@@ -8,7 +8,7 @@ module.exports = mongoose => {
         },
         userName: {
             type: String,
-            unique: true,
+            // unique: true,
         },
         firstName: {
             type: String,
@@ -51,11 +51,12 @@ module.exports = mongoose => {
             default: 'rejected',
         },
         approvesTandC: {
-            type: Boolean
+            type: Boolean,
+            default: false
         },
         isVerified: { 
             type: Boolean, 
-            default: false 
+            default: false,
         },
         accessToken: {
             type: String,
