@@ -53,8 +53,9 @@ module.exports = mongoose => {
         approvesTandC: {
             type: Boolean
         },
-        isActivated: {
-            type: Boolean,
+        isVerified: { 
+            type: Boolean, 
+            default: false 
         },
         accessToken: {
             type: String,

@@ -103,7 +103,7 @@ exports.signUp = async (req, res) => {
             email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             password: encryptedPassword,
             approvesTandC,
-            isActivated: false,
+            isVerified: false,
             status: 'pending',
             roles: [
                 {
@@ -205,7 +205,7 @@ exports.reSignUp = async (req, res) => {
     try {
         
         const { email } = req.body;
-        const existingUser = await User.findOne(email);
+        const existingUser = await User.findOne({ email: email.toLowerCase() });
         
         if (!(existingUser)) {
             const responseData = {
@@ -645,7 +645,7 @@ exports.findAllActive = async (req, res) => {
 exports.updateUserById = async (req, res) => {
     try {
         // const _id = req.params.id;
-        const { userName, email, phone, address, address2, city, state, country, zipCode, isActive } = req.body;
+        const { userName, email, phone, address, address2, city, state, country, zipCode, isVerified } = req.body;
 
         // To Add New Roles to Existing User's Account
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
@@ -662,7 +662,7 @@ exports.updateUserById = async (req, res) => {
             state,
             country,
             zipCode,
-            isActive,
+            isVerified,
             //    roles: [
             //         { 
             //             _id: roleAdmin._id, 

@@ -298,7 +298,7 @@ export default function Login() {
 
             
             {/* Signup Modal */}
-            <div className="relative inset-0 bg-gray-600 bg-opacity-35 backdrop-blur-md h-screen w-screen signup__modal">
+            <div className="relative inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
                 <div className="grid place-content-center items-center h-full">
                     <div>
                         <div className="bg-gray-800 flex flex-col justify-center gap-16 rounded-lg right-pane">             
