@@ -6,11 +6,13 @@ import DonationPage from "./DonationPage";
 import OLDSignUp from "./OLDSignUp";
 import OLDRegister from "./OLDRegister";
 import SignUpVerification from "./SignUpVerification";
-import SignUpReVerification from "./SignUpReVerification";
+import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
 
 import SignUp from "./SignUp";
 import Login from "./Login";
+import VerifySignup from "./VerifySignup";
+
 
 import AdminDashboard from "./AdminDashboard";
 
@@ -45,11 +47,12 @@ export {
     OLDSignUp,
     OLDRegister,
     SignUpVerification,
-    SignUpReVerification,
+    OLDSignUpReVerification,
 
     SignUp,
     Login,
-
+    VerifySignup,
+    
     AdminDashboard,
         
     DashboardUsersPage,

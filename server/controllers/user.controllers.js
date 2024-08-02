@@ -200,13 +200,14 @@ exports.signUp = async (req, res) => {
 };
 
 // Our Account Re-Activation Logic starts here
-exports.completeSignUp = async (req, res) => {
-    
-    const { email } = req.body;
+exports.reSignUp = async (req, res) => {
 
     try {
-        const existingUser = await User.findOne(email);        
-        if (!existingUser) {
+        
+        const { email } = req.body;
+        const existingUser = await User.findOne(email);
+        
+        if (!(existingUser)) {
             const responseData = {
                 success: false,
                 message: "No match found",
@@ -214,6 +215,7 @@ exports.completeSignUp = async (req, res) => {
             return res.status(404).json(responseData);
         }
 
+           
 
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
@@ -242,6 +244,7 @@ exports.completeSignUp = async (req, res) => {
             message: "Re-sent activation e-mail",
         };
         return res.status(200).json(responseData);
+        
     } catch (error) {
         const responseData = { 
             success: false, 
@@ -449,6 +452,7 @@ exports.logIn = async (req, res) => {
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
+                data: user,
                 message: `Kindly verify your account.`
             };
             return res.status(200).json(responseData);
@@ -464,7 +468,7 @@ exports.logIn = async (req, res) => {
         // *************                CURRENT LOGGED-IN USER                  **************//
         // ***********************************************************************************//
         console.log("***********************************************",
-            "\n******     🔐  LOGIN SUCCESSFUL  🔑     ******",
+            "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
             "\n***********************************************",
             "\n=====>       CURRENT LOGGED-IN USER      <=====",
             "\n***********************************************",
