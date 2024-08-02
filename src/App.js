@@ -6,8 +6,8 @@ import {
   OurProgress, DonationPage,
   OLDRegister,
   OLDSignUp, 
-  // SignUpVerification, 
-  // SignUpReVerification,
+  SignUpVerification, 
+  // VerifySignUp,
   SignUp,
   Login, 
   AdminDashboard, 
@@ -47,8 +47,8 @@ const App = () => {
       <Route path="/user/signup-two" element={<OLDSignUp />}></Route>
       <Route path="/user/signup-three" element={<OLDRegister />}></Route>
 
-      {/* <Route path="/user/verify/:token" element={<SignUpVerification />}></Route> */}
-      {/* <Route path="/user/verify" element={<SignUpReVerification />}></Route> */}
+      <Route path="/user/verify/:token" element={<SignUpVerification />}></Route>
+      {/* <Route path="/user/verify" element={<VerifySignUp />}></Route> */}
       
       <Route path="/user/signup" element={<SignUp />}></Route>
       <Route path="/user/login" element={<Login />}></Route>

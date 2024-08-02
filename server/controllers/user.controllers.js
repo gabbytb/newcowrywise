@@ -94,86 +94,86 @@ exports.signUp = async (req, res) => {
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        // const user = new User({
-        //     _id: id * randNum,
-        //     // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-        //     firstName,
-        //     lastName,
-        //     email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-        //     password: encryptedPassword,
-        //     approvesTandC,
-        //     status: 'pending',
-        //     roles: [
-        //         {
-        //             _id: roleAdmin._id,
-        //             role: roleAdmin.role,
-        //             createdAt: roleAdmin.createdAt,
-        //             updatedAt: roleAdmin.updatedAt,
-        //         },
-        //         // {
-        //         //     _id: roleEditor._id, 
-        //         //     role: roleEditor.role, 
-        //         //     createdAt: roleEditor.createdAt, 
-        //         //     updatedAt: roleEditor.updatedAt, 
-        //         // },
-        //         // {
-        //         //     _id: roleStaff._id, 
-        //         //     role: roleStaff.role, 
-        //         //     createdAt: roleStaff.createdAt, 
-        //         //     updatedAt: roleStaff.updatedAt, 
-        //         // },
-        //         // {
-        //         //     _id: roleUsers._id, 
-        //         //     role: roleUsers.role, 
-        //         //     createdAt: roleUsers.createdAt, 
-        //         //     updatedAt: roleUsers.updatedAt,
-        //         // }
-        //     ],
-        // });
-        // const newUser = await user.save();        
-        // // ******************************************************************************************************//
-        // // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // // ******************************************************************************************************//
-        // const token = await createJWT(newUser._id);
+        const user = new User({
+            _id: id * randNum,
+            // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            firstName,
+            lastName,
+            email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            password: encryptedPassword,
+            approvesTandC,
+            status: 'pending',
+            roles: [
+                {
+                    _id: roleAdmin._id,
+                    role: roleAdmin.role,
+                    createdAt: roleAdmin.createdAt,
+                    updatedAt: roleAdmin.updatedAt,
+                },
+                // {
+                //     _id: roleEditor._id, 
+                //     role: roleEditor.role, 
+                //     createdAt: roleEditor.createdAt, 
+                //     updatedAt: roleEditor.updatedAt, 
+                // },
+                // {
+                //     _id: roleStaff._id, 
+                //     role: roleStaff.role, 
+                //     createdAt: roleStaff.createdAt, 
+                //     updatedAt: roleStaff.updatedAt, 
+                // },
+                // {
+                //     _id: roleUsers._id, 
+                //     role: roleUsers.role, 
+                //     createdAt: roleUsers.createdAt, 
+                //     updatedAt: roleUsers.updatedAt,
+                // }
+            ],
+        });
+        const newUser = await user.save();        
+        // ******************************************************************************************************//
+        // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // ******************************************************************************************************//
+        const token = await createJWT(newUser._id);
         
    
         // **************************************** //
         // ***    BE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        const user = new User({ 
-            _id: 123,
-            userName: "gabby",
-            firstName: "Oyebanji", 
-            lastName: "Gabriel", 
-            email: "idkraqinz@gmail.com",
-            password: await encryptPassword("London123"),
-            isVerified: true, 
-            approvesTandC: true,  
-            status: "approved",
-            roles: [
-                {
-                    _id: roleAdmin._id, 
-                    role: roleAdmin.role, 
-                    createdAt: roleAdmin.createdAt, 
-                    updatedAt: roleAdmin.updatedAt,
-                },
-            ]
-        });
-        // ******************************************************************************************************//
-        // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // ******************************************************************************************************//
-        const token = await createJWT(user._id);
-        // ******************************************************************************************************//
-        // ***  Add Generated TOKEN to New User before Saving to DB ***//
-        // ******************************************************************************************************//
-        user.accessToken = token;
-        const newUser = await user.save();
+        // const user = new User({ 
+        //     _id: 123,
+        //     userName: "gabby",
+        //     firstName: "Oyebanji", 
+        //     lastName: "Gabriel", 
+        //     email: "idkraqinz@gmail.com",
+        //     password: await encryptPassword("London123"),
+        //     isVerified: true, 
+        //     approvesTandC: true,  
+        //     status: "approved",
+        //     roles: [
+        //         {
+        //             _id: roleAdmin._id, 
+        //             role: roleAdmin.role, 
+        //             createdAt: roleAdmin.createdAt, 
+        //             updatedAt: roleAdmin.updatedAt,
+        //         },
+        //     ]
+        // });
+        // // ******************************************************************************************************//
+        // // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // // ******************************************************************************************************//
+        // const token = await createJWT(user._id);
+        // // ******************************************************************************************************//
+        // // ***  Add Generated TOKEN to New User before Saving to DB ***//
+        // // ******************************************************************************************************//
+        // user.accessToken = token;
+        // const newUser = await user.save();
 
 
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        // await mailSender(token, newUser);
+        await mailSender(token, newUser);
 
 
         console.log("\n*********************************************************",
@@ -267,7 +267,7 @@ exports.reSignUp = async (req, res) => {
 }
 
 // Our Account Verification Logic starts here
-// exports.accountVerification = async (req, res) => {
+// exports.verifySignUp = async (req, res) => {
 //     const AuthHeader = req.headers.authorization;
 //     if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
 //         const responseData = { 
@@ -282,13 +282,12 @@ exports.reSignUp = async (req, res) => {
 //     try {          
 //         const existingUser = await jwt.verify(token, secretKey);
 //         const _id = existingUser.id;
-
 //         const user = await User.findById(_id);
 //         if (!user) {
-            
 //             const dataToUpdate = {
 //                 status: 'rejected',
 //                 isVerified: false,
+//                 accessToken: token,
 //             };
 //             const email = user.email;
 //             await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
@@ -299,13 +298,11 @@ exports.reSignUp = async (req, res) => {
 //             };
 //             console.log("Account verification failed: ", responseData);
 //             return res.status(404).json(responseData);
-
 //         } else {
-
 //             const dataToUpdate = {
 //                 status: 'approved',
+//                 isVerified: true,
 //                 accessToken: token,
-//                 isActivated: true,
 //             };
 //             const email = user.email;
 //             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
@@ -317,8 +314,7 @@ exports.reSignUp = async (req, res) => {
 //             };
 //             console.log("Account verification status: ", responseData);
 //             return res.status(200).json(responseData);
-
-//         }
+//         };
 //     } catch (error) {
 //         const responseData = { 
 //             success: false, 
@@ -341,8 +337,8 @@ exports.verifySignUp = async (req, res) => {
         }
         
         const token = AuthHeader.split(" ")[1];
-        jwt.verify(token, secretKey, async (err, decodedData) => {            
-            // If any error is encountered during Account Verification, Log Error !
+        await jwt.verify(token, secretKey, async (err, decodedData) => {            
+            // 1) If any error is encountered during Account Verification, Log Error !
             if (err) {
                 const responseData = { 
                     success: false, 
@@ -351,17 +347,20 @@ exports.verifySignUp = async (req, res) => {
                 console.log("Email verification error: ", responseData);
                 return res.status(404).json(responseData);
             }
-            // If token was signed to an Existing User, find the Existing User ID !
+
+            // If token was signed to an Existing User, find the Existing User by ID !
             const _id = decodedData.id
             const user = await User.findById(_id);
-            //  If the User Exists
-            if (user) {
+
+            //  2) If token exists and has not expired!
+            if (token) {
                 // Step 2: Update these Records for the User upon Account Verification
                 const dataToUpdate = {
+                    status: "approved",
                     accessToken: token,
-                    isActivated: true,
+                    isVerified: true,
                 };
-                const email = user.email;       // Step 1: find the UserByEmail to Update previous User Record 
+                const email = user.email;   
                 const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
                 
                 const responseData = {
@@ -376,13 +375,24 @@ exports.verifySignUp = async (req, res) => {
                     "\n\n*********************************************************\n\n");
                 return res.status(200).json(responseData);
             } else {
-                // If token was signed to an Existing User, but Existing User cannot be found !
-                // Account Verification Error:  TypeError: Cannot read properties of undefined (reading 'email')
-                const responseData = { 
-                    success: false,
-                    message: "Failed",
+                const dataToUpdate = {
+                    status: "rejected",
+                    accessToken: token,
+                    isVerified: false,
                 };
-                console.log("Verification Status: ", responseData, "\n");
+                const email = user.email;
+                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+                
+                const responseData = {
+                    success: false,
+                    data: updatedUser,
+                    message: "Token has expired"
+                };
+                console.log("*********************************************************",
+                    "\n*****           NEW ACCOUNT VERIFICATION             ****",
+                    "\n*********************************************************",
+                    "\n\nVerification Status: ", responseData,
+                    "\n\n*********************************************************\n\n");
                 return res.status(200).json(responseData);
             };
         });
@@ -784,7 +794,18 @@ exports.deleteAllUsers = (req, res) => {
 
 
 
-        // var hasNext, 
+
+
+
+
+
+
+
+
+
+
+
+// var hasNext, 
         //     hasPrev,
         //     next, 
         //     previous;
@@ -847,4 +868,4 @@ exports.deleteAllUsers = (req, res) => {
 //     to: 'recipient@example.com',
 //     subject: 'Subject of your email',
 //     text: 'This is the body of your email'
-// };
+// }

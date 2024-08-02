@@ -15,12 +15,16 @@ import { BrandLogo, BrandLogoWhite, brandOfficialLogo, brandOfficialWhiteLogo } 
 function SignUp() {  
 
 
+    // console.clear();
+
+
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign Up", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //

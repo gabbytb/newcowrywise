@@ -1,5 +1,5 @@
 import { useState, useEffect, } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { Nav, ButtonSubmit, } from "../components";
 
@@ -155,9 +155,11 @@ const SignUpVerification = () => {
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
     const { token } = useParams();
-    const [registeredUser, setRegisteredUser] = useState({ accessToken: token });
-    console.log("***  Token Was VERIFIED For User  ***", 
-                "\nUser Account: ", registeredUser);
+    // { accessToken: token }
+    const [registeredUser, setRegisteredUser] = useState(null);
+    console.log("***  Token VERIFICATION DETAILS  ***", 
+                "\nUser Account: ", registeredUser,
+                "\nToken: ", token);
     
     const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
     // console.log("Account Verification: ", authenticationResponseMsg);
@@ -171,7 +173,7 @@ const SignUpVerification = () => {
             const payload = {
                 accessToken: token,
             };
-            axios.post(`http://127.0.0.1:3000/user/verify/${token}`, payload, {
+            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, payload, {
                 headers: {                    
                     Authorization: `Bearer ${token}`,
                 },
@@ -222,7 +224,7 @@ const SignUpVerification = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, []);
+    }, [token]);
         
     useEffect(() => {
         const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";

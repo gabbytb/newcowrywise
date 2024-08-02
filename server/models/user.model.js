@@ -8,7 +8,7 @@ module.exports = mongoose => {
         },
         userName: {
             type: String,
-            // unique: true,
+            unique: true,
         },
         firstName: {
             type: String,
@@ -69,19 +69,17 @@ module.exports = mongoose => {
                 updatedAt: Date,
             }
         ],
-    }, { versionKey: false, timestamps: true,  }); // This option disables the automatic creation of the default _id (& the _v) field.
+    }, { 
+        versionKey: false, 
+        timestamps: true,  
+    }); 
+    // The first option disables the automatic creation of the default  "_v" attribute representing "versionKey".
+    // Timestamps will keep track of "Time of Creation" and "Time of Update".
 
 
     const User = mongoose.model("User", userSchema);
     return User;
 };
-
-
-
-
-
-
-
 
 
 

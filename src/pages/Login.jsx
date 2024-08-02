@@ -22,7 +22,8 @@ export default function Login() {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Log In", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Log In", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
