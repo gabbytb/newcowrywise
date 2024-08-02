@@ -94,86 +94,86 @@ exports.signUp = async (req, res) => {
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        const user = new User({
-            _id: id * randNum,
-            // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-            firstName,
-            lastName,
-            email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
-            password: encryptedPassword,
-            approvesTandC,
-            status: 'pending',
-            roles: [
-                {
-                    _id: roleAdmin._id,
-                    role: roleAdmin.role,
-                    createdAt: roleAdmin.createdAt,
-                    updatedAt: roleAdmin.updatedAt,
-                },
-                // {
-                //     _id: roleEditor._id, 
-                //     role: roleEditor.role, 
-                //     createdAt: roleEditor.createdAt, 
-                //     updatedAt: roleEditor.updatedAt, 
-                // },
-                // {
-                //     _id: roleStaff._id, 
-                //     role: roleStaff.role, 
-                //     createdAt: roleStaff.createdAt, 
-                //     updatedAt: roleStaff.updatedAt, 
-                // },
-                // {
-                //     _id: roleUsers._id, 
-                //     role: roleUsers.role, 
-                //     createdAt: roleUsers.createdAt, 
-                //     updatedAt: roleUsers.updatedAt,
-                // }
-            ],
-        });
-        const newUser = await user.save();        
-        // ******************************************************************************************************//
-        // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // ******************************************************************************************************//
-        const token = await createJWT(newUser._id);
+        // const user = new User({
+        //     _id: id * randNum,
+        //     // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+        //     firstName,
+        //     lastName,
+        //     email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+        //     password: encryptedPassword,
+        //     approvesTandC,
+        //     status: 'pending',
+        //     roles: [
+        //         {
+        //             _id: roleAdmin._id,
+        //             role: roleAdmin.role,
+        //             createdAt: roleAdmin.createdAt,
+        //             updatedAt: roleAdmin.updatedAt,
+        //         },
+        //         // {
+        //         //     _id: roleEditor._id, 
+        //         //     role: roleEditor.role, 
+        //         //     createdAt: roleEditor.createdAt, 
+        //         //     updatedAt: roleEditor.updatedAt, 
+        //         // },
+        //         // {
+        //         //     _id: roleStaff._id, 
+        //         //     role: roleStaff.role, 
+        //         //     createdAt: roleStaff.createdAt, 
+        //         //     updatedAt: roleStaff.updatedAt, 
+        //         // },
+        //         // {
+        //         //     _id: roleUsers._id, 
+        //         //     role: roleUsers.role, 
+        //         //     createdAt: roleUsers.createdAt, 
+        //         //     updatedAt: roleUsers.updatedAt,
+        //         // }
+        //     ],
+        // });
+        // const newUser = await user.save();        
+        // // ******************************************************************************************************//
+        // // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // // ******************************************************************************************************//
+        // const token = await createJWT(newUser._id);
         
    
         // **************************************** //
         // ***    BE: SAVE USER INFORMATION     *** //
         // **************************************** //
-        // const user = new User({ 
-        //     _id: 1007,
-        //     userName: "jwick",
-        //     firstName: "Bigg", 
-        //     lastName: "Brotha", 
-        //     email: "biggbrotha@email.com",
-        //     password: await encryptPassword("London123"),
-        //     isActivated: true, 
-        //     approvesTandC: true,  
-        //     status: "rejected",
-        //     roles: [
-        //         {
-        //             _id: roleUsers._id, 
-        //             role: roleUsers.role, 
-        //             createdAt: roleUsers.createdAt, 
-        //             updatedAt: roleUsers.updatedAt,
-        //         },
-        //     ]
-        // });
+        const user = new User({ 
+            _id: 123,
+            userName: "gabby",
+            firstName: "Oyebanji", 
+            lastName: "Gabriel", 
+            email: "idkraqinz@gmail.com",
+            password: await encryptPassword("London123"),
+            isVerified: true, 
+            approvesTandC: true,  
+            status: "approved",
+            roles: [
+                {
+                    _id: roleAdmin._id, 
+                    role: roleAdmin.role, 
+                    createdAt: roleAdmin.createdAt, 
+                    updatedAt: roleAdmin.updatedAt,
+                },
+            ]
+        });
         // ******************************************************************************************************//
         // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // ******************************************************************************************************//
-        // const token = await createJWT(user._id);
+        const token = await createJWT(user._id);
         // ******************************************************************************************************//
         // ***  Add Generated TOKEN to New User before Saving to DB ***//
         // ******************************************************************************************************//
-        // user.accessToken = token;
-        // const newUser = await user.save();
+        user.accessToken = token;
+        const newUser = await user.save();
 
 
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        await mailSender(token, newUser);
+        // await mailSender(token, newUser);
 
 
         console.log("\n*********************************************************",
@@ -449,7 +449,7 @@ exports.logIn = async (req, res) => {
         }
 
         // 4) Check if User Has Verified their Account Registration
-        if (!(user.isActivated && user.accessToken)) {
+        if (!(user.isVerified && user.accessToken)) {
             // ***********************************************************************************//
             // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
             // ***********************************************************************************//
@@ -460,7 +460,7 @@ exports.logIn = async (req, res) => {
                         "\nAccount Owner: ", user.firstName + " " + user.lastName,
                         "\nAccount E-mail: ", user.email,
                         "\nAccount Token: ", user.accessToken,
-                        "\nAccount isVerified: ", user.isActivated,
+                        "\nAccount isVerified: ", user.isVerified,
                         "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
             // ***********************************************************************************//
             // NOTE:- Use USER 'accessToken' for Authentication & Authorization
