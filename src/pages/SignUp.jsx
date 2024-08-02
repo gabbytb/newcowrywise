@@ -159,9 +159,7 @@ function SignUp() {
 
     // Clear Input Only After Form Submission
     useEffect(() => {
-        if (formSubmitted === true) {
-            clearInput();
-        };
+        clearInput();
     }, [formSubmitted]);
     function clearInput() {
         if (formSubmitted !== true) {
