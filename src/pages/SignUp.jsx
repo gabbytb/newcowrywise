@@ -69,6 +69,10 @@ function SignUp() {
     async function handleOnKeyUp(e) {
         var name = e.target.name;
         var value = e.target.value;
+        setUser({
+            ...user,
+            [name]: value
+        });
     };
 
     async function handleOnChange(e) {
@@ -167,11 +171,12 @@ function SignUp() {
     }, [formSubmitted]);
     function clearInput() {
         if (formSubmitted !== true) {
-            firstNameInput.current.value = firstNameInput.current.value;
-            lastNameInput.current.value = lastNameInput.current.value;
-            emailInput.current.value = emailInput.current.value;
-            passwordInput.current.value = passwordInput.current.value;
+            // firstNameInput.current.value = firstNameInput.current.value;
+            // lastNameInput.current.value = lastNameInput.current.value;
+            // emailInput.current.value = emailInput.current.value;
+            // passwordInput.current.value = passwordInput.current.value;
             // checkboxInput.current.value = checkboxInput.current.value;
+            return;
         } else {
             firstNameInput.current.value = "";
             lastNameInput.current.value = "";
@@ -191,7 +196,9 @@ function SignUp() {
             <div className='hidden sm:block left-pane relative'>               
                 <div className="relative h-full">
                     <div className="flex justify-center items-center w-full h-30 bg-white px-8">
-                        <Link className="w-56" to={"/"}><img src={brandOfficialLogo} /></Link>
+                        <Link className="w-56" to={"/"}>
+                            <img src={brandOfficialLogo} alt="brand logo" />
+                        </Link>
                     </div>
 
                     <img className='w-full h-full object-cover absolute top-0 -z-3' src={loginImg} alt="background-img" />
