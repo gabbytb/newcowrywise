@@ -2,8 +2,15 @@ const db = require("../models");
 const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
+const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
-const { secretKey } = process.env;
+// FOR JWT: Replace with a secure, secret key.
+const secretKey = process.env.secretKey || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
+const expiresIn = process.env.expiresIn || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
+// FOR CRYPTO: Replace with a secure, secret key.
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
+const IV_LENGTH = 16; // AES block size in bytes
+
 
 
 // *****************************************************************
@@ -20,7 +27,33 @@ const mailSender = require("../middlewares/MailSender");
 
 
 
-            
+
+// Encrypt function
+const encrypt = (textToBeEncrypted) => {
+    const iv = crypto.randomBytes(IV_LENGTH); // Generate a random initialization vector
+    const cipher = crypto.createCipheriv('aes-256-ctr', Buffer.from(ENCRYPTION_KEY, 'utf8'), iv); // Create cipher
+    let encrypted = cipher.update(textToBeEncrypted, 'utf8', 'hex'); // Encrypt text
+    // let encrypted = cipher.update(String(textToBeEncrypted), 'utf8', 'hex'); // Encrypt text
+    encrypted += cipher.final('hex'); // Finalize encryption
+    return iv.toString('hex') + ':' + encrypted; // Return IV + encrypted text
+};
+
+// Decrypt function
+const decrypt = (encryptedText) => {
+    const textParts = encryptedText.split(':'); // Split the IV and encrypted text
+    const iv = Buffer.from(textParts.shift(), 'hex'); // Extract the IV
+    const encryptedTextBuffer = Buffer.from(textParts.join(':'), 'hex'); // Extract the encrypted text
+    const decipher = crypto.createDecipheriv('aes-256-ctr', Buffer.from(ENCRYPTION_KEY, 'utf8'), iv); // Create decipher
+    let decrypted = decipher.update(encryptedTextBuffer, 'hex', 'utf8'); // Decrypt text
+    decrypted += decipher.final('utf8'); // Finalize decryption
+    return decrypted;
+};
+
+
+
+
+     
+
 
 // Our Account Creation Logic starts here
 exports.signUp = async (req, res) => {
@@ -103,6 +136,7 @@ exports.signUp = async (req, res) => {
             password: encryptedPassword,
             approvesTandC,
             status: 'pending',
+            expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
             roles: [
                 {
                     _id: roleAdmin._id,
@@ -167,6 +201,7 @@ exports.signUp = async (req, res) => {
         // // ***  Add Generated TOKEN to New User before Saving to DB ***//
         // // ******************************************************************************************************//
         // user.accessToken = token;
+        // user.expirationInMs = encrypt(expiresIn),        // Encode: token lifespan
         // const newUser = await user.save();
 
 
@@ -174,6 +209,9 @@ exports.signUp = async (req, res) => {
         // E-mail Service Config
         // ***************************************************************//
         await mailSender(token, newUser);
+
+        // let valueOfEncodedText = decrypt(newUser.expirationInMs);
+        // console.log("Encrypted token lifespan: ", valueOfEncodedText);
 
 
         console.log("\n*********************************************************",
@@ -612,23 +650,28 @@ exports.findUserById = async (req, res) => {
     
     try {
         const _id = req.params.id;
-        const userId = await User.findById(_id);
+        const user = await User.findById(_id);
+        const decodedExpiresIn = decrypt(user.expirationInMs); // Decode here
+        console.log("Decoded Token Expiration Time: ", decodedExpiresIn);
 
-        if (!(userId)) {
+        if (!(user)) {
             const responseData = {
                 success: false,
-                message: "Users not found",
+                message: "User not found",
             };
-            console.log("Failed to fetch all User items: ", responseData);
+            console.log("Find User by ID: ", responseData);
             return res.status(404).json(responseData);
         }
         
+
         const responseData = {
                 success: true,
-                data: userId,
+                data: user,
                 message: "Successful",
         };
+        console.log("Find User by ID: ", responseData);
         return res.status(200).json(responseData);
+
     } catch (error) {
         // Catch error
         return res.status(500).send(`Internal Server Error ${error}`);
@@ -800,6 +843,15 @@ exports.deleteAllUsers = (req, res) => {
 
 
 
+
+
+// FOR ENCYRPTION  !!!
+// Why Use Buffer.from?
+// Buffer.from is used to ensure that the encryption key and IV are in the correct format:
+
+// Encryption Key: AES-256 requires a 32-byte key. Buffer.from converts the key from a string into a buffer of bytes.
+// IV: The IV needs to be in a specific byte format. Buffer.from converts the hexadecimal string representation of the IV back into bytes for the cipher functions.
+// Using Buffer.from ensures that the data is correctly formatted for encryption and decryption.
 
 
 

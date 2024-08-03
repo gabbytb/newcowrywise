@@ -71,8 +71,8 @@ function SignUp() {
     // console.log("Login Successful: ", formSubmitted);
 
     async function handleOnKeyUp(e) {
-        var name = e.target.name;
-        var value = e.target.value;
+        let name = e.target.name;
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         setUser({
             ...user,
             [name]: value
@@ -80,8 +80,8 @@ function SignUp() {
     };
 
     async function handleOnChange(e) {
-        const name = e.target.name;
-        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        let name = e.target.name;
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 
         setUser({
             ...user,

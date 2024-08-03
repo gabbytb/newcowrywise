@@ -61,6 +61,9 @@ module.exports = mongoose => {
         accessToken: {
             type: String,
         },
+        expirationInMs: {
+            type: String,
+        },
         roles: [
             {
                 _id: Number,
