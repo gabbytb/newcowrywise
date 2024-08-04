@@ -75,11 +75,11 @@ function SignUp() {
     async function handleFormSubmission(e) {
         e.preventDefault();
         
-        axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+       await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data } = response.data; 
-            var errMsg = document.querySelector('#signUpId .error'); 
-            var successMsg = document.querySelector('#signUpId .success');
+            var errMsg = document.querySelector('#signUpId .signup__error'); 
+            var successMsg = document.querySelector('#signUpId .signup__success');
 
             if ((!success) && (message === "Fill all the required inputs.")) {
 
@@ -90,13 +90,13 @@ function SignUp() {
                 setFormSubmitted(success);
                 setFormMessage(message);
                    
-                errMsg?.classList.remove('error');
+                errMsg?.classList.remove('.signup__error');
                 errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
                     errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
+                    errMsg?.classList.add('.signup__error');
+                }, 3000);
                 // Perform These Actions
 
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
@@ -108,13 +108,13 @@ function SignUp() {
                 setFormSubmitted(success);
                 setFormMessage(message);
                     
-                errMsg?.classList.remove('error');
+                errMsg?.classList.remove('.signup__error');
                 errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
                     errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
+                    errMsg?.classList.add('.signup__error');
+                }, 3000);
                 // Perform These Actions
 
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
@@ -126,13 +126,13 @@ function SignUp() {
                 setFormSubmitted(success);
                 setFormMessage(message);
                     
-                errMsg?.classList.remove('error');
+                errMsg?.classList.remove('.signup__error');
                 errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
                     errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
+                    errMsg?.classList.add('.signup__error');
+                }, 3000);
                 // Perform These Actions
                                 
             } else {             
@@ -145,12 +145,12 @@ function SignUp() {
                 document.getElementById("signUpForm").reset();
                 // RESET FORM AFTER SUBMISSION
                 
-                successMsg.classList.remove('success');
+                successMsg.classList.remove('signup__success');
                 successMsg.classList.add('success-message-info'); 
                                     
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
-                    successMsg.classList.add('success');            
+                    successMsg.classList.add('signup__success');            
                 }, 3500);
                 // Perform These Actions
 
@@ -166,8 +166,7 @@ function SignUp() {
 
     return (
         <div id="signUpId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
-            
-            
+                        
             <div className='hidden sm:block left-pane relative'>               
                 <div className="relative h-full">
                     <div className="flex justify-center items-center w-full h-30 bg-white px-8">
@@ -181,7 +180,6 @@ function SignUp() {
             </div>
 
 
-
             <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
                 <form id="signUpForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 py-8 px-10' onSubmit={handleFormSubmission}>
                     
@@ -191,7 +189,7 @@ function SignUp() {
 
                     
                     {/* Error Message */}
-                    <div className="mx-auto error">
+                    <div className="mx-auto signup__error">
                         {formMessage}
                     </div>
                     {/* Error Message */}
@@ -261,15 +259,17 @@ function SignUp() {
 
 
                     {/* Success Message */}
-                    <div className="mt-6 mx-auto success">
+                    <div className="mt-6 mx-auto signup__success">
                         {formMessage}
                     </div>
                     {/* Success Message */}
 
                 </form>
             </div>
+
         </div>
     );
 };
+
 
 export default SignUp;
