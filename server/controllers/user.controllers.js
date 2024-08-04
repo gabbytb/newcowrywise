@@ -20,6 +20,7 @@ const IV_LENGTH = 16; // AES block size in bytes
 const encryptPassword = require("../middlewares/EncryptPassword");
 const createJWT = require("../middlewares/GenerateToken");
 const mailSender = require("../middlewares/MailSender");
+const verifyToken = require("../middlewares/VerifyToken");
 // *****************************************************************
 // *****************************************************************
 
@@ -363,75 +364,222 @@ exports.reSignUp = async (req, res) => {
 //         return res.status(500).json(responseData);
 //     }
 // };
-exports.verifySignUp = async (req, res) => {
-    try {
-        const AuthHeader = req.headers.authorization;
-        if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
-            const responseData = { 
-                success: false, 
-                message: "Unauthorized",
-            }
-            console.log("Missing Token for Account Verification: ", responseData);
-            return res.status(403).json(responseData);
-        }
+// exports.verifySignUp = async (req, res) => {
+//     try {
+//         // Step 1: Get the authorization header from the request
+//         const AuthHeader = req.headers.authorization;
         
-        const token = AuthHeader.split(" ")[1];
+//         // Step 2: Check if the authorization header is present and starts with 'Bearer '
+//         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Unauthorized",  // No token provided
+//             };
+//             console.log("Missing Token for Account Verification: ", responseData);
+//             return res.status(401).json(responseData); // Send a 401 Unauthorized response
+//         }
         
-        // verifyToken(token);
-        const decodedData = await jwt.verify(token, secretKey, async (err, decodedData) => {            
-            // 1) If any error is encountered during Account Verification, Log Error !
-            if (err) {
-                const responseData = { 
-                    success: false, 
-                    message: "token does not exist",
-                };
+//         // Step 3: Extract the token from the authorization header
+//         const token = AuthHeader.split(" ")[1];
+        
+//         // Step 4: Verify the token using a secret key
+//         const existingUser = await jwt.verify(token, secretKey);
+        
+//         // Step 5: If the token is valid, find the user by ID
+//         const _id = existingUser.id;
+//         const user = await User.findById(_id);
+        
+//         if (user) {
+//             // Step 6: If user exists, update their status to "approved" and set them as verified
+//             const email = user.email;   
+//             const dataToUpdate = {
+//                 status: "approved",
+//                 accessToken: token,
+//                 isVerified: true,
+//             };
+//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        
+//             const responseData = {
+//                 success: true,
+//                 data: updatedUser,
+//                 message: "Successful"
+//             };
+//             console.log("*********************************************************",
+//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//                 "\n*********************************************************",
+//                 "\nVerification Status: ", responseData,
+//                 "\n*********************************************************\n\n");
+//             return res.status(200).json(responseData); // Send a success response
+//         } else {
+//             // Step 7: If the user does not exist
+//             const responseData = {
+//                 success: false,
+//                 message: "user not found",
+//             };
+//             console.log("*********************************************************",
+//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//                 "\n*********************************************************",
+//                 "\nVerification Status: ", responseData,
+//                 "\n*********************************************************\n\n");
+//             return res.status(404).json(responseData); // Send a 404 Not Found response
+//         };
 
-                // Reject if there's an error
-                console.log("Email verification error: ", responseData);
-                return res.status(404).json(responseData);
-            }
+//     } catch (error) {
+//         // Step 8: Error handling for different cases
+//         if (error.name === 'TokenExpiredError') {
+//             // If the token has expired
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "Token has expired",
+//             };
+//             console.error('Token verification error: ', error); // Log the original error for debugging
+//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
+
+//         } else if (error.name === "JsonWebTokenError") {
+//             // If the token is invalid
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "Token does not exist",
+//             };
+//             console.error('Token verification error: ', error); // Log the original error for debugging
+//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
+
+//         } else {
+//             // Catch any other unexpected errors
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "An unexpected error occurred",
+//             };
+//             console.error('Unexpected error: ', error); // Log the original error for debugging
+//             return res.status(500).json(responseData.data); // Send a 500 Internal Server Error response
+//         };
+//     };
+// };
+
+exports.verifySignUp = async (req, res) => {
+
+    const AuthHeader = req.headers.authorization;
+    if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+        const responseData = { 
+            success: false, 
+            message: "Unauthorized",
+        };
+        console.log("Token required to verify account: ", responseData);
+        return res.status(401).json(responseData);
+    }
+    
+    const token = AuthHeader.split(" ")[1];
+    try {
+        const decodedData = await jwt.verify(token, secretKey);
+        console.log('Token is valid:', decodedData);
+
+        // Additional logic after successful token verification
+        const _id = decodedData.id;
+        const user = await User.findById(_id);
         
-            // If token was signed to an Existing User, find the Existing User by ID !
-            const _id = decodedData.id
-            const user = await User.findById(_id);
-            // const email = user.email;   
-            const dataToUpdate = {
-                status: "approved",
-                accessToken: token,
-                isVerified: true,
-            };
-            const updatedUser = await User.findOneAndUpdate({ email: user.email }, dataToUpdate, { new: true });               
-        
-            const responseData = {
+        // Step 6: If user exists, update their status to "approved" and set them as verified
+        const email = user.email;   
+        const dataToUpdate = {
+            status: "approved",
+            accessToken: token,
+            isVerified: true,
+        };
+        const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+    
+        const responseData = {
             success: true,
             data: updatedUser,
             message: "Successful"
-            };
-            console.log("*********************************************************",
-                "\n*****           NEW ACCOUNT VERIFICATION             ****",
-                "\n*********************************************************",
-                "\n\nVerification Status: ", responseData,
-                "\n\n*********************************************************\n\n");
-                return res.status(200).json(responseData);
-        });
-
-        // Token is valid and not expired
-        console.log(`Token is valid: ${decodedData}`);
-        // Proceed with your application logic
-
+        };
+        console.log("*********************************************************",
+            "\n*****           NEW ACCOUNT VERIFICATION             ****",
+            "\n*********************************************************",
+            "\nVerification Status: ", responseData,
+            "\n*********************************************************\n\n");
+        res.status(200).json(responseData); // Send a success response
     } catch (error) {
-        // Handle errors
         if (error.name === 'TokenExpiredError') {
-            // Token has expired
-            console.error('Token has expired.');
+            // console.error("Token has expired");
+            const responseData = { 
+                success: false, 
+                message: "Token has expired",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.status(403).json(responseData);
         } else if (error.name === 'JsonWebTokenError') {
-            // Invalid token
-            console.error('Invalid token.');
+            // console.error("Token does not exist");
+            const responseData = { 
+                success: false, 
+                message: "Token does not exist",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.status(401).json(responseData);
         } else {
-            // Other errors
-            console.error('Token verification error:', error.message);
-        }
+            // console.error('Token verification failed:', error.message);
+            const responseData = { 
+                success: false, 
+                message: "Unexpected error encountered",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.status(500).json(responseData);
+        };
     };
+    // await jwt.verify(token, secretKey, async (error, decodedData) => {
+    //     if (error) {
+    //         if (error.name === 'TokenExpiredError') {
+    //             // console.error("Token has expired");
+    //             const responseData = { 
+    //                 success: false, 
+    //                 message: "Token has expired",
+    //             };
+    //             console.log("Token verification status: ", responseData);
+    //             return res.status(403).json(responseData);
+    //         } else if (error.name === 'JsonWebTokenError') {
+    //             // console.error("Token does not exist");
+    //             const responseData = { 
+    //                 success: false, 
+    //                 message: "Token does not exist",
+    //             };
+    //             console.log("Token verification status: ", responseData);
+    //             return res.status(401).json(responseData);
+    //         } else {
+    //             // console.error('Token verification failed:', error.message);
+    //             const responseData = { 
+    //                 success: false, 
+    //                 message: "Unexpected error encountered",
+    //             };
+    //             console.log("Token verification status: ", responseData);
+    //             return res.status(500).json(responseData);
+    //         };
+    //     } else {
+    //         console.log('Token is valid:', decodedData);
+
+    //         // Additional logic after successful token verification
+    //         const _id = decodedData.id;
+    //         const user = await User.findById(_id);
+            
+    //         // Step 6: If user exists, update their status to "approved" and set them as verified
+    //         const email = user.email;   
+    //         const dataToUpdate = {
+    //             status: "approved",
+    //             accessToken: token,
+    //             isVerified: true,
+    //         };
+    //         const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        
+    //         const responseData = {
+    //             success: true,
+    //             data: updatedUser,
+    //             message: "Successful"
+    //         };
+    //         console.log("*********************************************************",
+    //             "\n*****           NEW ACCOUNT VERIFICATION             ****",
+    //             "\n*********************************************************",
+    //             "\nVerification Status: ", responseData,
+    //             "\n*********************************************************\n\n");
+    //         return res.status(200).json(responseData); // Send a success response
+    //     };
+    // });
 };
 
 // Our Login Logic starts here

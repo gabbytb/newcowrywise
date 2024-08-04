@@ -11,7 +11,7 @@ import { BrandLogo, BrandLogoWhite, brandOfficialLogo, brandOfficialWhiteLogo } 
 
 
 
-export default function Login() {
+function SignIn() {
 
 
     // console.clear();
@@ -29,7 +29,6 @@ export default function Login() {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-
 
 
 
@@ -161,8 +160,6 @@ export default function Login() {
             console.log("Error encountered: ", error);
         });
     };
-
-
     
 
 
@@ -379,3 +376,5 @@ export default function Login() {
         </div>
     );
 };
+
+export default SignIn;

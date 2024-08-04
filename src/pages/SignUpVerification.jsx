@@ -155,65 +155,75 @@ const SignUpVerification = () => {
     // ***** VERIFY EXISTING USER ***** //
     // ******************************** //
     const { token } = useParams();
-    // { accessToken: token }
     const [registeredUser, setRegisteredUser] = useState(null);
     console.log("***  Token VERIFICATION DETAILS  ***", 
-                "\nUser Account: ", registeredUser,
-                "\nToken: ", token);
-    
+                "\nRegistered User: ", registeredUser,
+                "\nGenerated Token: ", token);
+
+    const [authenticationSuccessful, setAuthenticationSuccessful] = useState(false);
+    console.log("Account Verification Successful: ", authenticationSuccessful);
+                
     const [authenticationResponseMsg, setAuthenticationResponseMsg] = useState(null);
-    // console.log("Account Verification: ", authenticationResponseMsg);
+    console.log("Account Verification Message: ", authenticationResponseMsg);
+
+
+    
+    
+    
 
     const [isLoading, setIsLoading] = useState(true);
     // console.log("Is Loading: ", isLoading);
 
     useEffect(() => {  
         window.scroll({ left: 0, top: 300, behavior: "smooth" });
-        function verifyAccountRegistration() {
+        async function verifyAccountRegistration() {
             const payload = {
                 accessToken: token,
             };
-            axios.post(`http://127.0.0.1:8000/user/verify/${token}`, payload, {
+            await axios.post(`http://127.0.0.1:8000/user/verify/${token}`, payload, {
                 headers: {                    
                     Authorization: `Bearer ${token}`,
                 },
             })
             .then((response) => {
                 const { success, data, message } = response.data;              
-                // if (!success && message === "Unauthorized: Bearer token required") {
-                //     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                //     setAuthenticationResponseMsg(message);
-                // }
-                
-                if (!success && message === "User not found") {
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                if ((!success) && (message === "Unauthorized")) {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    setAuthenticationSuccessful(success);
                     setAuthenticationResponseMsg(message);
-                } 
+                } else if ((!success) && (message === "Token has expired")) {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    setAuthenticationSuccessful(success);
+                    setAuthenticationResponseMsg(message); 
+                } else if ((!success) && (message === "Token does not exist")) {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    setAuthenticationSuccessful(success);
+                    setAuthenticationResponseMsg(message); 
+                } else if ((!success) && (message === "Token verification failed")) {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    setAuthenticationSuccessful(success);
+                    setAuthenticationResponseMsg(message); 
+                } else {
+                    setAuthenticationSuccessful(success);
+                    setAuthenticationResponseMsg(message);
+                    setRegisteredUser(data);
+                
+                    // let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
+                    // verificationStatus?.classList.remove('success-verify');
+                    // verificationStatus?.classList.add('success-message-info');
+                    
+                    // setTimeout(() => {
+                    //     verificationStatus?.classList.remove('success-message-info');
+                    //     verificationStatus?.classList.add('success-verify');
+                    // }, 500);
             
-                // if (!success && message === "token does not exist") {
-                //     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                //     setAuthenticationResponseMsg(message);                    
-                // }
-
-                setAuthenticationResponseMsg(message);
-                setRegisteredUser(data);
-
-                // let verificationStatus = document.querySelector('#signUpVerificationID .success-verify');
-                // verificationStatus?.classList.remove('success-verify');
-                // verificationStatus?.classList.add('success-message-info');
-                
-                // setTimeout(() => {
-                //     verificationStatus?.classList.remove('success-message-info');
-                //     verificationStatus?.classList.add('success-verify');
-                // }, 500);
-        
-                setTimeout(() => {
-                    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
-                }, 800);
-                
+                    // setTimeout(() => {
+                    //     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                    // }, 800);
+                };
             })
             .catch((error) => {
-                console.log("Account Verification Error: ", error);
+               console.log("Unexpected Error occurred: ", error.message);
             })
             .finally(() => {
                 setIsLoading(false);

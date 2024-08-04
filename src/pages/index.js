@@ -10,7 +10,7 @@ import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
 
 import SignUp from "./SignUp";
-import Login from "./Login";
+import SignIn from "./SignIn";
 import VerifySignUp from "./VerifySignUp";
 
 
@@ -50,7 +50,7 @@ export {
     OLDSignUpReVerification,
 
     SignUp,
-    Login,
+    SignIn,
     VerifySignUp,
     
     AdminDashboard,

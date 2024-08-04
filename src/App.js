@@ -9,7 +9,7 @@ import {
   SignUpVerification, 
   // VerifySignUp,
   SignUp,
-  Login, 
+  SignIn, 
   AdminDashboard, 
   DashboardUsersPage, DashboardUsersDetailsPage,
   DashboardStaffsPage, DashboardStaffsDetailsPage,
@@ -51,7 +51,7 @@ const App = () => {
       {/* <Route path="/user/verify" element={<VerifySignUp />}></Route> */}
       
       <Route path="/user/signup" element={<SignUp />}></Route>
-      <Route path="/user/login" element={<Login />}></Route>
+      <Route path="/user/login" element={<SignIn />}></Route>
 
       <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
       <Route path="/admin/users" element={<DashboardUsersPage />}></Route>
