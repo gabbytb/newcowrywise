@@ -141,8 +141,10 @@ function SignUp() {
                 setFormSubmitted(success);
                 setFormMessage(message);
 
+                // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
-
+                // RESET FORM AFTER SUBMISSION
+                
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info'); 
                                     
@@ -158,23 +160,6 @@ function SignUp() {
             console.log("Error encountered: ", error);
         });
     };
-
-
-
-
-    // // Create Function to Clear Input Only After Form Submission
-    // useEffect(() => {
-    //     if (formSubmitted === true) {
-    //         const timer = setTimeout(clearInput, 300);
-    //         return () => {
-    //             clearTimeout(timer);
-    //         };
-    //     };
-    // }, [formSubmitted]);
-    // function clearInput() {
-    //     document.getElementById("signUpForm").reset();
-    // };
-    // // Clear Input Only After Form Submission
 
 
 
@@ -289,4 +274,6 @@ function SignUp() {
 
 
 export default SignUp;
+
+
 
