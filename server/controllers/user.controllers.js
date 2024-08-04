@@ -128,9 +128,9 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
 
 
-        // **************************************** //
-        // ***    FE: SAVE USER INFORMATION     *** //
-        // **************************************** //
+        // ************************************ //
+        // ***  FE: CREATE "USER" INSTANCE  *** //
+        // ************************************ //
         const user = new User({
             _id: id * randNum,
             // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
@@ -140,7 +140,7 @@ exports.signUp = async (req, res) => {
             password: encryptedPassword,
             approvesTandC,
             status: 'pending',
-            expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
+            // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
             roles: [
                 {
                     _id: roleAdmin._id,
@@ -167,14 +167,31 @@ exports.signUp = async (req, res) => {
                 //     updatedAt: roleUsers.updatedAt,
                 // }
             ],
-        });
-        const newUser = await user.save();        
+        });       
         // ******************************************************************************************************//
-        // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // ******************************************************************************************************//
-        const token = await createJWT(newUser._id);
-        
-   
+        const token = await createJWT(user._id);
+        // ****************************************************
+        // ***  FE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
+        // ****************************************************
+        const decodedData = await jwt.verify(token, secretKey);
+        // console.log("Token Details: ", decodedData);
+        // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
+        // NOTE:-
+        //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
+        //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
+        //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
+        user.expirationInMs = decodedData.exp;
+        // **************************************** //
+        // ***    FE: SAVE USER INFORMATION     *** //
+        // **************************************** //
+        const newUser = await user.save();
+        // **************************************** //
+
+
+
+
         // **************************************** //
         // ***    BE: SAVE USER INFORMATION     *** //
         // **************************************** //
@@ -201,12 +218,26 @@ exports.signUp = async (req, res) => {
         // // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // // ******************************************************************************************************//
         // const token = await createJWT(user._id);
+        // // ****************************************************
+        // // ***  BE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
+        // // ****************************************************
+        // const decodedData = await jwt.verify(token, secretKey);
+        // // console.log("Token Details: ", decodedData);
+        // // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
+        // // NOTE:-
+        // //     1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
+        // //     2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
+        // //     3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
         // // ******************************************************************************************************//
-        // // ***  Add Generated TOKEN to New User before Saving to DB ***//
+        // // ***  Add Generated TOKEN & TIME OF EXPIRY, to New User before Saving to DB ***//
         // // ******************************************************************************************************//
         // user.accessToken = token;
-        // user.expirationInMs = encrypt(expiresIn),        // Encode: token lifespan
+        // user.expirationInMs = decodedData.exp;
+        // // **************************************** //
+        // // ***    BE: SAVE USER INFORMATION     *** //
+        // // **************************************** //
         // const newUser = await user.save();
+        // // **************************************** //
 
 
         // ***************************************************************//
@@ -309,155 +340,6 @@ exports.reSignUp = async (req, res) => {
 }
 
 // Our Account Verification Logic starts here
-// exports.verifySignUp = async (req, res) => {
-//     const AuthHeader = req.headers.authorization;
-//     if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
-//         const responseData = { 
-//             success: false, 
-//             message: "Unauthorized: Bearer token required",
-//         };
-//         console.log("Token required to verify account: ", responseData);
-//         return res.status(403).json(responseData);
-//     }
-    
-//     const token = AuthHeader.split(" ")[1];
-//     try {          
-//         const existingUser = await jwt.verify(token, secretKey);
-//         const _id = existingUser.id;
-//         const user = await User.findById(_id);
-//         if (!user) {
-//             const dataToUpdate = {
-//                 status: 'rejected',
-//                 isVerified: false,
-//                 accessToken: token,
-//             };
-//             const email = user.email;
-//             await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
-
-//             const responseData = { 
-//                 success: false,
-//                 message: "User not found",
-//             };
-//             console.log("Account verification failed: ", responseData);
-//             return res.status(404).json(responseData);
-//         } else {
-//             const dataToUpdate = {
-//                 status: 'approved',
-//                 isVerified: true,
-//                 accessToken: token,
-//             };
-//             const email = user.email;
-//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
-
-//             const responseData = {
-//                 success: true,
-//                 data: updatedUser,
-//                 message: "Account verification successful",
-//             };
-//             console.log("Account verification status: ", responseData);
-//             return res.status(200).json(responseData);
-//         };
-//     } catch (error) {
-//         const responseData = { 
-//             success: false, 
-//             message: "Internal Server Error",
-//         };
-//         console.error("Unexpected error during account verification: ", error);
-//         return res.status(500).json(responseData);
-//     }
-// };
-// exports.verifySignUp = async (req, res) => {
-//     try {
-//         // Step 1: Get the authorization header from the request
-//         const AuthHeader = req.headers.authorization;
-        
-//         // Step 2: Check if the authorization header is present and starts with 'Bearer '
-//         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
-//             const responseData = { 
-//                 success: false, 
-//                 message: "Unauthorized",  // No token provided
-//             };
-//             console.log("Missing Token for Account Verification: ", responseData);
-//             return res.status(401).json(responseData); // Send a 401 Unauthorized response
-//         }
-        
-//         // Step 3: Extract the token from the authorization header
-//         const token = AuthHeader.split(" ")[1];
-        
-//         // Step 4: Verify the token using a secret key
-//         const existingUser = await jwt.verify(token, secretKey);
-        
-//         // Step 5: If the token is valid, find the user by ID
-//         const _id = existingUser.id;
-//         const user = await User.findById(_id);
-        
-//         if (user) {
-//             // Step 6: If user exists, update their status to "approved" and set them as verified
-//             const email = user.email;   
-//             const dataToUpdate = {
-//                 status: "approved",
-//                 accessToken: token,
-//                 isVerified: true,
-//             };
-//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
-        
-//             const responseData = {
-//                 success: true,
-//                 data: updatedUser,
-//                 message: "Successful"
-//             };
-//             console.log("*********************************************************",
-//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
-//                 "\n*********************************************************",
-//                 "\nVerification Status: ", responseData,
-//                 "\n*********************************************************\n\n");
-//             return res.status(200).json(responseData); // Send a success response
-//         } else {
-//             // Step 7: If the user does not exist
-//             const responseData = {
-//                 success: false,
-//                 message: "user not found",
-//             };
-//             console.log("*********************************************************",
-//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
-//                 "\n*********************************************************",
-//                 "\nVerification Status: ", responseData,
-//                 "\n*********************************************************\n\n");
-//             return res.status(404).json(responseData); // Send a 404 Not Found response
-//         };
-
-//     } catch (error) {
-//         // Step 8: Error handling for different cases
-//         if (error.name === 'TokenExpiredError') {
-//             // If the token has expired
-//             const responseData = {
-//                 errorStatus: false,
-//                 errorMessage: "Token has expired",
-//             };
-//             console.error('Token verification error: ', error); // Log the original error for debugging
-//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
-
-//         } else if (error.name === "JsonWebTokenError") {
-//             // If the token is invalid
-//             const responseData = {
-//                 errorStatus: false,
-//                 errorMessage: "Token does not exist",
-//             };
-//             console.error('Token verification error: ', error); // Log the original error for debugging
-//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
-
-//         } else {
-//             // Catch any other unexpected errors
-//             const responseData = {
-//                 errorStatus: false,
-//                 errorMessage: "An unexpected error occurred",
-//             };
-//             console.error('Unexpected error: ', error); // Log the original error for debugging
-//             return res.status(500).json(responseData.data); // Send a 500 Internal Server Error response
-//         };
-//     };
-// };
-
 exports.verifySignUp = async (req, res) => {
 
     const AuthHeader = req.headers.authorization;
@@ -479,7 +361,7 @@ exports.verifySignUp = async (req, res) => {
         const _id = decodedData.id;
         const user = await User.findById(_id);
         
-        if (decodedData.id || !user._id) {
+        if (decodedData.id !== null && !user) {
             // console.error('Token verification failed:', error.message);
             const responseData = { 
                 success: false, 
@@ -527,13 +409,20 @@ exports.verifySignUp = async (req, res) => {
             };
             console.log("Token verification status: ", responseData);
             return res.status(401).json(responseData);
+        } else if (error.name === 'MongoServerError') {
+            // console.error("Duplicate User Entry");
+            const responseData = { 
+                success: false, 
+                message: "Duplicate User Entry",
+            };
+            console.log("Duplicate User Entry: ", responseData);
+            return res.status(401).json(responseData);
         } else {
-            // console.error('Token verification failed:', error.message);
             const responseData = { 
                 success: false, 
                 message: "Internal Server Error",
             };
-            console.error("Unexpected error during account verification: ", error);
+            console.error("Unexpected error during account verification: ", error.message);
             return res.status(500).json(responseData);
         };
     };

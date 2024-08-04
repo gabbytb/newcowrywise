@@ -1,0 +1,148 @@
+// exports.verifySignUp = async (req, res) => {
+//     const AuthHeader = req.headers.authorization;
+//     if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+//         const responseData = { 
+//             success: false, 
+//             message: "Unauthorized: Bearer token required",
+//         };
+//         console.log("Token required to verify account: ", responseData);
+//         return res.status(403).json(responseData);
+//     }
+    
+//     const token = AuthHeader.split(" ")[1];
+//     try {          
+//         const existingUser = await jwt.verify(token, secretKey);
+//         const _id = existingUser.id;
+//         const user = await User.findById(_id);
+//         if (!user) {
+//             const dataToUpdate = {
+//                 status: 'rejected',
+//                 isVerified: false,
+//                 accessToken: token,
+//             };
+//             const email = user.email;
+//             await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
+//             const responseData = { 
+//                 success: false,
+//                 message: "User not found",
+//             };
+//             console.log("Account verification failed: ", responseData);
+//             return res.status(404).json(responseData);
+//         } else {
+//             const dataToUpdate = {
+//                 status: 'approved',
+//                 isVerified: true,
+//                 accessToken: token,
+//             };
+//             const email = user.email;
+//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
+//             const responseData = {
+//                 success: true,
+//                 data: updatedUser,
+//                 message: "Account verification successful",
+//             };
+//             console.log("Account verification status: ", responseData);
+//             return res.status(200).json(responseData);
+//         };
+//     } catch (error) {
+//         const responseData = { 
+//             success: false, 
+//             message: "Internal Server Error",
+//         };
+//         console.error("Unexpected error during account verification: ", error);
+//         return res.status(500).json(responseData);
+//     }
+// };
+// exports.verifySignUp = async (req, res) => {
+//     try {
+//         // Step 1: Get the authorization header from the request
+//         const AuthHeader = req.headers.authorization;
+        
+//         // Step 2: Check if the authorization header is present and starts with 'Bearer '
+//         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Unauthorized",  // No token provided
+//             };
+//             console.log("Missing Token for Account Verification: ", responseData);
+//             return res.status(401).json(responseData); // Send a 401 Unauthorized response
+//         }
+        
+//         // Step 3: Extract the token from the authorization header
+//         const token = AuthHeader.split(" ")[1];
+        
+//         // Step 4: Verify the token using a secret key
+//         const existingUser = await jwt.verify(token, secretKey);
+        
+//         // Step 5: If the token is valid, find the user by ID
+//         const _id = existingUser.id;
+//         const user = await User.findById(_id);
+        
+//         if (user) {
+//             // Step 6: If user exists, update their status to "approved" and set them as verified
+//             const email = user.email;   
+//             const dataToUpdate = {
+//                 status: "approved",
+//                 accessToken: token,
+//                 isVerified: true,
+//             };
+//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        
+//             const responseData = {
+//                 success: true,
+//                 data: updatedUser,
+//                 message: "Successful"
+//             };
+//             console.log("*********************************************************",
+//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//                 "\n*********************************************************",
+//                 "\nVerification Status: ", responseData,
+//                 "\n*********************************************************\n\n");
+//             return res.status(200).json(responseData); // Send a success response
+//         } else {
+//             // Step 7: If the user does not exist
+//             const responseData = {
+//                 success: false,
+//                 message: "user not found",
+//             };
+//             console.log("*********************************************************",
+//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//                 "\n*********************************************************",
+//                 "\nVerification Status: ", responseData,
+//                 "\n*********************************************************\n\n");
+//             return res.status(404).json(responseData); // Send a 404 Not Found response
+//         };
+
+//     } catch (error) {
+//         // Step 8: Error handling for different cases
+//         if (error.name === 'TokenExpiredError') {
+//             // If the token has expired
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "Token has expired",
+//             };
+//             console.error('Token verification error: ', error); // Log the original error for debugging
+//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
+
+//         } else if (error.name === "JsonWebTokenError") {
+//             // If the token is invalid
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "Token does not exist",
+//             };
+//             console.error('Token verification error: ', error); // Log the original error for debugging
+//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
+
+//         } else {
+//             // Catch any other unexpected errors
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "An unexpected error occurred",
+//             };
+//             console.error('Unexpected error: ', error); // Log the original error for debugging
+//             return res.status(500).json(responseData.data); // Send a 500 Internal Server Error response
+//         };
+//     };
+// };

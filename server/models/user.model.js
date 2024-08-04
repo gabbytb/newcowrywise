@@ -8,7 +8,7 @@ module.exports = mongoose => {
         },
         userName: {
             type: String,
-            unique: true,
+            // unique: true,
         },
         firstName: {
             type: String,
@@ -62,7 +62,7 @@ module.exports = mongoose => {
             type: String,
         },
         expirationInMs: {
-            type: String,
+            type: Number,
         },
         roles: [
             {
