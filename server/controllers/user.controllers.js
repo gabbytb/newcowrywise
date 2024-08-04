@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
 // FOR JWT: Replace with a secure, secret key.
 const secretKey = process.env.secretKey || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
+// const verifyToken = require("../middlewares/VerifyToken");
 const expiresIn = process.env.expiresIn || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
 // FOR CRYPTO: Replace with a secure, secret key.
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
@@ -375,67 +376,61 @@ exports.verifySignUp = async (req, res) => {
         }
         
         const token = AuthHeader.split(" ")[1];
-        await jwt.verify(token, secretKey, async (err, decodedData) => {            
+        
+        // verifyToken(token);
+        const decodedData = await jwt.verify(token, secretKey, async (err, decodedData) => {            
             // 1) If any error is encountered during Account Verification, Log Error !
             if (err) {
                 const responseData = { 
                     success: false, 
                     message: "token does not exist",
                 };
+
+                // Reject if there's an error
                 console.log("Email verification error: ", responseData);
                 return res.status(404).json(responseData);
             }
-
+        
             // If token was signed to an Existing User, find the Existing User by ID !
             const _id = decodedData.id
             const user = await User.findById(_id);
-
-            //  2) If token exists and has not expired!
-            if (token) {
-                // Step 2: Update these Records for the User upon Account Verification
-                const dataToUpdate = {
-                    status: "approved",
-                    accessToken: token,
-                    isVerified: true,
-                };
-                const email = user.email;   
-                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
-                
-                const responseData = {
-                    success: true,
-                    data: updatedUser,
-                    message: "Successful"
-                };
-                console.log("*********************************************************",
-                    "\n*****           NEW ACCOUNT VERIFICATION             ****",
-                    "\n*********************************************************",
-                    "\n\nVerification Status: ", responseData,
-                    "\n\n*********************************************************\n\n");
-                return res.status(200).json(responseData);
-            } else {
-                const dataToUpdate = {
-                    status: "rejected",
-                    accessToken: token,
-                    isVerified: false,
-                };
-                const email = user.email;
-                const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
-                
-                const responseData = {
-                    success: false,
-                    data: updatedUser,
-                    message: "Token has expired"
-                };
-                console.log("*********************************************************",
-                    "\n*****           NEW ACCOUNT VERIFICATION             ****",
-                    "\n*********************************************************",
-                    "\n\nVerification Status: ", responseData,
-                    "\n\n*********************************************************\n\n");
-                return res.status(200).json(responseData);
+            // const email = user.email;   
+            const dataToUpdate = {
+                status: "approved",
+                accessToken: token,
+                isVerified: true,
             };
+            const updatedUser = await User.findOneAndUpdate({ email: user.email }, dataToUpdate, { new: true });               
+        
+            const responseData = {
+            success: true,
+            data: updatedUser,
+            message: "Successful"
+            };
+            console.log("*********************************************************",
+                "\n*****           NEW ACCOUNT VERIFICATION             ****",
+                "\n*********************************************************",
+                "\n\nVerification Status: ", responseData,
+                "\n\n*********************************************************\n\n");
+                return res.status(200).json(responseData);
         });
+
+        // Token is valid and not expired
+        console.log(`Token is valid: ${decodedData}`);
+        // Proceed with your application logic
+
     } catch (error) {
-        return res.status(500).send(`Internal Server Error: ${error}`);
+        // Handle errors
+        if (error.name === 'TokenExpiredError') {
+            // Token has expired
+            console.error('Token has expired.');
+        } else if (error.name === 'JsonWebTokenError') {
+            // Invalid token
+            console.error('Invalid token.');
+        } else {
+            // Other errors
+            console.error('Token verification error:', error.message);
+        }
     };
 };
 

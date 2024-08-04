@@ -40,6 +40,7 @@ export default function Login() {
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
 
+    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
 
@@ -172,6 +173,7 @@ export default function Login() {
     const [formMessageAccountVerification, setFormMessageAccountVerification] = useState(null);
     // console.log("Account Verification Attempt: ", formMessageAccountVerification);
 
+    // eslint-disable-next-line
     const [formSubmittedAccountVerification, setFormSubmittedAccountVerification] = useState(false);
     // console.log("Account Verification Attempt: ", formMessageAccountVerification);
 
@@ -237,6 +239,7 @@ export default function Login() {
     return (
         <div id="loginId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
              
+
             <div className='hidden sm:block left-pane relative'>               
                 <div className="relative h-full">
                     <div className="flex justify-center items-center w-full h-30 bg-white px-8">
@@ -248,10 +251,15 @@ export default function Login() {
             </div>
 
 
+
             <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
-                <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
-                    <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6 uppercase'>sign in</h2>
+                <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
                     
+                    {/* PAGE TITLE */}
+                    <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6 uppercase'>sign in</h2>
+                    {/* PAGE TITLE */}
+
+
                     {/* Error Message */}
                     <div className="mx-auto error">
                         {formMessage}
@@ -276,17 +284,25 @@ export default function Login() {
                     </div>
                     {/* Password */}
 
-
+                
+                    {/* LINK: REMEMBER ME & PASSWORD RESET */}
                     <div className='flex justify-between py-2'>{/* text-gray-400 */}
                         <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
                         <p><Link className='text-white' to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
-                    
-                    <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase'>sign in</button>
+                    {/* LINK: REMEMBER ME & PASSWORD RESET */}
 
+                    
+                    {/* SUBMIT BUTTON */}
+                    <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase'>sign in</button>
+                    {/* SUBMIT BUTTON */}
+
+
+                    {/* LINK: SIGN UP */}
                     <div className="text-white login__register">
                         Don't have an account? <Link className='capitalize' to={"/user/signup"}>sign up</Link>
                     </div>
+                    {/* LINK: SIGN UP */}
 
 
                     {/* Success Message */}
@@ -305,8 +321,12 @@ export default function Login() {
                         <div className="bg-gray-800 flex flex-col justify-center gap-16 rounded-lg right-pane">             
                             
 
-                            <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8'>
+                            <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8'>
+                                
+                                {/* PAGE TITLE */}
                                 <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6'>Verify account</h2>                            
+                                {/* PAGE TITLE */}
+
 
                                 {/* E-mail Address */}
                                 <div className="flex flex-col text-gray-400 py-2">
@@ -329,11 +349,17 @@ export default function Login() {
                                 </div>
                                 {/* E-mail Address */}
 
-                                <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase" onClick={handleVerification}>Verify email</button>
 
+                                {/* SUBMIT BUTTON */}
+                                <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase" onClick={handleVerification}>Verify email</button>
+                                {/* SUBMIT BUTTON */}
+
+
+                                {/* lINK: LOGIN */}
                                 <div className="text-white login__register">
                                     Have an account? <Link className="capitalize cursor-pointer" to={"/user/login"}>sign in</Link>
                                 </div>
+                                {/* lINK: LOGIN */}
 
 
                                 {/* VERIFICATION Success Message */}
@@ -352,4 +378,4 @@ export default function Login() {
 
         </div>
     );
-}
+};

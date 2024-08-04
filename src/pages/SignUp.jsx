@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import loginImg from '../assets/login.jpg'
@@ -32,32 +32,14 @@ function SignUp() {
     // *************************** //
 
 
-    
-    // *************************************** //
-    // *** Lay reference to these Elements *** //
-    // *************************************** //
-    const firstNameInput = React.useRef();
-    // console.log("First Name Input: ", firstNameInput);
-    const lastNameInput = React.useRef();
-    // console.log("Last Name Input: ", lastNameInput);
-    const emailInput = React.useRef();
-    // console.log("E-mail Input: ", emailInput);
-    const passwordInput = React.useRef();
-    // console.log("Password Input: ", passwordInput);
-    // const checkboxInput = React.useRef();    
-    // console.log("Checkbox Input: ", checkboxInput);
-    // *************************************** //
-    // *** Lay reference to these Elements *** //
-    // *************************************** //
-
 
 
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
-    const randNum = Math.floor(298 * Math.random()) + Math.floor(286 * Math.random());
-    const [user, setUser] = useState({ id: randNum, firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    console.log("*** CREATE NEW ACCOUNT FOR USER ***\nUser: ", user);
+    // const randNum = Math.floor(298 * Math.random()) + Math.floor(286 * Math.random());
+    const [user, setUser] = useState({ id: 23401, firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
+    console.log("*** ACCOUNT CREATION ***\nUser: ", user);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
@@ -72,7 +54,8 @@ function SignUp() {
 
     async function handleOnKeyUp(e) {
         let name = e.target.name;
-        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
         setUser({
             ...user,
             [name]: value
@@ -81,7 +64,7 @@ function SignUp() {
 
     async function handleOnChange(e) {
         let name = e.target.name;
-        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
         setUser({
             ...user,
@@ -97,10 +80,11 @@ function SignUp() {
             const { success, message, data } = response.data; 
             var errMsg = document.querySelector('#signUpId .error'); 
             var successMsg = document.querySelector('#signUpId .success');
-            // var reactivateAccountMsg = document.querySelector("#logIn .validate-account");
-            // console.log("Re-activate Account: ", reactivateAccountMsg);
 
-            if (!success && message === "Fill all the required inputs.") {
+            if ((!success) && (message === "Fill all the required inputs.")) {
+
+                /// Scroll to Top
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
                 // Perform These Actions
                 setFormSubmitted(success);
@@ -116,38 +100,48 @@ function SignUp() {
                 // Perform These Actions
 
             } else if ((!success) && (message === "E-mail exists. Please sign-in.")) {
+ 
                 /// Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
+                // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
+                    
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
+                // Perform These Actions
 
             } else if ((!success) && (message === "Username exists. Please sign-in.")) {
+   
                 /// Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
+                // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-
-                errMsg.classList.remove('error');
-                errMsg.classList.add('error-message-info');
+                    
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg.classList.remove('error-message-info');
-                    errMsg.classList.add('error');
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
                 }, 2800);
+                // Perform These Actions
+                                
+            } else {             
 
-            } else {               
+                // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
+
+                document.getElementById("signUpForm").reset();
 
                 successMsg.classList.remove('success');
                 successMsg.classList.add('success-message-info'); 
@@ -155,11 +149,9 @@ function SignUp() {
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('success');            
-                }, 3300);
+                }, 3500);
+                // Perform These Actions
 
-                setTimeout(() => {
-                    window.location.reload();        
-                }, 3400);
             };
         })
         .catch((error) => {
@@ -169,27 +161,21 @@ function SignUp() {
 
 
 
-    // Clear Input Only After Form Submission
-    useEffect(() => {
-        clearInput();
-    }, [formSubmitted]);
-    function clearInput() {
-        if (formSubmitted !== true) {
-            // firstNameInput.current.value = firstNameInput.current.value;
-            // lastNameInput.current.value = lastNameInput.current.value;
-            // emailInput.current.value = emailInput.current.value;
-            // passwordInput.current.value = passwordInput.current.value;
-            // checkboxInput.current.value = checkboxInput.current.value;
-            return;
-        } else {
-            firstNameInput.current.value = "";
-            lastNameInput.current.value = "";
-            emailInput.current.value = "";
-            passwordInput.current.value = "";
-            // checkboxInput.current.value = false;
-        };
-    };
-    // Clear Input Only After Form Submission
+
+    // // Create Function to Clear Input Only After Form Submission
+    // useEffect(() => {
+    //     if (formSubmitted === true) {
+    //         const timer = setTimeout(clearInput, 300);
+    //         return () => {
+    //             clearTimeout(timer);
+    //         };
+    //     };
+    // }, [formSubmitted]);
+    // function clearInput() {
+    //     document.getElementById("signUpForm").reset();
+    // };
+    // // Clear Input Only After Form Submission
+
 
 
 
@@ -212,8 +198,12 @@ function SignUp() {
 
 
             <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
-                <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 py-8 px-10' onSubmit={handleFormSubmission}>
+                <form id="signUpForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 py-8 px-10' onSubmit={handleFormSubmission}>
+                    
+                    {/* PAGE TITLE */}
                     <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6 uppercase'>sign up</h2>
+                    {/* PAGE TITLE */}
+
                     
                     {/* Error Message */}
                     <div className="mx-auto error">
@@ -234,11 +224,11 @@ function SignUp() {
                     {/* First & Last Name */}
                     <div className='flex flex-row text-gray-400 py-2 gap-12'>
                         <label htmlFor="firstName">First Name
-                            <input ref={firstNameInput} className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="firstName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="firstName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
                         </label>
 
                         <label htmlFor="lastName">Last Name
-                            <input ref={lastNameInput} className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="lastName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="lastName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
                         </label>
                     </div>
                     {/* First & Last Name */}
@@ -247,7 +237,7 @@ function SignUp() {
                     {/* E-mail Address */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="email">E-mail address
-                            <input ref={emailInput} className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
                         </label>
                     </div>
                     {/* E-mail Address */}
@@ -256,7 +246,7 @@ function SignUp() {
                     {/* Password */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="password">Password
-                            <input ref={passwordInput} className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
+                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
                         </label>
                     </div>
                     {/* Password */}
@@ -271,14 +261,18 @@ function SignUp() {
                     </div>
                     {/* Approves TandC */}
                     
+  
+                    {/* SUBMIT BUTTON */}
+                    <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
+                    {/* SUBMIT BUTTON */}
 
-                    <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase' onClick={clearInput}>submit</button>
 
-
+                    {/* LINK: SIGN IN & PASSWORD RESET */}
                     <div className="login__register flex flex-col mt-4 mb-6 gap-4">
                         <p className="text-white">Have an account? <Link className='capitalize' to={"/user/login"}>sign in</Link></p>
                         <p className="text-white"><Link to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
+                    {/* LINK: SIGN IN & PASSWORD RESET */}
 
 
                     {/* Success Message */}
@@ -286,6 +280,7 @@ function SignUp() {
                         {formMessage}
                     </div>
                     {/* Success Message */}
+
                 </form>
             </div>
         </div>
