@@ -731,9 +731,11 @@
 
 
 
+  
   /*****  Error Message CSS  *****/
-  /* .success-verify, */
-  .success, .error, .verify__error, .verify__success {
+  .success, .error, 
+  .signup__error, .signup__success
+  .verify__error, .verify__success {
     @apply
       hidden      
     ;
