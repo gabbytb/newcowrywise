@@ -4,32 +4,18 @@ const Role = db.roles;
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
+
+
+
 // FOR JWT: Replace with a secure, secret key.
 const secretKey = process.env.secretKey || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
-// const verifyToken = require("../middlewares/VerifyToken");
 const expiresIn = process.env.expiresIn || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
+
+
+
 // FOR CRYPTO: Replace with a secure, secret key.
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
 const IV_LENGTH = 16; // AES block size in bytes
-
-
-
-// *****************************************************************
-// Middlewares
-// *****************************************************************
-const encryptPassword = require("../middlewares/EncryptPassword");
-const createJWT = require("../middlewares/GenerateToken");
-const mailSender = require("../middlewares/MailSender");
-const verifyToken = require("../middlewares/VerifyToken");
-// *****************************************************************
-// *****************************************************************
-
-
-
-
-
-
-
 // Encrypt function
 const encrypt = (textToBeEncrypted) => {
     const iv = crypto.randomBytes(IV_LENGTH); // Generate a random initialization vector
@@ -39,7 +25,6 @@ const encrypt = (textToBeEncrypted) => {
     encrypted += cipher.final('hex'); // Finalize encryption
     return iv.toString('hex') + ':' + encrypted; // Return IV + encrypted text
 };
-
 // Decrypt function
 const decrypt = (encryptedText) => {
     const textParts = encryptedText.split(':'); // Split the IV and encrypted text
@@ -50,6 +35,23 @@ const decrypt = (encryptedText) => {
     decrypted += decipher.final('utf8'); // Finalize decryption
     return decrypted;
 };
+// FOR CRYPTO: Replace with a secure, secret key.
+
+
+
+// *****************************************************************
+// Middlewares
+// *****************************************************************
+const encryptPassword = require("../middlewares/EncryptPassword");
+const createJWT = require("../middlewares/GenerateToken");
+const mailSender = require("../middlewares/MailSender");
+// *****************************************************************
+// *****************************************************************
+
+
+
+
+
 
 
 
@@ -477,6 +479,16 @@ exports.verifySignUp = async (req, res) => {
         const _id = decodedData.id;
         const user = await User.findById(_id);
         
+        if (decodedData.id || !user._id) {
+            // console.error('Token verification failed:', error.message);
+            const responseData = { 
+                success: false, 
+                message: "User not found",
+            };
+            console.log("Invalid user: ", responseData);
+            return res.status(500).json(responseData);
+        }
+
         // Step 6: If user exists, update their status to "approved" and set them as verified
         const email = user.email;   
         const dataToUpdate = {
@@ -497,6 +509,7 @@ exports.verifySignUp = async (req, res) => {
             "\nVerification Status: ", responseData,
             "\n*********************************************************\n\n");
         res.status(200).json(responseData); // Send a success response
+    
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
             // console.error("Token has expired");
@@ -518,68 +531,12 @@ exports.verifySignUp = async (req, res) => {
             // console.error('Token verification failed:', error.message);
             const responseData = { 
                 success: false, 
-                message: "Unexpected error encountered",
+                message: "Internal Server Error",
             };
-            console.log("Token verification status: ", responseData);
+            console.error("Unexpected error during account verification: ", error);
             return res.status(500).json(responseData);
         };
     };
-    // await jwt.verify(token, secretKey, async (error, decodedData) => {
-    //     if (error) {
-    //         if (error.name === 'TokenExpiredError') {
-    //             // console.error("Token has expired");
-    //             const responseData = { 
-    //                 success: false, 
-    //                 message: "Token has expired",
-    //             };
-    //             console.log("Token verification status: ", responseData);
-    //             return res.status(403).json(responseData);
-    //         } else if (error.name === 'JsonWebTokenError') {
-    //             // console.error("Token does not exist");
-    //             const responseData = { 
-    //                 success: false, 
-    //                 message: "Token does not exist",
-    //             };
-    //             console.log("Token verification status: ", responseData);
-    //             return res.status(401).json(responseData);
-    //         } else {
-    //             // console.error('Token verification failed:', error.message);
-    //             const responseData = { 
-    //                 success: false, 
-    //                 message: "Unexpected error encountered",
-    //             };
-    //             console.log("Token verification status: ", responseData);
-    //             return res.status(500).json(responseData);
-    //         };
-    //     } else {
-    //         console.log('Token is valid:', decodedData);
-
-    //         // Additional logic after successful token verification
-    //         const _id = decodedData.id;
-    //         const user = await User.findById(_id);
-            
-    //         // Step 6: If user exists, update their status to "approved" and set them as verified
-    //         const email = user.email;   
-    //         const dataToUpdate = {
-    //             status: "approved",
-    //             accessToken: token,
-    //             isVerified: true,
-    //         };
-    //         const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
-        
-    //         const responseData = {
-    //             success: true,
-    //             data: updatedUser,
-    //             message: "Successful"
-    //         };
-    //         console.log("*********************************************************",
-    //             "\n*****           NEW ACCOUNT VERIFICATION             ****",
-    //             "\n*********************************************************",
-    //             "\nVerification Status: ", responseData,
-    //             "\n*********************************************************\n\n");
-    //         return res.status(200).json(responseData); // Send a success response
-    //     };
-    // });
 };
 
 // Our Login Logic starts here

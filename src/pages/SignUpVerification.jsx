@@ -203,6 +203,10 @@ const SignUpVerification = () => {
                     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
                     setAuthenticationSuccessful(success);
                     setAuthenticationResponseMsg(message); 
+                } else if ((!success) && (message === "User not found")) {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    setAuthenticationSuccessful(success);
+                    setAuthenticationResponseMsg(message); 
                 } else {
                     setAuthenticationSuccessful(success);
                     setAuthenticationResponseMsg(message);
