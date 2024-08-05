@@ -1,8 +1,9 @@
 import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import loginImg from '../assets/login.jpg'
-import { BrandLogo, BrandLogoWhite, brandOfficialLogo, brandOfficialWhiteLogo } from '../assets/images';
+import loginImg from "../assets/login.jpg";
+import { brandOfficialLogo, loginBg } from '../assets/images';
+
 
 
 
@@ -232,28 +233,33 @@ function SignIn() {
 
 
 
+    
 
     return (
-        <div id="loginId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
-             
+        <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
+            {/* ADD ton Below:  right-pane */}
+            <div className="flex flex-col justify-center gap-10 relative"> 
 
-            <div className='hidden sm:block left-pane relative'>               
-                <div className="relative h-full">
-                    <div className="flex justify-center items-center w-full h-30 bg-white px-8">
-                        <Link className="w-56" to={"/"}><img src={brandOfficialLogo} /></Link>
-                    </div>
-
-                    <img className='w-full h-full object-cover absolute top-0 -z-3' src={loginImg} alt="background-img" />
+                {/* PAGE NAV */}
+                <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
+                    <Link className="w-56" to={"/"}>
+                        <img src={brandOfficialLogo} />
+                    </Link>
                 </div>
-            </div>
+                {/* PAGE NAV */}
 
 
-
-            <div className='bg-gray-800 flex flex-col justify-center gap-16 right-pane'>             
-                <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8' onSubmit={handleLogin}>
+                <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-skin-signup-signin-bg p-8 px-8 z-1' onSubmit={handleLogin}>
                     
+                    {/* PAGE ICON */}
+                    <div className="flex justify-center">
+                        <img className="h-44 w-48" src={loginBg} alt="user-img" />
+                    </div>
+                    {/* PAGE ICON */}
+
+
                     {/* PAGE TITLE */}
-                    <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6 uppercase'>sign in</h2>
+                    <h2 className='text-2xl dark:text-white font-bold text-center mt-0 mb-16 uppercase opacity-30'>sign in</h2>
                     {/* PAGE TITLE */}
 
 
@@ -312,13 +318,13 @@ function SignIn() {
 
             
             {/* Signup Modal */}
-            <div className="relative inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
+            <div id="verifyId" className="hidden inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
                 <div className="grid place-content-center items-center h-full">
                     <div>
                         <div className="bg-gray-800 flex flex-col justify-center gap-16 rounded-lg right-pane">             
                             
 
-                            <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8'>
+                            <form id="verifyForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8'>
                                 
                                 {/* PAGE TITLE */}
                                 <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6'>Verify account</h2>                            
@@ -375,6 +381,172 @@ function SignIn() {
 
         </div>
     );
+
 };
 
 export default SignIn;
+
+
+
+
+
+
+
+
+
+
+// return (
+//     <div id="loginId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
+         
+
+//         {/* <div className='hidden sm:block left-pane relative'>               
+//             <div className="relative h-full">
+//                 <div className="flex justify-center items-center w-full h-30 bg-white px-8">
+//                     <Link className="w-56" to={"/"}><img src={brandOfficialLogo} /></Link>
+//                 </div>
+    
+//                 <img className="w-full h-full object-cover absolute top-0 -z-3" src={loginImg} alt="background-img" />
+//             </div>
+//         </div> */}
+
+
+//         <div className="flex flex-col justify-center items-center gap-8 w-full h-30 bg-white px-8">
+//             <Link className="w-80" to={"/"}>`
+//                 <img src={brandOfficialLogo} />
+//             </Link>
+//             <h1 className="text-2xl/6 -tracking-supertight font-black italic un">Reaching out to Great Minds.</h1>
+//         </div>
+
+//         <div className='bg-skin-signup-signin-bg flex flex-col justify-center gap-16 right-pane relative'>             
+//             <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-skin-signup-signin-bg p-8 px-8 z-1' onSubmit={handleLogin}>
+                
+//                 {/* PAGE ICON */}
+//                 <div className="flex justify-center">
+//                     <img className="h-32 w-36" src={loginBg} alt="user-img" />
+//                 </div>
+//                 {/* PAGE ICON */}
+
+
+//                 {/* PAGE TITLE */}
+//                 <h2 className='text-4xl dark:text-white font-bold text-center mt-0 mb-16 uppercase opacity-30'>sign in</h2>
+//                 {/* PAGE TITLE */}
+
+
+//                 {/* Error Message */}
+//                 <div className="mx-auto error">
+//                     {formMessage}
+//                 </div>
+//                 {/* Error Message */}
+
+
+//                 {/* E-mail Address */}
+//                 <div className="flex flex-col text-gray-400 py-2">
+//                     <label htmlFor="email">E-mail address
+//                         <input className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="email" name="email" onChange={handleChange} onKeyUp={handleKeyUp} />
+//                     </label>
+//                 </div>
+//                 {/* E-mail Address */}
+
+
+//                 {/* Password */}
+//                 <div className='flex flex-col text-gray-400 py-2'>
+//                     <label htmlFor="password">Password
+//                         <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleChange} onKeyUp={handleKeyUp} />
+//                     </label>
+//                 </div>
+//                 {/* Password */}
+
+            
+//                 {/* LINK: REMEMBER ME & PASSWORD RESET */}
+//                 <div className='flex justify-between py-2'>{/* text-gray-400 */}
+//                     <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
+//                     <p><Link className='text-white' to={"/user/password-reset"}>Forgot Password</Link></p>
+//                 </div>
+//                 {/* LINK: REMEMBER ME & PASSWORD RESET */}
+
+                
+//                 {/* SUBMIT BUTTON */}
+//                 <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase'>sign in</button>
+//                 {/* SUBMIT BUTTON */}
+
+
+//                 {/* LINK: SIGN UP */}
+//                 <div className="text-white login__register">
+//                     Don't have an account? <Link className='capitalize' to={"/user/signup"}>sign up</Link>
+//                 </div>
+//                 {/* LINK: SIGN UP */}
+
+
+//                 {/* Success Message */}
+//                 <div className="mt-6 mx-auto success">
+//                     {formMessage}
+//                 </div>
+//                 {/* Success Message */}
+//             </form>
+//         </div>
+
+        
+//         {/* Signup Modal */}
+//         <div id="verifyId" className="hidden inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
+//             <div className="grid place-content-center items-center h-full">
+//                 <div>
+//                     <div className="bg-gray-800 flex flex-col justify-center gap-16 rounded-lg right-pane">             
+                        
+
+//                         <form id="verifyForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8'>
+                            
+//                             {/* PAGE TITLE */}
+//                             <h2 className='text-4xl dark:text-white font-bold text-center mt-4 mb-6'>Verify account</h2>                            
+//                             {/* PAGE TITLE */}
+
+
+//                             {/* E-mail Address */}
+//                             <div className="flex flex-col text-gray-400 py-2">
+//                                 <label htmlFor="email">E-mail address
+//                                     <input 
+//                                         className="rounded-lg
+//                                             bg-gray-700 
+//                                             mt-2 
+//                                             p-2 
+//                                             focus:border-blue-500 
+//                                             focus:bg-gray-800 
+//                                             focus:outline-none"
+//                                         type="email"
+//                                         name="email"
+//                                         value={existingUser?.email} 
+//                                         onChange={handleOnChange} 
+//                                         disabled 
+//                                     />
+//                                 </label>
+//                             </div>
+//                             {/* E-mail Address */}
+
+
+//                             {/* SUBMIT BUTTON */}
+//                             <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase" onClick={handleVerification}>Verify email</button>
+//                             {/* SUBMIT BUTTON */}
+
+
+//                             {/* lINK: LOGIN */}
+//                             <div className="text-white login__register">
+//                                 Have an account? <Link className="capitalize cursor-pointer" to={"/user/login"}>sign in</Link>
+//                             </div>
+//                             {/* lINK: LOGIN */}
+
+
+//                             {/* VERIFICATION Success Message */}
+//                             <div className="mt-6 mx-auto verify__success">
+//                                 {formMessageAccountVerification}
+//                             </div>
+//                             {/* VERIFICATION Success Message */}
+//                         </form>
+
+
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//         {/* Signup Modal */}
+
+//     </div>
+// );

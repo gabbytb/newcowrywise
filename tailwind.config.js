@@ -115,7 +115,7 @@ module.exports = {
           'simple-blue': 'var(--admin-total-revenue-card-2)',
           'simple-purple': 'var(--admin-total-revenue-card-3)',
           'signup-box-bg': 'var(--signup-box-bg-color)',
-
+          'signup-signin-bg': 'var(--login-bg-black-color)',
         },
       },
       backgroundImage: {
@@ -170,6 +170,7 @@ module.exports = {
         '95.5': '22.5rem',
         '98': '25rem',
         '26.3': '26.3rem',
+        '26.88': '26rem',
         '121': '30.875rem',
         '122': '45rem',
         '122.5': '46rem',

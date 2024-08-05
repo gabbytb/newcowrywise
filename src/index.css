@@ -106,6 +106,7 @@
     /* LOGIN COLORS:-  Color mode HSL(hue, saturation, lightness) */
     --login-white-color: hsl(0, 0%, 100%);
     --login-black-color: hsl(0, 0%, 0%);
+    --login-bg-black-color: rgb(30, 33, 88);
 
     /* LOGIN FONT AND TYPOGRAPHY */
     /* .5rem = 8px | 1rem = 16px ... */
