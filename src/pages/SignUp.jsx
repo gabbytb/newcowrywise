@@ -140,10 +140,6 @@ function SignUp() {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-
-                // RESET FORM AFTER SUBMISSION
-                document.getElementById("signUpForm").reset();
-                // RESET FORM AFTER SUBMISSION
                 
                 successMsg.classList.remove('signup__success');
                 successMsg.classList.add('success-message-info'); 
@@ -161,9 +157,23 @@ function SignUp() {
         });
     };
 
+    useEffect(() => {
+        clearInput();
+    }, [formSubmitted]);
+
+    async function clearInput() {
+        if (formSubmitted === true) {
+            // RESET FORM AFTER SUBMISSION
+            document.getElementById("signUpForm").reset();
+            // RESET FORM AFTER SUBMISSION
+
+            setUser({ id: 23401, firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
+        };
+    };
 
 
-
+        
+    
     return (
         <div id="signUpId" className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
                         
@@ -246,7 +256,7 @@ function SignUp() {
                     
   
                     {/* SUBMIT BUTTON */}
-                    <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
+                    <button onClick={clearInput} className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
                     {/* SUBMIT BUTTON */}
 
 
@@ -269,7 +279,7 @@ function SignUp() {
 
         </div>
     );
-};
 
+};
 
 export default SignUp;
