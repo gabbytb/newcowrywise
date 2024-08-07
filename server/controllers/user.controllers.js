@@ -504,7 +504,12 @@ exports.logIn = async (req, res) => {
         return res.status(200).json(responseData);
 
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred' });
+        const responseData = { 
+            success: false, 
+            message: "Internal Server Error",
+        };
+        console.error("Unexpected error during account verification: ", error);
+        return res.status(500).json(responseData);  
     }
 }
 

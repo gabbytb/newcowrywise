@@ -15,7 +15,7 @@ import { brandOfficialLogo, loginBg } from '../assets/images';
 function SignUp() {  
 
 
-    // console.clear();
+    console.clear();
 
 
     // *************************** //
@@ -73,8 +73,8 @@ function SignUp() {
 
     async function handleFormSubmission(e) {
         e.preventDefault();
-        
-       await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+
+        await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message } = response.data; 
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
@@ -118,7 +118,7 @@ function SignUp() {
 
             } else if ((!success) && (message === "Username exists. Sign In")) {
    
-                /// Scroll to Top
+                // Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
                 // Perform These Actions
@@ -135,11 +135,19 @@ function SignUp() {
                 // Perform These Actions
                                 
             } else {             
-
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
                 
+                // RESET FORM AFTER SUBMISSION
+                document.getElementById("signUpForm").reset();
+
+                // RESET FORM AFTER SUBMISSION
+                setUser({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
+
+                // Scroll to Top
+                window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
+
                 successMsg.classList.remove('signup_success');
                 successMsg.classList.add('success-message-info'); 
                                     
@@ -149,27 +157,15 @@ function SignUp() {
                 }, 3500);
                 // Perform These Actions
 
+                setTimeout(() => {
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+                }, 3900);
             };
         })
         .catch((error) => {
             console.log("Error encountered: ", error);
         });
     };
-
-    useEffect(() => {
-        clearInput();
-    }, [formSubmitted]);
-    // Call this Function on:- FormSubmission
-    function clearInput() {
-        if (formSubmitted === true) {
-            // RESET FORM AFTER SUBMISSION
-            document.getElementById("signUpForm").reset();
-            // RESET FORM AFTER SUBMISSION
-
-            setUser({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-        };
-    };
-
 
         
     

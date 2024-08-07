@@ -33,7 +33,7 @@ const mailSender = (token, user) => {
             from: `Samuel Akinola Foundation <${mailServiceUser}>`,
             to: user.email,
             subject: 'Account Activation',
-            text: `Hello ${user.firstName}, \nThank you for registering with us at www.samuelakinolafoundation.com \nWe are more than just a foundation. \nPlease verify your account by clicking the link below to have a personalized experience. \n\n\n ${verificationLink} \n${activationLink}`,
+            text: `Hello ${user.firstName} ${user.lastName}, \nThank you for registering with us at www.samuelakinolafoundation.com \nWe are more than just a foundation. \nPlease verify your account by clicking the link below to have a personalized experience. \n\n\n ${verificationLink} \n${activationLink}`,
             html: `<strong>Hello ${user.firstName} ${user.lastName}</strong>, <br /><br />Thank you for registering with us at ${siteURL}. <br /><br />We are more than just a charity organization. <br /><br />Please verify your account by clicking the link below to have a personalized experience. <br /><br /><div className="mailer-wrapper">${verificationLink}</div> <br />${activationLink}<br /><br /><br />`,
         };
 
@@ -47,7 +47,7 @@ const mailSender = (token, user) => {
             // Attempt to send email
             transporter.sendMail(mailOptions, (error, mail) => {
                 if (error) {
-                    console.log('Error sending USER their "ACCOUNT VERIFICATION" E-mail:', error.message);
+                    console.log('Error sending User mail with token for Verification:', error.message);
 
                     if (retryAttempts < maxRetries) {
                         retryAttempts++;
@@ -55,7 +55,7 @@ const mailSender = (token, user) => {
 
                         setTimeout(attemptSend, 10000); // Retry after 15 seconds
                     } else {
-                        console.log(`Max retries (${maxRetries}) exceeded. Could not send email.`);
+                        console.log(`Max retries (${maxRetries}) exceeded. Could not send verification email to User.`);
                     };
                 } else {
                     console.log("E-mail Service Details:", mail.envelope,

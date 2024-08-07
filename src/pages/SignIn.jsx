@@ -168,7 +168,7 @@ function SignIn() {
 
 
     const [existingUser, setExistingUser] = useState(null);
-    console.log("Existing User: ", existingUser?.email);
+    // console.log("Existing User: ", existingUser?.email);
 
     const [formMessageAccountVerification, setFormMessageAccountVerification] = useState(null);
     // console.log("Account Verification Attempt: ", formMessageAccountVerification);
