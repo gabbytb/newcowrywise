@@ -1,7 +1,7 @@
 import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import loginImg from "../assets/login.jpg";
+// import loginImg from "../assets/login.jpg";
 import { brandOfficialLogo, loginBg } from '../assets/images';
 
 
@@ -34,6 +34,9 @@ function SignIn() {
 
 
 
+    // ******************************** //
+    // *** USER PAYLOAD FOR SIGN UP *** //
+    // ******************************** //
     const [user, setUser] = useState({ email: "", password: "", });
     // console.log("Login Attempt By: ", user.email);
 
@@ -72,24 +75,23 @@ function SignIn() {
             var successMsg = document.querySelector('#loginId .success');
             // var reactivateAccountMsg = document.querySelector("#logIn .validate-account");
             // console.log("Re-activate Account: ", reactivateAccountMsg);
+            // if (!success && message === "All fields are required.") {
 
-
-            if (!success && message === "All fields are required.") {
-
-                // Perform These Actions
-                setFormMessage(message);
-                setFormSubmitted(success);   
+            //     // Perform These Actions
+            //     setFormMessage(message);
+            //     setFormSubmitted(success);   
                   
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
+            //     errMsg?.classList.remove('error');
+            //     errMsg?.classList.add('error-message-info');
 
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
-                // Perform These Actions
+            //     setTimeout(() => {
+            //         errMsg?.classList.remove('error-message-info');
+            //         errMsg?.classList.add('error');
+            //     }, 2800);
+            //     // Perform These Actions
+            // } else 
 
-            } else if (!success && message === "Incorrect password or email.") {
+            if (!success && message === "Incorrect password or email.") {
                 
                 // Perform These Actions
                 setFormSubmitted(success);
@@ -194,8 +196,7 @@ function SignIn() {
             var errVerifyMsg = document.querySelector('#loginId .verify__error'); 
             var successVerifyMsg = document.querySelector('#loginId .verify__success');
 
-
-            if (!success && message === "No match found") {
+            if (!success && message === "Incorrect password or email") {
                 // Perform These Actions
                 setFormSubmittedAccountVerification(success); 
                 setFormMessageAccountVerification(message);
@@ -210,6 +211,20 @@ function SignIn() {
                 // Perform These Actions
             }
             
+            if (!success & message === "Login Failed: Account with this details does not exist") {
+                // Perform These Actions
+                setFormSubmittedAccountVerification(success); 
+                setFormMessageAccountVerification(message);
+                    
+                errVerifyMsg?.classList.remove('verify__error');
+                errVerifyMsg?.classList.add('error-message-info');
+
+                setTimeout(() => {
+                    errVerifyMsg?.classList.remove('error-message-info');
+                    errVerifyMsg?.classList.add('verify__error');
+                }, 2800);
+                // Perform These Actions
+            }
 
             setFormSubmittedAccountVerification(success); 
             // setWhoVerifiedAccount(data);
@@ -238,7 +253,7 @@ function SignIn() {
     return (
         <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
             {/* ADD ton Below:  right-pane */}
-            <div className="flex flex-col justify-center gap-10 relative"> 
+            <div className="flex flex-col justify-center gap-10 relative bg-skin-signup-signin-bg"> 
 
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
@@ -249,7 +264,7 @@ function SignIn() {
                 {/* PAGE NAV */}
 
 
-                <form id="logInForm" className='max-w-[400px] w-full mx-auto rounded-lg bg-skin-signup-signin-bg p-8 px-8 z-1' onSubmit={handleLogin}>
+                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-24 rounded-lg bg-skin-signup-signin-bg p-8 px-8 z-1' onSubmit={handleLogin}>
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -273,7 +288,7 @@ function SignIn() {
                     {/* E-mail Address */}
                     <div className="flex flex-col text-gray-400 py-2">
                         <label htmlFor="email">E-mail address
-                            <input className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="email" name="email" onChange={handleChange} onKeyUp={handleKeyUp} />
+                            <input className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="email" name="email" onChange={handleChange} onKeyUp={handleKeyUp} required />
                         </label>
                     </div>
                     {/* E-mail Address */}
@@ -282,7 +297,7 @@ function SignIn() {
                     {/* Password */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="password">Password
-                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleChange} onKeyUp={handleKeyUp} />
+                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleChange} onKeyUp={handleKeyUp} required />
                         </label>
                     </div>
                     {/* Password */}

@@ -735,7 +735,7 @@
   
   /*****  Error Message CSS  *****/
   .success, .error, 
-  .signup__error, .signup__success,
+  .signup_error, .signup_success,
   .verify__error, .verify__success {
     @apply
       hidden      

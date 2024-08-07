@@ -578,6 +578,7 @@ video {
   /* LOGIN COLORS:-  Color mode HSL(hue, saturation, lightness) */
   --login-white-color: hsl(0, 0%, 100%);
   --login-black-color: hsl(0, 0%, 0%);
+  --login-bg-black-color: rgb(30, 33, 88);
   /* LOGIN FONT AND TYPOGRAPHY */
   /* .5rem = 8px | 1rem = 16px ... */
   /* --login-body-font: "Poppins", sans-serif; */
@@ -1666,7 +1667,7 @@ tbody tr{
 }
 
 .success, .error, 
-  .signup__error, .signup__success,
+  .signup_error, .signup_success,
   .verify__error, .verify__success{
   display: none;
 }
@@ -3895,6 +3896,10 @@ tbody tr{
   z-index: 0;
 }
 
+.z-1{
+  z-index: 1;
+}
+
 .z-50{
   z-index: 50;
 }
@@ -3949,6 +3954,10 @@ tbody tr{
 
 .mb-2{
   margin-bottom: 0.5rem;
+}
+
+.mb-24{
+  margin-bottom: 6rem;
 }
 
 .mb-3{
@@ -4119,6 +4128,14 @@ tbody tr{
   height: 7rem;
 }
 
+.h-32{
+  height: 8rem;
+}
+
+.h-44{
+  height: 11rem;
+}
+
 .h-8{
   height: 2rem;
 }
@@ -4202,6 +4219,14 @@ tbody tr{
   width: 60%;
 }
 
+.w-36{
+  width: 9rem;
+}
+
+.w-48{
+  width: 12rem;
+}
+
 .w-56{
   width: 14rem;
 }
@@ -4216,6 +4241,10 @@ tbody tr{
 
 .w-8{
   width: 2rem;
+}
+
+.w-80{
+  width: 20rem;
 }
 
 .w-full{
@@ -4532,6 +4561,10 @@ tbody tr{
   background-color: var(--signup-box-bg-color);
 }
 
+.bg-skin-signup-signin-bg{
+  background-color: var(--login-bg-black-color);
+}
+
 .bg-skin-simple-blue{
   background-color: var(--admin-total-revenue-card-2);
 }
@@ -4705,6 +4738,10 @@ tbody tr{
   padding-bottom: 2rem;
 }
 
+.pb-0{
+  padding-bottom: 0px;
+}
+
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -4793,6 +4830,10 @@ tbody tr{
   padding-top: 1.25rem;
 }
 
+.pt-6{
+  padding-top: 1.5rem;
+}
+
 .pt-9{
   padding-top: 2.25rem;
 }
@@ -4833,6 +4874,11 @@ tbody tr{
 
 .text-2xl{
   font-size: 1.5rem;
+}
+
+.text-2xl\/6{
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 
 .text-2xl\/normal{
@@ -4916,12 +4962,20 @@ tbody tr{
   text-transform: capitalize;
 }
 
+.italic{
+  font-style: italic;
+}
+
 .leading-6{
   line-height: 1.5rem;
 }
 
 .-tracking-moretight{
   letter-spacing: -0.065em;
+}
+
+.-tracking-supertight{
+  letter-spacing: -0.015em;
 }
 
 .-tracking-tighten{
@@ -4991,6 +5045,10 @@ tbody tr{
 
 .opacity-0{
   opacity: 0;
+}
+
+.opacity-30{
+  opacity: 0.3;
 }
 
 .opacity-50{

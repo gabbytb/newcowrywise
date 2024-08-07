@@ -64,40 +64,40 @@ exports.signUp = async (req, res) => {
 
     try {
 
-        // Generate a Random Number
-        var randNum = await Math.floor(366 * Math.random()) + Math.floor(765 * Math.random()) + Math.floor(876 * Math.random());
-        
+        // Gets a unique number based on the current time
+        const uniqueId = Date.now();
+
         // Payload
-        const { id, firstName, lastName, email, password, approvesTandC } = req.body;
+        const { id=23401, firstName, lastName, email, password, approvesTandC } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
         if (!(firstName && lastName && email && password)) {
             const responseData = {
                 success: false,
-                message: "Fill all the required inputs."
+                message: "Fill all the required inputs"
             };
             console.log("*************************************",
                 "\n*********  SIGNUP  ATTEMPT  *********",
                 "\n*************************************",
                 "\nSignup Error: ", responseData.message + "\n\n");
             return res.status(200).json(responseData);
-        }
+        };
 
         const emailExists = await User.findOne({ email: email.toLowerCase() });
         if (emailExists) {
             const responseData = {
                 success: false,
-                message: "E-mail exists. Please sign-in."
+                message: "E-mail exists. Sign In"
             };
             console.log("E-mail Exists: ", emailExists);
             return res.status(200).json(responseData);
-        }
+        };
         
         // const usernameExists = await User.findOne({ userName: username.toLowerCase() });
         // if (usernameExists) {
         //     const responseData = {
         //         success: false,
-        //         message: "Username exists. Please sign-in."
+        //         message: "Username exists. Sign In"
         //     };
         //     // console.log("Username Exists: ", usernameExists);
         //     console.log("Username Exists: ", responseData);
@@ -130,44 +130,20 @@ exports.signUp = async (req, res) => {
 
         // ************************************ //
         // ***  FE: CREATE "USER" INSTANCE  *** //
-        // ************************************ //
+        // ************************************ //      
         const user = new User({
-            _id: id * randNum,
+            _id: uniqueId % id,
             // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             firstName,
             lastName,
-            email: email.toLowerCase(),          // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            email: email.toLowerCase(),
             password: encryptedPassword,
             approvesTandC,
             status: 'pending',
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [
-                {
-                    _id: roleAdmin._id,
-                    role: roleAdmin.role,
-                    createdAt: roleAdmin.createdAt,
-                    updatedAt: roleAdmin.updatedAt,
-                },
-                // {
-                //     _id: roleEditor._id, 
-                //     role: roleEditor.role, 
-                //     createdAt: roleEditor.createdAt, 
-                //     updatedAt: roleEditor.updatedAt, 
-                // },
-                // {
-                //     _id: roleStaff._id, 
-                //     role: roleStaff.role, 
-                //     createdAt: roleStaff.createdAt, 
-                //     updatedAt: roleStaff.updatedAt, 
-                // },
-                // {
-                //     _id: roleUsers._id, 
-                //     role: roleUsers.role, 
-                //     createdAt: roleUsers.createdAt, 
-                //     updatedAt: roleUsers.updatedAt,
-                // }
-            ],
-        });       
+            roles: [{ ...roleAdmin }]
+        });
+
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // ******************************************************************************************************//
@@ -252,7 +228,7 @@ exports.signUp = async (req, res) => {
         console.log("\n*********************************************************",
             "\n*****        TOKEN GENERATED FOR NEW USER           *****",
             `\n*********************************************************
-            \nAccess Token: ${token}`,
+            \nToken: ${token}`,
             "\n\n*********************************************************",
             "\n*****          NEW USER ACCOUNT DETAILS             *****",
             `\n*********************************************************
@@ -431,62 +407,48 @@ exports.verifySignUp = async (req, res) => {
 // Our Login Logic starts here
 exports.logIn = async (req, res) => {
 
-    try {
-        const { email, password } = req.body;
-
-        // 1) Required Payload.
-        if (!(email && password)) {
+    try {        
+        // 1) Required Payload
+        const { email, password } = req.body;  
+    
+        // 2) Check if User Email Exists
+        const user = await User.findOne({ email });    
+        if (!existingUser) {        
             const responseData = { 
                 success: false, 
-                message: "All fields are required.",
+                error: "Login Failed: Account with this details does not exist",
             };
-            console.log("*************************************",
-                        "\n**********  LOGIN ATTEMPT  **********",
-                        "\n*************************************",
-                        "\nLogin Error: ", responseData.message + "\n\n");
-            return res.status(200).json(responseData);
+            console.log("***********************************",
+                        "\n*****    LOG-IN ATTEMPT BY    *****",
+                        "\n***********************************",
+                        "\nUser ID: ", existingUser._id,
+                        "\nUser Owner: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser E-mail: ", existingUser.email,
+                        "\n***********************************\n");
+            return res.status(404).json(responseData);
         };
 
-        // 2) Check if E-mail belongs to a Registered User.
-        const user = await User.findOne({ email });        
-        if (!user) {        
-            const responseData = { 
-                success: false, 
-                message: "Incorrect password or email.",
-            };
-            console.log("***********************************",
-                        "\n*****    LOG-IN ATTEMPT BY    *****",
-                        "\n***********************************",
-                        "\nAccount ID: ", user._id,
-                        "\nAccount Owner: ", user.firstName + " " + user.lastName,
-                        "\nAccount E-mail: ", user.email,
-                        "\nIS PASSWORD CORRECT?: ", auth +
-                        "\nAccount Token: ", user.accessToken,
-                        "\n***********************************\n");
-            return res.status(200).json(responseData);
-        }
-
         // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
-        const auth = await bcrypt.compare(password, user.password);
-        if (!auth) {        
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if (!isPasswordCorrect) {        
             const responseData = { 
                 success: false, 
-                message: "Incorrect password or email.",
+                error: "Invalid password",
             };
             console.log("***********************************",
                         "\n*****    LOG-IN ATTEMPT BY    *****",
                         "\n***********************************",
-                        "\nAccount ID: ", user._id,
-                        "\nAccount Owner: ", user.firstName + " " + user.lastName,
-                        "\nAccount E-mail: ", user.email,
-                        "\nIS PASSWORD CORRECT?: ", auth +
-                        "\nAccount Token: ", user.accessToken,
+                        "\nUser ID: ", existingUser._id,
+                        "\nUser Owner: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser E-mail: ", existingUser.email,
+                        "\nIS User PASSWORD CORRECT?: ", isPasswordCorrect +
+                        "\nUser AccessToken: ", existingUser.accessToken,
                         "\n***********************************\n");
-            return res.status(200).json(responseData);
-        }
+            return res.status(401).json(responseData);
+        };
 
         // 4) Check if User Has Verified their Account Registration
-        if (!(user.isVerified && user.accessToken)) {
+        if (!(existingUser.isVerified && existingUser.accessToken)) {
             // ***********************************************************************************//
             // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
             // ***********************************************************************************//
@@ -507,10 +469,9 @@ exports.logIn = async (req, res) => {
                 data: user,
                 message: `Kindly verify your account.`
             };
-            return res.status(200).json(responseData);
-        }
+            return res.status(401).json(responseData);
+        };
         
-
         // 5) Assign Token to Logged-In User
         // NOTE:-  Token has a Life-span.
         const token = await createJWT(user._id);
@@ -541,9 +502,9 @@ exports.logIn = async (req, res) => {
             message: "Successful",
         };
         return res.status(200).json(responseData);
-        
+
     } catch (error) {
-        return res.status(500).send(`Internal Server Error: ${error}`);
+        res.status(500).json({ error: 'An error occurred' });
     }
 }
 
