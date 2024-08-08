@@ -407,8 +407,8 @@ exports.verifySignUp = async (req, res) => {
 // Our Login Logic starts here
 exports.logIn = async (req, res) => {
 
-    try {        
-        
+    try {
+
         // 1) Required Payload
         const { email, password } = req.body;  
     
@@ -420,16 +420,23 @@ exports.logIn = async (req, res) => {
                 success: false, 
                 error: "Login Failed: Account with this details does not exist",
             };
-            console.log("***********************************",
-                        "\n*****    LOG-IN ATTEMPT BY    *****",
-                        "\n***********************************",
+            console.log("***************************************",
+                        "\n*****      LOG-IN ATTEMPT BY      *****",
+                        "\n***************************************",
                         "\nUser ID: ", existingUser._id,
-                        "\nUser Owner: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
                         "\nUser E-mail: ", existingUser.email,
-                        "\n***********************************\n");
+                        "\nUser Password is CORRECT: ", isPasswordCorrect,
+                        "\n***************************************",
+                        "\n***   ADDITIONAL USER INFORMATION   ***",
+                        "\n***************************************",
+                        "\nUser Account isVerified: ", existingUser.isVerified,
+                        "\nUser Account Status: ", existingUser.status.toUpperCase(),
+                        "\nUser Account ROLE(S): ", existingUser.roles,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken ,
+                        "\n***************************************\n");
             return res.status(404).json(responseData);
         };
-        console.log("Existing E-mail: ", existingUser);
         
 
         // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
@@ -437,20 +444,25 @@ exports.logIn = async (req, res) => {
         if (!isPasswordCorrect) {        
             const responseData = { 
                 success: false, 
-                error: "Invalid password",
+                error: "Login Failed: Account with this details does not exist",
             };
-            console.log("***********************************",
-                        "\n*****    LOG-IN ATTEMPT BY    *****",
-                        "\n***********************************",
+            console.log("***************************************",
+                        "\n*****      LOG-IN ATTEMPT BY      *****",
+                        "\n***************************************",
                         "\nUser ID: ", existingUser._id,
-                        "\nUser Owner: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
                         "\nUser E-mail: ", existingUser.email,
-                        "\nIS User PASSWORD CORRECT?: ", isPasswordCorrect +
-                        "\nUser AccessToken: ", existingUser.accessToken,
-                        "\n***********************************\n");
+                        "\nUser Password is CORRECT: ", isPasswordCorrect,
+                        "\n***************************************",
+                        "\n***   ADDITIONAL USER INFORMATION   ***",
+                        "\n***************************************",
+                        "\nUser Account isVerified: ", existingUser.isVerified,
+                        "\nUser Account Status: ", existingUser.status.toUpperCase(),
+                        "\nUser Account ROLE(S): ", existingUser.roles,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken ,
+                        "\n***************************************\n");
             return res.status(401).json(responseData);
-        };
-        console.log("Existing Passowrd: ", isPasswordCorrect);
+        };        
 
 
         // 4) Check if User Has Verified their Account Registration
@@ -461,23 +473,28 @@ exports.logIn = async (req, res) => {
             console.log("***********************************",
                         "\n*****    LOG-IN ATTEMPT BY    *****",
                         "\n***********************************",
-                        "\nAccount ID: ", existingUser._id,
-                        "\nAccount Owner: ", existingUser.firstName + " " + existingUser.lastName,
-                        "\nAccount E-mail: ", existingUser.email,
-                        "\nAccount Token: ", existingUser.accessToken,
-                        "\nAccount isVerified: ", existingUser.isVerified,
-                        "\nACCOUNT HAVE ROLE(S): ", existingUser.roles, "\n");
+                        "\nUser ID: ", existingUser._id,
+                        "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser E-mail: ", existingUser.email,
+                        "\nUser Password is CORRECT: ", isPasswordCorrect,
+                        "\n***************************************",
+                        "\n***   ADDITIONAL USER INFORMATION   ***",
+                        "\n***************************************",
+                        "\nUser Account isVerified: ", existingUser.isVerified,
+                        "\nUser Account Status: ", existingUser.status.toUpperCase(),
+                        "\nUser Account ROLE(S): ", existingUser.roles,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken ,
+                        "\n");
             // ***********************************************************************************//
             // NOTE:- Use USER 'accessToken' for Authentication & Authorization
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
                 data: existingUser,
-                message: `Kindly verify your account.`
+                message: `Kindly verify your account`
             };
             return res.status(401).json(responseData);
-        }
-        console.log("Existing Passowrd: ", isPasswordCorrect);
+        };
     
 
         // 5) Assign Token to Logged-In User
@@ -494,12 +511,17 @@ exports.logIn = async (req, res) => {
             "\n***********************************************",
             "\n=====>       CURRENT LOGGED-IN USER      <=====",
             "\n***********************************************",
-            "\nAccount ID: ", existingUser._id,
-            "\nAccount Owner: ", existingUser.firstName + " " + existingUser.lastName,
-            "\nAccount E-mail: ", existingUser.email,
-            "\nAccount Token: ", existingUser.accessToken,
-            "\nAccount isVerified: ", existingUser.isVerified,
-            "\nACCOUNT HAVE ROLE(S): ", existingUser.roles, "\n");
+            "\nUser ID: ", existingUser._id,
+            "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
+            "\nUser E-mail: ", existingUser.email,
+            "\n***************************************",
+            "\n***   ADDITIONAL USER INFORMATION   ***",
+            "\n***************************************",
+            "\nUser Account isVerified: ", existingUser.isVerified,
+            "\nUser Account Status: ", existingUser.status.toUpperCase(),
+            "\nUser Account ROLE(S): ", existingUser.roles,
+            "\nNEW User AccessToken: ", existingUser.accessToken,
+            "\n");
         // ***********************************************************************************//
         // NOTE:- By assigning Token to Logged-in User,
         //        Now you can use User's "accessToken" 

@@ -32,8 +32,6 @@ function SignIn() {
     // *************************** //
 
 
-
-
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
@@ -73,25 +71,8 @@ function SignIn() {
             const { success, message, data } = response.data; 
             var errMsg = document.querySelector('#loginId .error'); 
             var successMsg = document.querySelector('#loginId .success');
-            // var reactivateAccountMsg = document.querySelector("#logIn .validate-account");
-            // console.log("Re-activate Account: ", reactivateAccountMsg);
-            // if (!success && message === "All fields are required.") {
-
-            //     // Perform These Actions
-            //     setFormMessage(message);
-            //     setFormSubmitted(success);   
-                  
-            //     errMsg?.classList.remove('error');
-            //     errMsg?.classList.add('error-message-info');
-
-            //     setTimeout(() => {
-            //         errMsg?.classList.remove('error-message-info');
-            //         errMsg?.classList.add('error');
-            //     }, 2800);
-            //     // Perform These Actions
-            // } else 
-
-            if (!success && message === "Incorrect password or email.") {
+            
+            if (!success && message === "Login Failed: Account with this details does not exist") {
                 
                 // Perform These Actions
                 setFormSubmitted(success);
@@ -103,30 +84,15 @@ function SignIn() {
                 setTimeout(() => {
                     errMsg?.classList.remove('error-message-info');
                     errMsg?.classList.add('error');
-                }, 2800);
+                }, 2500);
                 // Perform These Actions
 
-            } else if (!success && message === "Invalid account.") {
-                
+            } else if (!success && message === "Kindly verify your account") {
+
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-
-                errMsg?.classList.remove('error');
-                errMsg?.classList.add('error-message-info');
-
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('error');
-                }, 2800);
-                // Perform These Actions
-
-            } else if (!success && message === "Kindly verify your account.") {
-
-                // Perform These Actions
                 setExistingUser(data);
-                setFormSubmitted(success);
-                setFormMessage(message);
 
                 errMsg?.classList.remove('error');
                 errMsg?.classList.add('error-message-info');
@@ -134,7 +100,7 @@ function SignIn() {
                 setTimeout(() => {
                     errMsg?.classList.remove('error-message-info');
                     errMsg?.classList.add('error');
-                }, 2800);
+                }, 2500);
                 // Perform These Actions
 
             } else {
@@ -142,9 +108,8 @@ function SignIn() {
                 // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);
-
                 localStorage.setItem('user', JSON.stringify(data));
-                
+
                 successMsg?.classList.remove('success');
                 successMsg?.classList.add('success-message-info');
 
@@ -153,8 +118,10 @@ function SignIn() {
                     successMsg?.classList.add('success');
                 }, 2500);
 
-                const redirToAdminDashboard = "/admin/dashboard";
-                window.location = redirToAdminDashboard;
+                setTimeout(() => {
+                    const redirToAdminDashboard = "/admin/dashboard";
+                    window.location = redirToAdminDashboard;
+                }, 2800);
                 // Perform These Actions
 
             };
@@ -164,6 +131,8 @@ function SignIn() {
         });
     };
     
+
+
 
 
 
