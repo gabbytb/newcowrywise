@@ -408,12 +408,14 @@ exports.verifySignUp = async (req, res) => {
 exports.logIn = async (req, res) => {
 
     try {        
+        
         // 1) Required Payload
         const { email, password } = req.body;  
     
+
         // 2) Check if User Email Exists
-        const user = await User.findOne({ email });    
-        if (!user) {        
+        const existingUser = await User.findOne({ email });    
+        if (!existingUser) {        
             const responseData = { 
                 success: false, 
                 error: "Login Failed: Account with this details does not exist",
@@ -427,9 +429,11 @@ exports.logIn = async (req, res) => {
                         "\n***********************************\n");
             return res.status(404).json(responseData);
         };
+        console.log("Existing E-mail: ", existingUser);
+        
 
         // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
         if (!isPasswordCorrect) {        
             const responseData = { 
                 success: false, 
@@ -446,37 +450,42 @@ exports.logIn = async (req, res) => {
                         "\n***********************************\n");
             return res.status(401).json(responseData);
         };
+        console.log("Existing Passowrd: ", isPasswordCorrect);
+
 
         // 4) Check if User Has Verified their Account Registration
-        if (!(user.isVerified && user.accessToken)) {
+        if (!(existingUser.isVerified && existingUser.accessToken)) {
             // ***********************************************************************************//
             // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
             // ***********************************************************************************//
             console.log("***********************************",
                         "\n*****    LOG-IN ATTEMPT BY    *****",
                         "\n***********************************",
-                        "\nAccount ID: ", user._id,
-                        "\nAccount Owner: ", user.firstName + " " + user.lastName,
-                        "\nAccount E-mail: ", user.email,
-                        "\nAccount Token: ", user.accessToken,
-                        "\nAccount isVerified: ", user.isVerified,
-                        "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
+                        "\nAccount ID: ", existingUser._id,
+                        "\nAccount Owner: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nAccount E-mail: ", existingUser.email,
+                        "\nAccount Token: ", existingUser.accessToken,
+                        "\nAccount isVerified: ", existingUser.isVerified,
+                        "\nACCOUNT HAVE ROLE(S): ", existingUser.roles, "\n");
             // ***********************************************************************************//
             // NOTE:- Use USER 'accessToken' for Authentication & Authorization
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
-                data: user,
+                data: existingUser,
                 message: `Kindly verify your account.`
             };
             return res.status(401).json(responseData);
-        };
-        
+        }
+        console.log("Existing Passowrd: ", isPasswordCorrect);
+    
+
         // 5) Assign Token to Logged-In User
         // NOTE:-  Token has a Life-span.
-        const token = await createJWT(user._id);
-        user.accessToken = token;
-        
+        const token = await createJWT(existingUser._id);
+        existingUser.accessToken = token;
+
+
         // ***********************************************************************************//
         // *************                CURRENT LOGGED-IN USER                  **************//
         // ***********************************************************************************//
@@ -485,12 +494,12 @@ exports.logIn = async (req, res) => {
             "\n***********************************************",
             "\n=====>       CURRENT LOGGED-IN USER      <=====",
             "\n***********************************************",
-            "\nAccount ID: ", user._id,
-            "\nAccount Owner: ", user.firstName + " " + user.lastName,
-            "\nAccount E-mail: ", user.email,
-            "\nAccount Token: ", user.accessToken,
-            "\nAccount isVerified: ", user.isVerified,
-            "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
+            "\nAccount ID: ", existingUser._id,
+            "\nAccount Owner: ", existingUser.firstName + " " + existingUser.lastName,
+            "\nAccount E-mail: ", existingUser.email,
+            "\nAccount Token: ", existingUser.accessToken,
+            "\nAccount isVerified: ", existingUser.isVerified,
+            "\nACCOUNT HAVE ROLE(S): ", existingUser.roles, "\n");
         // ***********************************************************************************//
         // NOTE:- By assigning Token to Logged-in User,
         //        Now you can use User's "accessToken" 
@@ -498,7 +507,7 @@ exports.logIn = async (req, res) => {
         // ***********************************************************************************//  
         const responseData = {
             success: true,
-            data: user,
+            data: existingUser,
             message: "Successful",
         };
         return res.status(200).json(responseData);
@@ -508,7 +517,7 @@ exports.logIn = async (req, res) => {
             success: false, 
             message: "Internal Server Error",
         };
-        console.error("Unexpected error during account verification: ", error);
+        console.error("Unexpected error during Login: ", error);
         return res.status(500).json(responseData);  
     }
 }  //Working
