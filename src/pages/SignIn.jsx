@@ -87,6 +87,22 @@ function SignIn() {
                 }, 2500);
                 // Perform These Actions
 
+            } else if (!success && message === "Login Failed: Incorrect password") {
+                
+                // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+                setExistingUser(data);
+
+                errMsg?.classList.remove('error');
+                errMsg?.classList.add('error-message-info');
+
+                setTimeout(() => {
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('error');
+                }, 2500);
+                // Perform These Actions
+
             } else if (!success && message === "Kindly verify your account") {
 
                 // Perform These Actions

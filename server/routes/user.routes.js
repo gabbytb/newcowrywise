@@ -13,6 +13,10 @@ module.exports = app => {
     
 
 
+
+
+    
+
     // Create a new "User" DATA using this API
     router.post("/api/v1/admin/users/manage/create", cors(corsOptions), users.signUp);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/create") for the frontend to access.
@@ -27,7 +31,12 @@ module.exports = app => {
     router.post("/user/verify/:token", cors(corsOptions), users.verifySignUp); 
     // Expose this endpoint(i.e "http://127.0.0.1:3000/user/verify/:token") for the frontend to access.
     
-        
+    
+    // QUERY TOKEN: Verify All "User" Accounts using this API
+    router.post("/user/verify?token=:token", cors(corsOptions), users.queryTokenToVerifySignUp);
+    // Expose this endpoint(i.e "http://127.0.0.1:3000/user/verify?token=:token") for the frontend to access.
+    
+
     // Login User
     router.post("/api/v1/auth/login", users.logIn);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/login") for the frontend to access.

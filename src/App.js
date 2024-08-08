@@ -35,8 +35,9 @@ ReactGA.initialize(TRACKING_ID);
 const App = () => {
   
   useEffect(() => {
-    let pageViews = ReactGA.pageview(window.location.pathname + window.location.search);
-    console.log("TRACKING PAGE VIEWS: ", pageViews);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    // let pageViews = 
+    // console.log("TRACKING PAGE VIEWS: ", pageViews);
   }, []);
 
   return (

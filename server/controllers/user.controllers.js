@@ -2,40 +2,37 @@ const db = require("../models");
 const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
-const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
-
+// const crypto = require('crypto');
 
 
 // FOR JWT: Replace with a secure, secret key.
-const secretKey = process.env.secretKey || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
-const expiresIn = process.env.expiresIn || 'your-32-character-secret-key-here'; // 32 bytes for AES-256;
-
+const secretKey = process.env.secretKey || '!wasinvincibleallalongtheydunno!';   // 32 bytes for AES-256;
 
 
 // FOR CRYPTO: Replace with a secure, secret key.
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
-const IV_LENGTH = 16; // AES block size in bytes
-// Encrypt function
-const encrypt = (textToBeEncrypted) => {
-    const iv = crypto.randomBytes(IV_LENGTH); // Generate a random initialization vector
-    const cipher = crypto.createCipheriv('aes-256-ctr', Buffer.from(ENCRYPTION_KEY, 'utf8'), iv); // Create cipher
-    let encrypted = cipher.update(textToBeEncrypted, 'utf8', 'hex'); // Encrypt text
-    // let encrypted = cipher.update(String(textToBeEncrypted), 'utf8', 'hex'); // Encrypt text
-    encrypted += cipher.final('hex'); // Finalize encryption
-    return iv.toString('hex') + ':' + encrypted; // Return IV + encrypted text
-};
-// Decrypt function
-const decrypt = (encryptedText) => {
-    const textParts = encryptedText.split(':'); // Split the IV and encrypted text
-    const iv = Buffer.from(textParts.shift(), 'hex'); // Extract the IV
-    const encryptedTextBuffer = Buffer.from(textParts.join(':'), 'hex'); // Extract the encrypted text
-    const decipher = crypto.createDecipheriv('aes-256-ctr', Buffer.from(ENCRYPTION_KEY, 'utf8'), iv); // Create decipher
-    let decrypted = decipher.update(encryptedTextBuffer, 'hex', 'utf8'); // Decrypt text
-    decrypted += decipher.final('utf8'); // Finalize decryption
-    return decrypted;
-};
-// FOR CRYPTO: Replace with a secure, secret key.
+// const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
+// const IV_LENGTH = 16; // AES block size in bytes
+// // Encrypt function
+// const encrypt = (textToBeEncrypted) => {
+//     const iv = crypto.randomBytes(IV_LENGTH); // Generate a random initialization vector
+//     const cipher = crypto.createCipheriv('aes-256-ctr', Buffer.from(ENCRYPTION_KEY, 'utf8'), iv); // Create cipher
+//     let encrypted = cipher.update(textToBeEncrypted, 'utf8', 'hex'); // Encrypt text
+//     // let encrypted = cipher.update(String(textToBeEncrypted), 'utf8', 'hex'); // Encrypt text
+//     encrypted += cipher.final('hex'); // Finalize encryption
+//     return iv.toString('hex') + ':' + encrypted; // Return IV + encrypted text
+// };
+// // Decrypt function
+// const decrypt = (encryptedText) => {
+//     const textParts = encryptedText.split(':'); // Split the IV and encrypted text
+//     const iv = Buffer.from(textParts.shift(), 'hex'); // Extract the IV
+//     const encryptedTextBuffer = Buffer.from(textParts.join(':'), 'hex'); // Extract the encrypted text
+//     const decipher = crypto.createDecipheriv('aes-256-ctr', Buffer.from(ENCRYPTION_KEY, 'utf8'), iv); // Create decipher
+//     let decrypted = decipher.update(encryptedTextBuffer, 'hex', 'utf8'); // Decrypt text
+//     decrypted += decipher.final('utf8'); // Finalize decryption
+//     return decrypted;
+// };
+// // FOR CRYPTO: Replace with a secure, secret key.
 
 
 
@@ -250,7 +247,7 @@ exports.signUp = async (req, res) => {
         console.error("Unexpected error during account verification: ", error);
         return res.status(500).json(responseData);  
     }
-};  //Working
+};  // THOROUGHLY Tested === Working
 
 // Our Account Re-Activation Logic starts here
 exports.reSignUp = async (req, res) => {
@@ -313,7 +310,7 @@ exports.reSignUp = async (req, res) => {
         console.error("Database error during account re-verification: ", error);
         return res.status(500).json(responseData); 
     }
-}
+};  // THOROUGHLY Tested === Working
 
 // Our Account Verification Logic starts here
 exports.verifySignUp = async (req, res) => {
@@ -402,20 +399,112 @@ exports.verifySignUp = async (req, res) => {
             return res.status(500).json(responseData);
         };
     };
-};  //Working
+};  // THOROUGHLY Tested === Working
+
+// Our Account Verification Logic starts here
+exports.queryTokenToVerifySignUp = async (req, res) => {
+
+    const AuthHeader = req.headers.authorization;
+    if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+        const responseData = { 
+            success: false, 
+            message: "Unauthorized",
+        };
+        console.log("Token required to verify account: ", responseData);
+        return res.status(401).json(responseData);
+    }
+    
+    const token = AuthHeader.split(" ")[1];
+    try {
+        const decodedData = await jwt.verify(token, secretKey);
+        console.log('Token is valid:', decodedData);
+
+        // Additional logic after successful token verification
+        const _id = decodedData.id;
+        const user = await User.findById(_id);
+        
+        if (decodedData.id !== null && !user) {
+            // console.error('Token verification failed:', error.message);
+            const responseData = { 
+                success: false, 
+                message: "User not found",
+            };
+            console.log("Invalid user: ", responseData);
+            return res.status(500).json(responseData);
+        };
+
+        // Step 6: If user exists, update their status to "approved" and set them as verified
+        // const email = user.email;
+        const dataToUpdate = {
+            status: "approved",
+            accessToken: token,
+            isVerified: true,
+        };
+        const updatedUser = await User.findOneAndUpdate({ email: user.email }, dataToUpdate, { new: true });               
+    
+        const responseData = {
+            success: true,
+            data: updatedUser,
+            message: "Successful"
+        };
+        console.log("*********************************************************",
+            "\n*****           NEW ACCOUNT VERIFICATION             ****",
+            "\n*********************************************************",
+            "\nVerification Status: ", responseData,
+            "\n*********************************************************\n\n");
+        res.status(200).json(responseData); // Send a success response
+    
+    } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            // console.error("Token has expired");
+            const responseData = { 
+                success: false, 
+                message: "Token has expired",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.status(403).json(responseData);
+        } else if (error.name === 'JsonWebTokenError') {
+            // console.error("Token does not exist");
+            const responseData = { 
+                success: false, 
+                message: "Token does not exist",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.status(401).json(responseData);
+        } else if (error.name === 'MongoServerError') {
+            // console.error("Duplicate User Entry");
+            const responseData = { 
+                success: false, 
+                message: "Duplicate User Entry",
+            };
+            console.log("Duplicate User Entry: ", responseData);
+            return res.status(401).json(responseData);
+        } else {
+            const responseData = { 
+                success: false, 
+                message: "Internal Server Error",
+            };
+            console.error("Unexpected error during account verification: ", error.message);
+            return res.status(500).json(responseData);
+        };
+    };
+};  // THOROUGHLY Tested === Working
 
 // Our Login Logic starts here
 exports.logIn = async (req, res) => {
 
     try {
 
-        // 1) Required Payload
+        // 0) Required Payload
         const { email, password } = req.body;  
     
 
-        // 2) Check if User Email Exists
-        const existingUser = await User.findOne({ email });    
-        if (!existingUser) {        
+        // 1) Use E-mail to find User
+        const existingUser = await User.findOne({ email });
+  
+        
+        // 2) CHECK IF USER EXISTS
+        if (!existingUser) {
             const responseData = { 
                 success: false, 
                 error: "Login Failed: Account with this details does not exist",
@@ -444,11 +533,11 @@ exports.logIn = async (req, res) => {
         if (!isPasswordCorrect) {        
             const responseData = { 
                 success: false, 
-                error: "Login Failed: Account with this details does not exist",
+                error: "Login Failed: Incorrect password",
             };
-            console.log("***************************************",
-                        "\n*****      LOG-IN ATTEMPT BY      *****",
-                        "\n***************************************",
+            console.log("*******************************************************",
+                        "\n*****   A WRONG PASSWORD WAS USED FOR LOG-IN BY   *****",
+                        "\n*******************************************************",
                         "\nUser ID: ", existingUser._id,
                         "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
                         "\nUser E-mail: ", existingUser.email,
@@ -459,34 +548,35 @@ exports.logIn = async (req, res) => {
                         "\nUser Account isVerified: ", existingUser.isVerified,
                         "\nUser Account Status: ", existingUser.status.toUpperCase(),
                         "\nUser Account ROLE(S): ", existingUser.roles,
-                        "\nPrevious User AccessToken: ", existingUser.accessToken ,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken,
                         "\n***************************************\n");
             return res.status(401).json(responseData);
         };        
 
 
         // 4) Check if User Has Verified their Account Registration
-        if (!(existingUser.isVerified && existingUser.accessToken)) {
+        if (!existingUser.isVerified) {
             // ***********************************************************************************//
-            // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
+            // *************         UNVERIFIED USER ATTEMPTING TO LOG-IN           **************//
             // ***********************************************************************************//
-            console.log("***********************************",
-                        "\n*****    LOG-IN ATTEMPT BY    *****",
-                        "\n***********************************",
+    
+            console.log("*******************************************************",
+                        "\n*****      LOG-IN ATTEMPT BY UNVERIFIED USER      *****",
+                        "\n*******************************************************",
                         "\nUser ID: ", existingUser._id,
                         "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
                         "\nUser E-mail: ", existingUser.email,
                         "\nUser Password is CORRECT: ", isPasswordCorrect,
                         "\n***************************************",
-                        "\n***   ADDITIONAL USER INFORMATION   ***",
+                        "\n***   ADDITIONAL USER INFORMATION  ***",
                         "\n***************************************",
                         "\nUser Account isVerified: ", existingUser.isVerified,
                         "\nUser Account Status: ", existingUser.status.toUpperCase(),
                         "\nUser Account ROLE(S): ", existingUser.roles,
-                        "\nPrevious User AccessToken: ", existingUser.accessToken ,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken,
                         "\n");
             // ***********************************************************************************//
-            // NOTE:- Use USER 'accessToken' for Authentication & Authorization
+            // NOTE:- Use the USER 'accessToken' for Authentication & Authorization
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
@@ -530,8 +620,12 @@ exports.logIn = async (req, res) => {
         const responseData = {
             success: true,
             data: existingUser,
+            // data: {
+            //     userId: existingUser._id,
+            //     accessToken: existingUser.accessToken,
+            // },
             message: "Successful",
-        };
+        };       
         return res.status(200).json(responseData);
 
     } catch (error) {
@@ -542,7 +636,7 @@ exports.logIn = async (req, res) => {
         console.error("Unexpected error during Login: ", error);
         return res.status(500).json(responseData);  
     }
-}  //Working
+}  // THOROUGHLY Tested === Working
 
 // Finding All ADMINS
 exports.findAllAdmins = async (req, res) => {
@@ -637,8 +731,8 @@ exports.findUserById = async (req, res) => {
     try {
         const _id = req.params.id;
         const user = await User.findById(_id);
-        const decodedExpiresIn = decrypt(user.expirationInMs); // Decode here
-        console.log("Decoded Token Expiration Time: ", decodedExpiresIn);
+        // const decodedExpiresIn = decrypt(user.expirationInMs); // Decode here
+        // console.log("Decoded Token Expiration Time: ", decodedExpiresIn);
 
         if (!(user)) {
             const responseData = {
