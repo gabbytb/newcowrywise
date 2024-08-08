@@ -14,7 +14,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [approvedStaffs, setApprovedStaffs] = useState([]);
-    // console.log("APPROVED STAFFS: ", approvedStaffs);
+    console.log("APPROVED STAFFS: ", approvedStaffs);
     
     const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
     // console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
@@ -34,7 +34,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
     // ****************************************************************************             
@@ -76,13 +76,13 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                     approvedStaffs?.length !== 0 ?
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
-                                            <tr>
-                                                <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                                                <th>NAME</th>
-                                                <th>E-MAIL ADDRESS</th>
-                                                <th className="text-center">STATUS</th>
-                                                <th className="text-center">ACTION</th>
-                                            </tr>
+                                <tr>
+                                    <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                                    <th>NAME</th>
+                                    <th>E-MAIL ADDRESS</th>
+                                    <th className="text-center">STATUS</th>
+                                    <th className="text-center">ACTION</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 {

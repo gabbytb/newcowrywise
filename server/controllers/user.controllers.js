@@ -250,7 +250,7 @@ exports.signUp = async (req, res) => {
         console.error("Unexpected error during account verification: ", error);
         return res.status(500).json(responseData);  
     }
-};
+};  //Working
 
 // Our Account Re-Activation Logic starts here
 exports.reSignUp = async (req, res) => {
@@ -402,7 +402,7 @@ exports.verifySignUp = async (req, res) => {
             return res.status(500).json(responseData);
         };
     };
-};
+};  //Working
 
 // Our Login Logic starts here
 exports.logIn = async (req, res) => {
@@ -413,7 +413,7 @@ exports.logIn = async (req, res) => {
     
         // 2) Check if User Email Exists
         const user = await User.findOne({ email });    
-        if (!existingUser) {        
+        if (!user) {        
             const responseData = { 
                 success: false, 
                 error: "Login Failed: Account with this details does not exist",
@@ -448,7 +448,7 @@ exports.logIn = async (req, res) => {
         };
 
         // 4) Check if User Has Verified their Account Registration
-        if (!(existingUser.isVerified && existingUser.accessToken)) {
+        if (!(user.isVerified && user.accessToken)) {
             // ***********************************************************************************//
             // *************         EXISTING USER ATTEMPTING TO LOG-IN             **************//
             // ***********************************************************************************//
@@ -489,7 +489,7 @@ exports.logIn = async (req, res) => {
             "\nAccount Owner: ", user.firstName + " " + user.lastName,
             "\nAccount E-mail: ", user.email,
             "\nAccount Token: ", user.accessToken,
-            "\nAccount isVerified: ", user.isActivated,
+            "\nAccount isVerified: ", user.isVerified,
             "\nACCOUNT HAVE ROLE(S): ", user.roles, "\n");
         // ***********************************************************************************//
         // NOTE:- By assigning Token to Logged-in User,
@@ -511,7 +511,7 @@ exports.logIn = async (req, res) => {
         console.error("Unexpected error during account verification: ", error);
         return res.status(500).json(responseData);  
     }
-}
+}  //Working
 
 // Finding All ADMINS
 exports.findAllAdmins = async (req, res) => {

@@ -14,7 +14,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [pendingStaffs, setPendingStaffs] = useState([]);
-    // console.log("PENDING ADMINS: ", pendingAdmins);
+    console.log("PENDING STAFFS: ", pendingStaffs);
 
     const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
     // console.log("PENDING STAFFS or TOTAL PENDING STAFFS: ", totalPendingAdminUsers);
@@ -33,7 +33,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" STAFFS
     // ****************************************************************************             

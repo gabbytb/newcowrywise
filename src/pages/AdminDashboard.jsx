@@ -55,7 +55,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // ***************************************************************************
-    const userName = isLoggedIn?.userName ? isLoggedIn?.userName : logOut();
+    const userName = isLoggedIn?.userName ? isLoggedIn?.userName : "undefined";
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // const userAccessToken = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();

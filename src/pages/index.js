@@ -17,7 +17,6 @@ import VerifySignUp from "./VerifySignUp";
 import AdminDashboard from "./AdminDashboard";
 
 import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
-import AllUsersPage from "./dashboard/dashboardSettings/users/AllUsersPage";
 import ApprovedUsersPage from "./dashboard/dashboardSettings/users/ApprovedUsersPage";
 import PendingUsersPage from "./dashboard/dashboardSettings/users/PendingUsersPage";
 import RejectedUsersPage from "./dashboard/dashboardSettings/users/RejectedUsersPage";
@@ -56,7 +55,6 @@ export {
     AdminDashboard,
         
     DashboardUsersPage,
-    AllUsersPage,
     ApprovedUsersPage,
     PendingUsersPage,
     RejectedUsersPage,

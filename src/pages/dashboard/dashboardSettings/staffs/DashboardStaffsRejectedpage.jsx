@@ -14,7 +14,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [rejectedStaffs, setRejectedStaffs] = useState([]);
-    // console.log("REJECTED ADMINS: ", rejectedStaffs);
+    console.log("REJECTED ADMINS: ", rejectedStaffs);
 
     const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
     // console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
@@ -33,7 +33,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" STAFFS
     // ****************************************************************************             
