@@ -86,12 +86,12 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
             <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
                 <table className="table-fixed capitalize w-full border staff__table">
                     <thead>
-                        <tr>
-                            <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                            <th>NAME</th>
-                            <th>E-MAIL ADDRESS</th>
-                            <th className="text-center">STATUS</th>
-                            <th className="text-center">ACTION</th>
+                        <tr className="">
+                            <th className="w-8 h-16 text-center">S/N</th>
+                            <th className="w-40 text-center">NAME</th>
+                            <th className="w-60 text-center">E-MAIL ADDRESS</th>
+                            <th className="w-40 text-center">STATUS</th>
+                            <th className="w-40 text-center">ACTION</th>
                         </tr>
                     </thead>
                     {
@@ -110,7 +110,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                                 <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                 <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                 <td className="w-40 flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                    <Link className="bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -134,7 +134,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                                 <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                 <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                 <td className="w-40 flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                    <Link className="bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -158,7 +158,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                                 <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                 <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                 <td className="w-4/5 flex justify-center mx-auto">
-                                                                    <Link className="w-full bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                    <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -181,7 +181,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                     <td className="w-20 h-16 text-center"></td>
                                     <td className="text-center"></td>
                                     <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
-                                        No record of staff
+                                        No record of approved staffs
                                     </td>
                                     <td className="text-center"></td>
                                     <td className="text-center"></td>

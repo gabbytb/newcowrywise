@@ -125,20 +125,16 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     const limit = 10; // Number of items per page
 
 
-
     useEffect(() => {
         var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");
-        console.log("All Staffs Link: ", allStaffsLink);
-
         if (activeDisplay === "allStaffs") {
             allStaffsLink?.classList.add("activeStaffView");
         } else {
             allStaffsLink?.classList.remove("activeStaffView");
-        }
+        };
     }, [activeDisplay]);
 
-    
-
+        
     useEffect(() => {
         if (activeDisplay === "allStaffs") {
             // ****************************************************************************
@@ -182,8 +178,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     // ****************************************************************************
 
-
-    
+        
     if (isLoading) {
         return (
             <>
@@ -628,7 +623,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                                 {/* Users Navigation */}
                                 <div id="staffsLinkID" className="flex flex-row gap-3 mt-4 mb-10">
-                                    <Link className="allStaffs" onClick={() => setActiveDisplay("allStaffs")}>All</Link>
+                                    <Link className="allStaffs activeStaffView" onClick={() => setActiveDisplay("allStaffs")}>All</Link>
                                     <Link className="allApprovedStaffs" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
                                     <Link className="allPendingStaffs" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
                                     <Link className="allRejectedStaffs" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected</Link>
@@ -647,7 +642,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                                 {/***********  Views  ***********/}
                                 <div className={`capitalize border ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
-                                    <table className="table-fixed capitalize w-full border border-separate staff__table">
+                                    <table className="table-fixed capitalize w-full border staff__table">
                                         <thead>
                                             <tr className="">
                                                 <th className="w-8 h-16 text-center">S/N</th>
