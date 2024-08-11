@@ -729,7 +729,7 @@
   .activate-second {    /** Working for Section Seven */
     @apply animate-slideUpSecond
   }
-  .activeStaffView {
+  .activeStaffView {    /** Working for Selecting Active Staff Link from Dashboard */
     @apply
       bg-blue-900
       text-white
