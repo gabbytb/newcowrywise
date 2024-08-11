@@ -69,6 +69,8 @@ function SignIn() {
         axios.post("http://127.0.0.1:8000/api/v1/auth/login", user)
         .then((response) => {
             const { success, message, data } = response.data; 
+            // const { userId, token } = data;
+
             var errMsg = document.querySelector('#loginId .error'); 
             var successMsg = document.querySelector('#loginId .success');
             
@@ -103,7 +105,7 @@ function SignIn() {
                 }, 2500);
                 // Perform These Actions
 
-            } else if (!success && message === "Kindly verify your account") {
+            } else if (!success && message === "Login Failed: Kindly verify your account") {
 
                 // Perform These Actions
                 setFormSubmitted(success);
@@ -177,7 +179,7 @@ function SignIn() {
 
         await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify", existingUser?.email)
         .then((response) => {
-            const { success, message, data } = response.data;
+            const { success, message, } = response.data;
             var errVerifyMsg = document.querySelector('#loginId .verify__error'); 
             var successVerifyMsg = document.querySelector('#loginId .verify__success');
 
@@ -243,7 +245,7 @@ function SignIn() {
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
                     <Link className="w-56" to={"/"}>
-                        <img src={brandOfficialLogo} />
+                        <img src={brandOfficialLogo} alt="logo" />
                     </Link>
                 </div>
                 {/* PAGE NAV */}

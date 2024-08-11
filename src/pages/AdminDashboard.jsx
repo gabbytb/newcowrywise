@@ -55,7 +55,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // ***************************************************************************
-    const userName = isLoggedIn?.userName ? isLoggedIn?.userName : "undefined";
+    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : "undefined";
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // const userAccessToken = isLoggedIn?.accessToken ? isLoggedIn?.accessToken : logOut();
@@ -853,7 +853,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
                                         <h1>Welcome 
-                                            <strong className="capitalize text-black"> {userName}</strong>
+                                            <strong className="capitalize text-black"> {lastName}</strong>
                                         </h1>
                                     </div>
                                     <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">

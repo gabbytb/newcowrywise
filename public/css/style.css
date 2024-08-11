@@ -1041,9 +1041,6 @@ tbody tr{
   height: 7.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 @media (min-width: 981px){
@@ -3960,6 +3957,10 @@ tbody tr{
   margin-bottom: 6rem;
 }
 
+.mb-28{
+  margin-bottom: 7rem;
+}
+
 .mb-3{
   margin-bottom: 0.75rem;
 }
@@ -4255,12 +4256,48 @@ tbody tr{
   width: 100vw;
 }
 
+.w-44{
+  width: 11rem;
+}
+
+.w-32{
+  width: 8rem;
+}
+
+.w-121{
+  width: 45rem;
+}
+
+.w-122{
+  width: 33rem;
+}
+
+.w-40{
+  width: 10rem;
+}
+
+.w-12{
+  width: 3rem;
+}
+
+.w-4\/5{
+  width: 80%;
+}
+
 .min-w-80{
   min-width: 17.8rem;
 }
 
 .max-w-\[400px\]{
   max-width: 400px;
+}
+
+.max-w-80{
+  max-width: 80%;
+}
+
+.max-w-full{
+  max-width: 100%;
 }
 
 .flex-1{
@@ -4293,6 +4330,10 @@ tbody tr{
 
 .border-collapse{
   border-collapse: collapse;
+}
+
+.border-separate{
+  border-collapse: separate;
 }
 
 .transform{
@@ -4738,6 +4779,11 @@ tbody tr{
   padding-bottom: 2rem;
 }
 
+.px-20{
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
 .pb-0{
   padding-bottom: 0px;
 }
@@ -4910,6 +4956,10 @@ tbody tr{
 .text-8xl\/tighter{
   font-size: 6rem;
   line-height: 1.35;
+}
+
+.text-lg{
+  font-size: 1.125rem;
 }
 
 .text-lg\/6{

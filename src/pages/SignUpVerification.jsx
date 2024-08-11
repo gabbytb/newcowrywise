@@ -17,7 +17,7 @@ const SignUpVerification = () => {
 
     // console.clear();
     
-    
+
 
     // *************************** //
     // ***** CREATE NEW USER ***** //

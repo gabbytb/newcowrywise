@@ -107,7 +107,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // ****************************************************************************
     // const userName = isLoggedIn?.userName ? isLoggedIn?.userName : logOut();
-    const firstName = isLoggedIn?.firstName ? isLoggedIn?.firstName : logOut();
+    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
 
@@ -252,7 +252,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                         
                                         <div className="rt-left-pane">
                                             <h1>Welcome 
-                                                <strong className="capitalize text-black"> {firstName}</strong>
+                                                <strong className="capitalize text-black"> {lastName}</strong>
                                             </h1>
                                         </div>
                                         
@@ -327,8 +327,8 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                             allStaffs?.length !== 0 ?
                                                 <table className="table-fixed capitalize w-full border staff__table">
                                                     <thead>
-                                                        <tr>
-                                                            <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                                                        <tr className="h-16">
+                                                            <th className="w-20 flex justify-center items-center">S/N</th>
                                                             <th>NAME</th>
                                                             <th>E-MAIL ADDRESS</th>
                                                             <th className="text-center">STATUS</th>
@@ -557,7 +557,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                     
                                     <div className="rt-left-pane">
                                         <h1>Welcome 
-                                            <strong className="capitalize text-black"> {firstName}</strong>
+                                            <strong className="capitalize text-black"> {lastName}</strong>
                                         </h1>
                                     </div>
                                     
@@ -638,18 +638,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                                 {/***********  Views  ***********/}
                                 <div className={`capitalize border ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
-                                    {
-                                        allStaffs?.length !== 0 ?
-                                            <table className="table-fixed capitalize w-full border staff__table">
-                                                <thead>
-                                                    <tr>
-                                                        <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                                                        <th>NAME</th>
-                                                        <th>E-MAIL ADDRESS</th>
-                                                        <th className="text-center">STATUS</th>
-                                                        <th className="text-center">ACTION</th>
-                                                    </tr>
-                                                </thead>
+                                    <table className="table-fixed capitalize w-full border border-separate staff__table">
+                                        <thead>
+                                            <tr className="">
+                                                <th className="w-8 h-16 text-center">S/N</th>
+                                                <th className="w-40 text-center">NAME</th>
+                                                <th className="w-60 text-center">E-MAIL ADDRESS</th>
+                                                <th className="w-40 text-center">STATUS</th>
+                                                <th className="w-40 text-center">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        {
+                                            allStaffs?.length !== 0 ?
                                                 <tbody>
                                                     {
                                                         allStaffs?.map((user, userIndex) => {
@@ -658,14 +658,20 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                     user?.roles?.map((roleUsers) => {
                                                                         if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                             return (
-                                                                                <tr key={userIndex}>
-                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                                    <td>{user?.firstName} {user?.lastName}</td>
-                                                                                    <td className="lowercase">{user?.email}</td>
-                                                                                    <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                                    <td className="flex justify-center">
-                                                                                        <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                                <tr key={userIndex} className="">
+                                                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                                    <td className="w-40 flex justify-center">
+                                                                                        <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                                     </td>
+                                                                                </tr>
+                                                                            );
+                                                                        } else {
+                                                                            return (
+                                                                                <tr>
+                                                                                    <td>no record of pending staff</td>
                                                                                 </tr>
                                                                             );
                                                                         };
@@ -676,32 +682,20 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                     user?.roles?.map((roleUsers) => {
                                                                         if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                                             return (
-                                                                                <tr key={userIndex}>
-                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                                    <td>{user?.firstName} {user?.lastName}</td>
-                                                                                    <td className="lowercase">{user?.email}</td>
-                                                                                    <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                                    <td className="flex justify-center">
-                                                                                        <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                                <tr key={userIndex} className="">
+                                                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                                    <td className="w-40 flex justify-center">
+                                                                                        <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                                     </td>
                                                                                 </tr>
                                                                             );
-                                                                        };
-                                                                    })
-                                                                );
-                                                            } else if (user?.status === "approved") {
-                                                                return (
-                                                                    user?.roles?.map((roleUsers) => {
-                                                                        if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                                        } else {
                                                                             return (
-                                                                                <tr key={userIndex}>
-                                                                                    <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                                    <td>{user?.firstName} {user?.lastName}</td>
-                                                                                    <td className="lowercase">{user?.email}</td>
-                                                                                    <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                                    <td className="flex justify-center">
-                                                                                        <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
-                                                                                    </td>
+                                                                                <tr>
+                                                                                    <td>no record of rejected staff</td>
                                                                                 </tr>
                                                                             );
                                                                         };
@@ -709,33 +703,46 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                 );
                                                             } else {
                                                                 return (
-                                                                    <tr key={userIndex}>
-                                                                        <td>No staff record found</td>
-                                                                    </tr>
+                                                                    user?.roles?.map((roleUsers) => {
+                                                                        if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                                                                            return (
+                                                                                <tr key={userIndex} className="">
+                                                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                                    <td className="w-4/5 flex justify-center mx-auto">
+                                                                                        <Link className="w-full bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            );
+                                                                        } else {
+                                                                            return (
+                                                                                <tr>
+                                                                                    <td>no record of approved staff</td>
+                                                                                </tr>
+                                                                            );
+                                                                        };
+                                                                    })
                                                                 );
                                                             };
                                                         })
                                                     }
                                                 </tbody>
-                                            </table>
-                                            :
-                                            <table className="table-fixed capitalize w-full border staff__table">
-                                                <thead>
-                                                    <tr>
-                                                        <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                                                        <th>NAME</th>
-                                                        <th>E-MAIL ADDRESS</th>
-                                                        <th className="text-center">STATUS</th>
-                                                        <th className="text-center">ACTION</th>
-                                                    </tr>
-                                                </thead>
+                                                :
                                                 <tbody>
-                                                    <tr>
-                                                        <td>No staff record found</td>
+                                                    <tr className="h-32 mb-28">
+                                                        <td className="w-20 h-16 text-center"></td>
+                                                        <td className="text-center"></td>
+                                                        <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
+                                                            No record of staff
+                                                        </td>
+                                                        <td className="text-center"></td>
+                                                        <td className="text-center"></td>
                                                     </tr>
                                                 </tbody>
-                                            </table>
-                                    }
+                                        }
+                                    </table>
 
 
                                     {/* Pagination controls */}
@@ -800,3 +807,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
 export default DashboardStaffsPage;
+
+
+
+

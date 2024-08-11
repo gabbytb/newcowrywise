@@ -16,7 +16,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     const [pendingStaffs, setPendingStaffs] = useState([]);
     console.log("PENDING STAFFS: ", pendingStaffs);
 
-    const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
+    // const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
     // console.log("PENDING STAFFS or TOTAL PENDING STAFFS: ", totalPendingAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -28,36 +28,37 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         if (activeDisplay === "allPendingStaffs") {
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" STAFFS
+            // ****************************************************************************             
+            async function fetchPendingStaffs() {        
+                const pendingStatus = "pending";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { staffsList, pagination } = data;
+
+                    if (!success && message === "No admin found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setPendingStaffs(staffsList);
+                    
+                    // setTotalPendingAdminUsers(pagination?.staffsRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+            };
+
             var timerID = setTimeout(fetchPendingStaffs, 300);   // Delay execution of fetchPendingStaffs by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" STAFFS
-    // ****************************************************************************             
-    async function fetchPendingStaffs() {        
-        const pendingStatus = "pending";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { staffsList, pagination } = data;
-
-            if (!success && message === "No admin found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setPendingStaffs(staffsList);
-            
-            setTotalPendingAdminUsers(pagination?.staffsRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
-    };
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
@@ -102,6 +103,12 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of pending staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
                                             );
@@ -120,10 +127,16 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of rejected staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
                                             );
-                                        } else if (user?.status === "approved") {
+                                        } else {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
@@ -138,14 +151,14 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of approved staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
-                                            );
-                                        } else {
-                                            return (
-                                                <tr key={userIndex}>
-                                                    <td>No pending staff record</td>
-                                                </tr>
                                             );
                                         };
                                     })
@@ -153,7 +166,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                             </tbody>
                         </table>
                         :
-                        <table className="table-fixed capitalize w-full border staff__table">
+                        <table className="table-fixed w-full border staff__table">
                             <thead>
                                 <tr>
                                     <th className="w-20 h-16 flex justify-center items-center">S/N</th>
@@ -164,8 +177,14 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="flex justify-center">
-                                    <td>No pending staff record</td>
+                                <tr className="h-32 mb-28">
+                                    <td></td>
+                                    <td></td>
+                                    <td className="uppercase font-medium text-lg tracking-supertight">
+                                        No record of pending staff
+                                    </td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>

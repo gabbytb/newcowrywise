@@ -445,7 +445,7 @@
     @apply 
     bg-white
       h-114.5
-      shadow-sm 
+      /* shadow-sm  */
       /* lg:h-28 */
       /***** Just Added these *****/
       lg:h-32

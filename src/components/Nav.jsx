@@ -20,14 +20,14 @@ import {
 
 
 const Nav = () => {
-    
+
 
     return (
         <>
             {/* Top bar */}
-            <Link className="bg-skin-darkblue h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" 
-                to="https://futureself.cowrywise.com/?utm_source=Landing+page&utm_medium=Web+strip&utm_campaign=futureself&utm_id=FutureSelf" 
-                target="_blank">Write a letter to your future self 💙 <strong className="text-xl">&nbsp; Click here ↗</strong>
+            <Link className="bg-skin-darkblue h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer"
+                to={"/user/signup"}>Welcome to Samuel Akinola Foundation 💙 <strong className="text-xl">&nbsp; Sign Up ↗</strong>
+                {/* target="_blank" */}
             </Link>
             {/* Top bar */}
 

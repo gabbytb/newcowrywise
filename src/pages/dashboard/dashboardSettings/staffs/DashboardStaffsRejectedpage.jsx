@@ -16,7 +16,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     const [rejectedStaffs, setRejectedStaffs] = useState([]);
     console.log("REJECTED ADMINS: ", rejectedStaffs);
 
-    const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
+    // const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
     // console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -28,36 +28,38 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         if (activeDisplay === "allRejectedStaffs") {
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" STAFFS
+            // ****************************************************************************             
+            async function fetchRejectedStaffs() {        
+                const rejectedStatus = "rejected";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { staffsList, pagination } = data;
+
+                    if (!success && message === "No admin found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setRejectedStaffs(staffsList)
+
+                    // setTotalRejectedAdminUsers(pagination?.staffsRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+            };
+
             var timerID = setTimeout(fetchRejectedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        }
+        };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" STAFFS
-    // ****************************************************************************             
-    async function fetchRejectedStaffs() {        
-        const rejectedStatus = "rejected";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { staffsList, pagination } = data;
 
-            if (!success && message === "No admin found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setRejectedStaffs(staffsList)
-
-            setTotalRejectedAdminUsers(pagination?.staffsRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
-    };
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
@@ -74,6 +76,126 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
             <div className={`capitalize border ${activeDisplay === "allRejectedStaffs" ? "grid" : "hidden"}`}>
                 {
                     rejectedStaffs?.length !== 0 ?
+                        // <table className="table-fixed capitalize w-full border staff__table">
+                        //     <thead>
+                        //         <tr>
+                        //             <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                        //             <th>NAME</th>
+                        //             <th>E-MAIL ADDRESS</th>
+                        //             <th className="text-center">STATUS</th>
+                        //             <th className="text-center">ACTION</th>
+                        //         </tr>
+                        //     </thead>
+                        //     <tbody>
+                        //         {
+                        //             rejectedStaffs?.map((user, userIndex) => {
+                        //                 if (user?.status === "pending") {
+                        //                     return (
+                        //                         user?.roles?.map((roleUsers, roleIndex) => {
+                        //                             if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                        //                                 return (
+                        //                                     <tr key={userIndex}>
+                        //                                         <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                        //                                         <td>{user?.firstName} {user?.lastName}</td>
+                        //                                         <td className="lowercase">{user?.email}</td>
+                        //                                         <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                        //                                         <td className="flex justify-center">
+                        //                                             <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                        //                                         </td>
+                        //                                     </tr>
+                        //                                 );
+                        //                             } else {
+                        //                                 return (
+                        //                                     <tr>
+                        //                                         <td>No record of pending staff</td>
+                        //                                     </tr>
+                        //                                 );
+                        //                             };
+                        //                         })
+                        //                     );
+                        //                 } else if (user?.status === "rejected") {
+                        //                     return (
+                        //                         user?.roles?.map((roleUsers) => {
+                        //                             if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                        //                                 return (
+                        //                                     <tr key={userIndex}>
+                        //                                         <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                        //                                         <td>{user?.firstName} {user?.lastName}</td>
+                        //                                         <td className="lowercase">{user?.email}</td>
+                        //                                         <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                        //                                         <td className="flex justify-center">
+                        //                                             <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                        //                                         </td>
+                        //                                     </tr>
+                        //                                 );
+                        //                             } else {
+                        //                                 return (
+                        //                                     <tr>
+                        //                                         <td>No record of rejected staff</td>
+                        //                                     </tr>
+                        //                                 );
+                        //                             };
+                        //                         })
+                        //                     );
+                        //                 } else if (user?.status === "approved") {
+                        //                     return (
+                        //                         user?.roles?.map((roleUsers) => {
+                        //                             if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
+                        //                                 return (
+                        //                                     <tr key={userIndex}>
+                        //                                         <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                        //                                         <td>{user?.firstName} {user?.lastName}</td>
+                        //                                         <td className="lowercase">{user?.email}</td>
+                        //                                         <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                        //                                         <td className="flex justify-center">
+                        //                                             <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                        //                                         </td>
+                        //                                     </tr>
+                        //                                 );
+                        //                             } else {
+                        //                                 return (
+                        //                                     <tr>
+                        //                                         <td>No record of pending staff</td>
+                        //                                     </tr>
+                        //                                 );
+                        //                             };
+                        //                         })
+                        //                     );
+                        //                 } else {
+                        //                     return (
+                        //                         <tr key={userIndex}>
+                        //                             <td>No rejected staff record</td>
+                        //                         </tr>
+                        //                     );
+                        //                 };
+                        //             })
+                        //         }
+                        //     </tbody>
+                        // </table>
+                        // :
+                        // <table className="table-fixed capitalize w-full border staff__table">
+                        //     <thead>
+                        //         <tr>
+                        //             <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                        //             <th>NAME</th>
+                        //             <th>E-MAIL ADDRESS</th>
+                        //             <th className="text-center">STATUS</th>
+                        //             <th className="text-center">ACTION</th>
+                        //         </tr>
+                        //     </thead>
+                        //     <tbody>
+                        //         <tr className="h-32 mb-28">
+                        //             <td></td>
+                        //             <td></td>
+                        //             <td className="uppercase font-medium text-lg tracking-supertight">
+                        //                 No record of rejected staff
+                        //             </td>
+                        //             <td></td>
+                        //             <td></td>
+                        //         </tr>
+                        //     </tbody>
+                        // </table>
+
                         <table className="table-fixed capitalize w-full border staff__table">
                             <thead>
                                 <tr>
@@ -102,6 +224,12 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of pending staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
                                             );
@@ -120,10 +248,16 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of rejected staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
                                             );
-                                        } else if (user?.status === "approved") {
+                                        } else {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
@@ -138,14 +272,14 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of approved staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
-                                            );
-                                        } else {
-                                            return (
-                                                <tr key={userIndex}>
-                                                    <td>No rejected staff record</td>
-                                                </tr>
                                             );
                                         };
                                     })
@@ -153,7 +287,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                             </tbody>
                         </table>
                         :
-                        <table className="table-fixed capitalize w-full border staff__table">
+                        <table className="table-fixed w-full border staff__table">
                             <thead>
                                 <tr>
                                     <th className="w-20 h-16 flex justify-center items-center">S/N</th>
@@ -164,8 +298,14 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="flex justify-center">
-                                    <td className="">No rejected staff record</td>
+                                <tr className="h-32 mb-28">
+                                    <td></td>
+                                    <td></td>
+                                    <td className="uppercase font-medium text-lg tracking-supertight">
+                                        No record of rejected staff
+                                    </td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -218,7 +358,6 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
 
 export default DashboardStaffsRejectedPage;
-
 
 
 

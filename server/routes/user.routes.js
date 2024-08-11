@@ -29,12 +29,7 @@ module.exports = app => {
 
     // Verify All "User" Accounts using this API
     router.post("/user/verify/:token", cors(corsOptions), users.verifySignUp); 
-    // Expose this endpoint(i.e "http://127.0.0.1:3000/user/verify/:token") for the frontend to access.
-    
-    
-    // QUERY TOKEN: Verify All "User" Accounts using this API
-    router.post("/user/verify?token=:token", cors(corsOptions), users.queryTokenToVerifySignUp);
-    // Expose this endpoint(i.e "http://127.0.0.1:3000/user/verify?token=:token") for the frontend to access.
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify/:token") for the frontend to access.
     
 
     // Login User

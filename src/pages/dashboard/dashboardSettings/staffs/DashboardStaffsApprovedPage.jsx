@@ -16,7 +16,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     const [approvedStaffs, setApprovedStaffs] = useState([]);
     console.log("APPROVED STAFFS: ", approvedStaffs);
     
-    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
+    // const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
     // console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -29,36 +29,38 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         if (activeDisplay === "allApprovedStaffs") {
+
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+            // ****************************************************************************             
+            async function fetchApprovedStaffs() {        
+                const approvedStatus = "approved";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { staffsList, pagination } = data;
+
+                    if (!success && message === "No admin found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setApprovedStaffs(staffsList);
+                    
+                    // setTotalApprovedAdminUsers(pagination?.staffsRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+            };
+
             var timerID = setTimeout(fetchApprovedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
-    // ****************************************************************************             
-    async function fetchApprovedStaffs() {        
-        const approvedStatus = "approved";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { staffsList, pagination } = data;
-
-            if (!success && message === "No admin found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setApprovedStaffs(staffsList);
-            
-            setTotalApprovedAdminUsers(pagination?.staffsRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
-    };
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
@@ -102,6 +104,12 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of pending staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
                                             );
@@ -120,10 +128,16 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of rejected staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
                                             );
-                                        } else if (user?.status === "approved") {
+                                        } else {
                                             return (
                                                 user?.roles?.map((roleUsers) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
@@ -138,14 +152,14 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                                 </td>
                                                             </tr>
                                                         );
+                                                    } else {
+                                                        return (
+                                                            <tr>
+                                                                <td>no record of approved staff</td>
+                                                            </tr>
+                                                        );
                                                     };
                                                 })
-                                            );
-                                        } else {
-                                            return (
-                                                <tr key={userIndex}>
-                                                    <td>No approved staff record</td>
-                                                </tr>
                                             );
                                         };
                                     })
@@ -153,7 +167,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                             </tbody>
                         </table>
                         :
-                        <table className="table-fixed capitalize w-full border staff__table">
+                        <table className="table-fixed w-full border staff__table">
                             <thead>
                                 <tr>
                                     <th className="w-20 h-16 flex justify-center items-center">S/N</th>
@@ -164,8 +178,14 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="flex justify-center">
-                                    <td className="">No approved staff record</td>
+                                <tr className="h-32 mb-28">
+                                    <td></td>
+                                    <td></td>
+                                    <td className="uppercase font-medium text-lg tracking-supertight">
+                                        No record of approved staff
+                                    </td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -175,40 +195,40 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
 
                 {/* Pagination controls */}
                 <div className="flex justify-between">
-                                    <div className="border-e-2 border-gray-200/50 p-4 font-black text-42xl font-firma tracking-supertight">
-                                        {limit}
-                                    </div>
-                                    <nav className="relative z-0 inline-flex shadow-sm">
-                                        {/* Previous page button */}
-                                        <button
-                                            onClick={() => handlePageChange(currentPage - 1)}
-                                            className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                            disabled={currentPage === 1}
-                                        >
-                                            Prev
-                                        </button>
+                    <div className="border-e-2 border-gray-200/50 p-4 font-black text-42xl font-firma tracking-supertight">
+                        {limit}
+                    </div>
+                    <nav className="relative z-0 inline-flex shadow-sm">
+                        {/* Previous page button */}
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            disabled={currentPage === 1}
+                        >
+                            Prev
+                        </button>
 
 
-                                        {/* Page numbers */}
-                                        {Array.from({ length: totalPages }, (_, index) => (
-                                            <button
-                                            key={index}
-                                            onClick={() => handlePageChange(index + 1)}
-                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
-                                            {index + 1}
-                                            </button>
-                                        ))}
+                        {/* Page numbers */}
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                            {index + 1}
+                            </button>
+                        ))}
 
 
-                                        {/* Next page button */}
-                                        <button
-                                            onClick={() => handlePageChange(currentPage + 1)}
-                                            className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                            disabled={currentPage === totalPages}
-                                        >
-                                            Next
-                                        </button>
-                                    </nav>
+                        {/* Next page button */}
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            disabled={currentPage === totalPages}
+                        >
+                            Next
+                        </button>
+                    </nav>
                 </div>
                 {/* Pagination controls */}
             </div>

@@ -42,6 +42,7 @@ const secretKey = process.env.secretKey || '!wasinvincibleallalongtheydunno!';  
 const encryptPassword = require("../middlewares/EncryptPassword");
 const createJWT = require("../middlewares/GenerateToken");
 const mailSender = require("../middlewares/MailSender");
+// const MailSenderForToken = require("../middlewares/MailSenderForToken");
 // *****************************************************************
 // *****************************************************************
 
@@ -217,6 +218,7 @@ exports.signUp = async (req, res) => {
         // E-mail Service Config
         // ***************************************************************//
         await mailSender(token, newUser);
+        // await MailSenderForToken(token, newUser);
 
         // let valueOfEncodedText = decrypt(newUser.expirationInMs);
         // console.log("Encrypted token lifespan: ", valueOfEncodedText);
@@ -234,6 +236,10 @@ exports.signUp = async (req, res) => {
                 
         const responseData = {
             success: true,
+            // data: {
+            //     userId: newUser,
+            //     accessToken: token,
+            // },
             data: newUser,
             message: "Successful",
         };
@@ -315,26 +321,26 @@ exports.reSignUp = async (req, res) => {
 // Our Account Verification Logic starts here
 exports.verifySignUp = async (req, res) => {
 
-    const AuthHeader = req.headers.authorization;
-    if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
-        const responseData = { 
-            success: false, 
-            message: "Unauthorized",
-        };
-        console.log("Token required to verify account: ", responseData);
-        return res.status(401).json(responseData);
-    }
-    
-    const token = AuthHeader.split(" ")[1];
     try {
+        const AuthHeader = req.headers.authorization;
+        if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+            const responseData = { 
+                success: false, 
+                message: "Unauthorized",
+            };
+            console.log("Token was not authorized by a User: ", responseData);
+            return res.status(401).json(responseData);
+        };
+        
+        const token = AuthHeader.split(" ")[1];
         const decodedData = await jwt.verify(token, secretKey);
         console.log('Token is valid:', decodedData);
 
         // Additional logic after successful token verification
         const _id = decodedData.id;
-        const user = await User.findById(_id);
+        const userExists = await User.findById(_id);
         
-        if (decodedData.id !== null && !user) {
+        if (!userExists) {
             // console.error('Token verification failed:', error.message);
             const responseData = { 
                 success: false, 
@@ -344,8 +350,12 @@ exports.verifySignUp = async (req, res) => {
             return res.status(500).json(responseData);
         }
 
-        // Step 6: If user exists, update their status to "approved" and set them as verified
-        const email = user.email;   
+        // Step 6: If user exists, find User by Email 
+        const email = userExists.email;   
+
+        // Change Existing User status to "approved".
+        // Assign the generated token to Existing User, as their accessToken..
+        // Set isVerified as True for Existing User
         const dataToUpdate = {
             status: "approved",
             accessToken: token,
@@ -401,160 +411,55 @@ exports.verifySignUp = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-// Our Account Verification Logic starts here
-exports.queryTokenToVerifySignUp = async (req, res) => {
-
-    const AuthHeader = req.headers.authorization;
-    if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
-        const responseData = { 
-            success: false, 
-            message: "Unauthorized",
-        };
-        console.log("Token required to verify account: ", responseData);
-        return res.status(401).json(responseData);
-    }
-    
-    const token = AuthHeader.split(" ")[1];
-    try {
-        const decodedData = await jwt.verify(token, secretKey);
-        console.log('Token is valid:', decodedData);
-
-        // Additional logic after successful token verification
-        const _id = decodedData.id;
-        const user = await User.findById(_id);
-        
-        if (decodedData.id !== null && !user) {
-            // console.error('Token verification failed:', error.message);
-            const responseData = { 
-                success: false, 
-                message: "User not found",
-            };
-            console.log("Invalid user: ", responseData);
-            return res.status(500).json(responseData);
-        };
-
-        // Step 6: If user exists, update their status to "approved" and set them as verified
-        // const email = user.email;
-        const dataToUpdate = {
-            status: "approved",
-            accessToken: token,
-            isVerified: true,
-        };
-        const updatedUser = await User.findOneAndUpdate({ email: user.email }, dataToUpdate, { new: true });               
-    
-        const responseData = {
-            success: true,
-            data: updatedUser,
-            message: "Successful"
-        };
-        console.log("*********************************************************",
-            "\n*****           NEW ACCOUNT VERIFICATION             ****",
-            "\n*********************************************************",
-            "\nVerification Status: ", responseData,
-            "\n*********************************************************\n\n");
-        res.status(200).json(responseData); // Send a success response
-    
-    } catch (error) {
-        if (error.name === 'TokenExpiredError') {
-            // console.error("Token has expired");
-            const responseData = { 
-                success: false, 
-                message: "Token has expired",
-            };
-            console.log("Token verification status: ", responseData);
-            return res.status(403).json(responseData);
-        } else if (error.name === 'JsonWebTokenError') {
-            // console.error("Token does not exist");
-            const responseData = { 
-                success: false, 
-                message: "Token does not exist",
-            };
-            console.log("Token verification status: ", responseData);
-            return res.status(401).json(responseData);
-        } else if (error.name === 'MongoServerError') {
-            // console.error("Duplicate User Entry");
-            const responseData = { 
-                success: false, 
-                message: "Duplicate User Entry",
-            };
-            console.log("Duplicate User Entry: ", responseData);
-            return res.status(401).json(responseData);
-        } else {
-            const responseData = { 
-                success: false, 
-                message: "Internal Server Error",
-            };
-            console.error("Unexpected error during account verification: ", error.message);
-            return res.status(500).json(responseData);
-        };
-    };
-};  // THOROUGHLY Tested === Working
-
 // Our Login Logic starts here
 exports.logIn = async (req, res) => {
 
     try {
 
         // 0) Required Payload
-        const { email, password } = req.body;  
-    
+        const { email, password } = req.body;
 
         // 1) Use E-mail to find User
         const existingUser = await User.findOne({ email });
-  
-        
+
         // 2) CHECK IF USER EXISTS
         if (!existingUser) {
             const responseData = { 
                 success: false, 
                 error: "Login Failed: Account with this details does not exist",
             };
-            console.log("***************************************",
-                        "\n*****      LOG-IN ATTEMPT BY      *****",
-                        "\n***************************************",
-                        "\nUser ID: ", existingUser._id,
-                        "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
-                        "\nUser E-mail: ", existingUser.email,
-                        "\nUser Password is CORRECT: ", isPasswordCorrect,
-                        "\n***************************************",
-                        "\n***   ADDITIONAL USER INFORMATION   ***",
-                        "\n***************************************",
-                        "\nUser Account isVerified: ", existingUser.isVerified,
-                        "\nUser Account Status: ", existingUser.status.toUpperCase(),
-                        "\nUser Account ROLE(S): ", existingUser.roles,
-                        "\nPrevious User AccessToken: ", existingUser.accessToken ,
-                        "\n***************************************\n");
             return res.status(404).json(responseData);
         };
-        
 
         // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+        
+        // 4) CHECK IF USER CORRECT
         if (!isPasswordCorrect) {        
             const responseData = { 
                 success: false, 
                 error: "Login Failed: Incorrect password",
             };
-            console.log("*******************************************************",
-                        "\n*****   A WRONG PASSWORD WAS USED FOR LOG-IN BY   *****",
-                        "\n*******************************************************",
-                        "\nUser ID: ", existingUser._id,
-                        "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
-                        "\nUser E-mail: ", existingUser.email,
-                        "\nUser Password is CORRECT: ", isPasswordCorrect,
-                        "\n***************************************",
-                        "\n***   ADDITIONAL USER INFORMATION   ***",
-                        "\n***************************************",
-                        "\nUser Account isVerified: ", existingUser.isVerified,
-                        "\nUser Account Status: ", existingUser.status.toUpperCase(),
-                        "\nUser Account ROLE(S): ", existingUser.roles,
-                        "\nPrevious User AccessToken: ", existingUser.accessToken,
-                        "\n***************************************\n");
+            console.log("***************************************",
+                "\n*****      LOG-IN ATTEMPT BY      *****",
+                "\n***************************************",
+                "\nUser ID: ", existingUser._id,
+                "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
+                "\nUser E-mail: ", existingUser.email,
+                "\nUser Password is CORRECT: ", isPasswordCorrect,
+                "\n***************************************",
+                "\n***   ADDITIONAL USER INFORMATION   ***",
+                "\n***************************************",
+                "\nUser Account isVerified: ", existingUser.isVerified,
+                "\nUser Account Status: ", existingUser.status.toUpperCase(),
+                "\nUser Account ROLE(S): ", existingUser.roles,
+                "\nPrevious User AccessToken: ", existingUser.accessToken ,
+                "\n***************************************\n");
+
             return res.status(401).json(responseData);
         };        
 
-
-        // 4) Check if User Has Verified their Account Registration
+        // 5) Check if User Has Verified their Account Registration
         if (!existingUser.isVerified) {
             // ***********************************************************************************//
             // *************         UNVERIFIED USER ATTEMPTING TO LOG-IN           **************//
@@ -580,18 +485,16 @@ exports.logIn = async (req, res) => {
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
-                data: existingUser,
-                message: `Kindly verify your account`
+                // data: existingUser,
+                message: `Login Failed: Kindly verify your account`
             };
             return res.status(401).json(responseData);
         };
-    
 
-        // 5) Assign Token to Logged-In User
+        // 6) Assign Token to Logged-In User
         // NOTE:-  Token has a Life-span.
         const token = await createJWT(existingUser._id);
         existingUser.accessToken = token;
-
 
         // ***********************************************************************************//
         // *************                CURRENT LOGGED-IN USER                  **************//
@@ -680,7 +583,7 @@ exports.findAllAdmins = async (req, res) => {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
-};
+};  // THOROUGHLY Tested === Working
 
 // Finding All USERS
 exports.findAllUsers = async (req, res) => {
@@ -723,7 +626,7 @@ exports.findAllUsers = async (req, res) => {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
-};
+};  // THOROUGHLY Tested === Working
 
 // Find a Single User by their ID
 exports.findUserById = async (req, res) => {
