@@ -23,13 +23,23 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
 
+    
 
+    useEffect(() => {
+        var allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
+        console.log("All Approved Staffs Link: ", allApprovedStaffsLink);
+
+        if (activeDisplay === "allApprovedStaffs") {
+            allApprovedStaffsLink?.classList.add("activeStaffView");
+        } else {
+            allApprovedStaffsLink?.classList.remove("activeStaffView");
+        }
+    }, [activeDisplay]);
 
 
 
     useEffect(() => {
         if (activeDisplay === "allApprovedStaffs") {
-
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
             // ****************************************************************************             
@@ -69,23 +79,23 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // ****************************************************************************
 
-    
+
     
     return (
         <>
             <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
-                {
-                    approvedStaffs?.length !== 0 ?
-                        <table className="table-fixed capitalize w-full border staff__table">
-                            <thead>
-                                <tr>
-                                    <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                                    <th>NAME</th>
-                                    <th>E-MAIL ADDRESS</th>
-                                    <th className="text-center">STATUS</th>
-                                    <th className="text-center">ACTION</th>
-                                </tr>
-                            </thead>
+                <table className="table-fixed capitalize w-full border staff__table">
+                    <thead>
+                        <tr>
+                            <th className="w-20 h-16 flex justify-center items-center">S/N</th>
+                            <th>NAME</th>
+                            <th>E-MAIL ADDRESS</th>
+                            <th className="text-center">STATUS</th>
+                            <th className="text-center">ACTION</th>
+                        </tr>
+                    </thead>
+                    {
+                        approvedStaffs?.length !== 0 ?
                             <tbody>
                                 {
                                     approvedStaffs?.map((user, userIndex) => {
@@ -94,13 +104,13 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                 user?.roles?.map((roleUsers) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                         return (
-                                                            <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                            <tr key={userIndex} className="">
+                                                                <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                                <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="w-40 flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -118,13 +128,13 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                 user?.roles?.map((roleUsers) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                         return (
-                                                            <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                            <tr key={userIndex} className="">
+                                                                <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                                <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="w-40 flex justify-center">
+                                                                    <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -142,13 +152,13 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                                 user?.roles?.map((roleUsers) => {
                                                     if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
                                                         return (
-                                                            <tr key={userIndex}>
-                                                                <td className="font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td>{user?.firstName} {user?.lastName}</td>
-                                                                <td className="lowercase">{user?.email}</td>
-                                                                <td className="text-white font-medium text-xl text-center rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td className="flex justify-center">
-                                                                    <Link className="bg-skin-darkblue text-white p-4" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                            <tr key={userIndex} className="">
+                                                                <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                                <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                <td className="w-4/5 flex justify-center mx-auto">
+                                                                    <Link className="w-full bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                 </td>
                                                             </tr>
                                                         );
@@ -165,31 +175,20 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                     })
                                 }
                             </tbody>
-                        </table>
-                        :
-                        <table className="table-fixed w-full border staff__table">
-                            <thead>
-                                <tr>
-                                    <th className="w-20 h-16 flex justify-center items-center">S/N</th>
-                                    <th>NAME</th>
-                                    <th>E-MAIL ADDRESS</th>
-                                    <th className="text-center">STATUS</th>
-                                    <th className="text-center">ACTION</th>
-                                </tr>
-                            </thead>
+                            :
                             <tbody>
                                 <tr className="h-32 mb-28">
-                                    <td></td>
-                                    <td></td>
-                                    <td className="uppercase font-medium text-lg tracking-supertight">
-                                        No record of approved staff
+                                    <td className="w-20 h-16 text-center"></td>
+                                    <td className="text-center"></td>
+                                    <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
+                                        No record of staff
                                     </td>
-                                    <td></td>
-                                    <td></td>
+                                    <td className="text-center"></td>
+                                    <td className="text-center"></td>
                                 </tr>
                             </tbody>
-                        </table>
-                }
+                    }
+                </table>
 
 
 

@@ -729,7 +729,14 @@
   .activate-second {    /** Working for Section Seven */
     @apply animate-slideUpSecond
   }
-
+  .activeStaffView {
+    @apply
+      bg-blue-900
+      text-white
+      font-semibold
+      !important
+    ;
+  }
 
 
   

@@ -1657,6 +1657,14 @@ tbody tr{
   animation: slideUp 0.6s ease-in;
 }
 
+.activeStaffView{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(30 58 138 / var(--tw-bg-opacity)) !important;
+  font-weight: 600 !important;
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
 /*****  Error Message CSS  *****/
 
 .\!success{
@@ -4200,6 +4208,10 @@ tbody tr{
   width: 30rem;
 }
 
+.w-121{
+  width: 45rem;
+}
+
 .w-135{
   width: 52rem;
 }
@@ -4222,6 +4234,14 @@ tbody tr{
 
 .w-36{
   width: 9rem;
+}
+
+.w-4\/5{
+  width: 80%;
+}
+
+.w-40{
+  width: 10rem;
 }
 
 .w-48{
@@ -4256,48 +4276,12 @@ tbody tr{
   width: 100vw;
 }
 
-.w-44{
-  width: 11rem;
-}
-
-.w-32{
-  width: 8rem;
-}
-
-.w-121{
-  width: 45rem;
-}
-
-.w-122{
-  width: 33rem;
-}
-
-.w-40{
-  width: 10rem;
-}
-
-.w-12{
-  width: 3rem;
-}
-
-.w-4\/5{
-  width: 80%;
-}
-
 .min-w-80{
   min-width: 17.8rem;
 }
 
 .max-w-\[400px\]{
   max-width: 400px;
-}
-
-.max-w-80{
-  max-width: 80%;
-}
-
-.max-w-full{
-  max-width: 100%;
 }
 
 .flex-1{
@@ -4709,6 +4693,11 @@ tbody tr{
   padding-right: 0.5rem;
 }
 
+.px-20{
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
 .px-3{
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -4777,11 +4766,6 @@ tbody tr{
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.px-20{
-  padding-left: 5rem;
-  padding-right: 5rem;
 }
 
 .pb-0{

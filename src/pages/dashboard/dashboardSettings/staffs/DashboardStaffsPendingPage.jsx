@@ -25,6 +25,18 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
 
 
+    useEffect(() => {
+        var allPendingStaffsLink = document.querySelector("#staffsLinkID .allPendingStaffs");
+        console.log("All Pending Staffs Link: ", allPendingStaffsLink);
+
+        if (activeDisplay === "allPendingStaffs") {
+            allPendingStaffsLink?.classList.add("activeStaffView");
+        } else {
+            allPendingStaffsLink?.classList.remove("activeStaffView");
+        }
+    }, [activeDisplay]);
+
+
 
     useEffect(() => {
         if (activeDisplay === "allPendingStaffs") {
@@ -66,7 +78,6 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     };
     // ****************************************************************************
     // ****************************************************************************
-
 
 
 

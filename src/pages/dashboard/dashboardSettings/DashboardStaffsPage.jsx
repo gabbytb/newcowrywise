@@ -126,53 +126,61 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
 
+    useEffect(() => {
+        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");
+        console.log("All Staffs Link: ", allStaffsLink);
+
+        if (activeDisplay === "allStaffs") {
+            allStaffsLink?.classList.add("activeStaffView");
+        } else {
+            allStaffsLink?.classList.remove("activeStaffView");
+        }
+    }, [activeDisplay]);
+
     
 
     useEffect(() => {
         if (activeDisplay === "allStaffs") {
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
+            // ****************************************************************************             
+            async function fetchAllStaffs() {
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { staffsList, pagination } = data;
+
+                    if (!success && message === "No admin found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setAllStaffs(staffsList);
+                    
+                    setTotalAdminUsers(pagination?.staffsRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+            };
+            
             var timerID = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
-    }, [currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
-    // ****************************************************************************             
-    async function fetchAllStaffs() {
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { staffsList, pagination } = data;
-
-            if (!success && message === "No admin found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setAllStaffs(staffsList);
-            
-            setTotalAdminUsers(pagination?.staffsRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
-    };
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // ****************************************************************************
- 
- 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
     // ****************************************************************************
     // ****************************************************************************
-
-
 
 
     
@@ -482,6 +490,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     };
 
 
+
     return (
         <>
             <main id="dashboardStaffsID" className="admin-dashboard">
@@ -618,11 +627,11 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
                                 {/* Users Navigation */}
-                                <div className="flex flex-row gap-3 mt-4 mb-10">
-                                    <Link onClick={() => setActiveDisplay("allStaffs")}>All</Link>
-                                    <Link onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
-                                    <Link onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
-                                    <Link onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected</Link>
+                                <div id="staffsLinkID" className="flex flex-row gap-3 mt-4 mb-10">
+                                    <Link className="allStaffs" onClick={() => setActiveDisplay("allStaffs")}>All</Link>
+                                    <Link className="allApprovedStaffs" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
+                                    <Link className="allPendingStaffs" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
+                                    <Link className="allRejectedStaffs" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected</Link>
                                 </div>
                                 {/* Users Navigation */}
 
@@ -664,7 +673,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                                     <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                                     <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                                     <td className="w-40 flex justify-center">
-                                                                                        <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                                        <Link className="bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                                     </td>
                                                                                 </tr>
                                                                             );
@@ -688,7 +697,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                                     <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                                     <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                                     <td className="w-40 flex justify-center">
-                                                                                        <Link className="bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                                        <Link className="bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                                     </td>
                                                                                 </tr>
                                                                             );
@@ -712,7 +721,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                                     <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                                     <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
                                                                                     <td className="w-4/5 flex justify-center mx-auto">
-                                                                                        <Link className="w-full bg-skin-darkblue text-white py-6 px-20" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
                                                                                     </td>
                                                                                 </tr>
                                                                             );

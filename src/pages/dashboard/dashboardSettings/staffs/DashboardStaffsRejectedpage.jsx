@@ -25,6 +25,18 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
 
 
+    useEffect(() => {
+        var allRejectedStaffsLink = document.querySelector("#staffsLinkID .allRejectedStaffs");
+        console.log("All Pending Staffs Link: ", allRejectedStaffsLink);
+
+        if (activeDisplay === "allRejectedStaffs") {
+            allRejectedStaffsLink?.classList.add("activeStaffView");
+        } else {
+            allRejectedStaffsLink?.classList.remove("activeStaffView");
+        }
+    }, [activeDisplay]);
+
+
 
     useEffect(() => {
         if (activeDisplay === "allRejectedStaffs") {
@@ -59,7 +71,6 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
             };
         };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
@@ -67,7 +78,6 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     };
     // ****************************************************************************
     // ****************************************************************************
-
 
 
 
