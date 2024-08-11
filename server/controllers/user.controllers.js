@@ -141,7 +141,6 @@ exports.signUp = async (req, res) => {
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
             roles: [{ ...roleAdmin }]
         });
-
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // ******************************************************************************************************//
@@ -166,19 +165,20 @@ exports.signUp = async (req, res) => {
 
 
 
-        // **************************************** //
-        // ***    BE: SAVE USER INFORMATION     *** //
-        // **************************************** //
+        // // **************************************** //
+        // // ***    BE: SAVE USER INFORMATION     *** //
+        // // **************************************** //
         // const user = new User({ 
         //     _id: 123,
         //     userName: "gabby",
-        //     firstName: "Oyebanji", 
-        //     lastName: "Gabriel", 
-        //     email: "idkraqinz@gmail.com",
-        //     password: await encryptPassword("London123"),
-        //     isVerified: true, 
-        //     approvesTandC: true,  
-        //     status: "approved",
+        //     firstName: "Guru", 
+        //     lastName: "Gabby", 
+        //     email: "test@email.com",
+        //     // password: await encryptPassword("London123"),
+        //     password: encryptedPassword,
+        //     isVerified: false, 
+        //     approvesTandC: false,  
+        //     status: "rejected",
         //     roles: [
         //         {
         //             _id: roleAdmin._id, 
