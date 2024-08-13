@@ -41,6 +41,7 @@ const secretKey = process.env.secretKey || '!wasinvincibleallalongtheydunno!';  
 // *****************************************************************
 const encryptPassword = require("../middlewares/EncryptPassword");
 const createJWT = require("../middlewares/GenerateToken");
+// const verifyJWT = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
 // const MailSenderForToken = require("../middlewares/MailSenderForToken");
 // *****************************************************************
@@ -334,7 +335,7 @@ exports.verifySignUp = async (req, res) => {
         
         const token = AuthHeader.split(" ")[1];
         const decodedData = await jwt.verify(token, secretKey);
-        console.log('Token is valid:', decodedData);
+        // console.log('Token is valid:', decodedData);
 
         // Additional logic after successful token verification
         const _id = decodedData.id;
@@ -494,8 +495,14 @@ exports.logIn = async (req, res) => {
         // 6) Assign Token to Logged-In User
         // NOTE:-  Token has a Life-span.
         const token = await createJWT(existingUser._id);
-        existingUser.accessToken = token;
+        console.log("Generated Token Data: ", token);
 
+        const verifiedToken = await jwt.verify(token, secretKey);
+        console.log("Verified or Decoded Token Data: ", verifiedToken);
+        
+        existingUser.accessToken = token;
+        existingUser.expirationInMs = verifiedToken.exp;
+    
         // ***********************************************************************************//
         // *************                CURRENT LOGGED-IN USER                  **************//
         // ***********************************************************************************//
@@ -512,8 +519,9 @@ exports.logIn = async (req, res) => {
             "\n***************************************",
             "\nUser Account isVerified: ", existingUser.isVerified,
             "\nUser Account Status: ", existingUser.status.toUpperCase(),
+            "\nUser AccessToken: ", existingUser.accessToken,
+            "\nUser AccessToken [EXPIRES IN]: ", existingUser.expirationInMs,
             "\nUser Account ROLE(S): ", existingUser.roles,
-            "\nNEW User AccessToken: ", existingUser.accessToken,
             "\n");
         // ***********************************************************************************//
         // NOTE:- By assigning Token to Logged-in User,
