@@ -40,10 +40,12 @@ const secretKey = process.env.secretKey || '!wasinvincibleallalongtheydunno!';  
 // Middlewares
 // *****************************************************************
 const encryptPassword = require("../middlewares/EncryptPassword");
-const createJWT = require("../middlewares/GenerateToken");
-// const verifyJWT = require("../middlewares/VerifyToken");
+const assignToken = require("../middlewares/AssignToken");   // For Sign In
+// const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");
+const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
+const verifyToken = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
-// const MailSenderForToken = require("../middlewares/MailSenderForToken");
+// const mailSenderForToken = require("../middlewares/MailSenderForToken");
 // *****************************************************************
 // *****************************************************************
 
@@ -143,20 +145,21 @@ exports.signUp = async (req, res) => {
             roles: [{ ...roleAdmin }]
         });
         // ******************************************************************************************************//
-        // ***  FE: USE MIDDLEWARE: (JWT) TO CREATE "TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
         // ******************************************************************************************************//
-        const token = await createJWT(user._id);
+        const token = await assignThreeDaysToken(user._id);
         // ****************************************************
         // ***  FE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
         // ****************************************************
-        const decodedData = await jwt.verify(token, secretKey);
-        // console.log("Token Details: ", decodedData);
+        const tokenDecoded = await verifyToken(token);
         // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
         // NOTE:-
         //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
         //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
         //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
-        user.expirationInMs = decodedData.exp;
+        
+        const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
+        user.sessionEnds = tokenExpiryDate;
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
         // **************************************** //
@@ -227,13 +230,14 @@ exports.signUp = async (req, res) => {
 
         console.log("\n*********************************************************",
             "\n*****        TOKEN GENERATED FOR NEW USER           *****",
-            `\n*********************************************************
-            \nToken: ${token}`,
+            `\n*********************************************************`,
+            `\nToken: ${token}`,
+            // "\nToken Details: ", tokenDecoded,
             "\n\n*********************************************************",
             "\n*****          NEW USER ACCOUNT DETAILS             *****",
-            `\n*********************************************************
-            \nRegistration Status: ${newUser}`,
-            "\n\n******************************************************************************************\n");
+            "\n*********************************************************",
+            `\nRegistration Status: ${newUser}`,
+            "\n******************************************************************************************\n");
                 
         const responseData = {
             success: true,
@@ -334,13 +338,11 @@ exports.verifySignUp = async (req, res) => {
         };
         
         const token = AuthHeader.split(" ")[1];
-        const decodedData = await jwt.verify(token, secretKey);
-        // console.log('Token is valid:', decodedData);
-
-        // Additional logic after successful token verification
-        const _id = decodedData.id;
-        const userExists = await User.findById(_id);
         
+        const verifiedToken = await verifyToken(token);
+        const _id = verifiedToken.id;
+
+        const userExists = await User.findById(_id);
         if (!userExists) {
             // console.error('Token verification failed:', error.message);
             const responseData = { 
@@ -422,9 +424,9 @@ exports.logIn = async (req, res) => {
 
         // 1) Use E-mail to find User
         const existingUser = await User.findOne({ email });
-
         // 2) CHECK IF USER EXISTS
         if (!existingUser) {
+
             const responseData = { 
                 success: false, 
                 error: "Login Failed: Account with this details does not exist",
@@ -434,29 +436,34 @@ exports.logIn = async (req, res) => {
 
         // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
-        
         // 4) CHECK IF USER CORRECT
-        if (!isPasswordCorrect) {        
+        if (!isPasswordCorrect) {      
+
+            for (var i = 0; i < existingUser.roles.length; i++) {
+                if (i < existingUser.roles.length) {
+                    console.log("***************************************",
+                        "\n*****      LOG-IN ATTEMPT BY      *****",
+                        "\n***************************************",
+                        // "\nUser ID: ", existingUser._id,
+                        "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser E-mail: ", existingUser.email,
+                        "\nUser Password is CORRECT: ", isPasswordCorrect,
+                        "\n***************************************",
+                        "\n***   ADDITIONAL USER INFORMATION  ***",
+                        "\n***************************************",
+                        "\nUser isVerified: ", existingUser.isVerified,
+                        "\nUser Status: ", existingUser.status.toUpperCase(),
+                        "\nUser ROLE(S): ", existingUser.roles[i].role,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken,
+                        "\n***************************************",
+                        "\n\n");
+                };
+            };
+
             const responseData = { 
                 success: false, 
-                error: "Login Failed: Incorrect password",
+                error: "Incorrect email or password",
             };
-            console.log("***************************************",
-                "\n*****      LOG-IN ATTEMPT BY      *****",
-                "\n***************************************",
-                "\nUser ID: ", existingUser._id,
-                "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
-                "\nUser E-mail: ", existingUser.email,
-                "\nUser Password is CORRECT: ", isPasswordCorrect,
-                "\n***************************************",
-                "\n***   ADDITIONAL USER INFORMATION   ***",
-                "\n***************************************",
-                "\nUser Account isVerified: ", existingUser.isVerified,
-                "\nUser Account Status: ", existingUser.status.toUpperCase(),
-                "\nUser Account ROLE(S): ", existingUser.roles,
-                "\nPrevious User AccessToken: ", existingUser.accessToken ,
-                "\n***************************************\n");
-
             return res.status(401).json(responseData);
         };        
 
@@ -466,63 +473,87 @@ exports.logIn = async (req, res) => {
             // *************         UNVERIFIED USER ATTEMPTING TO LOG-IN           **************//
             // ***********************************************************************************//
     
-            console.log("*******************************************************",
+            for (var i = 0; i < existingUser.roles.length; i++) {
+                if (i < existingUser.roles.length) {
+                    console.log("*******************************************************",
                         "\n*****      LOG-IN ATTEMPT BY UNVERIFIED USER      *****",
                         "\n*******************************************************",
-                        "\nUser ID: ", existingUser._id,
-                        "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
+                        // "\nUser ID: ", existingUser._id,
+                        "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
                         "\nUser E-mail: ", existingUser.email,
                         "\nUser Password is CORRECT: ", isPasswordCorrect,
                         "\n***************************************",
                         "\n***   ADDITIONAL USER INFORMATION  ***",
                         "\n***************************************",
-                        "\nUser Account isVerified: ", existingUser.isVerified,
-                        "\nUser Account Status: ", existingUser.status.toUpperCase(),
-                        "\nUser Account ROLE(S): ", existingUser.roles,
+                        "\nUser isVerified: ", existingUser.isVerified,
+                        "\nUser Status: ", existingUser.status.toUpperCase(),
+                        "\nUser ROLE(S): ", existingUser.roles[i].role,
                         "\nPrevious User AccessToken: ", existingUser.accessToken,
-                        "\n");
+                        "\n***************************************",
+                        "\n\n");
+                };
+            };
+
             // ***********************************************************************************//
             // NOTE:- Use the USER 'accessToken' for Authentication & Authorization
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
-                // data: existingUser,
                 message: `Login Failed: Kindly verify your account`
             };
             return res.status(401).json(responseData);
         };
 
-        // 6) Assign Token to Logged-In User
-        // NOTE:-  Token has a Life-span.
-        const token = await createJWT(existingUser._id);
-        console.log("Generated Token Data: ", token);
-
-        const verifiedToken = await jwt.verify(token, secretKey);
-        console.log("Verified or Decoded Token Data: ", verifiedToken);
         
-        existingUser.accessToken = token;
-        existingUser.expirationInMs = verifiedToken.exp;
-    
-        // ***********************************************************************************//
-        // *************                CURRENT LOGGED-IN USER                  **************//
-        // ***********************************************************************************//
-        console.log("***********************************************",
-            "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
-            "\n***********************************************",
+        console.log("\n***********************************************",
             "\n=====>       CURRENT LOGGED-IN USER      <=====",
             "\n***********************************************",
-            "\nUser ID: ", existingUser._id,
-            "\nUser Details: ", existingUser.firstName + " " + existingUser.lastName,
+            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
             "\nUser E-mail: ", existingUser.email,
-            "\n***************************************",
-            "\n***   ADDITIONAL USER INFORMATION   ***",
-            "\n***************************************",
-            "\nUser Account isVerified: ", existingUser.isVerified,
-            "\nUser Account Status: ", existingUser.status.toUpperCase(),
-            "\nUser AccessToken: ", existingUser.accessToken,
-            "\nUser AccessToken [EXPIRES IN]: ", existingUser.expirationInMs,
-            "\nUser Account ROLE(S): ", existingUser.roles,
-            "\n");
+            "\n**********************************************",
+            "\n****      ADDITIONAL USER INFORMATION      ****",
+            "\n***********************************************",
+            "\nPrevious User AccessToken: ", existingUser.accessToken,
+            "\nPrevious User AccessToken [TIME TO EXPIRE]: ", existingUser.sessionEnds,
+            "\n***********************************************",
+            "\n\n");
+ 
+        // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
+        const token = await assignToken(existingUser._id);    // console.log("Generated Token Data: ", token);
+        
+        // 7) Verify token to get Lifespan of Token
+        const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
+        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
+        existingUser.sessionEnds = tokenExpiryDate;
+        
+        existingUser.accessToken = token;
+
+        for (var n = 0; n < existingUser.roles.length; n++) {
+            if (n < existingUser.roles.length) {
+                // ***********************************************************************************//
+                // *************                CURRENT LOGGED-IN USER                  **************//
+                // ***********************************************************************************//
+                console.log("***********************************************",
+                    "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+                    "\n***********************************************",
+                    // "\nUser ID: ", existingUser._id,
+                    "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+                    "\nUser E-mail: ", existingUser.email,
+                    "\n***********************************************",
+                    "\n****      ADDITIONAL USER INFORMATION      ****",
+                    "\n***********************************************",
+                    "\nUser ROLE(S): ", existingUser.roles[n].role,
+                    // "\nUser isVerified: ", existingUser.isVerified,
+                    "\nUser Status: ", existingUser.status.toUpperCase(),
+                    "\nUser AccessToken: ", existingUser.accessToken,
+                    "\nUser AccessToken [EXPIRES IN]: ", existingUser.sessionEnds,
+                    "\n***********************************************",
+                    "\n=====>       CURRENT LOGGED-IN USER      <=====",
+                    "\n***********************************************",
+                    "\n");
+            };
+        };
+        
         // ***********************************************************************************//
         // NOTE:- By assigning Token to Logged-in User,
         //        Now you can use User's "accessToken" 
@@ -547,6 +578,7 @@ exports.logIn = async (req, res) => {
         console.error("Unexpected error during Login: ", error);
         return res.status(500).json(responseData);  
     }
+
 }  // THOROUGHLY Tested === Working
 
 // Finding All ADMINS
