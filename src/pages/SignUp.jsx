@@ -76,9 +76,7 @@ function SignUp() {
 
         await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
-            const { success, message, data } = response.data;
-            const { userId, accessToken } = data;
-
+            const { success, message, } = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
@@ -140,13 +138,9 @@ function SignUp() {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-                localStorage.setItem("token", JSON.stringify(data?.accessToken));
-
+                
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
-
-                // RESET FORM AFTER SUBMISSION
-                setUser({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
 
                 // Scroll to Top
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });

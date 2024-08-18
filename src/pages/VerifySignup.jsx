@@ -12,7 +12,7 @@ import { brandOfficialLogo, loginBg } from '../assets/images';
 
 
 
-function VerifyToken() {  
+function VerifySignUp() {  
 
 
     console.clear();
@@ -21,12 +21,11 @@ function VerifyToken() {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Sign Up", 
-              siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
+    // useEffect(() => {
+    //     const pageTitle = "Account Verification", 
+    //         siteTitle = "Samuel Akinola Foundation";
+    //     document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
+    // }, [registeredUser]);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -46,7 +45,7 @@ function VerifyToken() {
 
 
 
-    const [formMessage, setFormMessage] = useState(null);
+    const [formMessage, setFormMessage] = useState("");
     // console.log("Login Attempt: ", formMessage);
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
@@ -77,8 +76,6 @@ function VerifyToken() {
         await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data } = response.data;
-            const { userId, accessToken } = data;
-
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
@@ -140,13 +137,9 @@ function VerifyToken() {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-                localStorage.setItem("token", JSON.stringify(data?.accessToken));
 
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
-
-                // RESET FORM AFTER SUBMISSION
-                setUser({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
 
                 // Scroll to Top
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
@@ -180,7 +173,7 @@ function VerifyToken() {
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
                     <Link className="w-56" to={"/"}>
-                        <img src={brandOfficialLogo} />
+                        <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
                 </div>
                 {/* PAGE NAV */}
@@ -281,4 +274,4 @@ function VerifyToken() {
     );
 };
 
-export default VerifyToken;
+export default VerifySignUp;
