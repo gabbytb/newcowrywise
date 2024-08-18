@@ -737,7 +737,19 @@
       !important
     ;
   }
+  label.progress_label {
+    /* font-size: 1rem; */
+  }
+  progress#file {
+    width: -webkit-fill-available;
+    background-color: antiquewhite !important;
+    fill: white;
+    height: 100%;
+  }
 
+  .jumbu {
+    height: 0.2rem;
+  }
 
   
   /*****  Error Message CSS  *****/

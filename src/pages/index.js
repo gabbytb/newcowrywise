@@ -10,8 +10,11 @@ import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
 
 import SignUp from "./SignUp";
-import SignIn from "./SignIn";
 import VerifySignUp from "./VerifySignUp";
+
+
+import SignIn from "./SignIn";
+import SignInVerifySignUp from "./SignInVerifySignUp";
 
 
 import AdminDashboard from "./AdminDashboard";
@@ -49,8 +52,10 @@ export {
     OLDSignUpReVerification,
 
     SignUp,
-    SignIn,
     VerifySignUp,
+    
+    SignIn,
+    SignInVerifySignUp,
     
     AdminDashboard,
         

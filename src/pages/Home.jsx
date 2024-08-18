@@ -32,6 +32,11 @@ const Home = () => {
 
   return (
     <>
+
+      <label htmlFor="file" className="progress_label">File progress:
+        <progress id="file" max="100" value="70">70%</progress>
+      </label>
+
       <HomeNav />
       <main ref={tawkMessengerRef}>
         <div className="w-full m-0 p-0 home-container">
@@ -41,6 +46,7 @@ const Home = () => {
         </div>
       </main>
 
+ 
 
       {/* Production Data Supplied */}
       <TawkMessengerReact

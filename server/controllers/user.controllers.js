@@ -2,15 +2,10 @@ const db = require("../models");
 const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 // const crypto = require('crypto');
 
 
-// FOR JWT: Replace with a secure, secret key.
-const secretKey = process.env.secretKey || '!wasinvincibleallalongtheydunno!';   // 32 bytes for AES-256;
-
-
-// FOR CRYPTO: Replace with a secure, secret key.
+// // FOR CRYPTO: Replace with a secure, secret key.
 // const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
 // const IV_LENGTH = 16; // AES block size in bytes
 // // Encrypt function
@@ -40,7 +35,7 @@ const secretKey = process.env.secretKey || '!wasinvincibleallalongtheydunno!';  
 // Middlewares
 // *****************************************************************
 const encryptPassword = require("../middlewares/EncryptPassword");
-const assignToken = require("../middlewares/AssignToken");   // For Sign In
+const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For Sign In
 // const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");
 const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
@@ -90,7 +85,7 @@ exports.signUp = async (req, res) => {
                 success: false,
                 message: "E-mail exists. Sign In"
             };
-            console.log("E-mail Exists: ", emailExists);
+            console.log("**************************\n***   SIGN-UP FAILED   ***\n**************************\nE-mail: ", emailExists.email, " exists\n\n");
             return res.status(200).json(responseData);
         };
         
@@ -104,6 +99,7 @@ exports.signUp = async (req, res) => {
         //     console.log("Username Exists: ", responseData);
         //     return res.status(200).json(responseData);
         // }
+        
 
         // ***************************************************************//
         // Hash/Encrypt Password
@@ -338,7 +334,7 @@ exports.verifySignUp = async (req, res) => {
         };
         
         const token = AuthHeader.split(" ")[1];
-        
+
         const verifiedToken = await verifyToken(token);
         const _id = verifiedToken.id;
 
@@ -505,8 +501,14 @@ exports.logIn = async (req, res) => {
         };
 
         
-        console.log("\n***********************************************",
-            "\n=====>       CURRENT LOGGED-IN USER      <=====",
+        console.log("***********************************************",
+            "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+            "\n***********************************************",
+            // "\nUser ID: ", existingUser._id,
+            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+            "\nUser E-mail: ", existingUser.email,
+            "\n***********************************************",
+            "\n****      ADDITIONAL USER INFORMATION      ****",
             "\n***********************************************",
             "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
             "\nUser E-mail: ", existingUser.email,
@@ -519,7 +521,7 @@ exports.logIn = async (req, res) => {
             "\n\n");
  
         // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
-        const token = await assignToken(existingUser._id);    // console.log("Generated Token Data: ", token);
+        const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
         
         // 7) Verify token to get Lifespan of Token
         const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
