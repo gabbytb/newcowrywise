@@ -502,21 +502,16 @@ exports.logIn = async (req, res) => {
 
         
         console.log("***********************************************",
-            "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+            "\n******       🔐   ACTIVE USER  🔑        ******",
             "\n***********************************************",
             // "\nUser ID: ", existingUser._id,
-            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
-            "\nUser E-mail: ", existingUser.email,
-            "\n***********************************************",
-            "\n****      ADDITIONAL USER INFORMATION      ****",
-            "\n***********************************************",
             "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
             "\nUser E-mail: ", existingUser.email,
             "\n**********************************************",
             "\n****      ADDITIONAL USER INFORMATION      ****",
             "\n***********************************************",
-            "\nPrevious User AccessToken: ", existingUser.accessToken,
-            "\nPrevious User AccessToken [TIME TO EXPIRE]: ", existingUser.sessionEnds,
+            "\nPrev. AccessToken: ", existingUser.accessToken,
+            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.sessionEnds,
             "\n***********************************************",
             "\n\n");
  
@@ -529,30 +524,31 @@ exports.logIn = async (req, res) => {
         existingUser.sessionEnds = tokenExpiryDate;
         
         existingUser.accessToken = token;
-
-        for (var n = 0; n < existingUser.roles.length; n++) {
-            if (n < existingUser.roles.length) {
+        const loggedInUser = await existingUser.save();
+      
+        for (var n = 0; n < loggedInUser.roles.length; n++) {
+            if (n < loggedInUser.roles.length) {
                 // ***********************************************************************************//
                 // *************                CURRENT LOGGED-IN USER                  **************//
                 // ***********************************************************************************//
                 console.log("***********************************************",
                     "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
                     "\n***********************************************",
-                    // "\nUser ID: ", existingUser._id,
-                    "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
-                    "\nUser E-mail: ", existingUser.email,
+                    // "\nUser ID: ", loggedInUser._id,
+                    "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
+                    "\nUser E-mail: ", loggedInUser.email,
                     "\n***********************************************",
                     "\n****      ADDITIONAL USER INFORMATION      ****",
                     "\n***********************************************",
-                    "\nUser ROLE(S): ", existingUser.roles[n].role,
-                    // "\nUser isVerified: ", existingUser.isVerified,
-                    "\nUser Status: ", existingUser.status.toUpperCase(),
-                    "\nUser AccessToken: ", existingUser.accessToken,
-                    "\nUser AccessToken [EXPIRES IN]: ", existingUser.sessionEnds,
+                    "\nUser ROLE(S): ", loggedInUser.roles[n].role,
+                    // "\nUser isVerified: ", loggedInUser.isVerified,
+                    "\nUser Status: ", loggedInUser.status.toUpperCase(),
+                    "\nUser AccessToken: ", loggedInUser.accessToken,
+                    "\nUser AccessToken [EXPIRES IN]: ", loggedInUser.sessionEnds,
                     "\n***********************************************",
                     "\n=====>       CURRENT LOGGED-IN USER      <=====",
                     "\n***********************************************",
-                    "\n");
+                    "\n\n");
             };
         };
         
@@ -563,7 +559,7 @@ exports.logIn = async (req, res) => {
         // ***********************************************************************************//  
         const responseData = {
             success: true,
-            data: existingUser,
+            data: loggedInUser,
             // data: {
             //     userId: existingUser._id,
             //     accessToken: existingUser.accessToken,
