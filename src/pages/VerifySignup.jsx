@@ -1,5 +1,5 @@
 import { useState, useEffect, } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 // import loginImg from '../assets/login.jpg'
 import { brandOfficialLogo, loginBg } from '../assets/images';
@@ -42,9 +42,6 @@ function VerifySignUp() {
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
 
-
-
-
     const [formMessage, setFormMessage] = useState("");
     // console.log("Login Attempt: ", formMessage);
     const [formSubmitted, setFormSubmitted] = useState(false);
@@ -80,14 +77,13 @@ function VerifySignUp() {
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
             if ((!success) && (message === "Fill all the required inputs")) {
-
-                /// Scroll to Top
-                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
-                   
+                            
+                /// Scroll to Top
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 errMsg?.classList.remove('signup_error');
                 errMsg?.classList.add('error-message-info');
 
@@ -164,6 +160,166 @@ function VerifySignUp() {
     };
 
         
+
+
+
+    
+
+    const { token } = useParams();
+    const [registeredUser, setRegisteredUser] = useState(null);
+    console.log("Registered User: ", registeredUser);
+    
+    const [verificationSuccessful, setVerificationSuccessful] = useState(false);
+    const [verificationMessage, setVerificationMessage] = useState("");
+
+    useEffect(() => {
+        async function verifyToken() {              
+            try {
+                const url = `http://127.0.0.1:8000/user/verify/${token}`;
+                const payload = { 
+                    accessToken: token,
+                };
+
+                const response = await axios.post(url, payload, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
+
+                const { success, message, data } = response.data;
+                var verifyErrMsg = document.querySelector('#signUpForm .verify_error'); 
+                var verifySuccessMsg = document.querySelector('#signUpForm .verify_success');
+
+                if ((!success) && (message === "Unauthorized")) {
+                    setVerificationSuccessful(success);
+                    setVerificationMessage(message);
+
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
+                    verifyErrMsg?.classList.remove('verify_error');
+                    verifyErrMsg?.classList.add('error-message-info');
+
+                    setTimeout(() => {
+                        verifyErrMsg?.classList.remove('error-message-info');
+                        verifyErrMsg?.classList.add('verify_error');
+                    }, 3000);
+                    // Perform These Actions
+
+                } else if ((!success) && (message === "Token has expired")) {
+                    setVerificationSuccessful(success);
+                    setVerificationMessage(message);
+
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
+                    verifyErrMsg?.classList.remove('verify_error');
+                    verifyErrMsg?.classList.add('error-message-info');
+
+                    setTimeout(() => {
+                        verifyErrMsg?.classList.remove('error-message-info');
+                        verifyErrMsg?.classList.add('verify_error');
+                    }, 3000);
+                    // Perform These Actions
+                    
+                } else if ((!success) && (message === "Token does not exist")) {
+                    setVerificationSuccessful(success);
+                    setVerificationMessage(message);   
+                    
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
+                    verifyErrMsg?.classList.remove('verify_error');
+                    verifyErrMsg?.classList.add('error-message-info');
+
+                    setTimeout(() => {
+                        verifyErrMsg?.classList.remove('error-message-info');
+                        verifyErrMsg?.classList.add('verify_error');
+                    }, 3000);
+                    // Perform These Actions
+                       
+                } else if ((!success) && (message === "Mulitple user entry")) {
+                    setVerificationSuccessful(success);
+                    setVerificationMessage(message);      
+                    
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
+                    verifyErrMsg?.classList.remove('verify_error');
+                    verifyErrMsg?.classList.add('error-message-info');
+
+                    setTimeout(() => {
+                        verifyErrMsg?.classList.remove('error-message-info');
+                        verifyErrMsg?.classList.add('verify_error');
+                    }, 3000);
+                    // Perform These Actions
+                    
+                } else if ((!success) && (message === "Invalid token")) {
+                    setVerificationSuccessful(success);
+                    setVerificationMessage(message);      
+                    
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
+                    verifyErrMsg?.classList.remove('verify_error');
+                    verifyErrMsg?.classList.add('error-message-info');
+
+                    setTimeout(() => {
+                        verifyErrMsg?.classList.remove('error-message-info');
+                        verifyErrMsg?.classList.add('verify_error');
+                    }, 3000);
+                    // Perform These Actions
+                    
+                } else if ((!success) && (message === "User not found")) {
+                    setVerificationSuccessful(success);
+                    setVerificationMessage(message);      
+                    
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
+                    verifyErrMsg?.classList.remove('verify_error');
+                    verifyErrMsg?.classList.add('error-message-info');
+
+                    setTimeout(() => {
+                        verifyErrMsg?.classList.remove('error-message-info');
+                        verifyErrMsg?.classList.add('verify_error');
+                    }, 3000);
+                    // Perform These Actions
+                    
+                } else {
+                    setVerificationSuccessful(success);
+                    setRegisteredUser(data);
+                    setVerificationMessage(message);
+
+                    // RESET FORM AFTER SUBMISSION
+                    document.getElementById("signUpForm").reset();
+
+                    // Scroll to Top
+                    window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
+
+                    verifySuccessMsg.classList.remove('verify_success');
+                    verifySuccessMsg.classList.add('success-message-info'); 
+                                        
+                    setTimeout(() => {
+                        verifySuccessMsg.classList.remove('success-message-info');
+                        verifySuccessMsg.classList.add('verify_success');            
+                    }, 3500);
+                    // Perform These Actions
+
+                    setTimeout(() => {
+                        window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+                    }, 3900);
+                };
+            } catch(error) {
+                console.log("Error encountered: ", error);
+            };
+        };
+
+        var timer = setTimeout(verifyToken, 2000);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [token]);
     
     return (
         <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
@@ -197,6 +353,13 @@ function VerifySignUp() {
                         {formMessage}
                     </div>
                     {/* Error Message */}
+
+
+                    {/* Verification Error Message */}
+                    <div className="mx-auto verify_error">
+                        {verificationMessage}
+                    </div>
+                    {/* Verification Error Message */}
 
 
                     {/* Username */}
@@ -250,7 +413,16 @@ function VerifySignUp() {
                     
   
                     {/* SUBMIT BUTTON */}
-                    <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
+                    <div className="relative">
+                        <div className="mx-auto verify_success absolute top-0 w-full">
+                            {
+                                verificationSuccessful
+                                &&
+                                <div className="bg-green-500 text-white font-bold text-2xl flex justify-center items-center py-4 animate-dropdown rounded-xl">{verificationMessage}</div>
+                            }
+                        </div>
+                        <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
+                    </div>
                     {/* SUBMIT BUTTON */}
 
 

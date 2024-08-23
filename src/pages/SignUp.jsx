@@ -76,7 +76,7 @@ function SignUp() {
 
         await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
         .then((response) => {
-            const { success, message, } = response.data;
+            const { success, message, data} = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
@@ -135,16 +135,16 @@ function SignUp() {
                 // Perform These Actions
                                 
             } else {             
-                // Perform These Actions
-                setFormSubmitted(success);
-                setFormMessage(message);
-                
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
 
-                // Scroll to Top
+                // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+                                
+                // Scroll to Bottom
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
-
+                
                 successMsg.classList.remove('signup_success');
                 successMsg.classList.add('success-message-info'); 
                                     
@@ -157,6 +157,7 @@ function SignUp() {
                 setTimeout(() => {
                     window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
                 }, 3900);
+                // Perform These Actions
             };
         })
         .catch((error) => {
@@ -174,7 +175,7 @@ function SignUp() {
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
                     <Link className="w-56" to={"/"}>
-                        <img src={brandOfficialLogo} />
+                        <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
                 </div>
                 {/* PAGE NAV */}

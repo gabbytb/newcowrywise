@@ -40,7 +40,6 @@ const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For 
 const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
-// const mailSenderForToken = require("../middlewares/MailSenderForToken");
 // *****************************************************************
 // *****************************************************************
 
@@ -85,7 +84,7 @@ exports.signUp = async (req, res) => {
                 success: false,
                 message: "E-mail exists. Sign In"
             };
-            console.log("**************************\n***   SIGN-UP FAILED   ***\n**************************\nE-mail: ", emailExists.email, " exists\n\n");
+            console.log("**************************\n***   SIGN-UP FAILED   ***\n**************************\nID: ", emailExists._id,"\nE-mail: ", emailExists.email, " exists\n\n");
             return res.status(200).json(responseData);
         };
         
@@ -148,12 +147,14 @@ exports.signUp = async (req, res) => {
         // ***  FE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
         // ****************************************************
         const tokenDecoded = await verifyToken(token);
+        
         // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
         // NOTE:-
         //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
         //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
         //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
-        
+        // Format using: new Date(tokenDecoded.exp * 1000) 
+        // To Get Current Date Setting for Token Expiration Time to start counting from!
         const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
         user.sessionEnds = tokenExpiryDate;
         // **************************************** //
@@ -218,7 +219,6 @@ exports.signUp = async (req, res) => {
         // E-mail Service Config
         // ***************************************************************//
         await mailSender(token, newUser);
-        // await MailSenderForToken(token, newUser);
 
         // let valueOfEncodedText = decrypt(newUser.expirationInMs);
         // console.log("Encrypted token lifespan: ", valueOfEncodedText);
@@ -334,7 +334,6 @@ exports.verifySignUp = async (req, res) => {
         };
         
         const token = AuthHeader.split(" ")[1];
-
         const verifiedToken = await verifyToken(token);
         const _id = verifiedToken.id;
 
@@ -350,8 +349,7 @@ exports.verifySignUp = async (req, res) => {
         }
 
         // Step 6: If user exists, find User by Email 
-        const email = userExists.email;   
-
+        // const email = userExists.email;   
         // Change Existing User status to "approved".
         // Assign the generated token to Existing User, as their accessToken..
         // Set isVerified as True for Existing User
@@ -360,7 +358,11 @@ exports.verifySignUp = async (req, res) => {
             accessToken: token,
             isVerified: true,
         };
-        const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        // const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        
+        
+        // Step 6: If user exists, find User by Email
+        const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
     
         const responseData = {
             success: true,
@@ -392,19 +394,19 @@ exports.verifySignUp = async (req, res) => {
             console.log("Token verification status: ", responseData);
             return res.status(401).json(responseData);
         } else if (error.name === 'MongoServerError') {
-            // console.error("Duplicate User Entry");
+            // console.error("Mulitple user entry");
             const responseData = { 
                 success: false, 
-                message: "Duplicate User Entry",
+                message: "Mulitple user entry",
             };
-            console.log("Duplicate User Entry: ", responseData);
+            console.log("Mulitple user entry: ", responseData);
             return res.status(401).json(responseData);
         } else {
             const responseData = { 
                 success: false, 
                 message: "Internal Server Error",
             };
-            console.error("Unexpected error during account verification: ", error.message);
+            console.error("Internal Server Error during account verification: ", error.message);
             return res.status(500).json(responseData);
         };
     };

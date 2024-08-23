@@ -5,7 +5,7 @@ import OurProgressSectionFour from "./ourprogress/OurProgressSectionFour";
 import OurProgressSectionFive from "./ourprogress/OurProgressSectionFive";
 import OurProgressSectionSix from "./ourprogress/OurProgressSectionSix";
 import OurProgressSectionSeven from "./ourprogress/OurProgressSectionSeven";
-import Footer from "./Footer";
+
 
 
 
@@ -18,5 +18,4 @@ export {
     OurProgressSectionFive,
     OurProgressSectionSix,
     OurProgressSectionSeven,
-    Footer,
 };

@@ -4336,6 +4336,20 @@ progress#file {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@keyframes showDropdown{
+  0%{
+    transform: translate3d(0px, -25.4804px, 0px) scale(0.8981, 0.898078);
+  }
+
+  to{
+    transform: translate(0px, 0px);
+  }
+}
+
+.animate-dropdown{
+  animation: showDropdown 0.5s ease;
+}
+
 @keyframes slideUp{
   0%{
     -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
@@ -5082,6 +5096,11 @@ progress#file {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-red-500{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .opacity-0{

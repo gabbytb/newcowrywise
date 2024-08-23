@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppStoreIcon, ArrowRight, PlayStoreIcon, StarRating, } from "../assets/icons";
 import { footerCompany, footerProduct, footerResources, footerContact, footerLinks, } from "../constants";
-import { ButtonComponent, FooterCard, FooterSocialCard, } from "../components";
+import { ButtonComponent, FooterCard, FooterSocialCard, } from ".";
 
 
 

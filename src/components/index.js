@@ -20,6 +20,7 @@ import DisqusCard from "./DisqusCard";
 
 
 // FOOTER
+import Footer from "./Footer";
 import FooterCard from "./FooterCard";
 import FooterSocialCard from "./FooterSocialCard";
 // FOOTER
@@ -57,6 +58,7 @@ export {
 
 
     // FOOTER
+    Footer,
     FooterCard,
     FooterSocialCard,
     // FOOTER
