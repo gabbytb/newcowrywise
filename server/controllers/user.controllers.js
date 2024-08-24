@@ -40,6 +40,7 @@ const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For 
 const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
+const { useState } = require("react");
 // *****************************************************************
 // *****************************************************************
 
@@ -109,9 +110,9 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" }),
-        // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
+        const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
@@ -137,7 +138,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: 'pending',
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleAdmin }]
+            roles: [{ ...roleStaff }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -587,6 +588,8 @@ exports.findAllAdmins = async (req, res) => {
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
     
     try {
+
+        // Create Object instance
         let query = {};
 
         // Add "status" filter
@@ -594,7 +597,7 @@ exports.findAllAdmins = async (req, res) => {
             query.status = status;
         };
         
-        // Pagination logic
+        // Query User Status & Pagination logic
         const staffsList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
@@ -602,13 +605,12 @@ exports.findAllAdmins = async (req, res) => {
 
         const totalAdminUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
-
-
         const pagination = {
             staffsRecord: totalAdminUsers,
             lastPage: totalPages,
         };
-
+        // console.log("PAGINATION: ", pagination);
+        
         const responseData = {
             success: true,
             data: {
@@ -617,7 +619,27 @@ exports.findAllAdmins = async (req, res) => {
             },
             message: "Items retrieved successfully",
         }
-        res.status(200).json(responseData);
+        return res.status(200).json(responseData);
+
+        // for (var n = 0; n < staffsList.length; n++) {       
+        //     if (n < staffsList.length) {
+        //         for (var i = 0; i < staffsList[n].roles.length; i++) {
+        //             if (staffsList[n].roles.role === "ROLE_ADMIN" || staffsList[n].roles[i].role === "ROLE_EDITOR" || staffsList[n].roles[i].role === "ROLE_STAFF") {
+        //                 let affsList = staffsList[n];
+        //                 const responseData = {
+        //                     success: true,
+        //                     data: {
+        //                         affsList,
+        //                         pagination
+        //                     },
+        //                     message: "Items retrieved successfully",
+        //                 }
+        //                 return res.status(200).json(responseData);
+        //             }
+        //         };
+        //     };
+        // };
+
 
     } catch (error) {
         console.error("Internal Server Error:", error);

@@ -1,5 +1,10 @@
-import { useEffect } from "react";
-import { Nav, OurProgressBody, Footer, } from "../components";
+import { Suspense, lazy, useEffect } from "react";
+const Nav = lazy(() => import("../components/Nav"));
+const OurProgressBody = lazy(() => import("../components/OurProgressBody"));
+const Footer = lazy(() => import("../components/Footer"));
+
+
+
 
 
 
@@ -26,22 +31,22 @@ const OurProgress = () => {
     //     };
     //   };
     // };
-          
+
 
     return (
-        <>
-          <div className="jumbu">
-              <label htmlFor="file" className="progress_label">
-                <progress id="file" className="flex" value={70} max={100}>CLICK OVER HERE</progress>
-              </label>
-          </div>
+        <Suspense fallback={<div>Loading...</div>}>
+            <div className="jumbu">
+                <label htmlFor="file" className="progress_label">
+                  <progress id="file" className="flex" value={70} max={100}>CLICK OVER HERE</progress>
+                </label>
+            </div>
 
-          <Nav/>
-          <div className="absolute top-0 w-full -z-10">
-            <OurProgressBody />
-            <Footer />
-          </div>
-        </>
+            <Nav/>
+            <div className="absolute top-0 w-full -z-10">
+                <OurProgressBody />
+                <Footer />
+            </div>
+        </Suspense>
     );
 };
 
