@@ -1,5 +1,3 @@
-const { type } = require("@testing-library/user-event/dist/type");
-
 module.exports = mongoose => {
     
 
@@ -63,7 +61,7 @@ module.exports = mongoose => {
         accessToken: {
             type: String,
         },
-        sessionEnds: {
+        tokenExpires: {
             type: Date,
         },
         roles: [

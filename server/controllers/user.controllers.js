@@ -159,7 +159,7 @@ exports.signUp = async (req, res) => {
         // Format using: new Date(tokenDecoded.exp * 1000) 
         // To Get Current Date Setting for Token Expiration Time to start counting from!
         const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
-        user.sessionEnds = tokenExpiryDate;
+        user.tokenExpires = tokenExpiryDate;
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
         // **************************************** //
@@ -516,7 +516,7 @@ exports.logIn = async (req, res) => {
             "\n****      ADDITIONAL USER INFORMATION      ****",
             "\n***********************************************",
             "\nPrev. AccessToken: ", existingUser.accessToken,
-            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.sessionEnds,
+            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
             "\n***********************************************",
             "\n\n");
  
@@ -526,7 +526,7 @@ exports.logIn = async (req, res) => {
         // 7) Verify token to get Lifespan of Token
         const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
         const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
-        existingUser.sessionEnds = tokenExpiryDate;
+        existingUser.tokenExpires = tokenExpiryDate;
         
         existingUser.accessToken = token;
         const loggedInUser = await existingUser.save();
@@ -549,7 +549,7 @@ exports.logIn = async (req, res) => {
                     // "\nUser isVerified: ", loggedInUser.isVerified,
                     "\nUser Status: ", loggedInUser.status.toUpperCase(),
                     "\nUser AccessToken: ", loggedInUser.accessToken,
-                    "\nUser AccessToken [EXPIRES IN]: ", loggedInUser.sessionEnds,
+                    "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
                     "\n***********************************************",
                     "\n=====>       CURRENT LOGGED-IN USER      <=====",
                     "\n***********************************************",
@@ -639,12 +639,14 @@ exports.findAllAdmins = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Finding All USERS
-exports.findAllUsers = async (req, res) => {
+exports.findAllUsers = async (req, res) => { 
 
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
     
     try {
-        let query = {};
+        let query = {
+            'roles.role': ROLES.USERS,
+        };
 
         if (status) {
             query.status = status;
@@ -662,6 +664,8 @@ exports.findAllUsers = async (req, res) => {
 
         const pagination = {
             usersRecord: totalUsers,
+            page,
+            limit,
             lastPage: totalPages,
         };
 
