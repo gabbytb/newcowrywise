@@ -1,8 +1,10 @@
 const db = require("../models");
+const ROLES = require("../constants/constants");
 const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
 // const crypto = require('crypto');
+
 
 
 // // FOR CRYPTO: Replace with a secure, secret key.
@@ -584,32 +586,41 @@ exports.logIn = async (req, res) => {
 
 // Finding All ADMINS
 exports.findAllAdmins = async (req, res) => {
-
-    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
     
     try {
-
-        // Create Object instance
-        let query = {};
+        // const { page = parseInt(1), limit = parseInt(10), status } = req.query; // Destructure query parameters  
+        
+        const status = req.query.status || "";
+        // Get Pagination Parameters from the request query
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 10;
+        const skip = (page - 1) * limit;
+            
+        const query = {
+            'roles.role': ROLES.ADMIN,
+        };
 
         // Add "status" filter
         if (status) {
             query.status = status;
         };
-        
+
         // Query User Status & Pagination logic
         const staffsList = await User.find(query)
-                                .skip((page - 1) * limit)
-                                .limit(parseInt(limit));
-        // console.log("STAFFS LIST: ", staffsList);
+                                .skip(skip)
+                                .limit(limit);
+        console.log("STAFFS LIST: ", staffsList);       
+
 
         const totalAdminUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
         const pagination = {
             staffsRecord: totalAdminUsers,
+            page,
+            limit,
             lastPage: totalPages,
         };
-        // console.log("PAGINATION: ", pagination);
+        console.log("PAGINATION: ", pagination);
         
         const responseData = {
             success: true,
@@ -620,26 +631,6 @@ exports.findAllAdmins = async (req, res) => {
             message: "Items retrieved successfully",
         }
         return res.status(200).json(responseData);
-
-        // for (var n = 0; n < staffsList.length; n++) {       
-        //     if (n < staffsList.length) {
-        //         for (var i = 0; i < staffsList[n].roles.length; i++) {
-        //             if (staffsList[n].roles.role === "ROLE_ADMIN" || staffsList[n].roles[i].role === "ROLE_EDITOR" || staffsList[n].roles[i].role === "ROLE_STAFF") {
-        //                 let affsList = staffsList[n];
-        //                 const responseData = {
-        //                     success: true,
-        //                     data: {
-        //                         affsList,
-        //                         pagination
-        //                     },
-        //                     message: "Items retrieved successfully",
-        //                 }
-        //                 return res.status(200).json(responseData);
-        //             }
-        //         };
-        //     };
-        // };
-
 
     } catch (error) {
         console.error("Internal Server Error:", error);
