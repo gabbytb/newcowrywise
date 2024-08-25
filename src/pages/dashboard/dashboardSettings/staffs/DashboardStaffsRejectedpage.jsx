@@ -16,7 +16,8 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
     const [rejectedStaffs, setRejectedStaffs] = useState([]);
     console.log("REJECTED ADMINS: ", rejectedStaffs);
 
-    // const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
+    // eslint-disable-next-line
+    const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
     // console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -57,7 +58,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
                     setRejectedStaffs(staffsList)
 
-                    // setTotalRejectedAdminUsers(pagination?.staffsRecord);
+                    setTotalRejectedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
@@ -200,7 +201,6 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
 
 export default DashboardStaffsRejectedPage;
-
 
 
 

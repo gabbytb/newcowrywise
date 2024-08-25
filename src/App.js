@@ -71,8 +71,9 @@ ReactGA.initialize(TRACKING_ID);
 export default function App() {
 
     useEffect(() => {
-        let pageViews = ReactGA.pageview(window.location.pathname + window.location.search);
-        console.log("TRACKING PAGE VIEWS: ", pageViews);
+        ReactGA.pageview(window.location.pathname + window.location.search);
+        // let pageViews = 
+        // console.log("TRACKING PAGE VIEWS: ", pageViews);
     }, []);
     
     const routes = useRoutes([       

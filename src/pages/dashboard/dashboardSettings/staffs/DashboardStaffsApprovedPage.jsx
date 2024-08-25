@@ -16,7 +16,8 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     const [approvedStaffs, setApprovedStaffs] = useState([]);
     console.log("APPROVED STAFFS: ", approvedStaffs);
     
-    // const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
+    // eslint-disable-next-line
+    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
     // console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -27,7 +28,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         var allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
-        console.log("All Approved Staffs Link: ", allApprovedStaffsLink);
+        // console.log("All Approved Staffs Link: ", allApprovedStaffsLink);
 
         if (activeDisplay === "allApprovedStaffs") {
             allApprovedStaffsLink?.classList.add("activeStaffView");
@@ -57,7 +58,7 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
 
                     setApprovedStaffs(staffsList);
                     
-                    // setTotalApprovedAdminUsers(pagination?.staffsRecord);
+                    setTotalApprovedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {

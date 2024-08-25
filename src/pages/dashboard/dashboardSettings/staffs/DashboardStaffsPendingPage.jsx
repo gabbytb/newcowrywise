@@ -16,7 +16,8 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
     const [pendingStaffs, setPendingStaffs] = useState([]);
     console.log("PENDING STAFFS: ", pendingStaffs);
 
-    // const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
+    // eslint-disable-next-line
+    const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
     // console.log("PENDING STAFFS or TOTAL PENDING STAFFS: ", totalPendingAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -27,7 +28,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         var allPendingStaffsLink = document.querySelector("#staffsLinkID .allPendingStaffs");
-        console.log("All Pending Staffs Link: ", allPendingStaffsLink);
+        // console.log("All Pending Staffs Link: ", allPendingStaffsLink);
 
         if (activeDisplay === "allPendingStaffs") {
             allPendingStaffsLink?.classList.add("activeStaffView");
@@ -57,7 +58,7 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 
                     setPendingStaffs(staffsList);
                     
-                    // setTotalPendingAdminUsers(pagination?.staffsRecord);
+                    setTotalPendingAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
