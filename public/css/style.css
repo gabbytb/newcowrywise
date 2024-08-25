@@ -1657,7 +1657,8 @@ tbody tr{
   animation: slideUp 0.6s ease-in;
 }
 
-.activeStaffView {
+.activeStaffView,
+  .activeUserView {
   /** Working for Selecting Active Staff Link from Dashboard */
   --tw-bg-opacity: 1 !important;
   background-color: rgb(30 58 138 / var(--tw-bg-opacity)) !important;
@@ -1689,7 +1690,7 @@ progress#file {
 
 .success, .error, 
   .signup_error, .signup_success,
-  .verify__error, .verify__success{
+  .verify_error, .verify_success{
   display: none;
 }
 
@@ -1914,7 +1915,8 @@ progress#file {
   font-weight: 600;
 }
 
-.staff__table{
+.staff__table, 
+.users__table{
   border-collapse: collapse;
 }
 

@@ -729,7 +729,8 @@
   .activate-second {    /** Working for Section Seven */
     @apply animate-slideUpSecond
   }
-  .activeStaffView {    /** Working for Selecting Active Staff Link from Dashboard */
+  .activeStaffView,
+  .activeUserView {    /** Working for Selecting Active Staff Link from Dashboard */
     @apply
       bg-blue-900
       text-white
@@ -755,7 +756,7 @@
   /*****  Error Message CSS  *****/
   .success, .error, 
   .signup_error, .signup_success,
-  .verify__error, .verify__success {
+  .verify_error, .verify_success {
     @apply
       hidden      
     ;
@@ -927,7 +928,8 @@
 
 
 
-.staff__table {
+.staff__table, 
+.users__table {
   @apply
     border-collapse
   ;

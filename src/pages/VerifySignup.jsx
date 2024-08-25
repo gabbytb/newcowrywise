@@ -15,7 +15,7 @@ import { brandOfficialLogo, loginBg } from '../assets/images';
 function VerifySignUp() {  
 
 
-    console.clear();
+    // console.clear();
 
 
     // *************************** //

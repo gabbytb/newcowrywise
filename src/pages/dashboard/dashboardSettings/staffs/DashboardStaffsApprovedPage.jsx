@@ -101,75 +101,39 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                                     approvedStaffs?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                        return (
-                                                            <tr key={userIndex} className="">
-                                                                <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                <td className="w-60 text-center lowercase">{user?.email}</td>
-                                                                <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                <td className="w-4/5 flex justify-center mx-auto">
-                                                                    <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            <tr>
-                                                                <td>no record of pending staff</td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex} className="">
+                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                    <td className="w-4/5 flex justify-center mx-auto">
+                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                    </td>
+                                                </tr>
                                             );
                                         } else if (user?.status === "rejected") {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                        return (
-                                                            <tr key={userIndex} className="">
-                                                                <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                <td className="w-60 text-center lowercase">{user?.email}</td>
-                                                                <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                <td className="w-4/5 flex justify-center mx-auto">
-                                                                    <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            <tr>
-                                                                <td>no record of rejected staff</td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex} className="">
+                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                    <td className="w-4/5 flex justify-center mx-auto">
+                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                    </td>
+                                                </tr>
                                             );
                                         } else {
                                             return (
-                                                user?.roles?.map((roleUsers) => {
-                                                    if ((roleUsers?.role === "ROLE_ADMIN") || (roleUsers?.role === "ROLE_EDITOR") || (roleUsers?.role === "ROLE_STAFF")) {
-                                                        return (
-                                                            <tr key={userIndex} className="">
-                                                                <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                <td className="w-60 text-center lowercase">{user?.email}</td>
-                                                                <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                <td className="w-4/5 flex justify-center mx-auto">
-                                                                    <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            <tr>
-                                                                <td>no record of approved staff</td>
-                                                            </tr>
-                                                        );
-                                                    };
-                                                })
+                                                <tr key={userIndex} className="">
+                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
+                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                    <td className="w-4/5 flex justify-center mx-auto">
+                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/${user?._id}`} alt="view staff details">view details</Link>
+                                                    </td>
+                                                </tr>
                                             );
                                         };
                                     })
