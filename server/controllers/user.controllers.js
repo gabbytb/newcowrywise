@@ -56,7 +56,7 @@ const mailSender = require("../middlewares/MailSender");
      
 
 
-// Our Account Creation Logic starts here
+// Our CREATE ACCOUNT Logic starts here
 exports.signUp = async (req, res) => {
 
     try {
@@ -258,7 +258,7 @@ exports.signUp = async (req, res) => {
     }
 };  // THOROUGHLY Tested === Working
 
-// Our Account Re-Activation Logic starts here
+// Our ACCOUNT Re-ACTIVATION Logic starts here
 exports.reSignUp = async (req, res) => {
 
     const { email } = req.query;
@@ -321,7 +321,7 @@ exports.reSignUp = async (req, res) => {
     }
 };  // THOROUGHLY Tested === Working
 
-// Our Account Verification Logic starts here
+// Our ACCOUNT VERIFICATION Logic starts here
 exports.verifySignUp = async (req, res) => {
 
     try {
@@ -414,7 +414,7 @@ exports.verifySignUp = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-// Our Login Logic starts here
+// Our USER LOGIN Logic starts here
 exports.logIn = async (req, res) => {
 
     try {
@@ -583,7 +583,7 @@ exports.logIn = async (req, res) => {
 
 }  // THOROUGHLY Tested === Working
 
-// Finding All ADMINS
+// Our FIND All ADMINS Logic starts here
 exports.findAllAdmins = async (req, res) => {
     
     try {
@@ -637,7 +637,7 @@ exports.findAllAdmins = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-// Finding All USERS
+// Our FIND All USERS Logic starts here
 exports.findAllUsers = async (req, res) => { 
 
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
@@ -684,7 +684,7 @@ exports.findAllUsers = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-// Find a Single User by their ID
+// Our FIND SINGLE USER by ID Logic starts here
 exports.findUserById = async (req, res) => {
     
     try {
