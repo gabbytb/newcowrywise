@@ -15,17 +15,18 @@ const ApprovedUsersPage = ({ activeDisplay }) => {
     // ****************************************************************************
     const [approvedUsers, setApprovedUsers] = useState([]);
     // console.log("APPROVED USERS: ", approvedUsers);
-    
-    const [totalPages, setTotalPages] = useState(0);
+     
+    // eslint-disable-next-line
     const [totalApprovedUsers, setTotalApprovedUsers] = useState(null);
-
+    const [totalPages, setTotalPages] = useState(0);
+  
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
 
 
     useEffect(() => {
         var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");
-        console.log("All Approved Users Link: ", allApprovedUsersLink);
+        // console.log("All Approved Users Link: ", allApprovedUsersLink);
 
         if (activeDisplay === "allApprovedUsers") {
             allApprovedUsersLink?.classList.add("activeUserView");
@@ -37,36 +38,38 @@ const ApprovedUsersPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         if (activeDisplay === "allApprovedUsers") {
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
+            // ****************************************************************************             
+            async function fetchApprovedUsers() {        
+                const approvedStatus = "approved";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { usersList, pagination } = data;
+
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setApprovedUsers(usersList);
+
+                    setTotalApprovedUsers(pagination?.usersRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+            };
+
             var timerID = setTimeout(fetchApprovedUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        }
+        };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" USERS
-    // ****************************************************************************             
-    async function fetchApprovedUsers() {        
-        const approvedStatus = "approved";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { usersList, pagination } = data;
 
-            if (!success && message === "No user found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setApprovedUsers(usersList);
-
-            setTotalApprovedUsers(pagination?.usersRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
-    };
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {

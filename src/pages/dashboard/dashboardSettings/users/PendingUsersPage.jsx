@@ -15,6 +15,7 @@ const PendingUsersPage = ({ activeDisplay }) => {
     const [pendingUsers, setPendingUsers] = useState([]);
     // console.log("PENDING USERS: ", pendingUsers);
     
+    // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     const [totalPages, setTotalPages] = useState(0);
     
@@ -36,36 +37,38 @@ const PendingUsersPage = ({ activeDisplay }) => {
     
     useEffect(() => {
         if (activeDisplay === "allPendingUsers") {
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
+            // ****************************************************************************             
+            async function fetchPendingUsers() {        
+                const pendingStatus = "pending";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { usersList, pagination } = data;
+
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setPendingUsers(usersList);
+
+                    setTotalUsers(pagination?.usersRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+            };
+
             var timerID = setTimeout(fetchPendingUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        }
+        };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
-    // ****************************************************************************             
-    async function fetchPendingUsers() {        
-        const pendingStatus = "pending";
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { usersList, pagination } = data;
-
-            if (!success && message === "No user found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setPendingUsers(usersList);
-
-            setTotalUsers(pagination?.usersRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
-    };
+   
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {

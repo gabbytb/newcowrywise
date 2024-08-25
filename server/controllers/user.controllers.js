@@ -113,8 +113,8 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" });
-        // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
+        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -139,7 +139,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: 'pending',
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleUsers }]
+            roles: [{ ...roleStaff }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -715,7 +715,7 @@ exports.findUserById = async (req, res) => {
         // Catch error
         return res.status(500).send(`Internal Server Error ${error}`);
     };
-};
+};  // THOROUGHLY Tested === Working
 
 // Finding All isActivated Users
 exports.findAllActive = async (req, res) => {

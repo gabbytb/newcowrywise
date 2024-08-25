@@ -15,7 +15,8 @@ const RejectedUsersPage = ({ activeDisplay }) => {
     // ****************************************************************************
     const [rejectedUsers, setRejectedUsers] = useState([]);
     // console.log("REJECTED USERS: ", rejectedUsers);
-
+    
+    // eslint-disable-next-line
     const [totalRejectedUsers, setTotalRejectedUsers] = useState(null);
     const [totalPages, setTotalPages] = useState(0);
 
@@ -37,36 +38,38 @@ const RejectedUsersPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         if (activeDisplay === "allRejectedUsers") {
+            // ****************************************************************************
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" USERS
+            // ****************************************************************************             
+            async function fetchRejectedUsers() {        
+                const rejectedStatus = 'rejected';
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
+                .then((response) => {
+                    const { success, data, message } = response.data;
+                    const { usersList, pagination } = data;
+
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+
+                    setRejectedUsers(usersList);
+
+                    setTotalRejectedUsers(pagination?.usersRecord);
+                    setTotalPages(pagination?.lastPage);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+            };
+
             var timerID = setTimeout(fetchRejectedUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" USERS
-    // ****************************************************************************             
-    async function fetchRejectedUsers() {        
-        const rejectedStatus = 'rejected';
-        await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { usersList, pagination } = data;
 
-            if (!success && message === "No user found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            setRejectedUsers(usersList);
-
-            setTotalRejectedUsers(pagination?.usersRecord);
-            setTotalPages(pagination?.lastPage);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
-    };
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
