@@ -42,7 +42,6 @@ const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For 
 const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
-const { useState } = require("react");
 // *****************************************************************
 // *****************************************************************
 
@@ -113,9 +112,9 @@ exports.signUp = async (req, res) => {
         // PICK A SINGLE ROLE
         // ***************************************************************//
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
-        // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" }),
-        const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" });
+        // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
+        const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
         // ***************************************************************//
@@ -140,7 +139,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: 'pending',
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleStaff }]
+            roles: [{ ...roleUsers }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
