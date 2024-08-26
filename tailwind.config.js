@@ -116,6 +116,7 @@ module.exports = {
           'simple-purple': 'var(--admin-total-revenue-card-3)',
           'signup-box-bg': 'var(--signup-box-bg-color)',
           'signup-signin-bg': 'var(--login-bg-black-color)',
+          'mild-gray': 'var(--dim-gray)',
         },
       },
       backgroundImage: {
@@ -129,6 +130,7 @@ module.exports = {
       boxShadow: {
         '3xl': '3px 3px 0 0 var(--sw-gray)',
         '5xl': 'var(--sw-dark-blue) 3px 3px 0px 0px',
+        '7xl': '0 1px 20px 0 var(--admin-staff-details-nav)'
       },
       boxShadowColor: {
         skin: {

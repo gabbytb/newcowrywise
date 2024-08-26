@@ -115,6 +115,10 @@
     --login-normal-font-size: 1rem;
     --login-small-font-size: 0.813rem;
 
+    --admin-staff-details-nav: rgba(69, 90, 100, .08);
+    --dim-gray: rgba(239, 240, 244, 1);
+
+
     --admin-total-revenue-card-1: rgba(18, 169, 10, 1);
     --admin-total-revenue-card-2: rgb(124, 64, 135, 1);
     --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
@@ -180,9 +184,6 @@
     ;
   }
 }
-
-
-
 
 
 @layer components {
@@ -1840,11 +1841,6 @@
   }
   /**  Footer  **/
 }
-
-
-
-
-
 
 
 @layer utilities {

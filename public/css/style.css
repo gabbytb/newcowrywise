@@ -3927,6 +3927,10 @@ progress#file {
   z-index: 50;
 }
 
+.col-start-12{
+  grid-column-start: 12;
+}
+
 .m-0{
   margin: 0px;
 }
@@ -3949,6 +3953,36 @@ progress#file {
 .my-5{
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
+}
+
+.mx-20{
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+.mx-16{
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.mx-12{
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.mx-8{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.mx-9{
+  margin-left: 2.25rem;
+  margin-right: 2.25rem;
+}
+
+.mx-40{
+  margin-left: 10rem;
+  margin-right: 10rem;
 }
 
 .-ml-px{
@@ -4186,6 +4220,10 @@ progress#file {
   height: 100vh;
 }
 
+.h-40{
+  height: 10rem;
+}
+
 .min-h-106{
   min-height: 40rem;
 }
@@ -4294,12 +4332,28 @@ progress#file {
   width: 100vw;
 }
 
+.w-32{
+  width: 8rem;
+}
+
+.w-52{
+  width: 13rem;
+}
+
+.w-1\/2{
+  width: 50%;
+}
+
 .min-w-80{
   min-width: 17.8rem;
 }
 
 .max-w-\[400px\]{
   max-width: 400px;
+}
+
+.max-w-52{
+  max-width: 13rem;
 }
 
 .flex-1{
@@ -4324,6 +4378,10 @@ progress#file {
 
 .basis-7\/12{
   flex-basis: 58.333333%;
+}
+
+.basis-2\/6{
+  flex-basis: 33.333333%;
 }
 
 .table-fixed{
@@ -4385,6 +4443,30 @@ progress#file {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-5{
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-5{
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+
+.grid-rows-10{
+  grid-template-rows: repeat(10, minmax(0, 1fr));
+}
+
+.grid-rows-2{
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
 .flex-row{
   flex-direction: row;
 }
@@ -4411,6 +4493,10 @@ progress#file {
 
 .items-center{
   align-items: center;
+}
+
+.items-baseline{
+  align-items: baseline;
 }
 
 .justify-start{
@@ -4479,6 +4565,14 @@ progress#file {
 
 .gap-x-3{
   column-gap: 0.75rem;
+}
+
+.gap-x-12{
+  column-gap: 3rem;
+}
+
+.gap-x-4{
+  column-gap: 1rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){

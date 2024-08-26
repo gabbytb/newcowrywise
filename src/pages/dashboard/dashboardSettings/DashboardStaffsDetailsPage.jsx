@@ -14,12 +14,16 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 
 const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     
+    // import { useNavigate } from "react-router-dom";
+    // let navigate = useNavigate();
+    // <button onClick={() => navigate(-1)}>Back</button> 
+
     
     // *******************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // *******************************************************************
     const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("usersDetails");
+    const [activeDisplay, setActiveDisplay] = useState("staffsDetails");
     // *******************************************************************
     // *******************************************************************
     
@@ -61,7 +65,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     // *********************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // *********************************************
-    const userName = isLoggedIn?.userName ? isLoggedIn?.userName : logOut();
+    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
 
@@ -123,13 +127,15 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
             axios.get(url)
             .then((response) => {
                 const { success, data, message } = response.data;
-                if ((!success) || (message === "Failed to retrieve Single User")) {
-                    console.log("Message: ", message);
-                    console.log("Success: ", success);
-                }
+                // if ((!success) || (message === "Failed to retrieve Single User")) {
+                //     console.log("Message: ", message);
+                //     console.log("Success: ", success);
+                // }
                             
                 // Perform Actions Here if Truthy
                 setUser(data);
+                console.log("Message: ", message);
+                console.log("Success: ", success);
             })
             .catch((error) => {
                 // Handle error state or logging here
@@ -221,7 +227,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                     <div className="flex justify-between items-center h-full flex-row px-10">
                                         <div className="rt-left-pane">
                                             <h1>Welcome 
-                                                <strong className="capitalize text-black"> {userName}</strong>
+                                                <strong className="capitalize text-black"> {lastName}</strong>
                                             </h1>
                                         </div>
                                         <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
@@ -352,7 +358,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                 <div className="flex justify-between items-center h-full flex-row px-10">
                                     <div className="rt-left-pane">
                                         <h1>Welcome 
-                                            <strong className="capitalize text-black"> {userName}</strong>
+                                            <strong className="capitalize text-black"> {lastName}</strong>
                                         </h1>
                                     </div>
                                     <div className="flex flex-row gap-8 items-center h-full rt-right-pane relative">
@@ -401,8 +407,85 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
 
                             {/*********************   SECTION BODY STARTS HERE   *******************/}
 
-                            <div className="right-bottom-pane relative h-full flex flex-col">
-                                
+                            <div className="right-bottom-pane relative h-full flex flex-col bg-skin-mild-gray">                               
+                               <div className="flex flex-col gap-10 justify-between mx-9 mb-8">
+
+                                    {/* GO BACK ONE STEP */}
+                                   <button> 
+                                        <Link to="/admin/staffs">Back</Link>
+                                    </button> 
+                                    {/* GO BACK ONE STEP */}
+
+
+                                   {/* USER DETAILS NAV LINKS */}
+                                   <div className="w-full h-28 flex rounded-xl shadow-7xl">
+                                        <ul className="flex flex-row justify-around bg-white w-full h-28">
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#personal`} 
+                                                onClick={() => setActiveDisplay("staffsDetails")}>
+                                                    Personal Info
+                                                </Link>
+                                            </li>
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#services`} 
+                                                onClick={() => setActiveDisplay("staffsDetails")}>
+                                                    User's Services
+                                                </Link>
+                                            </li>
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#contacts`} 
+                                                onClick={() => setActiveDisplay("staffsDetails")}>
+                                                    User's Contacts
+                                                </Link>
+                                            </li>
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#reviews`} 
+                                                onClick={() => setActiveDisplay("staffsDetails")}>
+                                                    Reviews
+                                                </Link>
+                                            </li>
+                                            {/* <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#personal`} 
+                                                onClick={() => setActiveDisplay("personal")}>
+                                                    Personal Info
+                                                </Link>
+                                            </li>
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#services`} 
+                                                onClick={() => setActiveDisplay("services")}>
+                                                    User's Services
+                                                </Link>
+                                            </li>
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#contacts`} 
+                                                onClick={() => setActiveDisplay("contacts")}>
+                                                    User's Contacts
+                                                </Link>
+                                            </li>
+                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
+                                                <Link className="w-full h-full flex justify-center items-center" 
+                                                to={`/admin/staffs/${id}/#reviews`} 
+                                                onClick={() => setActiveDisplay("reviews")}>
+                                                    Reviews
+                                                </Link>
+                                            </li> */}
+                                        </ul>
+                                    </div>
+                                   {/* USER DETAILS NAV LINKS */}
+
+
+                                   <div className="w-full h-72 bg-red-500">
+                                        
+                                    </div>
+                                </div>
+
                             </div>
                         </aside>
                         {/******************************************************************************************/}
