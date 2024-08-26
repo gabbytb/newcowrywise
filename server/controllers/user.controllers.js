@@ -690,17 +690,18 @@ exports.findUserById = async (req, res) => {
     try {
         const _id = req.params.id;
         const user = await User.findById(_id);
+    
         // const decodedExpiresIn = decrypt(user.expirationInMs); // Decode here
         // console.log("Decoded Token Expiration Time: ", decodedExpiresIn);
 
-        // if (!(user)) {
-        //     const responseData = {
-        //         success: false,
-        //         message: "User not found",
-        //     };
-        //     console.log("Find User by ID: ", responseData);
-        //     return res.status(404).json(responseData);
-        // }
+        if (!user) {
+            const responseData = {
+                success: false,
+                message: "User not found",
+            };
+            console.log("Find User by ID: ", responseData);
+            return res.status(404).json(responseData);
+        }
         
         const responseData = {
                 success: true,

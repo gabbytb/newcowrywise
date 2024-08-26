@@ -585,6 +585,8 @@ video {
   --login-h1-font-size: 2rem;
   --login-normal-font-size: 1rem;
   --login-small-font-size: 0.813rem;
+  --admin-staff-details-nav: rgba(69, 90, 100, .08);
+  --dim-gray: rgba(239, 240, 244, 1);
   --admin-total-revenue-card-1: rgba(18, 169, 10, 1);
   --admin-total-revenue-card-2: rgb(124, 64, 135, 1);
   --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
@@ -3927,10 +3929,6 @@ progress#file {
   z-index: 50;
 }
 
-.col-start-12{
-  grid-column-start: 12;
-}
-
 .m-0{
   margin: 0px;
 }
@@ -3938,6 +3936,11 @@ progress#file {
 .mx-0{
   margin-left: 0px;
   margin-right: 0px;
+}
+
+.mx-9{
+  margin-left: 2.25rem;
+  margin-right: 2.25rem;
 }
 
 .mx-auto{
@@ -3953,36 +3956,6 @@ progress#file {
 .my-5{
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
-}
-
-.mx-20{
-  margin-left: 5rem;
-  margin-right: 5rem;
-}
-
-.mx-16{
-  margin-left: 4rem;
-  margin-right: 4rem;
-}
-
-.mx-12{
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
-
-.mx-8{
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
-.mx-9{
-  margin-left: 2.25rem;
-  margin-right: 2.25rem;
-}
-
-.mx-40{
-  margin-left: 10rem;
-  margin-right: 10rem;
 }
 
 .-ml-px{
@@ -4197,6 +4170,10 @@ progress#file {
   height: 11rem;
 }
 
+.h-72{
+  height: 18rem;
+}
+
 .h-8{
   height: 2rem;
 }
@@ -4218,10 +4195,6 @@ progress#file {
 
 .h-screen{
   height: 100vh;
-}
-
-.h-40{
-  height: 10rem;
 }
 
 .min-h-106{
@@ -4246,6 +4219,10 @@ progress#file {
 
 .min-h-24{
   min-height: 6rem;
+}
+
+.w-1\/4{
+  width: 25%;
 }
 
 .w-1\/5{
@@ -4332,28 +4309,12 @@ progress#file {
   width: 100vw;
 }
 
-.w-32{
-  width: 8rem;
-}
-
-.w-52{
-  width: 13rem;
-}
-
-.w-1\/2{
-  width: 50%;
-}
-
 .min-w-80{
   min-width: 17.8rem;
 }
 
 .max-w-\[400px\]{
   max-width: 400px;
-}
-
-.max-w-52{
-  max-width: 13rem;
 }
 
 .flex-1{
@@ -4378,10 +4339,6 @@ progress#file {
 
 .basis-7\/12{
   flex-basis: 58.333333%;
-}
-
-.basis-2\/6{
-  flex-basis: 33.333333%;
 }
 
 .table-fixed{
@@ -4443,30 +4400,6 @@ progress#file {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.grid-cols-2{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-cols-5{
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.grid-cols-3{
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-rows-5{
-  grid-template-rows: repeat(5, minmax(0, 1fr));
-}
-
-.grid-rows-10{
-  grid-template-rows: repeat(10, minmax(0, 1fr));
-}
-
-.grid-rows-2{
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-}
-
 .flex-row{
   flex-direction: row;
 }
@@ -4495,10 +4428,6 @@ progress#file {
   align-items: center;
 }
 
-.items-baseline{
-  align-items: baseline;
-}
-
 .justify-start{
   justify-content: flex-start;
 }
@@ -4513,6 +4442,10 @@ progress#file {
 
 .justify-between{
   justify-content: space-between;
+}
+
+.justify-around{
+  justify-content: space-around;
 }
 
 .gap-1{
@@ -4565,14 +4498,6 @@ progress#file {
 
 .gap-x-3{
   column-gap: 0.75rem;
-}
-
-.gap-x-12{
-  column-gap: 3rem;
-}
-
-.gap-x-4{
-  column-gap: 1rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
@@ -4702,6 +4627,10 @@ progress#file {
 
 .bg-skin-darkblue{
   background-color: var(--bg-dark-blue);
+}
+
+.bg-skin-mild-gray{
+  background-color: var(--dim-gray);
 }
 
 .bg-skin-signup-box-bg{
@@ -5215,6 +5144,12 @@ progress#file {
 .shadow-2xl{
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-7xl{
+  --tw-shadow: 0 1px 20px 0 var(--admin-staff-details-nav);
+  --tw-shadow-colored: 0 1px 20px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
