@@ -7,7 +7,7 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 
 import DashboardStaffsApprovedPage  from "./staffs/DashboardStaffsApprovedPage";
 import DashboardStaffsPendingPage from "./staffs/DashboardStaffsPendingPage";
-import DashboardStaffsRejectedPage from "./staffs/DashboardStaffsRejectedPage";
+import DashboardStaffsRejectedPage from "./staffs/DashboardStaffsRejectedpage";
 
 
 

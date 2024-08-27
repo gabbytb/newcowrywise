@@ -10,7 +10,7 @@ import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
 
 import SignUp from "./SignUp";
-import VerifySignUp from "./VerifySignUp";
+import VerifySignUp from "./VerifySignup";
 
 
 import SignIn from "./SignIn";
@@ -27,7 +27,7 @@ import RejectedUsersPage from "./dashboard/dashboardSettings/users/RejectedUsers
 import DashboardStaffsPage from "./dashboard/dashboardSettings/DashboardStaffsPage";
 import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsApprovedPage";
 import DashboardStaffsPendingPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsPendingPage";
-import DashboardStaffsRejectedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsRejectedPage";
+import DashboardStaffsRejectedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsRejectedpage";
 
 import DashboardUsersDetailsPage from "./dashboard/dashboardSettings/DashboardUsersDetailsPage";
 import DashboardStaffsDetailsPage from "./dashboard/dashboardSettings/DashboardStaffsDetailsPage";
