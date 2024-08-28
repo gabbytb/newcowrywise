@@ -23,8 +23,7 @@ function SignIn() {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Log In", 
-              siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign In", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -88,9 +87,7 @@ function SignIn() {
                     errMsg?.classList.add('error');
                 }, 2500);
                 // Perform These Actions
-
             } else if (!success && message === "Login Failed: Incorrect password") {
-                
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
@@ -122,7 +119,6 @@ function SignIn() {
                 // Perform These Actions
 
             } else {
-
                 // Perform These Actions
                 setFormMessage(message);
                 setFormSubmitted(success);
@@ -141,7 +137,6 @@ function SignIn() {
                     window.location = redirToAdminDashboard;
                 }, 2800);
                 // Perform These Actions
-
             };
         })
         .catch((error) => {

@@ -44,6 +44,8 @@ function VerifySignUp() {
 
     const [formMessage, setFormMessage] = useState("");
     // console.log("Login Attempt: ", formMessage);
+    
+    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
 
@@ -77,13 +79,13 @@ function VerifySignUp() {
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
             if ((!success) && (message === "Fill all the required inputs")) {
+                // Scroll to Top
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
                             
-                /// Scroll to Top
-                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-
                 errMsg?.classList.remove('signup_error');
                 errMsg?.classList.add('error-message-info');
 
@@ -92,27 +94,7 @@ function VerifySignUp() {
                     errMsg?.classList.add('signup_error');
                 }, 3000);
                 // Perform These Actions
-
             } else if ((!success) && (message === "E-mail exists. Sign In")) {
- 
-                /// Scroll to Top
-                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-
-                // Perform These Actions
-                setFormSubmitted(success);
-                setFormMessage(message);
-                    
-                errMsg?.classList.remove('signup_error');
-                errMsg?.classList.add('error-message-info');
-
-                setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('signup_error');
-                }, 3000);
-                // Perform These Actions
-
-            } else if ((!success) && (message === "Username exists. Sign In")) {
-   
                 // Scroll to Top
                 window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
@@ -128,17 +110,33 @@ function VerifySignUp() {
                     errMsg?.classList.add('signup_error');
                 }, 3000);
                 // Perform These Actions
-                                
-            } else {             
+            } else if ((!success) && (message === "Username exists. Sign In")) {
+                // Scroll to Top
+                window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+
                 // Perform These Actions
+                setFormSubmitted(success);
+                setFormMessage(message);
+                    
+                errMsg?.classList.remove('signup_error');
+                errMsg?.classList.add('error-message-info');
+
+                setTimeout(() => {
+                    errMsg?.classList.remove('error-message-info');
+                    errMsg?.classList.add('signup_error');
+                }, 3000);
+                // Perform These Actions                  
+            } else {             
+                // Scroll to Top
+                window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
+
+                // Perform These Actions
+                console.log("Sign Up Data: ", data);
                 setFormSubmitted(success);
                 setFormMessage(message);
 
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
-
-                // Scroll to Top
-                window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 
                 successMsg.classList.remove('signup_success');
                 successMsg.classList.add('success-message-info'); 
@@ -147,11 +145,11 @@ function VerifySignUp() {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('signup_success');            
                 }, 3500);
-                // Perform These Actions
-
+               
                 setTimeout(() => {
                     window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
                 }, 3900);
+                // Perform These Actions
             };
         })
         .catch((error) => {
@@ -159,7 +157,7 @@ function VerifySignUp() {
         });
     };
 
-        
+    
 
 
 

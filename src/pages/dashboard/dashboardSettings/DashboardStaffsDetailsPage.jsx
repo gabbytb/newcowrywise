@@ -122,38 +122,36 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
     // **************************************************************************************************
     useEffect(() => {     
-        if (isLoggedIn)  {
-            function findUserByID() {
-                const url = `http://127.0.0.1:8000/api/v1/admin/users/manage/${id}`;
-                axios.get(url)
-                .then((response) => {
-                    const { success, data, message } = response.data;
-                    if ((!success) || (message === "User not found")) {
-                        console.log("Message: ", message);
-                        console.log("Success: ", success);
-                    };
-                                
-                    // Perform Actions Here if Truthy
-                    setUser(data);
+        function findUserByID() {
+            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage/${id}`;
+            axios.get(url)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                if ((!success) || (message === "User not found")) {
                     console.log("Message: ", message);
                     console.log("Success: ", success);
-                })
-                .catch((error) => {
-                    // Handle error state or logging here
-                    console.log("Error encountered: ", error);
-                })
-                .finally(() => {
-                    setIsLoading(false);    // Always disable loading state, whether successful or not
-                });
-            };
-
-            var timerID = setTimeout(findUserByID, 300);   // Delay execution of findAllUsers by 1800ms
-            return () => {
-                // Clean up timer if component unmounts or token changes
-                clearTimeout(timerID);
-            };
+                };
+                            
+                // Perform Actions Here if Truthy
+                setUser(data);
+                console.log("Message: ", message);
+                console.log("Success: ", success);
+            })
+            .catch((error) => {
+                // Handle error state or logging here
+                console.log("Error encountered: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);    // Always disable loading state, whether successful or not
+            });
         };
-    }, [isLoggedIn]);
+
+        var timerID = setTimeout(findUserByID, 300);   // Delay execution of findAllUsers by 1800ms
+        return () => {
+            // Clean up timer if component unmounts or token changes
+            clearTimeout(timerID);
+        };
+    }, [id]);
     // *******************************************************************************************//
     // *******************************************************************************************//
 

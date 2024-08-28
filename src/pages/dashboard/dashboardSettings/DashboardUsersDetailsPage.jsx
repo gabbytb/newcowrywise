@@ -126,7 +126,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                 if ((!success) || (message === "Failed to retrieve Single User")) {
                     console.log("Message: ", message);
                     console.log("Success: ", success);
-                }
+                };
                             
                 // Perform Actions Here if Truthy
                 setUser(data);
@@ -145,7 +145,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
             // Clean up timer if component unmounts or token changes
             clearTimeout(timerID);
         };
-    }, []);
+    }, [id]);
     // *******************************************************************************************//
     // *******************************************************************************************//
 

@@ -424,18 +424,21 @@ exports.logIn = async (req, res) => {
 
         // 1) Use E-mail to find User
         const existingUser = await User.findOne({ email });
+       
         // 2) CHECK IF USER EXISTS
         if (!existingUser) {
-
             const responseData = { 
                 success: false, 
-                error: "Login Failed: Account with this details does not exist",
+                message: "Login Failed: Account with this details does not exist",
             };
-            return res.status(404).json(responseData);
+            console.log("SERVER RESPONSE for LOG-IN: ", responseData);
+            // return res.status(404).json(responseData);
+            return res.json(responseData);
         };
 
         // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+        
         // 4) CHECK IF USER CORRECT
         if (!isPasswordCorrect) {      
 
@@ -462,9 +465,11 @@ exports.logIn = async (req, res) => {
 
             const responseData = { 
                 success: false, 
-                error: "Incorrect email or password",
+                message: "Login Failed: Incorrect password",
             };
-            return res.status(401).json(responseData);
+            console.log("SERVER RESPONSE for LOG-IN: ", responseData);
+            // return res.status(401).json(responseData);
+            return res.json(responseData);
         };        
 
         // 5) Check if User Has Verified their Account Registration
@@ -499,11 +504,12 @@ exports.logIn = async (req, res) => {
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
-                message: `Login Failed: Kindly verify your account`
+                message: "Login Failed: Kindly verify your account",
             };
-            return res.status(401).json(responseData);
+            console.log("SERVER RESPONSE for LOG-IN: ", responseData);
+            // return res.status(401).json(responseData);
+            return res.json(responseData);
         };
-
         
         console.log("***********************************************",
             "\n******       🔐   ACTIVE USER  🔑        ******",
@@ -524,10 +530,15 @@ exports.logIn = async (req, res) => {
         
         // 7) Verify token to get Lifespan of Token
         const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
-        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
+        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);   // To make expire date begin with current date and time
+        
+        // 8. Update user.tokenExpires with value of tokenExpiryDate
         existingUser.tokenExpires = tokenExpiryDate;
         
+        // 9. Update user.accessToken with value of token
         existingUser.accessToken = token;
+
+        // 10. Save to Update USER DETAILS with values parsed
         const loggedInUser = await existingUser.save();
       
         for (var n = 0; n < loggedInUser.roles.length; n++) {
@@ -577,11 +588,12 @@ exports.logIn = async (req, res) => {
             success: false, 
             message: "Internal Server Error",
         };
-        console.error("Unexpected error during Login: ", error);
+        console.log("Unexpected error during Login 1: ", responseData);
+        console.error("Unexpected error during Login 2: ", error);
         return res.status(500).json(responseData);  
-    }
+    };
 
-}  // THOROUGHLY Tested === Working
+};  // THOROUGHLY Tested === Working
 
 // Our FIND All ADMINS Logic starts here
 exports.findAllAdmins = async (req, res) => {
@@ -703,6 +715,11 @@ exports.findUserById = async (req, res) => {
             return res.status(404).json(responseData);
         }
         
+        // if (user.roles.role === ROLE_USER) {
+            console.log("User Roles: ", user.roles.role);
+        // };
+        
+
         const responseData = {
                 success: true,
                 data: user,
