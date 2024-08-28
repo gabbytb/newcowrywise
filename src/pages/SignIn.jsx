@@ -73,7 +73,7 @@ function SignIn() {
             var errMsg = document.querySelector('#loginId .error'); 
             var successMsg = document.querySelector('#loginId .success');
             
-            if (!success && message === "Login Failed: Account with this details does not exist") {
+            if (!success && message === "Account with this details does not exist") {
                 
                 // Perform These Actions
                 setFormSubmitted(success);
@@ -87,7 +87,7 @@ function SignIn() {
                     errMsg?.classList.add('error');
                 }, 2500);
                 // Perform These Actions
-            } else if (!success && message === "Login Failed: Incorrect password") {
+            } else if (!success && message === "Incorrect password") {
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
@@ -102,7 +102,7 @@ function SignIn() {
                 }, 2500);
                 // Perform These Actions
 
-            } else if (!success && message === "Login Failed: Kindly verify your account") {
+            } else if (!success && message === "Kindly verify your account") {
 
                 // Perform These Actions
                 setFormSubmitted(success);

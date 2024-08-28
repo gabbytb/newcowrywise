@@ -429,9 +429,9 @@ exports.logIn = async (req, res) => {
         if (!existingUser) {
             const responseData = { 
                 success: false, 
-                message: "Login Failed: Account with this details does not exist",
+                message: "Account with this details does not exist",
             };
-            console.log("SERVER RESPONSE for LOG-IN: ", responseData);
+            console.log("Login Failed: ", responseData, "\n\n");
             // return res.status(404).json(responseData);
             return res.json(responseData);
         };
@@ -465,9 +465,9 @@ exports.logIn = async (req, res) => {
 
             const responseData = { 
                 success: false, 
-                message: "Login Failed: Incorrect password",
+                message: "Incorrect password",
             };
-            console.log("SERVER RESPONSE for LOG-IN: ", responseData);
+            console.log("Login Failed: ", responseData, "\n\n");
             // return res.status(401).json(responseData);
             return res.json(responseData);
         };        
@@ -504,9 +504,9 @@ exports.logIn = async (req, res) => {
             // ***********************************************************************************//  
             const responseData = {
                 success: false,
-                message: "Login Failed: Kindly verify your account",
+                message: "Kindly verify your account",
             };
-            console.log("SERVER RESPONSE for LOG-IN: ", responseData);
+            console.log("Login Failed: ", responseData, "\n\n");
             // return res.status(401).json(responseData);
             return res.json(responseData);
         };
