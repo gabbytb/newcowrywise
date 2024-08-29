@@ -261,7 +261,7 @@ exports.signUp = async (req, res) => {
 // Our ACCOUNT Re-ACTIVATION Logic starts here
 exports.reSignUp = async (req, res) => {
 
-    const { email } = req.query;
+    const { email } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
@@ -272,21 +272,21 @@ exports.reSignUp = async (req, res) => {
                 message: "No match found",
             }
             return res.status(404).json(responseData);
-        }
+        };
 
-        if (existingUser.isVerified) {
-            const responseData = {
-                success: false,
-                message: "User is already verified",
-            }
-            return res.status(200).json(responseData);
-        }
+        // if (existingUser.isVerified) {
+        //     const responseData = {
+        //         success: false,
+        //         message: "User is already verified",
+        //     }
+        //     return res.status(200).json(responseData);
+        // };
 
 
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
-        const token = await createJWT(existingUser._id);
+        const token = await assignThreeDaysToken(existingUser._id);
         
 
         // ***************************************************************//

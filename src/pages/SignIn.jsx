@@ -73,8 +73,7 @@ function SignIn() {
             var errMsg = document.querySelector('#logInForm .error'); 
             var successMsg = document.querySelector('#logInForm .success');
             
-            if (!success && message === "Account with this details does not exist") {
-                
+            if (!success && message === "Account with this details does not exist") {              
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
@@ -101,9 +100,7 @@ function SignIn() {
                     errMsg?.classList.add('error');
                 }, 2500);
                 // Perform These Actions
-
             } else if (!success && message === "Kindly verify your account") {
-
                 // Perform These Actions
                 setFormSubmitted(success);
                 setFormMessage(message);
@@ -130,7 +127,6 @@ function SignIn() {
                     };
                 }, 3200);
                 // Perform These Actions
-
             } else {
                 // Perform These Actions
                 setFormMessage(message);
@@ -161,16 +157,26 @@ function SignIn() {
 
 
 
-
     const [existingUser, setExistingUser] = useState(null);
-    // console.log("Existing User: ", existingUser?.email);
+    console.log("Existing User: ", existingUser);
 
     const [formMessageAccountVerification, setFormMessageAccountVerification] = useState(null);
-    // console.log("Account Verification Attempt: ", formMessageAccountVerification);
+    console.log("Account Verification Attempt: ", formMessageAccountVerification);
 
-    // eslint-disable-next-line
+    //// eslint-disable-next-line
     const [formSubmittedAccountVerification, setFormSubmittedAccountVerification] = useState(false);
-    // console.log("Account Verification Attempt: ", formMessageAccountVerification);
+    console.log("Account Verification Submission Attempt: ", formSubmittedAccountVerification);
+
+    async function closeModal() {
+        var loginFormId = document.querySelector("#logInFormId");
+        loginFormId?.classList?.remove("opacity-30");
+
+        var signUpModal = document.querySelector("#verifyId");
+        if (signUpModal?.classList?.contains("fixed")) {
+            signUpModal?.classList?.remove("fixed");
+            signUpModal?.classList?.add("hidden");
+        };
+    };
 
     async function handleOnChange(e) {
         const name = e.target.name;
@@ -185,13 +191,17 @@ function SignIn() {
     async function handleVerification(e) {
         e.preventDefault();
 
-        await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify", existingUser?.email)
+        const payload = {
+            email: user?.email,
+        };
+        const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify";
+        await axios.post(url, payload)
         .then((response) => {
-            const { success, message, } = response.data;
+            const { success, message, data } = response.data;
             var errVerifyMsg = document.querySelector('#loginId .verify__error'); 
             var successVerifyMsg = document.querySelector('#loginId .verify__success');
 
-            if (!success && message === "Incorrect password or email") {
+            if (!success && message === "No match found") {
                 // Perform These Actions
                 setFormSubmittedAccountVerification(success); 
                 setFormMessageAccountVerification(message);
@@ -204,36 +214,21 @@ function SignIn() {
                     errVerifyMsg?.classList.add('verify__error');
                 }, 2800);
                 // Perform These Actions
-            }
-            
-            if (!success & message === "Login Failed: Account with this details does not exist") {
+            } else {
                 // Perform These Actions
                 setFormSubmittedAccountVerification(success); 
-                setFormMessageAccountVerification(message);
-                    
-                errVerifyMsg?.classList.remove('verify__error');
-                errVerifyMsg?.classList.add('error-message-info');
+                setExistingUser(data);
+                setFormMessageAccountVerification(message);   
+
+                successVerifyMsg?.classList.remove('verify__success');
+                successVerifyMsg?.classList.add('success-message-info');
 
                 setTimeout(() => {
-                    errVerifyMsg?.classList.remove('error-message-info');
-                    errVerifyMsg?.classList.add('verify__error');
-                }, 2800);
+                    successVerifyMsg?.classList.remove('success-message-info');
+                    successVerifyMsg?.classList.add('verify__success');
+                }, 20500);
                 // Perform These Actions
-            }
-
-            setFormSubmittedAccountVerification(success); 
-            // setWhoVerifiedAccount(data);
-            setFormMessageAccountVerification(message);   
-
-            // Perform These Actions
-            successVerifyMsg?.classList.remove('verify__success');
-            successVerifyMsg?.classList.add('success-message-info');
-
-            setTimeout(() => {
-                successVerifyMsg?.classList.remove('success-message-info');
-                successVerifyMsg?.classList.add('verify__success');
-            }, 20500);
-            // Perform These Actions
+            };
         })
         .catch((error) => {
             console.log("Error encountered: ", error);
@@ -242,12 +237,13 @@ function SignIn() {
 
 
 
-
     
 
+    
     return (
         <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
-            {/* ADD ton Below:  right-pane */}
+           
+            {/* Login Form */}
             <div id="logInFormId" className="flex flex-col justify-center gap-10 relative bg-skin-signup-signin-bg"> 
 
                 {/* PAGE NAV */}
@@ -327,10 +323,11 @@ function SignIn() {
             </div>
 
             
-            {/* Signup Modal */}
+            {/* Verify Email Modal */}
             <div id="verifyId" className="hidden inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
                 <div className="grid place-content-center items-center h-full">
-                    <div>
+                    <div className="flex flex-col items-end gap-4">
+                        <button className="text-white font-black text-2xl right-0" onClick={closeModal}>X</button>
                         <div className="bg-gray-800 flex flex-col justify-center gap-16 rounded-lg right-pane">             
                             
 
@@ -354,7 +351,7 @@ function SignIn() {
                                                 focus:outline-none"
                                             type="email"
                                             name="email"
-                                            value={existingUser?.email} 
+                                            value={user?.email} 
                                             onChange={handleOnChange} 
                                             disabled 
                                         />
@@ -370,7 +367,7 @@ function SignIn() {
 
                                 {/* lINK: LOGIN */}
                                 <div className="text-white login__register">
-                                    Have an account? <Link className="capitalize cursor-pointer" to={"/user/login"}>sign in</Link>
+                                    Have an account? <Link className="capitalize cursor-pointer" onClick={closeModal}>sign in</Link>
                                 </div>
                                 {/* lINK: LOGIN */}
 
@@ -393,6 +390,7 @@ function SignIn() {
     );
 
 };
+
 
 export default SignIn;
 
