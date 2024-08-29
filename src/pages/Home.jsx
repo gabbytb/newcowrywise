@@ -12,12 +12,22 @@ import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 const Home = () => {
 
 
+
+  // *************************** //
+  // *** SET PAGE TITLE(SEO) *** //
+  // *************************** //
   useEffect(() => {
       const pageTitle = "Reaching out to Great Minds", siteTitle = "Samuel Akinola Foundation";
       document.title = `${pageTitle} | ${siteTitle}`;
   }, []);
+  // *************************** //
+  // *** SET PAGE TITLE(SEO) *** //
+  // *************************** //
 
 
+
+
+  
   const tawkMessengerRef = useRef();
 
   // const onLoad = () => {
@@ -30,6 +40,8 @@ const Home = () => {
 
 
 
+  
+  
   return (
     <>
 
