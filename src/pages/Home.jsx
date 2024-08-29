@@ -11,6 +11,13 @@ import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 const Home = () => {
 
+
+  useEffect(() => {
+      const pageTitle = "Reaching out to Great Minds", siteTitle = "Samuel Akinola Foundation";
+      document.title = `${pageTitle} | ${siteTitle}`;
+  }, []);
+
+
   const tawkMessengerRef = useRef();
 
   // const onLoad = () => {
@@ -23,19 +30,12 @@ const Home = () => {
 
 
 
-  useEffect(() => {
-    const pageTitle = "Reaching out to Great Minds", siteTitle = "Samuel Akinola Foundation";
-    document.title = `${pageTitle} | ${siteTitle}`;
-  }, []);
-
-
-
   return (
     <>
 
-      <label htmlFor="file" className="progress_label">File progress:
+      {/* <label htmlFor="file" className="progress_label">File progress:
         <progress id="file" max="100" value="70">70%</progress>
-      </label>
+      </label> */}
 
       <HomeNav />
       <main ref={tawkMessengerRef}>
