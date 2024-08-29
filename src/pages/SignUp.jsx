@@ -168,7 +168,7 @@ function SignUp() {
         
     
     return (
-        <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
+        <div id="signUpId" className="block h-screen w-full bg-skin-signup-signin-bg">
             {/* ADD ton Below:  right-pane */}
             <div className="flex flex-col justify-center gap-4 relative bg-skin-signup-signin-bg"> 
 

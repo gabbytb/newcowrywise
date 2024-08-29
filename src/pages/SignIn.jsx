@@ -70,8 +70,8 @@ function SignIn() {
             const { success, message, data } = response.data; 
             // const { userId, token } = data;
 
-            var errMsg = document.querySelector('#loginId .error'); 
-            var successMsg = document.querySelector('#loginId .success');
+            var errMsg = document.querySelector('#logInForm .error'); 
+            var successMsg = document.querySelector('#logInForm .success');
             
             if (!success && message === "Account with this details does not exist") {
                 
@@ -116,6 +116,19 @@ function SignIn() {
                     errMsg?.classList.remove('error-message-info');
                     errMsg?.classList.add('error');
                 }, 2500);
+
+                setTimeout(() => {
+                    var loginFormId = document.querySelector("#logInFormId");
+                    loginFormId?.classList?.add("opacity-30");
+
+                    var signUpModal = document.querySelector("#verifyId");
+                    console.log("SIGN UP MODAL: ", signUpModal);
+                    if (signUpModal?.classList?.contains("hidden")) {
+                        signUpModal?.classList?.remove("hidden");
+                        signUpModal?.classList?.add("fixed");
+                        signUpModal?.classList?.add("ease-out-anime");
+                    };
+                }, 3200);
                 // Perform These Actions
 
             } else {
@@ -235,7 +248,7 @@ function SignIn() {
     return (
         <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
             {/* ADD ton Below:  right-pane */}
-            <div className="flex flex-col justify-center gap-10 relative bg-skin-signup-signin-bg"> 
+            <div id="logInFormId" className="flex flex-col justify-center gap-10 relative bg-skin-signup-signin-bg"> 
 
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">

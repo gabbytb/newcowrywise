@@ -111,9 +111,9 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
         // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" });
-        const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
+        // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         // ***************************************************************//
         // PICK ALL ROLES
@@ -137,9 +137,9 @@ exports.signUp = async (req, res) => {
             email: email.toLowerCase(),
             password: encryptedPassword,
             approvesTandC,
-            status: 'pending',
+            status: "pending",
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleStaff }]
+            roles: [{ ...roleAdmin }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
