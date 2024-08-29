@@ -616,12 +616,11 @@ exports.findAllAdmins = async (req, res) => {
             query.status = status;
         };
 
-        // Query User Status & Pagination logic
+        // Query User Status and ROLES.role, & Pagination logic
         const staffsList = await User.find(query)
                                 .skip(skip)
                                 .limit(limit);
-        console.log("STAFFS LIST: ", staffsList);       
-
+        console.log("STAFFS LIST: ", staffsList);
 
         const totalAdminUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
@@ -631,7 +630,7 @@ exports.findAllAdmins = async (req, res) => {
             limit,
             lastPage: totalPages,
         };
-        console.log("PAGINATION: ", pagination);
+        console.log("PAGINATION: ", pagination, "\n\n");
         
         const responseData = {
             success: true,
@@ -663,22 +662,21 @@ exports.findAllUsers = async (req, res) => {
             query.status = status;
         };
  
-        // Pagination logic
+        // Query User Status and ROLES.role, & Pagination logic
         const usersList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
-        // console.log("USERS LIST: ", usersList);
+        console.log("USERS LIST: ", usersList);
 
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
-
-
         const pagination = {
             usersRecord: totalUsers,
             page,
             limit,
             lastPage: totalPages,
         };
+        console.log("PAGINATION: ", pagination, "\n\n");
 
         const responseData = {
             success: true,
