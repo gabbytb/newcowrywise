@@ -42,6 +42,7 @@ const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For 
 const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
+// const mailSenderForToken = require("../middlewares/MailSenderForToken");
 // *****************************************************************
 // *****************************************************************
 
@@ -159,10 +160,9 @@ exports.signUp = async (req, res) => {
         // To Get Current Date Setting for Token Expiration Time to start counting from!
         const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
         user.tokenExpires = tokenExpiryDate;
+        const newUser = await user.save();
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
-        // **************************************** //
-        const newUser = await user.save();
         // **************************************** //
 
 
@@ -224,7 +224,8 @@ exports.signUp = async (req, res) => {
 
         // let valueOfEncodedText = decrypt(newUser.expirationInMs);
         // console.log("Encrypted token lifespan: ", valueOfEncodedText);
-
+        
+        // **************************************** //
 
         console.log("\n*********************************************************",
             "\n*****        TOKEN GENERATED FOR NEW USER           *****",
@@ -241,7 +242,7 @@ exports.signUp = async (req, res) => {
             success: true,
             // data: {
             //     userId: newUser,
-            //     accessToken: token,
+            //     token: token,
             // },
             data: newUser,
             message: "Successful",
@@ -414,7 +415,94 @@ exports.verifySignUp = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
+// exports.verifySignUpWithGet = async (req, res) => {
+        
+//     try {
+//         const token = req.query.accessToken;
+ 
+//         const verifiedToken = await verifyToken(token);
+//         console.log("VERIFIED TOKEN: ", verifiedToken);
+
+
+//         const _id = verifiedToken.id;
+
+//         const userExists = await User.findById(_id);
+//         if (!userExists) {
+//             // console.error('Token verification failed:', error.message);
+//             const responseData = { 
+//                 success: false, 
+//                 message: "User not found",
+//             };
+//             console.log("Invalid user: ", responseData);
+//             return res.json(responseData);
+//         };
+
+//         // Step 6: If user exists, find User by Email 
+//         // const email = userExists.email;   
+//         // Change Existing User status to "approved".
+//         // Assign the generated token to Existing User, as their accessToken..
+//         // Set isVerified as True for Existing User
+//         const dataToUpdate = {
+//             status: "approved",
+//             accessToken: token,
+//             isVerified: true,
+//         };
+//         // const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        
+        
+//         // Step 6: If user exists, find User by Email
+//         const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
+    
+//         const responseData = {
+//             success: true,
+//             data: updatedUser,
+//             message: "Successful"
+//         };
+//         console.log("*********************************************************",
+//             "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//             "\n*********************************************************",
+//             "\nVerification Status: ", responseData,
+//             "\n*********************************************************\n\n");
+//         res.json(responseData); // Send a success response
+        
+//     } catch (error) {
+//         if (error.name === 'TokenExpiredError') {
+//             // console.error("Token has expired");
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Token has expired",
+//             };
+//             console.log("Token verification status: ", responseData);
+//             return res.json(responseData);
+//         } else if (error.name === 'JsonWebTokenError') {
+//             // console.error("Token does not exist");
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Token does not exist",
+//             };
+//             console.log("Token verification status: ", responseData);
+//             return res.json(responseData);
+//         } else if (error.name === 'MongoServerError') {
+//             // console.error("Mulitple user entry");
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Mulitple user entry",
+//             };
+//             console.log("Mulitple user entry: ", responseData);
+//             return res.json(responseData);
+//         } else {
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Internal Server Error",
+//             };
+//             console.error("Internal Server Error during account verification: ", error.message);
+//             return res.json(responseData);
+//         };
+//     };
+// };
+
 // Our USER LOGIN Logic starts here
+
 exports.logIn = async (req, res) => {
 
     try {

@@ -5,7 +5,6 @@ import DonationPage from "./DonationPage";
 
 import OLDSignUp from "./OLDSignUp";
 import OLDRegister from "./OLDRegister";
-import SignUpVerification from "./SignUpVerification";
 import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
 
@@ -48,7 +47,6 @@ export {
     
     OLDSignUp,
     OLDRegister,
-    SignUpVerification,
     OLDSignUpReVerification,
 
     SignUp,

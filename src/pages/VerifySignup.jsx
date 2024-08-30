@@ -1,6 +1,6 @@
 import { useState, useEffect, } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 // import loginImg from '../assets/login.jpg'
 import { brandOfficialLogo, loginBg } from '../assets/images';
 
@@ -12,7 +12,8 @@ import { brandOfficialLogo, loginBg } from '../assets/images';
 
 
 
-function VerifySignUp() {  
+
+const VerifySignUp = () => {  
 
 
     // console.clear();
@@ -37,7 +38,7 @@ function VerifySignUp() {
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    console.log("*** ACCOUNT CREATION ***\nUser: ", user);
+    console.log("*** NEW ACCOUNT DETAILS ***\nUser: ", user);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
@@ -72,7 +73,7 @@ function VerifySignUp() {
     async function handleFormSubmission(e) {
         e.preventDefault();
 
-        await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+        await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data } = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
@@ -161,7 +162,8 @@ function VerifySignUp() {
 
 
 
-    
+
+
 
     const { token } = useParams();
     const [registeredUser, setRegisteredUser] = useState(null);
@@ -171,19 +173,17 @@ function VerifySignUp() {
     const [verificationMessage, setVerificationMessage] = useState("");
 
     useEffect(() => {
-        async function verifyToken() {              
-            try {
-                const url = `http://127.0.0.1:8000/user/verify/${token}`;
-                const payload = { 
-                    accessToken: token,
-                };
-
-                const response = await axios.post(url, payload, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    }
-                });
-
+        async function verifyToken() {          
+            const payload = { 
+                accessToken: token,
+            };    
+            const uri = `/user/verify/${token}`;
+            await api.post(uri, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
                 const { success, message, data } = response.data;
                 var verifyErrMsg = document.querySelector('#signUpForm .verify_error'); 
                 var verifySuccessMsg = document.querySelector('#signUpForm .verify_success');
@@ -235,7 +235,7 @@ function VerifySignUp() {
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
                     // Perform These Actions
-                       
+                    
                 } else if ((!success) && (message === "Mulitple user entry")) {
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);      
@@ -308,9 +308,10 @@ function VerifySignUp() {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
                     }, 3900);
                 };
-            } catch(error) {
+            })
+            .catch((error) => {
                 console.log("Error encountered: ", error);
-            };
+            });
         };
 
         var timer = setTimeout(verifyToken, 2000);
@@ -318,7 +319,14 @@ function VerifySignUp() {
             clearTimeout(timer);
         };
     }, [token]);
+
+
+
     
+
+
+
+
     return (
         <div id="loginId" className="block h-screen w-full bg-skin-signup-signin-bg">
             {/* ADD ton Below:  right-pane */}

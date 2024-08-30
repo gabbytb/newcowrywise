@@ -32,6 +32,9 @@ module.exports = app => {
     // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify/:token") for the frontend to access.
     
 
+    // router.get("/user/verify", cors(corsOptions), users.verifySignUpWithGet);
+
+    
     // Login User
     router.post("/api/v1/auth/login", users.logIn);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/login") for the frontend to access.

@@ -1,8 +1,9 @@
 import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 // import loginImg from '../assets/login.jpg'
 import { brandOfficialLogo, loginBg } from '../assets/images';
+
 
 
 
@@ -42,7 +43,7 @@ function SignUp() {
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
-
+    
 
 
 
@@ -74,7 +75,7 @@ function SignUp() {
     async function handleFormSubmission(e) {
         e.preventDefault();
 
-        await axios.post("http://127.0.0.1:8000/api/v1/admin/users/manage/create", user)
+        await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data} = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
@@ -140,11 +141,11 @@ function SignUp() {
 
                 // Perform These Actions
                 setFormSubmitted(success);
-                setFormMessage(message);
-                                
+                setFormMessage(message);            
+                
                 // Scroll to Bottom
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
-                
+
                 successMsg.classList.remove('signup_success');
                 successMsg.classList.add('success-message-info'); 
                                     
@@ -164,6 +165,8 @@ function SignUp() {
             console.log("Error encountered: ", error);
         });
     };
+
+
 
         
     

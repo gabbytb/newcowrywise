@@ -1,8 +1,9 @@
 import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 // import loginImg from "../assets/login.jpg";
 import { brandOfficialLogo, loginBg } from '../assets/images';
+
 
 
 
@@ -65,7 +66,8 @@ function SignIn() {
     async function handleLogin(e) {
         e.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/api/v1/auth/login", user)
+        const uri = "/api/v1/auth/login";
+        api.post(uri, user)
         .then((response) => {
             const { success, message, data } = response.data; 
             // const { userId, token } = data;
@@ -195,7 +197,7 @@ function SignIn() {
             email: user?.email,
         };
         const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify";
-        await axios.post(url, payload)
+        await api.post(url, payload)
         .then((response) => {
             const { success, message, data } = response.data;
             var errVerifyMsg = document.querySelector('#loginId .verify__error'); 
@@ -237,7 +239,7 @@ function SignIn() {
 
 
 
-    
+
 
     
     return (
