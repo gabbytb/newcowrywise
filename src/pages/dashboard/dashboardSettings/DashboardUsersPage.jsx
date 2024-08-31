@@ -38,11 +38,17 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [activeDisplay, setActiveDisplay] = useState("allUsers");
-    // const [isLoading, setIsLoading] = useState(true);
+    
+    // eslint-disable-next-line
+    const [isLoading, setIsLoading] = useState(true);
     // ****************************************************************************
     // ****************************************************************************
     
 
+    // ****************************************************************************
+    // CURRENTLY ACTIVE USER:-
+    // ****************************************************************************
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));
     // ****************************************************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
     // ****************************************************************************
@@ -50,15 +56,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
         localStorage.clear();
         const redirToLogin = "/user/login";
         window.location = redirToLogin;
-    }
-    // ****************************************************************************
-    // ****************************************************************************
-
-
-    // ****************************************************************************
-    // CURRENTLY ACTIVE USER:-
-    // ****************************************************************************
-    isLoggedIn = JSON.parse(localStorage.getItem("user"));
+    };
     // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
     // ****************************************************************************
@@ -66,8 +64,8 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-   
-
+    // ****************************************************************************
+    // ****************************************************************************   
 
     
     // ****************************************************************************
@@ -158,6 +156,9 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                 })
                 .catch((error) => {
                     console.log("Error fetching data: ", error);
+                })
+                .finally(() => {
+                    setIsLoading(false);
                 });
             };
 
@@ -178,6 +179,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
 
 
+
     return (
         <main id="dashboardStaffsID" className="admin-dashboard">
             <div className="container flex admin-container">
@@ -192,7 +194,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
                         {/* mb-40 */}
                         <ul className="flex flex-col w-full px-8 gap-16 overflow-y-auto h-screen">
-                            {/* MAIN MENU */}
+                            {/* MAIN MENU: DASHBOARD */}
                             <div id="mainMenuId">
                                 <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Main Menu</small>
                                 <div className="flex flex-col gap-8">
@@ -205,7 +207,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
 
 
-                            {/* USERS MENU */}
+                            {/* SETTINGS MENU: USERS & ADMINS */}
                             <div id="userMenuId">
                                 <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
                                 <div className="flex flex-col gap-8">
@@ -214,7 +216,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             <UsersIcon /> <span>users</span>
                                         </button>
                                         <div className="flex flex-col gap-4 px-15.9 usersDropdown">
-                                            <Link to="/admin/users">user management</Link>
+                                            <Link to="/admin/users/manage">user management</Link>
                                         </div>
                                     </div>
                                     {/* flex flex-col gap-4  */}
@@ -223,12 +225,12 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             <StaffsIcon /> <span>staffs</span>
                                         </button>
                                         <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                            <Link to="/admin/staffs">staff management</Link>
+                                            <Link to="/admin/staffs/manage">staff management</Link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* USERS MENU */}
+                            {/* SETTINGS MENU */}
                         </ul>
                     </section>
                     {/*******************************************************************/
@@ -326,9 +328,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                             </div>
                             {/* Page Title Wrapper */}
 
-                            
-
-                           
+                                               
                             <div className={`capitalize border ${activeDisplay === "allUsers" ? "grid" : "hidden"}`}>
                                 <table className="table-fixed capitalize w-full border users__table">
                                     <thead>
@@ -457,7 +457,6 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
             </div>
         </main>
     );
-
 };
 
 

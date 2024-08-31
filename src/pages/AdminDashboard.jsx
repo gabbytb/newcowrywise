@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
-    adminDashboardIcon, 
-    brandOfficialLogo 
+    brandOfficialLogo,
+    adminDashboardIcon,  
 } from "../assets/images";
 import { 
     HomeIcon, 
@@ -12,6 +12,8 @@ import {
     StaffsIcon, 
     UsersIcon 
 } from "../assets/icons";
+
+
 
 
 
@@ -45,7 +47,6 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // ***************************************************************************
     // ***************************************************************************
     
-
 
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
@@ -126,7 +127,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
 
 
     return (
-        <> 
+        <Suspense fallback={<div>Loading...</div>}>
             <main id="adminDashboardID" className="admin-dashboard">
                 <div className="container flex admin-container">
                     <div className="h-screen w-full grid xs:grid-cols-26">
@@ -786,7 +787,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                     </div>
                 </div>
             </main>
-        </>
+        </Suspense>
     );
 };
 
