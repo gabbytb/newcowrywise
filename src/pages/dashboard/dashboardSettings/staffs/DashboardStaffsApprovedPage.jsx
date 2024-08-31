@@ -9,7 +9,10 @@ import axios from "axios";
 
 const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     
+    
+    // console.clear();
 
+    
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************

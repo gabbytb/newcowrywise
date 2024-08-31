@@ -1,5 +1,5 @@
 import { useState, useEffect, } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from '../api';
 // import loginImg from '../assets/login.jpg'
 import { brandOfficialLogo, loginBg } from '../assets/images';
@@ -18,7 +18,7 @@ const VerifySignUp = () => {
 
     // console.clear();
 
-
+    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -165,7 +165,9 @@ const VerifySignUp = () => {
 
 
 
-    const { token } = useParams();
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log("Token Found in LocalStorage: ", token);
+
     const [registeredUser, setRegisteredUser] = useState(null);
     console.log("Registered User: ", registeredUser);
     
@@ -173,20 +175,23 @@ const VerifySignUp = () => {
     const [verificationMessage, setVerificationMessage] = useState("");
 
     useEffect(() => {
-        async function verifyToken() {          
-            const payload = { 
-                accessToken: token,
-            };    
-            const uri = `/user/verify/${token}`;
-            await api.post(uri, payload, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+        function verifyToken() {          
+            // const payload = { 
+            //     accessToken: token,
+            // };    
+            // const uri = `/user/verify/${token}`;
+            // await api.post(uri, payload, {
+            //     headers: {
+            //         Authorization: `Bearer ${token}`,
+            //     },
+            // })
+            
+            const uri = "/user/verify/";
+            api.get(uri, { params: token })
             .then((response) => {
                 const { success, message, data } = response.data;
-                var verifyErrMsg = document.querySelector('#signUpForm .verify_error'); 
-                var verifySuccessMsg = document.querySelector('#signUpForm .verify_success');
+                var verifyErrMsg = document.querySelector('#verifySignUpForm .verify_error'); 
+                var verifySuccessMsg = document.querySelector('#verifySignUpForm .verify_success');
 
                 if ((!success) && (message === "Unauthorized")) {
                     setVerificationSuccessful(success);
@@ -289,36 +294,32 @@ const VerifySignUp = () => {
                     setRegisteredUser(data);
                     setVerificationMessage(message);
 
-                    // RESET FORM AFTER SUBMISSION
-                    document.getElementById("signUpForm").reset();
+                    setTimeout(() => {
+                        // Scroll to Bottom
+                        window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 
-                    // Scroll to Top
-                    window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
-
-                    verifySuccessMsg.classList.remove('verify_success');
-                    verifySuccessMsg.classList.add('success-message-info'); 
+                        verifySuccessMsg.classList.remove('verify_success');
+                        verifySuccessMsg.classList.add('success-message-info');
+                    }, 3000);
                                         
                     setTimeout(() => {
                         verifySuccessMsg.classList.remove('success-message-info');
                         verifySuccessMsg.classList.add('verify_success');            
-                    }, 3500);
+                    }, 4500);
                     // Perform These Actions
 
                     setTimeout(() => {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-                    }, 3900);
+                    }, 5200);
                 };
             })
             .catch((error) => {
                 console.log("Error encountered: ", error);
             });
         };
-
-        var timer = setTimeout(verifyToken, 2000);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [token]);
+        verifyToken();
+    // eslint-disable-next-line
+    }, []);
 
 
 
@@ -340,7 +341,7 @@ const VerifySignUp = () => {
                 </div>
                 {/* PAGE NAV */}
 
-                <form id="signUpForm" className='max-w-[400px] w-full mx-auto mb-10 rounded-lg bg-skin-signup-signin-bg py-8 px-10' onSubmit={handleFormSubmission}>
+                <form id="verifySignUpForm" className='max-w-[400px] w-full mx-auto mb-10 rounded-lg bg-skin-signup-signin-bg py-8 px-10' onSubmit={handleFormSubmission}>
                                             
                     {/* PAGE ICON */}
                     <div className="flex justify-center">

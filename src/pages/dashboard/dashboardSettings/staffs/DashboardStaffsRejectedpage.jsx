@@ -9,7 +9,10 @@ import axios from "axios";
 
 const DashboardStaffsRejectedPage = ({ activeDisplay }) => {  
 
+    
+    // console.clear();
 
+    
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
@@ -28,7 +31,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         var allRejectedStaffsLink = document.querySelector("#staffsLinkID .allRejectedStaffs");
-        console.log("All Pending Staffs Link: ", allRejectedStaffsLink);
+       // console.log("All Pending Staffs Link: ", allRejectedStaffsLink);
 
         if (activeDisplay === "allRejectedStaffs") {
             allRejectedStaffsLink?.classList.add("activeStaffView");

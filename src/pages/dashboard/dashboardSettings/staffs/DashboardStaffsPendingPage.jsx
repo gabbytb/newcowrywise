@@ -10,6 +10,9 @@ import axios from "axios";
 const DashboardStaffsPendingPage = ({ activeDisplay }) => {  
 
 
+    // console.clear();
+
+    
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************

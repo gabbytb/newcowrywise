@@ -19,7 +19,10 @@ import RejectedUsersPage from "./users/RejectedUsersPage";
 
 const DashboardUsersPage = ({ isLoggedIn }) => {
     
+    
+    // console.clear();
 
+    
     // ****************************************************************************
     // SET PAGE TITLE && ADD CUSTOM "admin__dashboard" CLASS TO ADMIN DASHBOARD
     // ****************************************************************************

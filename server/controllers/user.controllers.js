@@ -41,8 +41,8 @@ const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For 
 const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // For Sign Up
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
-const mailSender = require("../middlewares/MailSender");
-// const mailSenderForToken = require("../middlewares/MailSenderForToken");
+// const mailSender = require("../middlewares/MailSender");
+const mailSenderForToken = require("../middlewares/MailSenderForToken");
 // *****************************************************************
 // *****************************************************************
 
@@ -112,9 +112,9 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
+        // const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
         // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
-        // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
+        const roleStaff = await Role.findOne({ role: ROLES.STAFF });
         // const roleUsers = await Role.findOne({ role: ROLES.USERS });
         // ***************************************************************//
         // PICK ALL ADMIN ROLES
@@ -137,7 +137,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: "pending",
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleAdmin }]
+            roles: [{ ...roleStaff }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -217,7 +217,7 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        await mailSender(token, newUser);
+        await mailSenderForToken(token, newUser);
 
         // let valueOfEncodedText = decrypt(newUser.expirationInMs);
         // console.log("Encrypted token lifespan: ", valueOfEncodedText);

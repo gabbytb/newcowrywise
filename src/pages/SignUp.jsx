@@ -12,11 +12,10 @@ import { brandOfficialLogo, loginBg } from '../assets/images';
 
 
 
-
 function SignUp() {  
 
 
-    console.clear();
+    // console.clear();
 
 
     // *************************** //
@@ -40,15 +39,30 @@ function SignUp() {
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
     console.log("*** ACCOUNT CREATION ***\nUser: ", user);
+
+    const [accessToken, setAccessToken] = useState(null);
+    useEffect(() => {
+        if (accessToken !== null) {
+            console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken);
+            async function storeToken() {
+                const jsonObjData = {
+                    token: accessToken,
+                };
+                return await localStorage.setItem("token", JSON.stringify(jsonObjData));
+            };
+            storeToken();
+        };
+    }, [accessToken]);    
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
-    
 
 
 
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
+    
+    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
 
@@ -77,9 +91,7 @@ function SignUp() {
 
         await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
-            const { success, message, data} = response.data;
-            const { userId, token } = data;
-
+            const { success, data, message } = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
@@ -138,17 +150,18 @@ function SignUp() {
                 // Perform These Actions
                                 
             } else {             
-                // RESET FORM AFTER SUBMISSION
-                document.getElementById("signUpForm").reset();
-
                 // Perform These Actions
                 setFormSubmitted(success);               
-                console.log("User ID: ", userId, 
-                            "\nToken: ", token);
-                setFormMessage(message);            
+                setFormMessage(message);
+                // console.log("User ID: ", userId, 
+                //             "\nToken: ", token);
+                setAccessToken(data?.token);                    
 
                 // Scroll to Bottom
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
+
+                // RESET FORM AFTER SUBMISSION
+                document.getElementById("signUpForm").reset();
 
                 successMsg.classList.remove('signup_success');
                 successMsg.classList.add('success-message-info'); 
@@ -168,11 +181,9 @@ function SignUp() {
         .catch((error) => {
             console.log("Error encountered: ", error);
         });
-    };
+    };   
 
 
-
-        
     
     return (
         <div id="signUpId" className="block h-screen w-full bg-skin-signup-signin-bg">
@@ -257,7 +268,7 @@ function SignUp() {
                     </div>
                     {/* Approves TandC */}
                     
-  
+
                     {/* SUBMIT BUTTON */}
                     <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
                     {/* SUBMIT BUTTON */}

@@ -18,6 +18,9 @@ const DashboardStaffsRejectedPage = lazy(() => import("./staffs/DashboardStaffsR
 const DashboardStaffsPage = ({ isLoggedIn }) => {
     
 
+    // console.clear();
+
+    
     // ****************************************************************************
     // SET PAGE TITLE && ADD CUSTOM "admin__dashboard" CLASS TO ADMIN DASHBOARD
     // ****************************************************************************
@@ -113,7 +116,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [allStaffs, setAllStaffs] = useState([]);
-    // console.log("All ADMIN USERS: ", allStaffs);
+    console.log("All ADMIN USERS: ", allStaffs);
     
     // eslint-disable-next-line
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
