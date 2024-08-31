@@ -78,6 +78,8 @@ function SignUp() {
         await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data} = response.data;
+            const { userId, token } = data;
+
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
 
@@ -140,9 +142,11 @@ function SignUp() {
                 document.getElementById("signUpForm").reset();
 
                 // Perform These Actions
-                setFormSubmitted(success);
+                setFormSubmitted(success);               
+                console.log("User ID: ", userId, 
+                            "\nToken: ", token);
                 setFormMessage(message);            
-                
+
                 // Scroll to Bottom
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 

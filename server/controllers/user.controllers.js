@@ -1,9 +1,9 @@
 const db = require("../models");
-const ROLES = require("../constants/constants");
 const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
 // const crypto = require('crypto');
+const ROLES = require("../constants/constants");
 
 
 
@@ -38,7 +38,7 @@ const bcrypt = require("bcrypt");
 // *****************************************************************
 const encryptPassword = require("../middlewares/EncryptPassword");
 const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For Sign In
-const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");
+const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // For Sign Up
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSender = require("../middlewares/MailSender");
@@ -237,11 +237,11 @@ exports.signUp = async (req, res) => {
                 
         const responseData = {
             success: true,
-            // data: {
-            //     userId: newUser,
-            //     token: token,
-            // },
-            data: newUser,
+            data: {
+                userId: newUser,
+                token: token,
+            },
+            // data: newUser,
             message: "Successful",
         };
         return res.status(201).json(responseData);
