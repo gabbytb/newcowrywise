@@ -1,13 +1,15 @@
 const jwt = require("jsonwebtoken");
 // FOR JWT: Replace with a secure, secret key.
-const { secretKey, expiresInThreeDays } =  process.env;
+const secretKey =  process.env.secretKey || '!wasinvincibleallalongtheydunno!';   // 32 bytes for AES-256;;
+const expiresInThreeDays =  process.env.expiresInOneDay || 'UthoughtyouwasinvincibleallalongIkn!';   // 32 bytes for AES-256;;
+
 
 // Generate a JWT Using HS256:
-const assignThreeDaysToken = (id) => {
+const assignThreeDaysToken = (userId) => {
 
     // Create a payload
     const payload = {
-        id: id,
+        id: userId,
         // email: email,  // Optional: Include only if needed
     };    
     return jwt.sign(payload, secretKey, { algorithm: 'HS256', expiresIn: expiresInThreeDays }); 
