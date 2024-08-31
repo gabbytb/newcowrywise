@@ -687,7 +687,7 @@ exports.findAllAdmins = async (req, res) => {
         const skip = (page - 1) * limit;
             
         const query = {
-            'roles.role': ROLES.ADMIN,
+            'roles.role': ROLES.XYZ,
         };
 
         // Add "status" filter
