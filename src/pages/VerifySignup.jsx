@@ -76,8 +76,8 @@ const VerifySignUp = () => {
         await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data } = response.data;
-            var errMsg = document.querySelector('#signUpForm .signup_error'); 
-            var successMsg = document.querySelector('#signUpForm .signup_success');
+            var errMsg = document.querySelector('#verifySignUpForm .signup_error'); 
+            var successMsg = document.querySelector('#verifySignUpForm .signup_success');
 
             if ((!success) && (message === "Fill all the required inputs")) {
                 // Scroll to Top
