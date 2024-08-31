@@ -23,7 +23,7 @@ module.exports = app => {
     
 
     // Verify Unverified Existing "User" Accounts using this API
-    router.post("/api/v1/admin/users/manage/account/verify", cors(corsOptions), users.reSignUp);
+    router.post("/api/v1/admin/users/manage/account/verify", cors(corsOptions), users.reValidateSignUp);
     // Expose this endpoint(i.e "http://127.0.0.1:3000/api/v1/admin/users/manage/account-revalidation") for the frontend to access.
 
 

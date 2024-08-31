@@ -258,7 +258,7 @@ exports.signUp = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our ACCOUNT Re-ACTIVATION Logic starts here
-exports.reSignUp = async (req, res) => {
+exports.reValidateSignUp = async (req, res) => {
 
     const { email } = req.body;
 
