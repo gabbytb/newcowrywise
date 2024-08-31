@@ -241,7 +241,7 @@ const VerifySignUp = () => {
                     }, 3000);
                     // Perform These Actions
                     
-                } else if ((!success) && (message === "Mulitple user entry")) {
+                } else if ((!success) && (message === "Mulitple User entry")) {
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);      
                     
@@ -273,7 +273,7 @@ const VerifySignUp = () => {
                     }, 3000);
                     // Perform These Actions
                     
-                } else if ((!success) && (message === "User not found")) {
+                } else if ((!success) && (message === "Invalid account")) {
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);      
                     

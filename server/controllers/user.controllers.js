@@ -319,7 +319,7 @@ exports.reSignUp = async (req, res) => {
     }
 };  // THOROUGHLY Tested === Working
 
-// Our ACCOUNT VERIFICATION Logic starts here
+// Our ACCOUNT VERIFICATION Logic USING POST request using starts here
 exports.verifySignUp = async (req, res) => {
 
     try {
@@ -339,14 +339,13 @@ exports.verifySignUp = async (req, res) => {
         const _id = verifiedToken.id;
         const userExists = await User.findById(_id);
         if (!userExists) {
-            // console.error('Token verification failed:', error.message);
             const responseData = { 
                 success: false, 
-                message: "User not found",
+                message: "Invalid account",
             };
-            console.log("Invalid user: ", responseData);
-            return res.status(500).json(responseData);
-        }
+            console.log("VERIFIED USER: ", responseData);
+            return res.json(responseData);
+        };
 
         // Step 6: If user exists, find User by Email 
         // const email = userExists.email;   
@@ -397,7 +396,7 @@ exports.verifySignUp = async (req, res) => {
             // console.error("Mulitple user entry");
             const responseData = { 
                 success: false, 
-                message: "Mulitple user entry",
+                message: "Mulitple User entry",
             };
             console.log("Mulitple user entry: ", responseData);
             return res.status(401).json(responseData);
@@ -412,6 +411,7 @@ exports.verifySignUp = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
+// Our ACCOUNT VERIFICATION Logic USING GET request starts here
 exports.verifySignUpWithGet = async (req, res) => {    
 
     try {
@@ -422,13 +422,12 @@ exports.verifySignUpWithGet = async (req, res) => {
         const _id = verifiedToken.id;
         const userExists = await User.findById(_id);
         if (!userExists) {
-            // console.error('Token verification failed:', error.message);
             const responseData = { 
                 success: false, 
-                message: "User not found",
+                message: "Invalid account",
             };
-            console.log("Invalid user: ", responseData);
-            return res.status(500).json(responseData);
+            console.log("VERIFIED USER: ", responseData);
+            return res.json(responseData);
         };
 
         // Step 6: If user exists, find User by Email 
@@ -440,9 +439,7 @@ exports.verifySignUpWithGet = async (req, res) => {
             status: "approved",
             accessToken: token,
             isVerified: true,
-        };
-        // const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
-        
+        };              
         
         // Step 6: If user exists, find User by Email
         const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
@@ -480,7 +477,7 @@ exports.verifySignUpWithGet = async (req, res) => {
             // console.error("Mulitple user entry");
             const responseData = { 
                 success: false, 
-                message: "Mulitple user entry",
+                message: "Mulitple User entry",
             };
             console.log("Mulitple user entry: ", responseData);
             return res.status(401).json(responseData);
@@ -493,7 +490,7 @@ exports.verifySignUpWithGet = async (req, res) => {
             return res.status(500).json(responseData);
         };
     };
-};
+};  // THOROUGHLY Tested === Working
 
 // Our USER LOGIN Logic starts here
 exports.logIn = async (req, res) => {
