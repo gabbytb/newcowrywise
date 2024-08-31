@@ -43,7 +43,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
         localStorage.clear();
         const redirToLogin = "/user/login";
         window.location = redirToLogin;
-    }
+    };
     // ***************************************************************************
     // ***************************************************************************
 

@@ -39,27 +39,62 @@ export default function App() {
         // console.log("TRACKING PAGE VIEWS: ", pageViews);
     }, []);
     
-    const routes = useRoutes([       
-        { path: "/", element: <OurProgress /> },
-        { path: "/home", element: <Home /> },
-        { path: "/donations", element: <DonationPage /> },
-        // { path: "/user/verify/:token", element: <SignUpVerification /> },
-        { path: "/user/verify/:token", element: <VerifySignUp /> },
-        { path: "/user/signup", element: <SignUp /> },
-        { path: "/user/login", element: <SignIn /> },
-        { path: "/admin/dashboard", element: <AdminDashboard /> },
-        { path: "/admin/users", element: <DashboardUsersPage /> },
-        { path: "/admin/staffs", element: <DashboardStaffsPage /> },
-        { path: "/admin/users/:id", element: <DashboardUsersDetailsPage /> },
-        { path: "/admin/staffs/:id", element: <DashboardStaffsDetailsPage /> },
-        { path: "/admin/users/manage", element: <AccountUsers /> },
+    const element = useRoutes([       
+        { 
+            path: "/", element: <OurProgress /> 
+        },
+        { 
+            path: "/home", element: <Home /> 
+        },
+        { 
+            path: "/donations", element: <DonationPage /> 
+        },
+        { 
+            path: "/user/verify", element: <VerifySignUp /> 
+        },
+        // { 
+        //     path: "/user/verify/:token", element: <VerifySignUp /> 
+        // },
+        { 
+            path: "/user/signup", element: <SignUp /> 
+        },
+        { 
+            path: "/user/login", element: <SignIn /> 
+        },
+        { 
+            path: "/admin/dashboard", element: <AdminDashboard /> 
+        },
+        { 
+            path: "/admin/users/manage", element: <DashboardUsersPage />,
+        },
+        { 
+            path: "/admin/users/manage/:id", element: <DashboardUsersDetailsPage /> 
+        },
+        { 
+            path: "/admin/staffs/manage", element: <DashboardStaffsPage />,
+        },
+        { 
+            path: "/admin/staffs/manage/:id", element: <DashboardStaffsDetailsPage /> 
+        },
+        { 
+            path: "/admin/users/management", element: <AccountUsers /> 
+        },
     ]);
     
-    
-    return routes;
+    return element;
 };
 //   return (
 //     <Routes>
 //       <Route path="/" element={<Home />} />
+//       <Route 
+//          path: "/admin/staffs/", 
+//          element: <DashboardStaffsPage />,    
+//          children: [
+//              {
+//                   path: ":id",
+//                    element: <DashboardStaffsDetailsPage />,
+//              },
+//          ]
+//       />
 //     </Routes>
 //   );

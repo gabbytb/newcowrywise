@@ -66,7 +66,7 @@ exports.signUp = async (req, res) => {
         const uniqueId = Date.now();
 
         // Payload
-        const { id=23401, firstName, lastName, email, password, approvesTandC } = req.body;
+        const { id = 23401, firstName, lastName, email, password, approvesTandC } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
         if (!(firstName && lastName && email && password)) {
@@ -112,17 +112,14 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
-        // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" });
-        // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
-        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
+        // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
+        // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
+        // const roleUsers = await Role.findOne({ role: ROLES.USERS });
         // ***************************************************************//
-        // PICK ALL ROLES
+        // PICK ALL ADMIN ROLES
         // ***************************************************************//
-        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" }), 
-        // roleEditor = await Role.findOne({ role: "ROLE_EDITOR" }), 
-        // roleStaff = await Role.findOne({ role: "ROLE_STAFF" }), 
-        // roleUsers = await Role.findOne({ role: "ROLE_USERS" });        
+        // const topLvAdmin = await Role.findOne({ role: ROLES.XYZ });
         // ***************************************************************//
         // ***************************************************************//
 
@@ -499,7 +496,6 @@ exports.verifySignUpWithGet = async (req, res) => {
 };
 
 // Our USER LOGIN Logic starts here
-
 exports.logIn = async (req, res) => {
 
     try {
