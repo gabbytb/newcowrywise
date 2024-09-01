@@ -69,7 +69,7 @@ exports.signUp = async (req, res) => {
         const { id = 23401, firstName, lastName, email, password, approvesTandC } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!(firstName && lastName && email && password && approvesTandC)) {
+        if (!(firstName && lastName && email && password)) {
             const responseData = {
                 success: false,
                 message: "Fill all the required inputs"
@@ -422,7 +422,8 @@ exports.verifySignUpWithGet = async (req, res) => {
         
         const _id = verifiedToken.id;
         const userExists = await User.findById(_id);
-        if (!userExists) {
+
+        if (!(userExists)) {
             const responseData = { 
                 success: false, 
                 message: "Invalid account",
@@ -440,8 +441,7 @@ exports.verifySignUpWithGet = async (req, res) => {
             status: "approved",
             accessToken: token,
             isVerified: true,
-        };              
-        
+        };
         // Step 6: If user exists, find User by Email
         const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
     
@@ -465,7 +465,7 @@ exports.verifySignUpWithGet = async (req, res) => {
                 message: "Token has expired",
             };
             console.log("Token verification status: ", responseData);
-            return res.status(403).json(responseData);
+            return res.json(responseData);
         } else if (error.name === 'JsonWebTokenError') {
             // console.error("Token does not exist");
             const responseData = { 
@@ -473,15 +473,15 @@ exports.verifySignUpWithGet = async (req, res) => {
                 message: "Token does not exist",
             };
             console.log("Token verification status: ", responseData);
-            return res.status(401).json(responseData);
+            return res.json(responseData);
         } else if (error.name === 'MongoServerError') {
             // console.error("Mulitple user entry");
             const responseData = { 
                 success: false, 
                 message: "Mulitple User entry",
             };
-            console.log("Mulitple user entry: ", responseData);
-            return res.status(401).json(responseData);
+            console.log("Mulitple User entry: ", responseData);
+            return res.json(responseData);
         } else {
             const responseData = { 
                 success: false, 
@@ -792,11 +792,6 @@ exports.findUserById = async (req, res) => {
             return res.status(404).json(responseData);
         }
         
-        // if (user.roles.role === ROLE_USER) {
-            console.log("User Roles: ", user.roles.role);
-        // };
-        
-
         const responseData = {
                 success: true,
                 data: user,

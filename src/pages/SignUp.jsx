@@ -16,15 +16,15 @@ function SignUp() {
 
 
     // console.clear();
+    // localStorage.clear();
 
-
+    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Sign Up", 
-              siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -33,29 +33,37 @@ function SignUp() {
 
 
 
-
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
     console.log("*** ACCOUNT CREATION ***\nUser: ", user);
+    // ******************************** //
+    // *** USER PAYLOAD FOR SIGN UP *** //
+    // ******************************** //
 
+
+
+    // ************************************************** //
+    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
+    // ************************************************** //
     const [accessToken, setAccessToken] = useState(null);
+    console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken); 
+
     useEffect(() => {
         if (accessToken !== null) {
-            console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken);
-            async function storeToken() {
+            async function saveTokenInStorage() {
                 const jsonObjData = {
                     token: accessToken,
                 };
                 return await localStorage.setItem("token", JSON.stringify(jsonObjData));
             };
-            storeToken();
+            saveTokenInStorage();
         };
-    }, [accessToken]);    
-    // ******************************** //
-    // *** USER PAYLOAD FOR SIGN UP *** //
-    // ******************************** //
+    }, [accessToken]);
+    // ************************************************** //
+    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
+    // ************************************************** //
 
 
 
@@ -152,11 +160,10 @@ function SignUp() {
             } else {             
                 // Perform These Actions
                 setFormSubmitted(success);               
-                setFormMessage(message);
-                // console.log("User ID: ", userId, 
-                //             "\nToken: ", token);
-                setAccessToken(data?.token);                    
-
+                setAccessToken(data?.token);
+                // console.log("Registered User ID: ", data.userId); 
+                setFormMessage(message);              
+                                
                 // Scroll to Bottom
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 
@@ -184,7 +191,8 @@ function SignUp() {
     };   
 
 
-    
+
+
     return (
         <div id="signUpId" className="block h-screen w-full bg-skin-signup-signin-bg">
             {/* ADD ton Below:  right-pane */}
@@ -244,7 +252,7 @@ function SignUp() {
                     {/* E-mail Address */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="email">E-mail address
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} autoComplete="off" required />
                         </label>
                     </div>
                     {/* E-mail Address */}
@@ -253,7 +261,7 @@ function SignUp() {
                     {/* Password */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="password">Password
-                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} autoComplete="off" required />
                         </label>
                     </div>
                     {/* Password */}

@@ -162,11 +162,8 @@ const VerifySignUp = () => {
 
 
 
+    
 
-
-
-    const token = JSON.parse(localStorage.getItem("token"));
-    console.log("Token Found in LocalStorage: ", token);
 
     const [registeredUser, setRegisteredUser] = useState(null);
     console.log("Registered User: ", registeredUser);
@@ -175,7 +172,7 @@ const VerifySignUp = () => {
     const [verificationMessage, setVerificationMessage] = useState("");
 
     useEffect(() => {
-        function verifyToken() {          
+        async function verifyToken() {          
             // const payload = { 
             //     accessToken: token,
             // };    
@@ -185,15 +182,20 @@ const VerifySignUp = () => {
             //         Authorization: `Bearer ${token}`,
             //     },
             // })
-            
+
+
+            const token = JSON.parse(localStorage.getItem("token"));
+            console.log("Token Found in LocalStorage: ", token);
+
             const uri = "/user/verify/";
-            api.get(uri, { params: token })
+            await api.get(uri, { params: token })
             .then((response) => {
                 const { success, message, data } = response.data;
                 var verifyErrMsg = document.querySelector('#verifySignUpForm .verify_error'); 
                 var verifySuccessMsg = document.querySelector('#verifySignUpForm .verify_success');
 
                 if ((!success) && (message === "Unauthorized")) {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);
 
@@ -208,8 +210,8 @@ const VerifySignUp = () => {
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
                     // Perform These Actions
-
                 } else if ((!success) && (message === "Token has expired")) {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);
 
@@ -224,8 +226,8 @@ const VerifySignUp = () => {
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
                     // Perform These Actions
-                    
                 } else if ((!success) && (message === "Token does not exist")) {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);   
                     
@@ -239,9 +241,9 @@ const VerifySignUp = () => {
                         verifyErrMsg?.classList.remove('error-message-info');
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
-                    // Perform These Actions
-                    
+                    // Perform These Actions               
                 } else if ((!success) && (message === "Mulitple User entry")) {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);      
                     
@@ -255,9 +257,9 @@ const VerifySignUp = () => {
                         verifyErrMsg?.classList.remove('error-message-info');
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
-                    // Perform These Actions
-                    
+                    // Perform These Actions         
                 } else if ((!success) && (message === "Invalid token")) {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);      
                     
@@ -271,9 +273,9 @@ const VerifySignUp = () => {
                         verifyErrMsg?.classList.remove('error-message-info');
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
-                    // Perform These Actions
-                    
+                    // Perform These Actions   
                 } else if ((!success) && (message === "Invalid account")) {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setVerificationMessage(message);      
                     
@@ -287,30 +289,28 @@ const VerifySignUp = () => {
                         verifyErrMsg?.classList.remove('error-message-info');
                         verifyErrMsg?.classList.add('verify_error');
                     }, 3000);
-                    // Perform These Actions
-                    
+                    // Perform These Actions  
                 } else {
+                    // Perform These Actions
                     setVerificationSuccessful(success);
                     setRegisteredUser(data);
                     setVerificationMessage(message);
 
-                    setTimeout(() => {
-                        // Scroll to Bottom
-                        window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
+                    // Scroll to Bottom
+                    window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 
-                        verifySuccessMsg.classList.remove('verify_success');
-                        verifySuccessMsg.classList.add('success-message-info');
-                    }, 3000);
+                    verifySuccessMsg.classList.remove('verify_success');
+                    verifySuccessMsg.classList.add('success-message-info');
                                         
                     setTimeout(() => {
                         verifySuccessMsg.classList.remove('success-message-info');
                         verifySuccessMsg.classList.add('verify_success');            
-                    }, 4500);
-                    // Perform These Actions
-
+                    }, 3800);
+                    
                     setTimeout(() => {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
                     }, 5200);
+                    // Perform These Actions
                 };
             })
             .catch((error) => {
@@ -318,7 +318,9 @@ const VerifySignUp = () => {
             });
         };
         verifyToken();
-    // eslint-disable-next-line
+
+        // Clear Token from Cache
+        localStorage.clear();
     }, []);
 
 
