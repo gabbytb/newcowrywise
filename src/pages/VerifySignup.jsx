@@ -19,21 +19,6 @@ const VerifySignUp = () => {
     // console.clear();
 
     
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-    // useEffect(() => {
-    //     const pageTitle = "Account Verification", 
-    //         siteTitle = "Samuel Akinola Foundation";
-    //     document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
-    // }, [registeredUser]);
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-
-
-
-
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
@@ -76,8 +61,8 @@ const VerifySignUp = () => {
         await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
             const { success, message, data } = response.data;
-            var errMsg = document.querySelector('#verifySignUpForm .signup_error'); 
-            var successMsg = document.querySelector('#verifySignUpForm .signup_success');
+            let errMsg = document.querySelector('#verifySignUpForm .signup_error'); 
+            let successMsg = document.querySelector('#verifySignUpForm .signup_success');
 
             if ((!success) && (message === "Fill all the required inputs")) {
                 // Scroll to Top
@@ -87,12 +72,12 @@ const VerifySignUp = () => {
                 setFormSubmitted(success);
                 setFormMessage(message);
                             
-                errMsg?.classList.remove('signup_error');
-                errMsg?.classList.add('error-message-info');
+                errMsg?.classList?.remove('signup_error');
+                errMsg?.classList?.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('signup_error');
+                    errMsg?.classList?.remove('error-message-info');
+                    errMsg?.classList?.add('signup_error');
                 }, 3000);
                 // Perform These Actions
             } else if ((!success) && (message === "E-mail exists. Sign In")) {
@@ -103,12 +88,12 @@ const VerifySignUp = () => {
                 setFormSubmitted(success);
                 setFormMessage(message);
                     
-                errMsg?.classList.remove('signup_error');
-                errMsg?.classList.add('error-message-info');
+                errMsg?.classList?.remove('signup_error');
+                errMsg?.classList?.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('signup_error');
+                    errMsg?.classList?.remove('error-message-info');
+                    errMsg?.classList?.add('signup_error');
                 }, 3000);
                 // Perform These Actions
             } else if ((!success) && (message === "Username exists. Sign In")) {
@@ -119,12 +104,12 @@ const VerifySignUp = () => {
                 setFormSubmitted(success);
                 setFormMessage(message);
                     
-                errMsg?.classList.remove('signup_error');
-                errMsg?.classList.add('error-message-info');
+                errMsg?.classList?.remove('signup_error');
+                errMsg?.classList?.add('error-message-info');
 
                 setTimeout(() => {
-                    errMsg?.classList.remove('error-message-info');
-                    errMsg?.classList.add('signup_error');
+                    errMsg?.classList?.remove('error-message-info');
+                    errMsg?.classList?.add('signup_error');
                 }, 3000);
                 // Perform These Actions                  
             } else {             
@@ -136,15 +121,21 @@ const VerifySignUp = () => {
                 setFormSubmitted(success);
                 setFormMessage(message);
 
-                // RESET FORM AFTER SUBMISSION
-                document.getElementById("signUpForm").reset();
+                // Store Token in LocalStorage 
+                const jsonObjData = {
+                    token: data?.token,
+                };
+                localStorage.setItem("token", JSON.stringify(jsonObjData));
 
-                successMsg.classList.remove('signup_success');
-                successMsg.classList.add('success-message-info'); 
+                // RESET FORM AFTER SUBMISSION
+                document.getElementById("verifySignUpForm").reset();
+
+                successMsg?.classList.remove('signup_success');
+                successMsg?.classList.add('success-message-info'); 
                                     
                 setTimeout(() => {
-                    successMsg.classList.remove('success-message-info');
-                    successMsg.classList.add('signup_success');            
+                    successMsg?.classList?.remove('success-message-info');
+                    successMsg?.classList?.add('signup_success');            
                 }, 3500);
                
                 setTimeout(() => {
@@ -164,9 +155,24 @@ const VerifySignUp = () => {
 
     
 
-
+    
     const [registeredUser, setRegisteredUser] = useState(null);
-    console.log("Registered User: ", registeredUser);
+    // console.log("Registered User: ", registeredUser);
+
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
+        if (!(registeredUser?.email)) {
+            document.title = `${pageTitle} | ${siteTitle}`;  
+        } else {
+            document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
+        };
+    }, [registeredUser]);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
     
     const [verificationSuccessful, setVerificationSuccessful] = useState(false);
     const [verificationMessage, setVerificationMessage] = useState("");
@@ -191,8 +197,8 @@ const VerifySignUp = () => {
             await api.get(uri, { params: token })
             .then((response) => {
                 const { success, message, data } = response.data;
-                var verifyErrMsg = document.querySelector('#verifySignUpForm .verify_error'); 
-                var verifySuccessMsg = document.querySelector('#verifySignUpForm .verify_success');
+                let verifyErrMsg = document.querySelector('#verifySignUpForm .verify_error');
+                let verifySuccessMsg = document.querySelector('#verifySignUpForm .verify_success');           
 
                 if ((!success) && (message === "Unauthorized")) {
                     // Perform These Actions
@@ -234,12 +240,12 @@ const VerifySignUp = () => {
                     // Scroll to Top
                     window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
-                    verifyErrMsg?.classList.remove('verify_error');
-                    verifyErrMsg?.classList.add('error-message-info');
+                    verifyErrMsg?.classList?.remove('verify_error');
+                    verifyErrMsg?.classList?.add('error-message-info');
 
                     setTimeout(() => {
-                        verifyErrMsg?.classList.remove('error-message-info');
-                        verifyErrMsg?.classList.add('verify_error');
+                        verifyErrMsg?.classList?.remove('error-message-info');
+                        verifyErrMsg?.classList?.add('verify_error');
                     }, 3000);
                     // Perform These Actions               
                 } else if ((!success) && (message === "Mulitple User entry")) {
@@ -282,12 +288,12 @@ const VerifySignUp = () => {
                     // Scroll to Top
                     window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
 
-                    verifyErrMsg?.classList.remove('verify_error');
-                    verifyErrMsg?.classList.add('error-message-info');
+                    verifyErrMsg?.classList?.remove('verify_error');
+                    verifyErrMsg?.classList?.add('error-message-info');
 
                     setTimeout(() => {
-                        verifyErrMsg?.classList.remove('error-message-info');
-                        verifyErrMsg?.classList.add('verify_error');
+                        verifyErrMsg?.classList?.remove('error-message-info');
+                        verifyErrMsg?.classList?.add('verify_error');
                     }, 3000);
                     // Perform These Actions  
                 } else {
@@ -299,16 +305,18 @@ const VerifySignUp = () => {
                     // Scroll to Bottom
                     window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 
-                    verifySuccessMsg.classList.remove('verify_success');
-                    verifySuccessMsg.classList.add('success-message-info');
+                    verifySuccessMsg?.classList?.remove('verify_success');
+                    verifySuccessMsg?.classList?.add('success-message-info');
                                         
                     setTimeout(() => {
-                        verifySuccessMsg.classList.remove('success-message-info');
-                        verifySuccessMsg.classList.add('verify_success');            
+                        verifySuccessMsg?.classList?.remove('success-message-info');
+                        verifySuccessMsg?.classList?.add('verify_success');            
                     }, 3800);
                     
                     setTimeout(() => {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+                        // Clear Token from Cache
+                        localStorage.clear();
                     }, 5200);
                     // Perform These Actions
                 };
@@ -318,9 +326,6 @@ const VerifySignUp = () => {
             });
         };
         verifyToken();
-
-        // Clear Token from Cache
-        localStorage.clear();
     }, []);
 
 
@@ -357,17 +362,27 @@ const VerifySignUp = () => {
                     {/* PAGE TITLE */}
 
                     
-                    {/* Error Message */}
-                    <div className="mx-auto signup_error">
-                        {formMessage}
-                    </div>
-                    {/* Error Message */}
+                    {/* Sign Up Error Message */}
+                    {
+                        formSubmitted ?
+                            <div></div>
+                            :
+                            <div className="mx-auto signup_error">
+                                {formMessage}
+                            </div>
+                    }
+                    {/* Sign Up Error Message */}
 
 
                     {/* Verification Error Message */}
-                    <div className="mx-auto verify_error">
-                        {verificationMessage}
-                    </div>
+                    {
+                        verificationSuccessful ?
+                            <div></div>
+                            :
+                            <div className="mx-auto verify_error">
+                                {verificationMessage}
+                            </div>
+                    }
                     {/* Verification Error Message */}
 
 
@@ -423,13 +438,19 @@ const VerifySignUp = () => {
   
                     {/* SUBMIT BUTTON */}
                     <div className="relative">
-                        <div className="mx-auto verify_success absolute top-0 w-full">
-                            {
-                                verificationSuccessful
-                                &&
-                                <div className="bg-green-500 text-white font-bold text-2xl flex justify-center items-center py-4 animate-dropdown rounded-xl">{verificationMessage}</div>
-                            }
-                        </div>
+                        {/* Verification Success Message */}
+                        {
+                            verificationSuccessful ?
+                                <div className="mx-auto absolute top-0 w-full verify_success">
+                                    <div className="text-white font-bold text-2xl flex justify-center items-center py-4 animate-dropdown">
+                                        {verificationMessage}
+                                    </div>
+                                </div>
+                                :
+                                <div></div>
+                        }
+                        {/* Verification Success Message */}
+
                         <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
                     </div>
                     {/* SUBMIT BUTTON */}
@@ -443,12 +464,16 @@ const VerifySignUp = () => {
                     {/* LINK: SIGN IN & PASSWORD RESET */}
 
 
-                    {/* Success Message */}
-                    <div className="mt-6 mx-auto signup_success">
-                        {formMessage}
-                    </div>
-                    {/* Success Message */}
-
+                    {/* Sign Up Success Message */}
+                    {
+                        formSubmitted ?
+                            <div className="mt-6 mx-auto signup_success">
+                                {formMessage}
+                            </div>       
+                            :
+                            <div className="mt-6 mx-auto signup_success"></div>
+                    }
+                    {/* Sign Up Success Message */}
                 </form>
             </div>
         </div>

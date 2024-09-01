@@ -160,7 +160,28 @@ function SignIn() {
 
 
     const [existingUser, setExistingUser] = useState(null);
-    console.log("Existing User: ", existingUser);
+    console.log("EXISTING USER ACCOUNT: ", existingUser);
+
+    // ************************************************** //
+    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
+    // ************************************************** //
+    const [accessToken, setAccessToken] = useState(null);
+    console.log("*** NEW ACCOUNT TOKEN ***\nToken: ", accessToken); 
+
+    useEffect(() => {
+        if (accessToken !== null) {
+            async function saveTokenInStorage() {
+                const jsonObjData = {
+                    token: accessToken,
+                };
+                return await localStorage.setItem("token", JSON.stringify(jsonObjData));
+            };
+            saveTokenInStorage();
+        };
+    }, [accessToken]);
+    // ************************************************** //
+    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
+    // ************************************************** //
 
     const [formMessageAccountVerification, setFormMessageAccountVerification] = useState(null);
     console.log("Account Verification Attempt: ", formMessageAccountVerification);
@@ -219,7 +240,8 @@ function SignIn() {
             } else {
                 // Perform These Actions
                 setFormSubmittedAccountVerification(success); 
-                setExistingUser(data);
+                setExistingUser(data?.userId);
+                setAccessToken(data?.token);
                 setFormMessageAccountVerification(message);   
 
                 successVerifyMsg?.classList.remove('verify__success');

@@ -112,9 +112,9 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//
-        // const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
+        const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
         // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
-        const roleStaff = await Role.findOne({ role: ROLES.STAFF });
+        // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
         // const roleUsers = await Role.findOne({ role: ROLES.USERS });
         // ***************************************************************//
         // PICK ALL ADMIN ROLES
@@ -137,7 +137,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: "pending",
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleStaff }]
+            roles: [{ ...roleAdmin }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -285,13 +285,13 @@ exports.reValidateSignUp = async (req, res) => {
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
-        const token = await assignThreeDaysToken(existingUser._id);
+        const token = await assignTwoDaysToken(existingUser._id);
         
 
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        await mailSender(token, existingUser);
+        await mailSenderGetToken(token, existingUser);
 
 
         console.log("\n*********************************************************",
@@ -305,7 +305,10 @@ exports.reValidateSignUp = async (req, res) => {
                     "\n\n******************************************************************************************\n");
         const responseData = {
             success: true,
-            data: existingUser,
+            data: {
+                userId: existingUser,
+                token: token,
+            },
             message: "Re-sent activation e-mail",
         };
         return res.status(200).json(responseData);
