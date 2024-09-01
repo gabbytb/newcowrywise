@@ -191,7 +191,7 @@ const VerifySignUp = () => {
 
 
             const token = JSON.parse(localStorage.getItem("token"));
-            console.log("Token Found in LocalStorage: ", token);
+            // console.log("Token Found in LocalStorage: ", token);
 
             const uri = "/user/verify/";
             await api.get(uri, { params: token })
@@ -315,8 +315,13 @@ const VerifySignUp = () => {
                     
                     setTimeout(() => {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
+                        if (token) {                         
+                            // Remove the item with the key 'token'
+                            localStorage.removeItem("token");
+                        };
+
                         // Clear Token from Cache
-                        localStorage.clear();
+                        // localStorage.clear();
                     }, 5200);
                     // Perform These Actions
                 };
