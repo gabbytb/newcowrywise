@@ -318,8 +318,89 @@ exports.reValidateSignUp = async (req, res) => {
     }
 };  // THOROUGHLY Tested === Working
 
+// Our ACCOUNT VERIFICATION Logic USING GET request starts here
+exports.verifySignUpWithGet = async (req, res) => {    
+
+    try {
+
+        const token = req.query.token;
+        const verifiedToken = await verifyToken(token);
+        
+        const _id = verifiedToken.id;
+        const userExists = await User.findById(_id);
+
+        if (!(userExists)) {
+            const responseData = { 
+                success: false, 
+                message: "Invalid account",
+            };
+            console.log("VERIFIED USER: ", responseData);
+            return res.json(responseData);
+        };
+
+        // Step 6: If user exists, find User by Email 
+        // const email = userExists.email;   
+        // Change Existing User status to "approved".
+        // Assign the generated token to Existing User, as their accessToken..
+        // Set isVerified as True for Existing User
+        const dataToUpdate = {
+            status: "approved",
+            accessToken: token,
+            isVerified: true,
+        };
+        // Step 6: If user exists, find User by Email
+        const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
+    
+        const responseData = {
+            success: true,
+            data: updatedUser,
+            message: "Successful"
+        };
+        console.log("*********************************************************",
+            "\n*****           NEW ACCOUNT VERIFICATION             ****",
+            "\n*********************************************************",
+            "\nVerification Status: ", responseData,
+            "\n*********************************************************\n\n");
+        res.status(200).json(responseData); // Send a success response
+    
+    } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            // console.error("Token has expired");
+            const responseData = { 
+                success: false, 
+                message: "Token has expired",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.json(responseData);
+        } else if (error.name === 'JsonWebTokenError') {
+            // console.error("Token does not exist");
+            const responseData = { 
+                success: false, 
+                message: "Token does not exist",
+            };
+            console.log("Token verification status: ", responseData);
+            return res.json(responseData);
+        } else if (error.name === 'MongoServerError') {
+            // console.error("Mulitple user entry");
+            const responseData = { 
+                success: false, 
+                message: "Mulitple User entry",
+            };
+            console.log("Mulitple User entry: ", responseData);
+            return res.json(responseData);
+        } else {
+            const responseData = { 
+                success: false, 
+                message: "Internal Server Error",
+            };
+            console.error("Internal Server Error during account verification: ", error.message);
+            return res.status(500).json(responseData);
+        };
+    };
+};  // THOROUGHLY Tested === Working
+
 // Our ACCOUNT VERIFICATION Logic USING POST request using starts here
-exports.verifySignUp = async (req, res) => {
+exports.verifySignUpWithPost = async (req, res) => {
 
     try {
         const AuthHeader = req.headers.authorization;
@@ -401,87 +482,6 @@ exports.verifySignUp = async (req, res) => {
             };
             console.log("Mulitple user entry: ", responseData);
             return res.status(401).json(responseData);
-        } else {
-            const responseData = { 
-                success: false, 
-                message: "Internal Server Error",
-            };
-            console.error("Internal Server Error during account verification: ", error.message);
-            return res.status(500).json(responseData);
-        };
-    };
-};  // THOROUGHLY Tested === Working
-
-// Our ACCOUNT VERIFICATION Logic USING GET request starts here
-exports.verifySignUpWithGet = async (req, res) => {    
-
-    try {
-
-        const token = req.query.token;
-        const verifiedToken = await verifyToken(token);
-        
-        const _id = verifiedToken.id;
-        const userExists = await User.findById(_id);
-
-        if (!(userExists)) {
-            const responseData = { 
-                success: false, 
-                message: "Invalid account",
-            };
-            console.log("VERIFIED USER: ", responseData);
-            return res.json(responseData);
-        };
-
-        // Step 6: If user exists, find User by Email 
-        // const email = userExists.email;   
-        // Change Existing User status to "approved".
-        // Assign the generated token to Existing User, as their accessToken..
-        // Set isVerified as True for Existing User
-        const dataToUpdate = {
-            status: "approved",
-            accessToken: token,
-            isVerified: true,
-        };
-        // Step 6: If user exists, find User by Email
-        const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
-    
-        const responseData = {
-            success: true,
-            data: updatedUser,
-            message: "Successful"
-        };
-        console.log("*********************************************************",
-            "\n*****           NEW ACCOUNT VERIFICATION             ****",
-            "\n*********************************************************",
-            "\nVerification Status: ", responseData,
-            "\n*********************************************************\n\n");
-        res.status(200).json(responseData); // Send a success response
-    
-    } catch (error) {
-        if (error.name === 'TokenExpiredError') {
-            // console.error("Token has expired");
-            const responseData = { 
-                success: false, 
-                message: "Token has expired",
-            };
-            console.log("Token verification status: ", responseData);
-            return res.json(responseData);
-        } else if (error.name === 'JsonWebTokenError') {
-            // console.error("Token does not exist");
-            const responseData = { 
-                success: false, 
-                message: "Token does not exist",
-            };
-            console.log("Token verification status: ", responseData);
-            return res.json(responseData);
-        } else if (error.name === 'MongoServerError') {
-            // console.error("Mulitple user entry");
-            const responseData = { 
-                success: false, 
-                message: "Mulitple User entry",
-            };
-            console.log("Mulitple User entry: ", responseData);
-            return res.json(responseData);
         } else {
             const responseData = { 
                 success: false, 

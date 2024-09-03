@@ -1,5 +1,6 @@
 module.exports = app => {
          
+
     const router = require('express').Router();
     const cors = require("cors");
     const corsOptions = {        
@@ -11,7 +12,6 @@ module.exports = app => {
     const users = require("../controllers/user.controllers.js");   
 
     
-
 
 
 
@@ -28,13 +28,15 @@ module.exports = app => {
 
 
     // Verify All "User" Accounts using this API
-    router.post("/user/verify/:token", cors(corsOptions), users.verifySignUp); 
-    // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify/:token") for the frontend to access.
-    
-
     router.get("/user/verify", cors(corsOptions), users.verifySignUpWithGet);
-
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify") for the frontend to access.
     
+
+    // Verify All "User" Accounts using this API
+    router.post("/user/verify/:token", cors(corsOptions), users.verifySignUpWithPost); 
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify/:token") for the frontend to access.
+
+
     // Login User
     router.post("/api/v1/auth/login", users.logIn);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/login") for the frontend to access.
