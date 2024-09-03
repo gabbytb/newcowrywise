@@ -674,6 +674,52 @@ exports.logIn = async (req, res) => {
 
 };  // THOROUGHLY Tested === Working
 
+// Our FIND All USERS Logic starts here
+exports.findAllUsers = async (req, res) => { 
+
+    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
+    
+    try {
+        let query = {
+            'roles.role': ROLES.USERS,
+        };
+
+        if (status) {
+            query.status = status;
+        };
+ 
+        // Query User Status and ROLES.role, & Pagination logic
+        const usersList = await User.find(query)
+                                .skip((page - 1) * limit)
+                                .limit(parseInt(limit));
+        console.log("USERS LIST: ", usersList);
+
+        const totalUsers = await User.countDocuments(query); // Total number of users with the given status
+        const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
+        const pagination = {
+            usersRecord: totalUsers,
+            page,
+            limit,
+            lastPage: totalPages,
+        };
+        console.log("PAGINATION: ", pagination, "\n\n");
+
+        const responseData = {
+            success: true,
+            data: {
+                usersList,
+                pagination
+            },
+            message: "Items retrieved successfully",
+        }
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};  // THOROUGHLY Tested === Working
+
 // Our FIND All ADMINS Logic starts here
 exports.findAllAdmins = async (req, res) => {
     
@@ -727,54 +773,8 @@ exports.findAllAdmins = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-// Our FIND All USERS Logic starts here
-exports.findAllUsers = async (req, res) => { 
-
-    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
-    
-    try {
-        let query = {
-            'roles.role': ROLES.USERS,
-        };
-
-        if (status) {
-            query.status = status;
-        };
- 
-        // Query User Status and ROLES.role, & Pagination logic
-        const usersList = await User.find(query)
-                                .skip((page - 1) * limit)
-                                .limit(parseInt(limit));
-        console.log("USERS LIST: ", usersList);
-
-        const totalUsers = await User.countDocuments(query); // Total number of users with the given status
-        const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
-        const pagination = {
-            usersRecord: totalUsers,
-            page,
-            limit,
-            lastPage: totalPages,
-        };
-        console.log("PAGINATION: ", pagination, "\n\n");
-
-        const responseData = {
-            success: true,
-            data: {
-                usersList,
-                pagination
-            },
-            message: "Items retrieved successfully",
-        }
-        res.status(200).json(responseData);
-
-    } catch (error) {
-        console.error("Internal Server Error:", error);
-        return res.status(500).send(`Internal Server Error: ${error.message}`);
-    };
-};  // THOROUGHLY Tested === Working
-
 // Our FIND SINGLE USER by ID Logic starts here
-exports.findUserById = async (req, res) => {
+exports.findSingleUserById = async (req, res) => {
     
     try {
         const _id = req.params.id;
@@ -808,6 +808,7 @@ exports.findUserById = async (req, res) => {
 
 // Finding All isActivated Users
 exports.findAllActive = async (req, res) => {
+    
     //  res.setHeader('Content-Type', 'application/json');
     //  NOTE:  To filter a search results, specify a search condition using a "key-value" pair within curly braces, within the find method!
     //  For example, User.find({ username: 'john' }) would find all users with the username 'john'.     i.e  username = "john"
@@ -821,7 +822,7 @@ exports.findAllActive = async (req, res) => {
                 message: "RETRIEVE ALL USERS: Failed"
             };
             return res.status(404).json(responseData);
-        }
+        };
 
         const responseData = {
             success: true,
@@ -834,11 +835,11 @@ exports.findAllActive = async (req, res) => {
         // Catch error
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }
+    };
 };
 
 // Update User Information
-exports.updateUserById = async (req, res) => {
+exports.updateSingleUserById = async (req, res) => {
     try {
         // const _id = req.params.id;
         const { userName, email, phone, address, address2, city, state, country, zipCode, isVerified } = req.body;
