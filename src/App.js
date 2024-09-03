@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import ReactGA from 'react-ga';
 import { useRoutes } from "react-router-dom";
-// ...
 import { 
   Home,
   OurProgress, DonationPage,
@@ -33,55 +32,31 @@ ReactGA.initialize(TRACKING_ID);
 // or delay a certain action within the code.
 export default function App() {
 
+
     useEffect(() => {
         ReactGA.pageview(window.location.pathname + window.location.search);
         // let pageViews = 
         // console.log("TRACKING PAGE VIEWS: ", pageViews);
     }, []);
     
-    const element = useRoutes([       
-        { 
-            path: "/", element: <OurProgress /> 
-        },
-        { 
-            path: "/home", element: <Home /> 
-        },
-        { 
-            path: "/donations", element: <DonationPage /> 
-        },
-        { 
-            path: "/user/verify", element: <VerifySignUp /> 
-        },
-        // { 
-        //     path: "/user/verify/:token", element: <VerifySignUp /> 
-        // },
-        { 
-            path: "/user/signup", element: <SignUp /> 
-        },
-        { 
-            path: "/user/login", element: <SignIn /> 
-        },
-        { 
-            path: "/admin/dashboard", element: <AdminDashboard /> 
-        },
-        { 
-            path: "/admin/users/manage", element: <DashboardUsersPage />,
-        },
-        { 
-            path: "/admin/users/manage/:id", element: <DashboardUsersDetailsPage /> 
-        },
-        { 
-            path: "/admin/staffs/manage", element: <DashboardStaffsPage />,
-        },
-        { 
-            path: "/admin/staffs/manage/:id", element: <DashboardStaffsDetailsPage /> 
-        },
-        { 
-            path: "/admin/users/management", element: <AccountUsers /> 
-        },
-    ]);
-    
-    return element;
+
+    const routesConfig = [       
+        { path: "/", element: <OurProgress /> },
+        { path: "/home", element: <Home /> },
+        { path: "/donations", element: <DonationPage /> },
+        { path: "/user/verify", element: <VerifySignUp /> },
+        // { path: "/user/verify/:token", element: <VerifySignUp />, },
+        { path: "/user/signup", element: <SignUp />, },
+        { path: "/user/login", element: <SignIn />, },
+        { path: "/admin/dashboard", element: <AdminDashboard />, },
+        { path: "/admin/users/manage", element: <DashboardUsersPage />, },
+        { path: "/admin/users/manage/:id", element: <DashboardUsersDetailsPage />, },
+        { path: "/admin/staffs/manage", element: <DashboardStaffsPage />, },
+        { path: "/admin/staffs/manage/:id", element: <DashboardStaffsDetailsPage />, },
+        { path: "/admin/users/management", element: <AccountUsers />, },
+    ];
+    const routes = useRoutes(routesConfig);
+    return routes;
 };
 //   return (
 //     <Routes>

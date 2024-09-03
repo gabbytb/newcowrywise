@@ -763,7 +763,8 @@
   /*****  Error Message CSS  *****/
   .success, .error, 
   .signup_error, .signup_success,
-  .verify_error, .verify_success {
+  .verify_error, .verify_success,
+  .reverify_error, .reverify_success {
     @apply
       hidden      
     ;

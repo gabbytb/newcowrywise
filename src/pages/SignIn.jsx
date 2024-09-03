@@ -159,6 +159,9 @@ function SignIn() {
 
 
 
+    // ************************************** //
+    // *** USER PAYLOAD FOR RE-VALIDATION *** //
+    // ************************************** //
     const [existingUser, setExistingUser] = useState(null);
     console.log("EXISTING USER ACCOUNT: ", existingUser);
 
@@ -221,36 +224,36 @@ function SignIn() {
         await api.post(url, payload)
         .then((response) => {
             const { success, message, data } = response.data;
-            var errVerifyMsg = document.querySelector('#loginId .verify__error'); 
-            var successVerifyMsg = document.querySelector('#loginId .verify__success');
+            var errVerifyMsg = document.querySelector('#loginId .reverify_error'); 
+            var successVerifyMsg = document.querySelector('#loginId .reverify_success');
 
             if (!success && message === "No match found") {
                 // Perform These Actions
                 setFormSubmittedAccountVerification(success); 
                 setFormMessageAccountVerification(message);
                     
-                errVerifyMsg?.classList.remove('verify__error');
+                errVerifyMsg?.classList.remove('reverify_error');
                 errVerifyMsg?.classList.add('error-message-info');
 
                 setTimeout(() => {
                     errVerifyMsg?.classList.remove('error-message-info');
-                    errVerifyMsg?.classList.add('verify__error');
+                    errVerifyMsg?.classList.add('reverify_error');
                 }, 2800);
                 // Perform These Actions
             } else {
                 // Perform These Actions
-                setFormSubmittedAccountVerification(success); 
+                setFormSubmittedAccountVerification(success);
                 setExistingUser(data?.userId);
                 setAccessToken(data?.token);
                 setFormMessageAccountVerification(message);   
 
-                successVerifyMsg?.classList.remove('verify__success');
+                successVerifyMsg?.classList.remove('reverify_success');
                 successVerifyMsg?.classList.add('success-message-info');
 
                 setTimeout(() => {
                     successVerifyMsg?.classList.remove('success-message-info');
-                    successVerifyMsg?.classList.add('verify__success');
-                }, 20500);
+                    successVerifyMsg?.classList.add('reverify_success');
+                }, 2500);
                 // Perform These Actions
             };
         })
@@ -345,9 +348,10 @@ function SignIn() {
                     {/* Success Message */}
                 </form>
             </div>
+            {/* Login Form */}
 
             
-            {/* Verify Email Modal */}
+            {/* Re-verify Email Modal */}
             <div id="verifyId" className="hidden inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
                 <div className="grid place-content-center items-center h-full">
                     <div className="flex flex-col items-end gap-4">
@@ -397,7 +401,7 @@ function SignIn() {
 
 
                                 {/* VERIFICATION Success Message */}
-                                <div className="mt-6 mx-auto verify__success">
+                                <div className="mt-6 mx-auto reverify_success">
                                     {formMessageAccountVerification}
                                 </div>
                                 {/* VERIFICATION Success Message */}
@@ -408,7 +412,7 @@ function SignIn() {
                     </div>
                 </div>
             </div>
-            {/* Signup Modal */}
+            {/* Re-verify Email Modal */}
 
         </div>
     );
