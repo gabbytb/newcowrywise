@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const ROLES = require("../constants/constants");
 
 
-
 // // FOR CRYPTO: Replace with a secure, secret key.
 // const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here'; // 32 bytes for AES-256
 // const IV_LENGTH = 16; // AES block size in bytes
@@ -32,7 +31,6 @@ const ROLES = require("../constants/constants");
 // // FOR CRYPTO: Replace with a secure, secret key.
 
 
-
 // *****************************************************************
 // Middlewares
 // *****************************************************************
@@ -41,8 +39,9 @@ const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For 
 const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // For Sign Up
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
-// const mailSenderPostToken = require("../middlewares/MailSender");
-const mailSenderGetToken = require("../middlewares/MailSenderForToken");
+const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
+// const mailSenderForPostSignUp = require("../middlewares/MailSenderForPostSignUp");
+// const mailSenderForVerifiedAccount = require("../middlewares/MailSenderForVerifiedAccount");
 // *****************************************************************
 // *****************************************************************
 
@@ -51,10 +50,6 @@ const mailSenderGetToken = require("../middlewares/MailSenderForToken");
 
 
 
-
-
-
-     
 
 
 // Our CREATE ACCOUNT Logic starts here
@@ -217,8 +212,8 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        // await mailSenderPostToken(token, newUser);
-        await mailSenderGetToken(token, newUser);
+        // await mailSenderPostSignUp(token, newUser);
+        await mailSenderForGetSignUp(token, newUser);
 
         // let valueOfEncodedText = decrypt(newUser.expirationInMs);
         // console.log("Encrypted token lifespan: ", valueOfEncodedText);
@@ -291,7 +286,7 @@ exports.reValidateSignUp = async (req, res) => {
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
-        await mailSenderGetToken(token, existingUser);
+        await mailSenderForGetSignUp(token, existingUser);
 
 
         console.log("\n*********************************************************",
@@ -367,6 +362,8 @@ exports.verifySignUp = async (req, res) => {
         // Step 6: If user exists, find User by Email
         const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
     
+        
+
         const responseData = {
             success: true,
             data: updatedUser,

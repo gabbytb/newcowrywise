@@ -11,7 +11,7 @@ console.log("***********************************************",
 
 
 
-const MailSenderForToken = (token, user) => {
+const mailSenderForGetSignUp = (token, user) => {
 
         // ***************************************************************//
         // E-mail Service Config
@@ -73,4 +73,4 @@ const MailSenderForToken = (token, user) => {
 
 
 
-module.exports = MailSenderForToken;
+module.exports = mailSenderForGetSignUp;
