@@ -808,7 +808,7 @@ exports.findSingleUserById = async (req, res) => {
 
 // Finding All isActivated Users
 exports.findAllActive = async (req, res) => {
-    
+
     //  res.setHeader('Content-Type', 'application/json');
     //  NOTE:  To filter a search results, specify a search condition using a "key-value" pair within curly braces, within the find method!
     //  For example, User.find({ username: 'john' }) would find all users with the username 'john'.     i.e  username = "john"
@@ -987,39 +987,39 @@ exports.deleteAllUsers = (req, res) => {
 
 
 // var hasNext, 
-        //     hasPrev,
-        //     next, 
-        //     previous;
-        
-        
-        // if () {
-        //     hasNext = true
-        //     hasPrev = false
-        //     next = parseInt(page) + 1
-        //     previous = parseInt(page) - 1
-        // } else  if () {
-        //     hasNext = true
-        //     hasPrev = true
-        //     next = parseInt(page) + 1
-        //     previous = parseInt(page) - 1
-        // } else {
-        //     hasNext = false
-        //     hasPrev = true
-        //     next = null
-        //     previous = parseInt(page) - 1
-        // };
-        
+//     hasPrev,
+//     next, 
+//     previous;
 
-        // const pagination = {
-        //     currentPage: parseInt(page),
-        //     hasNext: hasNext,
-        //     next: next,
-        //     hasPrev: hasPrev,
-        //     previous: previous,
-        //     lastPage: totalPages,                       
-        //     numberPerPage: parseInt(limit),
-        // }
-        
+
+// if () {
+//     hasNext = true
+//     hasPrev = false
+//     next = parseInt(page) + 1
+//     previous = parseInt(page) - 1
+// } else  if () {
+//     hasNext = true
+//     hasPrev = true
+//     next = parseInt(page) + 1
+//     previous = parseInt(page) - 1
+// } else {
+//     hasNext = false
+//     hasPrev = true
+//     next = null
+//     previous = parseInt(page) - 1
+// };
+
+
+// const pagination = {
+//     currentPage: parseInt(page),
+//     hasNext: hasNext,
+//     next: next,
+//     hasPrev: hasPrev,
+//     previous: previous,
+//     lastPage: totalPages,                       
+//     numberPerPage: parseInt(limit),
+// }
+
 
 
 
