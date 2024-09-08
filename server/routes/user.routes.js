@@ -9,6 +9,20 @@ module.exports = app => {
         credentials: true,
     }
     const requireAUTHORIZATION = require("../middlewares/RequireAuthorization.js");
+   
+    // Middleware to check for valid token
+    const authenticateToken = (req, res, next) => {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1]; // Get token from Bearer header
+
+        if (token == null) return res.sendStatus(401); // No token provided
+
+        jwt.verify(token, SECRET_KEY, (err, user) => {
+            if (err) return res.sendStatus(403); // Token invalid
+            req.user = user; // Attach user to the request object
+            next(); // Continue to the next middleware or route
+        });
+    };
     const users = require("../controllers/user.controllers.js");   
 
     

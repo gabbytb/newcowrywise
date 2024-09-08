@@ -33,7 +33,7 @@ function SignIn() {
 
 
     // ******************************** //
-    // *** USER PAYLOAD FOR SIGN UP *** //
+    // *** USER PAYLOAD FOR SIGN IN *** //
     // ******************************** //
     const [user, setUser] = useState({ email: "", password: "", });
     // console.log("Login Attempt By: ", user.email);
@@ -172,15 +172,17 @@ function SignIn() {
     console.log("*** NEW ACCOUNT TOKEN ***\nToken: ", accessToken); 
 
     useEffect(() => {
-        if (accessToken !== null) {
-            async function saveTokenInStorage() {
+        async function saveTokenInStorage() {
+            if (accessToken !== null) {
                 const jsonObjData = {
                     token: accessToken,
                 };
-                return await localStorage.setItem("token", JSON.stringify(jsonObjData));
+                return await localStorage.setItem("tokEn", JSON.stringify(jsonObjData));
+            } else {
+                return await localStorage.clear();
             };
-            saveTokenInStorage();
         };
+        saveTokenInStorage();
     }, [accessToken]);
     // ************************************************** //
     // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
@@ -245,6 +247,8 @@ function SignIn() {
                 setFormSubmittedAccountVerification(success);
                 setExistingUser(data?.userId);
                 setAccessToken(data?.token);
+
+                localStorage.setItem("tokEn", JSON.stringify(data?.token));
                 setFormMessageAccountVerification(message);   
 
                 successVerifyMsg?.classList.remove('reverify_success');

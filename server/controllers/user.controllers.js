@@ -287,7 +287,18 @@ exports.reValidateSignUp = async (req, res) => {
         // E-mail Service Config
         // ***************************************************************//
         await mailSenderForGetSignUp(token, existingUser);
-
+        
+        const tokenDecoded = await verifyToken(token);
+        
+        // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
+        // NOTE:-
+        //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
+        //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
+        //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
+        // Format using: new Date(tokenDecoded.exp * 1000) 
+        // To Get Current Date Setting for Token Expiration Time to start counting from!
+        const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
+        existingUser.tokenExpires = tokenExpiryDate;
 
         console.log("\n*********************************************************",
                     "\n*****    NEW TOKEN GENERATED FOR EXISTING USER      *****",
@@ -319,14 +330,16 @@ exports.reValidateSignUp = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
-exports.verifySignUpWithGet = async (req, res) => {    
-
+exports.verifySignUpWithGet = async (req, res) => {        
+  
     try {
+        // parse token as ==> request parameters
+        const { token } = req.query;
 
-        const token = req.query.token;
-        const verifiedToken = await verifyToken(token);
-        
-        const _id = verifiedToken.id;
+        const decoded = await verifyToken(token);
+        // res.send(`Token is valid. User ID: ${decoded.id}`);
+
+        const _id = decoded.id;
         const userExists = await User.findById(_id);
 
         if (!(userExists)) {
@@ -361,8 +374,8 @@ exports.verifySignUpWithGet = async (req, res) => {
             "\n*********************************************************",
             "\nVerification Status: ", responseData,
             "\n*********************************************************\n\n");
-        res.status(200).json(responseData); // Send a success response
-    
+        res.status(200).json(responseData); // Send a success response       
+
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
             // console.error("Token has expired");
@@ -397,6 +410,82 @@ exports.verifySignUpWithGet = async (req, res) => {
             return res.status(500).json(responseData);
         };
     };
+    // try {
+
+    //     const token = req.query.token;
+    //     const verifiedToken = await verifyToken(token);
+        
+    //     const _id = verifiedToken.id;
+    //     const userExists = await User.findById(_id);
+
+    //     if (!(userExists)) {
+    //         const responseData = { 
+    //             success: false, 
+    //             message: "Invalid account",
+    //         };
+    //         console.log("VERIFIED USER: ", responseData);
+    //         return res.json(responseData);
+    //     };
+
+    //     // Step 6: If user exists, find User by Email 
+    //     // const email = userExists.email;   
+    //     // Change Existing User status to "approved".
+    //     // Assign the generated token to Existing User, as their accessToken..
+    //     // Set isVerified as True for Existing User
+    //     const dataToUpdate = {
+    //         status: "approved",
+    //         accessToken: token,
+    //         isVerified: true,
+    //     };
+    //     // Step 6: If user exists, find User by Email
+    //     const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
+    
+    //     const responseData = {
+    //         success: true,
+    //         data: updatedUser,
+    //         message: "Successful"
+    //     };
+    //     console.log("*********************************************************",
+    //         "\n*****           NEW ACCOUNT VERIFICATION             ****",
+    //         "\n*********************************************************",
+    //         "\nVerification Status: ", responseData,
+    //         "\n*********************************************************\n\n");
+    //     res.status(200).json(responseData); // Send a success response
+    
+    // } catch (error) {
+    //     if (error.name === 'TokenExpiredError') {
+    //         // console.error("Token has expired");
+    //         const responseData = { 
+    //             success: false, 
+    //             message: "Token has expired",
+    //         };
+    //         console.log("Token verification status: ", responseData);
+    //         return res.json(responseData);
+    //     } else if (error.name === 'JsonWebTokenError') {
+    //         // console.error("Token does not exist");
+    //         const responseData = { 
+    //             success: false, 
+    //             message: "Token does not exist",
+    //         };
+    //         console.log("Token verification status: ", responseData);
+    //         return res.json(responseData);
+    //     } else if (error.name === 'MongoServerError') {
+    //         // console.error("Mulitple user entry");
+    //         const responseData = { 
+    //             success: false, 
+    //             message: "Mulitple User entry",
+    //         };
+    //         console.log("Mulitple User entry: ", responseData);
+    //         return res.json(responseData);
+    //     } else {
+    //         const responseData = { 
+    //             success: false, 
+    //             message: "Internal Server Error",
+    //         };
+    //         console.error("Internal Server Error during account verification: ", error.message);
+    //         return res.status(500).json(responseData);
+    //     };
+    // };
 };  // THOROUGHLY Tested === Working
 
 // Our ACCOUNT VERIFICATION Logic USING POST request using starts here

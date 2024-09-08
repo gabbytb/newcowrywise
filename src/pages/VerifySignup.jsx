@@ -1,5 +1,5 @@
 import { useState, useEffect, } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import api from '../api';
 // import loginImg from '../assets/login.jpg'
 import { brandOfficialLogo, loginBg } from '../assets/images';
@@ -155,30 +155,33 @@ const VerifySignUp = () => {
 
     
 
-    
+
+
     const [registeredUser, setRegisteredUser] = useState(null);
     // console.log("Registered User: ", registeredUser);
-
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-    useEffect(() => {
-        const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
-        if (!(registeredUser?.email)) {
-            document.title = `${pageTitle} | ${siteTitle}`;  
-        } else {
-            document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
-        };
-    }, [registeredUser]);
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-    
     const [verificationSuccessful, setVerificationSuccessful] = useState(false);
     const [verificationMessage, setVerificationMessage] = useState("");
 
+    // Function to get a cookie by name
+    // function getCookie(name) {
+    //     const nameEQ = name + "=";
+    //     const ca = document.cookie.split(';');
+    //     for (let i = 0; i < ca.length; i++) {
+    //     let c = ca[i];
+    //     while (c.charAt(0) === ' ') c = c.substring(1);
+    //     if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    //     };
+    //     return null;
+    // };
+    // Usage example
+    // const token = JSON.parse(getCookie('cookieToken')); // Replace 'authToken' with the name of your cookie
+    // console.log('Token from cookie:', token);
+
+    const location = useLocation(); // Hook to get the current location object
     useEffect(() => {
-        async function verifyToken() {          
+        const queryParams = new URLSearchParams(location.search);
+        const token = queryParams.get('token'); // Assuming the token is passed as a query parameter
+        function verifyToken() {          
             // const payload = { 
             //     accessToken: token,
             // };    
@@ -188,13 +191,8 @@ const VerifySignUp = () => {
             //         Authorization: `Bearer ${token}`,
             //     },
             // })
-
-
-            const token = JSON.parse(localStorage.getItem("token"));
-            // console.log("Token Found in LocalStorage: ", token);
-
-            const uri = "/user/verify/";
-            await api.get(uri, { params: token })
+            const uri = "/user/verify";
+            api.get(uri, { params: { token } })
             .then((response) => {
                 const { success, message, data } = response.data;
                 let verifyErrMsg = document.querySelector('#verifySignUpForm .verify_error');
@@ -315,12 +313,10 @@ const VerifySignUp = () => {
                     
                     setTimeout(() => {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-                        if (token) {                         
-                            // Remove the item with the key 'token'
-                            localStorage.removeItem("token");
-                        };
-
-                        // Clear Token from Cache
+                        // Remove the item with the key: 'token' from Cache
+                        localStorage.removeItem("tokEn");
+                        
+                        // Clear Cache                                            
                         // localStorage.clear();
                     }, 5200);
                     // Perform These Actions
@@ -331,8 +327,22 @@ const VerifySignUp = () => {
             });
         };
         verifyToken();
-    }, []);
-
+    }, []); // Dependency array[location.search]: includes location.search to re-run effect if URL changes
+  
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
+        if (!(registeredUser?.email)) {
+            document.title = `${pageTitle} | ${siteTitle}`;  
+        } else {
+            document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
+        };
+    }, [registeredUser]);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
 
 
     

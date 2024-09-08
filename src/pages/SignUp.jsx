@@ -50,23 +50,6 @@ function SignUp() {
     const [accessToken, setAccessToken] = useState(null);
     console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken); 
 
-    useEffect(() => {
-        if (accessToken !== null) {
-            async function saveTokenInStorage() {
-                const jsonObjData = {
-                    token: accessToken,
-                };
-                return await localStorage.setItem("token", JSON.stringify(jsonObjData));
-            };
-            saveTokenInStorage();
-        };
-    }, [accessToken]);
-    // ************************************************** //
-    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
-    // ************************************************** //
-
-
-
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
     
@@ -189,6 +172,37 @@ function SignUp() {
             console.log("Error encountered: ", error);
         });
     };   
+
+    // useEffect(() => {
+    //     // function setTokenInStorage() {
+    //         // if (accessToken !== null) {
+    //         //     const jsonObjData = {
+    //         //         token: accessToken,
+    //         //     };
+    //         //     localStorage.setItem("tokEn", JSON.stringify(jsonObjData));
+    //         // };
+    //     // };
+    //     // setTokenInStorage();
+
+    //     // Function to set a cookie
+        
+    //     function setCookie(name, value, days) {
+    //         let expires = "";
+    //         if (days) {
+    //             const date = new Date();
+    //             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    //             expires = "; expires=" + date.toUTCString();
+    //         };
+    //         const objToken = {
+    //             token: value,
+    //         };
+    //         document.cookie = name + "=" + (JSON.stringify(objToken) || "") + expires + "; path=/";
+    //     };
+    //     setCookie("cookieToken", accessToken, 2);
+    // }, [accessToken]);
+    // ************************************************** //
+    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
+    // ************************************************** //
 
 
 
