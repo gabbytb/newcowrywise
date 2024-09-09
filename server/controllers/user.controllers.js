@@ -929,9 +929,10 @@ exports.findAllActive = async (req, res) => {
 
 // Update User Information
 exports.updateSingleUserById = async (req, res) => {
+    
     try {
         // const _id = req.params.id;
-        const { userName, email, phone, address, address2, city, state, country, zipCode, isVerified } = req.body;
+        const { username, email, phone, address, address2, city, state, country, zipCode, status, isVerified, } = req.body;
 
         // To Add New Roles to Existing User's Account
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
@@ -940,7 +941,7 @@ exports.updateSingleUserById = async (req, res) => {
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         
         const dataToUpdate = {
-            userName: userName.toLowerCase(),
+            userName: username.toLowerCase(),
             phone,
             address,
             address2,
@@ -948,33 +949,14 @@ exports.updateSingleUserById = async (req, res) => {
             state,
             country,
             zipCode,
+            status,
             isVerified,
-            //    roles: [
-            //         { 
-            //             _id: roleAdmin._id, 
-            //             role: roleAdmin.role, 
-            //             createdAt: roleAdmin.createdAt, 
-            //             updatedAt: roleAdmin.updatedAt 
-            //         },
-            //         { 
-            //             _id: roleEditor._id, 
-            //             role: roleEditor.role, 
-            //             createdAt: roleEditor.createdAt, 
-            //             updatedAt: roleEditor.updatedAt 
-            //         },
-            //         { 
-            //             _id: roleStaff._id, 
-            //             role: roleStaff.role, 
-            //             createdAt: roleStaff.createdAt, 
-            //             updatedAt: roleStaff.updatedAt 
-            //         },
-            //         { 
-            //             _id: roleUsers._id, 
-            //             role: roleUsers.role, 
-            //             createdAt: roleUsers.createdAt, 
-            //             updatedAt: roleUsers.updatedAt 
-            //         },
-            //     ]
+            // roles: [ {...roleAdmin} ],
+            // roles: [ {...roleEditor} ],
+            // roles: [ {...roleStaff} ],
+            // roles: [ {...roleUsers} ],
+            // Optional
+            // roles: [ {...roleAdmin}, {...roleEditor}, {...roleStaff} ],
         };
 
         // Use $or to find the user by username or email and update it
@@ -984,10 +966,10 @@ exports.updateSingleUserById = async (req, res) => {
                 success: false,
                 message: "No match found"
             };
-            return res.status(404).json(responseData);
-        }
+            return res.json(responseData);
+        };
 
-        const token = createJWT(updatedUser._id);
+        const token = assignTwoDaysToken(updatedUser._id);
         updatedUser.accessToken = token;
 
         // User updated successfully
@@ -996,14 +978,15 @@ exports.updateSingleUserById = async (req, res) => {
             data: updatedUser,
             message: 'User updated successfully',
         };
-        console.log("EXISTING USER DATA: ", updatedUser.email + " was updated!", "\nUPDATED USER DATA: ", responseData.data);
+        console.log("EXISTING User Account with E-mail: ", updatedUser.email + " was updated!", 
+                    "\nUPDATED USER DATA: ", responseData.data);
         return res.status(200).json(responseData);
 
     } catch (error) {
         // Catch error
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }
+    };
 };
 
 // Deleta a User with the Specified id in the request

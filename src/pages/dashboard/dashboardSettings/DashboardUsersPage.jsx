@@ -218,7 +218,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                         <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
                                             <UsersIcon /> <span>users</span>
                                         </button>
-                                        <div className="flex flex-col gap-4 px-15.9 usersDropdown">
+                                        <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
                                             <Link to="/admin/users/manage">user management</Link>
                                         </div>
                                     </div>
@@ -227,7 +227,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                         <button className="dropdown-toggle" type="button" onClick={toggleStaffsMenu}>
                                             <StaffsIcon /> <span>staffs</span>
                                         </button>
-                                        <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
+                                        <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
                                             <Link to="/admin/staffs/manage">staff management</Link>
                                         </div>
                                     </div>
@@ -239,7 +239,6 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                     {/*******************************************************************/
                     /************************  DASHBOARD: Menu  ************************/
                     /*******************************************************************/}
-
 
 
 

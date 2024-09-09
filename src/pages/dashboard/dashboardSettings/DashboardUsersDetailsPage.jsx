@@ -15,6 +15,17 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
     
     
+    // ***********************************************
+    // SET PAGE TITLE:-
+    // ***********************************************
+    useEffect(() => {
+        const pageTitle = "Reaching out to great minds", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *********************************************
+    // *********************************************
+
+
     // *******************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // *******************************************************************
@@ -43,19 +54,6 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
     // *********************************************
     // *********************************************
     
-
-    // ***********************************************
-    // SET PAGE TITLE IF USER IS LOGGED-IN:-
-    // ***********************************************
-    useEffect(() => {
-        if (isLoggedIn) {
-            const pageTitle = "Reaching out to great minds", 
-                siteTitle = "Samuel Akinola Foundation";
-            document.title = `${pageTitle} | ${siteTitle}`;
-        };
-    }, [isLoggedIn]);
-    // *********************************************
-    // *********************************************
 
 
     // *********************************************
@@ -92,14 +90,14 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
             toggleUserMenu?.classList.add('hidden');
         };
     };
-    function toggleStaffsView() {
+    function toggleStaffsMenu() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
-        if (toggleStaffMenu?.classList.contains("hidden")) {
-            toggleStaffMenu?.classList.remove('hidden');
-            toggleStaffMenu?.classList.add('flex');
-        } else {
+        if (toggleStaffMenu?.classList.contains("flex")) {
             toggleStaffMenu?.classList.remove('flex');
             toggleStaffMenu?.classList.add('hidden');
+        } else {
+            toggleStaffMenu?.classList.remove('hidden');
+            toggleStaffMenu?.classList.add('flex');
         };
     };
     // *******************************************************************************************//
@@ -157,7 +155,6 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                 <main id="dashboardUsersDetailsID" className="admin-dashboard">
                     <div className="container flex admin-container">
                         <div className="h-screen w-full grid xs:grid-cols-26">
-
                             {/*******************************************************************/
                             /************************  DASHBOARD: Menu  ************************/
                             /*******************************************************************/}
@@ -180,7 +177,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
 
 
 
-                                    {/* USERS MENU */}
+                                    {/* SETTINGS MENU: USERS & ADMINS */}
                                     <div id="userMenuId">
                                         <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
                                         <div className="flex flex-col gap-8">
@@ -189,21 +186,21 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                                                     <UsersIcon /> <span>users</span>
                                                 </button>
                                                 <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                    <Link to="/admin/users">user management</Link>
+                                                    <Link to="/admin/users/manage">user management</Link>
                                                 </div>
                                             </div>
                                             {/* flex flex-col gap-4  */}
                                             <div className="dropdown">
-                                                <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                                <button className="dropdown-toggle" type="button" onClick={toggleStaffsMenu}>
                                                     <StaffsIcon /> <span>staffs</span>
                                                 </button>
-                                                <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                    <Link to="/admin/staffs" >staff management</Link>
+                                                <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
+                                                    <Link to="/admin/staffs/manage">staff management</Link>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {/* USERS MENU */}
+                                    {/* SETTINGS MENU */}
                                 </ul>
                             </section>
                             {/*******************************************************************/
@@ -270,7 +267,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                                 {/*********************   SECTION BODY STARTS HERE   *******************/}
 
                                 <div className="right-bottom-pane relative h-full flex flex-col">
-                                    {user?._id}
+                                    
                                 </div>
                             </aside>
                             {/******************************************************************************************/}
@@ -310,7 +307,7 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
 
 
 
-                                {/* USERS MENU */}
+                                {/* SETTINGS MENU: USERS & ADMINS */}
                                 <div id="userMenuId">
                                     <small className="text-slate-300 text-xl tracking-moretight font-bold mb-6 uppercase flex w-full">Settings</small>
                                     <div className="flex flex-col gap-8">
@@ -319,21 +316,21 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
                                                 <UsersIcon /> <span>users</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                <Link to="/admin/users">user management</Link>
+                                                <Link to="/admin/users/manage">user management</Link>
                                             </div>
                                         </div>
                                         {/* flex flex-col gap-4  */}
                                         <div className="dropdown">
-                                            <button className="dropdown-toggle" type="button" onClick={toggleStaffsView}>
+                                            <button className="dropdown-toggle" type="button" onClick={toggleStaffsMenu}>
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
-                                            <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                <Link to="/admin/staffs" >staff management</Link>
+                                            <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
+                                                <Link to="/admin/staffs/manage">staff management</Link>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {/* USERS MENU */}
+                                {/* SETTINGS MENU */}
                             </ul>
                         </section>
                         {/*******************************************************************/

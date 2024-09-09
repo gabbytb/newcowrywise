@@ -1,23 +1,9 @@
-// const jwt = require("jsonwebtoken");
-// const { secretKey } = process.env;
-
-
-// const verifyToken = (token) => {
-//     return jwt.verify(token, secretKey);
-// }
-
-// module.exports = verifyToken;
-
-
-
-
-
 const jwt = require("jsonwebtoken");
 const { secretKey } = process.env;
 
 
-
 const verifyToken = (token) => {
+    
     // return jwt.verify(token, secretKey);
 
     // const authHeader = req.headers['authorization'];
@@ -33,6 +19,7 @@ const verifyToken = (token) => {
     };
 
     return jwt.verify(token, secretKey);
+
 };
 
 module.exports = verifyToken;

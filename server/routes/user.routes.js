@@ -11,18 +11,18 @@ module.exports = app => {
     const requireAUTHORIZATION = require("../middlewares/RequireAuthorization.js");
    
     // Middleware to check for valid token
-    const authenticateToken = (req, res, next) => {
-        const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1]; // Get token from Bearer header
+    // const authenticateToken = (req, res, next) => {
+    //     const authHeader = req.headers['authorization'];
+    //     const token = authHeader && authHeader.split(' ')[1]; // Get token from Bearer header
 
-        if (token == null) return res.sendStatus(401); // No token provided
+    //     if (token == null) return res.sendStatus(401); // No token provided
 
-        jwt.verify(token, SECRET_KEY, (err, user) => {
-            if (err) return res.sendStatus(403); // Token invalid
-            req.user = user; // Attach user to the request object
-            next(); // Continue to the next middleware or route
-        });
-    };
+    //     jwt.verify(token, SECRET_KEY, (err, user) => {
+    //         if (err) return res.sendStatus(403); // Token invalid
+    //         req.user = user; // Attach user to the request object
+    //         next(); // Continue to the next middleware or route
+    //     });
+    // };
     const users = require("../controllers/user.controllers.js");   
 
     
@@ -77,7 +77,7 @@ module.exports = app => {
 
 
     // Update a "Single User" DATA by it's ID, using this API
-    router.put("/api/v1/admin/users/manage/update/:id", users.updateSingleUserById);
+    router.put("/api/v1/admin/users/manage/update", users.updateSingleUserById);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/update/:id") for the frontend to access.
 
 

@@ -159,13 +159,17 @@ const VerifySignUp = () => {
 
     const [registeredUser, setRegisteredUser] = useState(null);
     // console.log("Registered User: ", registeredUser);
+    
     const [verificationSuccessful, setVerificationSuccessful] = useState(false);
     const [verificationMessage, setVerificationMessage] = useState("");
 
     const location = useLocation(); // Hook to get the current location object
+
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const token = queryParams.get('token'); // Assuming the token is passed as a query parameter
+        console.log("Token: ", token);
+
         function verifyToken() {          
             // const payload = { 
             //     accessToken: token,

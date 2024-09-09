@@ -47,8 +47,8 @@ function SignUp() {
     // ************************************************** //
     // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
     // ************************************************** //
-    const [accessToken, setAccessToken] = useState(null);
-    console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken); 
+    // const [accessToken, setAccessToken] = useState(null);
+    // console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken); 
 
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Login Attempt: ", formMessage);
@@ -142,10 +142,15 @@ function SignUp() {
                                 
             } else {             
                 // Perform These Actions
-                setFormSubmitted(success);               
-                setAccessToken(data?.token);
-                // console.log("Registered User ID: ", data.userId); 
-                setFormMessage(message);              
+                setFormSubmitted(success);     
+                setFormMessage(message);        
+                console.log("Data: ", data);
+
+                // Retrieve Registered User ID
+                // console.log("Registered User ID: ", data?.userId); 
+                
+                // Retrieve token to store in LocalStorage
+                // setAccessToken(data?.token);         
                                 
                 // Scroll to Bottom
                 window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
