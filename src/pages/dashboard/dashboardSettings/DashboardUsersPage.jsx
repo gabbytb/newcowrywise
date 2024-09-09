@@ -89,22 +89,22 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     function toggleUsersMenu() {
         let toggleUserMenu = document.querySelector('.usersDropdown');
-        if (toggleUserMenu?.classList.contains("hidden") ) {
-            toggleUserMenu?.classList.remove('hidden');
-            toggleUserMenu?.classList.add('flex');
-        } else {
+        if (toggleUserMenu?.classList.contains("flex") ) {
             toggleUserMenu?.classList.remove('flex');
             toggleUserMenu?.classList.add('hidden');
+        } else {
+            toggleUserMenu?.classList.remove('hidden');
+            toggleUserMenu?.classList.add('flex');
         };
     };
     function toggleStaffsMenu() {
         let toggleStaffMenu = document.querySelector('.staffsDropdown');
-        if (toggleStaffMenu?.classList.contains("flex")) {
-            toggleStaffMenu?.classList.remove('flex');
-            toggleStaffMenu?.classList.add('hidden');
-        } else {
+        if (toggleStaffMenu?.classList.contains("hidden")) {
             toggleStaffMenu?.classList.remove('hidden');
             toggleStaffMenu?.classList.add('flex');
+        } else {
+            toggleStaffMenu?.classList.remove('flex');
+            toggleStaffMenu?.classList.add('hidden');
         };
     };
     // ****************************************************************************
@@ -218,7 +218,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                         <button className="dropdown-toggle" type="button" onClick={toggleUsersMenu}>
                                             <UsersIcon /> <span>users</span>
                                         </button>
-                                        <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
+                                        <div className="flex flex-col gap-4 px-15.9 usersDropdown">
                                             <Link to="/admin/users/manage">user management</Link>
                                         </div>
                                     </div>
@@ -227,7 +227,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                         <button className="dropdown-toggle" type="button" onClick={toggleStaffsMenu}>
                                             <StaffsIcon /> <span>staffs</span>
                                         </button>
-                                        <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
+                                        <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
                                             <Link to="/admin/staffs/manage">staff management</Link>
                                         </div>
                                     </div>
