@@ -155,9 +155,10 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     // *******************************************************************************************//
     // *******************************************************************************************//
 
-    function goBack() {
-        window.history.back();
-    };
+    // function goBack() {
+    //     window.history.back();
+    // };
+    // onClick={goBack}
 
 
 
@@ -415,7 +416,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
 
                                     {/* GO BACK ONE STEP */}
                                    <button> 
-                                        <Link onClick={goBack}>Back</Link>
+                                        <Link to={"/admin/staffs/manage"}>Back</Link>
                                     </button> 
                                     {/* GO BACK ONE STEP */}
 
@@ -425,28 +426,28 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                         <ul className="flex flex-row justify-around bg-white w-full h-28">
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/manage/${id}/#personal`} 
+                                                to={`/admin/staffs/manage/${id}#personal`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     Personal Info
                                                 </Link>
                                             </li>
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}/#services`} 
+                                                to={`/admin/staffs/manage/${id}#services`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     User's Services
                                                 </Link>
                                             </li>
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}/#contacts`} 
+                                                to={`/admin/staffs/manage/${id}#contacts`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     User's Contacts
                                                 </Link>
                                             </li>
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}/#reviews`} 
+                                                to={`/admin/staffs/manage/${id}#reviews`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     Reviews
                                                 </Link>
