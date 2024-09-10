@@ -331,7 +331,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                                 <UsersIcon /> <span>users</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                <Link to="/admin/users/manage">user management</Link>
+                                                <Link to="/admin/users">user management</Link>
                                             </div>
                                         </div>
                                         {/* flex flex-col gap-4  */}
@@ -340,7 +340,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                <Link to="/admin/staffs/manage" >staff management</Link>
+                                                <Link to="/admin/staffs" >staff management</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -416,7 +416,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
 
                                     {/* GO BACK ONE STEP */}
                                    <button> 
-                                        <Link to={"/admin/staffs/manage"}>Back</Link>
+                                        <Link to={"/admin/staffs"}>Back</Link>
                                     </button> 
                                     {/* GO BACK ONE STEP */}
 
@@ -426,28 +426,28 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                         <ul className="flex flex-row justify-around bg-white w-full h-28">
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/manage/${id}#personal`} 
+                                                to={`/admin/staffs/${id}#personal`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     Personal Info
                                                 </Link>
                                             </li>
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/manage/${id}#services`} 
+                                                to={`/admin/staffs/${id}#services`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     User's Services
                                                 </Link>
                                             </li>
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/manage/${id}#contacts`} 
+                                                to={`/admin/staffs/${id}#contacts`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     User's Contacts
                                                 </Link>
                                             </li>
                                             <li className="w-1/4 text-2xl font-medium cursor-pointer">
                                                 <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/manage/${id}#reviews`} 
+                                                to={`/admin/staffs/${id}#reviews`} 
                                                 onClick={() => setActiveDisplay("staffsDetails")}>
                                                     Reviews
                                                 </Link>

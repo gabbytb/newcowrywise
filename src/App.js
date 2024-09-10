@@ -49,10 +49,10 @@ export default function App() {
         { path: "/user/signup", element: <SignUp />, },
         { path: "/user/login", element: <SignIn />, },
         { path: "/admin/dashboard", element: <AdminDashboard />, },
-        { path: "/admin/users/manage", element: <DashboardUsersPage />, },
-        { path: "/admin/users/manage/:id", element: <DashboardUsersDetailsPage />, },
-        { path: "/admin/staffs/manage", element: <DashboardStaffsPage />, },
-        { path: "/admin/staffs/manage/:id", element: <DashboardStaffsDetailsPage />, },
+        { path: "/admin/users/", element: <DashboardUsersPage />, },
+        { path: "/admin/users/:id", element: <DashboardUsersDetailsPage />, },
+        { path: "/admin/staffs", element: <DashboardStaffsPage />, },
+        { path: "/admin/staffs/:id", element: <DashboardStaffsDetailsPage />, },
         { path: "/admin/users/management", element: <AccountUsers />, },
     ];
     const routes = useRoutes(routesConfig);

@@ -116,7 +116,7 @@ module.exports = {
           'simple-purple': 'var(--admin-total-revenue-card-3)',
           'signup-box-bg': 'var(--signup-box-bg-color)',
           'signup-signin-bg': 'var(--login-bg-black-color)',
-          'mild-gray': 'var(--dim-gray)',
+          'admin-thead-bg': 'var(--admin-thead-bg-color)',
         },
       },
       backgroundImage: {

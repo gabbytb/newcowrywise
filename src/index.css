@@ -80,7 +80,8 @@
     --color-light-blue: rgb(0, 102, 245);
     --color-lighter-gray: rgb(108, 130, 163);  
     --color-lightest-gray: rgb(174, 185, 204);
-    
+    --admin-thead-bg-color: rgba(249, 250, 251, 1);
+
     --sw-gray: hsla(0, 0%, 100%, 0.3);
     --sw-dark-blue: rgba(24, 26, 27, 0.3);
 
@@ -170,11 +171,13 @@
 
   thead {
     @apply
-      bg-blue-900
-      text-white
+      /* bg-blue-900 */
+      bg-skin-admin-thead-bg
+      text-black
+      text-10xl
+      font-black
       table-header-group
-      text-41xl
-      tracking-tightener
+      tracking-extratight
       h-16
     ;
   }
@@ -182,6 +185,7 @@
   tbody tr {
     @apply
       h-16
+      border-b
     ;
   }
 }

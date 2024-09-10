@@ -121,10 +121,12 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // eslint-disable-next-line
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
     // console.log("TOTAL ADMIN USERS: ", totalAdminUsers);
+    const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    
-    const [currentPage, setCurrentPage] = useState(1);  
     const limit = 10; // Number of items per page
+
+    let leftArrow = "<", rightArrow = ">";
+
 
 
     useEffect(() => {
@@ -218,7 +220,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 <UsersIcon /> <span>users</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                <Link to="/admin/users/manage">user management</Link>
+                                                <Link to="/admin/users">user management</Link>
                                             </div>
                                         </div>
                                         {/* flex flex-col gap-4  */}
@@ -227,7 +229,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
                                             <div className="flex flex-col gap-4 px-15.9 staffsDropdown">
-                                                <Link to="/admin/staffs/manage">staff management</Link>
+                                                <Link to="/admin/staffs">staff management</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -327,6 +329,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                 {/* Users Navigation */}
 
 
+
                                 {/* Page Title Wrapper */}
                                 <div className="mt-10 mb-8 font-black text-3xl tracking-supertight">
                                     <h2 className="capitalize">all staffs</h2>
@@ -335,17 +338,16 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
 
 
-
                                 {/***********  Views  ***********/}
                                 <div className={`capitalize border ${activeDisplay === "allStaffs" ? "grid" : "hidden"}`}>
                                     <table className="table-fixed capitalize w-full border staff__table">
                                         <thead>
-                                            <tr className="">
-                                                <th className="w-8 h-16 text-center">S/N</th>
-                                                <th className="w-40 text-center">NAME</th>
-                                                <th className="w-60 text-center">E-MAIL ADDRESS</th>
-                                                <th className="w-40 text-center">STATUS</th>
-                                                <th className="w-40 text-center">ACTION</th>
+                                            <tr className="text-left">
+                                                <th className="w-12 h-16 px-3 py-3">ID</th>
+                                                <th className="w-60 px-3 py-3">NAME</th>
+                                                <th className="w-60 px-3 py-3">E-MAIL ADDRESS</th>
+                                                <th className="w-40 px-3 py-3">STATUS</th>
+                                                <th className="w-40 px-3 py-3">ACTION</th>
                                             </tr>
                                         </thead>
                                         {
@@ -355,37 +357,37 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                         allStaffs?.map((user, userIndex) => {
                                                             if (user?.status === "pending") {
                                                                 return (
-                                                                    <tr key={userIndex} className="">
-                                                                        <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                        <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                    <tr key={userIndex} className="text-left">
+                                                                        <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
+                                                                        <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="w-60 px-3 py-4 lowercase">{user?.email}</td>
                                                                         <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                        <td className="w-4/5 flex justify-center mx-auto">
-                                                                            <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/manage/${user?._id}`} alt="view staff details">view details</Link>
+                                                                        <td className="w-4/5 text-center flex justify-center mx-auto">
+                                                                            <Link className="w-full bg-skin-darkblue text-white py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
                                                             } else if (user?.status === "rejected") {
                                                                 return (
-                                                                    <tr key={userIndex} className="">
-                                                                        <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                        <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                    <tr key={userIndex} className="text-left">
+                                                                        <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
+                                                                        <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="w-60 px-3 py-4 lowercase">{user?.email}</td>
                                                                         <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                        <td className="w-4/5 flex justify-center mx-auto">
-                                                                            <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/manage/${user?._id}`} alt="view staff details">view details</Link>
+                                                                        <td className="w-4/5 text-center flex justify-center mx-auto">
+                                                                            <Link className="w-full bg-skin-darkblue text-white py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
                                                             } else {
                                                                 return (
-                                                                    <tr key={userIndex} className="">
-                                                                        <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
-                                                                        <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                        <td className="w-60 text-center lowercase">{user?.email}</td>
+                                                                    <tr key={userIndex} className="text-left">
+                                                                        <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
+                                                                        <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="w-60 px-3 py-4 lowercase">{user?.email}</td>
                                                                         <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                        <td className="w-4/5 flex justify-center mx-auto">
-                                                                            <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/staffs/manage/${user?._id}`} alt="view staff details">view details</Link>
+                                                                        <td className="w-4/5 text-center flex justify-center mx-auto">
+                                                                            <Link className="w-full bg-skin-darkblue text-white py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -411,8 +413,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
 
                                     {/* Pagination controls */}
                                     <div className="flex justify-between">
-                                        <div className="border-e-2 border-gray-200/50 p-4 font-black text-42xl font-firma tracking-supertight">
-                                            {limit}
+                                        <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                                            {limit} 
+                                            <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                                         </div>
                                         <nav className="relative z-0 inline-flex shadow-sm">
                                             {/* Previous page button */}
@@ -420,8 +423,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 onClick={() => handlePageChange(currentPage - 1)}
                                                 className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
                                                 disabled={currentPage === 1}
-                                            >
-                                                Prev
+                                            >{leftArrow}
                                             </button>
 
 
@@ -441,8 +443,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                 onClick={() => handlePageChange(currentPage + 1)}
                                                 className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
                                                 disabled={currentPage === totalPages}
-                                            >
-                                                Next
+                                            >{rightArrow}
                                             </button>
                                         </nav>
                                     </div>

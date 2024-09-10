@@ -556,6 +556,7 @@ video {
   --color-light-blue: rgb(0, 102, 245);
   --color-lighter-gray: rgb(108, 130, 163);
   --color-lightest-gray: rgb(174, 185, 204);
+  --admin-thead-bg-color: rgba(249, 250, 251, 1);
   --sw-gray: hsla(0, 0%, 100%, 0.3);
   --sw-dark-blue: rgba(24, 26, 27, 0.3);
   --color-opacity: hsla(0,0%,100%,.7);
@@ -640,16 +641,17 @@ tr {
 thead{
   display: table-header-group;
   height: 4rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
-  font-size: 1.54rem;
-  letter-spacing: 0.045em;
+  background-color: var(--admin-thead-bg-color);
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 tbody tr{
   height: 4rem;
+  border-bottom-width: 1px;
 }
 
 *, ::before, ::after{
@@ -4253,6 +4255,10 @@ progress#file {
   width: 30rem;
 }
 
+.w-12{
+  width: 3rem;
+}
+
 .w-121{
   width: 45rem;
 }
@@ -4641,10 +4647,6 @@ progress#file {
   background-color: var(--bg-dark-blue);
 }
 
-.bg-skin-mild-gray{
-  background-color: var(--dim-gray);
-}
-
 .bg-skin-signup-box-bg{
   background-color: var(--signup-box-bg-color);
 }
@@ -4926,6 +4928,10 @@ progress#file {
   padding-top: 2.25rem;
 }
 
+.text-left{
+  text-align: left;
+}
+
 .text-center{
   text-align: center;
 }
@@ -5052,6 +5058,10 @@ progress#file {
 
 .capitalize{
   text-transform: capitalize;
+}
+
+.normal-case{
+  text-transform: none;
 }
 
 .italic{

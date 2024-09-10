@@ -26,7 +26,7 @@ const RejectedUsersPage = ({ activeDisplay }) => {
 
     useEffect(() => {
         var allRejectedUsersLink = document.querySelector("#usersLinkID .allRejectedUsers");
-        console.log("All Rejected Users Link: ", allRejectedUsersLink);
+        // console.log("All Rejected Users Link: ", allRejectedUsersLink);
 
         if (activeDisplay === "allRejectedUsers") {
             allRejectedUsersLink?.classList.add("activeUserView");

@@ -25,7 +25,7 @@ const PendingUsersPage = ({ activeDisplay }) => {
     
     useEffect(() => {
         var allPendingUsersLink = document.querySelector("#usersLinkID .allPendingUsers");
-        console.log("All Pending Users Link: ", allPendingUsersLink);
+        // console.log("All Pending Users Link: ", allPendingUsersLink);
 
         if (activeDisplay === "allPendingUsers") {
             allPendingUsersLink?.classList.add("activeUserView");

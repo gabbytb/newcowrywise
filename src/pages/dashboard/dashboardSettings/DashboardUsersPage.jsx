@@ -125,13 +125,16 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
 
+    let leftArrow = "<", rightArrow = ">";
+
 
     useEffect(() => {
-        var allStaffsLink = document.querySelector("#usersLinkID .allUsers");
+        var allUsersLink = document.querySelector("#usersLinkID .allUsers");
+        // console.log("ALL USERS LINK", allUsersLink);
         if (activeDisplay === "allUsers") {
-            allStaffsLink?.classList.add("activeUserView");
+            allUsersLink?.classList.add("activeUserView");
         } else {
-            allStaffsLink?.classList.remove("activeUserView");
+            allUsersLink?.classList.remove("activeUserView");
         };
     }, [activeDisplay]);
 
@@ -219,7 +222,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             <UsersIcon /> <span>users</span>
                                         </button>
                                         <div className="flex flex-col gap-4 px-15.9 usersDropdown">
-                                            <Link to="/admin/users/manage">user management</Link>
+                                            <Link to={"/admin/users"}>user management</Link>
                                         </div>
                                     </div>
                                     {/* flex flex-col gap-4  */}
@@ -228,7 +231,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             <StaffsIcon /> <span>staffs</span>
                                         </button>
                                         <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                            <Link to="/admin/staffs/manage">staff management</Link>
+                                            <Link to={"/admin/staffs"}>staff management</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -335,7 +338,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                 <table className="table-fixed capitalize w-full border users__table">
                                     <thead>
                                         <tr className="">
-                                            <th className="w-8 h-16 text-center">S/N</th>
+                                            <th className="w-8 h-16 text-center">ID</th>
                                             <th className="w-40 text-center">NAME</th>
                                             <th className="w-60 text-center">E-MAIL ADDRESS</th>
                                             <th className="w-40 text-center">STATUS</th>
@@ -350,7 +353,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                         if (user?.status === "pending") {
                                                             return (
                                                                 <tr key={userIndex} className="">
-                                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                    <td className="w-10 text-center font-firma tracking-supertight">#{userIndex+1}</td>
                                                                     <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
                                                                     <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                     <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
@@ -362,7 +365,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                         } else if (user?.status === "rejected") {
                                                             return (
                                                                 <tr key={userIndex} className="">
-                                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                    <td className="w-10 text-center font-firma tracking-supertight">#{userIndex+1}</td>
                                                                     <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
                                                                     <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                     <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
@@ -374,7 +377,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                                         } else {
                                                             return (
                                                                 <tr key={userIndex} className="">
-                                                                    <td className="w-8 text-center font-black text-42xl font-firma tracking-supertight">{userIndex+1}</td>
+                                                                    <td className="w-10 text-center font-firma tracking-supertight">#{userIndex+1}</td>
                                                                     <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
                                                                     <td className="w-60 text-center lowercase">{user?.email}</td>
                                                                     <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
@@ -405,8 +408,9 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
                                 {/* Pagination controls */}
                                 <div className="flex justify-between">
-                                    <div className="border-e-2 border-gray-200/50 p-4 font-black text-42xl font-firma tracking-supertight">
-                                        {limit}
+                                    <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                                        {limit} 
+                                        <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                                     </div>
                                     <nav className="relative z-0 inline-flex shadow-sm">
                                         {/* Previous page button */}
@@ -414,8 +418,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             onClick={() => handlePageChange(currentPage - 1)}
                                             className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
                                             disabled={currentPage === 1}
-                                        >
-                                            Prev
+                                        >{leftArrow}
                                         </button>
 
 
@@ -435,8 +438,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             onClick={() => handlePageChange(currentPage + 1)}
                                             className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
                                             disabled={currentPage === totalPages}
-                                        >
-                                            Next
+                                        >{rightArrow}
                                         </button>
                                     </nav>
                                 </div>
@@ -451,7 +453,6 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                             {/***********  Views  ***********/}
                             
                         </div>
-
                     </aside>
                     {/******************************************************************************************/}
                     {/******************************************************************************************/}
