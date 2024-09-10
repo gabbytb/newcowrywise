@@ -156,14 +156,14 @@ const VerifySignUp = () => {
     
 
 
-
+    const location = useLocation(); // Hook to get the current location object'
+    console.log("CURRENT URL: ", location);
+    
     const [registeredUser, setRegisteredUser] = useState(null);
     // console.log("Registered User: ", registeredUser);
     
     const [verificationSuccessful, setVerificationSuccessful] = useState(false);
     const [verificationMessage, setVerificationMessage] = useState("");
-
-    const location = useLocation(); // Hook to get the current location object
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);

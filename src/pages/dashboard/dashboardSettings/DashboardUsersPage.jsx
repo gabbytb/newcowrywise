@@ -1,15 +1,17 @@
-import { useEffect, useState, } from "react";
+import { lazy, Suspense, useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 
-import ApprovedUsersPage from "./users/ApprovedUsersPage";
-import PendingUsersPage from "./users/PendingUsersPage";
-import RejectedUsersPage from "./users/RejectedUsersPage";
+// import ApprovedUsersPage from "./users/ApprovedUsersPage";
+// import PendingUsersPage from "./users/PendingUsersPage";
+// import RejectedUsersPage from "./users/RejectedUsersPage";
 
-
+const ApprovedUsersPage = lazy(() => import("./users/ApprovedUsersPage"));
+const PendingUsersPage = lazy(() => import("./users/PendingUsersPage"));
+const RejectedUsersPage = lazy(() => import("./users/RejectedUsersPage"));
 
 
 
@@ -124,8 +126,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
-
-    let leftArrow = "<", rightArrow = ">";
+    const leftArrow = "<", rightArrow = ">";
 
 
     useEffect(() => {
@@ -335,74 +336,74 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 
                                                
                             <div className={`capitalize border ${activeDisplay === "allUsers" ? "grid" : "hidden"}`}>
-                                <table className="table-fixed capitalize w-full border users__table">
-                                    <thead>
-                                        <tr className="">
-                                            <th className="w-8 h-16 text-center">ID</th>
-                                            <th className="w-40 text-center">NAME</th>
-                                            <th className="w-60 text-center">E-MAIL ADDRESS</th>
-                                            <th className="w-40 text-center">STATUS</th>
-                                            <th className="w-40 text-center">ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    {
-                                        allUsers?.length !== 0 ?
-                                            <tbody>
-                                                {
-                                                    allUsers?.map((user, userIndex) => {
-                                                        if (user?.status === "pending") {
-                                                            return (
-                                                                <tr key={userIndex} className="">
-                                                                    <td className="w-10 text-center font-firma tracking-supertight">#{userIndex+1}</td>
-                                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
-                                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
-                                                                    <td className="w-4/5 flex justify-center mx-auto">
-                                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                    </td>
-                                                                </tr>
-                                                            );
-                                                        } else if (user?.status === "rejected") {
-                                                            return (
-                                                                <tr key={userIndex} className="">
-                                                                    <td className="w-10 text-center font-firma tracking-supertight">#{userIndex+1}</td>
-                                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
-                                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
-                                                                    <td className="w-4/5 flex justify-center mx-auto">
-                                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                    </td>
-                                                                </tr>
-                                                            );
-                                                        } else {
-                                                            return (
-                                                                <tr key={userIndex} className="">
-                                                                    <td className="w-10 text-center font-firma tracking-supertight">#{userIndex+1}</td>
-                                                                    <td className="w-40 text-center">{user?.firstName} {user?.lastName}</td>
-                                                                    <td className="w-60 text-center lowercase">{user?.email}</td>
-                                                                    <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
-                                                                    <td className="w-4/5 flex justify-center mx-auto">
-                                                                        <Link className="w-full bg-skin-darkblue text-white py-6 text-center" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
-                                                                    </td>
-                                                                </tr>
-                                                            );
-                                                        };
-                                                    })
-                                                }
-                                            </tbody>
-                                            :
-                                            <tbody>
-                                                <tr className="h-32 mb-28">
-                                                    <td className="w-20 h-16 text-center"></td>
-                                                    <td className="text-center"></td>
-                                                    <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
-                                                        No user record
-                                                    </td>
-                                                    <td className="text-center"></td>
-                                                    <td className="text-center"></td>
-                                                </tr>
-                                            </tbody>
-                                    }
+                                <table className="table-fixed capitalize w-full border staff__table">
+                                        <thead>
+                                            <tr className="text-left">
+                                                <th className="w-12 h-16 px-3 py-3">ID</th>
+                                                <th className="w-40 px-3 py-3">NAME</th>
+                                                <th className="w-60 px-3 py-3">E-MAIL ADDRESS</th>
+                                                <th className="w-40 px-3 py-3 text-center">STATUS</th>
+                                                <th className="w-40 px-3 py-3 text-center">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        {
+                                            allUsers?.length !== 0 ?
+                                                <tbody>
+                                                    {
+                                                        allUsers?.map((user, userIndex) => {
+                                                            if (user?.status === "pending") {
+                                                                return (
+                                                                    <tr key={userIndex} className="text-left">
+                                                                        <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
+                                                                        <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
+                                                                        <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-orange-500">{user?.status}</div></td>
+                                                                        <td className="w-4/5 text-center flex justify-center mx-auto">
+                                                                            <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            } else if (user?.status === "rejected") {
+                                                                return (
+                                                                    <tr key={userIndex} className="text-left">
+                                                                        <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
+                                                                        <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
+                                                                        <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-red-500">{user?.status}</div></td>
+                                                                        <td className="w-4/5 text-center flex justify-center mx-auto">
+                                                                            <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            } else {
+                                                                return (
+                                                                    <tr key={userIndex} className="text-left">
+                                                                        <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
+                                                                        <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
+                                                                        <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
+                                                                        <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-green-500">{user?.status}</div></td>
+                                                                        <td className="w-4/5 text-center flex justify-center mx-auto">
+                                                                            <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                                        </td>
+                                                                    </tr>
+                                                                );
+                                                            };
+                                                        })
+                                                    }
+                                                </tbody>
+                                                :
+                                                <tbody>
+                                                    <tr className="h-32 mb-28">
+                                                        <td className="w-20 h-16 text-center"></td>
+                                                        <td className="text-center"></td>
+                                                        <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
+                                                            No record of user
+                                                        </td>
+                                                        <td className="text-center"></td>
+                                                        <td className="text-center"></td>
+                                                    </tr>
+                                                </tbody>
+                                        }
                                 </table>
 
 
@@ -445,11 +446,15 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                 {/* Pagination controls */}
                             </div>
                 
-                            <ApprovedUsersPage activeDisplay={activeDisplay} />
-
-                            <PendingUsersPage activeDisplay={activeDisplay} />
-
-                            <RejectedUsersPage activeDisplay={activeDisplay} />
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <ApprovedUsersPage activeDisplay={activeDisplay} />
+                            </Suspense>
+                            <Suspense fallback={<div>Loading...</div>}>                            
+                                <PendingUsersPage activeDisplay={activeDisplay} />
+                            </Suspense>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <RejectedUsersPage activeDisplay={activeDisplay} />
+                            </Suspense>
                             {/***********  Views  ***********/}
                             
                         </div>
