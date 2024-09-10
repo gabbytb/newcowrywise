@@ -162,7 +162,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 <UsersIcon /> <span>users</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 usersDropdown">
-                                                <Link to="/admin/users/manage">user management</Link>
+                                                <Link to="/admin/users">user management</Link>
                                             </div>
                                         </div>
                                         {/* flex flex-col gap-4  */}
@@ -171,7 +171,7 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                                 <StaffsIcon /> <span>staffs</span>
                                             </button>
                                             <div className="hidden flex-col gap-4 px-15.9 staffsDropdown">
-                                                <Link to="/admin/staffs/manage" >staff management</Link>
+                                                <Link to="/admin/staffs" >staff management</Link>
                                             </div>
                                         </div>
                                     </div>

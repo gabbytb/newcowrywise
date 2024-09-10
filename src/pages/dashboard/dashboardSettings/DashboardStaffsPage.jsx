@@ -361,9 +361,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                         <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
                                                                         <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
                                                                         <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
-                                                                        <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-orange-500">{user?.status}</td>
+                                                                        <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-orange-500">{user?.status}</div></td>
                                                                         <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                                            <Link className="w-full bg-skin-darkblue text-white py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -373,9 +373,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                         <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
                                                                         <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
                                                                         <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
-                                                                        <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-red-500">{user?.status}</td>
+                                                                        <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-red-500">{user?.status}</div></td>
                                                                         <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                                            <Link className="w-full bg-skin-darkblue text-white py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
@@ -385,9 +385,9 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                                                                         <td className="w-12 px-3 py-4 font-firma tracking-supertight">#{userIndex+1}</td>
                                                                         <td className="w-40 px-3 py-4">{user?.firstName} {user?.lastName}</td>
                                                                         <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
-                                                                        <td className="w-40 text-center text-white font-medium text-xl rounded-full h-2 py-2 px-8 bg-green-500">{user?.status}</td>
+                                                                        <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-green-500">{user?.status}</div></td>
                                                                         <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                                            <Link className="w-full bg-skin-darkblue text-white py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                                            <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                                         </td>
                                                                     </tr>
                                                                 );
