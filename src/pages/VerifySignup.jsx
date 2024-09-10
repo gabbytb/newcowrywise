@@ -316,7 +316,7 @@ const VerifySignUp = () => {
             });
         };
         verifyToken();
-    }, []); // Dependency array[location.search]: includes location.search to re-run effect if URL changes
+    }, [location.search]); // Dependency array includes location.search to re-run effect if URL changes
   
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
