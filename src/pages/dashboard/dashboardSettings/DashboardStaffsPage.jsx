@@ -318,22 +318,22 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
                             <div className="right-bottom-pane relative h-full flex flex-col px-12">
 
 
-                                {/* Users Navigation */}
+                                {/*********** Users Navigation ***********/}
                                 <div id="staffsLinkID" className="flex flex-row gap-3 mt-4 mb-10">
                                     <Link className="allStaffs activeStaffView" onClick={() => setActiveDisplay("allStaffs")}>All</Link>
                                     <Link className="allApprovedStaffs" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
                                     <Link className="allPendingStaffs" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
                                     <Link className="allRejectedStaffs" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected</Link>
                                 </div>
-                                {/* Users Navigation */}
+                                {/*********** Users Navigation ***********/}
 
 
 
-                                {/* Page Title Wrapper */}
+                                {/*********** Page Title Wrapper ***********/}
                                 <div className="mt-10 mb-8 font-black text-3xl tracking-supertight">
                                     <h2 className="capitalize">all staffs</h2>
                                 </div>
-                                {/* Page Title Wrapper */}
+                                {/*********** Page Title Wrapper ***********/}
 
 
 

@@ -328,13 +328,16 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                             {/* Users Navigation */}
 
 
-                            {/* Page Title Wrapper */}
+
+                            {/*********** Page Title Wrapper ***********/}
                             <div className="mt-10 mb-8 font-black text-3xl tracking-supertight">
                                 <h2 className="capitalize">all users</h2>
                             </div>
-                            {/* Page Title Wrapper */}
+                            {/*********** Page Title Wrapper ***********/}
 
-                                               
+
+                            
+                            {/***********  Views  ***********/}                                               
                             <div className={`capitalize border ${activeDisplay === "allUsers" ? "grid" : "hidden"}`}>
                                 <table className="table-fixed capitalize w-full border staff__table">
                                         <thead>
@@ -445,7 +448,6 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                 </div>
                                 {/* Pagination controls */}
                             </div>
-                
                             <Suspense fallback={<div>Loading...</div>}>
                                 <ApprovedUsersPage activeDisplay={activeDisplay} />
                             </Suspense>
@@ -456,7 +458,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                 <RejectedUsersPage activeDisplay={activeDisplay} />
                             </Suspense>
                             {/***********  Views  ***********/}
-                            
+
                         </div>
                     </aside>
                     {/******************************************************************************************/}
