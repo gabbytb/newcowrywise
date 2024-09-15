@@ -433,7 +433,6 @@ function SignIn() {
                     {/* Alternative Sign-In Methods */}
                     <div className="flex justify-center align-middle gap-10">
                         <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
-                        <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
                     </div>
                     {/* Alternative Sign-In Methods */}
 
