@@ -3870,6 +3870,10 @@ progress#file {
   position: fixed;
 }
 
+.\!absolute{
+  position: absolute !important;
+}
+
 .absolute{
   position: absolute;
 }
@@ -3945,6 +3949,10 @@ progress#file {
 
 .col-span-4{
   grid-column: span 4 / span 4;
+}
+
+.\!-m-px{
+  margin: -1px !important;
 }
 
 .m-0{
@@ -4141,6 +4149,10 @@ progress#file {
   display: block;
 }
 
+.inline-block{
+  display: inline-block;
+}
+
 .flex{
   display: flex;
 }
@@ -4159,6 +4171,10 @@ progress#file {
 
 .hidden{
   display: none;
+}
+
+.\!h-px{
+  height: 1px !important;
 }
 
 .h-10{
@@ -4254,6 +4270,10 @@ progress#file {
 
 .min-h-24{
   min-height: 6rem;
+}
+
+.\!w-px{
+  width: 1px !important;
 }
 
 .w-1\/4{
@@ -4431,6 +4451,16 @@ progress#file {
   animation: slideUp 1.7s linear;
 }
 
+@keyframes spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin{
+  animation: spin 1s linear infinite;
+}
+
 .cursor-not-allowed{
   cursor: not-allowed;
 }
@@ -4559,8 +4589,16 @@ progress#file {
   margin-bottom: calc(3rem * var(--tw-space-y-reverse));
 }
 
+.\!overflow-hidden{
+  overflow: hidden !important;
+}
+
 .overflow-y-auto{
   overflow-y: auto;
+}
+
+.\!whitespace-nowrap{
+  white-space: nowrap !important;
 }
 
 .rounded{
@@ -4593,12 +4631,20 @@ progress#file {
   border-bottom-right-radius: 0.375rem;
 }
 
+.\!border-0{
+  border-width: 0px !important;
+}
+
 .border{
   border-width: 1px;
 }
 
 .border-0{
   border-width: 0px;
+}
+
+.border-4{
+  border-width: 4px;
 }
 
 .border-e-2{
@@ -4609,6 +4655,14 @@ progress#file {
   border-top-width: 1px;
 }
 
+.border-solid{
+  border-style: solid;
+}
+
+.border-current{
+  border-color: currentColor;
+}
+
 .border-gray-300{
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -4617,6 +4671,10 @@ progress#file {
 .border-slate-600{
   --tw-border-opacity: 1;
   border-color: rgb(71 85 105 / var(--tw-border-opacity));
+}
+
+.border-r-transparent{
+  border-right-color: transparent;
 }
 
 .bg-blue-500{
@@ -4750,6 +4808,10 @@ progress#file {
 
 .object-cover{
   object-fit: cover;
+}
+
+.\!p-0{
+  padding: 0px !important;
 }
 
 .p-0{
@@ -4993,6 +5055,10 @@ progress#file {
 
 .align-middle{
   vertical-align: middle;
+}
+
+.align-\[-0\.125em\]{
+  vertical-align: -0.125em;
 }
 
 .font-firma{
@@ -5282,6 +5348,10 @@ progress#file {
   opacity: 0 !important;
 }
 
+.\!\[clip\:rect\(0\2c 0\2c 0\2c 0\)\]{
+  clip: rect(0,0,0,0) !important;
+}
+
 /* ********************  BASE  ******************** */
 
 .hover\:bg-blue-600:hover{
@@ -5391,6 +5461,18 @@ progress#file {
 .data-\[focus\]\:bg-blue-100[data-focus]{
   --tw-bg-opacity: 1;
   background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+@media (prefers-reduced-motion: reduce){
+  @keyframes spin{
+    to{
+      transform: rotate(360deg);
+    }
+  }
+
+  .motion-reduce\:animate-\[spin_1\.5s_linear_infinite\]{
+    animation: spin 1.5s linear infinite;
+  }
 }
 
 @media (min-width: 601px){

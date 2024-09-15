@@ -2,6 +2,7 @@
 import HomeNav from "./HomeNav";
 import Nav from "./Nav";
 import NavNoTopBar from "./NavNoTopBar";
+import Preloader from "./Preloader";
 // HEADER
 
 
@@ -45,6 +46,7 @@ export {
     HomeNav,
     Nav,
     NavNoTopBar,
+    Preloader,
     // HEADER
 
 
