@@ -1,6 +1,5 @@
 import { useState, useEffect, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
 import axios from "axios";
