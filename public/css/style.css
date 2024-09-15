@@ -4013,6 +4013,10 @@ progress#file {
   margin-bottom: 0.5rem;
 }
 
+.mb-20{
+  margin-bottom: 5rem;
+}
+
 .mb-24{
   margin-bottom: 6rem;
 }
@@ -4129,14 +4133,6 @@ progress#file {
   margin-top: 2rem;
 }
 
-.mt-5{
-  margin-top: 1.25rem;
-}
-
-.mb-20{
-  margin-bottom: 5rem;
-}
-
 .box-border{
   box-sizing: border-box;
 }
@@ -4234,10 +4230,6 @@ progress#file {
 
 .h-screen{
   height: 100vh;
-}
-
-.h-12{
-  height: 3rem;
 }
 
 .min-h-106{
@@ -4358,10 +4350,6 @@ progress#file {
 
 .w-screen{
   width: 100vw;
-}
-
-.w-6{
-  width: 1.5rem;
 }
 
 .min-w-80{
@@ -4911,6 +4899,10 @@ progress#file {
   padding-bottom: 1.25rem;
 }
 
+.pb-8{
+  padding-bottom: 2rem;
+}
+
 .pe-1{
   padding-inline-end: 0.25rem;
 }
@@ -4981,14 +4973,6 @@ progress#file {
 
 .pt-9{
   padding-top: 2.25rem;
-}
-
-.pb-8{
-  padding-bottom: 2rem;
-}
-
-.pt-0{
-  padding-top: 0px;
 }
 
 .text-left{

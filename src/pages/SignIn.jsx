@@ -2,8 +2,7 @@ import { useState, useEffect, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
-import axios from "axios";
-// import loginImg from "../assets/login.jpg";
+import googleApi from "../googleApi";
 import { brandOfficialLogo, loginBg } from '../assets/images';
 import { GoogleIcon } from '../assets/icons';
 
@@ -20,7 +19,9 @@ function SignIn() {
 
 
     // console.clear();
+        
     const navigate = useNavigate();
+
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -47,8 +48,8 @@ function SignIn() {
     });
 
     useEffect(() => {
-        if (googleUser) {
-            axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
+        if (googleUser.length !== 0) {
+            googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
                 headers: {
                     Authorization: `Bearer ${googleUser.access_token}`,
                     Accept: 'application/json'
@@ -60,9 +61,9 @@ function SignIn() {
             .catch((err) => console.log(err));
         };
     }, [googleUser]);
-
+   
     useEffect(() => {
-        if (profile) {
+        if (profile.length !== 0) {
             const uri = "/api/v1/auth/gmail/login";
             const payload = {
                 email: profile?.email,
@@ -70,22 +71,25 @@ function SignIn() {
             api.post(uri, payload)
             .then((response) => {
                 const { success, data, message } = response.data;
+                var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
                 var successMsg = document.querySelector('#logInForm .success');
-                var ssoLinks = document.querySelector("#logInForm .alt_sso");
+                var ssoLinks = document.querySelector("#logInForm .alt_sso");            
 
                 if (success === false || message === "No user found") {
                     // Perform These Actions
                     setFormSubmitted(success);
                     setFormMessage(message);
                 } else {
-                    // Perform These Actions
+                    // Perform These Actions                  
                     window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
+                    ssoLinksHr?.classList.remove("block");
+                    ssoLinksHr?.classList.add("hidden");
+                    ssoLinks?.classList.remove("flex");
+                    ssoLinks?.classList.add("hidden");
+
                     setFormMessage(message);
                     setFormSubmitted(success);
                     localStorage.setItem("user", JSON.stringify(data));
-
-                    ssoLinks?.classList.remove("flex");
-                    ssoLinks?.classList.add("hidden");
 
                     successMsg?.classList.remove('success');
                     successMsg?.classList.add('success-message-info');
@@ -96,8 +100,6 @@ function SignIn() {
                     }, 2500);
 
                     setTimeout(() => {
-                        // const redirToAdminDashboard = "/admin/dashboard";
-                        // window.location = redirToAdminDashboard;
                         navigate("/admin/dashboard")
                     }, 2800);
                     // Perform These Actions
@@ -107,8 +109,9 @@ function SignIn() {
                 console.log("Encountered unexpected error: ", error);
             });
         };
+    // eslint-disable-next-line
     }, [profile]);
-
+    
 
 
 
@@ -430,7 +433,7 @@ function SignIn() {
                     {/* LINK: SIGN UP */}
                     
                     
-                    <hr className="mt-10 mb-8"></hr>
+                    <hr className="alt_sso_hr block mt-10 mb-8"></hr>
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">
