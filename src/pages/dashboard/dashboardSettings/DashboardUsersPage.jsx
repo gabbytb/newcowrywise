@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState, } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     
     
     // console.clear();
-    const navigate = useNavigate();
+    
     
     // ****************************************************************************
     // SET PAGE TITLE && ADD CUSTOM "admin__dashboard" CLASS TO ADMIN DASHBOARD
@@ -63,10 +63,9 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
         googleLogout();
         // Clear User Details from Local Storage
         localStorage.clear();
-        // Redirect to Login Page
-        navigate("/user/login");
-        // let redirToURI = "/user/login";
-        // window.location = redirToURI;
+        // redirect to Login Page
+        let redirToURI = "/user/login";
+        window.location = redirToURI;
     };
     // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-

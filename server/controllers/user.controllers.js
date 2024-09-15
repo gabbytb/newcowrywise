@@ -767,81 +767,88 @@ exports.googleSignOn = async (req, res) => {
         const { email } = req.body;
 
         // 1) Find Existing User
-        const existingUser = await User.findOne({ email: email });
-        
-        console.log("***********************************************",
-            "\n******       🔐   ACTIVE USER  🔑        ******",
-            "\n***********************************************",
-            "\nUser ID: ", existingUser._id,
-            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
-            "\nUser E-mail: ", existingUser.email,
-            "\n**********************************************",
-            "\n****      ADDITIONAL USER INFORMATION      ****",
-            "\n***********************************************",
-            "\nPrev. AccessToken: ", existingUser.accessToken,
-            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
-            "\n***********************************************",
-            "\n\n");
+        const existingUser = await User.findOne({ email: email }); 
+        if (existingUser) {
 
-        // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
-        const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
-        
-        // 7) Verify token to get Lifespan of Token
-        const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
-        // NOTE: USE new Date() function to make expire date begin with current date and time.
-        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
-        
-        // 8. Update user.tokenExpires with value of tokenExpiryDate
-        existingUser.tokenExpires = tokenExpiryDate;
-        
-        // 9. Update user.accessToken with value of token
-        existingUser.accessToken = token;
-
-        // 10. Save to Update USER DETAILS with values parsed
-        const loggedInUser = await existingUser.save();
-    
-        for (var n = 0; n < loggedInUser.roles.length; n++) {
-            if (n < loggedInUser.roles.length) {
-                // ***********************************************************************************//
-                // *************                CURRENT LOGGED-IN USER                  **************//
-                // ***********************************************************************************//
-                console.log("***********************************************",
-                    "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+            console.log("***********************************************",
+                    "\n******       🔐   ACTIVE USER  🔑        ******",
                     "\n***********************************************",
-                    // "\nUser ID: ", loggedInUser._id,
-                    "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
-                    "\nUser E-mail: ", loggedInUser.email,
-                    "\n***********************************************",
+                    "\nUser ID: ", existingUser._id,
+                    "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+                    "\nUser E-mail: ", existingUser.email,
+                    "\n**********************************************",
                     "\n****      ADDITIONAL USER INFORMATION      ****",
                     "\n***********************************************",
-                    "\nUser ROLE(S): ", loggedInUser.roles[n].role,
-                    // "\nUser isVerified: ", loggedInUser.isVerified,
-                    "\nUser Status: ", loggedInUser.status.toUpperCase(),
-                    "\nUser AccessToken: ", loggedInUser.accessToken,
-                    "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
+                    "\nPrev. AccessToken: ", existingUser.accessToken,
+                    "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
                     "\n***********************************************",
-                    "\n=====>       CURRENT LOGGED-IN USER      <=====",
-                    "\n***********************************************",
-                    "\n\n");
-            };
-        };
-        
-        // ***********************************************************************************//
-        // NOTE:- By assigning Token to Logged-in User,
-        //        Now you can use User's "accessToken" 
-        //        for Headers Authentication & Authorization
-        // ***********************************************************************************//  
-        const responseData = {
-            success: true,
-            data: loggedInUser,
-            // data: {
-            //     userId: existingUser._id,
-            //     accessToken: existingUser.accessToken,
-            // },
-            message: "Successful",
-        };
-        return res.status(200).json(responseData);
+                "\n\n");
 
+            // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
+            const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
+            
+            // 7) Verify token to get Lifespan of Token
+            const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
+            // NOTE: USE new Date() function to make expire date begin with current date and time.
+            const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
+            
+            // 8. Update user.tokenExpires with value of tokenExpiryDate
+            existingUser.tokenExpires = tokenExpiryDate;
+            
+            // 9. Update user.accessToken with value of token
+            existingUser.accessToken = token;
+
+            // 10. Save to Update USER DETAILS with values parsed
+            const loggedInUser = await existingUser.save();
+        
+            for (var n = 0; n < loggedInUser.roles.length; n++) {
+                if (n < loggedInUser.roles.length) {
+                    // ***********************************************************************************//
+                    // *************                CURRENT LOGGED-IN USER                  **************//
+                    // ***********************************************************************************//
+                    console.log("***********************************************",
+                        "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+                        "\n***********************************************",
+                        // "\nUser ID: ", loggedInUser._id,
+                        "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
+                        "\nUser E-mail: ", loggedInUser.email,
+                        "\n***********************************************",
+                        "\n****      ADDITIONAL USER INFORMATION      ****",
+                        "\n***********************************************",
+                        "\nUser ROLE(S): ", loggedInUser.roles[n].role,
+                        // "\nUser isVerified: ", loggedInUser.isVerified,
+                        "\nUser Status: ", loggedInUser.status.toUpperCase(),
+                        "\nUser AccessToken: ", loggedInUser.accessToken,
+                        "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
+                        "\n***********************************************",
+                        "\n=====>       CURRENT LOGGED-IN USER      <=====",
+                        "\n***********************************************",
+                        "\n\n");
+                };
+            };
+            
+            // ***********************************************************************************//
+            // NOTE:- By assigning Token to Logged-in User,
+            //        Now you can use User's "accessToken" 
+            //        for Headers Authentication & Authorization
+            // ***********************************************************************************//  
+            const responseData = {
+                success: true,
+                data: loggedInUser,
+                // data: {
+                //     userId: existingUser._id,
+                //     accessToken: existingUser.accessToken,
+                // },
+                message: "Successful",
+            };
+            return res.status(200).json(responseData);
+        } else {          
+            const responseData = {
+                success: false,
+                message: "No user found",
+            };
+            res.json(responseData);
+        };
     } catch (error) {
         console.error('Error saving code:', error);
         res.status(500).json({ message: 'Failed to save code' });

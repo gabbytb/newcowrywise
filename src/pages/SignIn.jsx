@@ -70,28 +70,33 @@ function SignIn() {
             api.post(uri, payload)
             .then((response) => {
                 const { success, data, message } = response.data;
-                // var errMsg = document.querySelector('#logInForm .error'); 
                 var successMsg = document.querySelector('#logInForm .success');
+                
+                if (success === false || message === "No user found") {
+                    // Perform These Actions
+                    setFormSubmitted(success);
+                    setFormMessage(message);
+                } else {
+                    // Perform These Actions
+                    setFormMessage(message);
+                    setFormSubmitted(success);
+                    localStorage.setItem("user", JSON.stringify(data));
 
-                // Perform These Actions
-                setFormMessage(message);
-                setFormSubmitted(success);
-                localStorage.setItem("user", JSON.stringify(data));
+                    successMsg?.classList.remove('success');
+                    successMsg?.classList.add('success-message-info');
 
-                successMsg?.classList.remove('success');
-                successMsg?.classList.add('success-message-info');
+                    setTimeout(() => {
+                        successMsg?.classList.remove('success-message-info');
+                        successMsg?.classList.add('success');
+                    }, 2500);
 
-                setTimeout(() => {
-                    successMsg?.classList.remove('success-message-info');
-                    successMsg?.classList.add('success');
-                }, 2500);
-
-                setTimeout(() => {
-                    // const redirToAdminDashboard = "/admin/dashboard";
-                    // window.location = redirToAdminDashboard;
-                    navigate("/admin/dashboard")
-                }, 2800);
-                // Perform These Actions
+                    setTimeout(() => {
+                        // const redirToAdminDashboard = "/admin/dashboard";
+                        // window.location = redirToAdminDashboard;
+                        navigate("/admin/dashboard")
+                    }, 2800);
+                    // Perform These Actions
+                };
             })
             .catch((error) => {
                 console.log("Encountered unexpected error: ", error);

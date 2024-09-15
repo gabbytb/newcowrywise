@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { 
     brandOfficialLogo,
     adminDashboardIcon,  
@@ -25,7 +25,9 @@ import {
 
 const AdminDashboard = ({ isLoggedIn }) => {
     
-    const navigate = useNavigate();
+    
+    // console.clear();
+
 
     // ***************************************************************************
     // SET PAGE TITLE & ADD CUSTOM "admin__dashboard" CLASS to ADMIN DASHBOARD
@@ -62,10 +64,9 @@ const AdminDashboard = ({ isLoggedIn }) => {
         googleLogout();
         // Clear User Details from Local Storage
         localStorage.clear();
-        // Redirect to Login Page
-        navigate("/user/login");
-        // let redirToURI = "/user/login";
-        // window.location = redirToURI;
+        // redirect to Login Page
+        let redirToURI = "/user/login";
+        window.location = redirToURI;
     };
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
