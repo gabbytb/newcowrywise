@@ -6,6 +6,7 @@ import api from '../api';
 import axios from "axios";
 // import loginImg from "../assets/login.jpg";
 import { brandOfficialLogo, loginBg } from '../assets/images';
+import { GoogleIcon } from '../assets/icons';
 
 
 
@@ -425,7 +426,7 @@ function SignIn() {
                     </div>
                     {/* LINK: SIGN UP */}
                     
-                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
+                    <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">

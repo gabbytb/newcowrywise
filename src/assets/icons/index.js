@@ -27,6 +27,7 @@ import StarRating from "./StarRating";
 
 
 // Footer Icons
+import GoogleIcon from "./GoogleIcon";
 import TwitterIcon from "./TwitterIcon";
 import FacebookIcon from "./FacebookIcon";
 import WhatsappIcon from "./WhatsappIcon";
@@ -73,6 +74,7 @@ export {
     LearnThirdIcon,
 
 
+    GoogleIcon,
     TwitterIcon,
     FacebookIcon,
     WhatsappIcon,
@@ -87,4 +89,4 @@ export {
     UsersIcon,
     StaffsIcon,
     LogOutIcon,
-}
+};

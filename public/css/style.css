@@ -4228,6 +4228,10 @@ progress#file {
   height: 100vh;
 }
 
+.h-12{
+  height: 3rem;
+}
+
 .min-h-106{
   min-height: 40rem;
 }
@@ -4346,6 +4350,10 @@ progress#file {
 
 .w-screen{
   width: 100vw;
+}
+
+.w-6{
+  width: 1.5rem;
 }
 
 .min-w-80{
