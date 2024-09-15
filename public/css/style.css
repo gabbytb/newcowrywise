@@ -4129,6 +4129,14 @@ progress#file {
   margin-top: 2rem;
 }
 
+.mt-5{
+  margin-top: 1.25rem;
+}
+
+.mb-20{
+  margin-bottom: 5rem;
+}
+
 .box-border{
   box-sizing: border-box;
 }
@@ -4975,6 +4983,14 @@ progress#file {
   padding-top: 2.25rem;
 }
 
+.pb-8{
+  padding-bottom: 2rem;
+}
+
+.pt-0{
+  padding-top: 0px;
+}
+
 .text-left{
   text-align: left;
 }
@@ -4989,6 +5005,10 @@ progress#file {
 
 .text-end{
   text-align: end;
+}
+
+.align-middle{
+  vertical-align: middle;
 }
 
 .font-firma{

@@ -368,7 +368,7 @@ function SignIn() {
                 {/* PAGE NAV */}
 
 
-                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-24 rounded-lg bg-skin-signup-signin-bg p-8 px-8 z-1' onSubmit={handleLogin}>
+                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-0 pb-8 px-8 px-8 z-1' onSubmit={handleLogin}>
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -426,7 +426,17 @@ function SignIn() {
                     </div>
                     {/* LINK: SIGN UP */}
                     
-                    <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
+                    
+                    <hr className="mt-10 mb-8"></hr>
+
+                    
+                    {/* Alternative Sign-In Methods */}
+                    <div className="flex justify-center align-middle gap-10">
+                        <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
+                        <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
+                    </div>
+                    {/* Alternative Sign-In Methods */}
+
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">
