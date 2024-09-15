@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState, } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
 import axios from "axios";
 
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
@@ -23,7 +24,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     
     
     // console.clear();
-
+    const navigate = useNavigate();
     
     // ****************************************************************************
     // SET PAGE TITLE && ADD CUSTOM "admin__dashboard" CLASS TO ADMIN DASHBOARD
@@ -58,9 +59,14 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // FUNCTION TO LOG-OUT LOGGED-IN USER
     // ****************************************************************************
     function logOut() {
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
+        // Clear User Details from Local Storage
         localStorage.clear();
-        const redirToLogin = "/user/login";
-        window.location = redirToLogin;
+        // Redirect to Login Page
+        navigate("/user/login");
+        // let redirToURI = "/user/login";
+        // window.location = redirToURI;
     };
     // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
@@ -302,7 +308,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
                                             <img src={adminDashboardIcon} alt={`${adminDashboardIcon}`} />
                                         </button>                                                                                                       
                                         <div className="hidden flex-col items-start w-72 min-h-24 bg-white shadow-lg rounded-lg relative z-50 top-20 -left-52 upm">
-                                            <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to={"/admin/dashboard?logout"} onClick={logOut}><LogOutIcon /> sign out</Link>
+                                            <Link className="px-6.4 pt-9 pb-11 w-full text-start text-41xl capitalize font-medium flex flex-row items-center gap-2" to="/admin/dashboard?logout" onClick={logOut}><LogOutIcon /> sign out</Link>
                                         </div>           
                                     </div>
                                 </div>

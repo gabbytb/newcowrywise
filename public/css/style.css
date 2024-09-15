@@ -3943,6 +3943,10 @@ progress#file {
   z-index: 50;
 }
 
+.col-span-4{
+  grid-column: span 4 / span 4;
+}
+
 .m-0{
   margin: 0px;
 }
@@ -3970,6 +3974,15 @@ progress#file {
 .my-5{
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
+}
+
+.my-6{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.-mb-2{
+  margin-bottom: -0.5rem;
 }
 
 .-ml-px{
@@ -4088,6 +4101,10 @@ progress#file {
   margin-top: 0.5rem;
 }
 
+.mt-3{
+  margin-top: 0.75rem;
+}
+
 .mt-32{
   margin-top: 8rem;
 }
@@ -4164,10 +4181,6 @@ progress#file {
   height: 4rem;
 }
 
-.h-2{
-  height: 0.5rem;
-}
-
 .h-20{
   height: 5rem;
 }
@@ -4182,6 +4195,10 @@ progress#file {
 
 .h-44{
   height: 11rem;
+}
+
+.h-6{
+  height: 1.5rem;
 }
 
 .h-72{
@@ -4281,6 +4298,10 @@ progress#file {
 
 .w-3\/5{
   width: 60%;
+}
+
+.w-32{
+  width: 8rem;
 }
 
 .w-36{
@@ -4416,6 +4437,10 @@ progress#file {
 
 .grid-cols-1{
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .flex-row{
@@ -4576,8 +4601,8 @@ progress#file {
   border-inline-end-width: 2px;
 }
 
-.border-gray-200\/50{
-  border-color: rgb(229 231 235 / 0.5);
+.border-t{
+  border-top-width: 1px;
 }
 
 .border-gray-300{
@@ -4604,9 +4629,19 @@ progress#file {
   background-color: rgb(37 99 235 / 0.25);
 }
 
+.bg-gray-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .bg-gray-200{
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-gray-300{
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 .bg-gray-700{
@@ -4727,6 +4762,10 @@ progress#file {
 
 .p-4{
   padding: 1rem;
+}
+
+.p-6{
+  padding: 1.5rem;
 }
 
 .p-8{
@@ -4993,10 +5032,6 @@ progress#file {
   font-size: 1.54rem;
 }
 
-.text-42xl{
-  font-size: 1.46rem;
-}
-
 .text-4xl{
   font-size: 2.25rem;
 }
@@ -5247,9 +5282,19 @@ progress#file {
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-400:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-gray-50:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
+.hover\:text-orange-600:hover{
+  --tw-text-opacity: 1;
+  color: rgb(234 88 12 / var(--tw-text-opacity));
 }
 
 .hover\:text-white:hover{
@@ -5380,6 +5425,14 @@ progress#file {
 }
 
 @media (min-width: 769px){
+  .sm\:col-span-3{
+    grid-column: span 3 / span 3;
+  }
+
+  .sm\:col-span-9{
+    grid-column: span 9 / span 9;
+  }
+
   .sm\:ml-0{
     margin-left: 0px;
   }
@@ -5406,6 +5459,10 @@ progress#file {
 
   .sm\:basis-5\/12{
     flex-basis: 41.666667%;
+  }
+
+  .sm\:grid-cols-12{
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-18{

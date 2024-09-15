@@ -1,11 +1,12 @@
 const nodemailer = require("nodemailer");
 const { mailServiceProvider, mailServiceUser, mailServicePwd } = process.env;
-console.log("***********************************************",
-            "\n*********    E-MAIL SERVICE CONFIG    *********",
-            "\n***********************************************",
-            `\n\nSERVICE PROVIDER: ${mailServiceProvider} 🥴`,
-            `\nE-MAIL (Admin): ${mailServiceUser} 🤪`);
+console.log("************************************************",
+            "\n*********    E-MAIL SERVICE CONFIG    **********",
+            "\n************************************************"
+            `\n\nUSE SERVICE PROVIDER: ${mailServiceProvider}`,
+            `\nADMINISTRATOR E-MAIL: ${mailServiceUser}`);
 
+    
 
 
 
@@ -29,6 +30,7 @@ const mailSenderForPostSignUp = (token, user) => {
         const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
         const activationLink = `<span style="color:black;font-size:10px;">or copy and paste this link on your browser</span><br /><a href="http://127.0.0.1:3000/user/verify/${token}" alt="activation link" style="font-size:10px;">http://127.0.0.1:3000/user/verify/${token}</a>`;
 
+        // Configure Mail Options (E.g sender, subject, message, etc.)
         let mailOptions = {
             from: `Samuel Akinola Foundation <${mailServiceUser}>`,
             to: user.email,
@@ -37,7 +39,6 @@ const mailSenderForPostSignUp = (token, user) => {
             html: `<strong>Hello ${user.firstName} ${user.lastName}</strong>, <br /><br />Thank you for registering with us at ${siteURL}. <br /><br />We are more than just a charity organization. <br /><br />Please verify your account by clicking the link below to have a personalized experience. <br /><br /><div className="mailer-wrapper">${verificationLink}</div> <br />${activationLink}<br /><br /><br />`,
         };
 
-        
         // Attempt to send email with retry logic
         let retryAttempts = 0;  // Track number of retry attempts
         const maxRetries = 100;   // Maximum number of retry attempts before giving up
@@ -70,7 +71,5 @@ const mailSenderForPostSignUp = (token, user) => {
         // ***************************************************************//
 
 };
-
-
 
 module.exports = mailSenderForPostSignUp;

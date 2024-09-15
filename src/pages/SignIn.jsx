@@ -1,6 +1,9 @@
 import { useState, useEffect, } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+// import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
+import axios from "axios";
 // import loginImg from "../assets/login.jpg";
 import { brandOfficialLogo, loginBg } from '../assets/images';
 
@@ -17,7 +20,7 @@ function SignIn() {
 
 
     // console.clear();
-    
+    const navigate = useNavigate();
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -30,6 +33,73 @@ function SignIn() {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
+
+
+    const [ googleUser, setGoogleUser ] = useState([]);
+    console.log("Google User: ", googleUser);
+    
+    const [ profile, setProfile ] = useState([]);
+    console.log("Profile: ", profile);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
+        onError: (error) => console.log('Login Failed:', error)
+    });
+
+    useEffect(() => {
+        if (googleUser) {
+            axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
+                headers: {
+                    Authorization: `Bearer ${googleUser.access_token}`,
+                    Accept: 'application/json'
+                }
+            })
+            .then((res) => {
+                setProfile(res.data);
+            })
+            .catch((err) => console.log(err));
+        };
+    }, [googleUser]);
+
+    useEffect(() => {
+        if (profile) {
+            const uri = "/api/v1/auth/gmail/login";
+            const payload = {
+                email: profile?.email,
+            };
+            api.post(uri, payload)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                // var errMsg = document.querySelector('#logInForm .error'); 
+                var successMsg = document.querySelector('#logInForm .success');
+
+                // Perform These Actions
+                setFormMessage(message);
+                setFormSubmitted(success);
+                localStorage.setItem("user", JSON.stringify(data));
+
+                successMsg?.classList.remove('success');
+                successMsg?.classList.add('success-message-info');
+
+                setTimeout(() => {
+                    successMsg?.classList.remove('success-message-info');
+                    successMsg?.classList.add('success');
+                }, 2500);
+
+                setTimeout(() => {
+                    // const redirToAdminDashboard = "/admin/dashboard";
+                    // window.location = redirToAdminDashboard;
+                    navigate("/admin/dashboard")
+                }, 2800);
+                // Perform These Actions
+            })
+            .catch((error) => {
+                console.log("Encountered unexpected error: ", error);
+            });
+        };
+    }, [profile]);
+
+
 
 
     // ******************************** //
@@ -131,6 +201,7 @@ function SignIn() {
                 // Perform These Actions
             } else {
                 // Perform These Actions
+                window.scrollTo({ left: 0, top: 400, behavior: "smooth" });
                 setFormMessage(message);
                 setFormSubmitted(success);
                 localStorage.setItem('user', JSON.stringify(data));
@@ -144,8 +215,9 @@ function SignIn() {
                 }, 2500);
 
                 setTimeout(() => {
-                    const redirToAdminDashboard = "/admin/dashboard";
-                    window.location = redirToAdminDashboard;
+                    // const redirToAdminDashboard = "/admin/dashboard";
+                    // window.location = redirToAdminDashboard;
+                    navigate("/admin/dashboard")
                 }, 2800);
                 // Perform These Actions
             };
@@ -154,7 +226,11 @@ function SignIn() {
             console.log("Error encountered: ", error);
         });
     };
-    
+
+
+
+
+
 
 
 
@@ -310,7 +386,7 @@ function SignIn() {
                     {/* E-mail Address */}
                     <div className="flex flex-col text-gray-400 py-2">
                         <label htmlFor="email">E-mail address
-                            <input autoComplete="off" className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="email" name="email" onChange={handleChange} onKeyUp={handleKeyUp} required />
+                            <input autoComplete="off" className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="text" name="email" onChange={handleChange} onKeyUp={handleKeyUp} required />
                         </label>
                     </div>
                     {/* E-mail Address */}
@@ -343,7 +419,8 @@ function SignIn() {
                         Don't have an account? <Link className='capitalize' to={"/user/signup"}>sign up</Link>
                     </div>
                     {/* LINK: SIGN UP */}
-
+                    
+                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">
@@ -417,7 +494,7 @@ function SignIn() {
                 </div>
             </div>
             {/* Re-verify Email Modal */}
-
+            
         </div>
     );
 

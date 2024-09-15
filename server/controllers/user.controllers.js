@@ -55,13 +55,13 @@ const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
 // Our CREATE ACCOUNT Logic starts here
 exports.signUp = async (req, res) => {
 
+    // Gets a unique number based on the current time
+    const uniqueId = Date.now();
+
+    // Payload
+    const { id = 23401, firstName, lastName, email, password, approvesTandC } = req.body;
+    
     try {
-
-        // Gets a unique number based on the current time
-        const uniqueId = Date.now();
-
-        // Payload
-        const { id = 23401, firstName, lastName, email, password, approvesTandC } = req.body;
 
         // FORM VALIDATION:  "Compulsory Payload"
         if (!(firstName && lastName && email && password)) {
@@ -76,37 +76,27 @@ exports.signUp = async (req, res) => {
             return res.status(200).json(responseData);
         };
 
+        
+        //  CHECK IF E-MAIL EXISTS IN USER REPOSITORY
         const emailExists = await User.findOne({ email: email.toLowerCase() });
         if (emailExists) {
             const responseData = {
                 success: false,
                 message: "E-mail exists. Sign In"
             };
-            console.log("**************************\n***   SIGN-UP FAILED   ***\n**************************\nID: ", emailExists._id,"\nE-mail: ", emailExists.email, " exists\n\n");
+            console.log("**************************",
+                        "\n***   SIGN-UP FAILED   ***",
+                        "\n**************************",
+                        "\nUser ID: ", emailExists._id,
+                        "\nUser Name: ", emailExists.firstName + " " + emailExists.lastName,
+                        "\nE-mail: ", emailExists.email, " exists\n\n");
             return res.status(200).json(responseData);
         };
-        
-        // const usernameExists = await User.findOne({ userName: username.toLowerCase() });
-        // if (usernameExists) {
-        //     const responseData = {
-        //         success: false,
-        //         message: "Username exists. Sign In"
-        //     };
-        //     // console.log("Username Exists: ", usernameExists);
-        //     console.log("Username Exists: ", responseData);
-        //     return res.status(200).json(responseData);
-        // }
-        
-
-        // ***************************************************************//
-        // Hash/Encrypt Password
-        // ***************************************************************//
-        const encryptedPassword = await encryptPassword(password);
-       
     
+        
         // ***************************************************************//
         // PICK A SINGLE ROLE
-        // ***************************************************************//
+        // ***************************************************************//        
         const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
         // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
         // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
@@ -117,7 +107,13 @@ exports.signUp = async (req, res) => {
         // const topLvAdmin = await Role.findOne({ role: ROLES.XYZ });
         // ***************************************************************//
         // ***************************************************************//
+            
 
+        // ***************************************************************//
+        // Hash/Encrypt Password
+        // ***************************************************************//
+        const encryptedPassword = await encryptPassword(password);
+       
 
         // ************************************ //
         // ***  FE: CREATE "USER" INSTANCE  *** //
@@ -599,7 +595,7 @@ exports.logIn = async (req, res) => {
                 success: false, 
                 message: "Account with this details does not exist",
             };
-            console.log("Login Failed: ", responseData, "\n\n");
+            console.log("Login Failed: ", responseData.message, "\n\n");
             // return res.status(404).json(responseData);
             return res.json(responseData);
         };
@@ -615,7 +611,7 @@ exports.logIn = async (req, res) => {
                     console.log("***************************************",
                         "\n*****      LOG-IN ATTEMPT BY      *****",
                         "\n***************************************",
-                        // "\nUser ID: ", existingUser._id,
+                        "\nUser ID: ", existingUser._id,
                         "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
                         "\nUser E-mail: ", existingUser.email,
                         "\nUser Password is CORRECT: ", isPasswordCorrect,
@@ -627,7 +623,7 @@ exports.logIn = async (req, res) => {
                         "\nUser ROLE(S): ", existingUser.roles[i].role,
                         "\nPrevious User AccessToken: ", existingUser.accessToken,
                         "\n***************************************",
-                        "\n\n");
+                        "\n");
                 };
             };
 
@@ -635,12 +631,12 @@ exports.logIn = async (req, res) => {
                 success: false, 
                 message: "Incorrect password",
             };
-            console.log("Login Failed: ", responseData, "\n\n");
+            console.log("Login Failed: ", responseData.message, "\n\n");
             // return res.status(401).json(responseData);
             return res.json(responseData);
         };        
 
-        // 5) Check if User Has Verified their Account Registration
+        // 5) Check if User Has Verified their Account after Registration
         if (!existingUser.isVerified) {
             // ***********************************************************************************//
             // *************         UNVERIFIED USER ATTEMPTING TO LOG-IN           **************//
@@ -674,7 +670,7 @@ exports.logIn = async (req, res) => {
                 success: false,
                 message: "Kindly verify your account",
             };
-            console.log("Login Failed: ", responseData, "\n\n");
+            console.log("Login Failed: ", responseData.message, "\n\n");
             // return res.status(401).json(responseData);
             return res.json(responseData);
         };
@@ -698,7 +694,8 @@ exports.logIn = async (req, res) => {
         
         // 7) Verify token to get Lifespan of Token
         const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
-        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);   // To make expire date begin with current date and time
+        // NOTE: USE new Date() function to make expire date begin with current date and time.
+        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
         
         // 8. Update user.tokenExpires with value of tokenExpiryDate
         existingUser.tokenExpires = tokenExpiryDate;
@@ -756,11 +753,99 @@ exports.logIn = async (req, res) => {
             success: false, 
             message: "Internal Server Error",
         };
-        console.log("Unexpected error during Login 1: ", responseData);
+        console.log("Unexpected error during Login 1: ", responseData.message);
         console.error("Unexpected error during Login 2: ", error);
         return res.status(500).json(responseData);  
     };
 
+};  // THOROUGHLY Tested === Working
+
+// Route to verify Google token
+exports.googleSignOn = async (req, res) => {
+    
+    try {
+        const { email } = req.body;
+
+        // 1) Find Existing User
+        const existingUser = await User.findOne({ email: email });
+        
+        console.log("***********************************************",
+            "\n******       🔐   ACTIVE USER  🔑        ******",
+            "\n***********************************************",
+            "\nUser ID: ", existingUser._id,
+            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+            "\nUser E-mail: ", existingUser.email,
+            "\n**********************************************",
+            "\n****      ADDITIONAL USER INFORMATION      ****",
+            "\n***********************************************",
+            "\nPrev. AccessToken: ", existingUser.accessToken,
+            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
+            "\n***********************************************",
+            "\n\n");
+
+        // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
+        const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
+        
+        // 7) Verify token to get Lifespan of Token
+        const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
+        // NOTE: USE new Date() function to make expire date begin with current date and time.
+        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
+        
+        // 8. Update user.tokenExpires with value of tokenExpiryDate
+        existingUser.tokenExpires = tokenExpiryDate;
+        
+        // 9. Update user.accessToken with value of token
+        existingUser.accessToken = token;
+
+        // 10. Save to Update USER DETAILS with values parsed
+        const loggedInUser = await existingUser.save();
+    
+        for (var n = 0; n < loggedInUser.roles.length; n++) {
+            if (n < loggedInUser.roles.length) {
+                // ***********************************************************************************//
+                // *************                CURRENT LOGGED-IN USER                  **************//
+                // ***********************************************************************************//
+                console.log("***********************************************",
+                    "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+                    "\n***********************************************",
+                    // "\nUser ID: ", loggedInUser._id,
+                    "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
+                    "\nUser E-mail: ", loggedInUser.email,
+                    "\n***********************************************",
+                    "\n****      ADDITIONAL USER INFORMATION      ****",
+                    "\n***********************************************",
+                    "\nUser ROLE(S): ", loggedInUser.roles[n].role,
+                    // "\nUser isVerified: ", loggedInUser.isVerified,
+                    "\nUser Status: ", loggedInUser.status.toUpperCase(),
+                    "\nUser AccessToken: ", loggedInUser.accessToken,
+                    "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
+                    "\n***********************************************",
+                    "\n=====>       CURRENT LOGGED-IN USER      <=====",
+                    "\n***********************************************",
+                    "\n\n");
+            };
+        };
+        
+        // ***********************************************************************************//
+        // NOTE:- By assigning Token to Logged-in User,
+        //        Now you can use User's "accessToken" 
+        //        for Headers Authentication & Authorization
+        // ***********************************************************************************//  
+        const responseData = {
+            success: true,
+            data: loggedInUser,
+            // data: {
+            //     userId: existingUser._id,
+            //     accessToken: existingUser.accessToken,
+            // },
+            message: "Successful",
+        };
+        return res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error('Error saving code:', error);
+        res.status(500).json({ message: 'Failed to save code' });
+    };
 };  // THOROUGHLY Tested === Working
 
 // Our FIND All USERS Logic starts here
@@ -1043,6 +1128,16 @@ exports.deleteAllUsers = (req, res) => {
 
 
 
+// const usernameExists = await User.findOne({ userName: username.toLowerCase() });
+// if (usernameExists) {
+//     const responseData = {
+//         success: false,
+//         message: "Username exists. Sign In"
+//     };
+//     // console.log("Username Exists: ", usernameExists);
+//     console.log("Username Exists: ", responseData);
+//     return res.status(200).json(responseData);
+// }
 
 
 
