@@ -72,16 +72,21 @@ function SignIn() {
             .then((response) => {
                 const { success, data, message } = response.data;
                 var successMsg = document.querySelector('#logInForm .success');
-                
+                var ssoLinks = document.querySelector("#logInForm .alt_sso");
+
                 if (success === false || message === "No user found") {
                     // Perform These Actions
                     setFormSubmitted(success);
                     setFormMessage(message);
                 } else {
                     // Perform These Actions
+                    window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
                     setFormMessage(message);
                     setFormSubmitted(success);
                     localStorage.setItem("user", JSON.stringify(data));
+
+                    ssoLinks?.classList.remove("flex");
+                    ssoLinks?.classList.add("hidden");
 
                     successMsg?.classList.remove('success');
                     successMsg?.classList.add('success-message-info');
@@ -207,7 +212,6 @@ function SignIn() {
                 // Perform These Actions
             } else {
                 // Perform These Actions
-                window.scrollTo({ left: 0, top: 400, behavior: "smooth" });
                 setFormMessage(message);
                 setFormSubmitted(success);
                 localStorage.setItem('user', JSON.stringify(data));
@@ -368,7 +372,7 @@ function SignIn() {
                 {/* PAGE NAV */}
 
 
-                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-0 pb-8 px-8 px-8 z-1' onSubmit={handleLogin}>
+                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-2 pb-8 px-8 z-1' onSubmit={handleLogin}>
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -429,19 +433,18 @@ function SignIn() {
                     
                     <hr className="mt-10 mb-8"></hr>
 
-                    
-                    {/* Alternative Sign-In Methods */}
-                    <div className="flex justify-center align-middle gap-10">
-                        <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
-                    </div>
-                    {/* Alternative Sign-In Methods */}
-
-
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">
                         {formMessage}
                     </div>
                     {/* Success Message */}
+
+                                        
+                    {/* Alternative Sign-In Methods */}
+                    <div className="alt_sso flex justify-center align-middle gap-10">
+                        <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
+                    </div>
+                    {/* Alternative Sign-In Methods */}
                 </form>
             </div>
             {/* Login Form */}
