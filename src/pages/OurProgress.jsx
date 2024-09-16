@@ -41,7 +41,7 @@ const OurProgress = () => {
                 </label>
             </div>
 
-            <Nav/>
+            <Nav />
             <div className="absolute top-0 w-full -z-10">
                 <OurProgressBody />
                 <Footer />

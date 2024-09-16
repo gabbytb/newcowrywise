@@ -309,7 +309,7 @@ function SignIn() {
                     Accept: 'application/json'
                 },
             })
-            .then((response) => {
+            .then((response) => {               
                 setProfile(response.data);
             })
             .catch((error) => console.log("Failed Google Login: ", error));

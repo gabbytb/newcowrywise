@@ -4657,6 +4657,14 @@ progress#file {
   border-top-width: 1px;
 }
 
+.border-e{
+  border-inline-end-width: 1px;
+}
+
+.border-b{
+  border-bottom-width: 1px;
+}
+
 .border-solid{
   border-style: solid;
 }
@@ -5143,6 +5151,26 @@ progress#file {
   line-height: 1.375;
 }
 
+.text-2xl\/4{
+  font-size: 1.5rem;
+  line-height: 1rem;
+}
+
+.text-2xl\/relaxed{
+  font-size: 1.5rem;
+  line-height: 1.625;
+}
+
+.text-xl\/relaxed{
+  font-size: 1.25rem;
+  line-height: 1.625;
+}
+
+.text-41xl\/relaxed{
+  font-size: 1.54rem;
+  line-height: 1.625;
+}
+
 .font-black{
   font-weight: 900;
 }
@@ -5205,6 +5233,14 @@ progress#file {
 
 .tracking-supertight{
   letter-spacing: 0.015em;
+}
+
+.tracking-subtight{
+  letter-spacing: 0.18rem;
+}
+
+.tracking-tighten{
+  letter-spacing: 0.25rem;
 }
 
 .text-black{

@@ -4,7 +4,7 @@ module.exports = app => {
     const router = require('express').Router();
     const cors = require("cors");
     const corsOptions = {        
-        origin: ["http://127.0.0.1:3000"],
+        origin: ["http://localhost:3000"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     }

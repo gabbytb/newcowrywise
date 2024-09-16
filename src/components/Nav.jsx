@@ -25,8 +25,8 @@ const Nav = () => {
     return (
         <>
             {/* Top bar */}
-            <Link className="bg-skin-darkblue h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer"
-                to={"/user/signup"}>Welcome to Samuel Akinola Foundation 💙 <strong className="text-xl">&nbsp; Sign Up ↗</strong>
+            <Link className="bg-skin-darkblue h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"}>Welcome to Samuel Akinola Foundation 💙 
+                <strong className="text-xl">&nbsp; Sign Up ↗</strong>
                 {/* target="_blank" */}
             </Link>
             {/* Top bar */}
