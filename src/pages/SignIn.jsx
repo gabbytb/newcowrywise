@@ -52,7 +52,7 @@ function SignIn() {
 
     // eslint-disable-next-line
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // console.log("Login Successful: ", formSubmitted);
+    // console.log("Login Successful: ", isLoggedIn);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
