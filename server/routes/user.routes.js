@@ -55,10 +55,12 @@ module.exports = app => {
     router.post("/api/v1/auth/login", users.logIn);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/login") for the frontend to access.
 
-    
-    router.post('/api/v1/auth/gmail/login', users.googleSignOn);
-    
 
+    // Login User with G-Mail
+    router.post('/api/v1/auth/gmail/login', users.googleSignOn);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/gmail/login") for the frontend to access.
+
+        
     // Fetch all "Users" DATA from using API
     router.get("/api/v1/auth/account/by-role/ROLE_USERS", users.findAllUsers);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.

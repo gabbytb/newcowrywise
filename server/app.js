@@ -3,13 +3,14 @@ const cors = require('cors');
 const DB_Connection = require("./config/dbConfig");
 require("dotenv").config();
 const { port } = process.env;
-const { OAuth2Client } = require('google-auth-library');
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 1. SERVER INSTANCE
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,26 +21,15 @@ const app = express();
 DB_Connection();
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 3. GOOGLE AUTH: Configure OAuth2 client
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const oauth2Client = new OAuth2Client('1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com');
-// const oauth2Client = new OAuth2Client();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   th2Client()
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
-// 4. MIDDLEWARES ===========================================================================================//
+// 3. MIDDLEWARES ===========================================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(cors());
-const corsOptions = {        
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +52,7 @@ app.use(express.json({ limit: '50mb' , extended: true }));
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 5. ROUTES:-  Home Page
+// 4. ROUTES:-  Home Page
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/', (req, res) => {
     const responseData = {
@@ -73,54 +63,12 @@ app.get('/', (req, res) => {
     return res.json(responseData);
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 1. Call the Google SDK from the frontend using whatever frontend
-//2. Extract the code or access token and send to your backend for verification.
-//3. Use your backend Google api to verify the code or token.
-//4. If verified, sign them in the backend and then send a response to frontend
-// app.post('/auth', async (req, res) => {
-    
-//     // Route to verify Google token
-//     try {
-    
-//         // get the code from frontend
-//         const code = req.headers.authorization;
-//         console.log('Authorization Code:', code);
-        
-//         // Exchange the authorization code for an access token
-//         const response = await axios.post('https://oauth2.googleapis.com/token', {
-//                 code,
-//                 client_id: '1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com',
-//                 client_secret: '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',
-//                 redirect_uri: 'postmessage',
-//                 grant_type: 'authorization_code'
-//         });
-//         const accessToken = response.data.access_token;
-//         console.log('Access Token:', accessToken);
-
-
-//         // Fetch user details using the access token
-//         const userResponse = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-//                                             headers: {
-//                                                 Authorization: `Bearer ${accessToken}`
-//                                             },
-//                                         });
-//         const userDetails = userResponse.data;
-//         console.log('User Details:', userDetails);
-
-//         // Process user details and perform necessary actions
-//         res.status(200).json({ message: 'Authentication successful' });
-//     } catch (error) {
-//         console.error('Error saving code:', error);
-//         res.status(500).json({ message: 'Failed to save code' });
-//     };
-
-// });
 
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  IMPORT:-  ROUTES
+// 5. IMPORT:-  ROUTES
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 require("./routes/user.routes")(app);
 require("./routes/role.routes")(app);
@@ -132,7 +80,7 @@ require("./routes/product.routes")(app);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SERVER:-  Port
+// 6. SERVER:-  Port
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let server = app.listen(port, process.env.IP, () => {
     let port = server.address().port;

@@ -105,7 +105,7 @@ const OurProgressSectionOne = () => {
     /***********************************************************************************************************************/
     // eslint-disable-next-line
     const [customersThumbnail, setCustomersThumbnail] = useState(customersThumbnails);
-    console.log("Customers Thumbnails: ", customersThumbnail);
+    // console.log("Customers Thumbnails: ", customersThumbnail);
     /***********************************************************************************************************************/
     // FOR: When "activeImage" state changes
     /***********************************************************************************************************************/

@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" id="scrollbar">
   <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      }) (window,document,'script','dataLayer','GTM-MM2Z27G9');
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GT-WB2R977Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'GT-WB2R977Q');
+    </script> -->
+    <!-- Google tag (gtag.js) -->
+     
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="icon" href="%PUBLIC_URL%/logo192.png" /> -->
@@ -8,10 +29,7 @@
     <!-- <link rel="icon" href="%PUBLIC_URL%/mern.ico" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1 maximum-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -32,9 +50,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
 
     <title>Reaching Out to Great Minds | Samuel Akinola Foundation</title>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->    
   </head>
   <body onscroll="myFunction()">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MM2Z27G9" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+     
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -47,6 +71,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    
     <script>
         function myFunction() {
             let scroll = window.scrollY;
@@ -56,17 +81,17 @@
             let beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
             
             if (scroll > 5) {
-              foundHeader?.classList.add('sticky-header');
-              foundHomeHeader?.classList.add('sticky-header');
-              foundScrollbar?.classList.add('no-scrollbar');
-              beforePseudoElement?.style.setProperty('--before-bg-color', "white");
-              beforePseudoElement?.style.setProperty('--after-bg-color', "white");
+                foundHeader?.classList.add('sticky-header');
+                foundHomeHeader?.classList.add('sticky-header');
+                foundScrollbar?.classList.add('no-scrollbar');
+                beforePseudoElement?.style.setProperty('--before-bg-color', "white");
+                beforePseudoElement?.style.setProperty('--after-bg-color', "white");
             } else {
-              foundHeader?.classList.remove('sticky-header');
-              foundHomeHeader?.classList.remove('sticky-header');
-              foundScrollbar?.classList.remove('no-scrollbar');
-              beforePseudoElement?.style.setProperty('--before-bg-color', "black");
-              beforePseudoElement?.style.setProperty('--after-bg-color', "black");
+                foundHeader?.classList.remove('sticky-header');
+                foundHomeHeader?.classList.remove('sticky-header');
+                foundScrollbar?.classList.remove('no-scrollbar');
+                beforePseudoElement?.style.setProperty('--before-bg-color', "black");
+                beforePseudoElement?.style.setProperty('--after-bg-color', "black");
            };
         };  
     </script>

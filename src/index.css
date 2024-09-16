@@ -17,7 +17,8 @@
          url('/src/assets/fonts/br-firma/BRFirmaCW-Light.woff2') format('woff2'), /* Super Modern Browsers */
          url('/src/assets/fonts/br-firma/BRFirmaCW-Light.woff') format('woff'), /* Pretty Modern Browsers */
          url('/src/assets/fonts/br-firma/BRFirmaCW-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('/src/assets/fonts/br-firma/BRFirmaCW-Light.svg#firma') format('svg'); /* Legacy iOS */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Light.svg#svgFontName') format('svg'); /* Legacy iOS */
+         /* url('/src/assets/fonts/br-firma/BRFirmaCW-Light.svg#firma') format('svg'); Legacy iOS */
     font-weight: 200;
     font-display: swap;
     font-style: normal;
@@ -30,7 +31,7 @@
          url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.woff2') format('woff2'), /* Super Modern Browsers */
          url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.woff') format('woff'), /* Pretty Modern Browsers */
          url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.svg#firma') format('svg'); /* Legacy iOS */
+         url('/src/assets/fonts/br-firma/BRFirmaCW-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
       font-weight: 400;
       font-display: swap;
       font-style: normal;
@@ -43,7 +44,7 @@
            url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.woff2') format('woff2'), /* Super Modern Browsers */
            url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.woff') format('woff'), /* Pretty Modern Browsers */
            url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
-           url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.svg#firma') format('svg'); /* Legacy iOS */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Medium.svg#svgFontName') format('svg'); /* Legacy iOS */
       font-weight: 500;
       font-display: swap;
       font-style: normal;
@@ -56,7 +57,7 @@
            url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
            url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.woff') format('woff'), /* Pretty Modern Browsers */
            url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.ttf')  format('truetype'), /* Safari, Android, iOS */
-           url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.svg#firma') format('svg'); /* Legacy iOS */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-SemiBold.svg#svgFontName') format('svg'); /* Legacy iOS */
       font-weight: 600;
       font-display: swap;
       font-style: normal;
@@ -69,7 +70,7 @@
            url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.woff2') format('woff2'), /* Super Modern Browsers */
            url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.woff') format('woff'), /* Pretty Modern Browsers */
            url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
-           url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.svg#firma') format('svg'); /* Legacy iOS */
+           url('/src/assets/fonts/br-firma/BRFirmaCW-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
       font-weight: 700;
       font-display: swap;
       font-style: normal;

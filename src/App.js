@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import ReactGA from 'react-ga';
+// import { useEffect } from "react";
+// import ReactGA from 'react-ga';
 import { useRoutes } from "react-router-dom";
-import { 
+import {
   Home,
   OurProgress, DonationPage,
   SignUp,
@@ -14,14 +14,24 @@ import {
 } from "./pages";
 
 
-// PRODUCTION Data for Travelbeta Blog
-// const TRACKING_ID = "UA-277984631-1";   // OLD_TRACKING_ID
-// const TRACKING_ID = "397205433";        // NEW_TRACKING_ID
 
 
-// DEVELOPMENT Data
-const TRACKING_ID = "AW-402104991";
-ReactGA.initialize(TRACKING_ID);
+// DEVELOPMENT Data [GOOGLE ANALYTICS]
+// const reactGA = "G-0LBZW5F0BD";
+
+// DEVELOPMENT Data [GOOGLE TAG]
+// const reactGA = "GT-WB2R977Q"
+
+// DEVELOPMENT Data [GOOGLE TAG MANAGER]
+// const reactGA = "GTM-MM2Z27G9";
+
+
+
+
+// Initialize Google Analytics
+// ReactGA.initialize(`${reactGA}`);
+
+
 
 
 // The clearTimeout() method is a powerful JavaScript tool 
@@ -32,12 +42,12 @@ ReactGA.initialize(TRACKING_ID);
 // or delay a certain action within the code.
 export default function App() {
 
-
-    useEffect(() => {
-        ReactGA.pageview(window.location.pathname + window.location.search);
-        // let pageViews = 
-        // console.log("TRACKING PAGE VIEWS: ", pageViews);
-    }, []);
+    
+    // useEffect(() => {      
+    //     // Optionally, you can use ReactGA.pageview to track page views
+    //     // ReactGA.set({ page: window.location.pathname });
+    //     ReactGA.pageview(window.location.pathname + window.location.search);
+    // }, []);
     
 
     const routesConfig = [       
@@ -58,6 +68,54 @@ export default function App() {
     const routes = useRoutes(routesConfig);
     return routes;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   return (
 //     <Routes>
 //       <Route path="/" element={<Home />} />

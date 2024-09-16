@@ -694,12 +694,11 @@ exports.logIn = async (req, res) => {
         
         // 7) Verify token to get Lifespan of Token
         const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
-        // NOTE: USE new Date() function to make expire date begin with current date and time.
-        const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
         
         // 8. Update user.tokenExpires with value of tokenExpiryDate
-        existingUser.tokenExpires = tokenExpiryDate;
-        
+        // NOTE: USE new Date() function to make expire date begin with current date and time.
+        existingUser.tokenExpires = new Date(verifiedToken.exp * 1000);
+                
         // 9. Update user.accessToken with value of token
         existingUser.accessToken = token;
 
@@ -768,7 +767,7 @@ exports.googleSignOn = async (req, res) => {
     try {
 
         // 1) Find Existing User
-        const existingUser = await User.findOne({ email }); 
+        const existingUser = await User.findOne({ email: email }); 
 
         // 2) If User Exists or Not
         if (existingUser) {
@@ -791,12 +790,12 @@ exports.googleSignOn = async (req, res) => {
             
             // 7) Verify token to get Lifespan of Token
             const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
-            // NOTE: USE new Date() function to make expire date begin with current date and time.
-            const tokenExpiryDate = new Date(verifiedToken.exp * 1000);
             
             // 8. Update user.tokenExpires with value of tokenExpiryDate
-            existingUser.tokenExpires = tokenExpiryDate;
-            
+            // NOTE: USE new Date() function to make expire date begin with current date and time.
+            existingUser.tokenExpires = new Date(verifiedToken.exp * 1000);
+                    
+            // existingUser.tokenExpires = tokenExpiryDate;
             // 9. Update user.accessToken with value of token
             existingUser.accessToken = token;
 
@@ -844,6 +843,7 @@ exports.googleSignOn = async (req, res) => {
                 message: "Successful",
             };
             return res.status(200).json(responseData);
+
         } else {
             const responseData = {
                 success: false,
@@ -851,7 +851,7 @@ exports.googleSignOn = async (req, res) => {
             };
             return res.json(responseData);
         };
-        
+
     } catch (error) {
         console.error('Error saving code:', error);
         res.status(500).json({ message: 'Failed to save code' });
