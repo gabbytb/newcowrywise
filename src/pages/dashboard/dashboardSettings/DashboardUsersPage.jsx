@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState, } from "react";
 import { Link, } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
-import axios from "axios";
+import api from "../../../api";
 
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
@@ -59,13 +59,13 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
     // FUNCTION TO LOG-OUT LOGGED-IN USER
     // ****************************************************************************
     function logOut() {
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
         // Clear User Details from Local Storage
         localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
         // redirect to Login Page
-        let redirToURI = "/user/login";
-        window.location = redirToURI;
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
     };
     // ****************************************************************************
     // DESTRUCTURE CURRENTLY ACTIVE USER:-
@@ -151,7 +151,7 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
             async function fetchAllUsers() {
-                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}`)
+                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { usersList, pagination } = data;

@@ -1,6 +1,6 @@
 import { useEffect, useState, } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../../api";
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 
@@ -117,8 +117,8 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
     // **************************************************************************************************
     useEffect(() => {      
         function findUserByID() {
-            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage/${id}`;
-            axios.get(url)
+            const url = `/api/v1/admin/users/manage/${id}`;
+            api.get(url)
             .then((response) => {
                 const { success, data, message } = response.data;
                 if ((!success) || (message === "Failed to retrieve Single User")) {

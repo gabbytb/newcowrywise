@@ -60,13 +60,13 @@ const AdminDashboard = ({ isLoggedIn }) => {
     // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
     // ***************************************************************************
     function logOut() {
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
         // Clear User Details from Local Storage
         localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
         // redirect to Login Page
-        let redirToURI = "/user/login";
-        window.location = redirToURI;
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
     };
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-

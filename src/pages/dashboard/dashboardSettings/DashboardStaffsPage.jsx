@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState, } from "react";
 import { Link, } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
-import axios from "axios";
+import api from "../../../api";
 
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
@@ -97,14 +97,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
     // FUNCTION TO LOG-OUT LOGGED-IN USER
     // ****************************************************************************
+
+    // *********************************************
+    // FUNCTION TO LOG-OUT LOGGED-IN USER
+    // *********************************************
     function logOut() {
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
         // Clear User Details from Local Storage
         localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
         // redirect to Login Page
-        let redirToURI = "/user/login";
-        window.location = redirToURI;
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
     };
     // ****************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER:-
@@ -117,15 +121,18 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     // ****************************************************************************
 
 
+
+
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [allStaffs, setAllStaffs] = useState([]);
-    console.log("All ADMIN USERS: ", allStaffs);
+    // console.log("All ADMIN USERS: ", allStaffs);
     
     // eslint-disable-next-line
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
     // console.log("TOTAL ADMIN USERS: ", totalAdminUsers);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const limit = 10; // Number of items per page
@@ -149,7 +156,7 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
             // ****************************************************************************             
             async function fetchAllStaffs() {
-                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
+                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;

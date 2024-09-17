@@ -1,6 +1,7 @@
 import { useEffect, useState, } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import { googleLogout } from "@react-oauth/google";
+import api from "../../../api";
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 
@@ -32,10 +33,14 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     // FUNCTION TO LOG-OUT LOGGED-IN USER
     // *********************************************
     function logOut() {
+        // Clear User Details from Local Storage
         localStorage.clear();
-        const redirToLogin = "/user/login";
-        window.location = redirToLogin;
-    }
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
+        // redirect to Login Page
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
+    };
     // *********************************************
     // *********************************************
 
@@ -116,17 +121,19 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     // ************************************
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
-    const { id } = useParams();
+    const { id } = useParams();   
     const [ user, setUser ] = useState(null);
     console.log("Retrieved USER: ", user?.roles);
+
+    const leftArrow = '<';
 
     // **************************************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
     // **************************************************************************************************
     useEffect(() => {     
         function findUserByID() {
-            const url = `http://127.0.0.1:8000/api/v1/admin/users/manage/${id}`;
-            axios.get(url)
+            const url = `/api/v1/admin/users/manage/${id}`;
+            api.get(url)
             .then((response) => {
                 const { success, data, message } = response.data;
                 if ((!success) || (message === "User not found")) {
@@ -156,7 +163,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     }, [id]);
     // *******************************************************************************************//
     // *******************************************************************************************//
-            
+
     
     // if (user?.roles[n]?.role === "ROLE_ADMIN") {
     //     role = "Admin";
@@ -433,63 +440,25 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                             {/*********************   SECTION BODY STARTS HERE   *******************/}
 
                             <div className="right-bottom-pane relative h-full flex flex-col bg-skin-mild-gray">                               
-                                <div className="flex flex-col gap-10 justify-between mx-9 mb-8">
-
-                                    {/* GO BACK ONE STEP */}
-                                    {/* <button> 
-                                        <Link to={"/admin/staffs"}>Back</Link>
-                                    </button>  */}
-                                    {/* GO BACK ONE STEP */}
-
-
-                                    {/* USER DETAILS NAV LINKS */}
-                                    {/* <div className="w-full h-28 flex rounded-xl shadow-7xl">
-                                        <ul className="flex flex-row justify-around bg-white w-full h-28">
-                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
-                                                <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}#personal`} 
-                                                onClick={() => setActiveDisplay("staffsDetails")}>
-                                                    Personal Info
-                                                </Link>
-                                            </li>
-                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
-                                                <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}#services`} 
-                                                onClick={() => setActiveDisplay("staffsDetails")}>
-                                                    User's Services
-                                                </Link>
-                                            </li>
-                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
-                                                <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}#contacts`} 
-                                                onClick={() => setActiveDisplay("staffsDetails")}>
-                                                    User's Contacts
-                                                </Link>
-                                            </li>
-                                            <li className="w-1/4 text-2xl font-medium cursor-pointer">
-                                                <Link className="w-full h-full flex justify-center items-center" 
-                                                to={`/admin/staffs/${id}#reviews`} 
-                                                onClick={() => setActiveDisplay("staffsDetails")}>
-                                                    Reviews
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div> */}
-                                    {/* USER DETAILS NAV LINKS */}
-
-
-                                    {/* <div className="w-full h-72 bg-red-500">
-                                        
-                                    </div> */}
-                                    
+                                <div className="flex flex-col gap-10 justify-between mx-9 mb-8">                                    
                                     <div class="bg-gray-100">
                                         <div class="container mx-auto py-8">
-                                            <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
-                                                <div class="col-span-4 sm:col-span-3">
+
+                                            {/* GO BACK ONE STEP */}
+                                            <div className="flex px-4 mt-6 mb-12">  
+                                                <button>
+                                                    <Link className="font-bold text-3xl/normal" to={"/admin/staffs"}>{leftArrow} Back</Link>
+                                                </button>                                            
+                                            </div>
+                                            {/* GO BACK ONE STEP */}
+
+
+                                            <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
+                                                <div className="col-span-4 sm:col-span-4">
                                                     <div class="bg-white shadow rounded-lg p-6">
                                                         <div class="flex flex-col items-center">
                                                             <img src="https://randomuser.me/api/portraits/men/94.jpg" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"/>
-                                                            <h1 class="text-xl font-bold capitalize">{user?.firstName} {user?.lastName}</h1>
+                                                            <h1 class="text-2xl/normal font-bold capitalize">{user?.firstName}  {user?.lastName}</h1>
                                                             {
                                                                 user?.roles?.map((role) => {
                                                                     if (role === "ROLE_ADMIN") {
@@ -519,7 +488,7 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
                                                 </div>
 
 
-                                                <div class="col-span-4 sm:col-span-9">
+                                                <div class="col-span-4 sm:col-span-8">
                                                     <div class="bg-white shadow rounded-lg p-6 flex flex-col gap-6">
                                                         <div className="flex flex-col">
                                                             <h2 class=" text-3xl capitalize font-bold tracking-wider mb-4">About Me</h2>
