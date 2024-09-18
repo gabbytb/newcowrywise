@@ -119,7 +119,7 @@ function SignIn() {
                     }, 2500);
 
                     setTimeout(() => {
-                        navigate("/admin/dashboard")
+                        navigate("/admin/dashboard");
                     }, 2800);
                     // Perform These Actions
                 };
@@ -254,7 +254,7 @@ function SignIn() {
                     }, 2500);
                 
                     setTimeout(() => {
-                        navigate("/admin/dashboard")
+                        navigate("/admin/dashboard");
                     }, 2800);
                     // Perform These Actions
                 };
@@ -266,6 +266,7 @@ function SignIn() {
     };
 
    
+
 
 
 
@@ -289,7 +290,7 @@ function SignIn() {
                 };
                 return await localStorage.setItem("tokEn", JSON.stringify(jsonObjData));
             } else {
-                return await localStorage.clear();
+                return await localStorage.removeItem("tokEn");
             };
         };
         saveTokenInStorage();
