@@ -41,7 +41,33 @@ import DashboardMenuCard from "./DashboardMenuCard";
 
 
 
+
+
+// TEST COMPONENTS
+import Sidebar from "./Sidebar/Sidebar";
+import CardBarChart from "./Cards/CardBarChart";
+import CardLineChart from "./Cards/CardLineChart";
+import CardPageVisits from "./Cards/CardPageVisits";
+import CardSocialTraffic from "./Cards/CardSocialTraffic";
+// DROPDOWNS
+import NotificationDropdown from "./Dropdowns/NotificationDropdown";
+import UserDropdown from "./Dropdowns/UserDropdown";
+
+
+
+
 export {
+
+    // IMPORTED TEST COMPONENTS
+    Sidebar,
+    CardBarChart,
+    CardLineChart,
+    CardPageVisits,
+    CardSocialTraffic,
+
+
+
+
     // HEADER
     HomeNav,
     Nav,
@@ -79,5 +105,9 @@ export {
     // ADMIN DASHBOARD
     DashboardMenuCard,    
     // ADMIN DASHBOARD
+
+
+    NotificationDropdown,
+    UserDropdown,
 }
 

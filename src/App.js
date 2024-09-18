@@ -1,6 +1,6 @@
 // import { useEffect } from "react";
 // import ReactGA from 'react-ga';
-import { useRoutes } from "react-router-dom";
+import { useRoutes, } from "react-router-dom";
 import {
   Home,
   OurProgress, DonationPage,
@@ -12,8 +12,11 @@ import {
   DashboardStaffsPage, DashboardStaffsDetailsPage,
   AccountUsers,
 } from "./pages";
-
-
+import { 
+  Admin 
+} from "./layouts";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/styles/tailwind.css";
 
 
 // DEVELOPMENT Data [GOOGLE ANALYTICS]
@@ -50,7 +53,12 @@ export default function App() {
     // }, []);
     
 
-    const routesConfig = [       
+    const routesConfig = [          
+        //  TEST ROUTES
+        { path: "/dash", element: <Admin /> },
+
+
+        //  MAIN ROUTES
         { path: "/", element: <OurProgress /> },
         { path: "/home", element: <Home /> },
         { path: "/donations", element: <DonationPage /> },
