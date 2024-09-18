@@ -44,6 +44,9 @@ import DashboardMenuCard from "./DashboardMenuCard";
 
 
 // TEST COMPONENTS
+import AdminNavbar from "./Navbars/AdminNavbar";
+import HeaderStats from "./Headers/HeaderStats";
+import CardStats from "./Cards/CardStats";
 import Sidebar from "./Sidebar/Sidebar";
 import CardBarChart from "./Cards/CardBarChart";
 import CardLineChart from "./Cards/CardLineChart";
@@ -59,6 +62,9 @@ import UserDropdown from "./Dropdowns/UserDropdown";
 export {
 
     // IMPORTED TEST COMPONENTS
+    AdminNavbar,
+    HeaderStats,
+    CardStats,
     Sidebar,
     CardBarChart,
     CardLineChart,

@@ -20,7 +20,7 @@ import Preloader from '../components/Preloader';
 function SignIn() {
 
 
-    // console.clear();
+    console.clear();
         
     const navigate = useNavigate();
 
@@ -40,18 +40,114 @@ function SignIn() {
 
 
     
+
+    // *************************************** //
+    // *** USER PAYLOAD FOR GOOGLE SIGN IN *** //
+    // *************************************** //
+    // new Date(verifiedToken.exp * 1000);
+    const [ googleUser, setGoogleUser ] = useState([]);
+    console.log("Google User: ", googleUser);
+    
+    const [ profile, setProfile ] = useState([]);
+    console.log("Profile: ", profile);
+    
+    // eslint-disable-next-line
+    const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
+    console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
+        onError: (error) => console.log('Login Failed: ', error)
+    });
+
+    useEffect(() => {
+        if (googleUser.length !== 0) {
+            googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
+                headers: {
+                    Authorization: `Bearer ${googleUser.access_token}`,
+                    Accept: 'application/json'
+                },
+            })
+            .then((response) => {               
+                setProfile(response.data);
+            })
+            .catch((error) => console.log("Failed Google Login: ", error));
+        };
+    }, [googleUser]);
+   
+    useEffect(() => {
+        if (profile?.length !== 0) {
+            const uri = "/api/v1/auth/gmail/login";
+            const payload = {
+                email: profile?.email,
+            };
+
+            api.post(uri, payload)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
+                var successMsg = document.querySelector('#logInForm .success');
+                var ssoLinks = document.querySelector("#logInForm .alt_sso");
+         
+                
+                if (!success && message === "No user found") {
+                    setIsLoggedInWithGmail(success);
+                    setLoginFormMessage(message);
+
+                    // ssoLinksHr?.classList.remove("hidden");
+                    // ssoLinks?.classList.add("flex");
+                    // ssoLinks?.classList.remove("hidden");
+                } else {
+
+                    // Perform These Actions                  
+                    window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
+                    
+                    ssoLinksHr?.classList.add("hidden");
+                    ssoLinks?.classList.remove("flex");
+                    ssoLinks?.classList.add("hidden");
+
+                    setLoginFormMessage(message);
+                    setIsLoggedInWithGmail(success);
+                    localStorage.setItem("user", JSON.stringify(data));
+
+                    successMsg?.classList.remove('success');
+                    successMsg?.classList.add('success-message-info');
+
+                    setTimeout(() => {
+                        successMsg?.classList.remove('success-message-info');
+                        successMsg?.classList.add('success');
+                    }, 2500);
+
+                    setTimeout(() => {
+                        navigate("/admin/dashboard")
+                    }, 2800);
+                    // Perform These Actions
+                };
+            })
+            .catch((error) => {
+                console.log("Encountered unexpected error: ", error);
+            });
+        };
+    // eslint-disable-next-line
+    }, [profile]);
+
+
+
+
+
+    
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN IN *** //
     // ******************************** //
     const [user, setUser] = useState({ email: "", password: "", });
-    // console.log("Login Attempt By: ", user.email);
+    console.log("Login Attempt By: ", user.email);
 
     const [loginFormMessage, setLoginFormMessage] = useState(null);
-    // console.log("Login Attempt: ", loginFormMessage);
+    console.log("Login Attempt: ", loginFormMessage);
 
     // eslint-disable-next-line
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // console.log("Login Successful: ", isLoggedIn);
+    console.log("Login Successful: ", isLoggedIn);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -172,6 +268,7 @@ function SignIn() {
    
 
 
+
     // ************************************** //
     // *** USER PAYLOAD FOR RE-VALIDATION *** //
     // ************************************** //
@@ -281,95 +378,6 @@ function SignIn() {
 
 
 
-
-    // *************************************** //
-    // *** USER PAYLOAD FOR GOOGLE SIGN IN *** //
-    // *************************************** //
-    // new Date(verifiedToken.exp * 1000);
-    const [ googleUser, setGoogleUser ] = useState([]);
-    // console.log("Google User: ", googleUser);
-    
-    const [ profile, setProfile ] = useState([]);
-    // console.log("Profile: ", profile);
-    
-    // eslint-disable-next-line
-    const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
-    // console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
-
-    const login = useGoogleLogin({
-        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
-        onError: (error) => console.log('Login Failed: ', error)
-    });
-
-    useEffect(() => {
-        if (googleUser.length !== 0) {
-            googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
-                headers: {
-                    Authorization: `Bearer ${googleUser.access_token}`,
-                    Accept: 'application/json'
-                },
-            })
-            .then((response) => {               
-                setProfile(response.data);
-            })
-            .catch((error) => console.log("Failed Google Login: ", error));
-        };
-    }, [googleUser]);
-   
-    useEffect(() => {
-        if (profile?.length !== 0) {
-            const uri = "/api/v1/auth/gmail/login";
-            const payload = {
-                email: profile?.email,
-            };
-                    
-            api.post(uri, payload)
-            .then((response) => {
-                const { success, data, message } = response.data;
-                var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
-                var successMsg = document.querySelector('#logInForm .success');
-                var ssoLinks = document.querySelector("#logInForm .alt_sso");
-         
-                if (!success && message === "No user found") {
-                    setIsLoggedInWithGmail(success);
-                    setLoginFormMessage(message);
-
-                    // ssoLinksHr?.classList.remove("hidden");
-                    // ssoLinks?.classList.add("flex");
-                    // ssoLinks?.classList.remove("hidden");
-                } else {
-
-                    // Perform These Actions                  
-                    window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
-                    
-                    ssoLinksHr?.classList.add("hidden");
-                    ssoLinks?.classList.remove("flex");
-                    ssoLinks?.classList.add("hidden");
-
-                    setLoginFormMessage(message);
-                    setIsLoggedInWithGmail(success);
-                    localStorage.setItem("user", JSON.stringify(data));
-
-                    successMsg?.classList.remove('success');
-                    successMsg?.classList.add('success-message-info');
-
-                    setTimeout(() => {
-                        successMsg?.classList.remove('success-message-info');
-                        successMsg?.classList.add('success');
-                    }, 2500);
-
-                    setTimeout(() => {
-                        navigate("/admin/dashboard")
-                    }, 2800);
-                    // Perform These Actions
-                };
-            })
-            .catch((error) => {
-                console.log("Encountered unexpected error: ", error);
-            });
-        };
-    // eslint-disable-next-line
-    }, [profile]);
 
 
     

@@ -2,6 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import NotificationDropdown from "../Dropdowns/NotificationDropdown";
 import UserDropdown from "../Dropdowns/UserDropdown";
+import { 
+    brandOfficialLogo,
+} from "../../assets/images";
+
+
 
 
 
@@ -10,6 +15,7 @@ import UserDropdown from "../Dropdowns/UserDropdown";
 export default function Sidebar() {
     
     const [collapseShow, setCollapseShow] = useState("hidden");
+
 
     return (
         <>
@@ -20,7 +26,9 @@ export default function Sidebar() {
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
-                    <Link className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" to="/">SAF</Link>
+                    <Link className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" to="/">
+                        <img src={brandOfficialLogo} alt="brand logo" />
+                    </Link>
                     {/* User */}
                     <ul className="md:hidden items-center flex flex-wrap list-none">
                         <li className="inline-block relative">

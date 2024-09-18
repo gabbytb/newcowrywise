@@ -1,95 +1,139 @@
 import React from "react";
+import { googleLogout } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
+import {
+  adminDashboardIcon,  
+} from "../../assets/images";
 
 
 
 
 
-const UserDropdown = () => {
-  // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
-  
-  
-  const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
-  };
-  
-  
-  const closeDropdownPopover = () => {
-    setDropdownPopoverShow(false);
-  };
 
 
-  return (
-    <>
-      <Link
-        className="text-blueGray-500 block"
-        to="#pablo"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-            <img alt="..." className="w-full rounded-full align-middle border-none shadow-lg" src={require("../../assets/img/team-1-800x800.jpg").default} />
-          </span>
-        </div>
-      </Link>
-      <div
-        ref={popoverDropdownRef}
-        className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-        }
-      >
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Action
-        </a>
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Another action
-        </a>
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Something else here
-        </a>
-        <div className="h-0 my-2 border border-solid border-blueGray-100" />
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Seprated link
-        </a>
-      </div>
-    </>
-  );
+const UserDropdown = ({ isLoggedIn }) => {
+
+      // dropdown props
+      const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+      const btnDropdownRef = React.createRef();
+      const popoverDropdownRef = React.createRef();
+        
+      const openDropdownPopover = () => {
+        createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
+          placement: "bottom-start",
+        });
+        setDropdownPopoverShow(true);
+      };
+      
+      const closeDropdownPopover = () => {
+        setDropdownPopoverShow(false);
+      };
+
+
+
+
+      // ***************************************************************************
+      // CURRENT ACTIVE USER:-
+      // ***************************************************************************
+      isLoggedIn = JSON.parse(localStorage.getItem("user"));
+      // ***************************************************************************
+      // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
+      // ***************************************************************************
+      function logOut() {
+          // Clear User Details from Local Storage
+          localStorage.clear();
+          // log out function to log the user out of google and set the profile array to null
+          googleLogout();
+          // redirect to Login Page
+          const redirToLOGIN = "/user/login";
+          window.location.replace(redirToLOGIN);
+      };
+      // ***************************************************************************
+      // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
+      // ***************************************************************************
+      const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+      const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+      // ***************************************************************************
+      // ***************************************************************************
+
+
+
+
+    return (
+        <>
+            <Link to="#pablo" className="text-blueGray-500 block" 
+                ref={btnDropdownRef}
+                onClick={(e) => {
+                    e.preventDefault();
+                    dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover(); 
+                }}>
+                <div className="flex flex-row space-x-6">
+                    <div className="flex flex-col">
+                        <span className="font-bold text-2xl tracking-supertight text-white">
+                            {userEmail}
+                        </span>
+                        {
+                            userRoles?.map((name) => {
+                                var adminRole = 'admin', editorRole = 'editor', staffRole = 'staff', userRole = 'user', noRole = 'No role assigned';
+                                if (name?.role === "ROLE_ADMIN")  {
+                                        return (
+                                            <span className="text-lg tracking-supertight font-bold text-white">{adminRole}</span>
+                                        );
+                                } else if (name?.role === "ROLE_EDITOR")  {
+                                        return (
+                                            <span className="text-lg tracking-supertight font-bold text-white">{editorRole}</span>
+                                        );
+                                } else if (name?.role === "ROLE_STAFF")  {
+                                    return (
+                                        <span className="text-lg tracking-supertight font-bold text-white">{staffRole}</span>
+                                    );
+                                } else if (name?.role === "ROLE_USERS")  {
+                                    return (
+                                        <span className="text-lg tracking-supertight font-bold text-white">{userRole}</span>
+                                    );
+                                } else {
+                                        return (
+                                            <span className="text-lg tracking-supertight font-bold text-red-500">{noRole}</span>
+                                        );
+                                };
+                            })
+                        }
+                    </div>
+                    <div className="items-center flex">
+                        <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+                          <img src={adminDashboardIcon} alt="..." className="w-full rounded-full align-middle border-none shadow-lg" 
+                          // src={require("../../assets/img/team-1-800x800.jpg").default} 
+                          />
+                        </span>
+                    </div>
+                </div>
+            </Link>
+
+
+            <div ref={popoverDropdownRef} className={(dropdownPopoverShow ? "block " : "hidden ") 
+                + "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"}>
+
+                <Link to="#pablo" onClick={(e) => e.preventDefault()} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    Action
+                </Link>
+                
+                <Link to="#pablo" onClick={(e) => e.preventDefault()} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    Another action
+                </Link>
+
+                <Link to="#pablo" onClick={(e) => e.preventDefault()} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    Something else here
+                </Link>
+                
+                <div className="h-0 my-2 border border-solid border-blueGray-100" />
+                
+                <Link to="/admin/dashboard?logout" onClick={logOut} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    Log Out
+                </Link>
+            </div>
+        </>
+    );
 };
 
 export default UserDropdown;

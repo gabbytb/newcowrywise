@@ -1,22 +1,23 @@
 // import { useEffect } from "react";
 // import ReactGA from 'react-ga';
-import { useRoutes, } from "react-router-dom";
+import { Routes, Route, } from "react-router-dom";
 import {
-  Home,
-  OurProgress, DonationPage,
+  // Home,
+  OurProgress, 
+  // DonationPage,
   SignUp,
-  VerifySignUp,
+  // VerifySignUp,
   SignIn,
-  AdminDashboard, 
-  DashboardUsersPage, DashboardUsersDetailsPage,
-  DashboardStaffsPage, DashboardStaffsDetailsPage,
-  AccountUsers,
+  // AdminDashboard, 
+  // DashboardUsersPage, DashboardUsersDetailsPage,
+  // DashboardStaffsPage, DashboardStaffsDetailsPage,
+  // AccountUsers,
 } from "./pages";
 import { 
   Admin 
 } from "./layouts";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./assets/styles/tailwind.css";
+
 
 
 // DEVELOPMENT Data [GOOGLE ANALYTICS]
@@ -53,28 +54,48 @@ export default function App() {
     // }, []);
     
 
-    const routesConfig = [          
-        //  TEST ROUTES
-        { path: "/dash", element: <Admin /> },
+    return (
+      <Routes>
+        {/* add routes with layouts */}
+        <Route path="/admin/dashboard" element={<Admin />} />
+        {/* <Route path="/auth" component={Auth} /> */}
 
 
-        //  MAIN ROUTES
-        { path: "/", element: <OurProgress /> },
-        { path: "/home", element: <Home /> },
-        { path: "/donations", element: <DonationPage /> },
-        { path: "/user/verify", element: <VerifySignUp /> },
-        // { path: "/user/verify/:token", element: <VerifySignUp />, },
-        { path: "/user/signup", element: <SignUp />, },
-        { path: "/user/login", element: <SignIn />, },
-        { path: "/admin/dashboard", element: <AdminDashboard />, },
-        { path: "/admin/users/", element: <DashboardUsersPage />, },
-        { path: "/admin/users/:id", element: <DashboardUsersDetailsPage />, },
-        { path: "/admin/staffs", element: <DashboardStaffsPage />, },
-        { path: "/admin/staffs/:id", element: <DashboardStaffsDetailsPage />, },
-        { path: "/admin/users/management", element: <AccountUsers />, },
-    ];
-    const routes = useRoutes(routesConfig);
-    return routes;
+        {/* add routes without layouts */}
+        {/* <Route path="/landing" exact component={Landing} /> */}
+        {/* <Route path="/profile" exact component={Profile} /> */}
+        <Route path="/user/signup" exact element={<SignUp />} />
+        <Route path="/user/login" exact element={<SignIn />} />
+        <Route path="/" exact element={<OurProgress />} />
+        
+
+        {/* add redirect for first page */}
+        {/* <Redirect from="*" to="/" /> */}
+        {/* <Route path="/admin/dashboard?logout" element={<Navigate replace to="/" />} /> */}
+      </Routes>
+    );
+    // const routesConfig = [          
+    //     //  TEST ROUTES
+    //     { path: "/dash", element: <Admin /> },
+
+
+    //     //  MAIN ROUTES
+    //     { path: "/", element: <OurProgress /> },
+    //     { path: "/home", element: <Home /> },
+    //     { path: "/donations", element: <DonationPage /> },
+    //     { path: "/user/verify", element: <VerifySignUp /> },
+    //     // { path: "/user/verify/:token", element: <VerifySignUp />, },
+    //     { path: "/user/signup", element: <SignUp />, },
+    //     { path: "/user/login", element: <SignIn />, },
+    //     { path: "/admin/dashboard", element: <AdminDashboard />, },
+    //     { path: "/admin/users/", element: <DashboardUsersPage />, },
+    //     { path: "/admin/users/:id", element: <DashboardUsersDetailsPage />, },
+    //     { path: "/admin/staffs", element: <DashboardStaffsPage />, },
+    //     { path: "/admin/staffs/:id", element: <DashboardStaffsDetailsPage />, },
+    //     { path: "/admin/users/management", element: <AccountUsers />, },
+    // ];
+    // const routes = useRoutes(routesConfig);
+    // return routes;
 };
 
 
