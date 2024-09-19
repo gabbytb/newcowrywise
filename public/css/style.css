@@ -3981,6 +3981,10 @@ progress#file {
   margin: 0.5rem;
 }
 
+.m-auto{
+  margin: auto;
+}
+
 .mx-0{
   margin-left: 0px;
   margin-right: 0px;
@@ -4194,6 +4198,10 @@ progress#file {
 
 .mt-8{
   margin-top: 2rem;
+}
+
+.mr-12{
+  margin-right: 3rem;
 }
 
 .box-border{
@@ -4443,6 +4451,14 @@ progress#file {
   width: 100vw;
 }
 
+.w-1{
+  width: 0.25rem;
+}
+
+.w-1\/2{
+  width: 50%;
+}
+
 .min-w-0{
   min-width: 0px;
 }
@@ -4586,6 +4602,10 @@ progress#file {
 
 .flex-wrap{
   flex-wrap: wrap;
+}
+
+.flex-nowrap{
+  flex-wrap: nowrap;
 }
 
 .place-content-center{

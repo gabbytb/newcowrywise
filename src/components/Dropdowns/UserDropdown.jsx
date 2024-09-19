@@ -69,33 +69,38 @@ const UserDropdown = ({ isLoggedIn }) => {
                     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover(); 
                 }}>
                 <div className="flex flex-row space-x-6">
-                    <div className="flex flex-col">
+                    <div className="hidden md:flex md:flex-col">
                         <span className="font-bold text-2xl tracking-supertight text-white">
                             {userEmail}
                         </span>
                         {
-                            userRoles?.map((name) => {
-                                var adminRole = 'admin', editorRole = 'editor', staffRole = 'staff', userRole = 'user', noRole = 'No role assigned';
+                            userRoles?.map((name, index) => {
+                                var adminRole = 'admin', 
+                                    editorRole = 'editor', 
+                                    staffRole = 'staff', 
+                                    userRole = 'user', 
+                                    noRole = 'No role assigned';
+
                                 if (name?.role === "ROLE_ADMIN")  {
-                                        return (
-                                            <span className="text-lg tracking-supertight font-bold text-white">{adminRole}</span>
-                                        );
+                                    return (
+                                            <span key={index} className="text-lg tracking-supertight font-bold text-white">{adminRole}</span>
+                                    );
                                 } else if (name?.role === "ROLE_EDITOR")  {
-                                        return (
-                                            <span className="text-lg tracking-supertight font-bold text-white">{editorRole}</span>
-                                        );
+                                    return (
+                                        <span key={index} className="text-lg tracking-supertight font-bold text-white">{editorRole}</span>
+                                    );
                                 } else if (name?.role === "ROLE_STAFF")  {
                                     return (
-                                        <span className="text-lg tracking-supertight font-bold text-white">{staffRole}</span>
+                                        <span key={index} className="text-lg tracking-supertight font-bold text-white">{staffRole}</span>
                                     );
                                 } else if (name?.role === "ROLE_USERS")  {
                                     return (
-                                        <span className="text-lg tracking-supertight font-bold text-white">{userRole}</span>
+                                        <span key={index} className="text-lg tracking-supertight font-bold text-white">{userRole}</span>
                                     );
                                 } else {
-                                        return (
-                                            <span className="text-lg tracking-supertight font-bold text-red-500">{noRole}</span>
-                                        );
+                                    return (
+                                        <span className="text-lg tracking-supertight font-bold text-red-500">{noRole}</span>
+                                    );
                                 };
                             })
                         }

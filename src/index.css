@@ -217,6 +217,10 @@
     ;
   } */
 
+  /* .login {
+    @apply ml-96
+  }; */
+
   #loginId input,
   #signUpId input {
     border-bottom: 3px solid limegreen;

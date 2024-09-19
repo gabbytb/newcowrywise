@@ -1,5 +1,5 @@
 import { useState, useEffect, } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
 import googleApi from "../googleApi";
@@ -20,7 +20,7 @@ import Preloader from '../components/Preloader';
 function SignIn() {
 
 
-    console.clear();
+    // console.clear();
         
     const navigate = useNavigate();
 
@@ -28,11 +28,18 @@ function SignIn() {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
+    const isAlreadyLoggedIn = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+
         const pageTitle = "Sign In", siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
+        document.title = `${pageTitle} | ${siteTitle}`;        
+
+        if (isAlreadyLoggedIn !== null) {
+            let redirURL = "/admin/dashboard";
+            window.location = redirURL;
+        };
+    }, [isAlreadyLoggedIn]);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -60,7 +67,7 @@ function SignIn() {
         onError: (error) => console.log('Login Failed: ', error)
     });
 
-    useEffect(() => {
+    useEffect(() => {       
         if (googleUser.length !== 0) {
             googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
                 headers: {
@@ -68,7 +75,7 @@ function SignIn() {
                     Accept: 'application/json'
                 },
             })
-            .then((response) => {               
+            .then((response) => {   
                 setProfile(response.data);
             })
             .catch((error) => console.log("Failed Google Login: ", error));
@@ -76,12 +83,19 @@ function SignIn() {
     }, [googleUser]);
    
     useEffect(() => {
+        // const urlparsed = new URLSearchParams(window.location.search);
+        // console.log("CURRENT URL: ", urlparsed);
+
+        // var emailNOW = urlparsed.get('email'), 
+        //     passwordNOW = urlparsed.get('password');
+        // console.log('URL EMAIL: ', emailNOW);
+        // console.log('URL PASSWORD: ', passwordNOW);                 
         if (profile?.length !== 0) {
             const uri = "/api/v1/auth/gmail/login";
             const payload = {
                 email: profile?.email,
             };
-
+ 
             api.post(uri, payload)
             .then((response) => {
                 const { success, data, message } = response.data;
@@ -253,9 +267,9 @@ function SignIn() {
                         successMsg?.classList.add('success');
                     }, 2500);
                 
-                    setTimeout(() => {
-                        navigate("/admin/dashboard");
-                    }, 2800);
+                    // setTimeout(() => {
+                    //     navigate("/admin/dashboard");
+                    // }, 2800);
                     // Perform These Actions
                 };
             })
@@ -329,11 +343,12 @@ function SignIn() {
     
     async function handleVerification(e) {
         e.preventDefault();
-
+        
+        const url = "/api/v1/admin/users/manage/account/verify";
         const payload = {
             email: user?.email,
         };
-        const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify";
+
         await api.post(url, payload)
         .then((response) => {
             const { success, message, data } = response.data;
@@ -398,7 +413,7 @@ function SignIn() {
                 {/* PAGE NAV */}
 
 
-                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-2 pb-8 px-8 z-1' onSubmit={handleLogin}>
+                <form id="logInForm" className="max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-2 pb-8 px-8 z-1">
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -438,7 +453,7 @@ function SignIn() {
 
                 
                     {/* LINK: REMEMBER ME & PASSWORD RESET */}
-                    <div className='flex justify-between py-2'>{/* text-gray-400 */}
+                    <div className="flex justify-between py-2">{/* text-gray-400 */}
                         <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
                         <p><Link className='text-white' to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
@@ -446,7 +461,7 @@ function SignIn() {
 
                     
                     {/* SUBMIT BUTTON */}
-                    <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase'>sign in</button>
+                    <button onClick={handleLogin} className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">sign in</button>
                     {/* SUBMIT BUTTON */}
 
 
@@ -456,8 +471,9 @@ function SignIn() {
                     </div>
                     {/* LINK: SIGN UP */}
                     
-                    
+            
                     <hr className="alt_sso_hr mt-10 mb-8"></hr>
+
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">
