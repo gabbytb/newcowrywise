@@ -2,15 +2,15 @@ import { googleLogout } from "@react-oauth/google";
 import "../assets/styles/tailwind.css";
 
 // components
-import { AdminNavbar, HeaderStats, Sidebar,  } from "../components";
-import { Dashboard, } from "../views";
+import { AdminNavbar, Sidebar,  } from "../components";
+import {  UsersTable } from "../views";
 
 
 
 
 
 
-const Admin = ({ isLoggedIn }) => {
+const DashboardUsers = ({ isLoggedIn }) => {
 
 
     // ***************************************************************************
@@ -53,18 +53,18 @@ const Admin = ({ isLoggedIn }) => {
                         <p className="w-full lg:w-6/12 xl:w-3/12 px-4 text-3xl text-white">     
                             Welcome <span className="font-bold text-white">{lastName}</span>
                         </p>
-                    </div>     
+                    </div>                
+                    {/* <HeaderStats /> */}
 
-                    <HeaderStats />
+                </div>
 
-          q     </div>
-
+                 {/* Users Table */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
-                    <Dashboard />                    
+                    <UsersTable />                    
                 </div>
             </div>
         </>
     );
 };
 
-export default Admin;
+export default DashboardUsers;

@@ -47,6 +47,8 @@ import DashboardMenuCard from "./DashboardMenuCard";
 import AdminNavbar from "./Navbars/AdminNavbar";
 import HeaderStats from "./Headers/HeaderStats";
 import CardStats from "./Cards/CardStats";
+import CardAllUsers from "./Cards/CardAllUsers";
+import CardAllStaffs from "./Cards/CardAllStaffs";
 import Sidebar from "./Sidebar/Sidebar";
 import CardBarChart from "./Cards/CardBarChart";
 import CardLineChart from "./Cards/CardLineChart";
@@ -54,6 +56,7 @@ import CardPageVisits from "./Cards/CardPageVisits";
 import CardSocialTraffic from "./Cards/CardSocialTraffic";
 // DROPDOWNS
 import NotificationDropdown from "./Dropdowns/NotificationDropdown";
+import TableDropdown from  "./Dropdowns/TableDropdown";
 import UserDropdown from "./Dropdowns/UserDropdown";
 
 
@@ -65,6 +68,10 @@ export {
     AdminNavbar,
     HeaderStats,
     CardStats,
+    
+    CardAllUsers,
+    CardAllStaffs,
+
     Sidebar,
     CardBarChart,
     CardLineChart,
@@ -114,6 +121,7 @@ export {
 
 
     NotificationDropdown,
+    TableDropdown,
     UserDropdown,
 }
 

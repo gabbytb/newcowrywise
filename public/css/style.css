@@ -816,6 +816,10 @@ tbody tr{
     ;
   } */
 
+/* .login {
+    @apply ml-96
+  }; */
+
 #loginId input,
   #signUpId input {
   border-bottom: 3px solid limegreen;
@@ -3981,10 +3985,6 @@ progress#file {
   margin: 0.5rem;
 }
 
-.m-auto{
-  margin: auto;
-}
-
 .mx-0{
   margin-left: 0px;
   margin-right: 0px;
@@ -4022,6 +4022,10 @@ progress#file {
 
 .-mb-2{
   margin-bottom: -0.5rem;
+}
+
+.-ml-4{
+  margin-left: -1rem;
 }
 
 .-ml-px{
@@ -4136,6 +4140,10 @@ progress#file {
   margin-right: 0.75rem;
 }
 
+.mr-32{
+  margin-right: 8rem;
+}
+
 .mr-4{
   margin-right: 1rem;
 }
@@ -4200,8 +4208,16 @@ progress#file {
   margin-top: 2rem;
 }
 
-.mr-12{
-  margin-right: 3rem;
+.mr-5{
+  margin-right: 1.25rem;
+}
+
+.mr-8{
+  margin-right: 2rem;
+}
+
+.mr-6{
+  margin-right: 1.5rem;
 }
 
 .box-border{
@@ -4323,6 +4339,10 @@ progress#file {
   height: 100vh;
 }
 
+.h-14{
+  height: 3.5rem;
+}
+
 .min-h-106{
   min-height: 40rem;
 }
@@ -4391,6 +4411,10 @@ progress#file {
   width: 5rem;
 }
 
+.w-24{
+  width: 6rem;
+}
+
 .w-3\/5{
   width: 60%;
 }
@@ -4449,14 +4473,6 @@ progress#file {
 
 .w-screen{
   width: 100vw;
-}
-
-.w-1{
-  width: 0.25rem;
-}
-
-.w-1\/2{
-  width: 50%;
 }
 
 .min-w-0{
@@ -4793,6 +4809,10 @@ progress#file {
   border-width: 0px;
 }
 
+.border-2{
+  border-width: 2px;
+}
+
 .border-4{
   border-width: 4px;
 }
@@ -4978,6 +4998,11 @@ progress#file {
   background-color: var(--admin-total-revenue-card-3);
 }
 
+.bg-teal-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(153 246 228 / var(--tw-bg-opacity));
+}
+
 .bg-teal-500{
   --tw-bg-opacity: 1;
   background-color: rgb(20 184 166 / var(--tw-bg-opacity));
@@ -5156,6 +5181,11 @@ progress#file {
   padding-bottom: 2rem;
 }
 
+.px-7{
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
 .pb-0{
   padding-bottom: 0px;
 }
@@ -5198,6 +5228,10 @@ progress#file {
 
 .pe-2{
   padding-inline-end: 0.5rem;
+}
+
+.pl-0{
+  padding-left: 0px;
 }
 
 .pl-10{
@@ -5248,6 +5282,10 @@ progress#file {
   padding-top: 0.375rem;
 }
 
+.pt-12{
+  padding-top: 3rem;
+}
+
 .pt-14{
   padding-top: 3.5rem;
 }
@@ -5284,6 +5322,10 @@ progress#file {
   padding-top: 2.25rem;
 }
 
+.pl-5{
+  padding-left: 1.25rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -5302,6 +5344,18 @@ progress#file {
 
 .text-end{
   text-align: end;
+}
+
+.indent-3{
+  text-indent: 0.75rem;
+}
+
+.indent-6{
+  text-indent: 1.5rem;
+}
+
+.indent-8{
+  text-indent: 2rem;
 }
 
 .align-middle{
@@ -5430,6 +5484,10 @@ progress#file {
   font-weight: 600;
 }
 
+.font-extrabold{
+  font-weight: 800;
+}
+
 .uppercase{
   text-transform: uppercase;
 }
@@ -5484,6 +5542,18 @@ progress#file {
 
 .tracking-supertight{
   letter-spacing: 0.015em;
+}
+
+.tracking-subtight{
+  letter-spacing: 0.18rem;
+}
+
+.tracking-verytight{
+  letter-spacing: 0.1rem;
+}
+
+.tracking-tighten{
+  letter-spacing: 0.25rem;
 }
 
 .text-black{
@@ -5554,9 +5624,19 @@ progress#file {
   color: rgb(51 65 85 / var(--tw-text-opacity));
 }
 
+.text-teal-500{
+  --tw-text-opacity: 1;
+  color: rgb(20 184 166 / var(--tw-text-opacity));
+}
+
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-green-500{
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
 .no-underline{

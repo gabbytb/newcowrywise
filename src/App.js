@@ -9,12 +9,15 @@ import {
   // VerifySignUp,
   SignIn,
   // AdminDashboard, 
-  // DashboardUsersPage, DashboardUsersDetailsPage,
+  DashboardUsersPage, 
+  // DashboardUsersDetailsPage,
   // DashboardStaffsPage, DashboardStaffsDetailsPage,
   // AccountUsers,
 } from "./pages";
 import { 
-  Admin 
+  Admin,
+  DashboardUsers, 
+  DashboardStaffs,
 } from "./layouts";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -58,6 +61,10 @@ export default function App() {
       <Routes>
         {/* add routes with layouts */}
         <Route path="/admin/dashboard" element={<Admin />} />
+        <Route path="/admin/manage/users" element={<DashboardUsers />} />
+        <Route path="/admin/manage/staffs" element={<DashboardStaffs />} />
+        <Route path="/admin/users" element={<DashboardUsersPage />} />
+        
         {/* <Route path="/auth" component={Auth} /> */}
 
 

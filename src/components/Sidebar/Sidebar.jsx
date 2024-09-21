@@ -19,22 +19,22 @@ export default function Sidebar() {
 
     return (
         <>
-            <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-164 z-10 py-4 px-6">
+            <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-164 z-10 py-1 px-6">
                 <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
                     {/* Toggler */}
-                    <button className="max-w-23 cursor-pointer text-black opacity-50 mr-12 md:hidden md:mr-0 px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" type="button" onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}>
+                    <button className="w-12 cursor-pointer text-black opacity-50 mr-32 pl-0 md:hidden md:mr-0 px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" type="button" onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}>
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
-                    <Link className="md:flex justify-center text-left md:pb-2 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/admin/dashboard">
+                    <Link className="md:flex justify-center text-left py-0 md:pb-2 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/admin/dashboard">
                         <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
-                    {/* User */}
-                    <ul className="max-w-23 m-0 md:hidden items-center flex flex-nowrap list-none">
-                        <li className="inline-block flex relative">
+                    {/* Logged-in User */}
+                    <ul className="w-24 m-0 md:hidden justify-end items-center flex flex-nowrap list-none">
+                        <li className="inline-block relative items-center">
                             <NotificationDropdown />
                         </li>
-                        <li className="inline-block flex relative w-full m-auto">
+                        <li className="inline-block relative m-0">
                             <UserDropdown />
                         </li>
                     </ul>
@@ -122,18 +122,22 @@ export default function Sidebar() {
                     {/* Divider */}
                     <hr className="my-4 md:min-w-full" />
                     {/* Heading */}
-                    <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">No Layout Pages</h6>
+                    <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">Manage Accounts</h6>
                     {/* Navigation */}
                     <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-                        <li className="items-center">
+                        {/* <li className="items-center">
                             <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/landing">
                                 <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}Landing Page
                             </Link>
-                        </li>
-
+                        </li> */}
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/profile">
-                                <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}Profile Page
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/manage/users">
+                                <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}Users
+                            </Link>
+                        </li>
+                        <li className="items-center">
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/manage/staffs">
+                                <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}Staffs
                             </Link>
                         </li>
                     </ul>

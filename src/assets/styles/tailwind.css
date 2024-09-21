@@ -1629,6 +1629,17 @@ select {
   list-style-type: none;
 }
 
+i.fas.fa-bell {
+  width: 100%;
+  height: 100%;
+}
+
+li.inline-block.flex.relative:nth-of-type(1) {
+  width: 4rem;
+  height: 4rem;
+  justify-content: center;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -1738,8 +1749,8 @@ select {
   margin-right: 1rem;
 }
 
-.mr-12 {
-  margin-right: 3rem;
+.mr-32 {
+  margin-right: 8rem;
 }
 
 .mb-4 {
@@ -1969,6 +1980,11 @@ select {
   padding-right: 0px;
 }
 
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -2067,6 +2083,10 @@ select {
 
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.pl-0 {
+  padding-left: 0px;
 }
 
 .pl-3 {
@@ -2516,8 +2536,8 @@ select {
   width: 4rem;
 }
 
-.max-w-23 {
-  max-width: 14rem;
+.w-24 {
+  width: 12rem;
 }
 
 .w-auto {
