@@ -408,7 +408,7 @@ export default function CardAllUsers({ color }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of user</td>
+                        <td className="text-left max-w-60 pl-6 h-60 flex justify-start items-center">No record of user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>

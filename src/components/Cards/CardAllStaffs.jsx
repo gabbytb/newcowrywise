@@ -250,6 +250,7 @@ export default function CardAllStaffs({ color }) {
         {/* Page Title */}
 
 
+        {/* Views */}
         <div className={`w-full overflow-x-auto ${activeDisplay === "allStaffs" ? "block" : "hidden"}`}>
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
@@ -403,7 +404,7 @@ export default function CardAllStaffs({ color }) {
                     <tr>
                       <td className=""></td>
                       <td className=""></td>
-                      <td className="text-left pl-4">No record of staff</td>
+                      <td className="text-left max-w-60 pl-6 h-60 flex justify-start items-center">No record of staff</td>
                       <td className=""></td>
                       <td className=""></td>
                       <td className=""></td>
@@ -451,18 +452,16 @@ export default function CardAllStaffs({ color }) {
           </div>
           {/* Pagination controls */}
         </div>
-
         <Suspense fallback={<div>Loading...</div>}>
           <CardAllApprovedStaffs activeDisplay={activeDisplay} />
-        </Suspense>
-        
+        </Suspense>        
         <Suspense fallback={<div>Loading...</div>}>                            
           <CardAllPendingStaffs activeDisplay={activeDisplay} />
-        </Suspense>
-                          
+        </Suspense>                       
         <Suspense fallback={<div>Loading...</div>}>
           <CardAllRejectedStaffs activeDisplay={activeDisplay} />
         </Suspense>
+        {/* Views */}
 
       </div>
     </>

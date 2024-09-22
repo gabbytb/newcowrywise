@@ -599,10 +599,6 @@ video {
   scroll-behavior: smooth;
 }
 
-/* #root-two {
-    font-size: 12px;
-  } */
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -4499,10 +4495,6 @@ progress#file {
   max-width: 10rem;
 }
 
-.max-w-52{
-  max-width: 13rem;
-}
-
 .max-w-60{
   max-width: 15rem;
 }
@@ -5259,6 +5251,10 @@ progress#file {
 
 .pl-5{
   padding-left: 1.25rem;
+}
+
+.pl-6{
+  padding-left: 1.5rem;
 }
 
 .pl-64{
