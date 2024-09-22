@@ -4,7 +4,7 @@ import api from "../../api";
 import sketch from '../../assets/img/sketch.jpg';
 
 // components
-import { TableDropdown } from "..";
+import { Preloader, TableDropdown } from "..";
 
 
 
@@ -52,6 +52,9 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
     
     useEffect(() => {
         if (activeDisplay === "allRejectedUsers") {
+
+            setIsLoading(true);
+
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
@@ -94,6 +97,82 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
     // ****************************************************************************
     // ****************************************************************************
 
+
+
+
+
+
+    if (isLoading) {
+        return (
+            <>
+                <div className={`w-full overflow-x-auto ${activeDisplay === "allRejectedUsers" ? "block" : "hidden"}`}>
+                  {/* Projects table */}
+                  <table className="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                      <tr>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                          }
+                        >
+                          S/N
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                          }
+                        >
+                          Full Name
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                          }
+                        >
+                          E-mail address
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                          }
+                        >
+                          Status
+                        </th>              
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                          }
+                        ></th>
+                      </tr>
+                    </thead>          
+                    <tbody className='w-16 h-16 '>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td className="max-w-40 h-60 flex justify-center items-center"><Preloader /></td>
+                        <td></td>
+                      </tr>                
+                    </tbody>
+                  </table>
+                </div>       
+            </>
+        );
+    };  
 
 
     return (
@@ -251,7 +330,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left pl-4">No record of rejected user</td>
+                        <td className="text-left max-w-52 pl-4 h-60 flex justify-center items-center">No record of rejected user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>

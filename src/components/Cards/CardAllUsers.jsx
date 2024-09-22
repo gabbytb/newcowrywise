@@ -5,7 +5,7 @@ import api from "../../api";
 import sketch from '../../assets/img/sketch.jpg';
 
 // components
-import { CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableDropdown } from "..";
+import { Preloader, CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableDropdown } from "..";
 
 
 
@@ -24,9 +24,10 @@ export default function CardAllUsers({ color }) {
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalUsers);
+    
     const [totalPages, setTotalPages] = useState(0);
-
     const [currentPage, setCurrentPage] = useState(1);
+
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
 
@@ -43,10 +44,11 @@ export default function CardAllUsers({ color }) {
         var allUsersLink = document.querySelector("#usersLinkID .allUsers");               
         // console.log("ALL USERS LINK", allUsersLink);
        
-        var activePage = document.querySelectorAll("#usersLinkID .activePage");
-        console.log("ALL USERS LINK", activePage);
+        // var activePage = document.querySelectorAll("#usersLinkID .activePage");
+        // console.log("ALL USERS LINK", activePage);
 
         if (activeDisplay === "allUsers") {
+            setCurrentPage(1);
             allUsersLink?.classList.add("activeUserView");
         } else {
             allUsersLink?.classList.remove("activeUserView");
@@ -55,6 +57,9 @@ export default function CardAllUsers({ color }) {
 
     useEffect(() => {
         if (activeDisplay === "allUsers") {
+          
+            setIsLoading(true);
+
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
@@ -81,28 +86,135 @@ export default function CardAllUsers({ color }) {
                     setIsLoading(false);
                 });
             };
-
+     
             var timerID = setTimeout(fetchAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
             return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes         
             };
-        };
-
-        // if (currentPage === 1) {
-        //   activePage?.classList.add("activeUserView");
-        // } else {
-        //   activePage?.classList.remove("activeUserView");
-        // };
+        };       
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
-        setCurrentPage(page);
+      setCurrentPage(page);
     };
     // ****************************************************************************
     // ****************************************************************************
 
 
+
+
+
+
+    if (isLoading) {
+        return (
+            <>
+              <div
+                  className={
+                    "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+                    (color === "light" ? "bg-white" : "bg-lightBlue-900 text-white")
+                  }
+                >
+
+                  {/* Users Navigation */}
+                  <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
+                    <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allUsers")}>All</Link>
+                    <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved</Link>
+                    <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingUsers")}>Pending</Link>
+                    <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected</Link>
+                  </div>
+                  {/* Users Navigation */}
+
+                  
+                  {/* Page Title */}
+                  <div className="rounded-t mb-0 px-4 py-3 border-0">
+                    <div className="flex flex-wrap items-center">
+                      <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                        <h3
+                          className={
+                            "font-semibold text-lg " +
+                            (color === "light" ? "text-blueGray-700" : "text-white")
+                          }
+                        >
+                          All Users
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Page Title */}
+
+
+                  <div className={`w-full overflow-x-auto ${activeDisplay === "allUsers" ? "block" : "hidden"}`}>
+                          {/* Projects table */}
+                          <table className="items-center w-full bg-transparent border-collapse">
+                            <thead>
+                              <tr>
+                                <th
+                                  className={
+                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    (color === "light"
+                                    ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                  }
+                                >
+                                  S/N
+                                </th>
+                                <th
+                                  className={
+                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    (color === "light"
+                                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                  }
+                                >
+                                  Full Name
+                                </th>
+                                <th
+                                  className={
+                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    (color === "light"
+                                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                  }
+                                >
+                                  E-mail address
+                                </th>
+                                <th
+                                  className={
+                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    (color === "light"
+                                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                  }
+                                >
+                                  Status
+                                </th>              
+                                <th
+                                  className={
+                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    (color === "light"
+                                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                  }
+                                ></th>
+                              </tr>
+                            </thead>          
+                            <tbody className='w-16 h-16'>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td className="max-w-40 h-60 flex justify-center items-center">
+                                  <Preloader />
+                                </td>
+                                <td></td>
+                              </tr>                
+                            </tbody>
+                          </table>
+                  </div> 
+              </div>      
+            </>
+        );
+    };
 
 
     return (

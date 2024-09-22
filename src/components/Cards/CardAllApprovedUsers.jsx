@@ -4,7 +4,7 @@ import api from "../../api";
 import sketch from '../../assets/img/sketch.jpg';
 
 // components
-import { TableDropdown } from "..";
+import { Preloader, TableDropdown } from "..";
 
 
 
@@ -17,28 +17,28 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // ****************************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-
-
-    // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [allApprovedUsers, setAllApprovedUsers] = useState([]);
     // console.log("ALL USERS: ", allUsers);
 
-      
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalUsers);
-    const [totalPages, setTotalPages] = useState(0);
 
+    const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
 
   
+
+    // ****************************************************************************
+    // MANAGE STATE:-  SPECIAL FEATURES
+    // ****************************************************************************
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");
         // console.log("ALL USERS LINK", allUsersLink);
@@ -49,9 +49,11 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
         };
     }, [activeDisplay]);
 
-    
     useEffect(() => {
         if (activeDisplay === "allApprovedUsers") {
+            
+            setIsLoading(true);
+
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
@@ -59,33 +61,33 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
                 var approved = 'approved';
                 await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approved}`)
                 .then((response) => {
-                    const { success, data, message } = response.data;
-                    const { usersList, pagination } = data;
+                            const { success, data, message } = response.data;
+                            const { usersList, pagination } = data;
 
-                    if (!success && message === "No user found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
-                    };
+                            if (!success && message === "No user found") {
+                                console.log("Success: ", success);
+                                console.log("Message: ", message);
+                            };
 
-                    setAllApprovedUsers(usersList);
-                
-                    setTotalUsers(pagination?.usersRecord);
-                    setTotalPages(pagination?.lastPage);
+                            setAllApprovedUsers(usersList);
+                        
+                            setTotalUsers(pagination?.usersRecord);
+                            setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
-                    console.log("Error fetching data: ", error);
+                      console.log("Error fetching data: ", error);
                 })
                 .finally(() => {
-                    setIsLoading(false);
+                      setIsLoading(false);
                 });
             };
-
-            var timerID = setTimeout(fetchAllApprovedUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+            var timerID = setTimeout(fetchAllApprovedUsers, 400);   // Delay execution of findAllApprovedUsers by 1800ms
+        
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, currentPage]); // Fetch data when activeDisplay and currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -94,6 +96,81 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
     // ****************************************************************************
     // ****************************************************************************
 
+
+
+
+
+    if (isLoading) {
+        return (
+        <>
+            <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
+              {/* Projects table */}
+              <table className="items-center w-full bg-transparent border-collapse">
+                <thead>
+                  <tr>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      S/N
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      Full Name
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      E-mail address
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      Status
+                    </th>              
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    ></th>
+                  </tr>
+                </thead>          
+                <tbody className='w-16 h-16 '>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td className="max-w-40 h-60 flex justify-center items-center"><Preloader /></td>
+                    <td></td>
+                  </tr>                
+                </tbody>
+              </table>
+            </div>       
+        </>
+        );
+    };
 
 
     return (
@@ -251,7 +328,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left pl-4">No record of approved user</td>
+                        <td className="text-left max-w-52 pl-4 h-60 flex justify-center items-center">No record of approved user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>
