@@ -330,7 +330,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left max-w-52 pl-4 h-60 flex justify-center items-center">No record of rejected user</td>
+                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of rejected user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>

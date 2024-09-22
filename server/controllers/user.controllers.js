@@ -766,9 +766,10 @@ exports.googleSignOn = async (req, res) => {
 
     try {
 
-            // 1) Find Existing User
-            const existingUser = await User.findOne({ email: email }); 
+        // 1) Find Existing User
+        const existingUser = await User.findOne({ email: email }); 
 
+        if (existingUser) {
             // 2) If User Exists or Not    
             console.log("***********************************************",
                     "\n******       🔐   ACTIVE USER  🔑        ******",
@@ -842,8 +843,13 @@ exports.googleSignOn = async (req, res) => {
                 message: "Successful",
             };
             return res.status(200).json(responseData);
-
-        
+        } else {
+            const responseData = { 
+                success: false,
+                message: "User not found",
+            };
+            res.json(responseData);
+        };
     } catch (error) {
         console.error('Error saving code:', error);
         res.status(500).json({ message: 'Failed to save code' });
@@ -864,7 +870,6 @@ exports.findAllUsers = async (req, res) => {
             query.status = status;
         };
  
-        // Query User Status and ROLES.role, & Pagination logic
         const usersList = await User.find(query)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));

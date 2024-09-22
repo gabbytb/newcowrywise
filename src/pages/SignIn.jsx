@@ -20,7 +20,7 @@ import Preloader from '../components/Preloader';
 function SignIn() {
 
 
-    console.clear();
+    // console.clear();
         
     const navigate = useNavigate();
 
@@ -468,7 +468,7 @@ function SignIn() {
                                         
                     {/* Alternative Sign-In Methods */}
                     <div className="alt_sso flex justify-center align-middle gap-10">
-                        <button className="w-16 h-16" onClick={() => login()}><GoogleIcon /></button>
+                        <button className="w-12 h-12" onClick={() => login()}><GoogleIcon /></button>
                     </div>
                     {/* Alternative Sign-In Methods */}
                 </form>

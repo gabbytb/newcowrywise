@@ -78,6 +78,7 @@ export default function CardAllUsers({ color }) {
                 
                     setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
+               
                 })
                 .catch((error) => {
                     console.log("Error fetching data: ", error);
@@ -100,7 +101,6 @@ export default function CardAllUsers({ color }) {
     };
     // ****************************************************************************
     // ****************************************************************************
-
 
 
 
@@ -228,10 +228,10 @@ export default function CardAllUsers({ color }) {
 
           {/* Users Navigation */}
           <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-            <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allUsers")}>All</Link>
-            <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved</Link>
-            <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingUsers")}>Pending</Link>
-            <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected</Link>
+            <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allUsers")}>All </Link>
+            <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
+            <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
+            <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
           </div>
           {/* Users Navigation */}
 
@@ -254,6 +254,7 @@ export default function CardAllUsers({ color }) {
           {/* Page Title */}
 
 
+          {/* Views */}
           <div className={`w-full overflow-x-auto ${activeDisplay === "allUsers" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
@@ -407,7 +408,7 @@ export default function CardAllUsers({ color }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left pl-4">No record of user</td>
+                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>
@@ -455,18 +456,16 @@ export default function CardAllUsers({ color }) {
             </div>
             {/* Pagination controls */}
           </div>
-
           <Suspense fallback={<div>Loading...</div>}>
             <CardAllApprovedUsers activeDisplay={activeDisplay} />
-          </Suspense>
-          
+          </Suspense>          
           <Suspense fallback={<div>Loading...</div>}>                            
             <CardAllPendingUsers activeDisplay={activeDisplay} />
-          </Suspense>
-                            
+          </Suspense>                           
           <Suspense fallback={<div>Loading...</div>}>
             <CardAllRejectedUsers activeDisplay={activeDisplay} />
           </Suspense>
+          {/* Views */}
 
         </div>
       </>

@@ -5,7 +5,7 @@ import api from "../../api";
 import sketch from '../../assets/img/sketch.jpg';
 
 // components
-import { CardAllApprovedStaffs, CardAllPendingStaffs, CardAllRejectedStaffs, TableDropdown } from "..";
+import { Preloader, CardAllApprovedStaffs, CardAllPendingStaffs, CardAllRejectedStaffs, TableDropdown } from "..";
 
 
 
@@ -54,6 +54,9 @@ export default function CardAllStaffs({ color }) {
   
   useEffect(() => {
       if (activeDisplay === "allStaffs") {
+
+          setIsLoading(true);
+
           // ****************************************************************************
           // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
           // ****************************************************************************             
@@ -81,7 +84,7 @@ export default function CardAllStaffs({ color }) {
               });
           };
 
-          var timerID = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
+          var timerID = setTimeout(fetchAllStaffs, 400);   // Delay execution of findAllStaffs by 1800ms
           return () => {
               clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
           };
@@ -97,6 +100,117 @@ export default function CardAllStaffs({ color }) {
 
 
   
+
+
+  if (isLoading) {
+      return (
+          <>
+            <div
+                className={
+                  "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+                  (color === "dark" ? "bg-white" : "bg-lightBlue-900 text-white")
+                }
+              >
+
+                {/* Staffs Navigation */}
+                <div id="staffsLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
+                  <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allStaffs")}>All</Link>
+                  <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved</Link>
+                  <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending</Link>
+                  <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected</Link>
+                </div>
+                {/* Staffs Navigation */}
+
+                
+                {/* Page Title */}
+                <div className="rounded-t mb-0 px-4 py-3 border-0">
+                  <div className="flex flex-wrap items-center">
+                    <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                      <h3
+                        className={
+                          "font-semibold text-lg " +
+                          (color === "dark" ? "text-blueGray-700" : "text-white")
+                        }
+                      >
+                        All Staffs
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                {/* Page Title */}
+
+
+                <div className={`w-full overflow-x-auto ${activeDisplay === "allStaffs" ? "block" : "hidden"}`}>
+                  {/* Projects table */}
+                  <table className="items-center w-full bg-transparent border-collapse">
+                          <thead>
+                            <tr>
+                              <th
+                                className={
+                                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                  (color === "light"
+                                  ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                  : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                }
+                              >
+                                S/N
+                              </th>
+                              <th
+                                className={
+                                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                  (color === "light"
+                                    ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                }
+                              >
+                                Full Name
+                              </th>
+                              <th
+                                className={
+                                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                  (color === "light"
+                                    ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                }
+                              >
+                                E-mail address
+                              </th>
+                              <th
+                                className={
+                                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                  (color === "light"
+                                    ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                }
+                              >
+                                Status
+                              </th>              
+                              <th
+                                className={
+                                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                  (color === "light"
+                                    ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                }
+                              ></th>
+                            </tr>
+                          </thead>          
+                          <tbody className='w-16 h-16'>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td className="max-w-40 h-60 flex justify-center items-center">
+                                <Preloader />
+                              </td>
+                              <td></td>
+                            </tr>                
+                          </tbody>
+                  </table>
+                </div> 
+            </div>      
+          </>
+      );
+  };
 
 
   return (

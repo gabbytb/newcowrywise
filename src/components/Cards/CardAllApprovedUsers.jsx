@@ -13,7 +13,7 @@ import { Preloader, TableDropdown } from "..";
 
 
 
-export default function CardAllApprovedUsers({ color, activeDisplay }) {
+export default function CardAllApprovedUsers({ color, activeDisplay, }) {
 
 
     // ****************************************************************************
@@ -61,18 +61,19 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
                 var approved = 'approved';
                 await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approved}`)
                 .then((response) => {
-                            const { success, data, message } = response.data;
-                            const { usersList, pagination } = data;
+                    const { success, data, message } = response.data;
+                    const { usersList, pagination } = data;
 
-                            if (!success && message === "No user found") {
-                                console.log("Success: ", success);
-                                console.log("Message: ", message);
-                            };
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
 
-                            setAllApprovedUsers(usersList);
-                        
-                            setTotalUsers(pagination?.usersRecord);
-                            setTotalPages(pagination?.lastPage);
+                    setAllApprovedUsers(usersList);
+                                            
+                    setTotalUsers(pagination?.usersRecord);
+                    setTotalPages(pagination?.lastPage);
+
                 })
                 .catch((error) => {
                       console.log("Error fetching data: ", error);
@@ -328,7 +329,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left max-w-52 pl-4 h-60 flex justify-center items-center">No record of approved user</td>
+                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of approved user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>

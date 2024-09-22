@@ -8,9 +8,9 @@ import axios from 'axios';
 
 // Create an instance of Axios with default settings
 const api = axios.create({
-    // baseURL: 'http://127.0.0.1:8000', // This is your server’s base URL
-    baseURL: 'http://localhost:8000', // This is your server’s base URL
-    // timeout: 3000, // Optional: Maximum time to wait for a response
+    baseURL: 'http://127.0.0.1:8000', // This is your server’s base URL
+    // baseURL: 'http://localhost:8000', // This is your server’s base URL
+    timeout: 1000, // Optional: Maximum time to wait for a response
 });
 
 export default api;
