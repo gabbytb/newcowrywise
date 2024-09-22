@@ -1,6 +1,6 @@
 import { useState, useEffect, } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
-import { Link, useNavigate, } from 'react-router-dom';
 import api from '../api';
 import googleApi from "../googleApi";
 import { brandOfficialLogo, loginBg } from '../assets/images';
@@ -20,7 +20,7 @@ import Preloader from '../components/Preloader';
 function SignIn() {
 
 
-    // console.clear();
+    console.clear();
         
     const navigate = useNavigate();
 
@@ -28,22 +28,109 @@ function SignIn() {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-    const isAlreadyLoggedIn = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-
         const pageTitle = "Sign In", siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;        
-
-        if (isAlreadyLoggedIn !== null) {
-            let redirURL = "/admin/dashboard";
-            window.location = redirURL;
-        };
-    }, [isAlreadyLoggedIn]);
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     
+
+
+    
+
+    // *************************************** //
+    // *** USER PAYLOAD FOR GOOGLE SIGN IN *** //
+    // *************************************** //
+    // new Date(verifiedToken.exp * 1000);
+    const [ googleUser, setGoogleUser ] = useState([]);
+    console.log("Google User: ", googleUser);
+    
+    const [ profile, setProfile ] = useState([]);
+    console.log("Profile: ", profile);
+    
+    // eslint-disable-next-line
+    const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
+    console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
+        onError: (error) => console.log('Login Failed: ', error)
+    });
+
+    useEffect(() => {
+        if (googleUser.length !== 0) {
+            googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
+                headers: {
+                    Authorization: `Bearer ${googleUser.access_token}`,
+                    Accept: 'application/json'
+                },
+            })
+            .then((response) => {               
+                setProfile(response.data);
+            })
+            .catch((error) => console.log("Failed Google Login: ", error));
+        };
+    }, [googleUser]);
+   
+    useEffect(() => {
+        if (profile?.length !== 0) {
+            const uri = "/api/v1/auth/gmail/login";
+            const payload = {
+                email: profile?.email,
+            };
+
+            api.post(uri, payload)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
+                var successMsg = document.querySelector('#logInForm .success');
+                var ssoLinks = document.querySelector("#logInForm .alt_sso");
+         
+                
+                if (!success && message === "No user found") {
+                    setIsLoggedInWithGmail(success);
+                    setLoginFormMessage(message);
+
+                    // ssoLinksHr?.classList.remove("hidden");
+                    // ssoLinks?.classList.add("flex");
+                    // ssoLinks?.classList.remove("hidden");
+                } else {
+
+                    // Perform These Actions                  
+                    window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
+                    
+                    ssoLinksHr?.classList.add("hidden");
+                    ssoLinks?.classList.remove("flex");
+                    ssoLinks?.classList.add("hidden");
+
+                    setLoginFormMessage(message);
+                    setIsLoggedInWithGmail(success);
+                    localStorage.setItem("user", JSON.stringify(data));
+
+                    successMsg?.classList.remove('success');
+                    successMsg?.classList.add('success-message-info');
+
+                    setTimeout(() => {
+                        successMsg?.classList.remove('success-message-info');
+                        successMsg?.classList.add('success');
+                    }, 2500);
+
+                    setTimeout(() => {
+                        navigate("/admin/dashboard");
+                    }, 2800);
+                    // Perform These Actions
+                };
+            })
+            .catch((error) => {
+                console.log("Encountered unexpected error: ", error);
+            });
+        };
+    // eslint-disable-next-line
+    }, [profile]);
+
 
 
 
@@ -182,107 +269,6 @@ function SignIn() {
 
 
 
-    
-    // *************************************** //
-    // *** USER PAYLOAD FOR GOOGLE SIGN IN *** //
-    // *************************************** //
-    // new Date(verifiedToken.exp * 1000);
-    const [ googleUser, setGoogleUser ] = useState([]);
-    console.log("Google User: ", googleUser);
-    
-    const [ profile, setProfile ] = useState([]);
-    console.log("Profile: ", profile);
-    
-    // eslint-disable-next-line
-    const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
-    console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
-
-    const login = useGoogleLogin({
-        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
-        onError: (error) => console.log('Login Failed: ', error)
-    });
-
-    useEffect(() => {       
-        if (googleUser.length !== 0) {
-            googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
-                headers: {
-                    Authorization: `Bearer ${googleUser.access_token}`,
-                    Accept: 'application/json'
-                },
-            })
-            .then((response) => {   
-                setProfile(response.data);
-            })
-            .catch((error) => console.log("Failed Google Login: ", error));
-        };
-    }, [googleUser]);
-   
-    useEffect(() => {
-        // const urlparsed = new URLSearchParams(window.location.search);
-        // console.log("CURRENT URL: ", urlparsed);
-
-        // var emailNOW = urlparsed.get('email'), 
-        //     passwordNOW = urlparsed.get('password');
-        // console.log('URL EMAIL: ', emailNOW);
-        // console.log('URL PASSWORD: ', passwordNOW);                 
-        if (profile?.length !== 0) {
-            const uri = "/api/v1/auth/gmail/login";
-            const payload = {
-                email: profile?.email,
-            };
- 
-            api.post(uri, payload)
-            .then((response) => {
-                const { success, data, message } = response.data;
-                var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
-                var successMsg = document.querySelector('#logInForm .success');
-                var ssoLinks = document.querySelector("#logInForm .alt_sso");
-         
-                
-                if (!success && message === "No user found") {
-                    setIsLoggedInWithGmail(success);
-                    setLoginFormMessage(message);
-
-                    // ssoLinksHr?.classList.remove("hidden");
-                    // ssoLinks?.classList.add("flex");
-                    // ssoLinks?.classList.remove("hidden");
-                } else {
-
-                    // Perform These Actions                  
-                    window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
-                    
-                    ssoLinksHr?.classList.add("hidden");
-                    ssoLinks?.classList.remove("flex");
-                    ssoLinks?.classList.add("hidden");
-
-                    setLoginFormMessage(message);
-                    setIsLoggedInWithGmail(success);
-                    localStorage.setItem("user", JSON.stringify(data));
-
-                    successMsg?.classList.remove('success');
-                    successMsg?.classList.add('success-message-info');
-
-                    setTimeout(() => {
-                        successMsg?.classList.remove('success-message-info');
-                        successMsg?.classList.add('success');
-                    }, 2500);
-
-                    setTimeout(() => {
-                        navigate("/admin/dashboard");
-                    }, 2800);
-                    // Perform These Actions
-                };
-            })
-            .catch((error) => {
-                console.log("Encountered unexpected error: ", error);
-            });
-        };
-    // eslint-disable-next-line
-    }, [profile]);
-
-
-    
-
 
     // ************************************** //
     // *** USER PAYLOAD FOR RE-VALIDATION *** //
@@ -343,12 +329,11 @@ function SignIn() {
     
     async function handleVerification(e) {
         e.preventDefault();
-        
-        const url = "/api/v1/admin/users/manage/account/verify";
+
         const payload = {
             email: user?.email,
         };
-
+        const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify";
         await api.post(url, payload)
         .then((response) => {
             const { success, message, data } = response.data;
@@ -413,7 +398,7 @@ function SignIn() {
                 {/* PAGE NAV */}
 
 
-                <form id="logInForm" className="max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-2 pb-8 px-8 z-1">
+                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-2 pb-8 px-8 z-1' onSubmit={handleLogin}>
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -437,7 +422,7 @@ function SignIn() {
                     {/* E-mail Address */}
                     <div className="flex flex-col text-gray-400 py-2">
                         <label htmlFor="email">E-mail address
-                            <input autoComplete="off" className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="text" name="email" onChange={handleChange} onKeyUp={handleKeyUp} />
+                            <input autoComplete="new-email" className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none" type="text" name="email" onChange={handleChange} onKeyUp={handleKeyUp} />
                         </label>
                     </div>
                     {/* E-mail Address */}
@@ -446,14 +431,14 @@ function SignIn() {
                     {/* Password */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="password">Password
-                            <input autoComplete="off" className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleChange} onKeyUp={handleKeyUp} required />
+                            <input autoComplete="new-password" className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleChange} onKeyUp={handleKeyUp} />
                         </label>
                     </div>
                     {/* Password */}
 
                 
                     {/* LINK: REMEMBER ME & PASSWORD RESET */}
-                    <div className="flex justify-between py-2">{/* text-gray-400 */}
+                    <div className='flex justify-between py-2'>{/* text-gray-400 */}
                         <p className='flex items-center text-white'><input className='mr-2' type="checkbox" /> Remember Me</p>
                         <p><Link className='text-white' to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
@@ -461,7 +446,7 @@ function SignIn() {
 
                     
                     {/* SUBMIT BUTTON */}
-                    <button onClick={handleLogin} className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">sign in</button>
+                    <button className='w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase'>sign in</button>
                     {/* SUBMIT BUTTON */}
 
 
@@ -471,9 +456,8 @@ function SignIn() {
                     </div>
                     {/* LINK: SIGN UP */}
                     
-            
+                    
                     <hr className="alt_sso_hr mt-10 mb-8"></hr>
-
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">

@@ -766,11 +766,10 @@ exports.googleSignOn = async (req, res) => {
 
     try {
 
-        // 1) Find Existing User
-        const existingUser = await User.findOne({ email: email }); 
+            // 1) Find Existing User
+            const existingUser = await User.findOne({ email: email }); 
 
-        // 2) If User Exists or Not
-        if (existingUser) {
+            // 2) If User Exists or Not    
             console.log("***********************************************",
                     "\n******       🔐   ACTIVE USER  🔑        ******",
                     "\n***********************************************",
@@ -785,21 +784,21 @@ exports.googleSignOn = async (req, res) => {
                     "\n***********************************************",
                 "\n\n");
 
-            // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
+            // 3) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
             const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
             
-            // 7) Verify token to get Lifespan of Token
+            // 4) Verify token to get Lifespan of Token
             const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
             
-            // 8. Update user.tokenExpires with value of tokenExpiryDate
+            // 5. Update user.tokenExpires with value of tokenExpiryDate
             // NOTE: USE new Date() function to make expire date begin with current date and time.
             existingUser.tokenExpires = new Date(verifiedToken.exp * 1000);
                     
             // existingUser.tokenExpires = tokenExpiryDate;
-            // 9. Update user.accessToken with value of token
+            // 6. Update user.accessToken with value of token
             existingUser.accessToken = token;
 
-            // 10. Save to Update USER DETAILS with values parsed
+            // 7. Save to Update USER DETAILS with values parsed
             const loggedInUser = await existingUser.save();
         
             for (var n = 0; n < loggedInUser.roles.length; n++) {
@@ -844,14 +843,7 @@ exports.googleSignOn = async (req, res) => {
             };
             return res.status(200).json(responseData);
 
-        } else {
-            const responseData = {
-                success: false,
-                message: "No user found",
-            };
-            return res.json(responseData);
-        };
-
+        
     } catch (error) {
         console.error('Error saving code:', error);
         res.status(500).json({ message: 'Failed to save code' });
