@@ -249,12 +249,12 @@ export default function CardAllPendingUsers({ color, activeDisplay }) {
                   :
                   <tbody>                    
                       <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="text-left pl-4">No record of pending user</td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className="text-left pl-4">No record of pending user</td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
                       </tr>
                   </tbody>
               }

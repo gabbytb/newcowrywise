@@ -249,12 +249,12 @@ export default function CardAllApprovedUsers({ color, activeDisplay }) {
                   :
                   <tbody>                    
                       <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="text-left pl-4">No record of approved user</td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className="text-left pl-4">No record of approved user</td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
                       </tr>
                   </tbody>
               }

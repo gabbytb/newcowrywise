@@ -251,12 +251,12 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
                   :
                   <tbody>                    
                       <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="text-left pl-4">No record of approved staff</td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className="text-left pl-4">No record of approved staff</td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
                       </tr>
                   </tbody>
               }

@@ -12,7 +12,6 @@ import { TableDropdown } from "..";
 
 
 
-
 export default function CardAllRejectedStaffs({ color, activeDisplay }) {
 
 
@@ -32,6 +31,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     const leftArrow = "<", rightArrow = ">";
 
 
+    
     
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
@@ -248,12 +248,12 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
                   :
                   <tbody>                    
                       <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="text-left pl-4">No record of rejected staff</td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className="text-left pl-4">No record of rejected staff</td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
                       </tr>
                   </tbody>
               }

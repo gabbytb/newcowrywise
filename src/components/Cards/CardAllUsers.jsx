@@ -12,8 +12,6 @@ import { CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableD
 
 
 
-
-
 export default function CardAllUsers({ color }) {
 
 
@@ -34,16 +32,20 @@ export default function CardAllUsers({ color }) {
 
 
 
+    
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
     const [activeDisplay, setActiveDisplay] = useState("allUsers");
-
-    
+  
     useEffect(() => {
-        var allUsersLink = document.querySelector("#usersLinkID .allUsers");
+        var allUsersLink = document.querySelector("#usersLinkID .allUsers");               
         // console.log("ALL USERS LINK", allUsersLink);
+       
+        var activePage = document.querySelectorAll("#usersLinkID .activePage");
+        console.log("ALL USERS LINK", activePage);
+
         if (activeDisplay === "allUsers") {
             allUsersLink?.classList.add("activeUserView");
         } else {
@@ -51,7 +53,6 @@ export default function CardAllUsers({ color }) {
         };
     }, [activeDisplay]);
 
-    
     useEffect(() => {
         if (activeDisplay === "allUsers") {
             // ****************************************************************************
@@ -86,6 +87,12 @@ export default function CardAllUsers({ color }) {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         };
+
+        // if (currentPage === 1) {
+        //   activePage?.classList.add("activeUserView");
+        // } else {
+        //   activePage?.classList.remove("activeUserView");
+        // };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
@@ -286,12 +293,12 @@ export default function CardAllUsers({ color }) {
                   :
                   <tbody>                    
                       <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="text-left pl-4">No record of user</td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className="text-left pl-4">No record of user</td>
+                        <td className=""></td>
+                        <td className=""></td>
+                        <td className=""></td>
                       </tr>
                   </tbody>
               }
@@ -300,11 +307,11 @@ export default function CardAllUsers({ color }) {
 
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
-                                    <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
                                         {limit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
-                                    </div>
-                                    <nav className="relative z-0 inline-flex shadow-sm">
+                </div>
+                <nav className="relative z-0 inline-flex shadow-sm">
                                         {/* Previous page button */}
                                         <button
                                             onClick={() => handlePageChange(currentPage - 1)}
@@ -319,7 +326,7 @@ export default function CardAllUsers({ color }) {
                                             <button
                                             key={index}
                                             onClick={() => handlePageChange(index + 1)}
-                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-xl font-bold text-gray-700 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-xl font-bold text-gray-700 hover:bg-gray-50 w-16 justify-center h-14 activePage ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
                                             {index + 1}
                                             </button>
                                         ))}
@@ -332,7 +339,7 @@ export default function CardAllUsers({ color }) {
                                             disabled={currentPage === totalPages}
                                         >{rightArrow}
                                         </button>
-                                    </nav>
+                </nav>
             </div>
             {/* Pagination controls */}
           </div>
