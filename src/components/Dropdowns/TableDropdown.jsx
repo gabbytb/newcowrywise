@@ -1,5 +1,6 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { Link } from "react-router-dom";
 
 
 
@@ -15,7 +16,7 @@ const NotificationDropdown = () => {
     const openDropdownPopover = () => {
       
       createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-          // placement: "bottom-end",
+          placement: "top-end",
         });
         setDropdownPopoverShow(true);
 
@@ -28,9 +29,9 @@ const NotificationDropdown = () => {
 
     return (
         <>
-          <a
+          <Link
             className="text-blueGray-500 py-1 px-3"
-            href="#pablo"
+            to="#"
             ref={btnDropdownRef}
             onClick={(e) => {
               e.preventDefault();
@@ -38,11 +39,11 @@ const NotificationDropdown = () => {
             }}
           >
             <i className="fas fa-ellipsis-v"></i>
-          </a>
+          </Link>
           <div
             ref={popoverDropdownRef}
             className={
-              (dropdownPopoverShow ? "block " : "hidden ") +
+              (dropdownPopoverShow ? "block" : "hidden ") +
               "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
             }
           >

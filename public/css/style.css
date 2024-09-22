@@ -5321,6 +5321,10 @@ progress#file {
   padding-top: 2.25rem;
 }
 
+.pe-6{
+  padding-inline-end: 1.5rem;
+}
+
 .text-left{
   text-align: left;
 }
