@@ -1,4 +1,4 @@
-import Admin from "./Admin";
+import MainDashboard from "./MainDashboard";
 import DashboardUsers from "./DashboardUsers";
 import DashboardStaffs from "./DashboardStaffs";
 
@@ -6,7 +6,7 @@ import DashboardStaffs from "./DashboardStaffs";
 
 
 export { 
-    Admin,
+    MainDashboard,
     DashboardUsers,
     DashboardStaffs,
 };

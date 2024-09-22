@@ -26,7 +26,7 @@ export default function Sidebar() {
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
-                    <Link className="md:flex justify-center text-left py-0 md:pb-2 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/admin/dashboard">
+                    <Link className="md:flex justify-center text-left py-0 md:pb-2 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/">
                         <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
                     {/* Logged-in User */}
@@ -119,6 +119,9 @@ export default function Sidebar() {
 
 
 
+                    {/***************************************/}
+                    {/*********** Manage Accounts ***********/}
+                    {/***************************************/}
                     {/* Divider */}
                     <hr className="my-4 md:min-w-full" />
                     {/* Heading */}
@@ -131,16 +134,19 @@ export default function Sidebar() {
                             </Link>
                         </li> */}
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/manage/users">
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/users">
                                 <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}Users
                             </Link>
                         </li>
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/manage/staffs">
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/staffs">
                                 <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}Staffs
                             </Link>
                         </li>
                     </ul>
+                    {/***************************************/}
+                    {/*********** Manage Accounts ***********/}
+                    {/***************************************/}
 
 
 

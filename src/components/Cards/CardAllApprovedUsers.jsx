@@ -1,11 +1,10 @@
-import { Suspense, useEffect, useState, } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, } from "react";
 import PropTypes from "prop-types";
 import api from "../../api";
 import sketch from '../../assets/img/sketch.jpg';
 
 // components
-import { CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableDropdown } from "..";
+import { TableDropdown } from "..";
 
 
 
@@ -14,14 +13,21 @@ import { CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableD
 
 
 
-export default function CardAllUsers({ color }) {
+export default function CardAllApprovedUsers({ color, activeDisplay }) {
+
+
+    // ****************************************************************************
+    // MANAGE STATE:-  SPECIAL FEATURES
+    // ****************************************************************************
+    const [isLoading, setIsLoading] = useState(true);
 
 
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [allUsers, setAllUsers] = useState([]);
+    const [allApprovedUsers, setAllApprovedUsers] = useState([]);
     // console.log("ALL USERS: ", allUsers);
+
       
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
@@ -32,33 +38,26 @@ export default function CardAllUsers({ color }) {
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
 
-
-
-    // ****************************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // ****************************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("allUsers");
-
-    
+  
     useEffect(() => {
-        var allUsersLink = document.querySelector("#usersLinkID .allUsers");
+        var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");
         // console.log("ALL USERS LINK", allUsersLink);
-        if (activeDisplay === "allUsers") {
-            allUsersLink?.classList.add("activeUserView");
+        if (activeDisplay === "allApprovedUsers") {
+            allApprovedUsersLink?.classList.add("activeUserView");
         } else {
-            allUsersLink?.classList.remove("activeUserView");
+            allApprovedUsersLink?.classList.remove("activeUserView");
         };
     }, [activeDisplay]);
 
     
     useEffect(() => {
-        if (activeDisplay === "allUsers") {
+        if (activeDisplay === "allApprovedUsers") {
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
-            async function fetchAllUsers() {
-                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}`)
+            async function fetchAllApprovedUsers() {
+                var approved = 'approved';
+                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approved}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { usersList, pagination } = data;
@@ -68,7 +67,7 @@ export default function CardAllUsers({ color }) {
                         console.log("Message: ", message);
                     };
 
-                    setAllUsers(usersList);
+                    setAllApprovedUsers(usersList);
                 
                     setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
@@ -81,7 +80,7 @@ export default function CardAllUsers({ color }) {
                 });
             };
 
-            var timerID = setTimeout(fetchAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            var timerID = setTimeout(fetchAllApprovedUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
@@ -97,45 +96,9 @@ export default function CardAllUsers({ color }) {
 
 
 
-
     return (
       <>
-        <div
-          className={
-            "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
-            (color === "light" ? "bg-white" : "bg-lightBlue-900 text-white")
-          }
-        >
-
-          {/* Users Navigation */}
-          <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-            <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allUsers")}>All</Link>
-            <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved</Link>
-            <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingUsers")}>Pending</Link>
-            <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected</Link>
-          </div>
-          {/* Users Navigation */}
-
-          
-          {/* Page Title */}
-          <div className="rounded-t mb-0 px-4 py-3 border-0">
-            <div className="flex flex-wrap items-center">
-              <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                <h3
-                  className={
-                    "font-semibold text-lg " +
-                    (color === "light" ? "text-blueGray-700" : "text-white")
-                  }
-                >
-                  All Users
-                </h3>
-              </div>
-            </div>
-          </div>
-          {/* Page Title */}
-
-
-          <div className={`w-full overflow-x-auto ${activeDisplay === "allUsers" ? "block" : "hidden"}`}>
+          <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
@@ -191,10 +154,10 @@ export default function CardAllUsers({ color }) {
                 </tr>
               </thead>
               {
-                allUsers?.length !== 0 ?
+                allApprovedUsers?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allUsers?.map((user, userIndex) => {
+                        allApprovedUsers?.map((user, userIndex) => {
                             if (user?.status === "pending") {
                                 return (
                                     <tr key={userIndex}>
@@ -288,7 +251,7 @@ export default function CardAllUsers({ color }) {
                       <tr>
                         <td class=""></td>
                         <td class=""></td>
-                        <td class="text-left pl-4">No record of user</td>
+                        <td class="text-left pl-4">No record of approved user</td>
                         <td class=""></td>
                         <td class=""></td>
                         <td class=""></td>
@@ -335,29 +298,15 @@ export default function CardAllUsers({ color }) {
                                     </nav>
             </div>
             {/* Pagination controls */}
-          </div>
-
-          <Suspense fallback={<div>Loading...</div>}>
-            <CardAllApprovedUsers activeDisplay={activeDisplay} />
-          </Suspense>
-          
-          <Suspense fallback={<div>Loading...</div>}>                            
-            <CardAllPendingUsers activeDisplay={activeDisplay} />
-          </Suspense>
-                            
-          <Suspense fallback={<div>Loading...</div>}>
-            <CardAllRejectedUsers activeDisplay={activeDisplay} />
-          </Suspense>
-
-        </div>
+          </div>       
       </>
     );
 };
 
-CardAllUsers.defaultProps = {
+CardAllApprovedUsers.defaultProps = {
   color: "light",
 };
 
-CardAllUsers.propTypes = {
+CardAllApprovedUsers.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };

@@ -1,8 +1,9 @@
 import { googleLogout } from "@react-oauth/google";
-import "../assets/styles/tailwind.css";
 
 // components
-import { AdminNavbar, HeaderStats, Sidebar,  } from "../components";
+import { Sidebar, AdminNavbar, HeaderStats, } from "../components";
+
+// views
 import { Dashboard, } from "../views";
 
 
@@ -10,7 +11,8 @@ import { Dashboard, } from "../views";
 
 
 
-const Admin = ({ isLoggedIn }) => {
+
+const MainDashboard = ({ isLoggedIn }) => {
 
 
     // ***************************************************************************
@@ -57,7 +59,7 @@ const Admin = ({ isLoggedIn }) => {
 
                     <HeaderStats />
 
-          q     </div>
+                </div>
 
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <Dashboard />                    
@@ -67,4 +69,4 @@ const Admin = ({ isLoggedIn }) => {
     );
 };
 
-export default Admin;
+export default MainDashboard;

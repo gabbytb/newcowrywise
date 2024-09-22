@@ -97,10 +97,10 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//        
-        const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
+        // const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
         // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
         // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
-        // const roleUsers = await Role.findOne({ role: ROLES.USERS });
+        const roleUsers = await Role.findOne({ role: ROLES.USERS });
         // ***************************************************************//
         // PICK ALL ADMIN ROLES
         // ***************************************************************//
@@ -128,7 +128,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: "pending",
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleAdmin }]
+            roles: [{ ...roleUsers }]
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -931,7 +931,7 @@ exports.findAllAdmins = async (req, res) => {
                                 .limit(limit);
         console.log("STAFFS LIST: ", staffsList);
 
-        const totalAdminUsers = await User.countDocuments(query); // Total number of users with the given status
+        const totalAdminUsers = await User.countDocuments(query); // Total number of staffs with the given status
         const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
         const pagination = {
             staffsRecord: totalAdminUsers,

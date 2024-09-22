@@ -1,6 +1,9 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 
+
+
+
 const NotificationDropdown = () => {
 
 
@@ -12,7 +15,7 @@ const NotificationDropdown = () => {
     const openDropdownPopover = () => {
       
       createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-          placement: "left-start",
+          // placement: "bottom-end",
         });
         setDropdownPopoverShow(true);
 
@@ -21,6 +24,8 @@ const NotificationDropdown = () => {
     const closeDropdownPopover = () => {
         setDropdownPopoverShow(false);
     };
+
+
     return (
         <>
           <a

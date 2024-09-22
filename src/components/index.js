@@ -48,7 +48,15 @@ import AdminNavbar from "./Navbars/AdminNavbar";
 import HeaderStats from "./Headers/HeaderStats";
 import CardStats from "./Cards/CardStats";
 import CardAllUsers from "./Cards/CardAllUsers";
+import CardAllApprovedUsers from "./Cards/CardAllApprovedUsers";
+import CardAllPendingUsers from "./Cards/CardAllPendingUsers";
+import CardAllRejectedUsers from "./Cards/CardAllRejectedUsers";
+
 import CardAllStaffs from "./Cards/CardAllStaffs";
+import CardAllApprovedStaffs from "./Cards/CardAllApprovedStaffs";
+import CardAllPendingStaffs from "./Cards/CardAllPendingStaffs";
+import CardAllRejectedStaffs from "./Cards/CardAllRejectedStaffs";
+
 import Sidebar from "./Sidebar/Sidebar";
 import CardBarChart from "./Cards/CardBarChart";
 import CardLineChart from "./Cards/CardLineChart";
@@ -70,7 +78,14 @@ export {
     CardStats,
     
     CardAllUsers,
+    CardAllApprovedUsers,
+    CardAllPendingUsers,
+    CardAllRejectedUsers,
+
     CardAllStaffs,
+    CardAllApprovedStaffs,
+    CardAllPendingStaffs,
+    CardAllRejectedStaffs,
 
     Sidebar,
     CardBarChart,

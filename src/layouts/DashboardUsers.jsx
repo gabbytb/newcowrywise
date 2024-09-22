@@ -1,9 +1,11 @@
 import { googleLogout } from "@react-oauth/google";
-import "../assets/styles/tailwind.css";
 
 // components
 import { AdminNavbar, Sidebar,  } from "../components";
+
+// views
 import {  UsersTable } from "../views";
+
 
 
 
@@ -39,9 +41,11 @@ const DashboardUsers = ({ isLoggedIn }) => {
 
 
 
+
     return (
         <>
             <Sidebar />
+            
             <div className="relative md:ml-64 bg-blueGray-100">
                 <AdminNavbar />
                 
@@ -66,5 +70,6 @@ const DashboardUsers = ({ isLoggedIn }) => {
         </>
     );
 };
+
 
 export default DashboardUsers;

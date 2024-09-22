@@ -21,7 +21,7 @@ const UserDropdown = ({ isLoggedIn }) => {
         
       const openDropdownPopover = () => {
         createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-          placement: "bottom-start",
+          placement: "bottom-end",
         });
         setDropdownPopoverShow(true);
       };
@@ -83,23 +83,23 @@ const UserDropdown = ({ isLoggedIn }) => {
 
                                 if (name?.role === "ROLE_ADMIN")  {
                                     return (
-                                            <span key={index} className="text-lg tracking-supertight font-bold text-white">{adminRole}</span>
+                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
                                     );
                                 } else if (name?.role === "ROLE_EDITOR")  {
                                     return (
-                                        <span key={index} className="text-lg tracking-supertight font-bold text-white">{editorRole}</span>
+                                        <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{editorRole}</span>
                                     );
                                 } else if (name?.role === "ROLE_STAFF")  {
                                     return (
-                                        <span key={index} className="text-lg tracking-supertight font-bold text-white">{staffRole}</span>
+                                        <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{staffRole}</span>
                                     );
                                 } else if (name?.role === "ROLE_USERS")  {
                                     return (
-                                        <span key={index} className="text-lg tracking-supertight font-bold text-white">{userRole}</span>
+                                        <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{userRole}</span>
                                     );
                                 } else {
                                     return (
-                                        <span className="text-lg tracking-supertight font-bold text-red-500">{noRole}</span>
+                                        <span className="text-lg tracking-supertight font-bold text-red-500 capitalize">{noRole}</span>
                                     );
                                 };
                             })

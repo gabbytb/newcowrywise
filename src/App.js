@@ -9,17 +9,17 @@ import {
   // VerifySignUp,
   SignIn,
   // AdminDashboard, 
-  DashboardUsersPage, 
+  // DashboardUsersPage, 
   // DashboardUsersDetailsPage,
   // DashboardStaffsPage, DashboardStaffsDetailsPage,
   // AccountUsers,
 } from "./pages";
 import { 
-  Admin,
+  MainDashboard,
   DashboardUsers, 
   DashboardStaffs,
 } from "./layouts";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+
 
 
 
@@ -60,10 +60,10 @@ export default function App() {
     return (
       <Routes>
         {/* add routes with layouts */}
-        <Route path="/admin/dashboard" element={<Admin />} />
-        <Route path="/admin/manage/users" element={<DashboardUsers />} />
-        <Route path="/admin/manage/staffs" element={<DashboardStaffs />} />
-        <Route path="/admin/users" element={<DashboardUsersPage />} />
+        <Route path="/admin/dashboard" element={<MainDashboard />} />
+        <Route path="/admin/users" element={<DashboardUsers />} />
+        <Route path="/admin/staffs" element={<DashboardStaffs />} />
+        {/* <Route path="/admin/users" element={<DashboardUsersPage />} /> */}
         
         {/* <Route path="/auth" component={Auth} /> */}
 
@@ -81,6 +81,17 @@ export default function App() {
         {/* <Route path="/admin/dashboard?logout" element={<Navigate replace to="/" />} /> */}
       </Routes>
     );
+};
+
+
+
+
+
+
+
+
+
+
     // const routesConfig = [          
     //     //  TEST ROUTES
     //     { path: "/dash", element: <Admin /> },
@@ -103,48 +114,6 @@ export default function App() {
     // ];
     // const routes = useRoutes(routesConfig);
     // return routes;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
