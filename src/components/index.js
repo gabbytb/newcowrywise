@@ -47,15 +47,19 @@ import DashboardMenuCard from "./DashboardMenuCard";
 import AdminNavbar from "./Navbars/AdminNavbar";
 import HeaderStats from "./Headers/HeaderStats";
 import CardStats from "./Cards/CardStats";
-import CardAllUsers from "./Cards/CardAllUsers";
-import CardAllApprovedUsers from "./Cards/CardAllApprovedUsers";
-import CardAllPendingUsers from "./Cards/CardAllPendingUsers";
-import CardAllRejectedUsers from "./Cards/CardAllRejectedUsers";
 
+
+// USERS COMPONENTS
+import CardAllUsers from "./Cards/CardAllUsers";
+import CardAllApprovedUsers from "./Cards/users/CardAllApprovedUsers";
+import CardAllPendingUsers from "./Cards/users/CardAllPendingUsers";
+import CardAllRejectedUsers from "./Cards/users/CardAllRejectedUsers";
+// STAFFS COMPONENTS
 import CardAllStaffs from "./Cards/CardAllStaffs";
-import CardAllApprovedStaffs from "./Cards/CardAllApprovedStaffs";
-import CardAllPendingStaffs from "./Cards/CardAllPendingStaffs";
-import CardAllRejectedStaffs from "./Cards/CardAllRejectedStaffs";
+import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
+import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
+import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
+
 
 import Sidebar from "./Sidebar/Sidebar";
 import CardBarChart from "./Cards/CardBarChart";

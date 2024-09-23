@@ -1,10 +1,10 @@
 import { useEffect, useState, } from "react";
 import PropTypes from "prop-types";
-import api from "../../api";
-import sketch from '../../assets/img/sketch.jpg';
+import api from "../../../api";
+import sketch from '../../../assets/img/sketch.jpg';
 
 // components
-import { Preloader, TableDropdown } from "..";
+import { Preloader, TableDropdown } from "../..";
 
 
 
@@ -12,65 +12,67 @@ import { Preloader, TableDropdown } from "..";
 
 
 
-export default function CardAllRejectedStaffs({ color, activeDisplay }) {
+
+export default function CardAllPendingUsers({ color, activeDisplay }) {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  FOR FIND ALL REJECTED STAFFS
+    // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
-    const [allRejectedStaffs, setAllRejectedStaffs] = useState([]);
-    // console.log("ALL REJECTED STAFFS: ", allRejectedStaffs);
+    const [isLoading, setIsLoading] = useState(true);
 
+
+    // ****************************************************************************
+    // MANAGE STATE:-  TO FIND ALL USERS
+    // ****************************************************************************
+    const [allPendingUsers, setAllPendingUsers] = useState([]);
+    // console.log("ALL USERS: ", allUsers);
+
+      
     // eslint-disable-next-line
-    const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL STAFFS: ", totalAdminUsers);
+    const [totalUsers, setTotalUsers] = useState(null);
+    // console.log("TOTAL USERS: ", totalUsers);
     const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
 
-
-    
-    
-    // ****************************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // ****************************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-    
-    useEffect(() => {
-      var allRejectedStaffsLink = document.querySelector("#staffsLinkID .allRejectedStaffs");
-      // console.log("ALL REJECTED STAFFS LINK", allRejectedStaffsLink);
-      if (activeDisplay === "allRejectedStaffs") {
-          allRejectedStaffsLink?.classList.add("activeStaffView");
-      } else {
-          allRejectedStaffsLink?.classList.remove("activeStaffView");
-      };
-    }, [activeDisplay]);
   
     useEffect(() => {
-        if (activeDisplay === "allRejectedStaffs") {
+        var allPendingUsersLink = document.querySelector("#usersLinkID .allPendingUsers");
+        // console.log("ALL USERS LINK", allUsersLink);
+        if (activeDisplay === "allPendingUsers") {
+            allPendingUsersLink?.classList.add("activeUserView");
+        } else {
+            allPendingUsersLink?.classList.remove("activeUserView");
+        };
+    }, [activeDisplay]);
 
+    
+    useEffect(() => {
+        if (activeDisplay === "allPendingUsers") {
+          
             setIsLoading(true);
-            
+
             // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL REJECTED STAFFS
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
-            async function fetchAllRejectedStaffs() {
-                const rejected = 'rejected';
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejected}`)
+            async function fetchAllPendingUsers() {
+                var pending = 'pending';
+                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${pending}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
-                    const { staffsList, pagination } = data;
+                    const { usersList, pagination } = data;
 
-                    if (!success && message === "No staff found") {
+                    if (!success && message === "No user found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setAllRejectedStaffs(staffsList);
+                    setAllPendingUsers(usersList);
                 
-                    setTotalAdminUsers(pagination?.staffsRecord);
+                    setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
@@ -81,7 +83,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
                 });
             };
 
-            var timerID = setTimeout(fetchAllRejectedStaffs, 300);   // Delay execution of findAllRejectedStaffs by 1800ms
+            var timerID = setTimeout(fetchAllPendingUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
@@ -97,11 +99,12 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
 
 
 
+
     
     if (isLoading) {
         return (
             <>
-                <div className={`w-full overflow-x-auto ${activeDisplay === "allRejectedStaffs" ? "block" : "hidden"}`}>
+                <div className={`w-full overflow-x-auto ${activeDisplay === "allPendingUsers" ? "block" : "hidden"}`}>
                   {/* Projects table */}
                   <table className="items-center w-full bg-transparent border-collapse">
                     <thead>
@@ -170,10 +173,10 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
         );
     };
 
-
+  
     return (
       <>
-          <div className={`w-full overflow-x-auto ${activeDisplay === "allRejectedStaffs" ? "block" : "hidden"}`}>
+          <div className={`w-full overflow-x-auto ${activeDisplay === "allPendingUsers" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
@@ -229,10 +232,10 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
                 </tr>
               </thead>
               {
-                allRejectedStaffs?.length !== 0 ?
+                allPendingUsers?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allRejectedStaffs?.map((user, userIndex) => {
+                        allPendingUsers?.map((user, userIndex) => {
                             if (user?.status === "pending") {
                                 return (
                                     <tr key={userIndex}>
@@ -326,7 +329,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of rejected staff</td>
+                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of pending user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>
@@ -378,10 +381,10 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     );
 };
 
-// CardAllRejectedStaffs.defaultProps = {
-//   color: "light",
-// };
+CardAllPendingUsers.defaultProps = {
+  color: "light",
+};
 
-CardAllRejectedStaffs.propTypes = {
+CardAllPendingUsers.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };

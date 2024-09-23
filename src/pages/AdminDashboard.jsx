@@ -212,26 +212,31 @@ const AdminDashboard = ({ isLoggedIn }) => {
                                             <h4>{userEmail}</h4>
                                             <h6>
                                                 {
-                                                    userRoles?.map((selectRole) => {
+                                                    userRoles?.map((selectRole, index) => {
                                                         if (selectRole?.role === "ROLE_ADMIN") {
+                                                            var adminRole = 'admin';
                                                             return (
-                                                                <span key={selectRole?._id}>admin</span>
+                                                                <span key={index}>{adminRole}</span>
                                                             );
                                                         } else if (selectRole?.role === "ROLE_EDITOR") {
+                                                            var editorRole = 'editor';
                                                             return (
-                                                                <span key={selectRole?._id}>editor</span>
+                                                                <span key={index}>{editorRole}</span>
                                                             );
                                                         } else if (selectRole?.role === "ROLE_STAFF") {
+                                                            var staffRole = 'staff';
                                                             return (
-                                                                <span key={selectRole?._id}>staff</span>
+                                                                <span key={index}>{staffRole}</span>
                                                             );
                                                         } else if (selectRole?.role === "ROLE_USERS") {
+                                                            var userRole = 'user';
                                                             return (
-                                                                <span key={selectRole?._id}>user</span>
+                                                                <span key={index}>{userRole}</span>
                                                             );
                                                         } else {
+                                                            var unassignedRole = 'Unassigned Role';
                                                             return (
-                                                                <span>Unassigned Role</span>
+                                                                <span>{unassignedRole}</span>
                                                             );
                                                         };
                                                     })

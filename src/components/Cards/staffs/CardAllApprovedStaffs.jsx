@@ -1,10 +1,10 @@
 import { useEffect, useState, } from "react";
 import PropTypes from "prop-types";
-import api from "../../api";
-import sketch from '../../assets/img/sketch.jpg';
+import api from "../../../api";
+import sketch from '../../../assets/img/sketch.jpg';
 
 // components
-import { Preloader, TableDropdown } from "..";
+import { Preloader, TableDropdown } from "../..";
 
 
 
@@ -13,16 +13,16 @@ import { Preloader, TableDropdown } from "..";
 
 
 
-export default function CardAllPendingStaffs({ color, activeDisplay }) {
+export default function CardAllApprovedStaffs({ color, activeDisplay }) {
 
 
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [allPendingStaffs, setAllPendingStaffs] = useState([]);
+    const [allApprovedStaffs, setAllApprovedUsers] = useState([]);
     // console.log("ALL USERS: ", allApprovedStaffs);
 
-      
+    
     // eslint-disable-next-line
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
     // console.log("TOTAL STAFFS: ", totalAdminUsers);
@@ -42,26 +42,27 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
   
     useEffect(() => {
-      const allPendingStaffsLink = document.querySelector("#staffsLinkID .allPendingStaffs");
-      // console.log("ALL STAFFS LINK", allPendingStaffsLink);
-      if (activeDisplay === "allPendingStaffs") {
-          allPendingStaffsLink?.classList.add("activeStaffView");
+      const allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
+      // console.log("ALL STAFFS LINK", allApprovedStaffsLink);
+      if (activeDisplay === "allApprovedStaffs") {
+          allApprovedStaffsLink?.classList.add("activeStaffView");
       } else {
-          allPendingStaffsLink?.classList.remove("activeStaffView");
+          allApprovedStaffsLink?.classList.remove("activeStaffView");
       };
     }, [activeDisplay]);
 
+  
     useEffect(() => {
-        if (activeDisplay === "allPendingStaffs") {
+        if (activeDisplay === "allApprovedStaffs") {
 
             setIsLoading(true);
             
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL APPROVED STAFFS
             // ****************************************************************************             
-            async function fetchAllPendingStaffs() {
-                var pendingStaffs = 'pending';
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStaffs}`)
+            async function fetchAllApprovedStaffs() {
+                var approvedStaffs = 'approved';
+                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStaffs}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
@@ -71,11 +72,11 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                         console.log("Message: ", message);
                     };
 
-                    setAllPendingStaffs(staffsList);
+                    setAllApprovedUsers(staffsList);
                 
                     setTotalAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
-
+                    
                 })
                 .catch((error) => {
                     console.log("Error fetching data: ", error);
@@ -85,7 +86,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                 });
             };
 
-            var timerID = setTimeout(fetchAllPendingStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
+            var timerID = setTimeout(fetchAllApprovedStaffs, 400);   // Delay execution of findAllStaffs by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
@@ -103,10 +104,11 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
 
 
+
     if (isLoading) {
         return (
             <>
-                <div className={`w-full overflow-x-auto ${activeDisplay === "allPendingStaffs" ? "block" : "hidden"}`}>
+                <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedStaffs" ? "block" : "hidden"}`}>
                   {/* Projects table */}
                   <table className="items-center w-full bg-transparent border-collapse">
                     <thead>
@@ -177,8 +179,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
 
     return (
-      <>
-          <div className={`w-full overflow-x-auto ${activeDisplay === "allPendingStaffs" ? "block" : "hidden"}`}>
+        <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedStaffs" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
@@ -234,10 +235,10 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                 </tr>
               </thead>
               {
-                allPendingStaffs?.length !== 0 ?
+                allApprovedStaffs?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allPendingStaffs?.map((user, userIndex) => {
+                        allApprovedStaffs?.map((user, userIndex) => {
                             if (user?.status === "pending") {
                                 return (
                                     <tr key={userIndex}>
@@ -331,7 +332,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of pending staff</td>
+                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of approved staff</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>
@@ -378,15 +379,14 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                                     </nav>
             </div>
             {/* Pagination controls */}
-          </div>       
-      </>
+        </div>       
     );
 };
 
-// CardAllPendingStaffs.defaultProps = {
+// CardAllApprovedStaffs.defaultProps = {
 //   color: "light",
 // };
 
-CardAllPendingStaffs.propTypes = {
+CardAllApprovedStaffs.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };

@@ -6,10 +6,40 @@ import { mayokun, wande, wura } from "../assets/images"
 
 
 
+// PRODUCTION Data [GOOGLE ANALYTICS]
+// const reactGA = "G-0LBZW5F0BD";
 
+// PRODUCTION Data [GOOGLE TAG]
+// const reactGA = "GT-WB2R977Q"
+
+// PRODUCTION Data [GOOGLE TAG MANAGER]
+// const reactGA = "GTM-MM2Z27G9";
+
+
+// PRODUCTION Data [GOOGLE OAuth CLIENT ID]
 export const googleClient = [    
     {
+        // PRODUCTION Data
         key: '1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com',
+    },
+]
+
+// PRODUCTION Data [Google Analytics]
+export const googleAnalytics = [    
+    {
+        // PRODUCTION Data [GOOGLE ANALYTICS]
+        key: 'G-0LBZW5F0BD',
+    },    
+]
+
+export const gClient = [  
+    {
+        // PRODUCTION Data [GOOGLE TAG]
+        gtag: 'GT-WB2R977Q',
+    },
+    {
+        // PRODUCTION Data [GOOGLE TAG MANAGER]
+        gmgr: 'GTM-MM2Z27G9',
     },
 ]
 

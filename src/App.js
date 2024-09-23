@@ -1,6 +1,7 @@
-// import { useEffect } from "react";
-// import ReactGA from 'react-ga';
+import { useEffect } from "react";
+import ReactGA from 'react-ga';
 import { Routes, Route, } from "react-router-dom";
+import { googleAnalytics } from "./constants";
 import {
   Home,
   OurProgress, 
@@ -22,24 +23,17 @@ import {
 
 
 
-
-// DEVELOPMENT Data [GOOGLE ANALYTICS]
-// const reactGA = "G-0LBZW5F0BD";
-
-// DEVELOPMENT Data [GOOGLE TAG]
-// const reactGA = "GT-WB2R977Q"
-
-// DEVELOPMENT Data [GOOGLE TAG MANAGER]
-// const reactGA = "GTM-MM2Z27G9";
+{`${googleClient.map(item => item.key)}`}
 
 
 
+
+// const reactGA =`{ ${reactGA} }`;
+const reactGA =`${googleAnalytics.map(item => item.key)}`;
+// const reactGA =`{ ${googleClient.map(item => item.gtix)} }`;
 
 // Initialize Google Analytics
-// ReactGA.initialize(`${reactGA}`);
-
-
-
+ReactGA.initialize(`${reactGA}`);
 
 // The clearTimeout() method is a powerful JavaScript tool 
 // that allows developers to clear and reset the timer 
@@ -49,14 +43,18 @@ import {
 // or delay a certain action within the code.
 export default function App() {
 
+    useEffect(() => {
+        // Optionally, you can use ReactGA.pageview to track page views
+        // ReactGA.set({ page: window.location.pathname });
+        // ReactGA.pageview(window.location.pathname + window.location.search);
+        // ReactGA.pageview(console.log('WINDOW PATHNAME = ', window.location.pathname + window.location.search));
+        const reactViews = { 
+            hitType: "pageview", 
+            page: "/admin/dashboard" 
+        };      
+        ReactGA.send(console.log('WINDOW PATHNAME = ', reactViews));
+    }, []);
     
-    // useEffect(() => {      
-    //     // Optionally, you can use ReactGA.pageview to track page views
-    //     // ReactGA.set({ page: window.location.pathname });
-    //     ReactGA.pageview(window.location.pathname + window.location.search);
-    // }, []);
-    
-
     return (
       <Routes>
         {/* add routes with layouts */}

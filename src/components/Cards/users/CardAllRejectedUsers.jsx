@@ -1,10 +1,10 @@
 import { useEffect, useState, } from "react";
 import PropTypes from "prop-types";
-import api from "../../api";
-import sketch from '../../assets/img/sketch.jpg';
+import api from "../../../api";
+import sketch from '../../../assets/img/sketch.jpg';
 
 // components
-import { Preloader, TableDropdown } from "..";
+import { Preloader, TableDropdown } from "../..";
 
 
 

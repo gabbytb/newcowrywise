@@ -1,10 +1,10 @@
 import { useEffect, useState, } from "react";
 import PropTypes from "prop-types";
-import api from "../../api";
-import sketch from '../../assets/img/sketch.jpg';
+import api from "../../../api";
+import sketch from '../../../assets/img/sketch.jpg';
 
 // components
-import { Preloader, TableDropdown } from "..";
+import { Preloader, TableDropdown } from "../..";
 
 
 
@@ -13,85 +13,82 @@ import { Preloader, TableDropdown } from "..";
 
 
 
-export default function CardAllApprovedStaffs({ color, activeDisplay }) {
+export default function CardAllApprovedUsers({ color, activeDisplay, }) {
 
 
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [allApprovedStaffs, setAllApprovedUsers] = useState([]);
-    // console.log("ALL USERS: ", allApprovedStaffs);
+    const [allApprovedUsers, setAllApprovedUsers] = useState([]);
+    // console.log("ALL USERS: ", allUsers);
 
-    
     // eslint-disable-next-line
-    const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL STAFFS: ", totalAdminUsers);
-    const [totalPages, setTotalPages] = useState(0);
+    const [totalUsers, setTotalUsers] = useState(null);
+    // console.log("TOTAL USERS: ", totalUsers);
 
+    const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
 
-
+  
 
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
 
-
-  
     useEffect(() => {
-      const allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
-      // console.log("ALL STAFFS LINK", allApprovedStaffsLink);
-      if (activeDisplay === "allApprovedStaffs") {
-          allApprovedStaffsLink?.classList.add("activeStaffView");
-      } else {
-          allApprovedStaffsLink?.classList.remove("activeStaffView");
-      };
+        var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");
+        // console.log("ALL USERS LINK", allUsersLink);
+        if (activeDisplay === "allApprovedUsers") {
+            allApprovedUsersLink?.classList.add("activeUserView");
+        } else {
+            allApprovedUsersLink?.classList.remove("activeUserView");
+        };
     }, [activeDisplay]);
 
-  
     useEffect(() => {
-        if (activeDisplay === "allApprovedStaffs") {
-
-            setIsLoading(true);
+        if (activeDisplay === "allApprovedUsers") {
             
+            setIsLoading(true);
+
             // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL APPROVED STAFFS
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
-            async function fetchAllApprovedStaffs() {
-                var approvedStaffs = 'approved';
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStaffs}`)
+            async function fetchAllApprovedUsers() {
+                var approved = 'approved';
+                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approved}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
-                    const { staffsList, pagination } = data;
+                    const { usersList, pagination } = data;
 
-                    if (!success && message === "No staff found") {
+                    if (!success && message === "No user found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setAllApprovedUsers(staffsList);
-                
-                    setTotalAdminUsers(pagination?.staffsRecord);
+                    setAllApprovedUsers(usersList);
+                                            
+                    setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
-                    
+
                 })
                 .catch((error) => {
-                    console.log("Error fetching data: ", error);
+                      console.log("Error fetching data: ", error);
                 })
                 .finally(() => {
-                    setIsLoading(false);
+                      setIsLoading(false);
                 });
             };
-
-            var timerID = setTimeout(fetchAllApprovedStaffs, 400);   // Delay execution of findAllStaffs by 1800ms
+            var timerID = setTimeout(fetchAllApprovedUsers, 400);   // Delay execution of findAllApprovedUsers by 1800ms
+        
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, currentPage]); // Fetch data when activeDisplay and currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -104,82 +101,82 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
 
 
 
-
     if (isLoading) {
         return (
-            <>
-                <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedStaffs" ? "block" : "hidden"}`}>
-                  {/* Projects table */}
-                  <table className="items-center w-full bg-transparent border-collapse">
-                    <thead>
-                      <tr>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                            : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                          }
-                        >
-                          S/N
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                          }
-                        >
-                          Full Name
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                          }
-                        >
-                          E-mail address
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                          }
-                        >
-                          Status
-                        </th>              
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                          }
-                        ></th>
-                      </tr>
-                    </thead>          
-                    <tbody className='w-16 h-16 '>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td className="max-w-40 h-60 flex justify-center items-center"><Preloader /></td>
-                        <td></td>
-                      </tr>                
-                    </tbody>
-                  </table>
-                </div>       
-            </>
+        <>
+            <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
+              {/* Projects table */}
+              <table className="items-center w-full bg-transparent border-collapse">
+                <thead>
+                  <tr>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      S/N
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      Full Name
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      E-mail address
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    >
+                      Status
+                    </th>              
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                      }
+                    ></th>
+                  </tr>
+                </thead>          
+                <tbody className='w-16 h-16 '>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td className="max-w-40 h-60 flex justify-center items-center"><Preloader /></td>
+                    <td></td>
+                  </tr>                
+                </tbody>
+              </table>
+            </div>       
+        </>
         );
     };
 
 
     return (
-        <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedStaffs" ? "block" : "hidden"}`}>
+      <>
+          <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
@@ -235,10 +232,10 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
                 </tr>
               </thead>
               {
-                allApprovedStaffs?.length !== 0 ?
+                allApprovedUsers?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allApprovedStaffs?.map((user, userIndex) => {
+                        allApprovedUsers?.map((user, userIndex) => {
                             if (user?.status === "pending") {
                                 return (
                                     <tr key={userIndex}>
@@ -332,7 +329,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
                       <tr>
                         <td className=""></td>
                         <td className=""></td>
-                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of approved staff</td>
+                        <td className="text-left max-w-60 pl-0 h-60 flex justify-start items-center">No record of approved user</td>
                         <td className=""></td>
                         <td className=""></td>
                         <td className=""></td>
@@ -379,14 +376,15 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
                                     </nav>
             </div>
             {/* Pagination controls */}
-        </div>       
+          </div>       
+      </>
     );
 };
 
-// CardAllApprovedStaffs.defaultProps = {
-//   color: "light",
-// };
+CardAllApprovedUsers.defaultProps = {
+  color: "light",
+};
 
-CardAllApprovedStaffs.propTypes = {
+CardAllApprovedUsers.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };
