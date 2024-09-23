@@ -3,14 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
 import googleApi from "../googleApi";
+import { Preloader } from '../components';
 import { brandOfficialLogo, loginBg } from '../assets/images';
 import { GoogleIcon } from '../assets/icons';
-import Preloader from '../components/Preloader';
-
-
-
-
-
 
 
 
@@ -19,9 +14,8 @@ import Preloader from '../components/Preloader';
 
 function SignIn() {
 
+    // console.clear();        
 
-    // console.clear();
-        
     const navigate = useNavigate();
 
 
@@ -39,10 +33,10 @@ function SignIn() {
     
 
 
-    
 
+    
     // *************************************** //
-    // *** USER PAYLOAD FOR GOOGLE SIGN IN *** //
+    // *********   GOOGLE: SIGN-IN   ********* //
     // *************************************** //
     // new Date(verifiedToken.exp * 1000);
     const [ googleUser, setGoogleUser ] = useState([]);
@@ -55,12 +49,7 @@ function SignIn() {
     const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
     console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
 
-    const login = useGoogleLogin({
-        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
-        onError: (error) => console.log('Login Failed: ', error)
-    });
-
-    useEffect(() => {
+    useEffect(() => {                
         if (googleUser.length !== 0) {
             googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
                 headers: {
@@ -87,7 +76,7 @@ function SignIn() {
                 const { success, data, message } = response.data;
                 var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
                 var successMsg = document.querySelector('#logInForm .success');
-                var ssoLinks = document.querySelector("#logInForm .alt_sso");
+                var ssoLinks = document.querySelector("#logInFormId .alt_sso");
          
                 
                 if (!success && message === "No user found") {
@@ -130,6 +119,11 @@ function SignIn() {
         };
     // eslint-disable-next-line
     }, [profile]);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setGoogleUser(codeResponse),
+        onError: (error) => console.log('Login Failed: ', error)
+    });
 
 
 
@@ -178,7 +172,7 @@ function SignIn() {
                 // const { userId, token } = data;
                 var errMsg = document.querySelector('#logInForm .error'); 
                 var successMsg = document.querySelector('#logInForm .success');
-                var ssoLinks = document.querySelector("#logInForm .alt_sso");
+                var ssoLinks = document.querySelector("#logInFormId .alt_sso");
                 var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
                                 
                 if (!success && message === "Account with this details does not exist") {              
@@ -379,8 +373,7 @@ function SignIn() {
 
 
 
-
-
+    
     
 
     return (
@@ -397,8 +390,9 @@ function SignIn() {
                 </div>
                 {/* PAGE NAV */}
 
-
-                <form id="logInForm" className='max-w-[400px] w-full mx-auto mb-20 rounded-lg bg-skin-signup-signin-bg pt-2 pb-8 px-8 z-1' onSubmit={handleLogin}>
+              
+                {/* Sign-In Methods */}
+                <form id="logInForm" onSubmit={handleLogin} className='max-w-[400px] w-full mx-auto mb-0 rounded-lg bg-skin-signup-signin-bg pt-2 pb-0 px-8 z-1'>
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -457,7 +451,7 @@ function SignIn() {
                     {/* LINK: SIGN UP */}
                     
                     
-                    <hr className="alt_sso_hr mt-10 mb-8"></hr>
+                    <hr className="alt_sso_hr mt-10 mb-0"></hr>
 
                     {/* Success Message */}
                     <div className="mt-6 mx-auto success">
@@ -465,17 +459,21 @@ function SignIn() {
                     </div>
                     {/* Success Message */}
 
-                                        
-                    {/* Alternative Sign-In Methods */}
-                    <div className="alt_sso flex justify-center align-middle gap-10">
-                        <button className="w-12 h-12" onClick={() => login()}><GoogleIcon /></button>
-                    </div>
-                    {/* Alternative Sign-In Methods */}
                 </form>
+                {/* Sign-In Methods */}
+
+
+                {/* Alternative Sign-In Methods */}
+                <div className="alt_sso flex justify-center align-middle pb-12 mb-20 gap-10">
+                    <button className="w-12 h-12" onClick={() => login()}><GoogleIcon /></button>
+                </div>
+                {/* Alternative Sign-In Methods */}
+
             </div>
             {/* Login Form */}
 
             
+
             {/* Re-verify Email Modal */}
             <div id="verifyId" className="hidden inset-0 backdrop-blur-sm bg-opacity-5 h-screen w-screen signup__modal">
                 <div className="grid place-content-center items-center h-full">

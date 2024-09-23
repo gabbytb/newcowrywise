@@ -76,6 +76,10 @@ import UserDropdown from "./Dropdowns/UserDropdown";
 
 export {
 
+    // IMPORT PRELOADER
+    Preloader,
+
+    
     // IMPORTED TEST COMPONENTS
     AdminNavbar,
     HeaderStats,
@@ -104,7 +108,6 @@ export {
     HomeNav,
     Nav,
     NavNoTopBar,
-    Preloader,
     // HEADER
 
 

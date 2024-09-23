@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
 
 // components
@@ -13,6 +14,22 @@ import { Dashboard, } from "../views";
 
 
 const MainDashboard = ({ isLoggedIn }) => {
+
+
+
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+        const pageTitle = "MAIN DASHBOARD", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+
+
 
 
     // ***************************************************************************

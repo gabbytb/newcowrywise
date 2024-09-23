@@ -102,7 +102,7 @@ const UserDropdown = ({ isLoggedIn }) => {
                                         <span className="text-lg tracking-supertight font-bold text-red-500 capitalize">{noRole}</span>
                                     );
                                 };
-                            })
+                            })                            
                         }
                     </div>
                     <div className="items-center flex">
