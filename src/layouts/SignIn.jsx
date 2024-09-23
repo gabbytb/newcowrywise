@@ -77,8 +77,7 @@ function SignIn() {
                 var ssoLinksHr = document.querySelector("#logInForm .alt_sso_hr");
                 var successMsg = document.querySelector('#logInForm .success');
                 var ssoLinks = document.querySelector("#logInFormId .alt_sso");
-         
-                
+                     
                 if (!success && message === "No user found") {
                     setIsLoggedInWithGmail(success);
                     setLoginFormMessage(message);
@@ -87,7 +86,6 @@ function SignIn() {
                     // ssoLinks?.classList.add("flex");
                     // ssoLinks?.classList.remove("hidden");
                 } else {
-
                     // Perform These Actions                  
                     window.scrollTo({ left: 0, top: 280, behavior: "smooth" });
                     
@@ -169,7 +167,7 @@ function SignIn() {
             await api.post(uri, user)
             .then((response) => {
                 const { success, message, data } = response.data; 
-                // const { userId, token } = data;
+
                 var errMsg = document.querySelector('#logInForm .error'); 
                 var successMsg = document.querySelector('#logInForm .success');
                 var ssoLinks = document.querySelector("#logInFormId .alt_sso");
@@ -191,8 +189,7 @@ function SignIn() {
                 } else if (!success && message === "Incorrect password") {
                     // Perform These Actions
                     setIsLoggedIn(success);
-                    setLoginFormMessage(message);
-                    setExistingUser(data);
+                    setLoginFormMessage(message);         
 
                     errMsg?.classList.remove('error');
                     errMsg?.classList.add('error-message-info');
@@ -206,7 +203,6 @@ function SignIn() {
                     // Perform These Actions
                     setIsLoggedIn(success);
                     setLoginFormMessage(message);
-                    setExistingUser(data);
 
                     errMsg?.classList.remove('error');
                     errMsg?.classList.add('error-message-info');
@@ -220,8 +216,7 @@ function SignIn() {
                         var loginFormId = document.querySelector("#logInFormId");
                         loginFormId?.classList?.add("opacity-30");
 
-                        var signUpModal = document.querySelector("#verifyId");
-                        console.log("SIGN UP MODAL: ", signUpModal);
+                        var signUpModal = document.querySelector("#verifyId");                       
                         if (signUpModal?.classList?.contains("hidden")) {
                             signUpModal?.classList?.remove("hidden");
                             signUpModal?.classList?.add("fixed");
@@ -267,31 +262,8 @@ function SignIn() {
     // ************************************** //
     // *** USER PAYLOAD FOR RE-VALIDATION *** //
     // ************************************** //
-    const [existingUser, setExistingUser] = useState(null);
+    // const [existingUser, setExistingUser] = useState(null);
     // console.log("EXISTING USER ACCOUNT: ", existingUser);
-
-    // ************************************************** //
-    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
-    // ************************************************** //
-    const [accessToken, setAccessToken] = useState(null);
-    // console.log("*** NEW ACCOUNT TOKEN ***\nToken: ", accessToken); 
-
-    useEffect(() => {
-        async function saveTokenInStorage() {
-            if (accessToken !== null) {
-                const jsonObjData = {
-                    token: accessToken,
-                };
-                return await localStorage.setItem("tokEn", JSON.stringify(jsonObjData));
-            } else {
-                return await localStorage.removeItem("tokEn");
-            };
-        };
-        saveTokenInStorage();
-    }, [accessToken]);
-    // ************************************************** //
-    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
-    // ************************************************** //
 
     const [formMessageAccountVerification, setFormMessageAccountVerification] = useState(null);
     // console.log("Account Verification Attempt: ", formMessageAccountVerification);
@@ -311,15 +283,15 @@ function SignIn() {
         };
     };
 
-    async function handleOnChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
+    // async function handleOnChange(e) {
+    //     const name = e.target.name;
+    //     const value = e.target.value;
 
-        setExistingUser({
-            ...existingUser,
-            [name]: value
-        });
-    } 
+    //     setExistingUser({
+    //         ...existingUser,
+    //         [name]: value
+    //     });
+    // } 
     
     async function handleVerification(e) {
         e.preventDefault();
@@ -327,10 +299,10 @@ function SignIn() {
         const payload = {
             email: user?.email,
         };
-        const url = "http://127.0.0.1:8000/api/v1/admin/users/manage/account/verify";
+        const url = "/api/v1/admin/users/manage/account/verify";
         await api.post(url, payload)
         .then((response) => {
-            const { success, message, data } = response.data;
+            const { success, message } = response.data;
             var errVerifyMsg = document.querySelector('#loginId .reverify_error'); 
             var successVerifyMsg = document.querySelector('#loginId .reverify_success');
 
@@ -350,12 +322,9 @@ function SignIn() {
             } else {
                 // Perform These Actions
                 setFormSubmittedAccountVerification(success);
-                setExistingUser(data?.userId);
-                setAccessToken(data?.token);
-
-                localStorage.setItem("tokEn", JSON.stringify(data?.token));
+                // setExistingUser(data);
                 setFormMessageAccountVerification(message);   
-
+                
                 successVerifyMsg?.classList.remove('reverify_success');
                 successVerifyMsg?.classList.add('success-message-info');
 
@@ -503,7 +472,7 @@ function SignIn() {
                                             type="email"
                                             name="email"
                                             value={user?.email} 
-                                            onChange={handleOnChange} 
+                                            // onChange={handleOnChange} 
                                             disabled 
                                         />
                                     </label>
