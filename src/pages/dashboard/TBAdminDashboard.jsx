@@ -23,7 +23,7 @@ import {
 
 
 
-const AdminDashboard = ({ isLoggedIn }) => {
+const TBAdminDashboard = ({ isLoggedIn }) => {
     
     
     // console.clear();
@@ -805,4 +805,4 @@ const AdminDashboard = ({ isLoggedIn }) => {
 };
 
 
-export default AdminDashboard;
+export default TBAdminDashboard;

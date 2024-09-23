@@ -7,8 +7,8 @@ import axios from "axios";
 
 
 
-const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
-    
+const TBDashboardStaffsRejectedPage = ({ activeDisplay }) => {  
+
     
     // console.clear();
 
@@ -16,40 +16,40 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [approvedStaffs, setApprovedStaffs] = useState([]);
-    console.log("APPROVED STAFFS: ", approvedStaffs);
-    
+    const [rejectedStaffs, setRejectedStaffs] = useState([]);
+    console.log("REJECTED ADMINS: ", rejectedStaffs);
+
     // eslint-disable-next-line
-    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
-    // console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
+    const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
+    // console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
-    
+
 
     useEffect(() => {
-        var allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
-        // console.log("All Approved Staffs Link: ", allApprovedStaffsLink);
+        var allRejectedStaffsLink = document.querySelector("#staffsLinkID .allRejectedStaffs");
+       // console.log("All Pending Staffs Link: ", allRejectedStaffsLink);
 
-        if (activeDisplay === "allApprovedStaffs") {
-            allApprovedStaffsLink?.classList.add("activeStaffView");
+        if (activeDisplay === "allRejectedStaffs") {
+            allRejectedStaffsLink?.classList.add("activeStaffView");
         } else {
-            allApprovedStaffsLink?.classList.remove("activeStaffView");
+            allRejectedStaffsLink?.classList.remove("activeStaffView");
         }
     }, [activeDisplay]);
 
 
 
     useEffect(() => {
-        if (activeDisplay === "allApprovedStaffs") {
+        if (activeDisplay === "allRejectedStaffs") {
             // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" STAFFS
             // ****************************************************************************             
-            async function fetchApprovedStaffs() {        
-                const approvedStatus = "approved";
-                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
+            async function fetchRejectedStaffs() {        
+                const rejectedStatus = "rejected";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
@@ -59,9 +59,9 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                         console.log("Message: ", message);
                     };
 
-                    setApprovedStaffs(staffsList);
-                    
-                    setTotalApprovedAdminUsers(pagination?.staffsRecord);
+                    setRejectedStaffs(staffsList)
+
+                    setTotalRejectedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
@@ -69,11 +69,11 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                 });
             };
 
-            var timerID = setTimeout(fetchApprovedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+            var timerID = setTimeout(fetchRejectedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        }
+        };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // ****************************************************************************
@@ -84,11 +84,11 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
     // ****************************************************************************
 
 
-    
+
     return (
         <>
-            <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
-            <table className="table-fixed capitalize w-full border staff__table">
+            <div className={`capitalize border ${activeDisplay === "allRejectedStaffs" ? "grid" : "hidden"}`}>
+                <table className="table-fixed capitalize w-full border staff__table">
                     <thead>
                         <tr className="text-left">
                             <th className="w-12 h-16 px-3 py-3">ID</th>
@@ -99,10 +99,10 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
                         </tr>
                     </thead>
                     {
-                        approvedStaffs?.length !== 0 ?
+                        rejectedStaffs?.length !== 0 ?
                             <tbody>
                                 {
-                                    approvedStaffs?.map((user, userIndex) => {
+                                    rejectedStaffs?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 <tr key={userIndex} className="text-left">
@@ -200,8 +200,9 @@ const DashboardStaffsApprovedPage = ({ activeDisplay }) => {
         </>
     );
 };
-      
 
-export default DashboardStaffsApprovedPage;
+
+export default TBDashboardStaffsRejectedPage;
+
 
 

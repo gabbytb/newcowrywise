@@ -1,4 +1,4 @@
-import Dashboard from "./admin/Dashboard";
+import DashboardTable from "./admin/DashboardTable";
 import StaffsTable from './admin/StaffsTable';
 import UsersTable from "./admin/UsersTable";
 
@@ -6,7 +6,7 @@ import UsersTable from "./admin/UsersTable";
 
 
 export {  
-    Dashboard,
+    DashboardTable,
     StaffsTable,
     UsersTable,
 }

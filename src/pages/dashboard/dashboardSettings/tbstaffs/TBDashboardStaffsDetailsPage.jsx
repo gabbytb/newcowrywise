@@ -1,9 +1,9 @@
 import { useEffect, useState, } from "react";
 import { useParams, Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
-import api from "../../../api";
-import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
-import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
+import api from "../../../../api";
+import { adminDashboardIcon, brandOfficialLogo } from "../../../../assets/images";
+import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../../assets/icons";
 
 
 
@@ -13,7 +13,7 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 
 
 
-const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
+const TBDashboardStaffsDetailsPage = ({ isLoggedIn }) => {
     
     // import { useNavigate } from "react-router-dom";
     // let navigate = useNavigate();
@@ -608,4 +608,4 @@ const DashboardStaffsDetailsPage = ({ isLoggedIn }) => {
 };
 
 
-export default DashboardStaffsDetailsPage;
+export default TBDashboardStaffsDetailsPage;

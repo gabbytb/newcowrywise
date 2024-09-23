@@ -7,61 +7,55 @@ import axios from "axios";
 
 
 
-const DashboardStaffsRejectedPage = ({ activeDisplay }) => {  
+const TBPendingUsersPage = ({ activeDisplay }) => {  
 
-    
-    // console.clear();
-
-    
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL USERS
+    // MANAGE STATE:-  TO FIND ALL PENDING USERS
     // ****************************************************************************
-    const [rejectedStaffs, setRejectedStaffs] = useState([]);
-    console.log("REJECTED ADMINS: ", rejectedStaffs);
-
+    const [pendingUsers, setPendingUsers] = useState([]);
+    // console.log("PENDING USERS: ", pendingUsers);
+    
     // eslint-disable-next-line
-    const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
-    // console.log("REJECTED STAFFS or TOTAL REJECTED STAFFS: ", totalRejectedAdminUsers);
+    const [totalUsers, setTotalUsers] = useState(null);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
 
-
+    
     useEffect(() => {
-        var allRejectedStaffsLink = document.querySelector("#staffsLinkID .allRejectedStaffs");
-       // console.log("All Pending Staffs Link: ", allRejectedStaffsLink);
+        var allPendingUsersLink = document.querySelector("#usersLinkID .allPendingUsers");
+        // console.log("All Pending Users Link: ", allPendingUsersLink);
 
-        if (activeDisplay === "allRejectedStaffs") {
-            allRejectedStaffsLink?.classList.add("activeStaffView");
+        if (activeDisplay === "allPendingUsers") {
+            allPendingUsersLink?.classList.add("activeUserView");
         } else {
-            allRejectedStaffsLink?.classList.remove("activeStaffView");
-        }
+            allPendingUsersLink?.classList.remove("activeUserView");
+        };
     }, [activeDisplay]);
-
-
-
+    
+    
     useEffect(() => {
-        if (activeDisplay === "allRejectedStaffs") {
+        if (activeDisplay === "allPendingUsers") {
             // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "REJECTED" STAFFS
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
             // ****************************************************************************             
-            async function fetchRejectedStaffs() {        
-                const rejectedStatus = "rejected";
-                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejectedStatus}`)
+            async function fetchPendingUsers() {        
+                const pendingStatus = "pending";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
-                    const { staffsList, pagination } = data;
+                    const { usersList, pagination } = data;
 
-                    if (!success && message === "No admin found") {
+                    if (!success && message === "No user found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setRejectedStaffs(staffsList)
+                    setPendingUsers(usersList);
 
-                    setTotalRejectedAdminUsers(pagination?.staffsRecord);
+                    setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
@@ -69,12 +63,13 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                 });
             };
 
-            var timerID = setTimeout(fetchRejectedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+            var timerID = setTimeout(fetchPendingUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+   
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
@@ -85,9 +80,10 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
 
 
 
+
     return (
         <>
-            <div className={`capitalize border ${activeDisplay === "allRejectedStaffs" ? "grid" : "hidden"}`}>
+            <div className={`capitalize border ${activeDisplay === "allPendingUsers" ? "grid" : "hidden"}`}>
                 <table className="table-fixed capitalize w-full border staff__table">
                     <thead>
                         <tr className="text-left">
@@ -99,10 +95,10 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                         </tr>
                     </thead>
                     {
-                        rejectedStaffs?.length !== 0 ?
+                        pendingUsers?.length !== 0 ?
                             <tbody>
                                 {
-                                    rejectedStaffs?.map((user, userIndex) => {
+                                    pendingUsers?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 <tr key={userIndex} className="text-left">
@@ -111,7 +107,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                                     <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
                                                     <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-orange-500">{user?.status}</div></td>
                                                     <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                     </td>
                                                 </tr>
                                             );
@@ -123,7 +119,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                                     <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
                                                     <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-red-500">{user?.status}</div></td>
                                                     <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                     </td>
                                                 </tr>
                                             );
@@ -135,7 +131,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                                     <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
                                                     <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-green-500">{user?.status}</div></td>
                                                     <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
+                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
                                                     </td>
                                                 </tr>
                                             );
@@ -149,7 +145,7 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
                                     <td className="w-20 h-16 text-center"></td>
                                     <td className="text-center"></td>
                                     <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
-                                        No record of staff
+                                        No record of user
                                     </td>
                                     <td className="text-center"></td>
                                     <td className="text-center"></td>
@@ -200,9 +196,8 @@ const DashboardStaffsRejectedPage = ({ activeDisplay }) => {
         </>
     );
 };
-
-
-export default DashboardStaffsRejectedPage;
-
+    
+    
+export default TBPendingUsersPage;
 
 

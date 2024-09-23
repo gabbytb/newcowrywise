@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 
-const DashboardStaffsPendingPage = ({ activeDisplay }) => {  
+const TBDashboardStaffsPendingPage = ({ activeDisplay }) => {  
 
 
     // console.clear();
@@ -202,5 +202,5 @@ const DashboardStaffsPendingPage = ({ activeDisplay }) => {
 };
 
 
-export default DashboardStaffsPendingPage;
+export default TBDashboardStaffsPendingPage;
 

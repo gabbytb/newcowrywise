@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
+import "../assets/styles/tailwind.css";
 
 // components
 import { Sidebar, AdminNavbar, HeaderStats, } from "../components";
 
 // views
-import { Dashboard, } from "../views";
+import { DashboardTable, } from "../views";
 
 
 
@@ -13,8 +14,7 @@ import { Dashboard, } from "../views";
 
 
 
-const MainDashboard = ({ isLoggedIn }) => {
-
+const Dashboard = ({ isLoggedIn }) => {
 
 
     // *************************** //
@@ -57,14 +57,24 @@ const MainDashboard = ({ isLoggedIn }) => {
 
 
 
+    
 
     return (
         <>
+            {/***** LEFT-PANEL *****/}
             <Sidebar />
+            {/***** LEFT-PANEL *****/}
+
+
+            
+            {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
-                <AdminNavbar />
                 
                 {/* Header */}
+                <AdminNavbar />
+                {/* Header */}
+
+                
                 <div className="relative bg-lightBlue-600 md:pt-32 pb-32 pt-12">
               
                     {/* Welcome Logged-In User */}
@@ -73,17 +83,20 @@ const MainDashboard = ({ isLoggedIn }) => {
                             Welcome <span className="font-bold text-white">{lastName}</span>
                         </p>
                     </div>     
+                    {/* Welcome Logged-In User */}
+
 
                     <HeaderStats />
 
                 </div>
 
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
-                    <Dashboard />                    
+                    <DashboardTable />                    
                 </div>
             </div>
+            {/***** RIGHT-PANEL *****/}
         </>
     );
 };
 
-export default MainDashboard;
+export default Dashboard;

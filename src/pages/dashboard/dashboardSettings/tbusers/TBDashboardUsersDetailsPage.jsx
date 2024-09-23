@@ -1,8 +1,8 @@
 import { useEffect, useState, } from "react";
 import { useParams, Link } from "react-router-dom";
-import api from "../../../api";
-import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
-import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
+import api from "../../../../api";
+import { adminDashboardIcon, brandOfficialLogo } from "../../../../assets/images";
+import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../../assets/icons";
 
 
 
@@ -12,7 +12,7 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 
 
 
-const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
+const TBDashboardUsersDetailsPage = ({ isLoggedIn }) => {
     
     
     // ***********************************************
@@ -280,4 +280,4 @@ const DashboardUsersDetailsPage = ({ isLoggedIn }) => {
 };
 
 
-export default DashboardUsersDetailsPage;
+export default TBDashboardUsersDetailsPage;

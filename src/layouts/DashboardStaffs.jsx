@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
 import "../assets/styles/tailwind.css";
 
 // components
 import { AdminNavbar, Sidebar, } from "../components";
+
+// views
 import { StaffsTable } from "../views";
 
 
@@ -11,6 +14,21 @@ import { StaffsTable } from "../views";
 
 
 const DashboardStaffs = ({ isLoggedIn }) => {
+
+   
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+        const pageTitle = "Staffs Dashboard", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+
+
 
 
     // ***************************************************************************
@@ -37,11 +55,19 @@ const DashboardStaffs = ({ isLoggedIn }) => {
     // ***************************************************************************
 
 
+
     
 
     return (
         <>
+            {/***** LEFT-PANEL *****/}
             <Sidebar />
+            {/***** LEFT-PANEL *****/}
+            
+
+            
+
+            {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
                 <AdminNavbar />
                 
@@ -62,7 +88,8 @@ const DashboardStaffs = ({ isLoggedIn }) => {
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <StaffsTable />                    
                 </div>
-            </div>
+            </div>            
+            {/***** RIGHT-PANEL *****/}            
         </>
     );
 };

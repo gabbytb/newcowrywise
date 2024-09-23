@@ -10,9 +10,9 @@ import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/ico
 // import PendingUsersPage from "./users/PendingUsersPage";
 // import RejectedUsersPage from "./users/RejectedUsersPage";
 
-const ApprovedUsersPage = lazy(() => import("./users/ApprovedUsersPage"));
-const PendingUsersPage = lazy(() => import("./users/PendingUsersPage"));
-const RejectedUsersPage = lazy(() => import("./users/RejectedUsersPage"));
+const ApprovedUsersPage = lazy(() => import("./tbusers/TBApprovedUsersPage"));
+const PendingUsersPage = lazy(() => import("./tbusers/TBPendingUsersPage"));
+const RejectedUsersPage = lazy(() => import("./tbusers/TBRejectedUsersPage"));
 
 
 
@@ -20,7 +20,7 @@ const RejectedUsersPage = lazy(() => import("./users/RejectedUsersPage"));
 
 
 
-const DashboardUsersPage = ({ isLoggedIn }) => {
+const TBDashboardUsersPage = ({ isLoggedIn }) => {
     
     
     // console.clear();
@@ -475,4 +475,4 @@ const DashboardUsersPage = ({ isLoggedIn }) => {
 };
 
 
-export default DashboardUsersPage;
+export default TBDashboardUsersPage;

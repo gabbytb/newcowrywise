@@ -8,25 +8,25 @@ import OLDRegister from "./OLDRegister";
 import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
 
-import SignUp from "./SignUp";
+// import SignUp from "../layouts/SignUp";
 import VerifySignUp from "./VerifySignup";
 
 
-import SignIn from "./SignIn";
+// import SignIn from "../layouts/SignIn";
 import SignInVerifySignUp from "./SignInVerifySignUp";
 
 
 // import AdminDashboard from "./AdminDashboard";
 
-import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
-import ApprovedUsersPage from "./dashboard/dashboardSettings/users/ApprovedUsersPage";
-import PendingUsersPage from "./dashboard/dashboardSettings/users/PendingUsersPage";
-import RejectedUsersPage from "./dashboard/dashboardSettings/users/RejectedUsersPage";
+// import DashboardUsersPage from "./dashboard/dashboardSettings/TBDashboardUsersPage";
+// import ApprovedUsersPage from "./dashboard/dashboardSettings/tbusers/TBApprovedUsersPage";
+// import PendingUsersPage from "./dashboard/dashboardSettings/tbusers/TBPendingUsersPage";
+// import RejectedUsersPage from "./dashboard/dashboardSettings/tbusers/TBRejectedUsersPage";
 
-import DashboardStaffsPage from "./dashboard/dashboardSettings/DashboardStaffsPage";
-import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsApprovedPage";
-import DashboardStaffsPendingPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsPendingPage";
-import DashboardStaffsRejectedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsRejectedpage";
+// import DashboardStaffsPage from "./dashboard/dashboardSettings/TBDashboardStaffsPage";
+// import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/tbstaffs/TBDashboardStaffsApprovedPage";
+// import DashboardStaffsPendingPage from "./dashboard/dashboardSettings/tbstaffs/TBDashboardStaffsPendingPage";
+// import DashboardStaffsRejectedPage from "./dashboard/dashboardSettings/tbstaffs/TBDashboardStaffsRejectedpage";
 
 // import DashboardUsersDetailsPage from "./dashboard/dashboardSettings/DashboardUsersDetailsPage";
 // import DashboardStaffsDetailsPage from "./dashboard/dashboardSettings/DashboardStaffsDetailsPage";
@@ -48,23 +48,23 @@ export {
     OLDRegister,
     OLDSignUpReVerification,
 
-    SignUp,
+    // SignUp,
     VerifySignUp,
     
-    SignIn,
+    // SignIn,
     SignInVerifySignUp,
     
     // AdminDashboard,
         
-    DashboardUsersPage,
-    ApprovedUsersPage,
-    PendingUsersPage,
-    RejectedUsersPage,
+    // DashboardUsersPage,
+    // ApprovedUsersPage,
+    // PendingUsersPage,
+    // RejectedUsersPage,
     
-    DashboardStaffsPage,
-    DashboardStaffsApprovedPage,
-    DashboardStaffsPendingPage,
-    DashboardStaffsRejectedPage,
+    // DashboardStaffsPage,
+    // DashboardStaffsApprovedPage,
+    // DashboardStaffsPendingPage,
+    // DashboardStaffsRejectedPage,
     
     // DashboardUsersDetailsPage,
     // DashboardStaffsDetailsPage,

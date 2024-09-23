@@ -6,9 +6,9 @@ import api from "../../../api";
 import { adminDashboardIcon, brandOfficialLogo } from "../../../assets/images";
 import { HomeIcon, LogOutIcon, StaffsIcon, UsersIcon } from "../../../assets/icons";
 
-const DashboardStaffsApprovedPage = lazy(() => import("./staffs/DashboardStaffsApprovedPage"));
-const DashboardStaffsPendingPage = lazy(() => import("./staffs/DashboardStaffsPendingPage"));
-const DashboardStaffsRejectedPage = lazy(() => import("./staffs/DashboardStaffsRejectedpage"));
+const DashboardStaffsApprovedPage = lazy(() => import("./tbstaffs/TBDashboardStaffsApprovedPage"));
+const DashboardStaffsPendingPage = lazy(() => import("./tbstaffs/TBDashboardStaffsPendingPage"));
+const DashboardStaffsRejectedPage = lazy(() => import("./tbstaffs/TBDashboardStaffsRejectedpage"));
 
 
 
@@ -16,7 +16,7 @@ const DashboardStaffsRejectedPage = lazy(() => import("./staffs/DashboardStaffsR
 
 
 
-const DashboardStaffsPage = ({ isLoggedIn }) => {
+const TBDashboardStaffsPage = ({ isLoggedIn }) => {
     
 
     // console.clear();
@@ -485,4 +485,4 @@ const DashboardStaffsPage = ({ isLoggedIn }) => {
     );
 };
 
-export default DashboardStaffsPage;
+export default TBDashboardStaffsPage;

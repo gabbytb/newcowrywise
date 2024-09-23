@@ -2,7 +2,7 @@
 import { CardBarChart, CardLineChart, CardPageVisits, CardSocialTraffic, } from "../../components";
 
 
-export default function TestDashboardBody() {
+export default function DashboardTable() {
 
     return (
         <>

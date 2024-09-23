@@ -7,55 +7,61 @@ import axios from "axios";
 
 
 
-const PendingUsersPage = ({ activeDisplay }) => {  
+const TBDashboardStaffsApprovedPage = ({ activeDisplay }) => {
+    
+    
+    // console.clear();
 
+    
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL PENDING USERS
+    // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
-    const [pendingUsers, setPendingUsers] = useState([]);
-    // console.log("PENDING USERS: ", pendingUsers);
+    const [approvedStaffs, setApprovedStaffs] = useState([]);
+    console.log("APPROVED STAFFS: ", approvedStaffs);
     
     // eslint-disable-next-line
-    const [totalUsers, setTotalUsers] = useState(null);
+    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
+    // console.log("APPROVED STAFFS or TOTAL APPROVED STAFFS: ", totalApprovedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
     
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
-
     
-    useEffect(() => {
-        var allPendingUsersLink = document.querySelector("#usersLinkID .allPendingUsers");
-        // console.log("All Pending Users Link: ", allPendingUsersLink);
 
-        if (activeDisplay === "allPendingUsers") {
-            allPendingUsersLink?.classList.add("activeUserView");
+    useEffect(() => {
+        var allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
+        // console.log("All Approved Staffs Link: ", allApprovedStaffsLink);
+
+        if (activeDisplay === "allApprovedStaffs") {
+            allApprovedStaffsLink?.classList.add("activeStaffView");
         } else {
-            allPendingUsersLink?.classList.remove("activeUserView");
-        };
+            allApprovedStaffsLink?.classList.remove("activeStaffView");
+        }
     }, [activeDisplay]);
-    
-    
+
+
+
     useEffect(() => {
-        if (activeDisplay === "allPendingUsers") {
+        if (activeDisplay === "allApprovedStaffs") {
             // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "PENDING" USERS
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL "APPROVED" STAFFS
             // ****************************************************************************             
-            async function fetchPendingUsers() {        
-                const pendingStatus = "pending";
-                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${pendingStatus}`)
+            async function fetchApprovedStaffs() {        
+                const approvedStatus = "approved";
+                await axios.get(`http://127.0.0.1:8000/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStatus}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
-                    const { usersList, pagination } = data;
+                    const { staffsList, pagination } = data;
 
-                    if (!success && message === "No user found") {
+                    if (!success && message === "No admin found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setPendingUsers(usersList);
-
-                    setTotalUsers(pagination?.usersRecord);
+                    setApprovedStaffs(staffsList);
+                    
+                    setTotalApprovedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
@@ -63,13 +69,12 @@ const PendingUsersPage = ({ activeDisplay }) => {
                 });
             };
 
-            var timerID = setTimeout(fetchPendingUsers, 300);   // Delay execution of findAllApprovedUsers by 1800ms
+            var timerID = setTimeout(fetchApprovedStaffs, 300);   // Delay execution of findAllApprovedUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        };
+        }
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-   
     // ****************************************************************************
     // ****************************************************************************
     const handlePageChange = (page) => {
@@ -79,12 +84,11 @@ const PendingUsersPage = ({ activeDisplay }) => {
     // ****************************************************************************
 
 
-
-
+    
     return (
         <>
-            <div className={`capitalize border ${activeDisplay === "allPendingUsers" ? "grid" : "hidden"}`}>
-                <table className="table-fixed capitalize w-full border staff__table">
+            <div className={`capitalize border ${activeDisplay === "allApprovedStaffs" ? "grid" : "hidden"}`}>
+            <table className="table-fixed capitalize w-full border staff__table">
                     <thead>
                         <tr className="text-left">
                             <th className="w-12 h-16 px-3 py-3">ID</th>
@@ -95,10 +99,10 @@ const PendingUsersPage = ({ activeDisplay }) => {
                         </tr>
                     </thead>
                     {
-                        pendingUsers?.length !== 0 ?
+                        approvedStaffs?.length !== 0 ?
                             <tbody>
                                 {
-                                    pendingUsers?.map((user, userIndex) => {
+                                    approvedStaffs?.map((user, userIndex) => {
                                         if (user?.status === "pending") {
                                             return (
                                                 <tr key={userIndex} className="text-left">
@@ -107,7 +111,7 @@ const PendingUsersPage = ({ activeDisplay }) => {
                                                     <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
                                                     <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-orange-500">{user?.status}</div></td>
                                                     <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                     </td>
                                                 </tr>
                                             );
@@ -119,7 +123,7 @@ const PendingUsersPage = ({ activeDisplay }) => {
                                                     <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
                                                     <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-red-500">{user?.status}</div></td>
                                                     <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                     </td>
                                                 </tr>
                                             );
@@ -131,7 +135,7 @@ const PendingUsersPage = ({ activeDisplay }) => {
                                                     <td className="w-60 px-3 py-4 lowercase font-bold">{user?.email}</td>
                                                     <td className="w-40"><div className="text-center text-white font-medium text-lg rounded-full py-3 px-8 w-full bg-green-500">{user?.status}</div></td>
                                                     <td className="w-4/5 text-center flex justify-center mx-auto">
-                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/users/${user?._id}`} alt="view user details">view details</Link>
+                                                        <Link className="w-full text-slate-700 py-6" to={`/admin/staffs/${user?._id}`} alt="view user details">view details</Link>
                                                     </td>
                                                 </tr>
                                             );
@@ -145,7 +149,7 @@ const PendingUsersPage = ({ activeDisplay }) => {
                                     <td className="w-20 h-16 text-center"></td>
                                     <td className="text-center"></td>
                                     <td className=" w-121 text-center uppercase font-medium text-lg tracking-supertight">
-                                        No record of user
+                                        No record of staff
                                     </td>
                                     <td className="text-center"></td>
                                     <td className="text-center"></td>
@@ -196,8 +200,8 @@ const PendingUsersPage = ({ activeDisplay }) => {
         </>
     );
 };
-    
-    
-export default PendingUsersPage;
+      
+
+export default TBDashboardStaffsApprovedPage;
 
 

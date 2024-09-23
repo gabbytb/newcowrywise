@@ -3,7 +3,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import "./assets/styles/tailwind.css";
+// import "./assets/styles/tailwind.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
 import { googleClient } from './constants';
 import App from './App';

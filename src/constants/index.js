@@ -32,16 +32,16 @@ export const googleAnalytics = [
     },    
 ]
 
-export const gClient = [  
-    {
-        // PRODUCTION Data [GOOGLE TAG]
-        gtag: 'GT-WB2R977Q',
-    },
-    {
-        // PRODUCTION Data [GOOGLE TAG MANAGER]
-        gmgr: 'GTM-MM2Z27G9',
-    },
-]
+// export const gClient = [  
+//     {
+//         // PRODUCTION Data [GOOGLE TAG]
+//         gtag: 'GT-WB2R977Q',
+//     },
+//     {
+//         // PRODUCTION Data [GOOGLE TAG MANAGER]
+//         gmgr: 'GTM-MM2Z27G9',
+//     },
+// ]
 
 export const customersQuotes = [
     { 

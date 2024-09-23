@@ -6,9 +6,9 @@ import {
   Home,
   OurProgress, 
   // DonationPage,
-  SignUp,
+  // SignUp,
   // VerifySignUp,
-  SignIn,
+  // SignIn,
   // AdminDashboard, 
   // DashboardUsersPage, 
   // DashboardUsersDetailsPage,
@@ -16,7 +16,10 @@ import {
   // AccountUsers,
 } from "./pages";
 import { 
-  MainDashboard,
+  SignUp,
+  SignIn,
+
+  Dashboard,
   DashboardUsers, 
   DashboardStaffs,
 } from "./layouts";
@@ -24,6 +27,7 @@ import {
 
 
 // {`${googleAnalytics.map(item => item.key)}`}
+
 
 
 
@@ -56,29 +60,27 @@ export default function App() {
     }, []);
     
     return (
-      <Routes>
-        {/* add routes with layouts */}
-        <Route path="/admin/dashboard" element={<MainDashboard />} />
-        <Route path="/admin/users" element={<DashboardUsers />} />
-        <Route path="/admin/staffs" element={<DashboardStaffs />} />
-        {/* <Route path="/admin/users" element={<DashboardUsersPage />} /> */}
-        
-        {/* <Route path="/auth" component={Auth} /> */}
+        <Routes>
+          {/* add routes with layouts */}
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/users" element={<DashboardUsers />} />
+          <Route path="/admin/staffs" element={<DashboardStaffs />} />       
+          {/* <Route path="/auth" component={Auth} /> */}
 
 
-        {/* add routes without layouts */}
-        {/* <Route path="/landing" exact component={Landing} /> */}
-        {/* <Route path="/profile" exact component={Profile} /> */}
-        <Route path="/user/signup" exact element={<SignUp />} />
-        <Route path="/user/login" exact element={<SignIn />} />
-        <Route path="/home" exact element={<Home />} />
-        <Route path="/" exact element={<OurProgress />} />
-        
+          {/* add routes without layouts */}
+          {/* <Route path="/landing" exact component={Landing} /> */}
+          {/* <Route path="/profile" exact component={Profile} /> */}
+          <Route path="/user/signup" exact element={<SignUp />} />
+          <Route path="/user/login" exact element={<SignIn />} />
+          <Route path="/home" exact element={<Home />} />
+          <Route path="/" exact element={<OurProgress />} />
+          
 
-        {/* add redirect for first page */}
-        {/* <Redirect from="*" to="/" /> */}
-        {/* <Route path="/admin/dashboard?logout" element={<Navigate replace to="/" />} /> */}
-      </Routes>
+          {/* add redirect for first page */}
+          {/* <Redirect from="*" to="/" /> */}
+          {/* <Route path="/admin/dashboard?logout" element={<Navigate replace to="/" />} /> */}
+        </Routes>
     );
 };
 

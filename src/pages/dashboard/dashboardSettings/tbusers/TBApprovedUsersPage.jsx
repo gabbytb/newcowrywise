@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 
-const ApprovedUsersPage = ({ activeDisplay }) => {
+const TBApprovedUsersPage = ({ activeDisplay }) => {
     
 
     // ****************************************************************************
@@ -198,6 +198,6 @@ const ApprovedUsersPage = ({ activeDisplay }) => {
 };
       
 
-export default ApprovedUsersPage;
+export default TBApprovedUsersPage;
 
 

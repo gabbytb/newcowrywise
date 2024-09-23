@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 
-const RejectedUsersPage = ({ activeDisplay }) => {  
+const TBRejectedUsersPage = ({ activeDisplay }) => {  
 
 
     // ****************************************************************************
@@ -200,7 +200,7 @@ const RejectedUsersPage = ({ activeDisplay }) => {
 };
 
 
-export default RejectedUsersPage;
+export default TBRejectedUsersPage;
 
 
 
