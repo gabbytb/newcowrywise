@@ -2568,7 +2568,9 @@ progress#file {
 
 .home-section-two--right{
   position: relative;
+  display: flex;
   width: 72rem;
+  align-items: flex-end;
 }
 
 .home-section-two--right #graph-anim-wrap{

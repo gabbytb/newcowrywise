@@ -2,7 +2,7 @@
 // import ReactGA from 'react-ga';
 import { Routes, Route, } from "react-router-dom";
 import {
-  // Home,
+  Home,
   OurProgress, 
   // DonationPage,
   SignUp,
@@ -73,6 +73,7 @@ export default function App() {
         {/* <Route path="/profile" exact component={Profile} /> */}
         <Route path="/user/signup" exact element={<SignUp />} />
         <Route path="/user/login" exact element={<SignIn />} />
+        <Route path="/home" exact element={<Home />} />
         <Route path="/" exact element={<OurProgress />} />
         
 

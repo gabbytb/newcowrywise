@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GoogleOAuthProvider clientId='1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com'>
@@ -22,10 +23,12 @@ root.render(
   </GoogleOAuthProvider>
 );
 
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+reportWebVitals();
+// reportWebVitals(console.log);
 
 
 // <React.StrictMode></React.StrictMode>

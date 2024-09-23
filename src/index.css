@@ -123,7 +123,7 @@
     --admin-total-revenue-card-1: rgba(18, 169, 10, 1);
     --admin-total-revenue-card-2: rgb(124, 64, 135, 1);
     --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
-    
+
   }
 
   * {
@@ -1255,7 +1255,7 @@
   }
 
   .home-section-two--right {
-    @apply relative w-720
+    @apply relative w-720 flex items-end
   }
 
   .home-section-two--right #graph-anim-wrap {
