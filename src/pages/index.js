@@ -16,7 +16,7 @@ import SignIn from "./SignIn";
 import SignInVerifySignUp from "./SignInVerifySignUp";
 
 
-import AdminDashboard from "./AdminDashboard";
+// import AdminDashboard from "./AdminDashboard";
 
 import DashboardUsersPage from "./dashboard/dashboardSettings/DashboardUsersPage";
 import ApprovedUsersPage from "./dashboard/dashboardSettings/users/ApprovedUsersPage";
@@ -28,8 +28,8 @@ import DashboardStaffsApprovedPage from "./dashboard/dashboardSettings/staffs/Da
 import DashboardStaffsPendingPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsPendingPage";
 import DashboardStaffsRejectedPage from "./dashboard/dashboardSettings/staffs/DashboardStaffsRejectedpage";
 
-import DashboardUsersDetailsPage from "./dashboard/dashboardSettings/DashboardUsersDetailsPage";
-import DashboardStaffsDetailsPage from "./dashboard/dashboardSettings/DashboardStaffsDetailsPage";
+// import DashboardUsersDetailsPage from "./dashboard/dashboardSettings/DashboardUsersDetailsPage";
+// import DashboardStaffsDetailsPage from "./dashboard/dashboardSettings/DashboardStaffsDetailsPage";
 
 import AccountUsers from "./AccountUsers";
 
@@ -54,7 +54,7 @@ export {
     SignIn,
     SignInVerifySignUp,
     
-    AdminDashboard,
+    // AdminDashboard,
         
     DashboardUsersPage,
     ApprovedUsersPage,
@@ -66,8 +66,8 @@ export {
     DashboardStaffsPendingPage,
     DashboardStaffsRejectedPage,
     
-    DashboardUsersDetailsPage,
-    DashboardStaffsDetailsPage,
+    // DashboardUsersDetailsPage,
+    // DashboardStaffsDetailsPage,
 
     // Misc
     AccountUsers,
