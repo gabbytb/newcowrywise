@@ -5,7 +5,6 @@ import NavNoTopBar from "./NavNoTopBar";
 import Preloader from "./Preloader";
 // HEADER
 
-
 // OUR PROGRESS MAIN: BODY !
 import OurProgressBody from "./OurProgressBody";
 // ALL INSIDE: OUR PROGRESS MAIN !!
@@ -19,17 +18,11 @@ import SliderCards from "./SliderCards";
 import DisqusCard from "./DisqusCard";
 // ALL INSIDE: OUR PROGRESS MAIN !!!
 
-
-// SIGN IN PAGE
-// import GoogleSignInButton from "./GoogleSignInButton";
-// SIGN IN PAGE
-
 // FOOTER
 import Footer from "./Footer";
 import FooterCard from "./FooterCard";
 import FooterSocialCard from "./FooterSocialCard";
 // FOOTER
-
 
 // ADMIN DASHBOARD
 import DashboardMenuCard from "./DashboardMenuCard";
@@ -39,21 +32,27 @@ import DashboardMenuCard from "./DashboardMenuCard";
 
 
 
-
-
-
-
-// TEST COMPONENTS
+// IMPORTED TEST COMPONENTS
+import Sidebar from "./Sidebar/Sidebar";
 import AdminNavbar from "./Navbars/AdminNavbar";
 import HeaderStats from "./Headers/HeaderStats";
 import CardStats from "./Cards/CardStats";
+import CardBarChart from "./Cards/CardBarChart";
+import CardLineChart from "./Cards/CardLineChart";
+import CardPageVisits from "./Cards/CardPageVisits";
+import CardSocialTraffic from "./Cards/CardSocialTraffic";
 
+// DROPDOWNS
+import NotificationDropdown from "./Dropdowns/NotificationDropdown";
+import TableDropdown from  "./Dropdowns/TableDropdown";
+import UserDropdown from "./Dropdowns/UserDropdown";
 
 // USERS COMPONENTS
 import CardAllUsers from "./Cards/CardAllUsers";
 import CardAllApprovedUsers from "./Cards/users/CardAllApprovedUsers";
 import CardAllPendingUsers from "./Cards/users/CardAllPendingUsers";
 import CardAllRejectedUsers from "./Cards/users/CardAllRejectedUsers";
+
 // STAFFS COMPONENTS
 import CardAllStaffs from "./Cards/CardAllStaffs";
 import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
@@ -61,30 +60,41 @@ import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
 
 
-import Sidebar from "./Sidebar/Sidebar";
-import CardBarChart from "./Cards/CardBarChart";
-import CardLineChart from "./Cards/CardLineChart";
-import CardPageVisits from "./Cards/CardPageVisits";
-import CardSocialTraffic from "./Cards/CardSocialTraffic";
-// DROPDOWNS
-import NotificationDropdown from "./Dropdowns/NotificationDropdown";
-import TableDropdown from  "./Dropdowns/TableDropdown";
-import UserDropdown from "./Dropdowns/UserDropdown";
 
 
 
 
 export {
-
-    // IMPORT PRELOADER
+    // PRELOADER
     Preloader,
+    // PRELOADER
+       
+    // HEADER
+    HomeNav,
+    Nav,
+    NavNoTopBar,
+    // HEADER
+
+
+
 
     
-    // IMPORTED TEST COMPONENTS
+    // IMPORTED COMPONENTS //
+    // DROPDOWNS
+    UserDropdown,
+    TableDropdown,
+    NotificationDropdown,
+    // DROPDOWNS
+
+    Sidebar,       
     AdminNavbar,
     HeaderStats,
     CardStats,
-    
+    CardBarChart,
+    CardLineChart,
+    CardPageVisits,
+    CardSocialTraffic,
+
     CardAllUsers,
     CardAllApprovedUsers,
     CardAllPendingUsers,
@@ -94,21 +104,10 @@ export {
     CardAllApprovedStaffs,
     CardAllPendingStaffs,
     CardAllRejectedStaffs,
-
-    Sidebar,
-    CardBarChart,
-    CardLineChart,
-    CardPageVisits,
-    CardSocialTraffic,
+    // IMPORTED COMPONENTS //
+    
 
 
-
-
-    // HEADER
-    HomeNav,
-    Nav,
-    NavNoTopBar,
-    // HEADER
 
 
     // OUR PROGRESS MAIN: BODY !
@@ -123,27 +122,13 @@ export {
     DisqusCard,
     // OUR PROGRESS MAIN: BODY !
 
-
-    // SIGN IN PAGE
-    // GoogleSignInButton,
-    // SIGN IN PAGE
-
-
     // FOOTER
     Footer,
     FooterCard,
     FooterSocialCard,
     // FOOTER
 
-
-
     // ADMIN DASHBOARD
     DashboardMenuCard,    
     // ADMIN DASHBOARD
-
-
-    NotificationDropdown,
-    TableDropdown,
-    UserDropdown,
-}
-
+};
