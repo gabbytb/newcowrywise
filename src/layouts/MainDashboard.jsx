@@ -22,7 +22,7 @@ const MainDashboard = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "MAIN DASHBOARD", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Admin Dashboard", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
