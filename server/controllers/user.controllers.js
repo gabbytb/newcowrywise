@@ -47,11 +47,6 @@ const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
 
 
 
-
-
-
-
-
 // Our CREATE ACCOUNT Logic starts here
 exports.signUp = async (req, res) => {
 
@@ -256,13 +251,13 @@ exports.reValidateSignUp = async (req, res) => {
     try {
         const existingUser = await User.findOne({ email });
 
-        if (!existingUser) {
-            const responseData = {
-                success: false,
-                message: "No match found",
-            }
-            return res.status(404).json(responseData);
-        };
+        // if (!existingUser) {
+        //     const responseData = {
+        //         success: false,
+        //         message: "No match found",
+        //     }
+        //     return res.status(404).json(responseData);
+        // };
 
         // if (existingUser.isVerified) {
         //     const responseData = {
@@ -276,9 +271,9 @@ exports.reValidateSignUp = async (req, res) => {
         // *************************************************************************************************//
         // ***  USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // *************************************************************************************************//
+        
         const token = await assignTwoDaysToken(existingUser._id);
         
-
         // ***************************************************************//
         // E-mail Service Config
         // ***************************************************************//
@@ -305,12 +300,14 @@ exports.reValidateSignUp = async (req, res) => {
                     `\n*********************************************************
                     \nExisting Account | Registration Status: ${existingUser}`,
                     "\n\n******************************************************************************************\n");
+        
         const responseData = {
             success: true,
-            data: {
-                userId: existingUser,
-                token: token,
-            },
+            data: existingUser,
+            // data: {
+            //     userId: existingUser,
+            //     token: token,
+            // },
             message: "Re-sent activation e-mail",
         };
         return res.status(200).json(responseData);

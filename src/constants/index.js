@@ -3,6 +3,16 @@ import { mayokun, wande, wura } from "../assets/images"
 
 
 
+
+
+
+
+export const googleClient = [    
+    {
+        key: '1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com',
+    },
+]
+
 export const customersQuotes = [
     { 
         textQuote: "I've become more conscious of how I spend my money and also about investing. Now, I feel comfortable spending knowing my Cowrywise account is there.",
@@ -24,7 +34,6 @@ export const customersQuotes = [
     },
 ]
 
-
 export const customersThumbnails = [
     { 
         imgURI: wura,
@@ -40,7 +49,6 @@ export const customersThumbnails = [
     }
 ]
 
-
 export const sliderItems = [
     { linkURL: "https://cowrywise.com/choose-account", label: "Automate and build my savings" },
     { linkURL: "https://cowrywise.com/choose-account", label: "Diversified long-term investing" },
@@ -49,7 +57,6 @@ export const sliderItems = [
     { linkURL: "https://cowrywise.com/choose-account", label: "Invest in mutual funds easily" },
     { linkURL: "https://cowrywise.com/choose-account", label: "Invest with very low fees" },
 ]
-
 
 export const flipItems = [
     {
@@ -77,7 +84,6 @@ export const flipItems = [
         subtitle: 'Sign up now.'
     },
 ]
-
 
 export const footerCompany = [
     {
@@ -109,7 +115,6 @@ export const footerCompany = [
         label: 'terms'
     },
 ]
-
 
 export const footerProduct = [
     {
@@ -149,7 +154,6 @@ export const footerProduct = [
         label: 'Got a Suggestion?'
     },
 ]
-
 
 export const footerResources = [
     {
@@ -194,7 +198,6 @@ export const footerResources = [
     },
 ]
 
-
 export const footerContact = [
     {
         linkURL: 'mailto:support@cowrywise.com',
@@ -205,7 +208,6 @@ export const footerContact = [
         label: 'WhatsApp ↗'
     },
 ]
-
 
 export const footerLinks = [
     {

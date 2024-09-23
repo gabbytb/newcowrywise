@@ -223,7 +223,7 @@
 
   #loginId input,
   #signUpId input {
-    border-bottom: 3px solid limegreen;
+    border-bottom: 1px solid limegreen;
   };
 
   .login__form {

@@ -271,7 +271,7 @@ function SignUp() {
                     {/* E-mail Address */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="email">E-mail address
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} autoComplete="off" required />
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* E-mail Address */}
@@ -280,7 +280,7 @@ function SignUp() {
                     {/* Password */}
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label htmlFor="password">Password
-                            <input className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} autoComplete="off" required />
+                            <input autoComplete="new-password" className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* Password */}

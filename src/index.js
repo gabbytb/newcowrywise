@@ -5,21 +5,30 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import "./assets/styles/tailwind.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
+import { googleClient } from './constants';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <GoogleOAuthProvider clientId='1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com'>
+  // Google OAuth client
+  <GoogleOAuthProvider clientId={`${googleClient.map(item => item.key)}`}>
     <React.StrictMode>
       <Router>
         <App />
       </Router>
     </React.StrictMode>
+    {/* 
+        React.StrictMode is a wrapper component provided by React, 
+        that helps you identify potential problems in your application.
+        It doesn’t affect the actual rendering of your app, 
+        but it does provide additional checks and warnings in development mode 
+        to help you catch issues early. 
+        For example, it can help find components with unsafe lifecycle methods. 
+    */}
   </GoogleOAuthProvider>
 );
 
@@ -29,12 +38,3 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 // reportWebVitals(console.log);
-
-
-// <React.StrictMode></React.StrictMode>
-// React.StrictMode is a wrapper component provided by React 
-// that helps you identify potential problems in your application.
-// It doesn’t affect the actual rendering of your app, 
-// but it does provide additional checks and warnings in development mode 
-// to help you catch issues early. 
-// For example, it can help find components with unsafe lifecycle methods.
