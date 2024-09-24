@@ -3,30 +3,31 @@ import ReactGA from 'react-ga';
 import { Routes, Route, } from "react-router-dom";
 import { googleAnalytics } from "./constants";
 import {
-  Home,
-  OurProgress, 
-  // DonationPage,
-  // SignUp,
-  // VerifySignUp,
-  // SignIn,
-  // AdminDashboard, 
-  // DashboardUsersPage, 
-  // DashboardUsersDetailsPage,
-  // DashboardStaffsPage, DashboardStaffsDetailsPage,
-  // AccountUsers,
+    Home,
+    OurProgress, 
+    // DonationPage,
+    // SignUp,
+    // VerifySignUp,
+    // SignIn,
+    // AdminDashboard, 
+    // DashboardUsersPage, 
+    // DashboardUsersDetailsPage,
+    // DashboardStaffsPage, DashboardStaffsDetailsPage,
+    // AccountUsers,
 } from "./pages";
 import { 
-  SignUp,
-  SignIn,
+    SignUp,
+    SignIn,
 
-  Dashboard,
-  DashboardUsers, 
-  DashboardStaffs,
+    Dashboard,
+    DashboardUsers, 
+    DashboardUsersDetails,
+    DashboardStaffs,
+    DashboardStaffsDetails,
 } from "./layouts";
 
 
-
-// {`${googleAnalytics.map(item => item.key)}`}
+console.log(`GOOGLE ANALYTICS: ${googleAnalytics.map(item => item.key)}`);
 
 
 
@@ -64,7 +65,9 @@ export default function App() {
           {/* add routes with layouts */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<DashboardUsers />} />
-          <Route path="/admin/staffs" element={<DashboardStaffs />} />       
+          <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />
+          <Route path="/admin/staffs" element={<DashboardStaffs />} />  
+          <Route path="/admin/staffs/:id" element={<DashboardStaffsDetails />} /> 
           {/* <Route path="/auth" component={Auth} /> */}
 
 
@@ -88,28 +91,28 @@ export default function App() {
 
 
 
-    // const routesConfig = [          
-    //     //  TEST ROUTES
-    //     { path: "/dash", element: <Admin /> },
+// const routesConfig = [          
+//     //  TEST ROUTES
+//     { path: "/dash", element: <Admin /> },
 
 
-    //     //  MAIN ROUTES
-    //     { path: "/", element: <OurProgress /> },
-    //     { path: "/home", element: <Home /> },
-    //     { path: "/donations", element: <DonationPage /> },
-    //     { path: "/user/verify", element: <VerifySignUp /> },
-    //     // { path: "/user/verify/:token", element: <VerifySignUp />, },
-    //     { path: "/user/signup", element: <SignUp />, },
-    //     { path: "/user/login", element: <SignIn />, },
-    //     { path: "/admin/dashboard", element: <AdminDashboard />, },
-    //     { path: "/admin/users/", element: <DashboardUsersPage />, },
-    //     { path: "/admin/users/:id", element: <DashboardUsersDetailsPage />, },
-    //     { path: "/admin/staffs", element: <DashboardStaffsPage />, },
-    //     { path: "/admin/staffs/:id", element: <DashboardStaffsDetailsPage />, },
-    //     { path: "/admin/users/management", element: <AccountUsers />, },
-    // ];
-    // const routes = useRoutes(routesConfig);
-    // return routes;
+//     //  MAIN ROUTES
+//     { path: "/", element: <OurProgress /> },
+//     { path: "/home", element: <Home /> },
+//     { path: "/donations", element: <DonationPage /> },
+//     { path: "/user/verify", element: <VerifySignUp /> },
+//     // { path: "/user/verify/:token", element: <VerifySignUp />, },
+//     { path: "/user/signup", element: <SignUp />, },
+//     { path: "/user/login", element: <SignIn />, },
+//     { path: "/admin/dashboard", element: <AdminDashboard />, },
+//     { path: "/admin/users/", element: <DashboardUsersPage />, },
+//     { path: "/admin/users/:id", element: <DashboardUsersDetailsPage />, },
+//     { path: "/admin/staffs", element: <DashboardStaffsPage />, },
+//     { path: "/admin/staffs/:id", element: <DashboardStaffsDetailsPage />, },
+//     { path: "/admin/users/management", element: <AccountUsers />, },
+// ];
+// const routes = useRoutes(routesConfig);
+// return routes;
 
 
 

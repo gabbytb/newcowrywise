@@ -5179,6 +5179,11 @@ progress#file {
   padding-bottom: 2rem;
 }
 
+.py-10{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .pb-0{
   padding-bottom: 0px;
 }
@@ -6039,6 +6044,10 @@ progress#file {
     width: 100%;
   }
 
+  .lg\:w-4\/12{
+    width: 33.333333%;
+  }
+
   .lg\:basis-5\/12{
     flex-basis: 41.666667%;
   }
@@ -6072,6 +6081,11 @@ progress#file {
   .lg\:py-2{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .lg\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .lg\:text-white{

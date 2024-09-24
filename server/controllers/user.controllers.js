@@ -968,12 +968,12 @@ exports.findSingleUserById = async (req, res) => {
             };
             console.log("Find User by ID: ", responseData);
             return res.status(404).json(responseData);
-        }
+        };
         
         const responseData = {
-                success: true,
-                data: user,
-                message: "Successful",
+            success: true,
+            data: user,
+            message: "Successful",
         };
         console.log("Find User by ID: ", responseData);
         return res.status(200).json(responseData);

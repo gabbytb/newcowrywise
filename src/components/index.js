@@ -59,7 +59,7 @@ import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
 import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
 
-
+import CardAllAccountDetails from "./Cards/CardAllAccountDetails";
 
 
 
@@ -104,6 +104,8 @@ export {
     CardAllApprovedStaffs,
     CardAllPendingStaffs,
     CardAllRejectedStaffs,
+
+    CardAllAccountDetails,
     // IMPORTED COMPONENTS //
     
 
