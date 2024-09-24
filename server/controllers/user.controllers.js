@@ -31,6 +31,7 @@ const ROLES = require("../constants/constants");
 // // FOR CRYPTO: Replace with a secure, secret key.
 
 
+
 // *****************************************************************
 // Middlewares
 // *****************************************************************
@@ -93,9 +94,9 @@ exports.signUp = async (req, res) => {
         // PICK A SINGLE ROLE
         // ***************************************************************//        
         // const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
-        // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
+        const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
         // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
-        const roleUsers = await Role.findOne({ role: ROLES.USERS });
+        // const roleUsers = await Role.findOne({ role: ROLES.USERS });
         // ***************************************************************//
         // PICK ALL ADMIN ROLES
         // ***************************************************************//
@@ -123,7 +124,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: "pending",
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleUsers }]
+            roles: [{ ...roleEditor }],
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -140,7 +141,7 @@ exports.signUp = async (req, res) => {
         //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
         //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
         // Format using: new Date(tokenDecoded.exp * 1000) 
-        // To Get Current Date Setting for Token Expiration Time to start counting from!
+        // To Get Current Date Setting for Token Expiration Time to start counting from!       
         const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
         user.tokenExpires = tokenExpiryDate;
         const newUser = await user.save();
@@ -155,33 +156,32 @@ exports.signUp = async (req, res) => {
         // // ***    BE: SAVE USER INFORMATION     *** //
         // // **************************************** //
         // const user = new User({ 
-        //     _id: 123,
-        //     userName: "gabby",
-        //     firstName: "Guru", 
-        //     lastName: "Gabby", 
-        //     email: "test@email.com",
-        //     // password: await encryptPassword("London123"),
-        //     password: encryptedPassword,
-        //     isVerified: false, 
-        //     approvesTandC: false,  
-        //     status: "rejected",
-        //     roles: [
-        //         {
-        //             _id: roleAdmin._id, 
-        //             role: roleAdmin.role, 
-        //             createdAt: roleAdmin.createdAt, 
-        //             updatedAt: roleAdmin.updatedAt,
-        //         },
-        //     ]
+        //     _id: 666, 
+        //     username: "admin", 
+        //     firstName: "Oyebanji", 
+        //     lastName: "Gabriel", 
+        //     phone: 2347038662402, 
+        //     address: '11a, Chidison str', 
+        //     address2: '14, Lekan Muritala str, Aboru, Lagos', 
+        //     city: 'Iba', 
+        //     state: 'Oyo', 
+        //     country: 'Nigeria', 
+        //     zipCode: 23401, 
+        //     email: "try-email@example.com", 
+        //     password: encryptPassword("Administrativerightsonly"),
+        //     roles: [{ ...roleEditor }],
+        //     approvesTandC: true,
+        //     status: 'rejected',
+        //     isVerified: true, 
         // });
         // // ******************************************************************************************************//
         // // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
         // // ******************************************************************************************************//
-        // const token = await createJWT(user._id);
+        // const token = await assignOneDayToken(user._id);
         // // ****************************************************
         // // ***  BE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
         // // ****************************************************
-        // const decodedData = await jwt.verify(token, secretKey);
+        // const decodedData = await verifyToken(token);
         // // console.log("Token Details: ", decodedData);
         // // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
         // // NOTE:-
@@ -192,7 +192,7 @@ exports.signUp = async (req, res) => {
         // // ***  Add Generated TOKEN & TIME OF EXPIRY, to New User before Saving to DB ***//
         // // ******************************************************************************************************//
         // user.accessToken = token;
-        // user.expirationInMs = decodedData.exp;
+        // user.tokenExpires = new Date(decodedData.exp * 1000);
         // // **************************************** //
         // // ***    BE: SAVE USER INFORMATION     *** //
         // // **************************************** //
@@ -224,11 +224,11 @@ exports.signUp = async (req, res) => {
                 
         const responseData = {
             success: true,
-            data: {
-                userId: newUser,
-                token: token,
-            },
-            // data: newUser,
+            // data: {
+            //     userId: newUser,
+            //     token: token,
+            // },
+            data: newUser,
             message: "Successful",
         };
         return res.status(201).json(responseData);

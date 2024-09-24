@@ -1,6 +1,5 @@
 module.exports = mongoose => {
-    
-
+       
     const { Schema } = mongoose;
     var userSchema = new Schema({
         _id: {
@@ -81,6 +80,26 @@ module.exports = mongoose => {
 
 
     const User = mongoose.model("User", userSchema);
+    // User.create({ 
+    //     _id: 666, 
+    //     username: "admin", 
+    //     firstName: "Oyebanji", 
+    //     lastName: "Gabriel", 
+    //     phone: 2347038662402, 
+    //     address: '11a, Chidison str', 
+    //     address2: '14, Lekan Muritala str, Aboru, Lagos', 
+    //     city: 'Iba', 
+    //     state: 'Oyo', 
+    //     country: 'Nigeria', 
+    //     zipCode: 23401, 
+    //     email: "try-email@example.com", 
+    //     password: encryptedPassword("Administrativerightsonly"),
+    //     roles: [{ _id: 627, role: "ROLE_EDITOR", }],
+    //     approvesTandC: true,
+    //     status: 'rejected',
+    //     isVerified: true,       
+    // });
+    // console.log("User: ", User);
     return User;
 };
 
@@ -88,6 +107,6 @@ module.exports = mongoose => {
 
 
 // User.create({ id: 4427, username: "admin", firstName: "Oyebanji", lastName: "Gabriel", phone: 2347038662402, address: '11a, Chidison str', address2: '14, Lekan Muritala str, Aboru, Lagos', city: 'Iba', state: 'Oyo', country: 'Nigeria', zipCode: 23401, email: "igabrieloyebanji@gmail.com", password: "Administrativerightsonly", roles: [ { id: 5, role: "ROLE_STAFF" } , { id: 6, role: "ROLE_ADMIN" } ], permission: ["project-index", "project-create", "project-delete"], isActive: true });
-// User.create({ _id: 19242498, username: "admin", firstName: "Oyebanji", lastName: "Gabriel", phone: 2347038662402, address: '11a, Chidison str', address2: '14, Lekan Muritala str, Aboru, Lagos', city: 'Iba', state: 'Oyo', country: 'Nigeria', zipCode: 23401, email: "igabrieloyebanji@gmail.com", password: "Administrativerightsonly", isActive: true });
+
 // console.log(`***** Created New User: ${User}`);
 // console.log("***** Created New User: ", User);

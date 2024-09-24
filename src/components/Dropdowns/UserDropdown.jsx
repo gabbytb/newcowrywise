@@ -53,7 +53,7 @@ const UserDropdown = ({ isLoggedIn }) => {
       // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
       // ***************************************************************************
       const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
-      const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+      const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();    
       // ***************************************************************************
       // ***************************************************************************
 
@@ -74,35 +74,33 @@ const UserDropdown = ({ isLoggedIn }) => {
                             {userEmail}
                         </span>
                         {
-                            userRoles?.map((name, index) => {
-                                var adminRole = 'admin', 
-                                    editorRole = 'editor', 
-                                    staffRole = 'staff', 
-                                    userRole = 'user', 
-                                    noRole = 'No role assigned';
+                             userRoles?.length !==  0 ?
+                                userRoles?.map((name, index) => {
+                                    var adminRole = 'admin', 
+                                        editorRole = 'editor', 
+                                        staffRole = 'staff', 
+                                        userRole = 'user';                     
 
-                                if (name?.role === "ROLE_ADMIN")  {
-                                    return (
-                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
-                                    );
-                                } else if (name?.role === "ROLE_EDITOR")  {
-                                    return (
-                                        <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{editorRole}</span>
-                                    );
-                                } else if (name?.role === "ROLE_STAFF")  {
-                                    return (
-                                        <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{staffRole}</span>
-                                    );
-                                } else if (name?.role === "ROLE_USERS")  {
-                                    return (
-                                        <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{userRole}</span>
-                                    );
-                                } else {
-                                    return (
-                                        <span className="text-lg tracking-supertight font-bold text-red-500 capitalize">{noRole}</span>
-                                    );
-                                };
-                            })                            
+                                    if (name?.role === "ROLE_ADMIN")  {
+                                        return (
+                                                <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
+                                        );
+                                    } else if (name?.role === "ROLE_EDITOR")  {
+                                        return (
+                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{editorRole}</span>
+                                        );
+                                    } else if (name?.role === "ROLE_STAFF")  {
+                                        return (
+                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{staffRole}</span>
+                                        );
+                                    } else {
+                                        return (
+                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{userRole}</span>
+                                        );
+                                    };
+                                }) 
+                                : 
+                                <span className="text-lg tracking-supertight font-bold text-white capitalize">unassigned role</span>
                         }
                     </div>
                     <div className="items-center flex">
