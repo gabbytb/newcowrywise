@@ -61,6 +61,11 @@ module.exports = app => {
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/auth/gmail/login") for the frontend to access.
 
         
+    // Fetch a "Single User" DATA by it's ID, using this API
+    router.get("/api/v1/auth/account/manage/:id", users.findSingleUserById);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/:id") for the frontend to access.
+
+
     // Fetch all "Users" DATA from using API
     router.get("/api/v1/auth/account/by-role/ROLE_USERS", users.findAllUsers);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.
@@ -74,11 +79,6 @@ module.exports = app => {
     // Fetch all "isActive Users" DATA using this API
     router.get("/api/v1/admin/users/manage/active", users.findAllActive);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
-
-
-    // Fetch a "Single User" DATA by it's ID, using this API
-    router.get("/api/v1/admin/users/manage/:id", users.findSingleUserById);
-    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/:id") for the frontend to access.
 
 
     // Update a "Single User" DATA by it's ID, using this API

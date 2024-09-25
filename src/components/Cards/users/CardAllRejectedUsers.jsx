@@ -275,7 +275,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
                                           <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                           <span
                                             className={
-                                              "ml-3 font-bold" +
+                                              "ml-3 font-bold " +
                                               +(color === "light" ? "text-blueGray-600" : "text-white")
                                             }
                                           >

@@ -1,4 +1,5 @@
 import SignUp from "./SignUp";
+import VerifySignUp from "./VerifySignup";
 import SignIn from "./SignIn";
 
 import Dashboard from "./Dashboard";
@@ -15,6 +16,7 @@ import DashboardStaffsDetails from "./DashboardStaffsDetails";
 
 export {    
     SignUp,
+    VerifySignUp,
     SignIn,
 
     Dashboard,  

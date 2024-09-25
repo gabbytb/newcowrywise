@@ -5149,6 +5149,11 @@ progress#file {
   padding-bottom: 0.25rem;
 }
 
+.py-10{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -5177,11 +5182,6 @@ progress#file {
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.py-10{
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 
 .pb-0{
@@ -6032,6 +6032,10 @@ progress#file {
     width: 36rem;
   }
 
+  .lg\:w-4\/12{
+    width: 33.333333%;
+  }
+
   .lg\:w-6\/12{
     width: 50%;
   }
@@ -6042,10 +6046,6 @@ progress#file {
 
   .lg\:w-full{
     width: 100%;
-  }
-
-  .lg\:w-4\/12{
-    width: 33.333333%;
   }
 
   .lg\:basis-5\/12{
@@ -6078,14 +6078,14 @@ progress#file {
     --tw-bg-opacity: 0;
   }
 
-  .lg\:py-2{
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
   .lg\:px-10{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .lg\:py-2{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .lg\:text-white{

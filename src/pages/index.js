@@ -2,19 +2,11 @@ import Home from "./Home";
 import OurProgress from "./OurProgress";
 import DonationPage from "./DonationPage";
 
-
 import OLDSignUp from "./OLDSignUp";
 import OLDRegister from "./OLDRegister";
 import OLDSignUpReVerification from "./OLDSignUpReVerification";
 
-
-// import SignUp from "../layouts/SignUp";
-import VerifySignUp from "./VerifySignup";
-
-
-// import SignIn from "../layouts/SignIn";
 import SignInVerifySignUp from "./SignInVerifySignUp";
-
 
 // import AdminDashboard from "./AdminDashboard";
 
@@ -47,11 +39,7 @@ export {
     OLDSignUp,
     OLDRegister,
     OLDSignUpReVerification,
-
-    // SignUp,
-    VerifySignUp,
-    
-    // SignIn,
+   
     SignInVerifySignUp,
     
     // AdminDashboard,

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { useParams, useNavigate, } from "react-router-dom";
 import api from '../api';
@@ -14,8 +14,8 @@ import { Sidebar, AdminNavbar, CardAllAccountDetails, } from "../components";
 
 const DashboardUsersDetails = ({ isLoggedIn }) => {
 
+    // console.clear();
 
-    const id = useParams();
     const navigate = useNavigate();
     
 
@@ -26,24 +26,6 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
         const pageTitle = "Admin Dashboard - VIEW USER", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
-
-
-        api.get(`/api/v1/admin/users/manage/${id}`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            
-            if (!success && message === "User not found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
-
-            console.log("Success: ", success);
-            console.log("Data: ", data);
-            console.log("Message: ", message);            
-        })
-        .catch((error) =>  {
-            console.log("Internal server error: ", error);
-        });
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -59,6 +41,7 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // ***************************************************************************
     function logOut() {
         // Clear User Details from Local Storage
+        localStorage.removeItem("user");
         localStorage.clear();
         // log out function to log the user out of google and set the profile array to null
         googleLogout();
@@ -75,55 +58,98 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // ***************************************************************************
     // ***************************************************************************
 
+    
 
 
+    // ************************************
+    // MANAGE STATE:-  TO FIND USER BY ID
+    // ************************************
+    const id = useParams();
+    console.log("STAFF ID: ", id);
+    // const [ user, setUser ] = useState(null);
+   
+    // **************************************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
+    // **************************************************************************************************
+    useEffect(() => {      
+        function findMyUserByID() {
+            const url = `/api/v1/auth/account/manage/${id}`;
+            api.get(url)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                // if ((!success) || (message === "User not found")) {
+                //     console.log("Message: ", message);
+                //     console.log("Success: ", success);
+                // };
+                            
+                // // Perform Actions Here if Truthy
+                // setUser(data);
+                console.log("Success: ", success);
+                console.log("Data: ", data);
+                console.log("Message: ", message);
+            })
+            .catch((error) => {
+                // Handle error state or logging here
+                console.log("Error encountered: ", error);
+            });
+            // .finally(() => {
+            //     setIsLoading(false);    // Always disable loading state, whether successful or not
+            // });
+        };
+        
+        var timerID = setTimeout(findMyUserByID, 500);   // Delay execution of findAllUsers by 1800ms
+        return () => {
+            // Clean up timer if component unmounts or token changes
+            clearTimeout(timerID);
+        };
+    }, [id]);
+    // *******************************************************************************************//
+    // *******************************************************************************************//
+    
+    // console.log("User with ID: ", user);
 
-    function logOut() {
-        localStorage.removeItem("user");
-        localStorage.clear();
-        navigate("/user/login");
-    };
+
 
 
     return (
-        <>
-            {/***** LEFT-PANEL *****/}
-            <Sidebar />
-            {/***** LEFT-PANEL *****/}
-            
-
-            
-            {/***** RIGHT-PANEL *****/}
-            <div className="relative md:ml-64 bg-blueGray-100">
-                <AdminNavbar />
+            <>
+                {/***** LEFT-PANEL *****/}
+                <Sidebar />
+                {/***** LEFT-PANEL *****/}
                 
-                {/* Header */}
-                <div className="relative bg-lightBlue-600 md:pt-32 pb-32 pt-12">
-              
-                    {/* Welcome Logged-In User */}
-                    <div className="px-4 md:px-10 pb-6 mx-auto w-full">  
-                        <p className="w-full lg:w-6/12 xl:w-3/12 px-4 text-3xl text-white">     
-                            Welcome <span className="font-bold text-white">{lastName}</span>
-                        </p>
-                    </div>                
-                    {/* <HeaderStats /> */}
 
-                </div>
+                
+                {/***** RIGHT-PANEL *****/}
+                <div className="relative md:ml-64 bg-blueGray-100">
+                    <AdminNavbar />
+                    
+                    {/* Header */}
+                    <div className="relative bg-lightBlue-600 md:pt-32 pb-32 pt-12">
+                
+                        {/* Welcome Logged-In User */}
+                        <div className="px-4 md:px-10 pb-6 mx-auto w-full">  
+                            <p className="w-full lg:w-6/12 xl:w-3/12 px-4 text-3xl text-white">     
+                                Welcome <span className="font-bold text-white">{lastName}</span>
+                            </p>
+                        </div>                
+                        {/* <HeaderStats /> */}
 
-                <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
-                    <div className="flex flex-wrap">
-                        <div className="w-full px-4">
-                            
-                            {/* Users Details */}
-                            <CardAllAccountDetails />
-                            {/* Users Details */}
-
-                        </div>
                     </div>
-                </div>                         
-            </div>
-            {/***** RIGHT-PANEL *****/}
-        </>
+
+                    <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
+                        <div className="flex flex-wrap">
+                            <div className="w-full px-4">
+                                
+                                {/* Users Details */}
+                                <CardAllAccountDetails />
+                                {/* Users Details */}
+
+                            </div>
+                        </div>
+                    </div>                         
+                </div>
+                {/***** RIGHT-PANEL *****/}
+            </>
     );
 };
 

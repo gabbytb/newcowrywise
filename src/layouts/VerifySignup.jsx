@@ -1,5 +1,5 @@
 import { useState, useEffect, } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import api from '../api';
 // import loginImg from '../assets/login.jpg'
 import { brandOfficialLogo, loginBg } from '../assets/images';
@@ -17,24 +17,38 @@ const VerifySignUp = () => {
 
 
     // console.clear();
+    
+    // USE= useLocation Hook to get the current location object using react-router-dom
+    // const location = useLocation(); 
+    // console.log("CURRENT URL: ", location);
+    // const { pathname, search, } = location;
+    // console.log("CURRENT URL PATHNAME: ", pathname);
+    // console.log("CURRENT URL SEARCH: ", search);
+    
+    // VERSUS
+    
+    // console.log("CURRENT URL: ", window.location);
+    // const { origin, protocol, host, pathname, search, } = window.location;
+    // console.log("ORIGIN: ", origin, 
+    //          "\n\nWEBSITE URL: ", protocol + "//" + host + pathname +  search);
+    // console.log("PATHNAME: ", pathname);
+    // console.log("SEARCH: ", search);
+    // console.log("CURRENT URL HOST: ", window.location.host);
+    // console.log("CURRENT URL HREF: ", window.location.href);
+
+
+
 
     
-    // ******************************** //
-    // *** USER PAYLOAD FOR SIGN UP *** //
-    // ******************************** //
+    // *********************************************** //
+    // *** MANAGE STATE:  USER PAYLOAD FOR SIGN UP *** //
+    // *********************************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    console.log("*** NEW ACCOUNT DETAILS ***\nUser: ", user);
-    // ******************************** //
-    // *** USER PAYLOAD FOR SIGN UP *** //
-    // ******************************** //
-
+    // console.log("*** NEW ACCOUNT DETAILS ***\nUser: ", user);
     const [formMessage, setFormMessage] = useState("");
     // console.log("Login Attempt: ", formMessage);
-    
-    // eslint-disable-next-line
     const [formSubmitted, setFormSubmitted] = useState(false);
     // console.log("Login Successful: ", formSubmitted);
-
     async function handleOnKeyUp(e) {
         let name = e.target.name;
         let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -44,7 +58,6 @@ const VerifySignUp = () => {
             [name]: value
         });
     };
-
     async function handleOnChange(e) {
         let name = e.target.name;
         let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -54,7 +67,6 @@ const VerifySignUp = () => {
             [name]: value
         });        
     };
-
     async function handleFormSubmission(e) {
         e.preventDefault();
 
@@ -148,40 +160,42 @@ const VerifySignUp = () => {
             console.log("Error encountered: ", error);
         });
     };
-
+    // *********************************************** //
+    // *********************************************** //
     
 
 
 
     
-
-
-    const location = useLocation(); // Hook to get the current location object'
-    console.log("CURRENT URL: ", location);
-    
+    // ******************************************************* //
+    // *** MANAGE STATE:  FOR REGISTERED USER VERIFICATION *** //
+    // ******************************************************* //
     const [registeredUser, setRegisteredUser] = useState(null);
-    // console.log("Registered User: ", registeredUser);
-    
+    // console.log("Registered User: ", registeredUser);    
     const [verificationSuccessful, setVerificationSuccessful] = useState(false);
+    // console.log("verification Successful: ", verificationSuccessful);
     const [verificationMessage, setVerificationMessage] = useState("");
-
+    // console.log("verification Message: ", verificationMessage);
+    // ******************************** //
+    // **** VERIFY REGISTERED USER **** //
+    // ******************************** //
     useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const token = queryParams.get('token'); // Assuming the token is passed as a query parameter
-        console.log("Token: ", token);
+        
+        // Assuming the token is passed as a query parameter
+        // console.log("CURRENT URL: ", window.location);
+        const { search } = window.location;
+        const queryParams = new URLSearchParams(search);        
+        const token = queryParams.get('token'); 
+        // console.log("Token: ", token);
 
         function verifyToken() {          
-            // const payload = { 
-            //     accessToken: token,
-            // };    
-            // const uri = `/user/verify/${token}`;
-            // await api.post(uri, payload, {
-            //     headers: {
-            //         Authorization: `Bearer ${token}`,
-            //     },
-            // })
             const uri = "/user/verify";
-            api.get(uri, { params: { token } })
+            api.get(uri, { 
+                // headers: { 
+                //     Authorization: `Bearer ${token}`,
+                // }, 
+                params: { token } 
+            })
             .then((response) => {
                 const { success, message, data } = response.data;
                 let verifyErrMsg = document.querySelector('#verifySignUpForm .verify_error');
@@ -302,25 +316,32 @@ const VerifySignUp = () => {
                     
                     setTimeout(() => {
                         window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-                        // Remove the item with the key: 'token' from Cache
-                        localStorage.removeItem("tokEn");
-                        
-                        // Clear Cache                                            
-                        // localStorage.clear();
-                    }, 5200);
+                    }, 3900);
                     // Perform These Actions
                 };
             })
             .catch((error) => {
                 console.log("Error encountered: ", error);
             });
+
+
+            // const payload = { 
+            //     accessToken: token,
+            // };    
+            // const uri = `/user/verify/${token}`;
+            // await api.post(uri, payload, {
+            //     headers: {
+            //         Authorization: `Bearer ${token}`,
+            //     },
+            // })
         };
         verifyToken();
-    }, [location.search]); // Dependency array includes location.search to re-run effect if URL changes
-  
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
+        
+        // Dependency array includes location.search to re-run effect if URL changes
+    }, []);
+    // ******************************** //
+    // ****** SET PAGE TITLE(SEO) ***** //
+    // ******************************** //
     useEffect(() => {
         const pageTitle = "Account Verification", siteTitle = "Samuel Akinola Foundation";
         if (!(registeredUser?.email)) {
@@ -329,9 +350,8 @@ const VerifySignUp = () => {
             document.title = `${pageTitle} (${registeredUser?.email}) | ${siteTitle}`;  
         };
     }, [registeredUser]);
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
+    // ******************************************************* //
+    // ******************************************************* //  
 
 
     

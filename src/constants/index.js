@@ -6,13 +6,13 @@ import { mayokun, wande, wura } from "../assets/images"
 
 
 
-// PRODUCTION Data [GOOGLE ANALYTICS]
+// [GOOGLE ANALYTICS]
 // const reactGA = "G-0LBZW5F0BD";
 
-// PRODUCTION Data [GOOGLE TAG]
+// [GOOGLE TAG]
 // const reactGA = "GT-WB2R977Q"
 
-// PRODUCTION Data [GOOGLE TAG MANAGER]
+// [GOOGLE TAG MANAGER]
 // const reactGA = "GTM-MM2Z27G9";
 
 
@@ -28,20 +28,20 @@ export const googleClient = [
 export const googleAnalytics = [    
     {
         // PRODUCTION Data [GOOGLE ANALYTICS]
-        key: 'G-0LBZW5F0BD',
+        key: 'G-GX972MDHG8',
     },    
 ]
 
-// export const gClient = [  
+// PRODUCTION Data [Google Tag Manager]
+// export const googleTagManager = [    
 //     {
-//         // PRODUCTION Data [GOOGLE TAG]
-//         gtag: 'GT-WB2R977Q',
-//     },
-//     {
-//         // PRODUCTION Data [GOOGLE TAG MANAGER]
-//         gmgr: 'GTM-MM2Z27G9',
-//     },
+//         // PRODUCTION Data [GOOGLE ANALYTICS]
+//         key: 'GTM-MM2Z27G9',
+//     },    
 // ]
+
+
+
 
 export const customersQuotes = [
     { 
