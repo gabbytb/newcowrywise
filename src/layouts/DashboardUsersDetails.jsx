@@ -1,7 +1,6 @@
 import { useEffect, } from "react";
 import { googleLogout } from "@react-oauth/google";
-import { useParams, useNavigate, } from "react-router-dom";
-import api from '../api';
+import { useNavigate, } from "react-router-dom";
 import { Sidebar, AdminNavbar, CardAllAccountDetails, } from "../components";
 
 
@@ -58,56 +57,6 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // ***************************************************************************
     // ***************************************************************************
 
-    
-
-
-    // ************************************
-    // MANAGE STATE:-  TO FIND USER BY ID
-    // ************************************
-    const id = useParams();
-    console.log("STAFF ID: ", id);
-    // const [ user, setUser ] = useState(null);
-   
-    // **************************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
-    // **************************************************************************************************
-    useEffect(() => {      
-        function findMyUserByID() {
-            const url = `/api/v1/auth/account/manage/${id}`;
-            api.get(url)
-            .then((response) => {
-                const { success, data, message } = response.data;
-                // if ((!success) || (message === "User not found")) {
-                //     console.log("Message: ", message);
-                //     console.log("Success: ", success);
-                // };
-                            
-                // // Perform Actions Here if Truthy
-                // setUser(data);
-                console.log("Success: ", success);
-                console.log("Data: ", data);
-                console.log("Message: ", message);
-            })
-            .catch((error) => {
-                // Handle error state or logging here
-                console.log("Error encountered: ", error);
-            });
-            // .finally(() => {
-            //     setIsLoading(false);    // Always disable loading state, whether successful or not
-            // });
-        };
-        
-        var timerID = setTimeout(findMyUserByID, 500);   // Delay execution of findAllUsers by 1800ms
-        return () => {
-            // Clean up timer if component unmounts or token changes
-            clearTimeout(timerID);
-        };
-    }, [id]);
-    // *******************************************************************************************//
-    // *******************************************************************************************//
-    
-    // console.log("User with ID: ", user);
-
 
 
 
@@ -136,6 +85,7 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
 
                     </div>
 
+                    {/* View User Details*/}
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
                         <div className="flex flex-wrap">
                             <div className="w-full px-4">

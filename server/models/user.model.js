@@ -33,7 +33,7 @@ module.exports = mongoose => {
         country: {
             type: String,
         },
-        zipCode: {
+        postalCode: {
             type: String,
         },
         email: {

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import ReactGA from 'react-ga';
+// import { useEffect } from "react";
+// import ReactGA from 'react-ga';
 import { Routes, Route, } from "react-router-dom";
-import { googleAnalytics } from "./constants";
+// import { googleAnalytics } from "./constants";
 import {
     Home,
     OurProgress, 
@@ -33,7 +33,7 @@ import {
 
 
 // const reactGA =`{ ${reactGA} }`;
-const reactGA =`${googleAnalytics.map(item => item.key)}`;
+// const reactGA =`${googleAnalytics.map(item => item.key)}`;
 
 
 
@@ -46,14 +46,14 @@ const reactGA =`${googleAnalytics.map(item => item.key)}`;
 export default function App() {                                    
 
     // Initialize Google Analytics
-    ReactGA.initialize(`${reactGA}`);
+    // ReactGA.initialize(`${reactGA}`);
 
-    useEffect(() => {
-        // Optionally, you can use ReactGA.pageview to track page views
-        ReactGA.pageview(window.location.pathname + window.location.search);   
-        // ReactGA.pageview(console.log('WINDOW PATHNAME = ', window.location.pathname + window.location.search));
-        // ReactGA.set({ page: window.location.pathname });
-    }, []);
+    // useEffect(() => {
+    //     // Optionally, you can use ReactGA.pageview to track page views
+    //     ReactGA.pageview(window.location.pathname + window.location.search);   
+    //     // ReactGA.pageview(console.log('WINDOW PATHNAME = ', window.location.pathname + window.location.search));
+    //     // ReactGA.set({ page: window.location.pathname });
+    // }, []);
     
     return (
         <Routes>

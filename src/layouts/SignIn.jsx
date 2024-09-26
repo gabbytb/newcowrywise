@@ -40,14 +40,14 @@ function SignIn() {
     // *************************************** //
     // new Date(verifiedToken.exp * 1000);
     const [ googleUser, setGoogleUser ] = useState([]);
-    console.log("Google User: ", googleUser);
+    // console.log("Google User: ", googleUser);
     
     const [ profile, setProfile ] = useState([]);
-    console.log("Profile: ", profile);
+    // console.log("Profile: ", profile);
     
     // eslint-disable-next-line
     const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
-    console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
+    // console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
 
     useEffect(() => {                
         if (googleUser.length !== 0) {
@@ -132,14 +132,14 @@ function SignIn() {
     // *** USER PAYLOAD FOR SIGN IN *** //
     // ******************************** //
     const [user, setUser] = useState({ email: "", password: "", });
-    console.log("Login Attempt By: ", user.email);
+    // console.log("Login Attempt By: ", user.email);
 
     const [loginFormMessage, setLoginFormMessage] = useState(null);
-    console.log("Login Attempt: ", loginFormMessage);
+    // console.log("Login Attempt: ", loginFormMessage);
 
     // eslint-disable-next-line
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    console.log("Login Successful: ", isLoggedIn);
+    // console.log("Login Successful: ", isLoggedIn);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
@@ -434,7 +434,9 @@ function SignIn() {
 
                 {/* Alternative Sign-In Methods */}
                 <div className="alt_sso flex justify-center align-middle pb-12 mb-20 gap-10">
-                    <button className="w-12 h-12" onClick={() => login()}><GoogleIcon /></button>
+                    <button className="w-96 hover:outline-none focus:outline-none" onClick={() => login()}>
+                        <div className="flex flex-wrap justify-center gap-3 bg-white hover:bg-cyan-500 focus:bg-cyan-500 hover:ease-in-out hover:duration-150 hover:text-white text-black text-15xl tracking-extratight font-medium items-center py-3 px-12 rounded-lg">Sign In with Google <span className="w-8 h-8"><GoogleIcon /></span></div>
+                    </button>
                 </div>
                 {/* Alternative Sign-In Methods */}
 

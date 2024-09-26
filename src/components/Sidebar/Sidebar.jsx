@@ -26,7 +26,7 @@ export default function Sidebar() {
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
-                    <Link className="md:flex justify-center text-left py-0 md:pb-2 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/">
+                    <Link className="md:flex outline-none justify-center text-left py-0 md:pb-2 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/">
                         <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
                     {/* Logged-in User */}

@@ -686,6 +686,10 @@ select {
   width: 100%;
 }
 
+.user_details input {
+  color: #000;
+}
+
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
