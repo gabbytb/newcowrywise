@@ -686,8 +686,10 @@ select {
   width: 100%;
 }
 
-.user_details input {
-  color: #000;
+#accountDetails input {
+  @apply
+    text-black hover:bg-white focus:bg-white
+  ;
 }
 
 @media (min-width: 640px) {

@@ -53,7 +53,9 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
     const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
-    console.log("Logged-In User Last Name: ", lastName);
+    // console.log("Logged-In User Last Name: ", lastName);
+    // const email = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    // console.log("Logged-In User E-mail: ", email);
     // ***************************************************************************
     // ***************************************************************************
 

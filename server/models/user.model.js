@@ -45,6 +45,9 @@ module.exports = mongoose => {
             max: 1022,
             min: 8,
         },
+        aboutMe: { 
+            type: String,
+        },
         status: { 
             type: String, 
             default: 'rejected',

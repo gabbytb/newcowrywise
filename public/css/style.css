@@ -4210,6 +4210,10 @@ progress#file {
   margin-top: 2rem;
 }
 
+.mt-12{
+  margin-top: 3rem;
+}
+
 .box-border{
   box-sizing: border-box;
 }
@@ -4335,6 +4339,10 @@ progress#file {
 
 .h-screen{
   height: 100vh;
+}
+
+.h-24{
+  height: 6rem;
 }
 
 .min-h-106{
@@ -5743,6 +5751,10 @@ progress#file {
 }
 
 /* ********************  BASE  ******************** */
+
+.hover\:cursor-not-allowed:hover{
+  cursor: not-allowed;
+}
 
 .hover\:bg-blue-600:hover{
   --tw-bg-opacity: 1;

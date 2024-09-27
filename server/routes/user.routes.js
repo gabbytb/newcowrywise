@@ -86,7 +86,6 @@ module.exports = app => {
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/update/:id") for the frontend to access.
 
     
-
     // router.post("/image-upload", users.uploadImages);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/image-upload") for the frontend to access.
 
