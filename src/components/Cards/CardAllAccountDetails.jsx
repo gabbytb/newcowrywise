@@ -456,7 +456,7 @@ export default function CardAllAccountDetails() {
 
                 <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}>
                     <div className="rounded-t bg-white mb-0 p-6">
-                        <div className="text-center flex justify-between">
+                        <div className="text-center flex justify-between items-center">
                             <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">update information</h6>
                             <button onClick={showUserInfo}
                                 className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-lg tracking-tightener px-8 py-2 rounded-lg shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
