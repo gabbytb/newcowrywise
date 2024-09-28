@@ -218,7 +218,7 @@ export default function CardAllAccountDetails() {
                     </div>
 
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        {/* ORIGINAL USER DATA FORM */}
+                        {/* FORM FOR SHOWING USER DATA */}
                         <form>
                             <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-bold uppercase">
                             User Information
@@ -430,15 +430,12 @@ export default function CardAllAccountDetails() {
                     <div className="rounded-t bg-white mb-0 px-6 py-6">
                         <div className="text-center flex justify-end">
                             <button onClick={showUpdateForm}
-                                className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                 type="button">Edit details
                             </button>
                         </div>
                     </div>
                 </div>  
-
-
-
 
 
                 <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}>
@@ -452,6 +449,7 @@ export default function CardAllAccountDetails() {
                             </button>
                         </div>
                     </div>
+
 
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {/* FORM FOR UPDATING USER DATA */}
@@ -696,23 +694,15 @@ export default function CardAllAccountDetails() {
                                 <div className="text-center flex justify-end">
                                     <button type="submit"
                                         onClick={handleSubmitUserInfo}
-                                        className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                        className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                        >Update details
                                     </button>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>                   
+                </div>  
 
-                    {/* <div className="rounded-t bg-white mb-0 px-6 py-6">
-                        <div className="text-center flex justify-end">
-                            <button onClick={saveUserDetails}
-                                className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                                type="submit">Update details
-                            </button>
-                        </div>
-                    </div> */}
-                </div>         
             </div>
         </>
     );
