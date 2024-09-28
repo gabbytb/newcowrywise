@@ -207,36 +207,37 @@ export default function CardAllAccountDetails() {
             <div id="accountDetails" className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
 
                 <div className={`activeDisplay ${activeForm === 'user-form' ? 'block' : 'hidden'}`}>
-                    <div className="rounded-t bg-white mb-0 px-6 py-6">
-                        <div className="text-center flex justify-between">
-                            <h6 className="text-blueGray-700 text-xl font-bold">My account</h6>
-                            <button
-                                className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                    <div className="rounded-t bg-white mb-0 p-6">
+                        <div className="text-center flex justify-between items-center">
+                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-black capitalize px-8">user Information</h6>
+                            <Link to={redirToUserPage ? '/admin/users' : '/admin/staffs'}>
+                                <button
+                                className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-lg tracking-tightener px-8 py-2 rounded-lg shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                 type="button">
-                                <Link to={redirToUserPage ? '/admin/users' : '/admin/staffs'}> Back</Link>
-                            </button>
+                                 Back</button>
+                            </Link>
                         </div>
                     </div>
 
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {/* FORM FOR SHOWING USER DATA */}
                         <form id="showUserFormID">
-                            <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-bold uppercase">
-                            User Information
+                            <h6 className="text-gray-500 text-2xl mt-12 mb-12 font-bold uppercase px-4">
+                            {/* User Information */}
                             </h6>
                             <div className="flex flex-wrap">
 
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
                                             First Name
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Lucky"
                                             value={user?.firstName}
                                             disabled
@@ -247,14 +248,14 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                     <label
-                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                         htmlFor="grid-password"
                                     >
                                         Last Name
                                     </label>
                                     <input
                                         type="text"
-                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="Jesse"
                                         value={user?.lastName}
                                         disabled
@@ -265,14 +266,14 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                     <label
-                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                         htmlFor="grid-password"
                                     >
                                         Email address
                                     </label>
                                     <input
                                         type="email"
-                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="jesse@example.com"
                                         value={user?.email}
                                         disabled
@@ -283,13 +284,13 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password">
                                             Phone Number
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Phone Number"
                                             value={user?.phone}
                                             disabled
@@ -301,7 +302,7 @@ export default function CardAllAccountDetails() {
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                            <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            <h6 className="text-gray-500 text-xl mt-10 mb-8 px-4 font-bold uppercase">
                             Contact Information
                             </h6>
                             <div className="flex flex-wrap">
@@ -309,14 +310,14 @@ export default function CardAllAccountDetails() {
                                     
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
                                             Address
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                                             value={user?.address}
                                             disabled
@@ -325,14 +326,14 @@ export default function CardAllAccountDetails() {
                                     
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
                                             Address 2
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                                             value={user?.address2}
                                             disabled
@@ -345,14 +346,14 @@ export default function CardAllAccountDetails() {
                                     
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="city"
                                         >
                                             City
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="New York"
                                             value={user?.city}
                                             disabled
@@ -361,14 +362,14 @@ export default function CardAllAccountDetails() {
 
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="state"
                                         >
                                             State
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                           
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                           
                                             value={user?.state}
                                             disabled
                                         />
@@ -379,14 +380,14 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-12/12 px-4 flex gap-8">
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
                                             Country
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="United States"
                                             value={user?.country}
                                             disabled
@@ -395,14 +396,14 @@ export default function CardAllAccountDetails() {
 
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
                                             Postal Code
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Postal Code"
                                             value={user?.postalCode}
                                             disabled
@@ -413,47 +414,50 @@ export default function CardAllAccountDetails() {
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                            <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            <h6 className="text-gray-500 text-xl mt-10 mb-8 px-4 font-bold uppercase">
                             About Me
                             </h6>
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-12/12 px-4">
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
                                             About me
                                         </label>
                                         <textarea
                                             type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
                                             value={user?.aboutMe}
                                             disabled
-                                            rows="4"
+                                            rows="8"
                                         ></textarea>
                                     </div>
                                 </div>
-                            </div>
+                            </div>          
                         </form>
-                    </div>
 
-                    <div className="rounded-t bg-white mb-0 px-6 py-6">
-                        <div className="text-center flex justify-end">
-                            <button onClick={showUpdateForm}
-                                className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                                type="button">Edit details
-                            </button>
+                        <div className="rounded-t px-6 mt-4 mb-4">
+                            <div className="text-center flex justify-end"> 
+                                <button onClick={showUpdateForm}
+                                    className="bg-lightBlue-500 text-white hover:bg-blue-600 active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                    type="button">Edit details
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>  
 
 
+
+
+
                 <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}>
-                    <div className="rounded-t bg-white mb-0 px-6 py-6">
+                    <div className="rounded-t bg-white mb-0 p-6">
                         <div className="text-center flex justify-between">
-                            <h6 className="text-blueGray-700 text-xl font-bold">My account</h6>
+                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize px-8">update information</h6>
                             <button onClick={showUserInfo}
                                 className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                 type="button"> Back
@@ -465,8 +469,8 @@ export default function CardAllAccountDetails() {
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {/* FORM FOR UPDATING USER DATA */}
                         <form id="userUpdateFormID" onSubmit={handleSubmitUserInfo}>
-                            <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-black uppercase px-4">
-                            Update User Information
+                            <h6 className="text-gray-500 text-2xl mt-12 mb-12 font-black uppercase px-4">
+                            {/* Update Information */}
                             </h6>
                             <div className="flex flex-wrap">
                                                                                
@@ -480,7 +484,7 @@ export default function CardAllAccountDetails() {
                                            
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-3 mb-4 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.firstName}
                                                 name="firstName"
                                                 onChange={handleChangeUserInfo}                                      
@@ -499,7 +503,7 @@ export default function CardAllAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-3 mb-4 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.lastName}
                                                 name="lastName"
                                                 onChange={handleChangeUserInfo}                                            
@@ -518,7 +522,7 @@ export default function CardAllAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.email} 
                                                 name="email"
                                                 onChange={handleChangeUserInfo} 
@@ -536,8 +540,9 @@ export default function CardAllAccountDetails() {
                                         Phone Number
                                     
                                         <input
-                                            type="text"
-                                            className="border-0 px-3 py-3 h-16 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            type="number"
+                                            min={0}
+                                            className="indent-3 border-0 px-3 py-3 mt-0 mb-6 h-20 appearance-none placeholder-gray-500 text-blueGray-600 bg-white rounded-lg text-2xl tracking-verytight shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             placeholder={user?.phone}
                                             name="phone"
                                             onChange={handleChangeUserInfo}                                            
@@ -549,7 +554,7 @@ export default function CardAllAccountDetails() {
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                            <h6 className="text-blueGray-400 text-lg mt-10 mb-8 px-4 font-bold uppercase">
+                            <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
                             Contact Information
                             </h6>
                             <div className="flex flex-wrap">
@@ -566,7 +571,7 @@ export default function CardAllAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.address}
                                                 name="address"
                                                 onChange={handleChangeUserInfo}                                              
@@ -583,7 +588,7 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.address2}
                                                 name="address2"
                                                 onChange={handleChangeUserInfo}                                        
@@ -605,7 +610,7 @@ export default function CardAllAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                            
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                            
                                                 placeholder={user?.city}
                                                 name="city"
                                                 onChange={handleChangeUserInfo}                                                
@@ -622,7 +627,7 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.state}
                                                 name="state"
                                                 onChange={handleChangeUserInfo}                                               
@@ -644,7 +649,7 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.country}
                                                 name="country"
                                                 onChange={handleChangeUserInfo}                                                
@@ -661,7 +666,7 @@ export default function CardAllAccountDetails() {
                                      
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.postalCode}
                                                 name="postalCode"
                                                 onChange={handleChangeUserInfo}                                               
@@ -675,7 +680,7 @@ export default function CardAllAccountDetails() {
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                            <h6 className="text-blueGray-400 text-lg mt-3 mb-6 font-bold uppercase">
+                            <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
                             About User
                             </h6>
                             <div className="flex flex-wrap">
@@ -692,7 +697,7 @@ export default function CardAllAccountDetails() {
                                     
                                             <textarea
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.aboutMe}
                                                 name="aboutMe"
                                                 onChange={handleChangeUserInfo}                                              
@@ -706,12 +711,12 @@ export default function CardAllAccountDetails() {
                             </div>
 
 
-                            <div className="rounded-t mb-0 px-6 py-6">
+                            <div className="rounded-t px-6 mt-4 mb-4">
                                 <div className="text-center flex justify-end">
                                     <button type="submit"
                                         onClick={handleSubmitUserInfo}
-                                        className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                                    >Update details</button>
+                                        className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                    > Submit</button>
                                 </div>
                             </div>
                         </form>
