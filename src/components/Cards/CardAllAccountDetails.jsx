@@ -18,9 +18,21 @@ export default function CardAllAccountDetails() {
     // ************************************
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
-    const {id} = useParams();
+    const { id } = useParams();
     // console.log("STAFF ID: ", id);
-    const [ user, setUser ] = useState(null);
+    const [ user, setUser ] = useState({ 
+        firstName: '',
+        lastName: '',
+        email: '', 
+        phone: '', 
+        address: '', 
+        address2: '', 
+        city: '', 
+        state: '', 
+        country: '', 
+        postalCode: '', 
+        aboutMe: '', 
+    });
     // **************************************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
     // **************************************************************************************************
@@ -37,6 +49,7 @@ export default function CardAllAccountDetails() {
                             
                 // Perform Actions Here if Truthy
                 setUser(data);
+
                 // console.log("Success: ", success);
                 // console.log("Data: ", data);
                 // console.log("Message: ", message);
@@ -63,72 +76,59 @@ export default function CardAllAccountDetails() {
     function showUpdateForm() {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         setActiveForm('update-form');        
+        document.querySelector('#userUpdateFormID').reset();
+    };
+    function showUserInfo() {
+        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+        document.querySelector('#userUpdateFormID').reset();
+        setActiveForm('user-form');        
     }; 
 
 
-
-    // const [updatedUserInfo, setUpdatedUserInfo ] = useState(null);   
-    // const [updatedUserInfo, setUpdatedUserInfo ] = useState({ 
-    //     // username: user?.username,
-    //     firstName: user?.firstName,
-    //     lastName: user?.lastName,
-    //     email: user?.email, 
-    //     phone: user?.phone, 
-    //     address: user?.address, 
-    //     address2: user?.address2, 
-    //     city: user?.city, 
-    //     state: user?.state, 
-    //     country: user?.country, 
-    //     postalCode: user?.postalCode, 
-    //     aboutMe: user?.aboutMe, 
-    //     // status: '', 
-    //     // isVerified: '', 
-    // });
-    // console.log("UPDATING STAFF INFO: ", updatedUserInfo);
     const [submitUpdate, setSubmitUpdate ] = useState(false);
   
     async function handleChangeUserInfo(e) {
-        const name = e.target.name;
-        const value = e.target.value;
+        const name = e.target.name,
+              value = e.target.value;
 
         setUser({
             ...user,
             [name]: value
-        })
+        });
     };
 
     async function handleSubmitUserInfo(e) {
         e.preventDefault();
      
         const uri = `/api/v1/admin/users/manage/update`;
-        const payLoad = { 
-            // username: user?.username,
-            firstName: user?.firstName,
-            lastName: user?.lastName,
-            email: user?.email, 
-            phone: user?.phone, 
-            address: user?.address, 
-            address2: user?.address2, 
-            city: user?.city, 
-            state: user?.state, 
-            country: user?.country, 
-            postalCode: user?.postalCode, 
-            aboutMe: user?.aboutMe, 
-            // status: '', 
-            // isVerified: '', 
-        };
+        // const payLoad = { 
+        //     // username: user?.username,
+        //     firstName: user?.firstName,
+        //     lastName: user?.lastName,
+        //     email: user?.email, 
+        //     phone: user?.phone, 
+        //     address: user?.address, 
+        //     address2: user?.address2, 
+        //     city: user?.city, 
+        //     state: user?.state, 
+        //     country: user?.country, 
+        //     postalCode: user?.postalCode, 
+        //     aboutMe: user?.aboutMe, 
+        //     // status: '', 
+        //     // isVerified: '', 
+        // };
 
-        await api.put(uri, payLoad)
+        await api.put(uri, user)
         .then((response) => {
             const { success, data, message } = response.data;
 
             if (!success && message === "No match found") { 
-                setSubmitUpdate(false);                
+                setSubmitUpdate(success);                
                 console.log("Success: ", success);
                 console.log("Message: ", message);                
             };
           
-            setSubmitUpdate(true);
+            setSubmitUpdate(success);
             setUser(data);
 
             console.log("Success: ", success);
@@ -147,29 +147,30 @@ export default function CardAllAccountDetails() {
     };
 
     useEffect(() => {  
-        if (submitUpdate === true) {    
+        if (submitUpdate === true) {
             function findUpdatedUserID() {
+                // if (submitUpdate === true) {       
                 const url = `/api/v1/auth/account/manage/${id}`;
                 api.get(url)
                 .then((response) => {
-                    const { success, data, message } = response.data;
-                    if ((!success) || (message === "User not found")) {
-                        console.log("Message: ", message);
-                        console.log("Success: ", success);
-                    };
-                                
-                    // Perform Actions Here if Truthy
-                    setUser(data);
-                    // console.log("Success: ", success);
-                    // console.log("Data: ", data);
-                    // console.log("Message: ", message);
+                        const { success, data, message } = response.data;
+                        if ((!success) || (message === "User not found")) {
+                            console.log("Message: ", message);
+                            console.log("Success: ", success);
+                        };
+                                    
+                        // Perform Actions Here if Truthy
+                        setUser(data);
+                        // console.log("Success: ", success);
+                        // console.log("Data: ", data);
+                        // console.log("Message: ", message);
                 })
                 .catch((error) => {
-                    // Handle error state or logging here
-                    console.log("Error encountered: ", error);
+                        // Handle error state or logging here
+                        console.log("Error encountered: ", error);
                 });
             };
-            
+                    
             findUpdatedUserID();
         };
     }, [id, submitUpdate]);
@@ -219,7 +220,7 @@ export default function CardAllAccountDetails() {
 
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {/* FORM FOR SHOWING USER DATA */}
-                        <form>
+                        <form id="showUserFormID">
                             <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-bold uppercase">
                             User Information
                             </h6>
@@ -453,10 +454,9 @@ export default function CardAllAccountDetails() {
                     <div className="rounded-t bg-white mb-0 px-6 py-6">
                         <div className="text-center flex justify-between">
                             <h6 className="text-blueGray-700 text-xl font-bold">My account</h6>
-                            <button
+                            <button onClick={showUserInfo}
                                 className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                                type="button">
-                                <Link to={redirToUserPage ? '/admin/users' : '/admin/staffs'}> Back</Link>
+                                type="button"> Back
                             </button>
                         </div>
                     </div>
@@ -464,8 +464,8 @@ export default function CardAllAccountDetails() {
 
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {/* FORM FOR UPDATING USER DATA */}
-                        <form onSubmit={handleSubmitUserInfo}>
-                            <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-black uppercase">
+                        <form id="userUpdateFormID" onSubmit={handleSubmitUserInfo}>
+                            <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-black uppercase px-4">
                             Update User Information
                             </h6>
                             <div className="flex flex-wrap">
@@ -480,8 +480,8 @@ export default function CardAllAccountDetails() {
                                            
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                defaultValue={user?.firstName}
+                                                className="border-0 px-3 py-3 mt-3 mb-4 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                placeholder={user?.firstName}
                                                 name="firstName"
                                                 onChange={handleChangeUserInfo}                                      
                                             />
@@ -499,8 +499,8 @@ export default function CardAllAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                defaultValue={user?.lastName}
+                                                className="border-0 px-3 py-3 mt-3 mb-4 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                placeholder={user?.lastName}
                                                 name="lastName"
                                                 onChange={handleChangeUserInfo}                                            
                                             />
@@ -518,8 +518,8 @@ export default function CardAllAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
-                                                defaultValue={user?.email} 
+                                                className="border-0 px-3 py-3 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                placeholder={user?.email} 
                                                 name="email"
                                                 onChange={handleChangeUserInfo} 
                                                 readOnly                                                                                           
@@ -537,8 +537,8 @@ export default function CardAllAccountDetails() {
                                     
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 h-16 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            defaultValue={user?.phone}
+                                            className="border-0 px-3 py-3 h-16 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            placeholder={user?.phone}
                                             name="phone"
                                             onChange={handleChangeUserInfo}                                            
                                         />
@@ -549,11 +549,12 @@ export default function CardAllAccountDetails() {
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                            <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            <h6 className="text-blueGray-400 text-lg mt-10 mb-8 px-4 font-bold uppercase">
                             Contact Information
                             </h6>
                             <div className="flex flex-wrap">
 
+                                {/* ADDRESS 1 AND 2 */}
                                 <div className="w-full lg:w-12/12 px-4 flex gap-8">
 
                                     {/* Address */}
@@ -565,8 +566,8 @@ export default function CardAllAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
-                                                defaultValue={user?.address}
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                placeholder={user?.address}
                                                 name="address"
                                                 onChange={handleChangeUserInfo}                                              
                                             />
@@ -582,8 +583,8 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                defaultValue={user?.address2}
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                placeholder={user?.address2}
                                                 name="address2"
                                                 onChange={handleChangeUserInfo}                                        
                                             />
@@ -592,7 +593,7 @@ export default function CardAllAccountDetails() {
                                     
                                 </div>
 
-
+                                {/* CITY AND STATE */}    
                                 <div className="w-full lg:w-12/12 px-4 flex gap-8">
                                     
                                     {/* City */}
@@ -604,10 +605,10 @@ export default function CardAllAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                            
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                            
+                                                placeholder={user?.city}
                                                 name="city"
-                                                onChange={handleChangeUserInfo}
-                                                defaultValue={user?.city}
+                                                onChange={handleChangeUserInfo}                                                
                                             />
                                         </label>
                                     </div>
@@ -621,8 +622,8 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
-                                                defaultValue={user?.state}
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                placeholder={user?.state}
                                                 name="state"
                                                 onChange={handleChangeUserInfo}                                               
                                             />
@@ -631,7 +632,7 @@ export default function CardAllAccountDetails() {
                                
                                 </div>
 
-
+                                {/* COUNTRY AND POSTAL CODE */}
                                 <div className="w-full lg:w-12/12 px-4 flex gap-8">
                                     
                                     {/* Country */}
@@ -643,8 +644,8 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
-                                                defaultValue={user?.country}
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                placeholder={user?.country}
                                                 name="country"
                                                 onChange={handleChangeUserInfo}                                                
                                             />
@@ -660,23 +661,26 @@ export default function CardAllAccountDetails() {
                                      
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                placeholder={user?.postalCode}
                                                 name="postalCode"
-                                                onChange={handleChangeUserInfo}
-                                                defaultValue={user?.postalCode}
+                                                onChange={handleChangeUserInfo}                                               
                                             />
                                         </label>
                                     </div>
 
                                 </div>
+
                             </div>                              
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                            <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                            About Me
+                            <h6 className="text-blueGray-400 text-lg mt-3 mb-6 font-bold uppercase">
+                            About User
                             </h6>
                             <div className="flex flex-wrap">
+                                
+                                {/* OPTIONAL: ABOUT ME */}
                                 <div className="w-full lg:w-12/12 px-4">
 
                                     {/* About Me */}
@@ -688,16 +692,17 @@ export default function CardAllAccountDetails() {
                                     
                                             <textarea
                                                 type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
-                                                defaultValue={user?.aboutMe}
+                                                className="border-0 px-3 py-3 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                placeholder={user?.aboutMe}
                                                 name="aboutMe"
                                                 onChange={handleChangeUserInfo}                                              
-                                                rows="4">
+                                                rows="6">
                                             </textarea>
                                         </label>
                                     </div>
 
                                 </div>
+
                             </div>
 
 
@@ -706,8 +711,7 @@ export default function CardAllAccountDetails() {
                                     <button type="submit"
                                         onClick={handleSubmitUserInfo}
                                         className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                                       >Update details
-                                    </button>
+                                    >Update details</button>
                                 </div>
                             </div>
                         </form>

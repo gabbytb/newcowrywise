@@ -593,6 +593,7 @@ video {
   --admin-total-revenue-card-1: rgba(18, 169, 10, 1);
   --admin-total-revenue-card-2: rgb(124, 64, 135, 1);
   --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
+  --input-dark-gray: #809bb6 !important;
 }
 
 * {
@@ -4988,6 +4989,10 @@ progress#file {
   background-color: var(--bg-dark-blue);
 }
 
+.bg-skin-darkgray{
+  background-color: var(--input-dark-gray);
+}
+
 .bg-skin-signup-box-bg{
   background-color: var(--signup-box-bg-color);
 }
@@ -5020,6 +5025,11 @@ progress#file {
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-gray-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-5{
@@ -5636,6 +5646,16 @@ progress#file {
   text-decoration-line: none;
 }
 
+.placeholder-gray-500::placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-600::placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-placeholder-opacity));
+}
+
 .opacity-0{
   opacity: 0;
 }
@@ -5781,6 +5801,11 @@ progress#file {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-white:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .hover\:text-orange-600:hover{
   --tw-text-opacity: 1;
   color: rgb(234 88 12 / var(--tw-text-opacity));
@@ -5860,6 +5885,11 @@ progress#file {
 .focus\:bg-gray-800:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.focus\:bg-white:focus{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .focus\:text-white:focus{
