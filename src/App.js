@@ -58,7 +58,7 @@ export default function App() {
     return (
         <Routes>
           {/* add routes with layouts */}
-          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/dashboard" exact element={<Dashboard />} />
           <Route path="/admin/users" element={<DashboardUsers />} />
           <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />
           <Route path="/admin/staffs" element={<DashboardStaffs />} />  
@@ -68,11 +68,11 @@ export default function App() {
           {/* add routes without layouts */}
           {/* <Route path="/landing" exact component={Landing} /> */}
           {/* <Route path="/profile" exact component={Profile} /> */}
-          <Route path="/user/signup" exact element={<SignUp />} />
-          <Route path="/user/verify" exact element={<VerifySignUp />} />          
-          <Route path="/user/login" exact element={<SignIn />} />
-          <Route path="/home" exact element={<Home />} />
-          <Route path="/" exact element={<OurProgress />} />
+          <Route path="/user/signup" element={<SignUp />} />
+          <Route path="/user/verify" element={<VerifySignUp />} />          
+          <Route path="/user/login" element={<SignIn />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<OurProgress />} />
           
 
           {/* add redirect for first page */}

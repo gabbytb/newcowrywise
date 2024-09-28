@@ -226,7 +226,7 @@ export default function CardAllAccountDetails() {
                             <div className="flex flex-wrap">
 
                                 <div className="w-full lg:w-6/12 px-4">
-                                        <div className="relative w-full mb-3">
+                                    <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                             htmlFor="grid-password"
@@ -238,8 +238,9 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Lucky"
                                             value={user?.firstName}
+                                            disabled
                                         />
-                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="w-full lg:w-6/12 px-4">
@@ -255,6 +256,7 @@ export default function CardAllAccountDetails() {
                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="Jesse"
                                         value={user?.lastName}
+                                        disabled
                                     />
                                     </div>
                                 </div>
@@ -272,6 +274,7 @@ export default function CardAllAccountDetails() {
                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="jesse@example.com"
                                         value={user?.email}
+                                        disabled
                                     />
                                     </div>
                                 </div>
@@ -288,6 +291,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Phone Number"
                                             value={user?.phone}
+                                            disabled
                                         />
                                     </div>
                                 </div>
@@ -314,6 +318,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                                             value={user?.address}
+                                            disabled
                                         />
                                     </div>
                                     
@@ -329,6 +334,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                                             value={user?.address2}
+                                            disabled
                                         />
                                     </div>
                                     
@@ -348,6 +354,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="New York"
                                             value={user?.city}
+                                            disabled
                                         />
                                     </div>
 
@@ -362,6 +369,7 @@ export default function CardAllAccountDetails() {
                                             type="text"
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                           
                                             value={user?.state}
+                                            disabled
                                         />
                                     </div>
 
@@ -380,6 +388,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="United States"
                                             value={user?.country}
+                                            disabled
                                         />
                                     </div>
 
@@ -395,6 +404,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Postal Code"
                                             value={user?.postalCode}
+                                            disabled
                                         />
                                     </div>
                                 </div>                    
@@ -419,6 +429,7 @@ export default function CardAllAccountDetails() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
                                             value={user?.aboutMe}
+                                            disabled
                                             rows="4"
                                         ></textarea>
                                     </div>

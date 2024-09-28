@@ -295,6 +295,16 @@ export default function CardAllStaffs({ color }) {
                   }
                 >
                   Status
+                </th> 
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                  }
+                >
+                  Action
                 </th>              
                 <th
                   className={
@@ -334,6 +344,9 @@ export default function CardAllStaffs({ color }) {
                                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
                                         <i className="fas fa-circle text-orange-500 mr-2"></i>{user?.status}
                                       </td>                  
+                                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
+                                          <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                      </td>    
                                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                                         <TableDropdown />
                                       </td>
@@ -361,7 +374,10 @@ export default function CardAllStaffs({ color }) {
                                       </td>
                                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
                                         <i className="fas fa-circle text-red-500 mr-2"></i>{user?.status}
-                                      </td>                  
+                                      </td> 
+                                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
+                                          <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                      </td>                   
                                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                                         <TableDropdown />
                                       </td>
@@ -389,6 +405,9 @@ export default function CardAllStaffs({ color }) {
                                       </td>
                                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
                                         <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
+                                      </td>  
+                                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
+                                          <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                       </td>                  
                                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                                         <TableDropdown />
