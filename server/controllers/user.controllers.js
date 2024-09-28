@@ -1021,7 +1021,7 @@ exports.updateSingleUserById = async (req, res) => {
     
     try {
         // const _id = req.params.id;
-        const { username, firstName, lastName, email, phone, address, address2, city, state, country, postalCode, aboutMe } = req.body;
+        const { firstName, lastName, email, phone, address, address2, city, state, country, postalCode, aboutMe } = req.body;
 
         // To Add New Roles to Existing User's Account
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
@@ -1029,8 +1029,7 @@ exports.updateSingleUserById = async (req, res) => {
         // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         
-        const dataToUpdate = {
-            userName: username,
+        const dataToUpdate = {        
             firstName,
             lastName,
             email,

@@ -5,10 +5,10 @@ module.exports = mongoose => {
         _id: {
             type: Number,
         },
-        userName: {
-            type: String,
-            // unique: true,
-        },
+        // userName: {
+        //     type: String,
+        //     // unique: true,
+        // },
         firstName: {
             type: String,
         },

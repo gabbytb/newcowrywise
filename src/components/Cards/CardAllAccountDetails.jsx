@@ -10,20 +10,17 @@ import "../../assets/styles/tailwind.css";
 
 export default function CardAllAccountDetails() {
   
-  
+
+    
     const [activeForm, setActiveForm] = useState('user-form');
 
-
+  
     // ************************************
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
     const {id} = useParams();
     // console.log("STAFF ID: ", id);
     const [ user, setUser ] = useState(null);
-    // console.log("RETRIEVED STAFF INFO: ", user);
-
-    const [redirToUserPage, setRedirToUserPage] = useState(true);
-    
     // **************************************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
     // **************************************************************************************************
@@ -59,56 +56,37 @@ export default function CardAllAccountDetails() {
             clearTimeout(timerID);
         };
     }, [id]);
+    console.log("GOT STAFF INFO: ", user);
 
 
-    // **************************************************************************************************
-    // FUNCTION TO RE-DIRECT TO PREVIOUS PAGE BASED ON USER'S ROLE
-    // **************************************************************************************************
-    useEffect(() => {      
-        function handleRedirectBackTo() {
-            for (var i = 0; i < user?.roles?.length; i++) {
-                if (user?.roles[i]?.role === 'ROLE_USERS') {
-                    setRedirToUserPage(true);
-                } else {
-                    setRedirToUserPage(false);
-                };
-            };
-        };
-        handleRedirectBackTo();
-    }, [user, redirToUserPage]);
 
-    function updateUserDetails() {
+    function showUpdateForm() {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         setActiveForm('update-form');        
     }; 
-    // *******************************************************************************************//
-    // *******************************************************************************************// 
-
-
-
 
 
 
     // const [updatedUserInfo, setUpdatedUserInfo ] = useState(null);   
     // const [updatedUserInfo, setUpdatedUserInfo ] = useState({ 
-        // username: '',
-        // firstName: '',
-        // lastName: '',
-        // email: '', 
-        // phone: '', 
-        // address: '', 
-        // address2: '', 
-        // city: '', 
-        // state: '', 
-        // country: '', 
-        // postalCode: '', 
-        // aboutMe: '', 
-        // status: '', 
-        // isVerified: '', 
+    //     // username: user?.username,
+    //     firstName: user?.firstName,
+    //     lastName: user?.lastName,
+    //     email: user?.email, 
+    //     phone: user?.phone, 
+    //     address: user?.address, 
+    //     address2: user?.address2, 
+    //     city: user?.city, 
+    //     state: user?.state, 
+    //     country: user?.country, 
+    //     postalCode: user?.postalCode, 
+    //     aboutMe: user?.aboutMe, 
+    //     // status: '', 
+    //     // isVerified: '', 
     // });
     // console.log("UPDATING STAFF INFO: ", updatedUserInfo);
     const [submitUpdate, setSubmitUpdate ] = useState(false);
-
+  
     async function handleChangeUserInfo(e) {
         const name = e.target.name;
         const value = e.target.value;
@@ -119,12 +97,12 @@ export default function CardAllAccountDetails() {
         })
     };
 
-    async function handleUpdateUserInfo(e) {
+    async function handleSubmitUserInfo(e) {
         e.preventDefault();
      
         const uri = `/api/v1/admin/users/manage/update`;
         const payLoad = { 
-            username: user?.username,
+            // username: user?.username,
             firstName: user?.firstName,
             lastName: user?.lastName,
             email: user?.email, 
@@ -140,7 +118,7 @@ export default function CardAllAccountDetails() {
             // isVerified: '', 
         };
 
-        api.put(uri, payLoad)
+        await api.put(uri, payLoad)
         .then((response) => {
             const { success, data, message } = response.data;
 
@@ -194,10 +172,32 @@ export default function CardAllAccountDetails() {
             
             findUpdatedUserID();
         };
-    }, [submitUpdate]);
+    }, [id, submitUpdate]);
 
 
     
+
+    // **************************************************************************************************
+    // FUNCTION TO RE-DIRECT TO PREVIOUS PAGE BASED ON USER'S ROLE
+    // **************************************************************************************************
+    const [redirToUserPage, setRedirToUserPage] = useState(true);
+    
+    useEffect(() => {      
+        function handleRedirectBackTo() {
+            for (var i = 0; i < user?.roles?.length; i++) {
+                if (user?.roles[i]?.role === 'ROLE_USERS') {
+                    setRedirToUserPage(true);
+                } else {
+                    setRedirToUserPage(false);
+                };
+            };
+        };
+        handleRedirectBackTo();
+    }, [user, redirToUserPage]);
+    // *******************************************************************************************//
+    // *******************************************************************************************// 
+
+
 
 
 
@@ -224,54 +224,24 @@ export default function CardAllAccountDetails() {
                             User Information
                             </h6>
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-6/12 px-4">
-                                    <div className="relative w-full mb-3">
-                                        <label 
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2" 
-                                            htmlFor="username">
-                                            Username   
 
-                                            <input
-                                                type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                // defaultValue="lucky.jesse"
-                                                value={user?.userName}
-                                            />
+                                <div className="w-full lg:w-6/12 px-4">
+                                        <div className="relative w-full mb-3">
+                                        <label
+                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            htmlFor="grid-password"
+                                        >
+                                            First Name
                                         </label>
-                                    </div>
+                                        <input
+                                            type="text"
+                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            // defaultValue="Lucky"
+                                            value={user?.firstName}
+                                        />
+                                        </div>
                                 </div>
-                                <div className="w-full lg:w-6/12 px-4">
-                                    <div className="relative w-full mb-3">
-                                    <label
-                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password"
-                                    >
-                                        Email address
-                                    </label>
-                                    <input
-                                        type="email"
-                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        // defaultValue="jesse@example.com"
-                                        value={user?.email}
-                                    />
-                                    </div>
-                                </div>
-                                <div className="w-full lg:w-6/12 px-4">
-                                    <div className="relative w-full mb-3">
-                                    <label
-                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password"
-                                    >
-                                        First Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        // defaultValue="Lucky"
-                                        value={user?.firstName}
-                                    />
-                                    </div>
-                                </div>
+
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                     <label
@@ -288,6 +258,40 @@ export default function CardAllAccountDetails() {
                                     />
                                     </div>
                                 </div>
+
+                                <div className="w-full lg:w-6/12 px-4">
+                                    <div className="relative w-full mb-3">
+                                    <label
+                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                    >
+                                        Email address
+                                    </label>
+                                    <input
+                                        type="email"
+                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        // defaultValue="jesse@example.com"
+                                        value={user?.email}
+                                    />
+                                    </div>
+                                </div>
+
+                                <div className="w-full lg:w-6/12 px-4">
+                                    <div className="relative w-full mb-3">
+                                        <label
+                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            htmlFor="grid-password">
+                                            Phone Number
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            // defaultValue="Phone Number"
+                                            value={user?.phone}
+                                        />
+                                    </div>
+                                </div>
+                        
                             </div>
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
@@ -393,23 +397,7 @@ export default function CardAllAccountDetails() {
                                             value={user?.postalCode}
                                         />
                                     </div>
-                                </div>
-
-                                <div className="w-full lg:w-12/12 px-4 flex justify-start gap-8">
-                                    <div className="relative w-3/6 mb-3">
-                                        <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                            htmlFor="grid-password">
-                                            Phone Number
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            // defaultValue="Phone Number"
-                                            value={user?.phone}
-                                        />
-                                    </div>
-                                </div>
+                                </div>                    
                             </div>
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
@@ -420,19 +408,19 @@ export default function CardAllAccountDetails() {
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-12/12 px-4">
                                     <div className="relative w-full mb-3">
-                                    <label
-                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password"
-                                    >
-                                        About me
-                                    </label>
-                                    <textarea
-                                        type="text"
-                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
-                                        value={user?.aboutMe}
-                                        rows="4"
-                                    ></textarea>
+                                        <label
+                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            htmlFor="grid-password"
+                                        >
+                                            About me
+                                        </label>
+                                        <textarea
+                                            type="text"
+                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
+                                            value={user?.aboutMe}
+                                            rows="4"
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -441,7 +429,7 @@ export default function CardAllAccountDetails() {
 
                     <div className="rounded-t bg-white mb-0 px-6 py-6">
                         <div className="text-center flex justify-end">
-                            <button onClick={updateUserDetails}
+                            <button onClick={showUpdateForm}
                                 className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                 type="button">Edit details
                             </button>
@@ -467,51 +455,12 @@ export default function CardAllAccountDetails() {
 
                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {/* FORM FOR UPDATING USER DATA */}
-                        <form onSubmit={handleUpdateUserInfo}>
+                        <form onSubmit={handleSubmitUserInfo}>
                             <h6 className="text-blueGray-400 text-2xl mt-12 mb-12 font-black uppercase">
                             Update User Information
                             </h6>
                             <div className="flex flex-wrap">
-                                
-                                {/* Username */}
-                                <div className="w-full lg:w-6/12 px-4">
-                                    <div className="relative w-full mb-3">
-                                        <label 
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2" 
-                                            htmlFor="username">
-                                            Username                        
-
-                                            <input
-                                                type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                defaultValue={user?.userName}
-                                                name="username"
-                                                onChange={handleChangeUserInfo}                                                                                           
-                                            />
-                                        </label>
-                                    </div>
-                                </div>
-
-                                {/* E-mail */}
-                                <div className="w-full lg:w-6/12 px-4">
-                                    <div className="relative w-full mb-3">
-                                        <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                            htmlFor="email">
-                                            Email address
-                                        
-                                            <input
-                                                type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
-                                                defaultValue={user?.email} 
-                                                name="email"
-                                                onChange={handleChangeUserInfo} 
-                                                readOnly                                                                                           
-                                            />
-                                        </label>
-                                    </div>
-                                </div>
-
+                                                                               
                                 {/* First Name */}
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
@@ -549,6 +498,43 @@ export default function CardAllAccountDetails() {
                                         </label>
                                     </div>
                                 </div>
+
+                                {/* E-mail */}
+                                <div className="w-full lg:w-6/12 px-4">
+                                    <div className="relative w-full mb-3">
+                                        <label
+                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            htmlFor="email">
+                                            Email address
+                                        
+                                            <input
+                                                type="text"
+                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                defaultValue={user?.email} 
+                                                name="email"
+                                                onChange={handleChangeUserInfo} 
+                                                readOnly                                                                                           
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {/* Phone Number */}
+                                <div className="w-full lg:w-6/12 px-4">
+                                    <label
+                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="phone">
+                                        Phone Number
+                                    
+                                        <input
+                                            type="text"
+                                            className="border-0 px-3 py-3 h-16 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            defaultValue={user?.phone}
+                                            name="phone"
+                                            onChange={handleChangeUserInfo}                                            
+                                        />
+                                    </label>
+                                </div>  
 
                             </div>
 
@@ -674,27 +660,6 @@ export default function CardAllAccountDetails() {
                                     </div>
 
                                 </div>
-
-                                <div className="w-full lg:w-12/12 px-4 flex justify-start gap-8">
-                                    
-                                    {/* Phone Number */}
-                                    <div className="relative w-3/6 mb-3">
-                                        <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                            htmlFor="phone">
-                                            Phone Number
-                                    
-                                            <input
-                                                type="text"
-                                                className="border-0 px-3 py-3 h-16 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                defaultValue={user?.phone}
-                                                name="phone"
-                                                onChange={handleChangeUserInfo}                                            
-                                            />
-                                        </label>
-                                    </div>                    
-
-                                </div>
                             </div>                              
 
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
@@ -729,9 +694,10 @@ export default function CardAllAccountDetails() {
 
                             <div className="rounded-t mb-0 px-6 py-6">
                                 <div className="text-center flex justify-end">
-                                    <button onClick={handleUpdateUserInfo}
+                                    <button type="submit"
+                                        onClick={handleSubmitUserInfo}
                                         className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                                        type="submit">Update details
+                                       >Update details
                                     </button>
                                 </div>
                             </div>
