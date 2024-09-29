@@ -2,9 +2,10 @@
 // import ReactGA from 'react-ga';
 import { Routes, Route, } from "react-router-dom";
 // import { googleAnalytics } from "./constants";
-import {
-    Blog,
+import {   
     Home,
+    DonateNow,
+    Blog,
     OurProgress, 
     // DonationPage,
     // SignUp,
@@ -73,11 +74,11 @@ export default function App() {
           {/* <Route path="/profile" exact component={Profile} /> */}
           <Route path="/user/signup" element={<SignUp />} />
           <Route path="/user/verify" element={<VerifySignUp />} />          
-          <Route path="/user/login" element={<SignIn />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/user/login" element={<SignIn />} />        
+          <Route path="/donations" element={<DonateNow />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/" element={<OurProgress />} />
-          
+          <Route path="/home" element={<OurProgress />} />
+          <Route path="/" element={<Home />} />          
 
           {/* add redirect for first page */}
           {/* <Redirect from="*" to="/" /> */}

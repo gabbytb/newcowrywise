@@ -1,4 +1,5 @@
 import Home from "./Home";
+import DonateNow from "./DonateNow";
 import Blog from "./Blog";
 import OurProgress from "./OurProgress";
 import DonationPage from "./DonationPage";
@@ -34,6 +35,7 @@ import AccountUsers from "./AccountUsers";
 
 export {
     Home,
+    DonateNow,
     Blog,
     OurProgress,
     DonationPage,

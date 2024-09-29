@@ -12,250 +12,269 @@ const Blog = () => {
 
     return (
         <>
-
-            {/* <!-- blog-card Section Starts --> */}
-            {/* <header id="header" class="bg-white w-full px-6 py-5 z-50 fixed top-0 shadow-md transition-all transform ease-in-out duration-500">
-                <div class="max-w-5xl mx-auto flex items-center flex-wrap justify-between">
-                    <div class="sm:mr-8">
-                        <a class="flex items-center" href="/">
-                            <span class="text-xl text-teal-700 font-semibold self-center">Vredeburg</span>
-                        </a>
-                    </div>
-                    <nav id="menu" class="order-last md:order-none items-center flex-grow w-full md:w-auto md:flex hidden mt-2 md:mt-0">
-                        
-                        <a href="/about" class="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4">About</a>
-                        
-                        <a href="/tags" class="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4">Tag List</a>
-                        
-                        <a href="https://github.com/daflh/vredeburg" target="_blank" rel="noopener" class="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4">GitHub</a>
-                        
-                    </nav>
-                    <form id="search" action="/search" class="order-last sm:order-none flex-grow items-center justify-end hidden sm:block mt-6 sm:mt-0">
-                        <label class="visually-hidden" for="header-searchbox">Search here ...</label>
-                        <input type="text" id="header-searchbox" name="q" placeholder="Search here ..." class="w-full sm:max-w-xs bg-slate-200 border border-transparent float-right focus:bg-white focus:border-slate-300 focus:outline-none h-8 p-4 placeholder-slate-500 rounded text-slate-700 text-sm" />
-                    </form>
-                    <div id="menu-toggle" class="flex items-center md:hidden text-slate-700 hover:text-teal-600 cursor-pointer sm:ml-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                    </div>
-                </div>
-            </header> */}
-            
             <Nav />
 
-            <main class="mx-7 lg:mx-6 mt-32 flex-grow">        
-                <div class="mx-auto flex flex-col items-center px-12">  
 
-                    {/* POSTS LISTING */}          
-                    <div class="grid grid-cols-3 gap-12 flex-wrap -mx-2">
-                            
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/small-business/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/small-business.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/small-business/">7 Things You Should Know About Running a Small Business</a>
+            <div className="container mx-auto">
+                <main class="mx-7 lg:mx-6 mt-32 grid grid-cols-28">  
+
+            
+                        <section>   
+                            <div class="mx-auto flex flex-col items-center pl-16 pr-12">  
+                                {/* POSTS LISTING */}          
+                                <div class="grid grid-cols-3 gap-4 flex-wrap">
+                                        
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/small-business/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/small-business.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/small-business/">7 Things You Should Know About Running a Small Business</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">            
+                                                    When you start your small business, you will quickly become aware that there are many othe...                
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">            
-                                        When you start your small business, you will quickly become aware that there are many othe...                
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                    
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                    
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                    
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>  
-
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                    
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>  
+                                    
+                                    <div class="self-stretch p-2 mb-12">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>  
 
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                    <div class="self-stretch p-2 mb-2">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                </div>
+                                {/* POSTS LISTING */}    
+
+
+
+                                {/* PAGINATION */}
+                                <div class="mt-3 flow-root">
+                                    <a href="/" class="float-left bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-pointer hover:bg-slate-100">Previous</a>
+                                    <a href="javascript:void(0)" class="float-right bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-default text-opacity-50">Next</a>
+                                </div>
+                                {/* PAGINATION */}
+                            </div>
+                        </section>
+
+
+
+
+                        <aside>
+                            <div class="max-w-5xl mx-auto">                        
+                                <div class="flex flex-wrap -mx-2">                            
+                                    <div class="w-full sm:w-1/2 md:w-1/3 self-stretch p-2 mb-2">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/small-business/">
+                                                {/* <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/small-business.jpg" width="960" height="500" alt="This post thumbnail" /> */}
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/small-business/">7 Things You Should Know About Running a Small Business</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    When you start your small business, you will quickly become aware that there are many othe...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
+                                    
+                                    <div class="w-full sm:w-1/2 md:w-1/3 self-stretch p-2 mb-2">
+                                        <div class="rounded shadow-md h-full">
+                                            <a href="/comparing-yourself/">
+                                                {/* <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" /> */}
+                                            </a>
+                                            <div class="px-6 py-5">
+                                                <div class="font-semibold text-lg mb-2">
+                                                    <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
+                                                </div>
+                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
+                                                <p class="text-slate-800">
+                                                    
+                                                    Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>                        
+                                </div>                           
                             </div>
-                        </div>
-                        
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
-                                    </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="self-stretch p-6 mb-12">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
-                                    </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>  
+                        </aside>
 
-                        <div class="self-stretch p-6 mb-2">
-                            <div class="rounded shadow-md h-full">
-                                <a href="/comparing-yourself/">
-                                    <img class="w-full m-0 rounded-t lazy" src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" data-src="/assets/img/comparing-yourself.jpg" width="960" height="500" alt="This post thumbnail" />
-                                </a>
-                                <div class="px-6 py-5">
-                                    <div class="font-semibold text-lg mb-2">
-                                        <a class="text-slate-900 hover:text-slate-700" href="/comparing-yourself/">Stop Comparing Yourself to Others #SelfLove</a>
-                                    </div>
-                                    <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                    <p class="text-slate-800">
-                                        
-                                        Far quitting dwelling graceful the likewise received building. An fact so to that show am ...
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>  
-
-                    </div>
-                    {/* POSTS LISTING */}    
-
-
-
-                    {/* PAGINATION */}
-                    <div class="mt-3 flow-root">
-                        <a href="/" class="float-left bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-pointer hover:bg-slate-100">Previous</a>
-                        <a href="javascript:void(0)" class="float-right bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-default text-opacity-50">Next</a>
-                    </div>
-                    {/* PAGINATION */}
-
-                </div>
-                
-            </main> 
-
+                </main> 
+            </div>
         </>
     );
 };

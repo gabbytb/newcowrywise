@@ -4448,10 +4448,6 @@ progress#file {
   height: 100vh;
 }
 
-.min-h-106{
-  min-height: 40rem;
-}
-
 .min-h-120{
   min-height: 60rem;
 }
@@ -4756,6 +4752,10 @@ progress#file {
 
 .grid-cols-2{
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-28{
+  grid-template-columns: 68% 1fr;
 }
 
 .grid-cols-3{
@@ -5526,6 +5526,10 @@ progress#file {
 
 .pl-10{
   padding-left: 2.5rem;
+}
+
+.pl-16{
+  padding-left: 4rem;
 }
 
 .pl-3{
@@ -6497,6 +6501,10 @@ progress#file {
 
   .sm\:hidden{
     display: none;
+  }
+
+  .sm\:w-1\/2{
+    width: 50%;
   }
 
   .sm\:w-full{

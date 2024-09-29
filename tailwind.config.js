@@ -163,6 +163,7 @@ module.exports = {
         // '20': '1fr',
         '22': 'repeat(auto-fit,minmax(240px,1fr))', // Used for Footer: .app-reviews
         '26': '28rem 1fr', // Used for Admin Dashboard
+        '28': '68% 1fr', // Used for Blog Page
       },
       height: {
         '13': '3.2rem',
