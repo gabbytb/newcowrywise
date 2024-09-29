@@ -19,6 +19,7 @@ import DisqusCard from "./DisqusCard";
 // ALL INSIDE: OUR PROGRESS MAIN !!!
 
 // FOOTER
+import HomeFooter from "./Footer/HomeFooter";
 import Footer from "./Footer";
 import FooterCard from "./FooterCard";
 import FooterSocialCard from "./FooterSocialCard";
@@ -125,6 +126,7 @@ export {
     // OUR PROGRESS MAIN: BODY !
 
     // FOOTER
+    HomeFooter,
     Footer,
     FooterCard,
     FooterSocialCard,

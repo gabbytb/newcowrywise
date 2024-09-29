@@ -3,6 +3,7 @@
 import { Routes, Route, } from "react-router-dom";
 // import { googleAnalytics } from "./constants";
 import {
+    Blog,
     Home,
     OurProgress, 
     // DonationPage,
@@ -74,6 +75,7 @@ export default function App() {
           <Route path="/user/verify" element={<VerifySignUp />} />          
           <Route path="/user/login" element={<SignIn />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/" element={<OurProgress />} />
           
 
