@@ -58,7 +58,9 @@ export default function App() {
     return (
         <Routes>
           {/* add routes with layouts */}
-          <Route path="/admin/dashboard" exact element={<Dashboard />} />
+          {/* <Route path="/admin" exact element={<GuestDashboard />} /> */}
+
+          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<DashboardUsers />} />
           <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />
           <Route path="/admin/staffs" element={<DashboardStaffs />} />  

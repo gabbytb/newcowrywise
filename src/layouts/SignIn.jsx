@@ -14,9 +14,31 @@ import { GoogleIcon } from '../assets/icons';
 
 function SignIn() {
 
-    // console.clear();        
-
+    // console.clear();   
     const navigate = useNavigate();
+
+
+
+    
+
+    // ***************************************************************************
+    // FUNCTION:-  AUTO-REDIRECT lOGGED-IN USERS to DASHBOARD
+    // ***************************************************************************
+    useEffect(() => {
+        function redirToDashboardIfUserLoggedIn() {  
+            if (JSON.parse(localStorage.getItem("user"))) { 
+                navigate('/admin/dashboard'); 
+            } else { 
+                navigate('/user/login');
+            };
+        };
+        redirToDashboardIfUserLoggedIn();
+    }, [navigate]);
+    // ***************************************************************************
+    // ***************************************************************************
+
+     
+
 
 
     // *************************** //

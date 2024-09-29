@@ -15,6 +15,9 @@ export default function CardAllAccountDetails() {
     const [activeForm, setActiveForm] = useState('user-form');
 
   
+
+
+
     // ************************************
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
@@ -34,7 +37,7 @@ export default function CardAllAccountDetails() {
         aboutMe: '', 
     });
     // **************************************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND USER BY ID
+    // CALL TO API:-  ID TO TRIGGER FUNCTION TO FIND USER BY ID
     // **************************************************************************************************
     useEffect(() => {      
         function findMyUserByID() {
@@ -69,22 +72,58 @@ export default function CardAllAccountDetails() {
             clearTimeout(timerID);
         };
     }, [id]);
-    console.log("GOT STAFF INFO: ", user);
+    // console.log("Found USER INFO: ", user);
+
+
+
+
+
+
+    // **************************************************************************************************
+    // FUNCTION TO RE-DIRECT TO PREVIOUS PAGE BASED ON USER'S ROLE
+    // **************************************************************************************************
+    const [redirToUserPage, setRedirToUserPage] = useState(true);
+
+    useEffect(() => {      
+        function handleRedirectBackTo() {
+            for (var i = 0; i < user?.roles?.length; i++) {
+                if (user?.roles[i]?.role === 'ROLE_USERS') {
+                    setRedirToUserPage(true);
+                } else {
+                    setRedirToUserPage(false);
+                };
+            };
+        };
+        handleRedirectBackTo();
+    }, [user, redirToUserPage]);
+    // *******************************************************************************************//
+    // *******************************************************************************************// 
+
+
+
 
 
 
     function showUpdateForm() {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-        setActiveForm('update-form');        
-        document.querySelector('#userUpdateFormID').reset();
+        setActiveForm('update-form'); 
     };
+
+    // Hit BACK BUTTON on UPDATE PAGE
     function showUserInfo() {
-        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-        document.querySelector('#userUpdateFormID').reset();
-        setActiveForm('user-form');        
+        if (id !== null) {    
+            for (var i = 0; i < user?.roles?.length; i++) {
+                if (user?.roles[i]?.role === 'ROLE_USERS') {
+                    window.location = `/admin/users/${id}`;
+                } else {
+                    window.location = `/admin/staffs/${id}`;
+                };
+            };
+            window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+            setActiveForm('user-form');
+        };
     }; 
-
-
+ 
     const [submitUpdate, setSubmitUpdate ] = useState(false);
   
     async function handleChangeUserInfo(e) {
@@ -101,23 +140,6 @@ export default function CardAllAccountDetails() {
         e.preventDefault();
      
         const uri = `/api/v1/admin/users/manage/update`;
-        // const payLoad = { 
-        //     // username: user?.username,
-        //     firstName: user?.firstName,
-        //     lastName: user?.lastName,
-        //     email: user?.email, 
-        //     phone: user?.phone, 
-        //     address: user?.address, 
-        //     address2: user?.address2, 
-        //     city: user?.city, 
-        //     state: user?.state, 
-        //     country: user?.country, 
-        //     postalCode: user?.postalCode, 
-        //     aboutMe: user?.aboutMe, 
-        //     // status: '', 
-        //     // isVerified: '', 
-        // };
-
         await api.put(uri, user)
         .then((response) => {
             const { success, data, message } = response.data;
@@ -135,10 +157,8 @@ export default function CardAllAccountDetails() {
             console.log("Data: ", data);
             console.log("Message: ", message);
 
-            setTimeout(() => {
-                window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });  
-                setSubmitUpdate(false);  
-                setActiveForm('user-form');
+            setTimeout(() => {              
+                showUserInfo();
             }, 3000);        
         })
         .catch((error) => {
@@ -146,24 +166,26 @@ export default function CardAllAccountDetails() {
         });
     };
 
-    useEffect(() => {  
+    useEffect(() => {              
         if (submitUpdate === true) {
+            console.log('Submit Update TRUE: ', submitUpdate); 
             function findUpdatedUserID() {
                 // if (submitUpdate === true) {       
                 const url = `/api/v1/auth/account/manage/${id}`;
                 api.get(url)
                 .then((response) => {
-                        const { success, data, message } = response.data;
-                        if ((!success) || (message === "User not found")) {
+                    const { success, data, message } = response.data;
+                    if ((!success) || (message === "User not found")) {
                             console.log("Message: ", message);
                             console.log("Success: ", success);
-                        };
+                    };
                                     
-                        // Perform Actions Here if Truthy
-                        setUser(data);
-                        // console.log("Success: ", success);
-                        // console.log("Data: ", data);
-                        // console.log("Message: ", message);
+                    // Perform Actions Here if Truthy
+                    // console.log("Success: ", success);
+                    // console.log("Data: ", data);
+                    // console.log("Message: ", message);
+                        
+                    setUser(data);
                 })
                 .catch((error) => {
                         // Handle error state or logging here
@@ -171,33 +193,14 @@ export default function CardAllAccountDetails() {
                 });
             };
                     
-            findUpdatedUserID();
+            const timer = setTimeout(findUpdatedUserID, 300);          
+            return () => { 
+                clearTimeout(timer);
+            };
         };
     }, [id, submitUpdate]);
 
-
     
-
-    // **************************************************************************************************
-    // FUNCTION TO RE-DIRECT TO PREVIOUS PAGE BASED ON USER'S ROLE
-    // **************************************************************************************************
-    const [redirToUserPage, setRedirToUserPage] = useState(true);
-    
-    useEffect(() => {      
-        function handleRedirectBackTo() {
-            for (var i = 0; i < user?.roles?.length; i++) {
-                if (user?.roles[i]?.role === 'ROLE_USERS') {
-                    setRedirToUserPage(true);
-                } else {
-                    setRedirToUserPage(false);
-                };
-            };
-        };
-        handleRedirectBackTo();
-    }, [user, redirToUserPage]);
-    // *******************************************************************************************//
-    // *******************************************************************************************// 
-
 
 
 
@@ -457,7 +460,7 @@ export default function CardAllAccountDetails() {
                 <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}>
                     <div className="rounded-t bg-white mb-0 p-6">
                         <div className="text-center flex justify-between items-center">
-                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">update information</h6>
+                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">update information</h6>                          
                             <button onClick={showUserInfo}
                                 className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-lg tracking-tightener px-8 py-2 rounded-lg shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                 type="button"> Back

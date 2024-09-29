@@ -117,7 +117,6 @@ module.exports = {
           'signup-box-bg': 'var(--signup-box-bg-color)',
           'signup-signin-bg': 'var(--login-bg-black-color)',
           'admin-thead-bg': 'var(--admin-thead-bg-color)',
-          darkgray: 'var(--input-dark-gray)',
         },
       },
       backgroundImage: {

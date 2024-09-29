@@ -593,7 +593,6 @@ video {
   --admin-total-revenue-card-1: rgba(18, 169, 10, 1);
   --admin-total-revenue-card-2: rgb(124, 64, 135, 1);
   --admin-total-revenue-card-3: rgba(8, 78, 187, 1);
-  --input-dark-gray: #809bb6 !important;
 }
 
 * {
@@ -3871,6 +3870,10 @@ progress#file {
 
 /**  Footer  **/
 
+.pointer-events-none{
+  pointer-events: none;
+}
+
 .collapse{
   visibility: collapse;
 }
@@ -3936,6 +3939,18 @@ progress#file {
   top: 5rem;
 }
 
+.bottom-0{
+  bottom: 0px;
+}
+
+.bottom-auto{
+  bottom: auto;
+}
+
+.top-auto{
+  top: auto;
+}
+
 .-z-10{
   z-index: -10;
 }
@@ -3986,6 +4001,10 @@ progress#file {
 
 .m-2{
   margin: 0.5rem;
+}
+
+.m-4{
+  margin: 1rem;
 }
 
 .mx-0{
@@ -4213,6 +4232,34 @@ progress#file {
 
 .mt-8{
   margin-top: 2rem;
+}
+
+.-mt-20{
+  margin-top: -5rem;
+}
+
+.-mt-24{
+  margin-top: -6rem;
+}
+
+.-mt-48{
+  margin-top: -12rem;
+}
+
+.mb-5{
+  margin-bottom: 1.25rem;
+}
+
+.ml-auto{
+  margin-left: auto;
+}
+
+.mr-3{
+  margin-right: 0.75rem;
+}
+
+.mt-5{
+  margin-top: 1.25rem;
 }
 
 .box-border{
@@ -4648,6 +4695,10 @@ progress#file {
   place-content: center;
 }
 
+.content-center{
+  align-content: center;
+}
+
 .items-start{
   align-items: flex-start;
 }
@@ -4815,6 +4866,11 @@ progress#file {
 .rounded-t{
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+}
+
+.rounded-t-lg{
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 .\!border-0{
@@ -4994,10 +5050,6 @@ progress#file {
   background-color: var(--bg-dark-blue);
 }
 
-.bg-skin-darkgray{
-  background-color: var(--input-dark-gray);
-}
-
 .bg-skin-signup-box-bg{
   background-color: var(--signup-box-bg-color);
 }
@@ -5032,9 +5084,24 @@ progress#file {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-gray-600{
+.bg-black{
   --tw-bg-opacity: 1;
-  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-emerald-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(52 211 153 / var(--tw-bg-opacity));
+}
+
+.bg-red-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
+.bg-red-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-5{
@@ -5063,6 +5130,10 @@ progress#file {
 
 .fill-white{
   fill: #fff;
+}
+
+.fill-current{
+  fill: currentColor;
 }
 
 .object-cover{
@@ -5099,6 +5170,10 @@ progress#file {
 
 .p-8{
   padding: 2rem;
+}
+
+.p-5{
+  padding: 1.25rem;
 }
 
 .px-0{
@@ -5209,6 +5284,16 @@ progress#file {
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-20{
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.py-24{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .pb-0{
@@ -5351,6 +5436,18 @@ progress#file {
   padding-top: 2.25rem;
 }
 
+.pb-48{
+  padding-bottom: 12rem;
+}
+
+.pr-12{
+  padding-right: 3rem;
+}
+
+.pt-20{
+  padding-top: 5rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -5371,16 +5468,12 @@ progress#file {
   text-align: end;
 }
 
-.indent-8{
-  text-indent: 2rem;
-}
-
-.indent-4{
-  text-indent: 1rem;
-}
-
 .indent-3{
   text-indent: 0.75rem;
+}
+
+.indent-8{
+  text-indent: 2rem;
 }
 
 .align-middle{
@@ -5454,6 +5547,10 @@ progress#file {
   font-size: 1.54rem;
 }
 
+.text-42xl{
+  font-size: 1.46rem;
+}
+
 .text-4xl{
   font-size: 2.25rem;
 }
@@ -5493,12 +5590,8 @@ progress#file {
   font-size: .75rem;
 }
 
-.text-43xl{
-  font-size: 0.89rem;
-}
-
-.text-42xl{
-  font-size: 1.46rem;
+.text-5xl{
+  font-size: 3rem;
 }
 
 .font-black{
@@ -5519,6 +5612,10 @@ progress#file {
 
 .font-semibold{
   font-weight: 600;
+}
+
+.font-light{
+  font-weight: 300;
 }
 
 .uppercase{
@@ -5557,6 +5654,10 @@ progress#file {
   line-height: 1.375;
 }
 
+.leading-normal{
+  line-height: 1.5;
+}
+
 .-tracking-moretight{
   letter-spacing: -0.065em;
 }
@@ -5581,12 +5682,12 @@ progress#file {
   letter-spacing: 0.015em;
 }
 
-.tracking-verytight{
-  letter-spacing: 0.1rem;
-}
-
 .tracking-tightener{
   letter-spacing: 0.045em;
+}
+
+.tracking-verytight{
+  letter-spacing: 0.1rem;
 }
 
 .text-black{
@@ -5831,20 +5932,6 @@ progress#file {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-skin-darkgray:hover{
-  background-color: var(--input-dark-gray);
-}
-
-.hover\:bg-red-500:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-blue-400:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
-}
-
 .hover\:text-orange-600:hover{
   --tw-text-opacity: 1;
   color: rgb(234 88 12 / var(--tw-text-opacity));
@@ -5929,10 +6016,6 @@ progress#file {
 .focus\:bg-white:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.focus\:bg-skin-darkgray:focus{
-  background-color: var(--input-dark-gray);
 }
 
 .focus\:text-white:focus{
@@ -6031,11 +6114,6 @@ progress#file {
   .xs\:grid-cols-26{
     grid-template-columns: 28rem 1fr;
   }
-
-  .xs\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
 }
 
 @media (min-width: 769px){
@@ -6097,11 +6175,6 @@ progress#file {
     margin-bottom: calc(4rem * var(--tw-space-y-reverse));
   }
 
-  .sm\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
   .sm\:text-35xl\/tight{
     font-size: 6.4rem;
     line-height: 1.25;
@@ -6132,6 +6205,10 @@ progress#file {
 
   .lg\:mr-8{
     margin-right: 2rem;
+  }
+
+  .lg\:-mt-64{
+    margin-top: -16rem;
   }
 
   .lg\:block{
@@ -6178,6 +6255,10 @@ progress#file {
     width: 100%;
   }
 
+  .lg\:w-3\/12{
+    width: 25%;
+  }
+
   .lg\:basis-5\/12{
     flex-basis: 41.666667%;
   }
@@ -6208,6 +6289,10 @@ progress#file {
     --tw-bg-opacity: 0;
   }
 
+  .lg\:p-10{
+    padding: 2.5rem;
+  }
+
   .lg\:px-10{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -6216,6 +6301,22 @@ progress#file {
   .lg\:py-2{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .lg\:pb-64{
+    padding-bottom: 16rem;
+  }
+
+  .lg\:pt-0{
+    padding-top: 0px;
+  }
+
+  .lg\:pt-12{
+    padding-top: 3rem;
+  }
+
+  .lg\:pt-24{
+    padding-top: 6rem;
   }
 
   .lg\:text-white{
