@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Nav } from "../components";
 
 
@@ -9,6 +10,17 @@ import { Nav } from "../components";
 
 const DonateNow = () => {
 
+
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        const pageTitle = "Donate Now", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
 
     return (
         <>

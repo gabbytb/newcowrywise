@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Nav } from "../components";
 
 
@@ -8,6 +9,20 @@ import { Nav } from "../components";
 
 
 const Blog = () => {
+
+
+
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        const pageTitle = "Blog", siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+
 
 
     return (

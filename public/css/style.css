@@ -6182,6 +6182,10 @@ progress#file {
 
 /* ********************  BASE  ******************** */
 
+.hover\:block:hover{
+  display: block;
+}
+
 .hover\:cursor-not-allowed:hover{
   cursor: not-allowed;
 }
