@@ -1,6 +1,6 @@
 import { useRef, useEffect, } from "react";
 import { Link } from "react-router-dom";
-import { HomeFooter, HomeNav } from "../components"
+import { HomeNav, HomeFooter, } from "../components"
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 // import '../assets/styles/tailwindcss.css';
 
@@ -16,7 +16,9 @@ const Home = () => {
     const tawkMessengerRef = useRef();
 
 
-
+    console.log('WINDOW LOCATION = ', window.location);
+    console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
+    console.log('WINDOW LOCATION SEARCH = ', window.location.search);
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -108,11 +110,11 @@ const Home = () => {
                     <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
                       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                         <div className="px-4 py-5 flex-auto">
-                          <div className="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-red-400">
+                          <div className="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mt-2 mb-5 shadow-lg rounded-full bg-red-400">
                             <i className="fas fa-award text-3xl"></i>
                           </div>
-                          <h6 className="text-xl font-semibold">Awarded Agency</h6>
-                          <p className="mt-2 mb-4 text-blueGray-500">
+                          <h6 className="text-41xl font-semibold">Awarded Agency</h6>
+                          <p className="my-4 text-blueGray-500 text-2xl/normal">
                             Divide details about your product or agency work into
                             parts. A paragraph describing a feature will be enough.
                           </p>
@@ -123,11 +125,11 @@ const Home = () => {
                     <div className="w-full md:w-4/12 px-4 text-center">
                       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                         <div className="px-4 py-5 flex-auto">
-                          <div className="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+                          <div className="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mt-2 mb-5 shadow-lg rounded-full bg-lightBlue-400">
                             <i className="fas fa-retweet text-3xl"></i>
                           </div>
-                          <h6 className="text-xl font-semibold">Free Revisions</h6>
-                          <p className="mt-2 mb-4 text-blueGray-500">
+                          <h6 className="text-41xl font-semibold">Free Revisions</h6>
+                          <p className="my-4 text-blueGray-500 text-2xl/normal">
                             Keep you user engaged by providing meaningful information.
                             Remember that by this time, the user is curious.
                           </p>
@@ -138,11 +140,11 @@ const Home = () => {
                     <div className="pt-6 w-full md:w-4/12 px-4 text-center">
                       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                         <div className="px-4 py-5 flex-auto">
-                          <div className="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-emerald-400">
+                          <div className="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mt-2 mb-5 shadow-lg rounded-full bg-emerald-400">
                             <i className="fas fa-fingerprint text-3xl"></i>
                           </div>
-                          <h6 className="text-xl font-semibold">Verified Company</h6>
-                          <p className="mt-2 mb-4 text-blueGray-500">
+                          <h6 className="text-41xl font-semibold">Verified Company</h6>
+                          <p className="my-4 text-blueGray-500 text-2xl/normal">
                             Write a few lines about each one. A paragraph describing a
                             feature will be enough. Keep you user engaged!
                           </p>
@@ -153,18 +155,18 @@ const Home = () => {
 
                   <div className="flex flex-wrap items-center mt-32">
                     <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-20 h-20 mb-6 shadow-lg rounded-full bg-white">
+                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-20 h-20 mb-4 shadow-lg rounded-full bg-white">
                         <i className="fas fa-user-friends text-3xl"></i>
                       </div>
-                      <h3 className="text-3xl mb-2 font-semibold leading-normal">
-                        Working with us is a pleasure
+                      <h3 className="text-5xl/tight mb-2 font-black">
+                        Working with Us is a pleasure
                       </h3>
-                      <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                      <p className="text-2xl/normal font-medium mt-8 mb-4 text-blueGray-600">
                         Don't let your uses guess by attaching tooltips and popoves to
                         any element. Just make sure you enable them first via
                         JavaScript.
                       </p>
-                      <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
+                      <p className="text-2xl/normal font-medium mt-0 mb-4 text-blueGray-600">
                         The kit comes with three pre-built pages to help you get
                         started faster. You can change the text and images and you're
                         good to go. Just make sure you enable them first via
@@ -197,7 +199,7 @@ const Home = () => {
                           <h4 className="text-xl font-bold text-white">
                             Top Notch Services
                           </h4>
-                          <p className="text-md font-light mt-2 text-white">
+                          <p className="text-2xl/normal font-light mt-2 text-white">
                             The Arctic Ocean freezes every winter and much of the
                             sea-ice then thaws every summer, and that process will
                             continue whatever happens.
@@ -244,7 +246,7 @@ const Home = () => {
                         <div className="text-lightBlue-600 p-3 text-center inline-flex items-center justify-center w-20 h-20 mb-6 shadow-lg rounded-full bg-lightBlue-300">
                           <i className="fas fa-rocket text-3xl"></i>
                         </div>
-                        <h3 className="text-3xl font-semibold">A growing company</h3>
+                        <h3 className="text-5xl/tight mb-2 font-black">A growing company</h3>
                         <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
                           The extension comes with three pre-built pages to help you
                           get started faster. You can change the text and images and
@@ -304,7 +306,7 @@ const Home = () => {
                 <div className="container mx-auto px-4">
                   <div className="flex flex-wrap justify-center text-center mb-24">
                     <div className="w-full lg:w-6/12 px-4">
-                      <h2 className="text-4xl font-semibold">Here are our heroes</h2>
+                      <h2 className="text-5xl/tight font-black">Here are our heroes</h2>
                       <p className="text-lg leading-relaxed m-4 text-blueGray-500">
                         According to the National Oceanic and Atmospheric
                         Administration, Ted, Scambos, NSIDClead scentist, puts the
@@ -481,7 +483,7 @@ const Home = () => {
                 <div className="container mx-auto px-4 lg:pt-24 lg:pb-64">
                   <div className="flex flex-wrap text-center justify-center">
                     <div className="w-full lg:w-6/12 px-4">
-                      <h2 className="text-4xl font-semibold text-white">
+                      <h2 className="text-5xl/tight font-black text-white">
                         Build something
                       </h2>
                       <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-400">
@@ -493,10 +495,10 @@ const Home = () => {
                   </div>
                   <div className="flex flex-wrap mt-12 justify-center">
                     <div className="w-full lg:w-3/12 px-4 text-center">
-                      <div className="text-blueGray-800 p-3 w-16 h-16 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-                        <i className="fas fa-medal text-3xl"></i>
+                      <div className="text-blueGray-800 p-3 w-20 h-20 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
+                        <i className="fas fa-medal text-4xl"></i>
                       </div>
-                      <h6 className="text-xl mt-5 font-semibold text-white">
+                      <h6 className="text-3xl mt-5 font-semibold text-white">
                         Excelent Services
                       </h6>
                       <p className="mt-2 mb-4 text-blueGray-400">
@@ -505,10 +507,10 @@ const Home = () => {
                       </p>
                     </div>
                     <div className="w-full lg:w-3/12 px-4 text-center">
-                      <div className="text-blueGray-800 p-3 w-16 h-16 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-                        <i className="fas fa-poll text-3xl"></i>
+                      <div className="text-blueGray-800 p-3 w-20 h-20 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
+                        <i className="fas fa-poll text-4xl"></i>
                       </div>
-                      <h5 className="text-xl mt-5 font-semibold text-white">
+                      <h5 className="text-3xl mt-5 font-semibold text-white">
                         Grow your market
                       </h5>
                       <p className="mt-2 mb-4 text-blueGray-400">
@@ -517,10 +519,10 @@ const Home = () => {
                       </p>
                     </div>
                     <div className="w-full lg:w-3/12 px-4 text-center">
-                      <div className="text-blueGray-800 p-3 w-16 h-16 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-                        <i className="fas fa-lightbulb text-3xl"></i>
+                      <div className="text-blueGray-800 p-3 w-20 h-20 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
+                        <i className="fas fa-lightbulb text-4xl"></i>
                       </div>
-                      <h5 className="text-xl mt-5 font-semibold text-white">
+                      <h5 className="text-3xl mt-5 font-semibold text-white">
                         Launch time
                       </h5>
                       <p className="mt-2 mb-4 text-blueGray-400">

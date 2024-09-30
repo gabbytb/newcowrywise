@@ -5755,6 +5755,11 @@ progress#file {
   font-size: 3rem;
 }
 
+.text-5xl\/tight{
+  font-size: 3rem;
+  line-height: 1.25;
+}
+
 .text-6xl{
   font-size: 4rem;
 }
@@ -5848,10 +5853,6 @@ progress#file {
 
 .leading-none{
   line-height: 1;
-}
-
-.leading-normal{
-  line-height: 1.5;
 }
 
 .leading-relaxed{
@@ -6181,10 +6182,6 @@ progress#file {
 }
 
 /* ********************  BASE  ******************** */
-
-.hover\:block:hover{
-  display: block;
-}
 
 .hover\:cursor-not-allowed:hover{
   cursor: not-allowed;
