@@ -31,7 +31,7 @@ const Blog = () => {
 
 
             <div className="container mx-auto">
-                <main class="mx-7 lg:mx-6 mt-32 grid grid-cols-28">  
+                <main class="mx-7 lg:mx-16 mt-32 grid grid-cols-28">  
 
             
                         <section>   
@@ -245,7 +245,7 @@ const Blog = () => {
 
 
                         <aside>
-                            <div class="max-w-5xl mx-auto">                        
+                            <div class="max-w-lg mx-0">                        
                                 <div class="flex flex-wrap -mx-2">                            
                                     <div class="w-full sm:w-1/2 md:w-1/3 self-stretch p-2 mb-2">
                                         <div class="rounded shadow-md h-full">

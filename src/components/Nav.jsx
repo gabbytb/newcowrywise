@@ -36,7 +36,7 @@ const Nav = () => {
             {/* Top Header  */}
             <header id="header" className="default-header">
                 <div className="container">
-                    <div className="flex items-center h-full px-0 relative ">                
+                    <div className="flex justify-between items-center h-full px-0 relative ">                
                         <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />

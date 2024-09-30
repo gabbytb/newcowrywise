@@ -4093,6 +4093,11 @@ progress#file {
   margin-bottom: 1.5rem;
 }
 
+.mx-96{
+  margin-left: 26rem;
+  margin-right: 26rem;
+}
+
 .-mb-2{
   margin-bottom: -0.5rem;
 }
@@ -4618,6 +4623,22 @@ progress#file {
 
 .max-w-full{
   max-width: 100%;
+}
+
+.max-w-3xl{
+  max-width: 48rem;
+}
+
+.max-w-2xl{
+  max-width: 42rem;
+}
+
+.max-w-xl{
+  max-width: 36rem;
+}
+
+.max-w-lg{
+  max-width: 32rem;
 }
 
 .flex-1{
@@ -6579,6 +6600,26 @@ progress#file {
   .lg\:my-5{
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
+  }
+
+  .lg\:mx-96{
+    margin-left: 26rem;
+    margin-right: 26rem;
+  }
+
+  .lg\:mx-12{
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .lg\:mx-20{
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
+  .lg\:mx-16{
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   .lg\:-mt-64{

@@ -101,7 +101,7 @@ const HomeNav = () => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="menu-item my-4 relative">
+                                 {/* <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Business</p>
                                     <div className="nav-dropdown hidden">
                                         <div className="nav-dropdown--left mr-20 pr-20">
@@ -116,6 +116,11 @@ const HomeNav = () => {
                                             </ul>
                                         </div>
                                     </div>
+                                </li> */}
+                                <li className="menu-item my-4 relative">
+                                    <Link to={'/blog'}>
+                                        <p className="has-dropdown">Blog</p>                                    
+                                    </Link>
                                 </li>
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Developer</p>
