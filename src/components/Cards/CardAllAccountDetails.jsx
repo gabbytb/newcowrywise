@@ -78,7 +78,6 @@ export default function CardAllAccountDetails() {
 
 
 
-
     // **************************************************************************************************
     // FUNCTION TO RE-DIRECT TO PREVIOUS PAGE BASED ON USER'S ROLE
     // **************************************************************************************************
@@ -102,25 +101,26 @@ export default function CardAllAccountDetails() {
 
 
 
-
-
+    
+    // ON-CLICK:- SHOW UPDATE PAGE
     function showUpdateForm() {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-        setActiveForm('update-form'); 
+        setActiveForm('update-form');
     };
 
-    // Hit BACK BUTTON on UPDATE PAGE
+    // ON-CLICK:- BACK BUTTON on THE UPDATE PAGE
+    // RETURN:- TO USER DETAILS PAGE / STAFF DETAILS PAGE
     function showUserInfo() {
         if (id !== null) {    
+            window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+
             for (var i = 0; i < user?.roles?.length; i++) {
                 if (user?.roles[i]?.role === 'ROLE_USERS') {
                     window.location = `/admin/users/${id}`;
                 } else {
                     window.location = `/admin/staffs/${id}`;
                 };
-            };
-            window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-            setActiveForm('user-form');
+            };       
         };
     }; 
  
@@ -169,13 +169,13 @@ export default function CardAllAccountDetails() {
     useEffect(() => {              
         if (submitUpdate === true) {
             console.log('Submit Update TRUE: ', submitUpdate); 
-            function findUpdatedUserID() {
-                // if (submitUpdate === true) {       
+            
+            function findUpdatedUserID() {             
                 const url = `/api/v1/auth/account/manage/${id}`;
                 api.get(url)
                 .then((response) => {
                     const { success, data, message } = response.data;
-                    if ((!success) || (message === "User not found")) {
+                    if (!success || message === "User not found") {
                             console.log("Message: ", message);
                             console.log("Success: ", success);
                     };
@@ -183,20 +183,15 @@ export default function CardAllAccountDetails() {
                     // Perform Actions Here if Truthy
                     // console.log("Success: ", success);
                     // console.log("Data: ", data);
-                    // console.log("Message: ", message);
-                        
+                    // console.log("Message: ", message);                        
                     setUser(data);
                 })
                 .catch((error) => {
                         // Handle error state or logging here
                         console.log("Error encountered: ", error);
                 });
-            };
-                    
-            const timer = setTimeout(findUpdatedUserID, 300);          
-            return () => { 
-                clearTimeout(timer);
-            };
+            };                    
+            findUpdatedUserID();
         };
     }, [id, submitUpdate]);
 
