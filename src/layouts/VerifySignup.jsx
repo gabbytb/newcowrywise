@@ -2,7 +2,7 @@ import { useState, useEffect, } from 'react';
 import { Link, } from 'react-router-dom';
 import api from '../api';
 // import loginImg from '../assets/login.jpg'
-import { brandOfficialLogo, loginBg } from '../assets/images';
+import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
 
 
@@ -367,7 +367,7 @@ const VerifySignUp = () => {
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
                     <Link className="w-56" to={"/"}>
-                        <img src={brandOfficialLogo} alt="brand logo" />
+                        <img src={brandOfficialLogoDark} alt="brand logo" />
                     </Link>
                 </div>
                 {/* PAGE NAV */}
@@ -376,7 +376,7 @@ const VerifySignUp = () => {
                                             
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
-                        <img className="h-44 w-48" src={loginBg} alt="user-img" />
+                        <img className="h-44 w-48" src={signUpIcon} alt="user-img" />
                     </div>
                     {/* PAGE ICON */}
 

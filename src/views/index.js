@@ -1,6 +1,6 @@
-import DashboardTable from "./admin/DashboardTable";
-import StaffsTable from './admin/StaffsTable';
-import UsersTable from "./admin/UsersTable";
+import DashboardTable from "./admin/tables/DashboardTable";
+import StaffsTable from './admin/tables/StaffsTable';
+import UsersTable from "./admin/tables/UsersTable";
 
 
 

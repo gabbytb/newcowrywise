@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
-    brandOfficialLogo, 
-    brandOfficialWhiteLogo,
+    brandOfficialLogoDark,
 } from "../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
@@ -25,14 +24,10 @@ const NavNoTopBar = () => {
             {/* Top Header  */}
             <header id="header" className="default-header">
                 <div className="container">
-                    <div className="flex justify-center items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="m-0 brand w-60 justify-center">
-                            {/* <BrandLogo /> */}
-                            <img src={brandOfficialLogo} alt="official logo" />
-                        </Link>
-                        <Link to={"/"} className="ml-16 brand-white w-60 justify-center">
+                    <div className="flex justify-center items-center h-full px-0 relative ">                              
+                        <Link to={"/"} className="ml-16 brand-white dark:block w-60 justify-center">
                             {/* -mt-2 <BrandLogoWhite   /> */}
-                            <img src={brandOfficialWhiteLogo} alt="official logo" />
+                            <img src={brandOfficialLogoDark} alt="official logo" />
                         </Link>
 
                         <div className="justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between hidden">

@@ -2,7 +2,7 @@ import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 // import loginImg from '../assets/login.jpg'
-import { brandOfficialLogo, loginBg } from '../assets/images';
+import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
 
 
@@ -214,28 +214,29 @@ function SignUp() {
 
     return (
         <div id="signUpId" className="block h-screen w-full bg-skin-signup-signin-bg">
-            {/* ADD ton Below:  right-pane */}
+            {/* ADD to Below:  right-pane */}
             <div className="flex flex-col justify-center gap-4 relative bg-skin-signup-signin-bg"> 
 
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
-                    <Link className="w-56" to={"/"}>
-                        <img src={brandOfficialLogo} alt="brand logo" />
+                    <Link className="w-56 block dark:block" to={"/"}>
+                        <img src={brandOfficialLogoDark} alt="brand logo" />
                     </Link>
                 </div>
                 {/* PAGE NAV */}
 
-                <form id="signUpForm" className='max-w-[400px] w-full mx-auto mb-10 rounded-lg bg-skin-signup-signin-bg py-8 px-10' onSubmit={handleFormSubmission}>
+                <form id="signUpForm" className='max-w-[400px] border bg-white w-full mx-auto mt-20 mb-16 rounded-3xl bg-skin-signup-signin-bg pt-2 pb-8 px-10' onSubmit={handleFormSubmission}>
                                             
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
-                        <img className="h-44 w-48" src={loginBg} alt="user-img" />
+                        <img className="w-36 h-32 rounded-full" src={signUpIcon} alt="user-img" />
                     </div>
                     {/* PAGE ICON */}
 
 
                     {/* PAGE TITLE */}
-                    <h2 className='text-2xl dark:text-white font-bold text-center mt-0 mb-24 uppercase opacity-30'>sign up</h2>
+                    {/* mb-24 */}
+                    <h2 className='text-2xl text-black dark:text-white font-bold text-center mt-0 mb-6 uppercase opacity-100'>sign up</h2>
                     {/* PAGE TITLE */}
 
                     
@@ -257,54 +258,54 @@ function SignUp() {
 
                     {/* First & Last Name */}
                     <div className='flex flex-row text-gray-400 py-2 gap-12'>
-                        <label htmlFor="firstName">First Name
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="firstName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                        <label htmlFor="firstName" className='text-lg font-semibold tracking-extratight text-gray-500'>First Name
+                            <input className='rounded-lg bg-white ease-in-out duration-150 mt-1 p-2 outline-none focus:border-none hover:border-none focus:outline-none hover:outline-none' type="text" name="firstName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
 
-                        <label htmlFor="lastName">Last Name
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" name="lastName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                        <label htmlFor="lastName" className='text-lg font-semibold tracking-extratight text-gray-500'>Last Name
+                            <input className='rounded-lg bg-white ease-in-out duration-150 mt-1 p-2 outline-none' type="text" name="lastName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* First & Last Name */}
 
                     
                     {/* E-mail Address */}
-                    <div className='flex flex-col text-gray-400 py-2'>
-                        <label htmlFor="email">E-mail address
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                    <div className='flex flex-col text-gray-400 py-5'>
+                        <label htmlFor="email" className='text-lg font-semibold tracking-extratight text-gray-500'>E-mail Address
+                            <input className='rounded-lg bg-gray-700 mt-1 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* E-mail Address */}
 
 
                     {/* Password */}
-                    <div className='flex flex-col text-gray-400 py-2'>
-                        <label htmlFor="password">Password
-                            <input autoComplete="new-password" className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                    <div className='flex flex-col text-gray-400 py-3'>
+                        <label htmlFor="password" className='text-lg font-semibold tracking-extratight text-gray-500'>Password
+                            <input autoComplete="new-password" className='p-2 rounded-lg bg-gray-700 mt-1 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* Password */}
 
 
                     {/* Approves TandC */}
-                    <div className="text-white pt-6 pb-0">{/* text-gray-400 */}
-                        <label className="flex justify-center items-center gap-2 leading-6" htmlFor="approvesTandC">
+                    <div className="text-white pt-4 pb-0">{/* text-gray-400 */}
+                        <label className="flex justify-center items-center gap-2 text-lg font-semibold tracking-extratight text-gray-500 leading-6" htmlFor="approvesTandC">
                             {/* ref={checkboxInput} */}
-                            <input className="mr-2 w-8 h-8" type="checkbox" name="approvesTandC" onChange={handleOnChange} onKeyUp={handleOnKeyUp} /> I have read and understood Samuel Akinola Foundation's terms and conditions.
+                            <input className="mb-3 mr-2 w-8 h-8" type="checkbox" name="approvesTandC" onChange={handleOnChange} onKeyUp={handleOnKeyUp} /> I have read and understood Samuel Akinola Foundation's terms and conditions.
                         </label>
                     </div>
                     {/* Approves TandC */}
                     
 
                     {/* SUBMIT BUTTON */}
-                    <button className="w-full my-5 py-5 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg uppercase">submit</button>
+                    <button className="w-full mt-4 mb-5 py-5 bg-skin-signup-signin-bg shadow-lg shadow-teal-500/50 hover:bg-green-500 hover:shadow-teal-500/40 duration-150 ease-in-out text-white font-semibold rounded-xl uppercase focus:outline-none">submit</button>
                     {/* SUBMIT BUTTON */}
 
 
                     {/* LINK: SIGN IN & PASSWORD RESET */}
-                    <div className="login__register flex flex-col mt-4 mb-6 gap-4">
-                        <p className="text-white">Have an account? <Link className='capitalize' to={"/user/login"}>sign in</Link></p>
-                        <p className="text-white"><Link to={"/user/password-reset"}>Forgot Password</Link></p>
+                    <div className="login__register flex flex-col mt-4 mb-6 gap-2">
+                        <p className="text-center text-xl font-semibold tracking-extratight text-gray-500">Have an account? <Link className='capitalize text-gray-600' to={"/user/login"}>sign in</Link></p>
+                        <p className="text-center text-xl font-semibold tracking-extratight"><Link className='capitalize text-gray-600' to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
                     {/* LINK: SIGN IN & PASSWORD RESET */}
 

@@ -1,5 +1,5 @@
 import brandOfficialLogo from "./logo.jpg";
-import brandOfficialWhiteLogo from "./logo-trans.png";
+import brandOfficialLogoDark from "./logo-trans.png";
 
 import BrandLogo from "./BrandLogo";
 import BrandLogoWhite from "./BrandLogoWhite";
@@ -9,7 +9,7 @@ import mayokun from "./mayokun.jpg";
 import wande from "./wande.jpg";
 import investmentPlatform from "./investment-platform.png";
 
-import loginBg from "./user-icon.jpg";
+import signUpIcon from "./user-icon.png";
 import adminDashboardIcon from "./admindb.png";
 
 
@@ -20,7 +20,7 @@ import adminDashboardIcon from "./admindb.png";
 
 export {
     brandOfficialLogo,
-    brandOfficialWhiteLogo,
+    brandOfficialLogoDark,
     
     BrandLogo,
     BrandLogoWhite,
@@ -29,6 +29,6 @@ export {
     wande,
     investmentPlatform,
 
-    loginBg,
+    signUpIcon,
     adminDashboardIcon,
 }

@@ -4,7 +4,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
 import googleApi from "../googleApi";
 import { Preloader } from '../components';
-import { brandOfficialLogo, loginBg } from '../assets/images';
+import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 import { GoogleIcon } from '../assets/icons';
 
 
@@ -376,7 +376,7 @@ function SignIn() {
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
                     <Link className="w-56" to={"/"}>
-                        <img src={brandOfficialLogo} alt="logo" />
+                        <img src={brandOfficialLogoDark} alt="logo" />
                     </Link>
                 </div>
                 {/* PAGE NAV */}
@@ -387,7 +387,7 @@ function SignIn() {
                     
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
-                        <img className="h-44 w-48" src={loginBg} alt="user-img" />
+                        <img className="h-44 w-48" src={signUpIcon} alt="user-img" />
                     </div>
                     {/* PAGE ICON */}
 

@@ -3,7 +3,7 @@ import {
     // BrandLogo, 
     // BrandLogoWhite,
     brandOfficialLogo, 
-    brandOfficialWhiteLogo,
+    brandOfficialLogoDark,
 } from "../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
@@ -37,13 +37,13 @@ const Nav = () => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex justify-between items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
+                        <Link to={"/"} className="mt-1.5 brand dark:block w-1/6 justify-start">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="ml-16 brand-white w-1/6">
+                        <Link to={"/"} className="ml-16 brand-white dark:block w-1/6">
                             {/* -mt-2 <BrandLogoWhite   /> */}
-                            <img src={brandOfficialWhiteLogo} alt="official logo" />
+                            <img src={brandOfficialLogoDark} alt="official logo" />
                         </Link>
 
                         <div className="flex justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between">

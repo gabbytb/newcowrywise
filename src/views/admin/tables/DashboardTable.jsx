@@ -1,5 +1,5 @@
 // components
-import { CardBarChart, CardLineChart, CardPageVisits, CardSocialTraffic, } from "../../components";
+import { CardBarChart, CardLineChart, CardPageVisits, CardSocialTraffic, } from "../../../components";
 
 
 export default function DashboardTable() {

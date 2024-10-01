@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-import { 
-    // BrandLogo, 
-    // BrandLogoWhite,
-    brandOfficialLogo, 
-    brandOfficialWhiteLogo,
+import {  
+    brandOfficialLogoDark,
 } from "../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
@@ -27,7 +24,7 @@ const HomeNav = () => {
             {/* Top bar */}
             <Link id="homeTopBarID" className="h-15 text-10xl text-white font-medium text-center flex justify-center items-center cursor-pointer" to={"/user/signup"}>
                 <div className="basis-3/4 justify-center ml-56 pl-64">
-                    Welcome to Samuel Akinola Foundation 💙 . Need an account? <strong className="text-xl">&nbsp; Click here ↗</strong>
+                    Welcome to Samuel Akinola Foundation 💙 . New account? <strong className="text-xl">&nbsp; Sign up ↗</strong>
                 </div>
                 <ul className="flex h-full basis-1/4 social--icons">
                     <li className="flex fill-white w-full justify-end gap-7 pr-24">
@@ -49,13 +46,9 @@ const HomeNav = () => {
             <header id="homeHeader" className="default-home-header">
                 <div className="container">
                     <div className="flex justify-between items-center h-full px-0 relative">                
-                        <Link to={"/"} className="mt-1.5 brand w-1/6 justify-start">
-                            {/* <BrandLogo /> */}
-                            <img src={brandOfficialLogo} alt="official logo" />
-                        </Link>
-                        <Link to={"/"} className="ml-16 brand-white w-1/6">
-                            {/* -mt-2 <BrandLogoWhite   /> */}
-                            <img src={brandOfficialWhiteLogo} alt="official logo" />
+                        <Link to={"/"} className="mt-1.5 brand dark:block w-1/6">
+                            {/* -mt-2 <BrandLogoWhite ml-16 /> */}
+                            <img src={brandOfficialLogoDark} alt="official logo" />
                         </Link>
 
                         <div className="flex justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between">

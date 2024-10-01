@@ -857,6 +857,8 @@ exports.googleSignOn = async (req, res) => {
 exports.findAllUsers = async (req, res) => { 
 
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
+    // published
+    // draft
     
     try {
         let query = {
