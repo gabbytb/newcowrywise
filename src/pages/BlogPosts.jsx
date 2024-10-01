@@ -15,7 +15,8 @@ const BlogPosts = () => {
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        const pageTitle = "Blog", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Blog News", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -33,7 +34,7 @@ const BlogPosts = () => {
                 <main class="mx-12 lg:mx-16 mt-32 grid">                     
                     <div class="mx-auto flex flex-col items-center pl-16 pr-12">  
                         {/* POSTS LISTING */}          
-                        <div class="grid grid-cols-3 gap-x-12 gap-y-20 mx-10 flex-wrap">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 mx-16 flex-wrap">
                                         
                                     <div class="self-stretch p-2 mb-12">
                                         <div class="rounded shadow-md h-full">

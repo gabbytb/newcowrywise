@@ -1,7 +1,6 @@
 import { useState, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
-// import loginImg from '../assets/login.jpg'
 import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
 
@@ -16,6 +15,7 @@ function SignUp() {
 
 
     // console.clear();
+
     // localStorage.clear();
 
     
@@ -24,7 +24,8 @@ function SignUp() {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Sign Up", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign Up", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
@@ -37,7 +38,7 @@ function SignUp() {
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    console.log("*** ACCOUNT CREATION ***\nUser: ", user);
+    // console.log("*** ACCOUNT CREATION ***\nUser: ", user);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
@@ -82,9 +83,10 @@ function SignUp() {
 
         await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
-            const { success, data, message } = response.data;
+            const { success, message } = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
+            var reduceSpaceBtwForgotPasswordAndSuccessMsg = document.querySelector('#signUpForm .login__register');
 
             if ((!success) && (message === "Fill all the required inputs")) {
 
@@ -144,7 +146,7 @@ function SignUp() {
                 // Perform These Actions
                 setFormSubmitted(success);     
                 setFormMessage(message);        
-                console.log("Data: ", data);
+                // console.log("Data: ", data);
 
                 // Retrieve Registered User ID
                 // console.log("Registered User ID: ", data?.userId); 
@@ -152,15 +154,18 @@ function SignUp() {
                 // Retrieve token to store in LocalStorage
                 // setAccessToken(data?.token);         
                                 
-                // Scroll to Bottom
-                window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
-
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
-
+                
+                reduceSpaceBtwForgotPasswordAndSuccessMsg.classList.remove('mb-6');
+                reduceSpaceBtwForgotPasswordAndSuccessMsg.classList.add('mb-3');
+    
                 successMsg.classList.remove('signup_success');
                 successMsg.classList.add('success-message-info'); 
                                     
+                // Scroll to Bottom
+                window.scrollTo({ left: 0, top: 1200, behavior: 'smooth', });
+
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('signup_success');            
@@ -225,7 +230,7 @@ function SignUp() {
                 </div>
                 {/* PAGE NAV */}
 
-                <form id="signUpForm" className='max-w-[400px] border bg-white w-full mx-auto mt-20 mb-16 rounded-3xl bg-skin-signup-signin-bg pt-2 pb-8 px-10' onSubmit={handleFormSubmission}>
+                <form id="signUpForm" className='max-w-[400px] border flex flex-col bg-white w-full mx-auto mt-14 mb-12 rounded-3xl bg-skin-signup-signin-bg pt-2 pb-10 px-10' onSubmit={handleFormSubmission}>
                                             
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -259,29 +264,29 @@ function SignUp() {
                     {/* First & Last Name */}
                     <div className='flex flex-row text-gray-400 py-2 gap-12'>
                         <label htmlFor="firstName" className='text-lg font-semibold tracking-extratight text-gray-500'>First Name
-                            <input className='rounded-lg bg-white ease-in-out duration-150 mt-1 p-2 outline-none focus:border-none hover:border-none focus:outline-none hover:outline-none' type="text" name="firstName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                            <input className='rounded-none text-black bg-gray-700 ease-in-out duration-150 mt-1 p-2 focus:border-blue-500 outline-none' type="text" name="firstName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
 
                         <label htmlFor="lastName" className='text-lg font-semibold tracking-extratight text-gray-500'>Last Name
-                            <input className='rounded-lg bg-white ease-in-out duration-150 mt-1 p-2 outline-none' type="text" name="lastName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                            <input className='rounded-none text-black bg-gray-700 ease-in-out duration-150 mt-1 p-2 focus:border-blue-500 outline-none' type="text" name="lastName" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* First & Last Name */}
 
                     
                     {/* E-mail Address */}
-                    <div className='flex flex-col text-gray-400 py-5'>
+                    <div className='text-gray-400 py-4'>
                         <label htmlFor="email" className='text-lg font-semibold tracking-extratight text-gray-500'>E-mail Address
-                            <input className='rounded-lg bg-gray-700 mt-1 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                            <input className='rounded-none text-black bg-gray-700 ease-in-out duration-150 mt-1 p-2 focus:border-blue-500 outline-none' type="email" name="email" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* E-mail Address */}
 
 
                     {/* Password */}
-                    <div className='flex flex-col text-gray-400 py-3'>
+                    <div className='text-gray-400 py-1'>
                         <label htmlFor="password" className='text-lg font-semibold tracking-extratight text-gray-500'>Password
-                            <input autoComplete="new-password" className='p-2 rounded-lg bg-gray-700 mt-1 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
+                            <input autoComplete="new-password" className='rounded-none text-black bg-gray-700 ease-in-out duration-150 mt-1 p-2 focus:border-blue-500 outline-none' type="password" name="password" onChange={handleOnChange} onKeyUp={handleOnKeyUp} required />
                         </label>
                     </div>
                     {/* Password */}
@@ -298,12 +303,12 @@ function SignUp() {
                     
 
                     {/* SUBMIT BUTTON */}
-                    <button className="w-full mt-4 mb-5 py-5 bg-skin-signup-signin-bg shadow-lg shadow-teal-500/50 hover:bg-green-500 hover:shadow-teal-500/40 duration-150 ease-in-out text-white font-semibold rounded-xl uppercase focus:outline-none">submit</button>
+                    <button className="w-full mt-4 mb-5 py-5 bg-skin-signup-signin-bg shadow-lg shadow-teal-500/50 hover:bg-green-500 focus:bg-green-600 hover:shadow-teal-500/40 duration-150 ease-in-out text-white font-semibold rounded-xl uppercase focus:outline-none">submit</button>
                     {/* SUBMIT BUTTON */}
 
 
                     {/* LINK: SIGN IN & PASSWORD RESET */}
-                    <div className="login__register flex flex-col mt-4 mb-6 gap-2">
+                    <div className="login__register flex flex-col mt-2 mb-6 gap-4">
                         <p className="text-center text-xl font-semibold tracking-extratight text-gray-500">Have an account? <Link className='capitalize text-gray-600' to={"/user/login"}>sign in</Link></p>
                         <p className="text-center text-xl font-semibold tracking-extratight"><Link className='capitalize text-gray-600' to={"/user/password-reset"}>Forgot Password</Link></p>
                     </div>
@@ -311,7 +316,7 @@ function SignUp() {
 
 
                     {/* Success Message */}
-                    <div className="mt-6 mx-auto signup_success">
+                    <div className="mt-3 mb-3 mx-auto signup_success">
                         {formMessage}
                     </div>
                     {/* Success Message */}
