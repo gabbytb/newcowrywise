@@ -184,7 +184,6 @@ exports.findAllBlogPosts = async (req, res) => {
     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
     // published
     // draft
-    // deleted
 
     try {
         let query = { 
@@ -228,6 +227,56 @@ exports.findAllBlogPosts = async (req, res) => {
 };  //// THOROUGHLY Tested === Working
 
 
+// Our FIND All USERS Logic starts here
+exports.findAllBlogPosts = async (req, res) => { 
+
+    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
+    // published
+    // draft
+    
+    try {
+        let query = { 
+
+        };
+
+        if (status) {
+            query.status = status;
+        };
+ 
+        const allBlogPosts = await Blog.find(query)
+                                .skip((page - 1) * limit)
+                                .limit(parseInt(limit));
+        console.log("ALL BLOG POSTS: ", allBlogPosts);
+
+
+        const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
+        const totalPages = Math.ceil(totalBlogPosts / limit); // Calculate total pages
+        const pagination = {
+            postsRecord: totalBlogPosts,
+            page,
+            limit,
+            lastPage: totalPages,
+        };
+        console.log("PAGINATION: ", pagination, "\n\n");
+
+        
+        const responseData = {
+            success: true,
+            data: {
+                allBlogPosts,
+                pagination
+            },
+            message: "Post Item retrieved successfully",
+        }
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};  //// THOROUGHLY Tested === Working
+
+
 // Our FIND SINGLE USER by ID Logic starts here
 exports.findSingleBlogPostById = async (req, res) => {
     
@@ -259,7 +308,32 @@ exports.findSingleBlogPostById = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 
+// Our FIND SINGLE USER by ID Logic starts here
 exports.findSingleBlogPostByTitle = async (req, res) => {
-    const title = req.params.title.replace(/-/g, ' '); // Convert back to spaces
-    res.send(`You are viewing: ${title}`);
-};
+    
+    try {
+        const title = req.params.title;
+        const blog = await Blog.findOne(title);
+
+        if (!blog) {
+            const responseData = {
+                success: false,
+                message: "Post not found",
+            };
+            console.log("Find Blog Post by TITLE: ", responseData);
+            return res.status(404).json(responseData);
+        };
+        
+        const responseData = {
+            success: true,
+            data: blog,
+            message: "Successful",
+        };
+        console.log("Find Post by TITLE: ", responseData);
+        return res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+    };
+};  // THOROUGHLY Tested === Working

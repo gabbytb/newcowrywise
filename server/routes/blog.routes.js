@@ -12,6 +12,8 @@ module.exports = app => {
 
     router.get("/api/v1/admin/blogs/manage/post/:id", blogs.findSingleBlogPostById);
 
+    router.get("/api/v1/admin/blogs/manage/post/:title", blogs.findSingleBlogPostByTitle);
+    
     // router.put("/api/v1/admin/blogs/manage/post/update", blogs.updateBlogPost);
 
     // router.delete("/api/v1/admin/blogs/manage/post/delete/:id", blogs.deleteSingleBlogPost);

@@ -1022,7 +1022,7 @@ exports.findAllActive = async (req, res) => {
 exports.updateSingleUserById = async (req, res) => {
     
     try {
-        // const _id = req.params.id;
+        const _id = req.params.id;
         const { firstName, lastName, email, phone, address, address2, city, state, country, postalCode, aboutMe } = req.body;
 
         // To Add New Roles to Existing User's Account
@@ -1054,7 +1054,9 @@ exports.updateSingleUserById = async (req, res) => {
         };
 
         // Use $or to find the user by username or email and update it
-        const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+        // findByIdAndUpdate
+        const updatedUser = await User.findByIdAndUpdate(_id, dataToUpdate, { new: true }); 
+        // const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
         if (!updatedUser) {
             const responseData = {
                 success: false,

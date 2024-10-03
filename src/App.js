@@ -7,6 +7,7 @@ import {
     DonateNow,
     BlogPosts,
     BlogSinglePost,
+    BlogSinglePostByTitle,
     OurProgress,     
     // DonationPage,
     // SignUp,
@@ -69,7 +70,8 @@ export default function App() {
           <Route path="/user/login" element={<SignIn />} />        
           <Route path="/donations" element={<DonateNow />} />
           <Route path="/blog" element={<BlogPosts />} />
-          <Route path="/blog/:title/:id" element={<BlogSinglePost />} />
+          {/* <Route path="/blog/:title/:id" element={<BlogSinglePostByTitle />} /> */}
+          <Route path="/blog/:title" element={<BlogSinglePostByTitle />} />          
           <Route path="/home" element={<OurProgress />} />
           <Route path="/" element={<Home />} />          
 

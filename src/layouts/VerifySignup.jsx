@@ -1,7 +1,6 @@
 import { useState, useEffect, } from 'react';
 import { Link, } from 'react-router-dom';
 import api from '../api';
-// import loginImg from '../assets/login.jpg'
 import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
 
@@ -179,14 +178,14 @@ const VerifySignUp = () => {
     // ******************************** //
     // **** VERIFY REGISTERED USER **** //
     // ******************************** //
-    useEffect(() => {
-        
+    useEffect(() => {        
         // Assuming the token is passed as a query parameter
         // console.log("CURRENT URL: ", window.location);
+
         const { search } = window.location;
         const queryParams = new URLSearchParams(search);        
         const token = queryParams.get('token'); 
-        // console.log("Token: ", token);
+        console.log("Token: ", token);
 
         function verifyToken() {          
             const uri = "/user/verify";
@@ -194,7 +193,9 @@ const VerifySignUp = () => {
                 // headers: { 
                 //     Authorization: `Bearer ${token}`,
                 // }, 
-                params: { token } 
+                params: { 
+                    token 
+                }, 
             })
             .then((response) => {
                 const { success, message, data } = response.data;

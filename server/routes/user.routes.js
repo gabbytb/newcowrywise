@@ -82,7 +82,7 @@ module.exports = app => {
 
 
     // Update a "Single User" DATA by it's ID, using this API
-    router.put("/api/v1/admin/users/manage/update", users.updateSingleUserById);
+    router.put("/api/v1/admin/users/manage/update/:id", users.updateSingleUserById);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/update/:id") for the frontend to access.
 
     

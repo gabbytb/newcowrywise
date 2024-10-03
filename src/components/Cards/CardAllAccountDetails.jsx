@@ -139,7 +139,7 @@ export default function CardAllAccountDetails() {
     async function handleSubmitUserInfo(e) {
         e.preventDefault();
      
-        const uri = `/api/v1/admin/users/manage/update`;
+        const uri = `/api/v1/admin/users/manage/update/${id}`;
         await api.put(uri, user)
         .then((response) => {
             const { success, data, message } = response.data;

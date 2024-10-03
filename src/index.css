@@ -173,6 +173,7 @@
     @apply
       /* bg-blue-900 */
       bg-skin-admin-thead-bg
+      /* bg-skin-darkblue */
       text-black
       text-10xl
       font-black
