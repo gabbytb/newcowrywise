@@ -168,7 +168,7 @@ export default function CardAllAccountDetails() {
 
     useEffect(() => {              
         if (submitUpdate === true) {
-            console.log('Submit Update TRUE: ', submitUpdate); 
+            console.log('Update was Submitted: ', submitUpdate); 
             
             function findUpdatedUserID() {             
                 const url = `/api/v1/auth/account/manage/${id}`;
@@ -176,8 +176,8 @@ export default function CardAllAccountDetails() {
                 .then((response) => {
                     const { success, data, message } = response.data;
                     if (!success || message === "User not found") {
-                            console.log("Message: ", message);
-                            console.log("Success: ", success);
+                        console.log("Message: ", message);
+                        console.log("Success: ", success);
                     };
                                     
                     // Perform Actions Here if Truthy

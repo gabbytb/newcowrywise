@@ -238,65 +238,8 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
                 allApprovedStaffs?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allApprovedStaffs?.map((user, userIndex) => {
-                            if (user?.status === "pending") {
-                                return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold " +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-orange-500 mr-2"></i>{user?.status}
-                                        </td>                  
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
-                                  );
-                            } else if (user?.status === "rejected") {
-                              return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold" +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-red-500 mr-2"></i>{user?.status}
-                                        </td>                  
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
-                              );
-                            } else {
-                                  return (
+                        allApprovedStaffs?.map((user, userIndex) => {                           
+                            return (
                                     <tr key={userIndex}>
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                           #{userIndex+1}
@@ -322,8 +265,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
                                           <TableDropdown />
                                         </td>
                                     </tr>               
-                                  );
-                            };
+                            );                          
                         })
                     }
                   </tbody>

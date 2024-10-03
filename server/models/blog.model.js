@@ -10,7 +10,10 @@ module.exports = mongoose => {
         },
         description: {
             type: String,
-        },       
+        },   
+        excerpt: {
+            type: String,
+        },
         author: {
             img: String,
             name: String,
@@ -22,7 +25,7 @@ module.exports = mongoose => {
             type: String, 
             default: 'draft',
         },
-        isActive: { 
+        isPublished: { 
             type: Boolean, 
             default: false,
         },

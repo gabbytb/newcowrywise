@@ -6,7 +6,8 @@ import {
     Home,
     DonateNow,
     BlogPosts,
-    OurProgress, 
+    BlogSinglePost,
+    OurProgress,     
     // DonationPage,
     // SignUp,
     // SignIn,
@@ -22,6 +23,7 @@ import {
     SignIn,
 
     Dashboard,
+    DashboardCreateBlog,
     DashboardUsers, 
     DashboardUsersDetails,
     DashboardStaffs,
@@ -59,16 +61,6 @@ export default function App() {
     
     return (
         <Routes>
-          {/* add routes with layouts */}
-          {/* <Route path="/admin" exact element={<GuestDashboard />} /> */}
-
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/users" element={<DashboardUsers />} />
-          <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />
-          <Route path="/admin/staffs" element={<DashboardStaffs />} />  
-          <Route path="/admin/staffs/:id" element={<DashboardStaffsDetails />}></Route>
-        
-
           {/* add routes without layouts */}
           {/* <Route path="/landing" exact component={Landing} /> */}
           {/* <Route path="/profile" exact component={Profile} /> */}
@@ -77,8 +69,20 @@ export default function App() {
           <Route path="/user/login" element={<SignIn />} />        
           <Route path="/donations" element={<DonateNow />} />
           <Route path="/blog" element={<BlogPosts />} />
+          <Route path="/blog/:title/:id" element={<BlogSinglePost />} />
           <Route path="/home" element={<OurProgress />} />
           <Route path="/" element={<Home />} />          
+
+
+
+          {/* add routes with layouts */}
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/blog/manage/create" element={<DashboardCreateBlog />} />
+          <Route path="/admin/users" element={<DashboardUsers />} />
+          <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />
+          <Route path="/admin/staffs" element={<DashboardStaffs />} />  
+          <Route path="/admin/staffs/:id" element={<DashboardStaffsDetails />}></Route>
+        
 
           {/* add redirect for first page */}
           {/* <Redirect from="*" to="/" /> */}

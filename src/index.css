@@ -777,7 +777,8 @@
   .success, .error, 
   .signup_error, .signup_success,
   .verify_error, .verify_success,
-  .reverify_error, .reverify_success {
+  .reverify_error, .reverify_success,
+  .create_error, .create_success {
     @apply
       hidden      
     ;

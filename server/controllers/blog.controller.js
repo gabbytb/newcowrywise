@@ -14,7 +14,7 @@ exports.createBlogPost = async (req, res) => {
     const uniqueId = Date.now();
 
     // Payload
-    const { id = 23401, title, description, author, tags, categories, status, isActive } = req.body;
+    const { id = 23401, title, description, excerpt, tags, categories, author, isPublished } = req.body;
     
     try {
 
@@ -55,14 +55,13 @@ exports.createBlogPost = async (req, res) => {
             _id: uniqueId % id,                     
             title: title.toLowerCase(),         // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                      
             description,
+            excerpt,
             author,
-            status: "published",
-            isActive: true,
-            // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
             tags,
-            categories,
-            status,
-            isActive,
+            categories,  
+            isPublished,
+            status: isPublished === true ? 'published' : 'draft' ,        
+            // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan  
         });
         // // ******************************************************************************************************//
         // // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -258,3 +257,9 @@ exports.findSingleBlogPostById = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
     };
 };  // THOROUGHLY Tested === Working
+
+
+exports.findSingleBlogPostByTitle = async (req, res) => {
+    const title = req.params.title.replace(/-/g, ' '); // Convert back to spaces
+    res.send(`You are viewing: ${title}`);
+};

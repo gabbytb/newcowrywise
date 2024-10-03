@@ -61,7 +61,7 @@ import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
 
 import CardAllAccountDetails from "./Cards/CardAllAccountDetails";
-
+import NewBlogPost from "./Forms/NewBlogPost";
 
 
 
@@ -107,6 +107,7 @@ export {
     CardAllRejectedStaffs,
 
     CardAllAccountDetails,
+    NewBlogPost,
     // IMPORTED COMPONENTS //
     
 

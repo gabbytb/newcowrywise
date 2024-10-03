@@ -1549,7 +1549,8 @@ progress#file {
 .success, .error, 
   .signup_error, .signup_success,
   .verify_error, .verify_success,
-  .reverify_error, .reverify_success{
+  .reverify_error, .reverify_success,
+  .create_error, .create_success{
   display: none;
 }
 
@@ -3723,9 +3724,9 @@ progress#file {
   margin-right: 3rem;
 }
 
-.mx-16{
-  margin-left: 4rem;
-  margin-right: 4rem;
+.mx-28{
+  margin-left: 7rem;
+  margin-right: 7rem;
 }
 
 .mx-7{
@@ -3808,6 +3809,10 @@ progress#file {
 
 .mb-24{
   margin-bottom: 6rem;
+}
+
+.mb-28{
+  margin-bottom: 7rem;
 }
 
 .mb-3{
@@ -5149,6 +5154,10 @@ progress#file {
   font-weight: 700;
 }
 
+.font-extrabold{
+  font-weight: 800;
+}
+
 .font-light{
   font-weight: 300;
 }
@@ -5211,6 +5220,10 @@ progress#file {
 
 .tracking-extratight{
   letter-spacing: 0.06em;
+}
+
+.tracking-moretight{
+  letter-spacing: 0.065em;
 }
 
 .tracking-supertight{
@@ -5643,6 +5656,11 @@ progress#file {
     order: 0;
   }
 
+  .sm\:mx-8{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
   .sm\:ml-0{
     margin-left: 0px;
   }
@@ -5815,10 +5833,6 @@ progress#file {
     flex-basis: 41.666667%;
   }
 
-  .lg\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .lg\:flex-row{
     flex-direction: row;
   }
@@ -5927,6 +5941,10 @@ progress#file {
 
   .xl\:w-full{
     width: 100%;
+  }
+
+  .xl\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .xl\:px-60{

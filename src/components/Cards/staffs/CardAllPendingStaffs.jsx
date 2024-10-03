@@ -237,38 +237,9 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                 allPendingStaffs?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allPendingStaffs?.map((user, userIndex) => {
-                            if (user?.status === "pending") {
-                                return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold " +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-orange-500 mr-2"></i>{user?.status}
-                                        </td>                  
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
-                                  );
-                            } else if (user?.status === "rejected") {
-                              return (
-                                    <tr key={userIndex}>
+                        allPendingStaffs?.map((user, userIndex) => {                    
+                            return (
+                                <tr key={userIndex}>
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                           #{userIndex+1}
                                         </td>
@@ -292,37 +263,8 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                                           <TableDropdown />
                                         </td>
-                                    </tr>               
-                              );
-                            } else {
-                                  return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold " +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
-                                        </td>                  
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
-                                  );
-                            };
+                                </tr>               
+                            );                            
                         })
                     }
                   </tbody>
@@ -343,11 +285,11 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
-                                    <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
                                         {limit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
-                                    </div>
-                                    <nav className="relative z-0 inline-flex shadow-sm">
+                </div>
+                <nav className="relative z-0 inline-flex shadow-sm">
                                         {/* Previous page button */}
                                         <button
                                             onClick={() => handlePageChange(currentPage - 1)}
@@ -375,7 +317,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                                             disabled={currentPage === totalPages}
                                         >{rightArrow}
                                         </button>
-                                    </nav>
+                </nav>
             </div>
             {/* Pagination controls */}
           </div>       
