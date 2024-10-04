@@ -23,10 +23,8 @@ const BlogSinglePost = () => {
     console.log("Single Post: ", blogSinglePost);
 
 
-    const formatUrl = (title) => {
-        return title.replace(/ /g, '-').toLowerCase();
-    };
 
+    
 
     useEffect(() => {
         const title = slug.replace(/-/g, ' '); // Convert slug back to title
