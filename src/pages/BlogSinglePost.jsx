@@ -24,12 +24,11 @@ const BlogSinglePost = () => {
 
 
 
-    
+
 
     useEffect(() => {
-        const title = slug.replace(/-/g, ' '); // Convert slug back to title
+        const title = slug.replace(/-/g, ' '); // Convert slug back to title    
 
-        // api.get(`/api/v1/admin/blogs/manage/post/${formatUrl(title)}`)
         api.get(`/api/v1/admin/blogs/manage/post/${title}`)
         .then((response) => {
             const { success, data, message } = response.data; 
@@ -180,6 +179,7 @@ const BlogSinglePost = () => {
             </div>
         </>
     );
+
 };
 
 export default BlogSinglePost;
