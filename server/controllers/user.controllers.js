@@ -119,7 +119,7 @@ exports.signUp = async (req, res) => {
             // userName: username.toLowerCase(),           // sanitize: convert email to lowercase. NOTE: You must sanitize your data before forwarding to backend.
             firstName,
             lastName,
-            email: email.toLowerCase(),
+            email,
             password: encryptedPassword,
             approvesTandC,
             status: "pending",

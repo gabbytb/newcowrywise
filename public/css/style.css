@@ -3967,6 +3967,18 @@ progress#file {
   margin-top: 2rem;
 }
 
+.mb-52{
+  margin-bottom: 13rem;
+}
+
+.mb-60{
+  margin-bottom: 15rem;
+}
+
+.mb-64{
+  margin-bottom: 16rem;
+}
+
 .block{
   display: block;
 }

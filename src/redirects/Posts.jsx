@@ -18,7 +18,7 @@ const Posts = () => {
         if (window.location.pathname === '/blog/post') {        
             navigate('/blog');
         };    
-    }, [window.location.search]);
+    }, [navigate]);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //

@@ -1,6 +1,6 @@
 import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
-import { Nav } from "../components";
+import { HomeFooter, Nav } from "../components";
 import api from "../api";
 
 
@@ -16,16 +16,19 @@ const BlogSinglePost = () => {
 
     const { slug } = useParams();
 
+    // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
-    console.log("IS LOADING: ", isLoading);
+    // console.log("IS LOADING: ", isLoading);
 
-    const [blogSinglePost, setBlogSinglePost] = useState(undefined);
-    console.log("Single Post: ", blogSinglePost);
-
-
+    const [blogSinglePost, setBlogSinglePost] = useState(null);
+    // console.log("Single Post: ", blogSinglePost);
 
 
 
+        
+    // ************************** //
+    // *** FIND POST BY TITLE *** //
+    // ************************** //
     useEffect(() => {
         const title = slug.replace(/-/g, ' '); // Convert slug back to title    
 
@@ -50,22 +53,24 @@ const BlogSinglePost = () => {
         .finally(() => {
             setIsLoading(false);
         });
-    }, [slug]);
+    }, [slug]);    
+    // ************************** //
+    // *** FIND POST BY TITLE *** //
+    // ************************** //
 
 
-    
 
     
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        if (blogSinglePost?.title !== undefined) {
-            const pageTitle = `${blogSinglePost?.title}`, 
-                  siteTitle = "Samuel Akinola Foundation";
-            document.title = `${pageTitle} | ${siteTitle}`;
-        } else {
+        if (!blogSinglePost?.title) {
             const pageTitle = "Blog Post", 
+                  siteTitle = "Samuel Akinola Foundation";
+            document.title = `${pageTitle} | ${siteTitle}`;           
+        } else {
+            const pageTitle = `${blogSinglePost?.title?.toUpperCase()}`, 
                   siteTitle = "Samuel Akinola Foundation";
             document.title = `${pageTitle} | ${siteTitle}`;
         };
@@ -84,13 +89,14 @@ const BlogSinglePost = () => {
 
 
 
+
     return (
         <>
             <Nav />
 
 
-            <div className="container mx-auto">
-                <main class="mx-12 lg:mx-16 mt-32 grid grid-cols-28">  
+            <main className="container mx-auto mb-64">
+                <div class="mx-12 lg:mx-16 mt-32 grid grid-cols-28">  
 
             
                         <section>   
@@ -175,11 +181,15 @@ const BlogSinglePost = () => {
                             </div>
                         </aside>
 
-                </main> 
-            </div>
+                </div> 
+            </main>
+
+
+            <HomeFooter />
         </>
     );
 
 };
 
 export default BlogSinglePost;
+
