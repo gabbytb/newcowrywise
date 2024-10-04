@@ -149,7 +149,7 @@ export default function HomeFooter() {
           </div>
           <hr className="my-6 border-blueGray-300" />
           <div className="flex flex-wrap items-center md:justify-between justify-center">
-            <div className="w-full md:w-4/12 px-2 mx-auto text-center">
+            <div className="w-9/12 md:w-6/12 px-2 mx-auto text-center">
               <div className="text-2xl font-bold text-blueGray-500 py-1">
                 Copyright © {new Date().getFullYear()} All Rights Reserved.{" "}
                   {/* <span className="text-blueGray-500"> Samuel Akinola Foundation</span> */}                  

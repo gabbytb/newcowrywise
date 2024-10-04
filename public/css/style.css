@@ -3959,6 +3959,26 @@ progress#file {
   margin-top: 2rem;
 }
 
+.mb-32{
+  margin-bottom: 8rem;
+}
+
+.mb-96{
+  margin-bottom: 26rem;
+}
+
+.mb-36{
+  margin-bottom: 9rem;
+}
+
+.mt-36{
+  margin-top: 9rem;
+}
+
+.mt-16{
+  margin-top: 4rem;
+}
+
 .block{
   display: block;
 }
@@ -4059,6 +4079,10 @@ progress#file {
   height: 100vh;
 }
 
+.h-24{
+  height: 6rem;
+}
+
 .min-h-138{
   min-height: 78rem;
 }
@@ -4157,6 +4181,10 @@ progress#file {
 
 .w-screen{
   width: 100vw;
+}
+
+.w-9\/12{
+  width: 75%;
 }
 
 .min-w-0{
@@ -4731,6 +4759,20 @@ progress#file {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-skin-lightblue{
+  background-color: var(--bg-light-blue);
+}
+
+.bg-blue-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-blue-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-5{
   --tw-bg-opacity: 0.05;
 }
@@ -5146,6 +5188,10 @@ progress#file {
   font-size: .75rem;
 }
 
+.text-43xl{
+  font-size: 0.89rem;
+}
+
 .font-black{
   font-weight: 900;
 }
@@ -5278,6 +5324,11 @@ progress#file {
   color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
+.text-orange-400{
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity));
+}
+
 .text-orange-500{
   --tw-text-opacity: 1;
   color: rgb(249 115 22 / var(--tw-text-opacity));
@@ -5324,6 +5375,11 @@ progress#file {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-gray-800{
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-opacity-50{
@@ -5505,6 +5561,16 @@ progress#file {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-400:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-blue-500:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .hover\:text-gray-500:hover{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -5593,6 +5659,10 @@ progress#file {
 .focus\:outline-none:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.focus\:outline-blue-500:focus{
+  outline-color: #3b82f6;
 }
 
 .focus\:ring:focus{

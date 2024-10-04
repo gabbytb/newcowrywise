@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Nav } from "../components";
+import { HomeFooter, Nav } from "../components";
 import api from "../api";
 import { Link } from "react-router-dom";
 
@@ -52,52 +52,71 @@ const BlogPosts = () => {
     // console.log("TOTAL BLOG PAGES: ", totalPages);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10; // Number of items per page
-    const leftArrow = "<", rightArrow = ">";
+    const limit = 10; // Number of items per page   
 
 
 
 
 
-    useEffect(() => {
-        // if (activeDisplay === "allStaffs") {
+    useEffect(() => {      
   
-        //     setIsLoading(true);
+        // ****************************************************************************
+        // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL BLOG POSTS
+        // ****************************************************************************             
+        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+
+        async function fetchAllPublishedBlogPosts() {
+            var status = 'published';
+            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}`)
+            .then((response) => {
+                const { success, data, message } = response.data;
+                const { allBlogPosts, pagination } = data;
   
-            // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL BLOG POSTS
-            // ****************************************************************************             
-            async function fetchAllPublishedBlogPosts() {
-                var status = 'published';
-                await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}`)
-                .then((response) => {
-                    const { success, data, message } = response.data;
-                    const { allBlogPosts, pagination } = data;
-  
-                    if (!success && message === "No article found") {
+                if (!success && message === "No article found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
-                    };
+                };
   
-                    setAllBlogPosts(allBlogPosts);
+                setAllBlogPosts(allBlogPosts);
                                               
-                    setTotalBlogPosts(pagination?.postsRecord);
-                    setTotalPages(pagination?.lastPage);
-                })
-                .catch((error) => {
+                setTotalBlogPosts(pagination?.postsRecord);
+                setTotalPages(pagination?.lastPage);
+
+                if (currentPage > 1 ) {                                           
+                        const pageTitle = `Blog News - Page ${currentPage}`, 
+                              siteTitle = "Samuel Akinola Foundation";
+                        document.title = `${pageTitle} | ${siteTitle}`;                 
+                        
+                        const new_URL = window.location.origin + `/blog/page/${currentPage}`;
+                        // console.log("ORIGINAL URL: ", new_URL);
+
+                        window.history.replaceState({}, document.title, new_URL );
+
+                } else {                                                 
+                        const pageTitle = 'Blog News', 
+                              siteTitle = "Samuel Akinola Foundation";
+                        document.title = `${pageTitle} | ${siteTitle}`;                 
+
+                        const new_URL = window.location.origin + '/blog';
+                        // console.log("ORIGINAL URL: ", new_URL);
+                                                   
+                        window.history.replaceState({}, document.title, new_URL );     
+                };
+            })
+            .catch((error) => {
                     console.log("Error fetching data: ", error);
-                })
-                .finally(() => {
+            })
+            .finally(() => {
                     setIsLoading(false);
-                });
-            };
+            });
+        };
   
-            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
-            return () => {
+        var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
+        return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-            };
-        // };
-    }, [currentPage]); // Fetch data when currentPage changes
+        };
+
+    }, [currentPage]); // Fetch data when currentPage changes and update URL with /page/currentPage value
     // ****************************************************************************
     // ****************************************************************************   
     const handlePageChange = (page) => {
@@ -122,10 +141,10 @@ const BlogPosts = () => {
 
 
             <div className="container mx-auto">
-                <main className="mx-12 lg:mx-16 mt-32 grid">                     
+                <main className="mx-12 lg:mx-16 mt-32 mb-28 grid">                     
                     <div className="mx-auto flex flex-col items-center pl-16 pr-12">  
 
-                        <h2>Post with TITLE</h2>   
+                        <h1 className="text-4xl font-black mb-32">RECENT POSTS</h1>   
            
            
                         {/* POSTS LISTING */}          
@@ -172,19 +191,21 @@ const BlogPosts = () => {
                         </div> */}
                         {/* PAGINATION */}
 
+
+
                         {/* Pagination controls */}
-                        <div className="flex justify-between items-center py-2 mr-6">
-                            <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                        <div className="flex justify-between items-center py-2 mt-16 mr-6">
+                            {/* <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
                                 {limit} 
                                 <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
-                            </div>
-                            <nav className="relative z-0 inline-flex shadow-sm">
+                            </div> */}
+                            <nav className="relative z-0 inline-flex gap-3">
                                 {/* Previous page button */}
                                 <button
                                     onClick={() => handlePageChange(currentPage - 1)}
-                                    className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                    className={`relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed hidden' : ''}`}
                                     disabled={currentPage === 1}
-                                >{leftArrow}
+                                >prev
                                 </button>
 
 
@@ -193,7 +214,7 @@ const BlogPosts = () => {
                                     <button
                                     key={index}
                                     onClick={() => handlePageChange(index + 1)}
-                                    className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-xl font-bold text-gray-700 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                    className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 bg-white text-xl font-bold text-black hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
                                     {index + 1}
                                     </button>
                                 ))}
@@ -202,9 +223,9 @@ const BlogPosts = () => {
                                 {/* Next page button */}
                                 <button
                                     onClick={() => handlePageChange(currentPage + 1)}
-                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                    disabled={currentPage === totalPages}
-                                >{rightArrow}
+                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                    // disabled={currentPage === totalPages}
+                                >next
                                 </button>
                             </nav>
                         </div>
@@ -212,6 +233,9 @@ const BlogPosts = () => {
                     </div>
                 </main> 
             </div>
+
+
+            <HomeFooter />
         </>
     );
 };
