@@ -16,9 +16,11 @@ const Home = () => {
     const tawkMessengerRef = useRef();
 
 
-    console.log('WINDOW LOCATION = ', window.location);
-    console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
-    console.log('WINDOW LOCATION SEARCH = ', window.location.search);
+    // console.log('WINDOW LOCATION = ', window.location);
+    // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
+    // console.log('WINDOW LOCATION SEARCH = ', window.location.search);
+
+
 
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -30,7 +32,6 @@ const Home = () => {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-
 
 
     

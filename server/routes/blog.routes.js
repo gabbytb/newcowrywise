@@ -9,11 +9,11 @@ module.exports = app => {
     router.post("/api/v1/admin/blogs/manage/create", blogs.createBlogPost);
 
     router.get("/api/v1/admin/blogs/manage", blogs.findAllBlogPosts);
-
-    router.get("/api/v1/admin/blogs/manage/post/:id", blogs.findSingleBlogPostById);
-
-    router.get("/api/v1/admin/blogs/manage/post/:title", blogs.findSingleBlogPostByTitle);
     
+    router.get("/api/v1/admin/blogs/manage/post/:title", blogs.findBlogPostByTitle);
+
+    router.get("/api/v1/admin/blogs/manage/post/:id", blogs.findBlogPostById);
+
     // router.put("/api/v1/admin/blogs/manage/post/update", blogs.updateBlogPost);
 
     // router.delete("/api/v1/admin/blogs/manage/post/delete/:id", blogs.deleteSingleBlogPost);
@@ -21,7 +21,6 @@ module.exports = app => {
     // router.delete("/api/v1/admin/blogs/manage/posts/cleanup", blogs.deleteAllBlogPost);
 
     
-
 
     app.use("/", router);
 

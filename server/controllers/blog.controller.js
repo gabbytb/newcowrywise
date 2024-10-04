@@ -224,7 +224,7 @@ exports.findAllBlogPosts = async (req, res) => {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
-};  //// THOROUGHLY Tested === Working
+};  // THOROUGHLY Tested === Working
 
 
 // Our FIND All USERS Logic starts here
@@ -274,11 +274,47 @@ exports.findAllBlogPosts = async (req, res) => {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
-};  //// THOROUGHLY Tested === Working
+};  // THOROUGHLY Tested === Working
+
+
+// Our FIND SINGLE USER by TITLE Logic starts here
+exports.findBlogPostByTitle = async (req, res) => {
+    
+    try {        
+        
+        const title = req.params.title;
+        // const { title } = req.params;
+
+        // const blog = await Blog.findOne({ title: title });
+        const blog = await Blog.findOne({ title });
+       
+        if (!blog) {
+            const responseData = {
+                success: false,
+                message: "Post not found",
+            };
+            console.log("Searching for Post with Title: ", responseData);
+            return res.json(responseData);
+            // return res.status(404).json(responseData);
+        };
+        
+        const responseData = {
+            success: true,
+            data: blog,
+            message: "Successful",
+        };
+        console.log("FOUND POST TITLE: ", responseData);
+        return res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+    };
+};  // THOROUGHLY Tested === Working
 
 
 // Our FIND SINGLE USER by ID Logic starts here
-exports.findSingleBlogPostById = async (req, res) => {
+exports.findBlogPostById = async (req, res) => {
     
     try {
         const _id = req.params.id;
@@ -299,37 +335,6 @@ exports.findSingleBlogPostById = async (req, res) => {
             message: "Successful",
         };
         console.log("Find Post by ID: ", responseData);
-        return res.status(200).json(responseData);
-
-    } catch (error) {
-        // Catch error
-        return res.status(500).send(`Internal Server Error ${error}`);
-    };
-};  // THOROUGHLY Tested === Working
-
-
-// Our FIND SINGLE USER by ID Logic starts here
-exports.findSingleBlogPostByTitle = async (req, res) => {
-    
-    try {
-        const title = req.params.title;
-        const blog = await Blog.findOne(title);
-
-        if (!blog) {
-            const responseData = {
-                success: false,
-                message: "Post not found",
-            };
-            console.log("Find Blog Post by TITLE: ", responseData);
-            return res.status(404).json(responseData);
-        };
-        
-        const responseData = {
-            success: true,
-            data: blog,
-            message: "Successful",
-        };
-        console.log("Find Post by TITLE: ", responseData);
         return res.status(200).json(responseData);
 
     } catch (error) {

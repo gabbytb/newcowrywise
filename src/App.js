@@ -7,7 +7,6 @@ import {
     DonateNow,
     BlogPosts,
     BlogSinglePost,
-    BlogSinglePostByTitle,
     OurProgress,     
     // DonationPage,
     // SignUp,
@@ -30,7 +29,9 @@ import {
     DashboardStaffs,
     DashboardStaffsDetails,
 } from "./layouts";
-
+import { 
+    Posts, 
+} from "./redirects";
 
 
 
@@ -69,9 +70,9 @@ export default function App() {
           <Route path="/user/verify" element={<VerifySignUp />} />          
           <Route path="/user/login" element={<SignIn />} />        
           <Route path="/donations" element={<DonateNow />} />
-          <Route path="/blog" element={<BlogPosts />} />
-          {/* <Route path="/blog/:title/:id" element={<BlogSinglePostByTitle />} /> */}
-          <Route path="/blog/:title" element={<BlogSinglePostByTitle />} />          
+          <Route path="/blog" exact element={<BlogPosts />} />  
+          <Route path="/blog/post" element={<Posts />} />         
+          <Route path="/blog/:slug" element={<BlogSinglePost />} />          
           <Route path="/home" element={<OurProgress />} />
           <Route path="/" element={<Home />} />          
 
@@ -94,11 +95,42 @@ export default function App() {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const routesConfig = [          
 //     //  TEST ROUTES
 //     { path: "/dash", element: <Admin /> },
-
-
+//
 //     //  MAIN ROUTES
 //     { path: "/", element: <OurProgress /> },
 //     { path: "/home", element: <Home /> },

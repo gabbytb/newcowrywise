@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { HomeFooter, Nav } from "../components";
+import { Link, } from "react-router-dom";
 import api from "../api";
-import { Link } from "react-router-dom";
-
+import { Nav, HomeFooter, } from "../components";
 
 
 
@@ -17,24 +16,17 @@ const BlogPosts = () => {
 
 
     // { color }
+    // console.log('WINDOW LOCATION = ', window.location);
+    console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
+    console.log('WINDOW LOCATION SEARCH = ', window.location.search);
+
+
+
+
     // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
     
-
-
-
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-    useEffect(() => {
-        const pageTitle = "Blog News", 
-              siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-
+    
 
 
     
@@ -58,12 +50,31 @@ const BlogPosts = () => {
 
 
 
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
     useEffect(() => {      
   
         // ****************************************************************************
         // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL BLOG POSTS
         // ****************************************************************************             
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+        if (currentPage > 1 ) {                                           
+            const pageTitle = `Blog News - Page ${currentPage}`, 
+                  siteTitle = "Samuel Akinola Foundation";
+            document.title = `${pageTitle} | ${siteTitle}`;                 
+                
+            const new_URL = window.location.origin + `/blog/page/${currentPage}`;
+            window.history.replaceState({}, document.title, new_URL );
+        } else {                                                 
+            const pageTitle = 'Blog News', 
+                  siteTitle = "Samuel Akinola Foundation";
+            document.title = `${pageTitle} | ${siteTitle}`;                 
+
+            const new_URL = window.location.origin + '/blog';                                               
+            window.history.replaceState({}, document.title, new_URL );     
+        };
+        
 
         async function fetchAllPublishedBlogPosts() {
             var status = 'published';
@@ -81,27 +92,6 @@ const BlogPosts = () => {
                                               
                 setTotalBlogPosts(pagination?.postsRecord);
                 setTotalPages(pagination?.lastPage);
-
-                if (currentPage > 1 ) {                                           
-                        const pageTitle = `Blog News - Page ${currentPage}`, 
-                              siteTitle = "Samuel Akinola Foundation";
-                        document.title = `${pageTitle} | ${siteTitle}`;                 
-                        
-                        const new_URL = window.location.origin + `/blog/page/${currentPage}`;
-                        // console.log("ORIGINAL URL: ", new_URL);
-
-                        window.history.replaceState({}, document.title, new_URL );
-
-                } else {                                                 
-                        const pageTitle = 'Blog News', 
-                              siteTitle = "Samuel Akinola Foundation";
-                        document.title = `${pageTitle} | ${siteTitle}`;                 
-
-                        const new_URL = window.location.origin + '/blog';
-                        // console.log("ORIGINAL URL: ", new_URL);
-                                                   
-                        window.history.replaceState({}, document.title, new_URL );     
-                };
             })
             .catch((error) => {
                     console.log("Error fetching data: ", error);
@@ -110,35 +100,38 @@ const BlogPosts = () => {
                     setIsLoading(false);
             });
         };
-  
         var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
         return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
         };
 
     }, [currentPage]); // Fetch data when currentPage changes and update URL with /page/currentPage value
-    // ****************************************************************************
-    // ****************************************************************************   
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
-    // ****************************************************************************
-    // ****************************************************************************
-  
-
-
-
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+ 
     
 
 
+    // ******************************** //
+    // *** FORMAT URL STRING PARAMS *** // 
+    // ******************************** //
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
     const formatUrl = (title) => {
         return title.replace(/ /g, '-').toLowerCase();
     };
+    // ****************************************************************************
+    // ****************************************************************************  
+
+
+
+
 
     return (
         <>
             <Nav />
-
 
             <div className="container mx-auto">
                 <main className="mx-12 lg:mx-16 mt-32 mb-28 grid">                     
@@ -233,7 +226,6 @@ const BlogPosts = () => {
                     </div>
                 </main> 
             </div>
-
 
             <HomeFooter />
         </>

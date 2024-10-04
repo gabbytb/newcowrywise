@@ -1023,6 +1023,7 @@ exports.updateSingleUserById = async (req, res) => {
     
     try {
         const _id = req.params.id;
+    
         const { firstName, lastName, email, phone, address, address2, city, state, country, postalCode, aboutMe } = req.body;
 
         // To Add New Roles to Existing User's Account
