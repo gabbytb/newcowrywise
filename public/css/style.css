@@ -4948,6 +4948,11 @@ progress#file {
   padding-bottom: 2rem;
 }
 
+.px-32{
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
 .pb-0{
   padding-bottom: 0px;
 }
@@ -5082,6 +5087,18 @@ progress#file {
 
 .pt-8{
   padding-top: 2rem;
+}
+
+.pl-32{
+  padding-left: 8rem;
+}
+
+.pr-0{
+  padding-right: 0px;
+}
+
+.pb-3{
+  padding-bottom: 0.75rem;
 }
 
 .text-left{
