@@ -10,6 +10,21 @@ import { Nav, HomeFooter, } from "../components";
 
 
 
+const convertDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        // hour: '2-digit',
+        // minute: '2-digit',
+        hour12: true
+    };
+
+    return date.toLocaleString('en-GB', options);
+};
+
 
 
 const BlogPosts = () => {
@@ -55,9 +70,9 @@ const BlogPosts = () => {
     // *************************** //
     useEffect(() => {      
   
-        // ****************************************************************************
-        // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL BLOG POSTS
-        // ****************************************************************************             
+        // *************************************************************************************************************
+        // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
+        // *************************************************************************************************************            
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         if (currentPage > 1 ) {                                           
             const pageTitle = `Blog News - Page ${currentPage}`, 
@@ -78,7 +93,9 @@ const BlogPosts = () => {
 
         async function fetchAllPublishedBlogPosts() {
             var status = 'published';
-            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}`)
+            var sort = 'recent';
+            
+            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
             .then((response) => {
                 const { success, data, message } = response.data;
                 const { allBlogPosts, pagination } = data;
@@ -119,9 +136,6 @@ const BlogPosts = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-    const formatUrl = (title) => {
-        return title.replace(/ /g, '-').toLowerCase();
-    };
     // ****************************************************************************
     // ****************************************************************************  
 
@@ -147,25 +161,31 @@ const BlogPosts = () => {
                                     return (                                        
                                         <div key={post._id} className="self-stretch p-2 mb-12">
                                             <div className="rounded shadow-md h-full">
-                                                <Link to={`/blog/${formatUrl(post.title)}`}>
+                                                {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
+                                                <Link to={`/blog/${post.uri}`}>
                                                     <img className="w-full m-0 rounded-t lazy" 
                                                         // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
                                                         //  data-src="/assets/img/small-business.jpg" 
+                                                        src={post.img}
                                                         width="960" 
                                                         height="500" 
-                                                        alt="This post thumbnail" 
+                                                        alt="post thumbnail" 
                                                     />
                                                 </Link>
                                                 <div className="px-6 py-5">
                                                     <div className="font-semibold text-lg mb-2">
-                                                        <Link className="text-slate-900 hover:text-slate-700" to={`/blog/${formatUrl(post.title)}`}>
+                                                        <Link className="text-slate-900 hover:text-slate-700" to={`/blog/${post.uri}`}>
                                                             {post.title}
                                                         </Link>
                                                     </div>
-                                                    <p className="text-slate-700 mb-1" title="Published date">{post.createdAt}</p>
+                                                    <p className="text-slate-700 mb-1" title="Published date">{convertDate(post.createdAt)}</p>
                                                     <p className="text-slate-800">            
                                                         {post?.excerpt}                
                                                     </p>
+                                                    <br />
+                                                    <Link to={`/blog/${post.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
+                                                        <button type="button">Read More</button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>                                        

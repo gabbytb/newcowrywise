@@ -70,7 +70,8 @@ export default function App() {
           <Route path="/user/verify" element={<VerifySignUp />} />          
           <Route path="/user/login" element={<SignIn />} />        
           <Route path="/donations" element={<DonateNow />} />
-          <Route path="/blog" exact element={<BlogPosts />} />  
+          <Route path="/blog" element={<BlogPosts />} />  
+          <Route path="/blog/page/:id" element={<BlogPosts />} />  
           <Route path="/blog/post" element={<Posts />} />         
           <Route path="/blog/:slug" element={<BlogSinglePost />} />          
           <Route path="/home" element={<OurProgress />} />

@@ -12,6 +12,23 @@ import api from "../api";
 
 
 
+const convertDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    };
+
+    return date.toLocaleString('en-GB', options);
+};
+
+
+
 const BlogSinglePost = () => {
 
     const { slug } = useParams();
@@ -30,9 +47,9 @@ const BlogSinglePost = () => {
     // *** FIND POST BY TITLE *** //
     // ************************** //
     useEffect(() => {
-        const title = slug.replace(/-/g, ' '); // Convert slug back to title    
-
-        api.get(`/api/v1/admin/blogs/manage/post/${title}`)
+        // const url = slug.replace(/-/g, ' '); // Convert slug back to title    
+        const url = slug;
+        api.get(`/api/v1/admin/blogs/manage/post/${url}`)
         .then((response) => {
             const { success, data, message } = response.data; 
             if (!success && message === "Post not found") {
@@ -58,6 +75,7 @@ const BlogSinglePost = () => {
     // *** FIND POST BY TITLE *** //
     // ************************** //
 
+    const formattedDate = convertDate(blogSinglePost?.createdAt);
 
 
     
@@ -100,10 +118,10 @@ const BlogSinglePost = () => {
 
             
                         <section>   
-                            <div class="mx-auto flex flex-col items-center pl-16 pr-12">  
+                            <div class="mx-auto flex flex-col items-center pl-28 pr-20">  
                                
                                 {/* SINGLE POST PAGE */}           
-                                <div class="block">
+                                <div class="block w-full">
                                         
                                     <div class="self-stretch p-2 mb-0">
                                         <div class="rounded shadow-md h-full">
@@ -111,19 +129,26 @@ const BlogSinglePost = () => {
                                                 <img class="w-full m-0 rounded-t lazy" 
                                                     // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" 
                                                     // data-src="/assets/img/small-business.jpg" 
-                                                    width="960" 
+                                                    // width="960" 
+                                                    src={blogSinglePost?.img}   
+                                                    width="100%"
                                                     height="500" 
-                                                    alt="This post thumbnail" 
+                                                    alt="post thumbnail" 
                                                 />
                                             </Link>
-                                            <div class="px-6 py-5">
-                                                <div class="font-semibold text-lg mb-2">
-                                                    <Link to={"/small-business/"} class="text-slate-900 hover:text-slate-700">{blogSinglePost?.title}</Link>
+                                            <div class="px-11 pt-10 pb-20 flex flex-col gap-8">
+                                                <div class="font-semibold text-lg mb-2 border-gray-600 border-b-2 pb-2">
+                                                    <Link to={"/small-business/"} class="text-slate-900 text-5xl font-semibold capitalize hover:text-slate-700">{blogSinglePost?.title}</Link>
+                                                    <div className="mt-5 pb-2 text-2xl italic font-bold">{formattedDate}</div>
                                                 </div>
-                                                <p class="text-slate-700 mb-1" title="Published date">16 January 2019 10:00 AM</p>
-                                                <p class="text-slate-800">            
+                                                {/* <p class="text-slate-700 mb-1" title="Published date">{blogSinglePost?.author?.name}</p> */}
+                                                {/* <p class="text-slate-800 text-2xl/relaxed font-medium tracking-tightened mb-2">            
                                                     {blogSinglePost?.description}               
-                                                </p>
+                                                </p>                       */}
+                                                <div
+                                                    className="rendered-output"
+                                                    dangerouslySetInnerHTML={{ __html: blogSinglePost?.description }} // Render HTML content here
+                                                />                   
                                             </div>
                                         </div>
                                     </div>
@@ -139,7 +164,9 @@ const BlogSinglePost = () => {
 
                         <aside>
                             <div class="max-w-lg mx-0">                        
-                                <div class="flex flex-wrap -mx-2">                            
+                                <div class="flex flex-wrap mx-auto">                            
+                                    <h2 className="text-3xl font-bold mb-8 tracking-tightened border-b-2 border-b-black">Recent Posts</h2>
+
                                     <div class="w-full sm:w-1/2 md:w-1/3 self-stretch p-2 mb-2">
                                         <div class="rounded shadow-md h-full">
                                             <a href="/small-business/">

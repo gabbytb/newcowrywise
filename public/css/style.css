@@ -845,6 +845,13 @@ tbody tr{
   text-decoration: underline;
 }
 
+/* .rendered-output {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+  } */
+
 .sales-stats--wrap .sales_direction svg.sales-increase,
   .sales-stats--wrap .sales_direction svg.sales-decrease{
   max-height: 3rem;
@@ -3839,6 +3846,10 @@ progress#file {
   margin-bottom: 1.5rem;
 }
 
+.mb-64{
+  margin-bottom: 16rem;
+}
+
 .mb-8{
   margin-bottom: 2rem;
 }
@@ -3965,18 +3976,6 @@ progress#file {
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.mb-52{
-  margin-bottom: 13rem;
-}
-
-.mb-60{
-  margin-bottom: 15rem;
-}
-
-.mb-64{
-  margin-bottom: 16rem;
 }
 
 .block{
@@ -4579,6 +4578,10 @@ progress#file {
   border-bottom-width: 1px;
 }
 
+.border-b-2{
+  border-bottom-width: 2px;
+}
+
 .border-e-2{
   border-inline-end-width: 2px;
 }
@@ -4612,8 +4615,18 @@ progress#file {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.border-gray-600{
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+
 .border-transparent{
   border-color: transparent;
+}
+
+.border-b-black{
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .border-r-transparent{
@@ -4672,6 +4685,11 @@ progress#file {
 .bg-gray-900{
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.bg-green-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
 
 .bg-indigo-500{
@@ -4825,6 +4843,11 @@ progress#file {
   padding-right: 2.5rem;
 }
 
+.px-11{
+  padding-left: 2.75rem;
+  padding-right: 2.75rem;
+}
+
 .px-12{
   padding-left: 3rem;
   padding-right: 3rem;
@@ -4973,6 +4996,10 @@ progress#file {
   padding-left: 4rem;
 }
 
+.pl-28{
+  padding-left: 7rem;
+}
+
 .pl-3{
   padding-left: 0.75rem;
 }
@@ -5015,6 +5042,10 @@ progress#file {
 
 .pt-1{
   padding-top: 0.25rem;
+}
+
+.pt-10{
+  padding-top: 2.5rem;
 }
 
 .pt-12{
@@ -5114,6 +5145,11 @@ progress#file {
 .text-2xl\/normal{
   font-size: 1.5rem;
   line-height: 1.5;
+}
+
+.text-2xl\/relaxed{
+  font-size: 1.5rem;
+  line-height: 1.625;
 }
 
 .text-3xl{
@@ -5254,6 +5290,10 @@ progress#file {
   letter-spacing: 0.015em;
 }
 
+.tracking-tightened{
+  letter-spacing: 0.04em;
+}
+
 .tracking-tightener{
   letter-spacing: 0.045em;
 }
@@ -5357,6 +5397,10 @@ progress#file {
 
 .text-opacity-50{
   --tw-text-opacity: 0.5;
+}
+
+.underline{
+  text-decoration-line: underline;
 }
 
 .no-underline{
@@ -5532,6 +5576,11 @@ progress#file {
 .hover\:bg-white:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.hover\:text-gray-300:hover{
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-500:hover{

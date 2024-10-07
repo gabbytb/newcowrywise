@@ -1,5 +1,9 @@
-import { useState, } from "react";
+import { useState } from 'react';
+// import RichTextEditor from '../TextEditor/RichTextEditor';
+import { Editor } from '@tinymce/tinymce-react';
 import api from "../../api";
+// import { useQuill } from 'react-quilljs';
+// import 'quill/dist/quill.snow.css';
 
 
 
@@ -19,16 +23,22 @@ const FormNewBlogPost = () => {
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
     // ********************************* //
+    // const { quill, quillRef } = useQuill();
+    // console.log('QUILL = ', quill); // undefined > Quill Object
+    // console.log('QUILL REF = ', quillRef); // { current: undefined } > { current: Quill Editor Reference }
+  
+
     const [post, setPost] = useState({
         // _id: null, // Assuming you'll set this when fetching or creating a post
+        img: '',        
         title: '',
-        description: '',
         excerpt: '',
         // author: {
         //     img: '',
         //     name: '',
         //     bio: '',
         // },
+        uri: '',
         isPublished: true,
         status: '',
         tags: [],
@@ -39,15 +49,30 @@ const FormNewBlogPost = () => {
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
     // ********************************* //
+    const [postDesc, setPostDesc] = useState({ description: '<b></b>' });
+    console.log("*** Blog Description: ", postDesc);
+    
 
 
 
 
-    // ************************************************** //
-    // ** MANAGE STATE OF:- TOKEN, FROM RESPONSE DATA *** //
-    // ************************************************** //
-    // const [accessToken, setAccessToken] = useState(null);
-    // console.log("*** ACCOUNT TOKEN ***\nToken: ", accessToken); 
+    // ******************************************************** //
+    // ** MANAGE STATE OF:- Form Message and Form Submitted *** //
+    // ******************************************************** //
+    // Effect to set up the onChange listener
+    // useEffect(() => {
+    //     if (quill) {
+    //         const handleChange = () => {
+    //             const description = quill.root.innerHTML; // Get the content of the editor
+    //             setPostDesc({ ...postDesc, description }); // Update the post state
+    //         };
+    //         quill.on('text-change', handleChange); // Listen for changes
+
+    //         return () => {
+    //             quill.off('text-change', handleChange); // Cleanup the listener
+    //         };
+    //     }
+    // }, [quill]); // Run this effect when `quill` is available
 
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Create Attempt: ", formMessage);
@@ -72,11 +97,50 @@ const FormNewBlogPost = () => {
         }));
     };
 
+    // Function to update description
+    // const updateDescription = (e) => {
+    //     const name = e.target.name;
+    //     const value = e.target.value;
+    //     setPostDesc({ 
+    //         ...postDesc, 
+    //         [name]: value 
+    //     }); 
+    // };
+
+    const handleEditorChange = (content) => {   
+        setPostDesc((prevPost) => ({
+            ...prevPost,
+            description: content,
+        }));
+    };
+     
+    // Function to format url appropriately
+    const formatUrl = (uri) => {
+        return uri.replace(/[^A-Z0-9]+/ig, "-");
+    };
+    
     // Function to handle form submission
-    const handlePostFormSubmission = async (e) => {
+    const handlePostFormSubmission = async (e) => {  
+        const payload = {
+            img: post.img,
+            title: post.title,
+            description: postDesc.description,
+            excerpt: post.excerpt,
+            uri: post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase()),
+            // author: {
+            //     img: '',
+            //     name: '',
+            //     bio: '',
+            // }
+            isPublished: post.isPublished,
+            status: post.status,
+            tags: post.tags,
+            categories: post.categories, 
+        };
         e.preventDefault();
-        
-        await api.post('/api/v1/admin/blogs/manage/create', post) // Update the URL to your API endpoint
+
+
+        await api.post('/api/v1/admin/blogs/manage/create', payload) // Update the URL to your API endpoint
         .then((response) => {
             const { success, data, message } = response.data;
             var errMsg = document.querySelector('#newPostFormID .create_error'); 
@@ -190,7 +254,27 @@ const FormNewBlogPost = () => {
                         </h6>
                         <div className="flex flex-wrap">                                                            
 
-                            {/* Title */}
+                            {/* Image */}
+                            <div className="w-full lg:w-12/12 px-4">
+                                <div className="relative w-full mb-3">
+                                    <label
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        htmlFor="img">
+                                        Post Image
+                                    
+                                        <input
+                                            type="text"
+                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                            name="img"                                                                              
+                                            placeholder="Enter Image URL"
+                                            // value={post.title}
+                                            onChange={(e) => setPost({ ...post, img: e.target.value })}                                                                                                                                                
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Post Title */}
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
@@ -210,23 +294,59 @@ const FormNewBlogPost = () => {
                                 </div>
                             </div>
 
-                            {/* Description */}
+                            {/* Post URL */}
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
                                         className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
-                                        htmlFor="description">
-                                        Post Description
-
-                                        <textarea
+                                        htmlFor="uri">
+                                        URL 
+                                    
+                                        <input
                                             type="text"
-                                            className="border-0 px-6 py-6 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-3xl shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
-                                            name="description"                                                             
-                                            placeholder="Description"
-                                            // value={post.description} 
-                                            onChange={(e) => setPost({ ...post, description: e.target.value })}                                              
-                                            rows="7">
-                                        </textarea>
+                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                            placeholder="Article Slug"   
+                                            name="uri"   
+                                            value={post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase())}                                      
+                                            onChange={(e) => setPost({ ...post, uri: e.target.value })}                                           
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Post Description */}
+                            <div className="w-full lg:w-12/12 px-4">
+                                <div className="relative w-full mb-3">                                    
+                                    <label
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        htmlFor="description">                                       
+                                        Description
+                                                
+                                        <Editor
+                                            apiKey="b68jaid3qmtd8i45pcq2e32l0m0lxo2lt1kpnp4xv97kgppi" // Get your free API key from TinyMCE website
+                                            initialValue="Start typing here..."
+                                            init={{
+                                                height: 500,
+                                                menubar: false,
+                                                plugins: [
+                                                  // Core editing features
+                                                  'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                                                  // Your account includes a free trial of TinyMCE premium features
+                                                  // Try the most popular premium features until Oct 20, 2024:
+                                                  'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+                                                ],
+                                                // toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                                                toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+                                                tinycomments_mode: 'embedded',
+                                                tinycomments_author: 'Author name',
+                                                mergetags_list: [
+                                                  { value: 'First.Name', title: 'First Name' },
+                                                  { value: 'Email', title: 'Email' },
+                                                ],
+                                                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+                                            }}                                            
+                                            onEditorChange={handleEditorChange}                                                                                                                                                                                                                                  
+                                        />
                                     </label>
                                 </div>
                             </div>
@@ -237,7 +357,7 @@ const FormNewBlogPost = () => {
                                     <label
                                         className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
                                         htmlFor="excerpt">
-                                        Post Excerpt
+                                        Excerpt
 
                                         <textarea
                                             type="text"

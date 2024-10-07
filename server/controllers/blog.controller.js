@@ -14,7 +14,7 @@ exports.createBlogPost = async (req, res) => {
     const uniqueId = Date.now();
 
     // Payload
-    const { id = 23401, title, description, excerpt, tags, categories, author, isPublished } = req.body;
+    const { id = 23401, img, title, description, uri, excerpt, tags, categories, author, isPublished } = req.body;
     
     try {
 
@@ -52,9 +52,11 @@ exports.createBlogPost = async (req, res) => {
         // ***  FE: CREATE "BLOG" INSTANCE  *** //
         // ************************************ //      
         const blog = new Blog({
-            _id: uniqueId % id,                     
-            title: title.toLowerCase(),         // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                      
+            _id: uniqueId % id,
+            img: img.toLowerCase(),     // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                      
+            title,         
             description,
+            uri,
             excerpt,
             author,
             tags,
@@ -230,20 +232,27 @@ exports.findAllBlogPosts = async (req, res) => {
 // Our FIND All USERS Logic starts here
 exports.findAllBlogPosts = async (req, res) => { 
 
-    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
+    const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
     // published
     // draft
     
     try {
-        let query = { 
-
-        };
+        let query = { };
 
         if (status) {
             query.status = status;
         };
  
+        // Set the sorting order
+        let sortOrder = {};
+        if (sort === 'recent') {
+                    sortOrder.createdAt = -1; // Sort by createdAt in descending order
+        } else {
+                    sortOrder.createdAt = 1; // Default sorting (ascending)
+        };
+
         const allBlogPosts = await Blog.find(query)
+                                .sort(sortOrder)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
         console.log("ALL BLOG POSTS: ", allBlogPosts);
@@ -278,15 +287,15 @@ exports.findAllBlogPosts = async (req, res) => {
 
 
 // Our FIND SINGLE USER by TITLE Logic starts here
-exports.findBlogPostByTitle = async (req, res) => {
+exports.findBlogPostByUrl = async (req, res) => {
     
     try {        
         
-        const title = req.params.title;
+        const uri = req.params.uri;
         // const { title } = req.params;
 
         // const blog = await Blog.findOne({ title: title });
-        const blog = await Blog.findOne({ title });
+        const blog = await Blog.findOne({ uri });
        
         if (!blog) {
             const responseData = {

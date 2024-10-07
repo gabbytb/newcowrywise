@@ -5,7 +5,13 @@ module.exports = mongoose => {
         _id: {
             type: Number,
         },
+        img: {
+            type: String,
+        },
         title: {
+            type: String,
+        },
+        uri: {
             type: String,
         },
         description: {

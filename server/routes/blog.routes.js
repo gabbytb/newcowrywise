@@ -10,7 +10,7 @@ module.exports = app => {
 
     router.get("/api/v1/admin/blogs/manage", blogs.findAllBlogPosts);
     
-    router.get("/api/v1/admin/blogs/manage/post/:title", blogs.findBlogPostByTitle);
+    router.get("/api/v1/admin/blogs/manage/post/:uri", blogs.findBlogPostByUrl);
 
     router.get("/api/v1/admin/blogs/manage/post/:id", blogs.findBlogPostById);
 
